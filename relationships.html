@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İlişki & Evlilik Rehberi — Enes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #161920;
+    --surface-2: #1c2029;
+    --accent: #e8a838;
+    --accent-dim: rgba(232,168,56,0.12);
+    --accent-glow: rgba(232,168,56,0.06);
+    --red: #e85454;
+    --red-dim: rgba(232,84,84,0.1);
+    --green: #4ecb8d;
+    --green-dim: rgba(78,203,141,0.1);
+    --blue: #5b9bf5;
+    --blue-dim: rgba(91,155,245,0.1);
+    --text: #e2e4e8;
+    --text-dim: #8a8f9a;
+    --text-muted: #555a66;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  h2 em { color: var(--accent); font-style: italic; }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 32px 0 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  /* CARDS — Four Horsemen */
+  .horseman-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+    border-left: 3px solid var(--red);
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  .horseman-card:hover { transform: translateX(4px); }
+  .horseman-card .card-number {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: var(--serif);
+    font-size: 48px;
+    color: rgba(232,84,84,0.08);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .horseman-card h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--red);
+  }
+  .horseman-card p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .antidote {
+    background: var(--green-dim);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--green);
+    margin-top: 12px;
+  }
+  .antidote strong { color: var(--green); }
+
+  /* PROTECT CARDS */
+  .protect-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 20px 0;
+    border-left: 3px solid var(--green);
+    transition: transform 0.2s ease;
+  }
+  .protect-card:hover { transform: translateX(4px); }
+  .protect-card h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--green);
+  }
+  .protect-card p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 0;
+  }
+
+  /* PERSONAL NOTE */
+  .personal-note {
+    background: var(--accent-dim);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .personal-note .note-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .personal-note p {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 0;
+    line-height: 1.7;
+  }
+
+  /* STAT */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    flex: 1;
+    min-width: 140px;
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-box .number {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--accent);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat-box .label {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* RISK TABLE */
+  .risk-grid {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .risk-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 14px 20px;
+  }
+  .risk-item .factor {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .risk-item .impact {
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .risk-item .impact.good {
+    color: var(--green);
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 14px 0 14px 36px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--text-muted);
+  }
+  .checklist.self li::before { border-color: var(--blue); }
+  .checklist.other li::before { border-color: var(--accent); }
+  .checklist li strong { color: #fff; font-weight: 600; }
+
+  /* BIG QUESTIONS */
+  .big-question {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border-radius: 16px;
+    padding: 36px 32px;
+    margin: 24px 0;
+    text-align: center;
+    border: 1px solid rgba(232,168,56,0.15);
+  }
+  .big-question .q-number {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .big-question blockquote {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .big-question .explanation {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* WARNING BOX */
+  .warning {
+    background: var(--red-dim);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 14px;
+    color: var(--red);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* FOOTER QUOTE */
+  .closing {
+    padding: 60px 0;
+    text-align: center;
+  }
+  .closing blockquote {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 24px;
+  }
+  .closing blockquote em { color: var(--accent); }
+  .closing .sources {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  /* DANCE METAPHOR */
+  .dance-box {
+    background: var(--blue-dim);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-left: 3px solid var(--blue);
+  }
+  .dance-box p {
+    font-size: 15px;
+    color: var(--blue);
+    margin-bottom: 0;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 30px; }
+    h2 { font-size: 24px; }
+    .stat-row { flex-direction: column; }
+    .big-question blockquote { font-size: 18px; }
+    .big-question { padding: 28px 20px; }
+    .horseman-card, .protect-card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">Araştırma Temelli Rehber</div>
+    <h1>İlişkilerde <em>Neye Bakmalı</em></h1>
+    <p class="hero-sub">Arkadaşlık, ilişki ve evlilik için bilimsel araştırmalardan çıkarılan dersler ve pratik uygulamaları.</p>
+  </div>
+
+  <!-- SECTION 1: YIKICI KALIPLAR -->
+  <section>
+    <div class="section-number">Bölüm 01</div>
+    <h2>İlişkileri <em>Öldüren</em> 4 Davranış</h2>
+    <p style="color: var(--text-dim); font-size: 15px;">Dr. John Gottman 40+ yıl boyunca binlerce çifti gözlemledi. MIT matematik geçmişiyle geliştirdiği SPAFF kodlama sisteminde her 6 saniyelik etkileşim bloğu ağırlıklandırıldı: küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke ve üzüntü ise yalnızca <strong>-1</strong>. Ağırlıklar bile hangi davranışların daha yıkıcı olduğunu gösteriyor. Bu hassasiyette bir sistem sayesinde 15 dakikalık bir tartışmayı izleyerek boşanmayı %88-94 doğrulukla tahmin edebildi. Tespit ettiği 4 yıkıcı kalıp sadece evlilikte değil, her ikili ilişkide geçerli.</p>
+
+    <div class="horseman-card">
+      <div class="card-number">1</div>
+      <h4>Eleştiri — Karaktere Saldırı</h4>
+      <p>Davranıştan değil, kimlikten şikayet etmek. "Bu konuda unutkan davrandın" ile "Sen hep böyle sorumsuz birisin" arasındaki fark küçük görünür ama yıkıcıdır. Biri çözüme davet eder, diğeri kimliğe saldırır.</p>
+      <div class="antidote"><strong>Panzehir:</strong> Yumuşak başlangıç — "Ben" diliyle konuşmak. "Bu durum beni üzdü" vs. "Sen beni üzdün."</div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>Eleştiri sadece ciddi konuşmalarda değil, mizah yoluyla da ortaya çıkabilir. Gottman'ın araştırmasında "hostile humor" (düşmanca mizah) küçümsemenin alt kategorisi olarak tanımlanıyor — şaka formatında yapılan karakter eleştirileri, ciddi olanlar kadar yıkıcı olabiliyor. Ayrıca analitik düşünen bireylerde ek bir risk bulunuyor: karşıdaki kişiyi "çözme" çabası, tek bir davranıştan karakter çıkarsamasına dönüşebilir.</p>
+    </div>
+
+    <div class="horseman-card">
+      <div class="card-number">2</div>
+      <h4>Küçümseme — Tek Başına En Güçlü Yıkıcı</h4>
+      <p>Göz devirmek, alaycı ton, üstünlük taslayan ifadeler. Uzun süredir birikmiş kızgınlıktan doğar — ele alınmamış şikayetler zamanla partnere karşı bir "dava dosyası" oluşturur. Küçümsemeye maruz kalan eşlerin bağışıklık sistemi bile zayıflıyor.</p>
+      <div class="antidote"><strong>Panzehir:</strong> Takdir kültürü oluşturmak. Partnerin iyi özelliklerine odaklanmak — olumluya odaklandıkça daha fazla olumlu fark edilir.</div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>Küçümseme, dört atlı arasında fark edilmesi en zor olanı olabilir — çoğu insan bunu yaptığının farkında değildir. "Ben bundan daha iyiyim" veya "Bu kadar basit şeyi nasıl anlamıyor" gibi düşünceler küçümsemenin tohumlarıdır. Özellikle entelektüel kapasitenin yüksek olduğu durumlarda, bilinçsizce üstünlük pozisyonuna geçme riski artar. Karşı tarafta ise göz devirmek, alaycı ton ve fikirleri ciddiye almamak gibi sinyaller erken dönemde küçük görünse de araştırma bunların en yıkıcı tek faktör olduğunu ortaya koyuyor — ciddiye alınması gereken güçlü uyarı işaretleri.</p>
+    </div>
+
+    <div class="horseman-card">
+      <div class="card-number">3</div>
+      <h4>Savunmacılık — Gizli Suçlama</h4>
+      <p>Eleştirilince sorumluluk almak yerine karşı saldırıya geçmek veya kurban rolüne bürünmek. Özünde gizli bir suçlama: "Sorun bende değil, sende." Partnerin derdini ciddiye almadığının mesajını verir.</p>
+      <div class="antidote"><strong>Panzehir:</strong> Kısmi sorumluluk almak. "Haklısın, bunda benim de payım var" diyebilmek.</div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>Savunmacılık değerlendirilirken iki farklı türü ayırt etmek gerekir. <strong>Refleks savunmacılık,</strong> güvenli bir ortamda bile değişmeyen, zaman geçse de yumuşamayan bir kalıptır ve ilişkinin gelişme potansiyelini ciddi şekilde sınırlar. <strong>Koruma savunmacılığı</strong> ise güven oluştukça yumuşayan, zamanla sorumluluk almaya dönüşen bir tepkidir — özellikle geçmiş deneyimlerden kaynaklanan bir savunma mekanizması olarak ortaya çıkabilir. Bu durumda savunmacılık karakterden değil travmadan beslenir. İki tür arasındaki ayrımı zaman ve tutarlılık ortaya koyar. Bir kişi ad hominem düzeyinde saldırıya geçiyorsa bu sağlıklı bir iletişim zemini olmadığının göstergesidir; sorumluluk alma kapasitesi gösteren bireyler ise ilişkide dönüşüm potansiyeli taşır.</p>
+    </div>
+
+    <div class="horseman-card">
+      <div class="card-number">4</div>
+      <h4>Duvar Örme — Sessizliğe Çekilmek</h4>
+      <p>Tamamen kapanmak, göz temasını kesmek. Erkeklerde çok daha yaygın — çatışma sırasında fizyolojik stres tepkisi daha yoğun (kalp 100+ BPM). Partnerin gözünden: "Sen benim için önemli değilsin" mesajı.</p>
+      <div class="antidote"><strong>Panzehir:</strong> "Biraz ara verelim, sakinleşince devam edelim" diyebilmek — bu bir kaçış değil, bir düzenleme.</div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>Bunun ardında fizyolojik bir gerçek var: Gottman'ın ölçümlerinde çatışma sırasında kalp atışı dakikada 100'ün üzerine çıktığında — "flooding" (fizyolojik taşma) — kişi artık rasyonel düşünemiyor, savaş ya da kaç tepkisi devreye giriyor. Laboratuvar deneylerinde çiftlere tartışma ortasında 20 dakika ara verdirip dergi okuttular; kalp atışı normale döndüğünde aynı çiftler birden mizaha ve şefkate erişebildi. Aynı konu, aynı insanlar — farklı fizyoloji, tamamen farklı konuşma.</p>
+    </div>
+
+    <div class="warning"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Dört atlı birden sürekli mevcutsa, ilişkinin uzun vadede hayatta kalma şansı %20'nin altına düşüyor.</div>
+
+    <div class="personal-note" style="margin-top: 24px;">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>Çözümsüz Sorunlar: %69</div>
+      <p>Gottman'ın belki de en çarpıcı bulgusu: çiftlerin %69'unun sorunları "perpetual" — yani kalıcı ve çözümsüz. Kişilik farklılıkları, değer farklılıkları, yaşam tarzı tercihleri... Bunlar asla tamamen çözülmüyor; her evlilikte bu tür sorunlar otomatik olarak var. Başarılı çiftlerin başarısız olanlardan farkı sorunları çözmek değil, çözülemeyen sorunlarla nasıl başa çıktıkları. "Masters" çiftler bu sorunları kabul ediyor, birbirleriyle bunlar hakkında konuşabiliyor, hatta bazen gülebiliyor. "Disasters" çiftler ise aynı sorunlarda takılıp gridlock'a (kilitlenme) giriyor — ve bu kilitlenme zamanla duygusal kopuşa dönüşüyor.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: KORUYUCU FAKTÖRLER -->
+  <section>
+    <div class="section-number">Bölüm 02</div>
+    <h2>İlişkileri <em>Ayakta Tutan</em> Faktörler</h2>
+
+    <div class="protect-card">
+      <h4>1. Bağlılık — En Güçlü Tek Öngörücü</h4>
+      <p>Zorunluluktan kalmak değil — ilişkiyi hayattaki en önemli şeylerden biri olarak görüp buna göre davranmak. Güven, güvenlik hissi ve karşılıklı yatırım duygusunu besler. Çatışma anlarında yıkıcı davranışları frenler.</p>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>Bağlılık sinyalleri büyük sözlerden değil küçük tercihlerden okunur: planlarında karşıdakini hesaba katıyor mu? Fedakarlık gerektiren anlarda ilişkiyi mi yoksa konforunu mu önceliklendiriyor?</p>
+    </div>
+
+    <div class="protect-card">
+      <h4>2. 5:1 Oranı ve Bağlantı Davetleri</h4>
+      <p>Mutlu çiftlerde her 1 olumsuz etkileşime karşılık en az 5 olumlu etkileşim var. Partnerin küçük bağlantı davetlerine (bir yorum, bir bakış, bir dokunuş) yanıt verme oranı kalıcı çiftlerde %86, biten ilişkilerde %33.</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="number">%86</div>
+        <div class="label">Kalıcı çiftlerde<br>"turning toward" oranı</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">%33</div>
+        <div class="label">Boşanan çiftlerde<br>"turning toward" oranı</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">5:1</div>
+        <div class="label">Mutlu ilişkilerdeki<br>olumlu/olumsuz oranı</div>
+      </div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Pratikte</div>
+      <p>"Turning toward," ilişkilerdeki en kolay uygulanabilir ama en çok göz ardı edilen kavramlardan biri. Bir kişi bir deneyimini paylaştığında kısa bir göz teması ve samimi bir yanıt, o anı bağlantıya ya da kopuşa dönüştürüyor. İlişkileri ayakta tutan büyük jestler değil, günlük küçük "seni görüyorum" sinyallerinin tutarlılığı. Ve bu karşılıklı işleyen bir dinamik — bir tarafın sürekli bağlantı daveti yapıp diğer tarafın sürekli geçiştirmesi, ilişkinin dengesini bozar.</p>
+    </div>
+
+    <div class="protect-card">
+      <h4>3. Koruyucu Eş — "Dünyaya Karşı Biz"</h4>
+      <p>Eşini koruyucu olarak tanımlayan kadınlar %60, erkekler %61 daha yüksek mutluluk bildirdi. Sadece fiziksel güvenlik değil — duygusal güvenlik, partnerin tarafında olma, ilişkiyi dış tehditlere karşı savunma.</p>
+    </div>
+
+    <div class="protect-card">
+      <h4>4. Birlikte Paylaşılan Ritüeller</h4>
+      <p>Düzenli date night'lar, ortak aktiviteler, birlikte yapılan ritüeller. İlişkiye "biz" kimliği kazandırıyor ve günlük rutinin aşındırıcı etkisine karşı tampon görevi görüyor.</p>
+    </div>
+
+    <h3 style="margin-top: 40px;">Gottman'ın 7 Kat Modeli: Sound Relationship House</h3>
+    <p style="color: var(--text-dim); font-size: 15px; margin-bottom: 20px;">Gottman tüm bulgularını bir ev metaforuyla yapılandırdı. İki taşıyıcı duvar (güven ve bağlılık) + 7 kat. Alt katlar sağlam değilse üst katlara çıkılamaz — her kat bir öncekinin üzerine inşa edilir.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 2px; max-width: 520px; margin: 0 auto;">
+      <div style="background: linear-gradient(135deg, var(--accent), #c48a2a); color: var(--bg); padding: 14px 18px; border-radius: 8px 8px 2px 2px; text-align: center;">
+        <strong style="font-size: 14px; letter-spacing: 1px;">7. ORTAK ANLAM OLUŞTUR</strong><br>
+        <span style="font-size: 12px; opacity: 0.85;">Ritüeller, roller, hedefler, semboller — "biz" kimliği</span>
+      </div>
+      <div style="background: rgba(232,168,56,0.15); border: 1px solid rgba(232,168,56,0.3); padding: 12px 18px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--accent);">6. HAYALLERİ DESTEKLE</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">Partnerin hayallerini anlama ve destekleme, gridlock'u aşma</span>
+      </div>
+      <div style="background: rgba(232,168,56,0.10); border: 1px solid rgba(232,168,56,0.2); padding: 12px 18px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--accent);">5. ÇATIŞMAYI YÖNET</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">Çözmek değil, birlikte yaşayabilmek — sorunların %69'u kalıcı</span>
+      </div>
+      <div style="background: rgba(232,168,56,0.08); border: 1px solid rgba(232,168,56,0.15); padding: 12px 18px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--accent);">4. OLUMLU BAKIŞ AÇISI</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">İlk 3 kat sağlamsa partnerin davranışları olumlu bir lensle yorumlanır</span>
+      </div>
+      <div style="background: rgba(76,175,80,0.12); border: 1px solid rgba(76,175,80,0.25); padding: 12px 18px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--green);">3. BAĞLANTI DAVETLERİNE YANIT VER</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">Turning toward — masters %86, disasters %33</span>
+      </div>
+      <div style="background: rgba(76,175,80,0.18); border: 1px solid rgba(76,175,80,0.3); padding: 12px 18px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--green);">2. HAYRANLIK VE TAKDİR</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">Küçümsemenin tam panzehiri — olumluyu görmek ve ifade etmek</span>
+      </div>
+      <div style="background: rgba(76,175,80,0.25); border: 1px solid rgba(76,175,80,0.4); padding: 12px 18px; border-radius: 2px 2px 8px 8px; text-align: center;">
+        <strong style="font-size: 13px; color: var(--green);">1. LOVE MAPS — PARTNERİNİ TANI</strong><br>
+        <span style="font-size: 12px; color: var(--text-dim);">Korkuları, hayalleri, değerleri... Duygusal bir harita oluştur</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-right: 4px;">
+          <strong style="font-size: 12px; color: var(--text); letter-spacing: 1px;">GÜVEN</strong>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-left: 4px;">
+          <strong style="font-size: 12px; color: var(--text); letter-spacing: 1px;">BAĞLILIK</strong>
+        </div>
+      </div>
+    </div>
+    <p style="color: var(--text-dim); font-size: 13px; text-align: center; margin-top: 12px;">↑ taşıyıcı duvarlar — bunlar olmadan yapı ayakta kalamaz</p>
+  </section>
+
+  <!-- SECTION 3: DEMOGRAFİK -->
+  <section>
+    <div class="section-number">Bölüm 03</div>
+    <h2>Sayıların <em>Söyledikleri</em></h2>
+
+    <h3>Türkiye — TÜİK 2024</h3>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="number" style="font-size: 24px;">187.343</div>
+        <div class="label">Boşanan çift<br>(cumhuriyet rekoru)</div>
+      </div>
+      <div class="stat-box">
+        <div class="number" style="font-size: 24px;">%33.7</div>
+        <div class="label">Boşanmaların<br>ilk 5 yılda olanı</div>
+      </div>
+      <div class="stat-box">
+        <div class="number" style="font-size: 24px;">%55</div>
+        <div class="label">İlk 10 yıl<br>içinde olan</div>
+      </div>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Metrik Tuzağı</div>
+      <p>"Binde 2.19" düşük görünse de yanıltıcıdır — paydada bebekler, bekarlar ve tüm nüfus yer alır. Aynı yıl içindeki boşanma/evlenme oranı %32.9'dur: her 3 evliliğe karşılık yaklaşık 1 boşanma. Kümülatif ömür boyu risk ise muhtemelen %25-35 aralığındadır.</p>
+    </div>
+
+    <h3>İki Boşanma Paterni</h3>
+    <p style="color: var(--text-dim); font-size: 15px;">Gottman'ın 14 yıllık boylamsal verileri iki farklı boşanma paterni ortaya koydu:</p>
+    <div class="stat-row">
+      <div class="stat-box" style="border-color: var(--red);">
+        <div class="number" style="font-size: 22px;">5.6 yıl</div>
+        <div class="label">Dört atlının yoğun olduğu çiftler.<br>Patlayıcı çatışma → erken boşanma.</div>
+      </div>
+      <div class="stat-box" style="border-color: var(--accent);">
+        <div class="number" style="font-size: 22px;">16.2 yıl</div>
+        <div class="label">Duygusal kopuş (disengagement).<br>Çatışma az ama pozitiflik de yok → sessiz tükenme.</div>
+      </div>
+    </div>
+    <p style="color: var(--text-dim); font-size: 14px; margin-top: 12px;">İkinci tür özellikle sinsi: dışarıdan bakınca "kavga etmiyorlar, iyi çift" gibi görünür. Ama ilgi yok, şefkat yok, mizah yok, empati yok — ilişki kağıt üzerinde devam eder, içeride çoktan bitmiştir.</p>
+
+    <h3>Risk Faktörleri</h3>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <span class="factor">25 yaş altı evlilik</span>
+        <span class="impact">En güçlü risk faktörlerinden biri</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">Eğitim: lise mezunu</span>
+        <span class="impact">~%45 boşanma</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">Eğitim: üniversite mezunu</span>
+        <span class="impact good">~%25 boşanma</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">Ebeveyn boşanmışsa</span>
+        <span class="impact">Risk %50↑</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">İki taraf da boşanmış aileden</span>
+        <span class="impact">Risk %200↑</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">Yakın arkadaş boşanmışsa</span>
+        <span class="impact">Risk %147↑</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">Ev sahibi olmak</span>
+        <span class="impact good">Güçlü koruyucu faktör</span>
+      </div>
+      <div class="risk-item">
+        <span class="factor">25 sonrası evlilik</span>
+        <span class="impact good">Risk ~%24 düşüyor</span>
+      </div>
+    </div>
+
+    <p style="color: var(--text-dim); font-size: 14px; margin-top: 20px;"><strong style="color: var(--green);">Umut verici bulgu:</strong> "Evlilik memnuniyeti kaçınılmaz olarak düşer" varsayımı bir mit. Boylamsal çalışmalarda çiftlerin %67-80'i yıllar boyunca yüksek memnuniyetlerini koruyor. Ortalamayı aşağı çeken, düşük memnuniyetle başlayıp hızla kötüleşen küçük bir azınlık.</p>
+  </section>
+
+  <!-- SECTION 4: PRATİK CHECKLIST -->
+  <section>
+    <div class="section-number">Bölüm 04</div>
+    <h2><em>Kendinde</em> ve Karşıda Dikkat Edilmesi Gerekenler</h2>
+
+    <h3 style="color: var(--blue);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-3px;margin-right:6px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>Kendinde</h3>
+    <ul class="checklist self">
+      <li><strong>Eleştiri refleksini fark et.</strong> Rahatsız olunca zihin davranışa mı gidiyor, karaktere mi? Eleştirileri kişiye değil duruma yönlendir.</li>
+      <li><strong>Küçümseme tohumlarını izle.</strong> "Ben bundan daha iyiyim" düşüncesi = tehlike. Farkında olmadan üstünlük pozisyonuna geçmek ilişkiyi sessizce aşındırır.</li>
+      <li><strong>Duvar örme başlıyorsa:</strong> "Biraz ara verelim, sakinleşince devam edelim." Kaçış değil, düzenleme.</li>
+      <li><strong>5:1 oranını yaşa.</strong> Eleştiri vermeden önce yeterince olumlu birikim var mı? Takdiri açıkça ifade et.</li>
+      <li><strong>Bağlantı davetlerine duyarlı ol.</strong> Biri paylaşım yaptığında: göz teması + samimi ilgi = turning toward.</li>
+    </ul>
+
+    <h3 style="color: var(--accent);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-3px;margin-right:6px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Karşıdaki Kişide</h3>
+    <ul class="checklist other">
+      <li><strong>Çatışma reflekslerini gözlemle.</strong> İlk birkaç tartışma o insanın çatışma stilinin röntgenidir. Gottman ilk 3 dakikadan %96 doğrulukla tahmin edebildi.</li>
+      <li><strong>Sorumluluk alma kapasitesine bak.</strong> Bir şeyler ters gittiğinde kısmi sorumluluk alabiliyor mu, yoksa her zaman dış faktörler mi suçlu? Sürekli savunmacılık, uzun vadede ilişkiyi tek taraflı bir yüke dönüştürür.</li>
+      <li><strong>Küçümseme sinyallerini erken yakala.</strong> Göz devirmek, alaycı ton, fikirleri ciddiye almamak — araştırma bunların ilişki için en yıkıcı tek faktör olduğunu gösteriyor.</li>
+      <li><strong>"Turning toward" davranışı var mı?</strong> Bir şey paylaşıldığında karşı taraf ilgi mi gösteriyor, geçiştiriyor mu? Bu küçük anlar büyük jestlerden daha fazla şey anlatır.</li>
+      <li><strong>Bağlılık sinyallerini oku.</strong> Planlarında karşı tarafı hesaba katıyor mu? Fedakarlık anlarında ilişkiyi mi konforunu mu tercih ediyor?</li>
+      <li><strong>Geçmişi anla, yargılama.</strong> Ebeveynleri boşanmışsa: bu kalıpların farkında mı? Bilinçli olarak kırmaya çalışıyor mu? Farkındalık olan yerde dönüşüm mümkündür.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 5: İKİ BÜYÜK SORU -->
+  <section>
+    <div class="section-number">Bölüm 05</div>
+    <h2>Her İlişkide Sor: <em>İki Soru</em></h2>
+
+    <div class="big-question">
+      <div class="q-number">Soru 1</div>
+      <blockquote>"Bu insan yanında güvende hissettiriyor mu?"</blockquote>
+      <p class="explanation">Duygusal güvenlik, yargılanmama, koruyucu eş kavramının kökü budur. Ve tersi de sorulmalı: karşıdaki insan bu ilişkide güvende hissediyor mu?</p>
+    </div>
+
+    <div class="big-question">
+      <div class="q-number">Soru 2</div>
+      <blockquote>"Çatışma yaşandığında iki taraf probleme karşı mı duruyor, yoksa birbirine mi karşı duruyor?"</blockquote>
+      <p class="explanation">Gottman'ın tüm araştırmasının özeti bu cümlede. Mutlu çiftler sorunu ortak düşman olarak görür; mutsuz çiftler birbirini düşman olarak görür.</p>
+    </div>
+
+    <div class="dance-box">
+      <p>Gottman'ın araştırmasında "repair attempt" (tamir girişimi) kavramı, evliliklerin geleceğini belirleyen en kritik faktörlerden biri olarak öne çıkıyor. Dört atlı ortaya çıktığında bile, çiftin birbirini onarmaya yönelik adımlar atabilmesi ve bu adımları kabul edebilmesi ilişkiyi kurtarabiliyor. Mükemmel bir ilişki çatışmasız olan değil, tamiri yapılabilen ilişkidir.</p>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <blockquote>
+      "İlişkiyi öldüren şey çatışmanın varlığı değil, çatışmanın <em>nasıl yönetildiği.</em><br><br>
+      Ayakta tutan şey büyük romantik jestler değil, günlük küçük bağlantı anlarında <em>'seni görüyorum'</em> diyebilmenin tutarlılığı."
+    </blockquote>
+    <p class="sources">
+      Kaynaklar: Gottman Institute (40+ yıl) · IFS/Wheatley 2022 · TÜİK 2024 · Pew Research · PMC/NCBI Sistematik Derlemeler
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>

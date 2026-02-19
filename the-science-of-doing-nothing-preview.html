@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiçbir Şey Yapmamanın Bilimi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --surface: #F0EDE7;
+    --text: #1A1A1E;
+    --text-dim: #6B665E;
+    --accent: #96622F;
+    --accent-glow: #96622F15;
+    --divider: #DDD8D0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #FAF7F2;
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Divider */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+    opacity: 0.4;
+  }
+
+  /* TOC */
+  .toc {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--divider);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .toc-item.no-border {
+    border-bottom: none;
+    padding-bottom: 0.4rem;
+  }
+
+  .toc-item:hover {
+    padding-left: 0.5rem;
+    border-bottom-color: var(--accent);
+  }
+
+  .toc-item.no-border:hover {
+    border-bottom-color: transparent;
+  }
+
+  .toc-item:hover .toc-title {
+    color: var(--accent);
+  }
+
+  .toc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    min-width: 1.5rem;
+  }
+
+  .toc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  .toc-content {
+    flex: 1;
+  }
+
+  /* Sub-item */
+  .toc-sub {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.5rem 0 1.2rem;
+    padding-left: 2.7rem;
+    border-bottom: 1px solid var(--divider);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .toc-sub:hover {
+    padding-left: 3.2rem;
+  }
+
+  .toc-sub:hover .toc-sub-title {
+    color: var(--accent);
+  }
+
+  .toc-sub-dash {
+    color: var(--accent);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+
+  .toc-sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dim);
+    transition: color 0.3s ease;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .toc { padding: 2rem 1.5rem 4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .toc { padding: 1.5rem 1.2rem 3rem; }
+
+    .toc-item {
+      gap: 0.8rem;
+      padding: 1rem 0;
+    }
+
+    .toc-title {
+      font-size: 1.05rem;
+    }
+
+    .toc-sub {
+      padding-left: 2.3rem;
+      padding-top: 0.3rem;
+      padding-bottom: 1rem;
+      gap: 0.6rem;
+    }
+
+    .toc-sub:hover { padding-left: 2.6rem; }
+
+    .toc-sub-title {
+      font-size: 0.9rem;
+    }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .toc-title { font-size: 0.95rem; }
+    .toc-sub-title { font-size: 0.85rem; }
+    .toc-sub { padding-left: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+
+    <h1>Hiçbir şey yapmamak, <em>yapabileceğin</em> en verimli şey olabilir.</h1>
+    <p class="hero-sub">Beyin bilimi, psikoloji ve tıp araştırmalarının "boş vakit" hakkında söyledikleri.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Günün her dakikasını doldurmaya çalışıyoruz — iş, spor, projeler, sosyal medya, diziler. 
+      Peki ya tam da bu yüzden <span class="highlight">daha az üretiyorsak?</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="toc">
+    <div style="height: 1rem;"></div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">01</span>
+      <div class="toc-content">
+        <div class="toc-title">Sürekli kendini geliştirmek gerçekten işe yarıyor mu?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Daha çok çaba, her zaman daha çok sonuç mu?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">02</span>
+      <div class="toc-content">
+        <div class="toc-title">En son ne zaman hiçbir şey yapmadan durdun?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Sessizlikten neden rahatsız oluyoruz?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">03</span>
+      <div class="toc-content">
+        <div class="toc-title">Beyin boşken gerçekten hiçbir şey yapmıyor mu?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Default Mode Network nedir?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">04</span>
+      <div class="toc-content">
+        <div class="toc-title">Boş kalmak bize ne kazandırıyor?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Neden en iyi fikirler duşta gelir?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">05</span>
+      <div class="toc-content">
+        <div class="toc-title">Sıkılmaktan neden bu kadar korkuyoruz?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Fasulye ayıklamak yaratıcılığı artırır mı?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">06</span>
+      <div class="toc-content">
+        <div class="toc-title">Sürekli meşguliyet vücuda ne yapıyor?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Kronik stres vücutta ne bırakıyor?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">07</span>
+      <div class="toc-content">
+        <div class="toc-title">Her işi planlamak neden geri teper?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Ödül motivasyonu neden öldürüyor?</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">08</span>
+      <div class="toc-content">
+        <div class="toc-title">Peki ne yapmalı?</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Aynı hayatı nasıl daha sürdürülebilir yaşarsın?</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-num">09</span>
+      <div class="toc-content">
+        <div class="toc-title">Sonuç</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Şubat 2026</p>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontrol Yanılgısı & Farkındalık</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    width: 1080px;
+    height: 1920px;
+    font-family: 'DM Sans', sans-serif;
+    background: #0f1117;
+    color: #e8e6e1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .grain {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 60px 56px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 44px;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .header h1 span {
+    color: #c4956a;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: #c4956a;
+    margin-top: 16px;
+  }
+
+  /* Two columns - stacked for mobile */
+  .columns {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .col-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(196, 149, 106, 0.3);
+  }
+
+  .col-header .emoji {
+    margin-right: 8px;
+  }
+
+  /* Loop / Cycle */
+  .cycle {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+
+  .cycle-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .cycle-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .cycle-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c4956a;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .cycle-connector {
+    width: 1px;
+    height: 22px;
+    background: rgba(196, 149, 106, 0.35);
+  }
+
+  .cycle-text {
+    font-size: 17px;
+    line-height: 1.5;
+    color: #bbb8b0;
+    padding-bottom: 10px;
+  }
+
+  .cycle-text strong {
+    color: #e8e6e1;
+    font-weight: 600;
+  }
+
+  .loop-arrow {
+    font-size: 12px;
+    color: #c4956a;
+    margin-left: 34px;
+    margin-top: -4px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+    letter-spacing: 2px;
+  }
+
+  /* Insight box */
+  .insight {
+    background: rgba(196, 149, 106, 0.08);
+    border-left: 2px solid #c4956a;
+    padding: 14px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 8px;
+  }
+
+  .insight p {
+    font-size: 16px;
+    line-height: 1.55;
+    color: #bbb8b0;
+  }
+
+  .insight p strong {
+    color: #c4956a;
+    font-weight: 600;
+  }
+
+  /* Bottom section - what to do */
+  .bottom {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .bottom-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .practices {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .practice {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .practice-num {
+    font-size: 13px;
+    font-weight: 600;
+    color: #c4956a;
+    letter-spacing: 1.5px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .practice-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e8e6e1;
+    margin-bottom: 0;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .practice-desc {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #8a877f;
+  }
+
+  .practice-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+
+  <div class="header">
+    <h1>Kontrol Yanılgısı & <span>Eziklik Döngüsü</span></h1>
+    <div class="divider"></div>
+  </div>
+
+  <div class="columns">
+    <!-- Left: Kontrol Yanılgısı -->
+    <div class="col">
+      <div class="col-header">Kontrol Yanılgısı</div>
+      
+      <div class="cycle">
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text"><strong>"Yeterince iyi olsam beni seçerdi"</strong></div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">Acı verici ama bir <strong>eylem planı</strong> sunuyor</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">Daha fit ol, daha ilginç ol, daha iyi giyin...</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">Zaten hepsini yapıyorsun → <strong>"hâlâ yeterli değilim"</strong></div>
+        </div>
+      </div>
+      <div class="loop-arrow">↻ döngü tekrar eder</div>
+
+      <div class="insight">
+        <p><strong>Gerçek:</strong> Kimya, zamanlama ve karşındaki kişinin bilinçdışı tercihleri senin kontrolünde değil. Bu iki kişilik bir denklem ve sen sadece bir tarafısın.</p>
+      </div>
+    </div>
+
+    <!-- Right: Eziklik Otoyolu -->
+    <div class="col">
+      <div class="col-header">Eziklik Otoyolu</div>
+
+      <div class="cycle">
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text"><strong>Tetiklenme:</strong> "Başka biriyle olabilir" düşüncesi</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">Beyin meta-hikayeye atlar: <strong>"hep böyle oluyor"</strong></div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">Tek bir olayı değil, tüm <strong>birikmiş örüntüyü</strong> hissedersin</div>
+        </div>
+        <div class="cycle-step">
+          <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
+          <div class="cycle-text">His orantısız güçlü gelir → <strong>"demek ki eksik bir şey var"</strong></div>
+        </div>
+      </div>
+      <div class="loop-arrow">↻ kontrol yanılgısını besler</div>
+
+      <div class="insight">
+        <p><strong>Gerçek:</strong> Seçiliyorsun — sadece karşılıklı uyum henüz denk gelmedi. Bu bir eksiklik değil, aradığın kombinasyon nadir.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom: Ne Yapmalı -->
+  <div class="bottom">
+    <div class="bottom-title">Döngüyü Kırmak</div>
+    <div class="practices">
+      <div class="practice">
+        <div class="practice-num">01</div>
+        <div><span class="practice-title">Soruyu Reddet —</span> <span class="practice-desc">"Yeterli miyim?" sorusunu cevaplama. Sorunun kendisi geçersiz.</span></div>
+      </div>
+      <div class="practice">
+        <div class="practice-num">02</div>
+        <div><span class="practice-title">Bedende Yakala —</span> <span class="practice-desc">His geldiğinde kafanda analiz etme. Bedendeki hissi fark et ve geçir.</span></div>
+      </div>
+      <div class="practice">
+        <div class="practice-num">03</div>
+        <div><span class="practice-title">Kanıtlama Refleksi —</span> <span class="practice-desc">"Kendimi kanıtlamalıyım" refleksini yakala. "Aa yine" de, yargılama.</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
