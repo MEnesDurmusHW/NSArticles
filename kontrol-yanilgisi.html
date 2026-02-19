@@ -85,6 +85,13 @@
     margin-right: 8px;
   }
 
+  .col-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #8a877f;
+    margin-bottom: 24px;
+  }
+
   /* Loop / Cycle */
   .cycle {
     display: flex;
@@ -225,6 +232,42 @@
     gap: 0;
   }
 
+  /* Feedback */
+  .feedback {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+
+  .feedback p {
+    font-size: 15px;
+    color: #8a877f;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: rgba(196, 149, 106, 0.12);
+    border: 1px solid rgba(196, 149, 106, 0.3);
+    border-radius: 8px;
+    color: #c4956a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: rgba(196, 149, 106, 0.22);
+    border-color: rgba(196, 149, 106, 0.5);
+    transform: translateY(-1px);
+  }
+
   /* Tablet */
   @media (max-width: 768px) {
     .container {
@@ -301,7 +344,7 @@
 <div class="container">
 
   <div class="header">
-    <h1>Kontrol Yanılgısı & <span>Eziklik Döngüsü</span></h1>
+    <h1>Kontrol Yanılgısı & <span>Yetersizlik Döngüsü</span></h1>
     <div class="divider"></div>
   </div>
 
@@ -309,35 +352,37 @@
     <!-- Left: Kontrol Yanılgısı -->
     <div class="col">
       <div class="col-header">Kontrol Yanılgısı</div>
-      
+      <p class="col-desc">Beyin belirsizliği sevmez. Bir sonuç olumsuz geldiğinde, sorumluluğu dış faktörlere değil kendine yükler — çünkü "suç bendeyse düzeltebilirim" düşüncesi sahte bir güvenlik hissi yaratır. Psikolog Ellen Langer bunu <em>illusion of control</em> olarak tanımlar.</p>
+
       <div class="cycle">
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text"><strong>"Yeterince iyi olsam beni seçerdi"</strong></div>
+          <div class="cycle-text"><strong>"Yeterince iyi olsam bu sonuç farklı olurdu"</strong></div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Acı verici ama bir <strong>eylem planı</strong> sunuyor</div>
+          <div class="cycle-text">Acı verici ama beyne bir <strong>eylem planı</strong> sunuyor</div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Daha fit ol, daha ilginç ol, daha iyi giyin...</div>
+          <div class="cycle-text">Daha çok çalış, daha fazla öğren, daha iyi ol...</div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Her şeyi yapsan bile sonuç değişmez → <strong>"hâlâ yeterli değilim"</strong></div>
+          <div class="cycle-text">Tüm çabaya rağmen sonuç değişmez → <strong>"hâlâ yeterli değilim"</strong></div>
         </div>
       </div>
       <div class="loop-arrow">↻ döngü tekrar eder</div>
 
       <div class="insight">
-        <p><strong>Gerçek:</strong> Kimya, zamanlama ve karşındaki kişinin bilinçdışı tercihleri senin kontrolünde değil. Bu iki kişilik bir denklem ve sen sadece bir tarafısın.</p>
+        <p><strong>Bilimsel gerçek:</strong> Sonuçların büyük kısmı zamanlama, bağlam ve kontrol edilemeyen dış değişkenlere bağlıdır. Beyin, belirsizliğe tahammül edemediği için sorumluluğu kendine yükler — bu bir <em>illizyonel kontrol</em> (illusion of control) mekanizmasıdır.</p>
       </div>
     </div>
 
-    <!-- Right: Eziklik Otoyolu -->
+    <!-- Right: Duygusal Genelleme Döngüsü -->
     <div class="col">
       <div class="col-header">Duygusal Genelleme Döngüsü</div>
+      <p class="col-desc">Tek bir olumsuz olay yaşandığında amigdala alarm verir ve beyin geçmişteki tüm benzer deneyimleri bir araya toplar. Aaron Beck'in bilişsel modeline göre bu <em>aşırı genelleme</em> hatasıdır: tek bir veri noktasından evrensel bir sonuç çıkarmak.</p>
 
       <div class="cycle">
         <div class="cycle-step">
@@ -368,6 +413,7 @@
   <!-- Bottom: Ne Yapmalı -->
   <div class="bottom">
     <div class="bottom-title">Döngüyü Kırmak</div>
+    <p class="col-desc">Bu döngüler otomatik pilotta çalışır. Kırmak için içeriği değil, <em>mekanizmayı</em> hedeflemek gerekir. Aşağıdaki üç adım nöroplastisite ilkesine dayanır: fark edilen bir otomatik düşünce, tekrarla gücünü kaybeder.</p>
     <div class="practices">
       <div class="practice">
         <div class="practice-num">01</div>
@@ -382,6 +428,11 @@
         <div><span class="practice-title">Kanıtlama Refleksi —</span> <span class="practice-desc">"Kendimi kanıtlamalıyım" refleksini yakala. "Aa yine" de, yargılama.</span></div>
       </div>
     </div>
+  </div>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
   </div>
 
 </div>

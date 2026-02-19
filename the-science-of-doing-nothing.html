@@ -236,6 +236,37 @@
     font-size: 0.8rem;
   }
 
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 4rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
   /* Sections visible by default */
 
   /* Reference links */
@@ -520,6 +551,11 @@
   <section class="closing">
     <p class="closing-sub">Şubat 2026</p>
   </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
 
   <button id="fab-back" onclick="goBack()" title="Metne dön">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
