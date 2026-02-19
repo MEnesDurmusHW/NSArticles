@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NS Articles</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0f1117;
+    color: #e8e6e1;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .grain {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+
+  .header {
+    margin-bottom: 64px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    font-size: 16px;
+    color: #8a8a8a;
+    font-weight: 400;
+  }
+
+  .articles {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .article-card {
+    display: block;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .article-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .article-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8a8a8a;
+    margin-bottom: 14px;
+  }
+
+  .article-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .article-card .desc {
+    font-size: 14px;
+    color: #7a7a7a;
+    line-height: 1.6;
+  }
+
+  .article-card .arrow {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #555;
+    transition: all 0.3s ease;
+  }
+
+  .article-card:hover .arrow {
+    color: #e8e6e1;
+    transform: translateY(-50%) translateX(4px);
+  }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="container">
+    <div class="header">
+      <h1>NS Articles</h1>
+      <p>Yazılar & Rehberler</p>
+    </div>
+
+    <div class="articles">
+      <a href="the-science-of-doing-nothing.html" class="article-card">
+        <span class="tag">Bilim & Psikoloji</span>
+        <h2>Hiçbir Şey Yapmamanın Bilimi</h2>
+        <p class="desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <a href="the-science-of-doing-nothing-preview.html" class="article-card">
+        <span class="tag">Önizleme</span>
+        <h2>Hiçbir Şey Yapmamanın Bilimi — Preview</h2>
+        <p class="desc">Makalenin kısa önizleme versiyonu.</p>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <a href="kontrol-yanilgisi.html" class="article-card">
+        <span class="tag">Farkındalık</span>
+        <h2>Kontrol Yanılgısı & Farkındalık</h2>
+        <p class="desc">Kontrol etme ihtiyacının ardındaki yanılgılar ve farkındalık yolu.</p>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <a href="relationships.html" class="article-card">
+        <span class="tag">İlişkiler</span>
+        <h2>İlişki & Evlilik Rehberi</h2>
+        <p class="desc">Sağlıklı ilişkiler ve evlilik üzerine kapsamlı bir rehber.</p>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
