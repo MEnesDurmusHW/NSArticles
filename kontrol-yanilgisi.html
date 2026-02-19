@@ -7,14 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
+
   body {
-    width: 1080px;
-    height: 1920px;
+    width: 100%;
+    min-height: 100vh;
     font-family: 'DM Sans', sans-serif;
     background: #0f1117;
     color: #e8e6e1;
-    overflow: hidden;
     position: relative;
   }
 
@@ -28,7 +27,8 @@
 
   .container {
     width: 100%;
-    height: 100%;
+    max-width: 960px;
+    margin: 0 auto;
     padding: 60px 56px;
     display: flex;
     flex-direction: column;
@@ -59,11 +59,11 @@
     margin-top: 16px;
   }
 
-  /* Two columns - stacked for mobile */
+  /* Two columns */
   .columns {
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
   }
 
   .col {
@@ -224,6 +224,76 @@
     align-items: baseline;
     gap: 0;
   }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .container {
+      padding: 40px 28px;
+    }
+
+    .header h1 {
+      font-size: 34px;
+    }
+
+    .columns {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .col-header {
+      font-size: 22px;
+    }
+
+    .bottom-title {
+      font-size: 22px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .container {
+      padding: 32px 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .col-header {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .cycle-text {
+      font-size: 15px;
+    }
+
+    .insight p {
+      font-size: 14px;
+    }
+
+    .practice {
+      padding: 14px 16px;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .practice-title {
+      font-size: 15px;
+    }
+
+    .practice-desc {
+      font-size: 14px;
+    }
+
+    .bottom-title {
+      font-size: 20px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -255,7 +325,7 @@
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Zaten hepsini yapıyorsun → <strong>"hâlâ yeterli değilim"</strong></div>
+          <div class="cycle-text">Her şeyi yapsan bile sonuç değişmez → <strong>"hâlâ yeterli değilim"</strong></div>
         </div>
       </div>
       <div class="loop-arrow">↻ döngü tekrar eder</div>
@@ -267,30 +337,30 @@
 
     <!-- Right: Eziklik Otoyolu -->
     <div class="col">
-      <div class="col-header">Eziklik Otoyolu</div>
+      <div class="col-header">Duygusal Genelleme Döngüsü</div>
 
       <div class="cycle">
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text"><strong>Tetiklenme:</strong> "Başka biriyle olabilir" düşüncesi</div>
+          <div class="cycle-text"><strong>Tetikleyici olay:</strong> Tek bir olumsuz deneyim yaşanır</div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Beyin meta-hikayeye atlar: <strong>"hep böyle oluyor"</strong></div>
+          <div class="cycle-text">Amigdala devreye girer, beyin genellemeye atlar: <strong>"hep böyle oluyor"</strong></div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">Tek bir olayı değil, tüm <strong>birikmiş örüntüyü</strong> hissedersin</div>
+          <div class="cycle-text">Tek olay değil, geçmişteki tüm <strong>birikmiş örüntü</strong> yeniden hissedilir</div>
         </div>
         <div class="cycle-step">
           <div class="cycle-line"><div class="cycle-dot"></div><div class="cycle-connector"></div></div>
-          <div class="cycle-text">His orantısız güçlü gelir → <strong>"demek ki eksik bir şey var"</strong></div>
+          <div class="cycle-text">Duygu olayla orantısız büyür → <strong>"bende yapısal bir eksiklik var"</strong> çıkarımı</div>
         </div>
       </div>
       <div class="loop-arrow">↻ kontrol yanılgısını besler</div>
 
       <div class="insight">
-        <p><strong>Gerçek:</strong> Seçiliyorsun — sadece karşılıklı uyum henüz denk gelmedi. Bu bir eksiklik değil, aradığın kombinasyon nadir.</p>
+        <p><strong>Bilimsel gerçek:</strong> Bu, bilişsel davranış terapisinde <em>"aşırı genelleme"</em> (overgeneralization) olarak tanımlanır. Beyin enerji tasarrufu için tek bir veriyi tüm kimliğe yayar — bu bir gerçeklik değil, bir kestirme hatadır.</p>
       </div>
     </div>
   </div>
