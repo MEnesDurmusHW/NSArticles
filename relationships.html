@@ -356,10 +356,27 @@
   }
   .closing blockquote em { color: var(--accent); }
   .closing .sources {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .closing .sources a {
+    display: inline-block;
     font-size: 11px;
+    font-family: var(--sans);
     color: var(--text-muted);
+    text-decoration: none;
     letter-spacing: 0.5px;
-    line-height: 1.8;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  .closing .sources a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   /* FEEDBACK */
@@ -742,9 +759,13 @@
       "İlişkiyi öldüren şey çatışmanın varlığı değil, çatışmanın <em>nasıl yönetildiği.</em><br><br>
       Ayakta tutan şey büyük romantik jestler değil, günlük küçük bağlantı anlarında <em>'seni görüyorum'</em> diyebilmenin tutarlılığı."
     </blockquote>
-    <p class="sources">
-      Kaynaklar: Gottman Institute (40+ yıl) · IFS/Wheatley 2022 · TÜİK 2024 · Pew Research · PMC/NCBI Sistematik Derlemeler
-    </p>
+    <div class="sources">
+      <a href="https://www.gottman.com/about/research/" target="_blank" rel="noopener">Gottman Institute</a>
+      <a href="https://ifstudies.org/blog/is-marriage-back-divorce-is-down-family-stability-is-up" target="_blank" rel="noopener">IFS / Wheatley 2022</a>
+      <a href="https://data.tuik.gov.tr/Bulten/Index?p=Evlenme-ve-Bosanma-Istatistikleri-2024-53560" target="_blank" rel="noopener">TÜİK 2024</a>
+      <a href="https://www.pewresearch.org/social-trends/2020/05/27/as-millennials-near-40-theyre-approaching-family-life-differently-than-previous-generations/" target="_blank" rel="noopener">Pew Research</a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PMC/NCBI</a>
+    </div>
   </div>
 
   <div class="feedback">
@@ -753,6 +774,8 @@
   </div>
 
 </div>
+
+<div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
 
 </body>
 </html>

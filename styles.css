@@ -114,3 +114,33 @@ body {
 [data-theme="dark"] .theme-toggle .icon-moon {
   display: none;
 }
+
+/* --- Home Logo --- */
+.home-logo {
+  text-align: center;
+  padding: 48px 0;
+  cursor: pointer;
+}
+
+.home-logo .logo-text {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: -0.3px;
+  transition: color 0.3s ease;
+}
+
+.home-logo .logo-author {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+}
+
+.home-logo:hover .logo-text {
+  color: var(--accent);
+}
