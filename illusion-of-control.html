@@ -4,27 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kontrol Yanılgısı & Farkındalık</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    width: 100%;
-    min-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
-    background: #0f1117;
-    color: #e8e6e1;
-    position: relative;
-  }
-
-  .grain {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
-  }
-
   .container {
     width: 100%;
     max-width: 960px;
@@ -41,22 +24,23 @@
   }
 
   .header h1 {
-    font-family: 'DM Serif Display', serif;
+    font-family: var(--serif);
     font-size: 44px;
-    color: #fff;
+    color: var(--text);
     letter-spacing: -0.5px;
     line-height: 1.2;
   }
 
   .header h1 span {
-    color: #c4956a;
+    color: var(--accent);
   }
 
-  .divider {
+  .header .divider {
     width: 60px;
     height: 2px;
-    background: #c4956a;
-    margin-top: 16px;
+    background: var(--accent);
+    margin: 16px 0 0;
+    opacity: 1;
   }
 
   /* Two columns */
@@ -73,22 +57,18 @@
   }
 
   .col-header {
-    font-family: 'DM Serif Display', serif;
+    font-family: var(--serif);
     font-size: 26px;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 22px;
     padding-bottom: 14px;
-    border-bottom: 1px solid rgba(196, 149, 106, 0.3);
-  }
-
-  .col-header .emoji {
-    margin-right: 8px;
+    border-bottom: 1px solid var(--divider);
   }
 
   .col-desc {
     font-size: 15px;
     line-height: 1.65;
-    color: #8a877f;
+    color: var(--text-dim);
     margin-bottom: 24px;
   }
 
@@ -118,7 +98,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #c4956a;
+    background: var(--accent);
     flex-shrink: 0;
     margin-top: 5px;
   }
@@ -126,24 +106,24 @@
   .cycle-connector {
     width: 1px;
     height: 22px;
-    background: rgba(196, 149, 106, 0.35);
+    background: var(--divider);
   }
 
   .cycle-text {
     font-size: 17px;
     line-height: 1.5;
-    color: #bbb8b0;
+    color: var(--text-dim);
     padding-bottom: 10px;
   }
 
   .cycle-text strong {
-    color: #e8e6e1;
+    color: var(--text);
     font-weight: 600;
   }
 
   .loop-arrow {
     font-size: 12px;
-    color: #c4956a;
+    color: var(--accent);
     margin-left: 34px;
     margin-top: -4px;
     margin-bottom: 16px;
@@ -153,8 +133,8 @@
 
   /* Insight box */
   .insight {
-    background: rgba(196, 149, 106, 0.08);
-    border-left: 2px solid #c4956a;
+    background: var(--accent-glow);
+    border-left: 2px solid var(--accent);
     padding: 14px 16px;
     border-radius: 0 8px 8px 0;
     margin-top: 8px;
@@ -163,11 +143,11 @@
   .insight p {
     font-size: 16px;
     line-height: 1.55;
-    color: #bbb8b0;
+    color: var(--text-dim);
   }
 
   .insight p strong {
-    color: #c4956a;
+    color: var(--accent);
     font-weight: 600;
   }
 
@@ -175,13 +155,13 @@
   .bottom {
     margin-top: 36px;
     padding-top: 28px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--border);
   }
 
   .bottom-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: var(--serif);
     font-size: 26px;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 20px;
   }
 
@@ -192,8 +172,8 @@
   }
 
   .practice {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px 20px;
     display: flex;
@@ -204,7 +184,7 @@
   .practice-num {
     font-size: 13px;
     font-weight: 600;
-    color: #c4956a;
+    color: var(--accent);
     letter-spacing: 1.5px;
     margin-bottom: 0;
     flex-shrink: 0;
@@ -213,7 +193,7 @@
   .practice-title {
     font-size: 17px;
     font-weight: 600;
-    color: #e8e6e1;
+    color: var(--text);
     margin-bottom: 0;
     margin-right: 8px;
     flex-shrink: 0;
@@ -222,27 +202,20 @@
   .practice-desc {
     font-size: 15px;
     line-height: 1.5;
-    color: #8a877f;
-  }
-
-  .practice-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0;
+    color: var(--text-dim);
   }
 
   /* Feedback */
   .feedback {
     margin-top: 48px;
     padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--border);
     text-align: center;
   }
 
   .feedback p {
     font-size: 15px;
-    color: #8a877f;
+    color: var(--text-dim);
     margin-bottom: 16px;
     line-height: 1.5;
   }
@@ -250,11 +223,11 @@
   .feedback-btn {
     display: inline-block;
     padding: 12px 32px;
-    background: rgba(196, 149, 106, 0.12);
-    border: 1px solid rgba(196, 149, 106, 0.3);
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
     border-radius: 8px;
-    color: #c4956a;
-    font-family: 'DM Sans', sans-serif;
+    color: var(--accent);
+    font-family: var(--sans);
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
@@ -263,8 +236,8 @@
   }
 
   .feedback-btn:hover {
-    background: rgba(196, 149, 106, 0.22);
-    border-color: rgba(196, 149, 106, 0.5);
+    background: var(--accent);
+    color: var(--bg);
     transform: translateY(-1px);
   }
 
@@ -341,6 +314,10 @@
 </head>
 <body>
 <div class="grain"></div>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
 <div class="container">
 
   <div class="header">

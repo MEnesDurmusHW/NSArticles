@@ -4,23 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hiçbir Şey Yapmamanın Bilimi</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #FAF7F2;
-    --surface: #F0EDE7;
-    --text: #1A1A1E;
-    --text-dim: #6B665E;
-    --accent: #96622F;
-    --accent-glow: #96622F15;
-    --divider: #DDD8D0;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    background: #FAF7F2;
-    color: var(--text);
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 300;
     line-height: 1.7;
@@ -57,18 +45,8 @@
     50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
   }
 
-  .hero-label {
-    font-size: 0.75rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
-
   .hero h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--serif);
     font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 400;
     line-height: 1.15;
@@ -131,7 +109,7 @@
   }
 
   .question-section .big-question {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--serif);
     font-size: clamp(1.3rem, 3vw, 2rem);
     font-weight: 400;
     color: var(--text);
@@ -143,15 +121,6 @@
   .question-section .big-question .highlight {
     color: var(--accent);
     font-style: italic;
-  }
-
-  /* Divider */
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--accent);
-    margin: 0 auto;
-    opacity: 0.4;
   }
 
   /* TOC */
@@ -190,14 +159,14 @@
   }
 
   .toc-num {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--serif);
     font-size: 0.85rem;
     color: var(--text-dim);
     min-width: 1.5rem;
   }
 
   .toc-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--serif);
     font-size: 1.15rem;
     font-weight: 400;
     transition: color 0.3s ease;
@@ -234,7 +203,7 @@
   }
 
   .toc-sub-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--serif);
     font-size: 1rem;
     font-weight: 400;
     font-style: italic;
@@ -251,6 +220,24 @@
   .closing-sub {
     color: var(--text-dim);
     font-size: 0.8rem;
+  }
+
+  .read-full-btn {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    padding: 0.7rem 2rem;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+  }
+
+  .read-full-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
   }
 
   /* Tablet */
@@ -326,8 +313,13 @@
 </head>
 <body>
 
-  <section class="hero">
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
 
+  <section class="hero">
     <h1>Hiçbir şey yapmamak, <em>yapabileceğin</em> en verimli şey olabilir.</h1>
     <p class="hero-sub">Beyin bilimi, psikoloji ve tıp araştırmalarının "boş vakit" hakkında söyledikleri.</p>
     <div class="scroll-hint">
@@ -337,7 +329,7 @@
 
   <section class="question-section">
     <p class="big-question">
-      Günün her dakikasını doldurmaya çalışıyoruz — iş, spor, projeler, sosyal medya, diziler. 
+      Günün her dakikasını doldurmaya çalışıyoruz — iş, spor, projeler, sosyal medya, diziler.
       Peki ya tam da bu yüzden <span class="highlight">daha az üretiyorsak?</span>
     </p>
   </section>
@@ -454,7 +446,8 @@
   <div class="divider"></div>
 
   <section class="closing">
-    <p class="closing-sub">Şubat 2026</p>
+    <a href="the-science-of-doing-nothing.html" class="read-full-btn">Yazının Tamamını Oku →</a>
+    <p class="closing-sub" style="margin-top:1rem;">Şubat 2026</p>
   </section>
 
 </body>

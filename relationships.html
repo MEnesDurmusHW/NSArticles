@@ -4,37 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>İlişki & Evlilik Rehberi — Enes</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+  /* Page-specific color tokens */
   :root {
-    --bg: #0d0f12;
-    --surface: #161920;
-    --surface-2: #1c2029;
-    --accent: #e8a838;
-    --accent-dim: rgba(232,168,56,0.12);
-    --accent-glow: rgba(232,168,56,0.06);
+    --red: #c94040;
+    --red-dim: rgba(201, 64, 64, 0.08);
+    --green: #2d8a5e;
+    --green-dim: rgba(45, 138, 94, 0.08);
+    --blue: #3a6fc9;
+    --blue-dim: rgba(58, 111, 201, 0.08);
+    --accent-dim: rgba(150, 98, 47, 0.08);
+    --surface-2: #E8E5DF;
+  }
+  [data-theme="dark"] {
     --red: #e85454;
-    --red-dim: rgba(232,84,84,0.1);
+    --red-dim: rgba(232, 84, 84, 0.1);
     --green: #4ecb8d;
-    --green-dim: rgba(78,203,141,0.1);
+    --green-dim: rgba(78, 203, 141, 0.1);
     --blue: #5b9bf5;
-    --blue-dim: rgba(91,155,245,0.1);
-    --text: #e2e4e8;
-    --text-dim: #8a8f9a;
-    --text-muted: #555a66;
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'DM Sans', -apple-system, sans-serif;
+    --blue-dim: rgba(91, 155, 245, 0.1);
+    --accent-dim: rgba(196, 149, 106, 0.12);
+    --surface-2: #1c2029;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
     font-size: 16px;
     line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
   }
 
   .container {
@@ -73,7 +71,7 @@
     font-weight: 400;
     line-height: 1.2;
     margin-bottom: 16px;
-    color: #fff;
+    color: var(--text);
   }
   .hero h1 em {
     color: var(--accent);
@@ -90,7 +88,7 @@
   /* SECTIONS */
   section {
     padding: 56px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border);
   }
   section:last-child { border-bottom: none; }
 
@@ -107,7 +105,7 @@
     font-family: var(--serif);
     font-size: 30px;
     font-weight: 400;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 24px;
     line-height: 1.3;
   }
@@ -116,7 +114,7 @@
   h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     margin: 32px 0 12px;
   }
 
@@ -142,7 +140,7 @@
     right: 24px;
     font-family: var(--serif);
     font-size: 48px;
-    color: rgba(232,84,84,0.08);
+    color: var(--red-dim);
     font-weight: 700;
     line-height: 1;
   }
@@ -278,7 +276,7 @@
   .checklist li {
     padding: 14px 0 14px 36px;
     position: relative;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border);
     font-size: 15px;
     color: var(--text);
     line-height: 1.65;
@@ -296,7 +294,7 @@
   }
   .checklist.self li::before { border-color: var(--blue); }
   .checklist.other li::before { border-color: var(--accent); }
-  .checklist li strong { color: #fff; font-weight: 600; }
+  .checklist li strong { color: var(--text); font-weight: 600; }
 
   /* BIG QUESTIONS */
   .big-question {
@@ -305,7 +303,7 @@
     padding: 36px 32px;
     margin: 24px 0;
     text-align: center;
-    border: 1px solid rgba(232,168,56,0.15);
+    border: 1px solid var(--border);
   }
   .big-question .q-number {
     font-size: 12px;
@@ -319,7 +317,7 @@
     font-family: var(--serif);
     font-size: 22px;
     font-style: italic;
-    color: #fff;
+    color: var(--text);
     line-height: 1.5;
     margin-bottom: 16px;
   }
@@ -364,6 +362,35 @@
     line-height: 1.8;
   }
 
+  /* FEEDBACK */
+  .feedback {
+    padding: 0 0 60px;
+    text-align: center;
+  }
+  .feedback p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
   /* DANCE METAPHOR */
   .dance-box {
     background: var(--blue-dim);
@@ -379,6 +406,27 @@
     line-height: 1.7;
   }
 
+  /* Sound Relationship House */
+  .house-level {
+    padding: 12px 18px;
+    text-align: center;
+  }
+  .house-level strong {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .house-level span {
+    font-size: 12px;
+  }
+  .house-top {
+    background: linear-gradient(135deg, var(--accent), #c48a2a);
+    color: var(--bg);
+    padding: 14px 18px;
+    border-radius: 8px 8px 2px 2px;
+  }
+  .house-top strong { font-size: 14px; }
+  .house-top span { font-size: 12px; opacity: 0.85; }
+
   @media (max-width: 600px) {
     .hero h1 { font-size: 30px; }
     h2 { font-size: 24px; }
@@ -390,6 +438,12 @@
 </style>
 </head>
 <body>
+
+<div class="grain"></div>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
 
 <div class="container">
 
@@ -516,39 +570,39 @@
     <p style="color: var(--text-dim); font-size: 15px; margin-bottom: 20px;">Gottman tüm bulgularını bir ev metaforuyla yapılandırdı. İki taşıyıcı duvar (güven ve bağlılık) + 7 kat. Alt katlar sağlam değilse üst katlara çıkılamaz — her kat bir öncekinin üzerine inşa edilir.</p>
 
     <div style="display: flex; flex-direction: column; gap: 2px; max-width: 520px; margin: 0 auto;">
-      <div style="background: linear-gradient(135deg, var(--accent), #c48a2a); color: var(--bg); padding: 14px 18px; border-radius: 8px 8px 2px 2px; text-align: center;">
-        <strong style="font-size: 14px; letter-spacing: 1px;">7. ORTAK ANLAM OLUŞTUR</strong><br>
-        <span style="font-size: 12px; opacity: 0.85;">Ritüeller, roller, hedefler, semboller — "biz" kimliği</span>
+      <div class="house-top" style="text-align: center;">
+        <strong>7. ORTAK ANLAM OLUŞTUR</strong><br>
+        <span>Ritüeller, roller, hedefler, semboller — "biz" kimliği</span>
       </div>
-      <div style="background: rgba(232,168,56,0.15); border: 1px solid rgba(232,168,56,0.3); padding: 12px 18px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--accent);">6. HAYALLERİ DESTEKLE</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">Partnerin hayallerini anlama ve destekleme, gridlock'u aşma</span>
+      <div class="house-level" style="background: var(--accent-dim); border: 1px solid var(--divider);">
+        <strong style="color: var(--accent);">6. HAYALLERİ DESTEKLE</strong><br>
+        <span style="color: var(--text-dim);">Partnerin hayallerini anlama ve destekleme, gridlock'u aşma</span>
       </div>
-      <div style="background: rgba(232,168,56,0.10); border: 1px solid rgba(232,168,56,0.2); padding: 12px 18px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--accent);">5. ÇATIŞMAYI YÖNET</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">Çözmek değil, birlikte yaşayabilmek — sorunların %69'u kalıcı</span>
+      <div class="house-level" style="background: var(--accent-dim); border: 1px solid var(--divider); opacity: 0.85;">
+        <strong style="color: var(--accent);">5. ÇATIŞMAYI YÖNET</strong><br>
+        <span style="color: var(--text-dim);">Çözmek değil, birlikte yaşayabilmek — sorunların %69'u kalıcı</span>
       </div>
-      <div style="background: rgba(232,168,56,0.08); border: 1px solid rgba(232,168,56,0.15); padding: 12px 18px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--accent);">4. OLUMLU BAKIŞ AÇISI</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">İlk 3 kat sağlamsa partnerin davranışları olumlu bir lensle yorumlanır</span>
+      <div class="house-level" style="background: var(--accent-dim); border: 1px solid var(--divider); opacity: 0.7;">
+        <strong style="color: var(--accent);">4. OLUMLU BAKIŞ AÇISI</strong><br>
+        <span style="color: var(--text-dim);">İlk 3 kat sağlamsa partnerin davranışları olumlu bir lensle yorumlanır</span>
       </div>
-      <div style="background: rgba(76,175,80,0.12); border: 1px solid rgba(76,175,80,0.25); padding: 12px 18px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--green);">3. BAĞLANTI DAVETLERİNE YANIT VER</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">Turning toward — masters %86, disasters %33</span>
+      <div class="house-level" style="background: var(--green-dim); border: 1px solid var(--divider);">
+        <strong style="color: var(--green);">3. BAĞLANTI DAVETLERİNE YANIT VER</strong><br>
+        <span style="color: var(--text-dim);">Turning toward — masters %86, disasters %33</span>
       </div>
-      <div style="background: rgba(76,175,80,0.18); border: 1px solid rgba(76,175,80,0.3); padding: 12px 18px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--green);">2. HAYRANLIK VE TAKDİR</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">Küçümsemenin tam panzehiri — olumluyu görmek ve ifade etmek</span>
+      <div class="house-level" style="background: var(--green-dim); border: 1px solid var(--divider);">
+        <strong style="color: var(--green);">2. HAYRANLIK VE TAKDİR</strong><br>
+        <span style="color: var(--text-dim);">Küçümsemenin tam panzehiri — olumluyu görmek ve ifade etmek</span>
       </div>
-      <div style="background: rgba(76,175,80,0.25); border: 1px solid rgba(76,175,80,0.4); padding: 12px 18px; border-radius: 2px 2px 8px 8px; text-align: center;">
-        <strong style="font-size: 13px; color: var(--green);">1. LOVE MAPS — PARTNERİNİ TANI</strong><br>
-        <span style="font-size: 12px; color: var(--text-dim);">Korkuları, hayalleri, değerleri... Duygusal bir harita oluştur</span>
+      <div class="house-level" style="background: var(--green-dim); border: 1px solid var(--divider); border-radius: 2px 2px 8px 8px;">
+        <strong style="color: var(--green);">1. LOVE MAPS — PARTNERİNİ TANI</strong><br>
+        <span style="color: var(--text-dim);">Korkuları, hayalleri, değerleri... Duygusal bir harita oluştur</span>
       </div>
       <div style="display: flex; justify-content: space-between; margin-top: 6px;">
-        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-right: 4px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-right: 4px;">
           <strong style="font-size: 12px; color: var(--text); letter-spacing: 1px;">GÜVEN</strong>
         </div>
-        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-left: 4px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; text-align: center; flex: 1; margin-left: 4px;">
           <strong style="font-size: 12px; color: var(--text); letter-spacing: 1px;">BAĞLILIK</strong>
         </div>
       </div>
@@ -585,11 +639,11 @@
     <h3>İki Boşanma Paterni</h3>
     <p style="color: var(--text-dim); font-size: 15px;">Gottman'ın 14 yıllık boylamsal verileri iki farklı boşanma paterni ortaya koydu:</p>
     <div class="stat-row">
-      <div class="stat-box" style="border-color: var(--red);">
+      <div class="stat-box">
         <div class="number" style="font-size: 22px;">5.6 yıl</div>
         <div class="label">Dört atlının yoğun olduğu çiftler.<br>Patlayıcı çatışma → erken boşanma.</div>
       </div>
-      <div class="stat-box" style="border-color: var(--accent);">
+      <div class="stat-box">
         <div class="number" style="font-size: 22px;">16.2 yıl</div>
         <div class="label">Duygusal kopuş (disengagement).<br>Çatışma az ama pozitiflik de yok → sessiz tükenme.</div>
       </div>
@@ -691,6 +745,11 @@
     <p class="sources">
       Kaynaklar: Gottman Institute (40+ yıl) · IFS/Wheatley 2022 · TÜİK 2024 · Pew Research · PMC/NCBI Sistematik Derlemeler
     </p>
+  </div>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
   </div>
 
 </div>

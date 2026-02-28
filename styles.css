@@ -1,0 +1,116 @@
+/* ===========================================
+   NSArticles — Shared Styles & Theme System
+   =========================================== */
+
+/* --- Light Mode (default) --- */
+:root {
+  color-scheme: light;
+  --bg: #FAF7F2;
+  --surface: #F0EDE7;
+  --text: #1A1A1E;
+  --text-dim: #6B665E;
+  --text-muted: #9E9A92;
+  --accent: #96622F;
+  --accent-glow: rgba(150, 98, 47, 0.1);
+  --divider: #DDD8D0;
+  --border: rgba(0, 0, 0, 0.08);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+
+/* --- Dark Mode --- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1117;
+  --surface: #161920;
+  --text: #e8e6e1;
+  --text-dim: #8a8a8a;
+  --text-muted: #555a66;
+  --accent: #c4956a;
+  --accent-glow: rgba(196, 149, 106, 0.08);
+  --divider: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.06);
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Grain Overlay (dark mode only) --- */
+.grain {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+}
+
+[data-theme="dark"] .grain {
+  opacity: 1;
+}
+
+/* --- Divider --- */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 0 auto;
+  opacity: 0.4;
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+.theme-toggle .icon-moon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
