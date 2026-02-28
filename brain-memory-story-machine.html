@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyin, Hafıza ve Hikâye Makinesi</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 500px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Article content */
+  .article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .section p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section .ref {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem 0;
+  }
+
+  /* Experiment boxes */
+  .experiment {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.6rem 1.8rem;
+    margin: 1.8rem 0;
+  }
+
+  .experiment-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .experiment p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+
+  .experiment p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Pull quotes */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .pull-quote .attribution {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--text-dim);
+  }
+
+  /* Conclusion */
+  .conclusion {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .conclusion h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 4rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* Reference links */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  a.ref:hover {
+    text-decoration: underline;
+  }
+
+  /* Highlight target reference */
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* Back to text FAB */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #fab-back:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .article { padding: 3rem 1.5rem; }
+    .experiment { padding: 1.3rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .article { padding: 2.5rem 1.2rem; }
+
+    .section h2 { font-size: 1.4rem; }
+
+    .section p { font-size: 1rem; }
+
+    .experiment { padding: 1.2rem; }
+    .experiment p { font-size: 0.95rem; }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .section h2 { font-size: 1.25rem; }
+    .section p { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <section class="hero">
+    <h1>Beyin, Hafıza ve <em>Hikâye Makinesi</em></h1>
+    <p class="hero-sub">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Hatırladığın her şeyin gerçek olduğuna emin misin? Peki ya beynin boşlukları
+      <span class="highlight">kendi hikâyesiyle dolduruyorsa?</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <article class="article">
+
+    <!-- 01 -->
+    <div class="section">
+      <div class="section-num">01</div>
+      <h2>Beyin her şeyi kaydetmiyor, peki neyi kaydediyor?</h2>
+      <p>Bir arkadaşınla yaptığın sıradan bir sohbeti hatırlamayabilirsin. Ama o sohbet sırasında birisi sana beklenmedik bir şey söylediyse, seni üzen, şaşırtan ya da çok güldüren bir şey, o anı yıllar sonra bile hatırlarsın. Çünkü beyin "önemli olan bu" dedi ve kaydetti. Geri kalanı? Silinmeye bıraktı.</p>
+      <p>Bu seçiciliğin arkasında birden fazla hormon ve nörotransmitter birlikte çalışıyor. Süreç kabaca şöyle işliyor: Duygusal bir olay yaşadığında vücudun adrenalin salgılıyor. Bu adrenalin vagus siniri üzerinden beyne sinyal gönderiyor ve amigdalada noradrenalin seviyesini artırıyor. Noradrenalin, duygusal anıların kalıcı hale gelmesinin belki de en kritik parçası. McGaugh ve arkadaşlarının onlarca yıllık araştırmaları, amigdaladaki noradrenalin aktivasyonunun duygusal hafızanın güçlenmesinde merkezi rol oynadığını gösteriyor <a href="#ref-1" class="ref" onclick="savePos(this)">[1]</a>. Aynı anda kortizol de bu süreci destekliyor. 2025'te Yale Üniversitesi'nde yayımlanan bir araştırmada, stres hormonlarının duygusal anıları güçlendirmek için beyin ağlarını nasıl yeniden yapılandırdığı gösterildi <a href="#ref-2" class="ref" onclick="savePos(this)">[2]</a>.</p>
+      <p>Bir de dopamin var. Dopamin daha çok "yenilik" sinyali olarak çalışıyor. Cedars-Sinai'de yapılan bir araştırmada, dopamin nöronlarının yeni bir uyaranla karşılaşıldığında ateşlendiği, ama tanıdık bir uyaranda sessiz kaldığı gösterildi <a href="#ref-3" class="ref" onclick="savePos(this)">[3]</a>. Yani dopamin beyne "bu yeni, kaydet" diyor.</p>
+      <p>Ve bu süreç uykuda da devam ediyor. 2025'te Neuron dergisinde yayımlanan bir çalışmada, NREM uykusu sırasında amigdala ile kortikal bölgeler arasındaki senkronizasyonun duygusal anıları seçici olarak güçlendirdiği gösterildi <a href="#ref-4" class="ref" onclick="savePos(this)">[4]</a>.</p>
+      <p>Kısacası, beynin bir filtreleme sistemi var ve bu filtre duygulara göre çalışıyor. Adrenalin, noradrenalin, kortizol ve dopamin birlikte karar veriyor: "Bu önemli, kaydet." Geri kalanına beyin pek önem vermiyor.</p>
+      <p>Ama bu sistem bir eksiklik değil. Tam tersine, oldukça verimli bir tasarım. Beyin her saniye devasa miktarda bilgi alıyor. Bunların hepsini kaydetmeye çalışsaydı, gerçekten önemli olanı bulmak giderek zorlaşırdı. Unutmak, bir arıza değil; önceliklendirme. Anderson ve Schooler'ın araştırmaları, unutma eğrilerinin çevredeki bilginin gerçek kullanım sıklığıyla paralel gittiğini gösteriyor <a href="#ref-5" class="ref" onclick="savePos(this)">[5]</a>. Yani beyin, istatistiksel olarak tekrar karşına çıkması muhtemel bilgiyi tutuyor, geri kalanını bırakıyor. Avcı-toplayıcı atalarımız güvenli su kaynağının yerini hatırlamalıydı ama oraya giderken yolda gördükleri her taşı değil. Az kaydetmek, çok hatırlamak demek.</p>
+      <p>Ama asıl soru şu: Kayıt sırasında kaydedilmeyen kısımlara ne oluyor? Hatırlamaya çalıştığında beyin o boşlukları nasıl dolduruyor?</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <div class="section">
+      <div class="section-num">02</div>
+      <h2>Hatırlamak mı, yeniden uydurmak mı?</h2>
+      <p>Bir anıyı hatırlamaya çalıştığında beyin o anıyı olduğu gibi geri oynatmıyor. Elindeki parçaları alıyor ve geri kalanını yeniden inşa ediyor. Senin inançların, beklentilerin ve "dünya böyle çalışır" diye kabul ettiğin şemalar üzerinden.</p>
+      <p>Bu fikri ilk ortaya atan isim İngiliz psikolog Frederic Bartlett oldu. 1932'de yaptığı ünlü "War of the Ghosts" deneyinde, İngiliz katılımcılara bir Kızılderili halk hikâyesi okuttu. Hikâye, katılımcıların kültürüne yabancı unsurlar içeriyordu: hayaletler, kanoler, doğaüstü olaylar <a href="#ref-6" class="ref" onclick="savePos(this)">[6]</a>.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Bartlett Deneyi, 1932</div>
+        <p>Katılımcılar hikâyeyi okuduktan sonra belirli aralıklarla tekrar tekrar yazmaya çalıştılar. Ve her seferinde sistematik değişiklikler yaptılar: Kanoları "tekne"ye çevirdiler, hikâyedeki hayalet savaşçıları tamamen çıkardılar, anlamadıkları doğaüstü olayları kendi kültürlerinde mantıklı olan olaylarla değiştirdiler. Bir katılımcı "hayaletler" kavramını "hastalık"a çevirdi çünkü o onun dünyasında daha mantıklıydı.</p>
+        <p>Zaman geçtikçe hikâye orijinalinden giderek uzaklaştı. Ama en ilginç kısım şuydu: Katılımcılar her seferinde "doğru hatırladıklarından" emindiler. Hikâyeyi değiştirdiklerinin farkında bile değillerdi <a href="#ref-6" class="ref" onclick="savePos(this)">[6]</a>.</p>
+      </div>
+
+      <p>Bartlett'in vardığı sonuç bugün hâlâ geçerli: Hatırlamak, bir kaydı geri oynatmak değil; eldeki parçalardan yeniden bir hikâye kurmak. Ve bu yeniden kurma sürecinde beyin, boşlukları senin şemalarınla, inançlarınla ve beklentilerinle dolduruyor.</p>
+      <p>Bunu çok daha dramatik biçimde gösteren isim ise Elizabeth Loftus oldu. Loftus, 1974'te katılımcılara bir trafik kazası videosu izletti ve ardından sorular sordu <a href="#ref-7" class="ref" onclick="savePos(this)">[7]</a>.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Loftus ve Palmer, 1974</div>
+        <p>Katılımcılara aynı trafik kazası videosu izletildi. Sonra herkese aynı soru soruldu, tek bir kelime farkıyla. Bir gruba "Arabalar birbirine <strong>çarptığında</strong> (hit) ne hızla gidiyorlardı?" denildi. Diğer gruba "Arabalar birbirine <strong>tosladığında</strong> (smashed) ne hızla gidiyorlardı?" denildi. Aynı video, aynı kaza, aynı soru. Sadece bir kelime farklı.</p>
+        <p>"Tosladığında" diye sorulan grup ortalama 40.8 mil/saat tahmin etti. "Çarptığında" diye sorulan grup 34 mil/saat. Ama asıl şaşırtıcı bulgu bir hafta sonra geldi. Katılımcılara "Videoda kırık cam gördünüz mü?" diye soruldu. Videoda kırık cam yoktu. Ama "tosladığında" grubunun %32'si kırık cam "gördüğünü" söyledi. "Çarptığında" grubunda bu oran %14'tü. Tek bir kelime, hafızayı yeniden şekillendirmekle kalmamış, olmayan bir görüntüyü bile yerleştirmişti <a href="#ref-7" class="ref" onclick="savePos(this)">[7]</a>.</p>
+      </div>
+
+      <p>Loftus bu alandaki çalışmalarına devam etti ve belki de en ünlü deneyini 1995'te yaptı: "Lost in the Mall" (alışveriş merkezinde kaybolma) deneyi <a href="#ref-8" class="ref" onclick="savePos(this)">[8]</a>.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Lost in the Mall Deneyi, 1995</div>
+        <p>Loftus ve ekibi katılımcıların aile üyeleriyle görüşerek gerçek çocukluk anılarını topladı. Sonra her katılımcıya dört anı sunuldu. Üçü gerçekti, biri tamamen uydurmaydı: çocukken bir alışveriş merkezinde kaybolduklarına dair sahte bir anı. Bu sahte anı, inandırıcılık için katılımcının gerçek aile bilgileriyle süslenmişti. Doğru alışveriş merkezi, doğru yaş aralığı, ama tamamen uydurma bir olay.</p>
+        <p>Katılımcıların yaklaşık dörtte biri bu uydurma anıyı "hatırladı". Ve sadece "evet olmuştu" demediler. Zamanla anıya kendi detaylarını eklemeye başladılar. Kaybolduklarında ne kadar korktuklarını, yanlarına gelen yaşlı kadını, annelerinin onları bulduğunda nasıl ağladığını anlattılar. Hiçbiri yaşanmamıştı. Ama bu detaylar katılımcıların kendi üretimiydi ve onlar için tamamen gerçekti <a href="#ref-8" class="ref" onclick="savePos(this)">[8]</a>.</p>
+      </div>
+
+      <div class="pull-quote">
+        <p>"Hafıza bir kayıt cihazı gibi çalışmıyor. Daha çok bir Wikipedia sayfası gibi. Sen de değiştirebilirsin, başkaları da."</p>
+        <span class="attribution">— Elizabeth Loftus</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <div class="section">
+      <div class="section-num">03</div>
+      <h2>Beyin neden "bilmiyorum" diyemiyor?</h2>
+      <p>Hatırlamak yeniden inşa etmekse, bu inşaat sırasında hatalar kaçınılmaz. Ve beyin hata yaptığında çok ilginç bir şey yapıyor: "bilmiyorum" demiyor. Bunun yerine, tutarlı ve mantıklı görünen bir açıklama uyduruyor. Ve buna kendisi de inanıyor.</p>
+      <p>Buna bilimde "konfabülasyon" deniyor. Kelime "dürüst yalan söyleme" olarak da tanımlanıyor çünkü kişi kandırmaya çalışmıyor. Gerçekten uydurduğu şeyin doğru olduğuna inanıyor.</p>
+      <p>Konfabülasyon genellikle beyin hasarı olan hastalarda inceleniyor ama sağlıklı insanlarda da sürekli oluyor. Kopelman'ın araştırmalarına göre, sağlıklı bireylerde "provoke edilmiş konfabülasyonlar", yani hafızası zorlandığında ortaya çıkan boşluk doldurma davranışları, son derece yaygın <a href="#ref-9" class="ref" onclick="savePos(this)">[9]</a>. Bu, hafızanın normal çalışma mekanizmasının bir parçası.</p>
+      <p>Bunu bir önceki bölümdeki "alışveriş merkezinde kaybolma" deneyi de gösteriyor <a href="#ref-8" class="ref" onclick="savePos(this)">[8]</a>. Katılımcılara hiç yaşamadıkları bir anı anlatıldığında, beyinleri bu anıyı reddetmek yerine sahiplenmeyi ve üzerine detay eklemeyi tercih etti. Çünkü beyin boşluk sevmiyor. Bir bilgi geldiğinde, onu mevcut hikâyesine entegre etmeye çalışıyor. "Bu bana ait değil" demek yerine "evet, hatırlıyorum, şöyle olmuştu" diyor.</p>
+      <p>Schnider'ın çalışmaları da konfabülasyonun nörolojik altyapısını ortaya koyuyor <a href="#ref-10" class="ref" onclick="savePos(this)">[10]</a>. Orbitofrontal korteks bir tür "gerçeklik filtresi" görevi görüyor. Bu bölge hasar gördüğünde spontan konfabülasyonlar artıyor. Ama sağlıklı beyinlerde bile bu filtre mükemmel çalışmıyor. Özellikle hafıza zorlandığında, duygusal yoğunluk olduğunda ya da sosyal baskı altındayken, beyin boşlukları doldurmaya ve tutarlı bir hikâye üretmeye devam ediyor.</p>
+      <p>Ve belki de bu bir arıza değil. Birinci bölümde unutmanın adaptif olduğunu gördük; aynı mantık konfabülasyon için de geçerli.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Neden "bilmiyorum" demek evrimsel bir lüks?</div>
+        <p>Savanada bir çalının arkasından ses geldiğinde, "bilmiyorum, belki rüzgârdır" diyen atamız orada kaldı. "Yırtıcı olabilir" diye hikâye kurup kaçan atamız hayatta kaldı. Hızlı karar vermek, doğru karar vermekten daha önemliydi. Beynin "bilmiyorum" demek yerine en iyi tahminini gerçekmiş gibi sunması, belirsizlik altında aksiyon almayı mümkün kılıyordu.</p>
+        <p>Evrimsel psikolog Robert Kurzban bunu bir adım ileri taşıyor: Beynimizde bir "basın sözcüsü" modülü var. Bu modülün işi doğruyu söylemek değil; dışarıya en olumlu, en savunulabilir mesajı vermek. Tıpkı bir hükümetin basın sözcüsünün gerçeği değil, en iyi hikâyeyi anlatması gibi. Ve bu sistem evrimsel olarak mantıklı çünkü sosyal hayatta "tutarlı ve güvenilir görünmek", "gerçekten tutarlı olmak"tan daha önemliydi. Kabilede yerinizi korumanız, başkalarını değerinize ikna etmeniz gerekiyordu. Bunun için de beynin iyi bir hikâye anlatıcısına ihtiyacı vardı <a href="#ref-16" class="ref" onclick="savePos(this)">[16]</a>.</p>
+      </div>
+
+      <p>Bugün aynı mekanizma çoğu zaman gereksiz, hatta yanıltıcı. Ama hâlâ çalışıyor çünkü evrimsel baskı onu oraya yerleştirdi.</p>
+      <p>Geçen yaz tatilinde tam olarak ne olduğunu hatırlamaya çalış. Muhtemelen bazı sahneleri net hatırlıyorsun. Ama aralarındaki boşlukları, farkında bile olmadan, "mantıklı olan" ile dolduruyorsun. Ve eğer birileri sana o tatille ilgili yanlış bir detay söylerse, o detayı kendi hafızana dahil etme ihtimalin düşündüğünden çok daha yüksek.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <div class="section">
+      <div class="section-num">04</div>
+      <h2>Hissettiğin duygunun sebebini gerçekten biliyor musun?</h2>
+      <p>Şimdiye kadar hafızanın seçici olduğunu ve boşlukları doldurduğunu gördük. Ama beynin hikâye uydurma yeteneği sadece geçmişe yönelik değil. Şu an, bu an hissettiklerin için de aynı şeyi yapıyor.</p>
+      <p>Antonio Damasio'nun "Somatik Belirteç Hipotezi" bunu açıklıyor <a href="#ref-11" class="ref" onclick="savePos(this)">[11]</a>: Bedenin sürekli beyne sinyaller gönderiyor. Kalp atışın hızlanıyor, miden kasılıyor, cildin terlemeye başlıyor. Bu sinyaller bilinçaltında kararlarını etkiliyor. Ama bu sinyallerin "nedeni" her zaman bilinç düzeyine ulaşmıyor.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Iowa Kumar Testi</div>
+        <p>Damasio'nun ekibi katılımcıları dört deste kartın olduğu bir masaya oturttu. Her turda bir desteden kart çekiyorlardı ve her kart ya para kazandırıyor ya da kaybettiriyordu. Katılımcılar bilmiyordu ama desteler eşit değildi: A ve B desteleri yüksek ödüller veriyordu, ama arada gelen cezalar çok büyüktü, uzun vadede net kayıp. C ve D desteleri ise küçük ödüller veriyordu ama cezalar da küçüktü, uzun vadede net kazanç.</p>
+        <p>Araştırmacılar her 10 kartta bir katılımcılara ne bildiklerini sordular ve dört aşama tespit ettiler. İlk birkaç kartta (ilk kayıp yaşanana kadar, yaklaşık 10. karta kadar) kimse bir şey hissetmiyordu. Ama yaklaşık 10. karttan sonra ilginç bir şey olmaya başladı: katılımcılar kötü destelerden kart çekmeye uzandıklarında cilt iletkenliği ölçümleri yükseliyordu, elleri terlemeye başlıyordu. Sorulduğunda ise "ne olduğu hakkında en ufak fikrim yok" diyorlardı. Bedenleri tehlikeyi fark etmişti, bilinçleri henüz fark etmemişti.</p>
+        <p>Yaklaşık 50. kart civarında, katılımcılar "bir hissim var, A ve B desteleri riskli gibi" demeye başladılar. Ama neden olduğunu açıklayamıyorlardı. Ve yaklaşık 80. karttan sonra, 10 katılımcıdan 7'si stratejiyi bilinçli olarak açıklayabildi: "A ve B desteleri uzun vadede kaybettiriyor çünkü cezalar çok büyük."</p>
+        <p>Bedenin bildiği şeyi bilinçin yakalaması için yaklaşık 70 kart, yani onlarca karar geçmesi gerekmişti <a href="#ref-11" class="ref" onclick="savePos(this)">[11]</a>.</p>
+      </div>
+
+      <p>Beden bilincin önünde gidiyor. Peki bilinç bunu kabul ediyor mu? Çoğu zaman hayır. Bilinç, bedenin gönderdiği sinyallere kendi açıklamasını üretiyor. Ve bu açıklama her zaman doğru olmuyor.</p>
+      <p>İşte burada Wilson ve Schooler'ın 1991'deki deneyi çarpıcı bir örnek sunuyor <a href="#ref-12" class="ref" onclick="savePos(this)">[12]</a>.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Reçel Deneyi</div>
+        <p>Wilson ve Schooler katılımcılara beş farklı çilek reçeli tattırdı. Bu reçeller daha önce Consumer Reports dergisinin uzman paneli tarafından değerlendirilmiş ve sıralanmıştı. Katılımcılar ikiye ayrıldı. İlk gruba sadece "reçelleri beğeni sıranıza göre sıralayın" denildi. İkinci gruba ise aynı göreve ek olarak "neden bu sıralamayı yaptığınızı, her reçel için neyi beğenip neyi beğenmediğinizi yazılı olarak açıklayın" denildi.</p>
+        <p>Sonuçlar çarpıcıydı. Sadece sıralama yapan grubun tercihleri, uzman panelin sıralamasıyla yüksek korelasyon gösterdi: .55. Ama gerekçe yazan grubun korelasyonu .11'e düştü. Neredeyse rastgele seçim yapmışlardı.</p>
+        <p>Ne olmuştu? Gerekçe yazmaya zorlandıklarında, katılımcılar sezgisel olarak değerlendirdikleri tat, kıvam, koku gibi zor verbalize edilen kriterleri bırakıp, kelimeye dökmeleri daha kolay olan ama aslında daha az önemli olan kriterlere yönelmişlerdi. "Rengi daha canlıydı", "kıvamı daha sıkıydı" gibi açıklamalar ürettiler ve bu açıklamalar onları en iyi reçelden uzaklaştırdı <a href="#ref-12" class="ref" onclick="savePos(this)">[12]</a>.</p>
+      </div>
+
+      <p>Bu deney önemli bir şey gösteriyor: Bazen bedenin ve sezgilerin doğru cevabı biliyor. Ama "neden" sorusu sorulduğunda, beynin bir parçası devreye giriyor, mantıklı görünen bir gerekçe üretiyor ve bu gerekçe seni yanlış yöne çekiyor.</p>
+      <p>Peki bu hikâye üreten sistem tam olarak nerede? Ve nasıl keşfedildi?</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <div class="section">
+      <div class="section-num">05</div>
+      <h2>Beyninin iki yarısı birbirinden koparılsa ne olur?</h2>
+      <p>1960'larda şiddetli epilepsi hastaları için deneysel bir ameliyat uygulanıyordu: Beynin iki yarısını birbirine bağlayan corpus callosum kesiliyordu. Amaç nöbetlerin bir yarıdan diğerine yayılmasını engellemekti. Ameliyat işe yaradı, nöbetler azaldı. Ama bu hastaların iki beyin yarısı artık birbirine bilgi aktaramıyordu.</p>
+      <p>Nörobilimci Michael Gazzaniga, Roger Sperry'nin laboratuvarında bu "split-brain" hastalarıyla çalışmaya başladığında, bilim tarihinin en şaşırtıcı keşiflerinden birini yaptı <a href="#ref-13" class="ref" onclick="savePos(this)">[13]</a>.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Tavuk Pençesi ve Kar Küreği</div>
+        <p>Hastanın sağ gözüne (sol beyin) bir tavuk pençesi, sol gözüne (sağ beyin) bir kar manzarası gösterildi. Hasta sağ eliyle tavuk resmini, sol eliyle kar küreğini işaret etti. Her iki yarıküre de kendi gördüğünü doğru seçmişti. Ama neden kar küreğini seçtiği sorulduğunda, sol beyin, kar manzarasından habersiz, hiç tereddüt etmeden cevap verdi: "Tavuk kümesini temizlemek için." Uydurmuştu. Ve buna tamamen inanıyordu <a href="#ref-13" class="ref" onclick="savePos(this)">[13]</a>.</p>
+      </div>
+
+      <p>Gazzaniga bu keşfe "Sol Beyin Yorumlayıcısı" (Left-Brain Interpreter) adını verdi. Sol yarıkürede, sürekli olarak davranışlarımıza, duygularımıza ve deneyimlerimize tutarlı açıklamalar üreten bir sistem var. Bu sistem elindeki bilgiyle çalışıyor. Ama bilgi eksik olduğunda, boşluğu doldurmaktan çekinmiyor.</p>
+
+      <div class="experiment">
+        <div class="experiment-title">Korkutucu Video Deneyi</div>
+        <p>Bir split-brain hastasının sağ beynine korkutucu bir yangın güvenliği videosu gösterildi. Sol beyin videodan habersizdi. Hastaya nasıl hissettiği sorulduğunda, "Neden bilmiyorum ama korkuyorum" dedi. Sonra ekledi: "Sanırım sizden korkuyorum doktor." Sağ beyin duyguyu hissettirmişti. Ama sol beyin, bu duygunun kaynağını bilmediği için bir açıklama uydurmuştu <a href="#ref-13" class="ref" onclick="savePos(this)">[13]</a>.</p>
+      </div>
+
+      <p>Ve belki de en çarpıcı bulgu şu: Sol beyin yorumlayıcısı sadece açıklama üretmiyor. Bu açıklamalar sistematik olarak egoyu koruyan yönde <a href="#ref-14" class="ref" onclick="savePos(this)">[14]</a>. Araştırmalar, konfabülasyonların "pozitif ve kendini yücelten" bir eğilim taşıdığını gösteriyor. Yani beyin sadece hikâye uydurmakla kalmıyor; uydurduğu hikâyede seni haklı, iyi ve tutarlı gösteriyor.</p>
+
+      <div class="pull-quote">
+        <p>"Belki de bilincin merkezinde, kendimize anlattığımız bir hikâye var. Her gün devam eden, bir kısmını unuttuğumuz, unuttuğumuz kısımları yeniden uydurduğumuz bir hikâye."</p>
+        <span class="attribution">— Michael Gazzaniga</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <div class="section">
+      <div class="section-num">06</div>
+      <h2>Kendi hikâyene ne kadar güvenebilirsin?</h2>
+      <p>Bu araştırmaların toplamı oldukça rahatsız edici bir tablo çiziyor.</p>
+      <p>Anıların çoğu orijinal değil. Her hatırlayışta yeniden inşa ediliyor ve her seferinde biraz değişiyor <a href="#ref-6" class="ref" onclick="savePos(this)">[6]</a><a href="#ref-7" class="ref" onclick="savePos(this)">[7]</a>. Hatta sana anlatılan uydurma bir anıyı bile kendi hafızana dahil edebilirsin <a href="#ref-8" class="ref" onclick="savePos(this)">[8]</a>. Duygularının "nedenini" bildiğini sanıyorsun ama bedenin bir şey hissettiriyor, sonra beynin buna mantıklı görünen bir açıklama üretiyor <a href="#ref-11" class="ref" onclick="savePos(this)">[11]</a>. Ve bu açıklamayı düşünmeye başladığında, sezgisel olarak doğru olan kararından uzaklaşabilirsin <a href="#ref-12" class="ref" onclick="savePos(this)">[12]</a>. Sol beyin yorumlayıcısı tüm bunların üzerine seni tutarlı ve haklı göstermek için çalışıyor <a href="#ref-13" class="ref" onclick="savePos(this)">[13]</a>. Gerçeği yansıtmak için değil.</p>
+      <p>Üstelik aynı mekanizma başkalarını anlamaya çalışırken de devreye giriyor. 1967'de Jones ve Harris, katılımcılara Küba lideri Fidel Castro hakkında yazılmış denemeler okuttu <a href="#ref-15" class="ref" onclick="savePos(this)">[15]</a>. Bazı yazarlar kendi istedikleri pozisyonu savunmuştu, bazılarına ise hangi tarafı savunacakları söylenmişti. Yani bir kısım yazar Castro'yu övmeye zorlanmıştı. Katılımcılar bunu biliyordu. Ama yine de, yazarın buna zorlandığını bilmelerine rağmen, Castro'yu öven yazarların "gerçekten Castro'cu" olduğunu düşündüler. Durumu bildikleri halde, davranışı kişiliğe bağladılar. Sosyal psikolojide buna "temel atıf hatası" deniyor: Başkalarının davranışlarını açıklarken durumu görmezden gelip kişiliklerine atfetme eğilimi. Kendi davranışlarımız için ise tam tersini yapıyoruz, "koşullar öyle gerektirdi" diyoruz. Sol beyin yorumlayıcısı her iki durumda da çalışıyor: Kendi hikâyemizde bizi haklı, başkalarının hikâyesinde onları sorumlu gösteriyor.</p>
+      <p>Ama bu tablo karamsar olmak için bir neden değil. Tam tersine, farkındalığın kendisi bir güç. Beynindeki hikâyeciyi susturmak mümkün değil, muhtemelen gerekli de değil. Ama ona her söylediğinde sorgusuz inanmayı bırakmak mümkün.</p>
+      <p>Bir dahaki sefere "kesinlikle böyle olmuştu" dediğinde, dur ve sor: Gerçekten böyle mi olmuştu, yoksa beynin boşlukları mı doldurdu? Birinin davranışını "kesinlikle şu yüzden yaptı" diye yorumladığında, aynı soruyu kendine çevir: Bunu biliyor musun, yoksa sol beyin yorumlayıcın mı uydurdu? Bir duygu hissettiğinde ama nedenini "bildiğinde", o bilmenin aslında bir tahmin olabileceğini düşün.</p>
+      <p>Çünkü beynin bir hikâye makinesi. Ve en iyi hikâyelerini sana anlatıyor.</p>
+    </div>
+
+    <!-- Kaynakça -->
+    <div class="conclusion">
+      <h2>Kaynaklar</h2>
+      <ol style="font-size: 0.88rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem;">
+        <li id="ref-1">McGaugh, J. L. (2013). Making lasting memories: Remembering the significant. <em>PNAS</em>, 110(Supplement 2), 10402-10407. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3690616/" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-2">Goldfarb, E. et al. (2025). Stress hormones can alter brain networks and strengthen emotional memories. <em>Yale News</em>. <a href="https://news.yale.edu/2025/12/10/stress-hormones-can-alter-brain-networks-and-strengthen-emotional-memories" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-3">Kaminski, J. et al. (2018). Novelty-sensitive dopaminergic neurons in the human substantia nigra predict success of declarative memory formation. <em>Current Biology</em>, 28(9), 1333-1343. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5973539/" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-4">Saito, Y. et al. (2025). Amygdalo-cortical dialogue underlies memory enhancement by emotional association. <em>Neuron</em>, 113(6), 931-948. <a href="https://www.cell.com/neuron/fulltext/S0896-6273(25)00005-4" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-5">Anderson, J. R. &amp; Schooler, L. J. (1991). Reflections of the environment in memory. <em>Psychological Science</em>, 2(6), 396-408. <a href="http://act-r.psy.cmu.edu/wordpress/wp-content/uploads/2012/12/37JRA_LS_PS_1991.pdf" target="_blank" style="color: var(--accent);">pdf</a></li>
+        <li id="ref-6">Bartlett, F. C. (1932). <em>Remembering: A Study in Experimental and Social Psychology.</em> Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511759185" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-7">Loftus, E. F. &amp; Palmer, J. C. (1974). Reconstruction of automobile destruction. <em>Journal of Verbal Learning and Verbal Behavior</em>, 13(5), 585-589. <a href="https://doi.org/10.1016/S0022-5371(74)80011-3" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-8">Loftus, E. F. (1995). The formation of false memories. <em>Psychiatric Annals</em>, 25(12), 720-725. <a href="https://www.academia.edu/3138643/The_formation_of_false_memories" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-9">Kopelman, M. D. (2002). Disorders of memory. <em>Brain</em>, 125(10), 2152-2190. <a href="https://academic.oup.com/brain/article/125/10/2152/300456" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-10">Schnider, A. (2008). <em>The Confabulating Mind: How the Brain Creates Reality.</em> Oxford University Press. <a href="https://doi.org/10.1093/med/9780199206759.001.0001" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-11">Damasio, A. R. (1994). <em>Descartes' Error: Emotion, Reason, and the Human Brain.</em> Putnam. <a href="https://www.worldcat.org/title/31072726" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-12">Wilson, T. D. &amp; Schooler, J. W. (1991). Thinking too much: Introspection can reduce the quality of preferences and decisions. <em>Journal of Personality and Social Psychology</em>, 60(2), 181-192. <a href="http://bear.warrington.ufl.edu/brenner/mar7588/Papers/wilson-schooler-jpsp-1991.pdf" target="_blank" style="color: var(--accent);">pdf</a></li>
+        <li id="ref-13">Gazzaniga, M. S. (2005). Forty-five years of split-brain research and still going strong. <em>Nature Reviews Neuroscience</em>, 6(8), 653-659. <a href="https://people.psych.ucsb.edu/gazzaniga/PDF/Forty-five%20years%20of%20split-brain%20research%20and%20still%20going%20strong.pdf" target="_blank" style="color: var(--accent);">pdf</a></li>
+        <li id="ref-14">Volz, L. J. &amp; Gazzaniga, M. S. (2017). Interaction in isolation: 50 years of insights from split-brain research. <em>Brain</em>, 140(7), 2051-2060. <a href="https://doi.org/10.1093/brain/awx139" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-15">Jones, E. E. &amp; Harris, V. A. (1967). The attribution of attitudes. <em>Journal of Experimental Social Psychology</em>, 3(1), 1-24. <a href="https://crowdcognition.net/wp-content/uploads/2020/11/attributionOfAttitudes.pdf" target="_blank" style="color: var(--accent);">pdf</a></li>
+        <li id="ref-16">Kurzban, R. (2010). <em>Why Everyone (Else) Is a Hypocrite: Evolution and the Modular Mind.</em> Princeton University Press. <a href="https://press.princeton.edu/books/paperback/9780691154398/why-everyone-else-is-a-hypocrite" target="_blank" style="color: var(--accent);">link</a></li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Şubat 2026</p>
+  </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script>
+    let savedPosition = null;
+
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(() => {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+  </script>
+
+</body>
+</html>
