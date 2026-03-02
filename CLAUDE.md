@@ -32,7 +32,7 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **Responsive breakpoints**: 768px (tablet), 480px (mobile), 360px (very small)
 - **Grain overlay**: `.grain` div is on every page, auto-visible only in dark mode
 - **Feedback**: Articles end with a feedback section linking to a Google Form
-- **References**: `the-science-of-doing-nothing.html` uses `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`)
+- **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`
 
 ## Page Footer
 
