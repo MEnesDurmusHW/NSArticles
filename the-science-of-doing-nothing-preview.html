@@ -214,7 +214,7 @@
   /* Footer */
   .closing {
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 1rem 2rem 0;
   }
 
   .closing-sub {
@@ -238,6 +238,46 @@
   .read-full-btn:hover {
     background: var(--accent);
     color: var(--bg);
+  }
+
+  .home-logo {
+    padding: 16px 0 100px;
+  }
+
+  /* Floating CTA */
+  .floating-cta {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .floating-cta.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .floating-cta a {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--bg);
+    background: var(--accent);
+    text-decoration: none;
+    padding: 0.7rem 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .floating-cta a:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.3);
   }
 
   /* Tablet */
@@ -446,11 +486,25 @@
   <div class="divider"></div>
 
   <section class="closing">
-    <a href="the-science-of-doing-nothing.html" class="read-full-btn">Yazının Tamamını Oku →</a>
-    <p class="closing-sub" style="margin-top:1rem;">Şubat 2026</p>
+    <p class="closing-sub">Şubat 2026</p>
   </section>
 
+  <div class="floating-cta" id="floatingCta">
+    <a href="the-science-of-doing-nothing.html">Yazının Tamamını Oku →</a>
+  </div>
+
   <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+  <script>
+  (function() {
+    var cta = document.getElementById('floatingCta');
+    function onScroll() {
+      cta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.3);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
 
 </body>
 </html>
