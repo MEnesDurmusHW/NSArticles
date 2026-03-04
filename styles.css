@@ -120,6 +120,7 @@ body {
   text-align: center;
   padding: 24px 0 40px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .home-logo .logo-text {

@@ -33,6 +33,7 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **Grain overlay**: `.grain` div is on every page, auto-visible only in dark mode
 - **Feedback**: Articles end with a feedback section linking to a Google Form
 - **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`
+- **No em dashes**: Never use the em dash character (—) in article content or any user-facing text. Restructure the sentence, use a comma, or use a period instead
 
 ## Page Footer
 

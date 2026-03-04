@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hayatı Yönetmek Değil, Tepkilerini Yönetmek</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Article content */
+  .article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.7em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .section p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section .ref {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem 0;
+  }
+
+  /* Sub-headings */
+  .sub-heading {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 2.5rem 0 1.2rem;
+  }
+
+  /* Evidence labels */
+  .evidence-label {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 2rem 0 0.8rem;
+  }
+
+  /* Experiment / info boxes */
+  .experiment {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.6rem 1.8rem;
+    margin: 1.8rem 0;
+  }
+
+  .experiment-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .experiment p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+
+  .experiment p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Pull quotes */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .pull-quote .attribution {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--text-dim);
+  }
+
+  /* Lists inside sections */
+  .section ul, .section ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .section li {
+    margin-bottom: 0.6rem;
+    text-align: justify;
+  }
+
+  .section ul ul, .section ol ol {
+    margin: 0.4rem 0 0.4rem 1.2rem;
+  }
+
+  /* Conclusion / References */
+  .conclusion {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .conclusion h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* Transition text between sections */
+  .transition {
+    font-style: italic;
+    color: var(--text-dim);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--divider);
+    font-size: 1rem;
+  }
+
+  /* Chain diagram */
+  .chain {
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    line-height: 2.2;
+    margin: 2rem 0;
+    color: var(--text);
+  }
+
+  .chain strong {
+    color: var(--accent);
+  }
+
+  .chain .arrow {
+    color: var(--text-dim);
+    margin: 0 0.3rem;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 1.5rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* Reference links */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  a.ref:hover {
+    text-decoration: underline;
+  }
+
+  /* Highlight target reference */
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* Back to text FAB */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #fab-back:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .article { padding: 3rem 1.5rem; }
+    .experiment { padding: 1.3rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .article { padding: 2.5rem 1.2rem; }
+
+    .section h2 { font-size: 1.4rem; }
+
+    .section p { font-size: 1rem; }
+
+    .experiment { padding: 1.2rem; }
+    .experiment p { font-size: 0.95rem; }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .section h2 { font-size: 1.25rem; }
+    .section p { font-size: 0.95rem; }
+  }
+
+  /* TOC Sidebar */
+  .toc-sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(16px, calc((100vw - 680px) / 2 - 220px));
+    width: 180px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--divider) transparent;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+  .toc-sidebar.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .toc-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-sidebar .toc-row {
+    display: flex;
+    align-items: flex-start;
+  }
+  .toc-sidebar .toc-link {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    padding: 4px 0 4px 12px;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .toc-sidebar .toc-link.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .toc-sidebar .toc-link:hover {
+    color: var(--text);
+  }
+  .toc-sidebar .toc-num {
+    font-family: var(--serif);
+    margin-right: 5px;
+    font-size: 0.68rem;
+  }
+  .toc-sidebar .toc-sep {
+    height: 8px;
+  }
+  .toc-sidebar .toc-toggle {
+    flex-shrink: 0;
+    width: 18px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.25s;
+  }
+  .toc-sidebar .toc-toggle:hover { opacity: 1; }
+  .toc-sidebar .toc-item.expanded > .toc-row > .toc-toggle {
+    transform: rotate(90deg);
+  }
+  .toc-sidebar .toc-subs {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .toc-sidebar .toc-item.expanded > .toc-subs {
+    max-height: 500px;
+  }
+  .toc-sidebar .toc-sub-link {
+    display: block;
+    padding: 2px 0 2px 22px;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    opacity: 0.7;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 2px solid transparent;
+  }
+  .toc-sidebar .toc-sub-link:hover { color: var(--text); opacity: 1; }
+  .toc-sidebar .toc-sub-link.active { color: var(--accent); opacity: 1; border-left-color: var(--accent); }
+  @media (max-width: 1100px) {
+    .toc-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <section class="hero">
+    <h1>Hayatı Yönetmek Değil, <em>Tepkilerini</em> Yönetmek</h1>
+    <p class="hero-sub">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Özgüven, ilişkiler, motivasyon — her sorunu ayrı ayrı çözmek yerine hepsinin kırıldığı
+      <span class="highlight">4 temel beceriyi</span> güçlendirsen?
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <nav class="toc-sidebar" id="tocSidebar">
+    <ul>
+      <li><a href="#giris" class="toc-link" data-section="giris">Giriş</a></li>
+      <li><a href="#s01" class="toc-link" data-section="s01"><span class="toc-num">01</span> Awareness</a></li>
+      <li><a href="#s02" class="toc-link" data-section="s02"><span class="toc-num">02</span> Non-reactivity</a></li>
+      <li><a href="#s03" class="toc-link" data-section="s03"><span class="toc-num">03</span> Reappraisal</a></li>
+      <li><a href="#s04" class="toc-link" data-section="s04"><span class="toc-num">04</span> Distress Tolerance</a></li>
+      <li><a href="#zincir" class="toc-link" data-section="zincir">Zincir</a></li>
+      <li class="toc-sep"></li>
+      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
+    </ul>
+  </nav>
+
+  <article class="article">
+
+<!-- GİRİŞ -->
+<div class="section" id="giris">
+  <h2>Giriş</h2>
+
+  <p>Gece 2'de aynı düşünceyi 50. kez çevirirken, toplantıda eleştirilince "demek ki yetersizim" diye düşünürken, birinin mesajına anlam yüklemeye çalışırken... Farklı sorunlar gibi görünüyor ama hep aynı kaslar çalışıyor. Bu yazı o kasların ne olduğunu, neden zayıf kaldığını ve nasıl güçlendirileceğini anlatıyor.</p>
+
+  <p>İnsanlar genellikle her sorunu ayrı ayrı çözmeye çalışır: özgüven için bir yol, ilişkiler için başka bir yol, motivasyon için bir başkası. Oysa farklı görünen bu sorunların hepsi aynı 4 noktada kırılıyor. Bu beceriler doğuştan mükemmel değil ama antrenmanla güçlendirilebilir, tıpkı bir kas gibi.</p>
+
+  <p>Bu 4 beceri sıralı bir zincir oluşturuyor: <strong>Awareness (Fark etme) → Non-reactivity (Tepki vermeme) → Reappraisal (Yeniden çerçeveleme) → Distress Tolerance (Rahatsızlıkla kalabilme).</strong> İlişkilerde, kariyerde, beslenmede, özgüvende aynı zincir geçerli.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 01 — AWARENESS -->
+<div class="section" id="s01">
+  <div class="section-num">01</div>
+  <h2>Awareness (Fark Etme)<em>Meta-farkındalık</em></h2>
+
+  <h3 class="sub-heading" id="s01-nedir">Nedir?</h3>
+
+  <p>Otomatik düşünce, duygu veya dürtü geldiğinde "içinde yaşayan" olmak yerine "gözlemleyen" konumuna geçebilme becerisi. Diğer üç becerinin ön koşulu, çünkü fark etmeden hiçbirine müdahale edemezsin.</p>
+
+  <h3 class="sub-heading" id="s01-evrim">Evrimsel Perspektif</h3>
+
+  <p>Fark etme becerisi evrimsel olarak geç gelişen bir yetenek. İlkel beyin (limbik sistem) hızlı tepki vermek için tasarlanmış: çalıların arkasındaki gölgeyi gördüğünde "düşün" değil "kaç" diyor. Bu tepki hayatta kalmak için kritikti. Ancak prefrontal korteksin gelişmesiyle insanlar kendi düşüncelerini gözlemleme kapasitesi kazandı. Bu "düşünce hakkında düşünme" yetisi yalnızca insana özgü değil ama en gelişmiş haliyle insanda mevcut. Sorun şu ki bu kapasite çok enerji harcıyor ve beynin varsayılan modu değil. Beyin otomatik pilotu tercih ediyor çünkü daha az enerji harcıyor.</p>
+
+  <h3 class="sub-heading" id="s01-beyin">Beyinde Ne Oluyor?</h3>
+
+  <p>Meta-farkındalığı ağırlıklı olarak prefrontal korteks (beynin planlama ve kontrol merkezi) yönetiyor. Bu bölge, amigdalanın (beynin alarm sistemi) otomatik tepkilerini izliyor ve gerektiğinde frenleme sinyali gönderiyor. fMRI çalışmaları, meta-farkındalık düzeyi yüksek olan bireylerde kontrol merkezi ile alarm sistemi arasındaki bağlantının daha güçlü olma eğiliminde olduğunu gösteriyor.</p>
+
+  <h3 class="sub-heading" id="s01-kanitlar">Bilimsel Kanıtlar</h3>
+
+  <p>Teasdale ve arkadaşları (2002) meta-farkındalığı şöyle tanımladı: olumsuz düşünce ve duyguların "ben" olarak değil, "zihinsel olaylar" olarak deneyimlenmesi. Araştırmaları kritik bir bulgu ortaya koydu:</p>
+
+  <div class="experiment">
+    <p>Depresyondan iyileşmiş hastalarda, metabilişsel farkındalık düzeyi düşük olanların tekrar depresyona girme riski daha yüksekti. Bilişsel terapi (BT) ve farkındalık temelli bilişsel terapi (MBCT) bu riski azalttığında, bunu metabilişsel farkındalığı artırarak yapıyordu. Bu terapiler düşüncelerin içeriğini değiştirerek değil, düşüncelerle olan ilişkiyi değiştirerek işe yarıyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></p>
+  </div>
+
+  <p>Bu bulgu klinik düzeyde doğrulandı: üç veya daha fazla depresyon atağı geçirmiş hastalarda MBCT, nüks oranını %66'dan %37'ye düşürdü. Takip çalışmaları MBCT'nin depresyon nüksünü önlemede antidepresanlar kadar etkili olduğunu gösterdi.</p>
+
+  <p>Nörogörüntüleme tarafında da kanıtlar tutarlı. Lutz ve arkadaşlarının (2014) fMRI çalışmasında katılımcılara kısa bir farkındalık talimatı verildi ve ardından olumsuz görseller sunuldu:</p>
+
+  <div class="experiment">
+    <p>24 sağlıklı bireye kısa bir farkındalık talimatı verildi ve 22 kişilik kontrol grubuyla karşılaştırıldı. Katılımcıların meditasyon deneyimi olması şart değildi. Negatif görseller gösterilmeden önce (beklenti aşaması) farkındalık grubunda prefrontal bölgelerde (DMPFC, DLPFC) ve insulada artmış aktivasyon gözlemlendi: beyin duygusal darbeye hazırlanıyordu. Görseller gösterildiğinde (algı aşaması) ise farkındalık grubunda amigdalada belirgin şekilde daha düşük aktivasyon vardı. Dikkat çekici bir bulgu: günlük hayatta zaten daha farkındalıklı olan bireyler bu düzenleme için daha az beyin kaynağı harcıyordu. Yani farkındalık pratiği arttıkça duygu düzenleme daha az efor gerektiriyor.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></p>
+  </div>
+
+  <p>Yapısal değişimler de dikkat çekici. 8 haftalık MBSR (Farkındalık Temelli Stres Azaltma) programlarının beyin üzerindeki etkilerini derleyen bir sistematik inceleme ve bunu destekleyen bir takip çalışması tutarlı bir tablo ortaya koyuyor:</p>
+
+  <div class="experiment">
+    <p>Program sonrasında duygu düzenlemeyle ilişkili bölgelerde aktivite artıyor; alarm sistemi olan amigdalada ise aktivite azalıyor ve kontrol merkezi ile alarm sistemi arasındaki bağlantı güçleniyor. En dikkat çekici bulgu: bu değişimler yıllarca meditasyon yapan deneyimli kişilerde gözlemlenenlerle benzer düzeyde. Hem kısa süreli (8 hafta) hem de uzun süreli meditasyon eğitimi amigdala tepkisini azaltıyor.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a><a href="#ref-7" class="ref" onclick="savePos(this)">7</a></p>
+  </div>
+
+  <p>Yani bu etki yıllarca pratik gerektirmiyor; 8 hafta bile ölçülebilir nörolojik değişim yaratıyor.</p>
+
+  <p>Daha güncel araştırmalar da bu tabloyu destekliyor:</p>
+
+  <div class="experiment">
+    <p>Meta-farkındalığı yüksek olan insanlarda olumsuz duygular, duygu düzenleme kapasitesini bozamıyordu. Düşük farkındalık grubunda ise olumsuz duygular duygu düzenlemeyi ciddi şekilde bozuyordu. Yani farkındalık, olumsuz duygulara karşı bir kalkan işlevi görüyor.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a></p>
+  </div>
+
+  <p>Bu kalkan sadece "duyguları görmek"le sınırlı değil, strateji seçimini de etkiliyor. Duygu bastırma (suppression), yani duyguyu hissetmemeye çalışmak, araştırmaların en etkisiz bulduğu stratejilerden biri: duygu deneyimini azaltmıyor, fizyolojik tepkiyi artırıyor ve belleği bozuyor. Farkındalık düzeyi yüksek kişiler ise bu tür etkisiz stratejilere daha az başvuruyor; bunun yerine etiketleme, yeniden çerçeveleme gibi işlevsel yollara yöneliyor.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a></p>
+
+  <p>Bir başka deyişle: farkındalık seviyesi yüksek olanlarda olumsuz duygular duygu düzenlemeyi daha az bozuyor. Ve bu sadece yıllarca meditasyon yapanlar için geçerli değil; kısa süreli müdahaleler bile ölçülebilir nörolojik değişim yaratıyor.</p>
+
+  <h3 class="sub-heading" id="s01-eksiklik">Eksikliğinde Ne Olur?</h3>
+
+  <p>Fark etme becerisi zayıf olduğunda insan duygularının içinde kayboluyor. Öfke geldiğinde "öfkeliyim" demek yerine öfkenin kendisi oluyor. Kaygı geldiğinde kaygıyı gözlemleyemiyor, kaygının yönlendirdiği şekilde davranıyor. Bu durum ruminasyona (sürekli aynı düşünceleri tekrarlama), dürtüsel kararlara ve duygusal tükenmeye yol açıyor.</p>
+
+  <p>Günlük hayatta bu şöyle görünüyor: birisi seni eleştirdi, akşama kadar o cümleyi kafanda çeviriyorsun ama "şu an ruminasyon yapıyorum" diyemiyorsun.</p>
+
+  <h3 class="sub-heading" id="s01-gelistirme">Nasıl Geliştirilir?</h3>
+
+  <p><strong>Bedeni kullan.</strong> Güçlü bir his geldiğinde kafanda değil bedeninde yakala: göğüste sıkışma, midede ağırlık, omuzlarda gerilme, çenede kasılma. Bedensel farkındalık seni düşünceden çıkarıp şimdiki ana çekiyor.</p>
+
+  <p><strong>Gün içi mikro-farkındalık.</strong> Günde 3-5 kez, rastgele anlarda kendine sor: "Şu an ne hissediyorum?" Cevap vermek zorunda değilsin. Sadece fark etme kasını çalıştırıyorsun. Telefona alarm kurmak işe yarar.</p>
+
+  <p><strong>Etiketleme pratiği.</strong> "Kaygı var", "öfke geldi", "karşılaştırma yapıyorum" gibi kısa etiketler kullan. Bu seni yaşayan konumdan gözlemleyen konumuna çekiyor. Etiketleme aslında bir sonraki becerinin (non-reactivity) temel aracı ama basit haliyle bile fark etmenin bir formu. Etiketlemenin beyinde tam olarak ne yaptığını ve neden bu kadar etkili olduğunu bir sonraki bölümde göreceğiz.</p>
+
+  <p class="transition">Fark etmek ilk adım. Ama fark ettikten sonra ne yapacaksın? Beyin "çöz, planla, tepki ver" demeye devam edecek. İkinci beceri tam burada devreye giriyor.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 02 — NON-REACTIVITY -->
+<div class="section" id="s02">
+  <div class="section-num">02</div>
+  <h2>Non-reactivity (Tepki Vermeme)<em>Duygu Etiketleme</em></h2>
+
+  <h3 class="sub-heading" id="s02-nedir">Nedir?</h3>
+
+  <p>Beyin sürekli sorular soruyor, senaryolar kuruyor, planlar yapıyor. Her düşünce bir sonrakini tetikliyor ve sen farkında olmadan bu zincirin içinde sürükleniyorsun. Non-reactivity bu otomatik zihinsel aktiviteye refleks olarak tepki vermemeyi öğrenmektir: soruyu duymak ama cevaplamamak, senaryoyu fark etmek ama devam ettirmemek, dürtüyü hissetmek ama takip etmemek. Awareness ile düşünceyi fark ediyorsun; non-reactivity ile fark ettikten sonra ona kapılmadan durabiliyorsun.</p>
+
+  <h3 class="sub-heading" id="s02-evrim">Evrimsel Perspektif</h3>
+
+  <p>Beynin senaryo kurma kapasitesi evrimsel bir avantaj. Nörolog Marcus Raichle'ın keşfettiği varsayılan mod ağı (Default Mode Network), beyin "boşta" kaldığında otomatik olarak devreye giriyor: geçmişi hatırlıyor, geleceği simüle ediyor, sosyal senaryolar kuruyor. "Yarın avda bu yoldan gidersem ne olur?" düşüncesi hayatta kalmayı artırdı.</p>
+
+  <p>Sorun şu ki modern dünyada bu mekanizma gereksiz yerlerde çalışmaya devam ediyor. "Bu mesajı atarsam ne der, sonra ben ne derim, sonra o ne düşünür..." gibi zincirler başlıyor çünkü beyin belirsizliği çözmeye programlı. Evrimsel ortamda belirsizlik gerçekten tehlikeydi: bilinmeyen bir bölgeye girmek yırtıcıyla karşılaşmak, zehirli bir bitki yemek ya da gruptan ayrı kalmak demek olabilirdi. Belirsizliği çözemeyen birey hayatta kalamıyor, hayatta kalamayan birey genlerini aktaramıyordu. Bu yüzden doğal seçilim, belirsizliğe karşı güçlü bir alarm sistemi olan beyinleri tercih etti. Ama modern ortamda çoğu belirsizlik zararsız ve beyin ayrım yapamıyor: okunmamış bir mesaj ile çalılıkların arkasındaki gölge aynı alarm devrelerini tetikliyor.</p>
+
+  <p>Bu senaryolar aslında beynin otomatik tepkileri: bir uyaran geliyor (belirsizlik, kaygı, merak) ve varsayılan mod ağı refleks olarak "çöz, planla, simüle et" moduna giriyor. Non-reactivity bu refleksi durdurmak. Peki beyin bunu nasıl yapıyor?</p>
+
+  <h3 class="sub-heading" id="s02-beyin">Beyinde Ne Oluyor?</h3>
+
+  <p>Peki beyin "tepki verme" refleksini nasıl durduruyor? Lieberman ve arkadaşlarının (2007) fMRI çalışması şaşırtıcı bir cevap veriyor: duyguyu etiketlemek yeterli.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+
+  <div class="experiment">
+    <p>Katılımcılara olumsuz duygusal yüz ifadeleri gösterildi ve üç farklı görev verildi: sadece izle, yüzü bir isimle eşleştir ("Hakan"), ya da duyguyu bir sözcükle etiketle ("öfkeli"). Sadece izleme ve isim eşleştirme sırasında amigdala güçlü tepki veriyordu. Ama katılımcılar duyguyu etiketlediğinde amigdala tepkisi belirgin şekilde düşüyordu. Aynı anda prefrontal korteksin bir alt bölgesi (RVLPFC) aktive oluyordu ve bu iki bölge arasında ters korelasyon vardı: kontrol merkezi ne kadar aktifse alarm sistemi o kadar sessizdi. Lieberman'ın ifadesiyle: sarı ışık gördüğünde frene bastığın gibi, duygularını sözcüklere döktüğünde de duygusal tepkilerinin frenine basıyorsun. Dikkat çekici olan, "Hakan" gibi bir isim etiketinin amigdalayı yatıştırmaması, sadece duygu sözcüğünün ("öfkeli", "üzgün") bu etkiyi yaratmasıydı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+  </div>
+
+  <h3 class="sub-heading" id="s02-kanitlar">Bilimsel Kanıtlar</h3>
+
+  <p>Etiketlemenin etkisi kişinin farkındalık düzeyiyle de bağlantılı:</p>
+
+  <div class="experiment">
+    <p>Aynı etiketleme paradigmasını kullanan bir takip çalışmasında, katılımcıların günlük hayattaki farkındalık düzeyleri (mindfulness) ölçüldü ve beyin tepkileriyle karşılaştırıldı. Sonuç: günlük hayatta daha farkındalıklı olan kişilerde etiketleme sırasında kontrol merkezinde daha yaygın aktivasyon ve alarm sisteminde daha az aktivite gözlemlendi. Yani farkındalık pratiği olan kişilerin beyni, "etiketle ve yatıştır" mekanizmasını daha güçlü kullanıyordu. Araştırmacılar bunu, farkındalık meditasyonunun ruh sağlığını neden iyileştirdiğine ilişkin ilk nörolojik kanıt olarak değerlendirdi.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+  </div>
+
+  <p>Etiketlemenin etkisi sadece fMRI laboratuvarında değil, gerçek hayatta da gösterildi:</p>
+
+  <div class="experiment">
+    <p>Örümcek fobisi olan katılımcılarla yapılan bir deneyde dört farklı strateji karşılaştırıldı: duyguyu sözlü olarak ifade etme, bilişsel yeniden değerlendirme, dikkat dağıtma ve sadece maruz kalma. Duygularını sözlü olarak ifade eden grup, diğer üç gruba göre örümceğe fiziksel olarak daha yakın durabildi.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Benzer şekilde, yüksek riskli matematik sınavı öncesinde kaygılarını yazıya döken öğrenciler, yazmayan gruba göre sınavda daha iyi performans gösterdi.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a></p>
+  </div>
+
+  <p>Bir diğer önemli bulgu: etiketleme ana dilde yapıldığında etkili, yabancı dilde yapıldığında amigdala tepkisini azaltmıyor, hatta artırıyor.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a> Yani "nasıl etiketlediğin, nasıl hissettiğini etkiliyor".</p>
+
+  <h3 class="sub-heading" id="s02-eksiklik">Eksikliğinde Ne Olur?</h3>
+
+  <p>Non-reactivity becerisi zayıf olduğunda beyin her uyarana otomatik tepki üretiyor ve sen bu tepkiyi sorgulamadan takip ediyorsun. Bir duygu geliyor, onu etiketlemek yerine doğrudan içine giriyorsun. Kaygı geldiğinde "kaygı var" demek yerine kaygının sunduğu senaryoları çözmeye başlıyorsun. Gece yatakta "yarın toplantıda şunu söylemeliyim, ama ya şöyle derse..." zinciri başlıyor ve uyuyamıyorsun. Birisi hakkında "acaba ne düşünüyor" sorusu geliyor ve saatlerce kafanda çeviriyorsun.</p>
+
+  <p>Etiketlemenin yokluğunda olan tam da bu: duygu ve düşünce geldiğinde kontrol merkezi devreye giremiyor, alarm sinyali yatışmıyor. Her senaryo bir sonrakini tetikliyor çünkü beyin duygusal tepkiyi frenlemeden bir sonraki adıma geçiyor. Araştırmaların gösterdiği gibi,<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> sadece "öfke" ya da "kaygı" demek bile alarm sistemini yatıştırıyor ama bu beceri yoksa duygunun kendisi seni yönlendiriyor. Bu, kontrol yanılgısının da yakıtı: beyin çözemeyeceği şeyleri çözmeye çalışarak enerji harcıyor çünkü duygusal dürtüyü frenleyecek etiketleme refleksi gelişmemiş.</p>
+
+  <h3 class="sub-heading" id="s02-gelistirme">Nasıl Geliştirilir?</h3>
+
+  <p><strong>Etiketle ve bırak.</strong> Düşünce geldiğinde içeriğiyle ilgilenme, türünü etiketle ve bırak. Etiketlemek tek başına kontrol merkezini aktive ediyor. Sık karşılaşılan etiketler:</p>
+
+  <ul>
+    <li><strong>"Senaryo kurma":</strong> Henüz olmamış bir durumu kafanda canlandırıp olası diyalogları, tepkileri, sonuçları simüle ediyorsun. "Bunu dersem o şunu der, sonra ben..."</li>
+    <li><strong>"Kontrol yanılgısı":</strong> Sonucu senin belirlemediğin bir durumu kafanda çözmeye çalışıyorsun. Karşı tarafın ne hissedeceğini, nasıl tepki vereceğini, ne zaman yazacağını kontrol edemezsin ama beyin "doğru hamleyi bulursam sonucu değiştirebilirim" diyor. "Şöyle yapsam belki farklı olur, böyle desem belki ikna olur..."</li>
+    <li><strong>"Kanıtlama refleksi":</strong> Bir inancını doğrulamak ya da çürütmek için zihinsel argüman üretiyorsun. "Ama ben aslında yeterince iyiyim çünkü..."</li>
+    <li><strong>"Ruminasyon":</strong> Geçmişte olan bir şeyi tekrar tekrar çeviriyorsun, sanki yeniden düşünmek sonucu değiştirecekmiş gibi. "Keşke o gün şöyle deseydim..."</li>
+    <li><strong>"Açık dosya":</strong> Tamamlanmamış bir ilişkiyi, konuşmayı veya durumu beyin sürekli geri getiriyor. "Acaba ne düşünüyor, acaba ne olacak..."</li>
+    <li><strong>"Karşılaştırma":</strong> Kendini başkalarıyla kıyaslıyorsun. "O bunu başardı ama ben hâlâ..."</li>
+  </ul>
+
+  <p>İçerikle ilgilenme, tartışma, çürütme, analiz yok. Sadece etiketle, "aa, senaryo kurma" de ve bırak. Beyin her cevaplamadığında o düşünce yolunun aciliyetini bir kademe düşürüyor.</p>
+
+  <p><strong>"İlginç" tekniği.</strong> Güçlü bir düşünce geldiğinde sadece "ilginç" de ve bırak. Tartışma, çürütme, analiz yok. Bu, düşüncenin içeriğinden çıkıp formunu gözlemlemeye geçiş.</p>
+
+  <p><strong>Dürtü sörfü (urge surfing).</strong> Bir dürtü geldiğinde (mesaj atma, internette arama, kafada senaryo çevirme) ona kapılmak yerine gözlemle. Psikolog Alan Marlatt'ın geliştirdiği bu teknik, dürtünün bir dalga gibi yükselip, zirve yapıp, doğal olarak azaldığını gözlemlemeye dayanıyor. Araştırmalar dürtülerin, tepki verilmediğinde genellikle 20-30 dakika içinde zayıfladığını gösteriyor. Sigara bırakma üzerine yapılan kontrollü bir çalışmada, dürtü sörfü öğretilen grup dürtülerini bastırmaya çalışan gruba göre hem daha az sigara içti hem de duygusal olarak daha iyi hissetti.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a></p>
+
+  <p class="transition">Tepkiyi durdurdun. Ama ortada hâlâ beynin otomatik olarak kurduğu bir hikâye var. Üçüncü beceri bu hikâyeyi sorgulamak.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 03 — COGNITIVE REAPPRAISAL -->
+<div class="section" id="s03">
+  <div class="section-num">03</div>
+  <h2>Cognitive Reappraisal (Bilişsel Yeniden Değerlendirme)<em>Narratif Düzeltme</em></h2>
+
+  <h3 class="sub-heading" id="s03-nedir">Nedir?</h3>
+
+  <p>Beyin her olaya otomatik bir anlam yüklüyor, bir hikâye oluşturuyor. "Toplantıda fikrimi eleştirdiler, demek ki yetersizim", "Arkadaşlarım planlarına beni çağırmadı, demek ki beni istemiyorlar", "İş başvurum reddedildi, demek ki yeterli değilim". Narratif düzeltme, bu otomatik hikâyeyi fark edip daha doğru ve dengeli bir çerçeveye çekmek.</p>
+
+  <h3 class="sub-heading" id="s03-evrim">Evrimsel Perspektif</h3>
+
+  <p>Beynin hikâye oluşturma kapasitesi çok güçlü bir evrimsel avantaj. "O meyveyi yiyen kişi hastalanmıştı, demek ki o meyve tehlikeli" gibi neden-sonuç bağlantıları kurmak hayatta kalmayı sağladı. Sorun şu ki beyin bu mekanizmayı gereksiz yerlerde de çalıştırıyor ve genellikle negatif yönde. Çünkü evrimsel ortamda tehlike yokken "tehlike var!" demek seni sadece gereksiz yere korkuturdu, ama tehlike varken "tehlike yok" demek seni öldürürdü. Beyin bu asimetriyi öğrendi ve her zaman en kötü senaryoyu varsaymayı tercih etti. Bu yüzden beyin olumsuz hikâyeler kurmaya eğilimli. "Eleştirildim çünkü beni geliştirmek istiyorlar" yerine "eleştirildim çünkü yetersizim" otomatik geliyor çünkü beyin en kötü senaryoya hazırlanmayı tercih ediyor.</p>
+
+  <h3 class="sub-heading" id="s03-beyin">Beyinde Ne Oluyor?</h3>
+
+  <p>Bilişsel yeniden değerlendirme sırasında prefrontal korteksin farklı alt bölgeleri aktive oluyor. Bu bölgeler amigdaladaki ve insuladaki duygusal uyarılma tepkisini düşürüyor. Yeniden değerlendirme duygu üretim sürecinin erken aşamasında devreye girdiği için, bastırma (suppression) gibi geç müdahalelere göre çok daha etkili: duyguyu oluştuktan sonra bastırmak yerine oluşum sürecinin kendisini değiştiriyor.</p>
+
+  <div class="experiment">
+    <p>Yeniden değerlendirme olumsuz duygu deneyimini ve davranışsal ifadeyi azaltıyor, belleği olumsuz etkilemiyor. Bastırma ise davranışsal ifadeyi azaltıyor ama duygu deneyimini azaltmayı başaramıyor ve belleği bozuyor. Bastırma aynı zamanda hem bastıran kişinin hem de sosyal partnerinin fizyolojik tepkisini artırıyor.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a></p>
+  </div>
+
+  <h3 class="sub-heading" id="s03-kanitlar">Bilimsel Kanıtlar</h3>
+
+  <p>Gross ve John (2003), beş ayrı çalışmada yeniden değerlendirme ve bastırma stratejilerini karşılaştırdı:</p>
+
+  <div class="experiment">
+    <p>Yeniden değerlendirme kullananlar daha fazla olumlu duygu ve daha az olumsuz duygu yaşıyorlar. Bastırma kullananlar ise daha az olumlu duygu yaşarken, daha fazla olumsuz duygu deneyimliyorlar. Yeniden değerlendirme kullanımı daha iyi kişilerarası işlevsellik ve daha yüksek iyi oluşla ilişkiliyken, bastırma bunların tersiyle ilişkili.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></p>
+  </div>
+
+  <p>48 nörogörüntüleme çalışmasının meta-analizi, bilişsel yeniden değerlendirmenin kontrol merkezini aktive ederek alarm sistemindeki duygusal tepkiyi azalttığını tutarlı olarak gösterdi.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
+
+  <p>Önemli bir uyarı: laboratuvar ortamında bilişsel yeniden değerlendirme deneyen katılımcıların üçte birinin doğal tepkilerine göre daha kötü hissettiği bulundu.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Bu, yeniden değerlendirmenin mekanik uygulanmaması gerektiğini gösteriyor: zorla "pozitif düşün" değil, daha doğru ve dengeli bir çerçeve bul.</p>
+
+  <h3 class="sub-heading" id="s03-eksiklik">Eksikliğinde Ne Olur?</h3>
+
+  <p>Narratif düzeltme becerisi zayıf olduğunda beynin ilk ürettiği hikâye son hikâye oluyor. Bu genellikle en olumsuz versiyon: "beni sevmiyor", "başaramayacağım", "hep böyle olacak". Bu otomatik hikâyeler tekrar ettikçe güçleniyor ve "gerçek" gibi hissediliyor. Zamanla kişi kendi beyninin uydurduğu hikâyeleri sorgulanmaz gerçekler olarak kabul ediyor. Bu, depresyon ve anksiyetenin temel mekanizmalarından biri. Bilişsel davranışçı terapi (CBT) tam olarak bu noktayı hedef alıyor.</p>
+
+  <h3 class="sub-heading" id="s03-gelistirme">Nasıl Geliştirilir?</h3>
+
+  <p><strong>"Yorum mu, gerçek mi?" sorusu.</strong> Otomatik bir düşünce yakaladığında kendine sor: bu kanıta dayalı bir gerçek mi, yoksa beynimin kurduğu bir yorum mu? Çoğu zaman yorum olduğunu fark edeceksin.</p>
+
+  <p><strong>Alternatif hikâye üretme.</strong> Tek bir yorum yerine en az 2-3 alternatif hikâye üret. "Toplantıda fikrimi eleştirdiler" için: a) fikri geliştirmek istiyorlar, b) kendi bakış açılarını savunuyorlar, c) bugün stresli bir günleri var, d) gerçekten kötü bir fikirdi. Her birinin olasılığını değerlendir. Genellikle otomatik hikâye en düşük olasılıklı olanıdır.</p>
+
+  <p><strong>"Bu 5 yıl sonra önemli olacak mı?" testi.</strong> Olayın büyüklüğünü perspektife koyar. Beyin şimdiki anı abartma eğilimindedir ve bu test o abartıyı dengeler.</p>
+
+  <p class="transition">Hikâyeyi düzelttin. Ama ya düzeltilecek bir hikâye yoksa? Ya durum gerçekten belirsiz, gerçekten çözümsüz, gerçekten rahatsız edici ise? Dördüncü beceri tam burada başlıyor.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 04 — DISTRESS TOLERANCE -->
+<div class="section" id="s04">
+  <div class="section-num">04</div>
+  <h2>Distress Tolerance (Rahatsızlıkla Kalabilme)<em>Psikolojik Esneklik</em></h2>
+
+  <h3 class="sub-heading" id="s04-nedir">Nedir?</h3>
+
+  <p>Belirsizlik, kontrolsüzlük, cevapsızlık, hoş olmayan duygular... Beyin bunlardan kaçmak istiyor ve sahte çözümler sunuyor: kontrol yanılgısı, aşırı planlama, senaryo kurma, dikkat dağıtma, madde kullanımı, kompulsif davranışlar. Rahatsızlıkla kalabilme, bu hoş olmayan hislerle oturup hiçbir şey yapmadan, kaçmadan, bastırmadan tolere edebilme becerisi.</p>
+
+  <h3 class="sub-heading" id="s04-evrim">Evrimsel Perspektif</h3>
+
+  <p>Evrimsel ortamda rahatsızlıktan hızla kaçmak hayatta kalmayı sağlıyordu. Acı tehlike demekti, tehlike de kaçmak demekti. Fiziksel acı için bu hâlâ geçerli: elini sıcak sobaya değdirdiğinde çekmen gerekiyor.</p>
+
+  <p>Ama modern dünyada rahatsızlığın çoğu psikolojik: belirsizlik, reddedilme kaygısı, sosyal karşılaştırma, anlamsızlık hissi. Ve beyin bu ikisini ayırt edemiyor. Eisenberger ve arkadaşlarının (2003) çığır açan fMRI çalışması bunu doğrudan gösterdi: katılımcılar sanal bir top oyununda dışlandığında, beyinde aktive olan bölgeler fiziksel acı sırasında aktive olanlarla aynıydı.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> Sosyal dışlanmanın "acısı" metafor değil, nörolojik gerçek. Evrimsel ortamda gruptan dışlanmak ölüm demekti: yiyecek bulamazsın, yırtıcılara karşı savunmasızsın, üreme şansın düşer. Bu yüzden beyin sosyal reddi fiziksel bir yara gibi kodluyor.</p>
+
+  <p>Bu psikolojik rahatsızlıklardan "kaçma" refleksi genellikle durumu kötüleştiriyor. Kaygıdan kaçmak daha fazla kaygı üretiyor, belirsizlikten kaçmak kontrolsüzlük hissini artırıyor.</p>
+
+  <h3 class="sub-heading" id="s04-beyin">Beyinde Ne Oluyor?</h3>
+
+  <p>Psikolojik rahatsızlık hissedildiğinde alarm sistemi aktive oluyor: beyin bir "tehdit" sinyali gönderiyor. Normalde bu sinyal "bir şey yap, kaç, çöz" dürtüsünü tetikliyor. Distress tolerance pratiğinde ise kişi bu sinyale rağmen harekete geçmemeyi öğreniyor. Zamanla kontrol merkezi bu sinyali daha iyi modüle etmeye başlıyor. Tehdit sinyali hâlâ geliyor ama "acil" etiketi düşüyor. Bu, korku sönmesi (fear extinction) mekanizmasına benziyor: tehdit sinyaline rağmen kötü bir şey olmadığını deneyimledikçe beyin o sinyalin yoğunluğunu düşürmeye başlıyor.</p>
+
+  <h3 class="sub-heading" id="s04-kanitlar">Bilimsel Kanıtlar</h3>
+
+  <p>Bu beceri en kapsamlı olarak Kabul ve Kararlılık Terapisi (ACT) araştırmalarıyla incelenmiş. ACT'ın temel prensibi düşünceleri değiştirmek yerine düşüncelerle olan ilişkini değiştirmek: düşünceyi "gerçek" olarak yaşamak yerine "zihinsel bir olay" olarak gözlemlemek (bilişsel ayrışma / cognitive defusion).</p>
+
+  <p>Psikolojik esnekliğin önemi büyük ölçekli araştırmalarla doğrulandı:</p>
+
+  <div class="experiment">
+    <p>Psikolojik esneksizlik ile psikopatolojik belirtiler, stres ve yaşam kalitesi düşüklüğü arasında orta-büyük korelasyonlar var. ACT'ın birincil amacı, dolu ve anlamlı bir yaşam sürmek için psikolojik esnekliği artırmak.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a></p>
+  </div>
+
+  <p>ACT müdahalelerinin etkinliği hem bekleme listesi hem de aktif tedavi gruplarıyla karşılaştırıldı:</p>
+
+  <div class="experiment">
+    <p>ACT müdahaleleri psikolojik esnekliği artırdı ve esneksizliği azalttı. Bu değişimler psikolojik sıkıntıdaki düşüşlerle anlamlı şekilde bağlantılıydı. Bu bulgular hem bekleme listesi hem de aktif tedavi karşılaştırmalarında geçerli.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a></p>
+  </div>
+
+  <p>Bu etkilerin kalıcılığı da incelendi:</p>
+
+  <div class="experiment">
+    <p>ACT'ın olumlu etkileri, artan psikolojik esneklik ve iyileşen duygusal düzenleme gibi, zaman içinde devam ediyor. Bu kalıcı faydalar bireyleri gelecekteki psikolojik zorluklarla başa çıkmak için araçlarla donatıyor.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
+  </div>
+
+  <p>Distress tolerance özellikle bağımlılık araştırmalarında kritik bir değişken. Düşük distress tolerance bağımlılığın sürmesinde ve şiddetlenmesinde risk faktörü olarak tanımlanıyor: kişi psikolojik rahatsızlıktan kaçmak için maddeye yöneliyor.</p>
+
+  <h3 class="sub-heading" id="s04-eksiklik">Eksikliğinde Ne Olur?</h3>
+
+  <p>Rahatsızlıkla kalma becerisi zayıf olduğunda kişi her olumsuz duygudan kaçmaya çalışıyor. Bu kaçış birçok form alabiliyor: telefonla dikkat dağıtma, aşırı yeme, alkol, kompulsif alışveriş, iş bağımlılığı, sürekli sosyal medya kontrolü, hatta sürekli "kendini geliştirme"ye sarılma (burada bile kaçış olabilir, rahatsız hissetmemek için sürekli bir şey "yapma" dürtüsü). Paradoks şu ki kaçtıkça rahatsızlık büyüyor çünkü beyin "bu duyguya dayanamam" inancını pekiştiriyor.</p>
+
+  <h3 class="sub-heading" id="s04-gelistirme">Nasıl Geliştirilir?</h3>
+
+  <p><strong>30 saniye kuralı.</strong> Rahatsız bir his geldiğinde hemen bir şey yapmak yerine 30 saniye bekle. Hiçbir şey yapma, sadece o hisle kal. Hiçbir şey kötüleşmeyecek. Bu 30 saniye zamanla 1 dakikaya, 5 dakikaya uzar.</p>
+
+  <p><strong>"Sadece rahatsız" etiketlemesi.</strong> "Dayanamıyorum" yerine "bu rahatsız edici ama sadece bir his" de. "Dayanamıyorum" beyne tehlike sinyali gönderiyor. "Rahatsız ama geçici" sinyali çok farklı.</p>
+
+  <p><strong>Mikro maruziyetler.</strong> Günlük hayatta küçük rahatsızlıkları bilinçli olarak tolere et: soğuk duş, sessizlikte oturma, telefonsuz bekleme. Bunlar büyük duygusal rahatsızlıklar için antrenman niteliğinde.</p>
+
+  <p><strong>Kaçış davranışlarını fark etme.</strong> Telefona uzandığında, buzdolabını açtığında, sosyal medyaya girdiğinde kendine sor: "Bunu gerçekten istediğim için mi yapıyorum, yoksa bir histen kaçtığım için mi?" Sadece fark etmek yeterli, her seferinde durman gerekmiyor.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ZİNCİR -->
+<div class="section" id="zincir">
+  <h2>Zincir</h2>
+
+  <p>Bu 4 beceri birbirinden bağımsız değil, sıralı bir zincir oluşturuyor:</p>
+
+  <div class="chain">
+    <strong>Awareness</strong> <span class="arrow">→</span> bir şeyin olduğunu gör<br>
+    <strong>Non-reactivity</strong> <span class="arrow">→</span> otomatik tepkiyi durdur<br>
+    <strong>Reappraisal</strong> <span class="arrow">→</span> daha doğru bir hikâye kur<br>
+    <strong>Distress Tolerance</strong> <span class="arrow">→</span> belirsizliği ve çözümsüzlüğü tolere et
+  </div>
+
+  <p>Bu sıra tipik akışı gösteriyor ama her zaman lineer ilerlemek zorunda değil. Bazen doğrudan distress tolerance'a ihtiyacın olur, reappraisal yapacak veri yoktur, sadece durup beklemen gerekir. Bazen reappraisal sırasında yeni bir farkındalık doğar. Önemli olan sıra değil, 4 kasın hepsinin çalışması.</p>
+
+  <p>Aynı tetikleyiciyi düşün: birisi sana mesaj atmadı. <strong>Awareness olmadan:</strong> kaygı fark edilmeden senaryolara dönüşür. <strong>Non-reactivity olmadan:</strong> "acaba ne düşünüyor" sorusu saatlerce kafanda döner. <strong>Reappraisal olmadan:</strong> "benden sıkıldı" hikâyesi sorgulanmaz gerçek olur. <strong>Distress tolerance olmadan:</strong> belirsizliğe dayanamayıp "her şey yolunda mı?" mesajı atarsın ve kontrol yanılgısı döngüsü başlar.</p>
+
+  <p>4 kas çalıştığında ise: kaygıyı fark edersin, "senaryo kurma" diye etiketlersin, "aslında başka açıklamalar da var" dersin ve cevap gelmese bile o belirsizlikle oturabilirsin. Sorun kaybolmadı. Ama seni yönetmeyi bıraktı.</p>
+
+  <p>İlişkilerde, kariyerde, beslenmede, özgüvende, motivasyonda hep aynı zincir: 20 ayrı beceri değil, 4 temel kas. Bu kasları güçlendirdikçe hayat kolaylaşmıyor. Ama sen duygularının yolcusu olmaktan çıkıp sürücü koltuğuna oturuyorsun.</p>
+</div>
+
+<!-- KAYNAKLAR -->
+<div class="conclusion" id="kaynaklar">
+  <h2>Kaynaklar</h2>
+  <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem;">
+    <li id="ref-1"><strong>Lieberman, M.D., Eisenberger, N.I., Crockett, M.J., Tom, S.M., Pfeifer, J.H. & Way, B.M. (2007).</strong> Putting feelings into words: Affect labeling disrupts amygdala activity in response to affective stimuli. <em>Psychological Science, 18</em>(5), 421-428. <a href="https://pubmed.ncbi.nlm.nih.gov/17576282/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-2"><strong>Gross, J.J. (2002).</strong> Emotion regulation: Affective, cognitive, and social consequences. <em>Psychophysiology, 39</em>(3), 281-291. <a href="https://pubmed.ncbi.nlm.nih.gov/12212647/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-3"><strong>Gross, J.J. & John, O.P. (2003).</strong> Individual differences in two emotion regulation processes: Implications for affect, relationships, and well-being. <em>Journal of Personality and Social Psychology, 85</em>(2), 348-362. <a href="https://pubmed.ncbi.nlm.nih.gov/12916575/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-4"><strong>Teasdale, J.D., Moore, R.G., Hayhurst, H., Pope, M., Williams, S. & Segal, Z.V. (2002).</strong> Metacognitive awareness and prevention of relapse in depression: Empirical evidence. <em>Journal of Consulting and Clinical Psychology, 70</em>(2), 275-287. <a href="https://pubmed.ncbi.nlm.nih.gov/11952186/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-5"><strong>Lutz, J., Herwig, U., Opialla, S., Hittmeyer, A., Jäncke, L., Rufer, M., Grosse Holtforth, M. & Brühl, A.B. (2014).</strong> Mindfulness and emotion regulation—an fMRI study. <em>Social Cognitive and Affective Neuroscience, 9</em>(6), 776-785. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4040090/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-6"><strong>Gotink, R.A. ve ark. (2016).</strong> 8-week Mindfulness Based Stress Reduction induces brain changes similar to traditional long-term meditation practice: A systematic review. <em>Brain and Cognition, 108</em>, 32-41. <a href="https://www.pdbti.org/wp-content/uploads/2019/11/Gotink-et-al.-2016-MBCT-induces-brain-changes-like-long-term-meditation-practice_-review.pdf" target="_blank" style="color: var(--accent);">PDF</a></li>
+    <li id="ref-7"><strong>Kral, T.R.A. ve ark. (2018).</strong> Impact of short- and long-term mindfulness meditation training on amygdala reactivity to emotional stimuli. <em>NeuroImage, 181</em>, 301-313. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6671286/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-8"><strong>Buhle, J.T. ve ark. (2014).</strong> Cognitive reappraisal of emotion: A meta-analysis of human neuroimaging studies. <em>Cerebral Cortex, 24</em>(11), 2981-2990. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4193464/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-9"><strong>Troy, A.S., Wilhelm, F.H., Shallcross, A.J. & Mauss, I.B. (2010).</strong> Seeing the silver lining: Cognitive reappraisal ability moderates the relationship between stress and depressive symptoms. <em>Cognition and Emotion, 24</em>(2), 365-381.</li>
+    <li id="ref-10"><strong>Lee, H. (2024).</strong> Effects of improving metacognitive awareness on emotion regulation. <em>Applied Developmental Education and Psychology.</em> <a href="https://www.syncsci.com/journal/ADEP/article/download/ADEP.2024.01.002/978" target="_blank" style="color: var(--accent);">SyncSci</a></li>
+    <li id="ref-11"><strong>Double, K.S. ve ark. (2026).</strong> Metacognitive ability is associated with reduced emotion suppression. <em>Scientific Reports.</em> <a href="https://www.nature.com/articles/s41598-026-37054-4" target="_blank" style="color: var(--accent);">Nature</a></li>
+    <li id="ref-12"><strong>Stockton, D. ve ark. (2024).</strong> Examining domains of psychological flexibility and inflexibility as treatment mechanisms in ACT. <em>Clinical Psychology Review.</em> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0272735824000539" target="_blank" style="color: var(--accent);">ScienceDirect</a></li>
+    <li id="ref-13"><strong>Creswell, J.D., Way, B.M., Eisenberger, N.I. & Lieberman, M.D. (2007).</strong> Neural correlates of dispositional mindfulness during affect labeling. <em>Psychosomatic Medicine, 69</em>(6), 560-565. <a href="https://www.uclahealth.org/news/release/putting-feelings-into-words-produces-therapeutic-effects-in-the-brain-ucla-neuroimaging-study-supports-ancient-buddhist-teachings" target="_blank" style="color: var(--accent);">UCLA Health</a></li>
+    <li id="ref-14"><strong>Gloster, A.T., Block, V.J. ve ark. (2024).</strong> Psikolojik esneklik ve esneksizlik: Teori, araştırma ve klinik uygulama. <em>Frontiers in Psychology.</em> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11284814/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-15"><strong>ACT ve Psikolojik İyi Oluş derlemesi (2025).</strong> Acceptance and Commitment Therapy and Psychological Well-Being: A Narrative Review. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11837766/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-16"><strong>Bowen, S. & Marlatt, A. (2009).</strong> Surfing the urge: Brief mindfulness-based intervention for college student smokers. <em>Psychology of Addictive Behaviors, 23</em>(4), 666-671. <a href="https://pubmed.ncbi.nlm.nih.gov/20025372/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-17"><strong>Kircanski, K., Lieberman, M.D. & Craske, M.G. (2012).</strong> Feelings into words: Contributions of language to exposure therapy. <em>Psychological Science, 23</em>(10), 1086-1091. <a href="https://pubmed.ncbi.nlm.nih.gov/22902568/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-18"><strong>Ramirez, G. & Beilock, S.L. (2011).</strong> Writing about testing worries boosts exam performance in the classroom. <em>Science, 331</em>(6014), 211-213. <a href="https://pubmed.ncbi.nlm.nih.gov/21233387/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+    <li id="ref-19"><strong>Vives, M.L., Costumero, V., Ávila, C. & Costa, A. (2021).</strong> Foreign language processing undermines affect labeling. <em>Affective Science, 2</em>, 199-206. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9382933/" target="_blank" style="color: var(--accent);">PMC</a></li>
+    <li id="ref-20"><strong>Eisenberger, N.I., Lieberman, M.D. & Williams, K.D. (2003).</strong> Does rejection hurt? An fMRI study of social exclusion. <em>Science, 302</em>(5643), 290-292. <a href="https://pubmed.ncbi.nlm.nih.gov/14551436/" target="_blank" style="color: var(--accent);">PubMed</a></li>
+  </ol>
+</div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Mart 2026</p>
+  </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+  <script>
+    let savedPosition = null;
+
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(function() {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+  </script>
+
+  <script>
+  (function() {
+    var toc = document.getElementById('tocSidebar');
+    var links = toc.querySelectorAll('.toc-link');
+    var hero = document.querySelector('.hero');
+    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
+
+    // Build expandable sub-headings for each TOC entry
+    links.forEach(function(link) {
+      var sid = link.dataset.section;
+      var li = link.parentElement;
+      var subItems = [];
+
+      if (sid === 'kaynaklar') return;
+
+      var sectionEl = document.getElementById(sid);
+      if (sectionEl) {
+        var subHeadings = sectionEl.querySelectorAll('.sub-heading[id]');
+        subHeadings.forEach(function(sh) {
+          subItems.push({ id: sh.id, title: sh.textContent.trim() });
+        });
+      }
+
+      if (subItems.length === 0) return;
+
+      // Wrap link in a row container
+      var row = document.createElement('div');
+      row.className = 'toc-row';
+      li.insertBefore(row, link);
+      row.appendChild(link);
+
+      // Add toggle button
+      var toggle = document.createElement('button');
+      toggle.className = 'toc-toggle';
+      toggle.innerHTML = '\u25B6';
+      toggle.setAttribute('aria-label', 'Alt başlıkları göster');
+      row.appendChild(toggle);
+
+      // Build sub-list
+      var subs = document.createElement('ul');
+      subs.className = 'toc-subs';
+      subItems.forEach(function(item) {
+        var subLi = document.createElement('li');
+        var subLink = document.createElement('a');
+        subLink.href = '#' + item.id;
+        subLink.className = 'toc-sub-link';
+        subLink.dataset.target = item.id;
+        subLink.textContent = item.title;
+        subLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          var t = document.getElementById(item.id);
+          if (t) {
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#' + item.id);
+          }
+        });
+        subLi.appendChild(subLink);
+        subs.appendChild(subLi);
+      });
+      li.appendChild(subs);
+      li.classList.add('toc-item');
+
+      // Accordion toggle
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wasExpanded = li.classList.contains('expanded');
+        toc.querySelectorAll('.toc-item.expanded').forEach(function(item) {
+          item.classList.remove('expanded');
+        });
+        if (!wasExpanded) li.classList.add('expanded');
+      });
+    });
+
+    // Show/hide TOC based on scroll past hero
+    function updateVisibility() {
+      if (!hero) return;
+      if (hero.getBoundingClientRect().bottom < 0) {
+        toc.classList.add('visible');
+      } else {
+        toc.classList.remove('visible');
+      }
+    }
+
+    // Active section tracking
+    var currentActive = null;
+    function setActive(id) {
+      if (currentActive === id) return;
+      currentActive = id;
+      links.forEach(function(link) {
+        link.classList.toggle('active', link.dataset.section === id);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Active sub-heading tracking
+    var subObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var subLink = toc.querySelector('.toc-sub-link[data-target="' + entry.target.id + '"]');
+          if (subLink) {
+            toc.querySelectorAll('.toc-sub-link.active').forEach(function(l) { l.classList.remove('active'); });
+            subLink.classList.add('active');
+          }
+        }
+      });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    toc.querySelectorAll('.toc-sub-link').forEach(function(subLink) {
+      var target = document.getElementById(subLink.dataset.target);
+      if (target) subObserver.observe(target);
+    });
+
+    // Smooth scroll on main TOC link click
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.section);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + this.dataset.section);
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>
