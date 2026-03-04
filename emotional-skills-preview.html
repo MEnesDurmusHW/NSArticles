@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4 Temel Duygusal Beceri</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* TOC */
+  .toc {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--divider);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .toc-item.no-border {
+    border-bottom: none;
+    padding-bottom: 0.4rem;
+  }
+
+  .toc-item:hover {
+    padding-left: 0.5rem;
+    border-bottom-color: var(--accent);
+  }
+
+  .toc-item.no-border:hover {
+    border-bottom-color: transparent;
+  }
+
+  .toc-item:hover .toc-title {
+    color: var(--accent);
+  }
+
+  .toc-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    min-width: 1.5rem;
+  }
+
+  .toc-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  .toc-content {
+    flex: 1;
+  }
+
+  /* Sub-item */
+  .toc-sub {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.5rem 0 1.2rem;
+    padding-left: 2.7rem;
+    border-bottom: 1px solid var(--divider);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .toc-sub:hover {
+    padding-left: 3.2rem;
+  }
+
+  .toc-sub:hover .toc-sub-title {
+    color: var(--accent);
+  }
+
+  .toc-sub-dash {
+    color: var(--accent);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+
+  .toc-sub-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dim);
+    transition: color 0.3s ease;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 1rem 2rem 0;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .home-logo {
+    padding: 16px 0 100px;
+  }
+
+  /* Floating CTA */
+  .floating-cta {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .floating-cta.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .floating-cta a {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    color: var(--bg);
+    background: var(--accent);
+    text-decoration: none;
+    padding: 0.7rem 2rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .floating-cta a:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.3);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .toc { padding: 2rem 1.5rem 4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .toc { padding: 1.5rem 1.2rem 3rem; }
+
+    .toc-item {
+      gap: 0.8rem;
+      padding: 1rem 0;
+    }
+
+    .toc-title {
+      font-size: 1.05rem;
+    }
+
+    .toc-sub {
+      padding-left: 2.3rem;
+      padding-top: 0.3rem;
+      padding-bottom: 1rem;
+      gap: 0.6rem;
+    }
+
+    .toc-sub:hover { padding-left: 2.6rem; }
+
+    .toc-sub-title {
+      font-size: 0.9rem;
+    }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .toc-title { font-size: 0.95rem; }
+    .toc-sub-title { font-size: 0.85rem; }
+    .toc-sub { padding-left: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <section class="hero">
+    <h1>4 Temel <em>Duygusal</em> Beceri</h1>
+    <p class="hero-sub">Bilim, evrim ve pratik — farklı görünen sorunların hepsi aynı 4 noktada kırılıyor. Doğuştan mükemmel değil ama antrenmanla güçlendirilebilir, tıpkı bir kas gibi.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Özgüven, ilişkiler, motivasyon — her sorunu ayrı ayrı çözmek yerine hepsinin kırıldığı
+      <span class="highlight">4 temel beceriyi</span> güçlendirsen?
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="toc">
+    <div style="height: 1rem;"></div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">01</span>
+      <div class="toc-content">
+        <div class="toc-title">Awareness — Fark Etme</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Beyin otomatik pilotu tercih ediyor. Meta-farkındalık bu pilotu devreden çıkarıyor.</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">02</span>
+      <div class="toc-content">
+        <div class="toc-title">Non-reactivity — Tepki Vermeme</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Beyin sürekli senaryo kuruyor. Hepsine cevap vermek zorunda değilsin.</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">03</span>
+      <div class="toc-content">
+        <div class="toc-title">Cognitive Reappraisal — Bilişsel Yeniden Değerlendirme</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Beyin her olaya otomatik bir hikâye uyduruyor. İlk versiyon neredeyse her zaman yanlış.</span>
+    </div>
+
+    <div class="toc-item no-border">
+      <span class="toc-num">04</span>
+      <div class="toc-content">
+        <div class="toc-title">Distress Tolerance — Rahatsızlıkla Kalabilme</div>
+      </div>
+    </div>
+
+    <div class="toc-sub">
+      <span class="toc-sub-dash">—</span>
+      <span class="toc-sub-title">Rahatsız bir duyguyla hiçbir şey yapmadan durabilmek. Beyin bundan kaçmak için tasarlanmış.</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-num"></span>
+      <div class="toc-content">
+        <div class="toc-title">16 bilimsel kaynak ile desteklenmiştir</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Önizleme / Mart 2026</p>
+  </section>
+
+  <div class="floating-cta" id="floatingCta">
+    <a href="emotional-skills.html">Yazının Tamamını Oku →</a>
+  </div>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+  <script>
+  (function() {
+    var cta = document.getElementById('floatingCta');
+    function onScroll() {
+      cta.classList.toggle('visible', window.scrollY > window.innerHeight * 0.3);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
+
+</body>
+</html>

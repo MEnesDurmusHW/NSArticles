@@ -45,10 +45,19 @@ Every page (except `index.html`) must have these at the bottom, before `</body>`
 
 Open any `.html` file directly in a browser — no server or build step required. For live reload during development, any static file server works (e.g., `python3 -m http.server`).
 
+## Listing Pages
+
+- **`all.html`**: Lists every article. Preview pages use "— Preview" suffix in the card title and the "Önizleme" tag
+- **`index.html`**: Curated landing page — only selected articles appear here. Do NOT use "Preview" suffix in card titles on this page
+
 ## Adding a New Article
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
 3. Add `<script src="theme.js"></script>` and `<link rel="stylesheet" href="styles.css">` in `<head>`
 4. Add the grain overlay, theme toggle button, and home logo + author credit
-5. Add a card entry in `index.html` (and `all.html`) inside the `.articles` div
+5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
+
+## Git
+
+- Do NOT add `Co-Authored-By` or any AI attribution lines to commit messages
