@@ -58,6 +58,7 @@ Open any `.html` file directly in a browser — no server or build step required
 3. Add `<script src="theme.js"></script>` and `<link rel="stylesheet" href="styles.css">` in `<head>`
 4. Add the grain overlay, theme toggle button, and home logo + author credit
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
+6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
 
 ## Git
 
