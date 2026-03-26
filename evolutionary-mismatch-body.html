@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero-series {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Article content */
+  .article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.7em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .section p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section .ref {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem 0;
+  }
+
+  /* Sub-headings */
+  .sub-heading {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 2.5rem 0 1.2rem;
+  }
+
+  /* Evidence labels */
+  .evidence-label {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 2rem 0 0.8rem;
+  }
+
+  /* Experiment / info boxes */
+  .experiment {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.6rem 1.8rem;
+    margin: 1.8rem 0;
+  }
+
+  .experiment-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .experiment p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+
+  .experiment p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Pull quotes */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .pull-quote .attribution {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--text-dim);
+  }
+
+  /* Lists inside sections */
+  .section ul, .section ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .section li {
+    margin-bottom: 0.6rem;
+    text-align: justify;
+  }
+
+  .section ul ul, .section ol ol {
+    margin: 0.4rem 0 0.4rem 1.2rem;
+  }
+
+  /* Conclusion / References */
+  .conclusion {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .conclusion h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* Transition text between sections */
+  .transition {
+    font-style: italic;
+    color: var(--text-dim);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--divider);
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 1.5rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* Reference links */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  a.ref:hover {
+    text-decoration: underline;
+  }
+
+  /* Highlight target reference */
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* Back to text FAB */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #fab-back:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .article { padding: 3rem 1.5rem; }
+    .experiment { padding: 1.3rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .article { padding: 2.5rem 1.2rem; }
+
+    .section h2 { font-size: 1.4rem; }
+
+    .section p { font-size: 1rem; }
+
+    .experiment { padding: 1.2rem; }
+    .experiment p { font-size: 0.95rem; }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .section h2 { font-size: 1.25rem; }
+    .section p { font-size: 0.95rem; }
+  }
+
+  /* TOC Sidebar */
+  .toc-sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(16px, calc((100vw - 680px) / 2 - 220px));
+    width: 180px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--divider) transparent;
+  }
+  .toc-sidebar::-webkit-scrollbar { width: 3px; }
+  .toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .toc-sidebar::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+  .toc-sidebar.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .toc-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-sidebar .toc-row {
+    display: flex;
+    align-items: flex-start;
+  }
+  .toc-sidebar .toc-link {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    padding: 4px 0 4px 12px;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .toc-sidebar .toc-link.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .toc-sidebar .toc-link:hover {
+    color: var(--text);
+  }
+  .toc-sidebar .toc-num {
+    font-family: var(--serif);
+    margin-right: 5px;
+    font-size: 0.68rem;
+  }
+  .toc-sidebar .toc-sep {
+    height: 8px;
+  }
+  .toc-sidebar .toc-toggle {
+    flex-shrink: 0;
+    width: 18px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s, transform 0.25s;
+  }
+  .toc-sidebar .toc-toggle:hover { opacity: 1; }
+  .toc-sidebar .toc-item.expanded > .toc-row > .toc-toggle {
+    transform: rotate(90deg);
+  }
+  .toc-sidebar .toc-subs {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .toc-sidebar .toc-item.expanded > .toc-subs {
+    max-height: 500px;
+  }
+  .toc-sidebar .toc-sub-link {
+    display: block;
+    padding: 2px 0 2px 22px;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    opacity: 0.7;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 2px solid transparent;
+  }
+  .toc-sidebar .toc-sub-link:hover { color: var(--text); opacity: 1; }
+  .toc-sidebar .toc-sub-link.active { color: var(--accent); opacity: 1; border-left-color: var(--accent); }
+  @media (max-width: 1100px) {
+    .toc-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <section class="hero">
+    <p class="hero-series">Evrimsel Uyumsuzluk Serisi / Part 1</p>
+    <h1>Bedenin sana karşı değil, seni <em>savanada</em> sanıyor.</h1>
+    <p class="hero-sub">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Bir gün içinde kaç kez kendini suçluyorsun? Gece gereksiz atıştırma, sabah kalkamama, akşam spora gidememe.
+      Her seferinde aynı açıklama: disiplinsiz, düzensiz, tembel.
+      Peki ya bunların hiçbiri <span class="highlight">senin suçun değilse?</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <nav class="toc-sidebar" id="tocSidebar">
+    <ul>
+      <li><a href="#giris" class="toc-link" data-section="giris">Giriş</a></li>
+      <li><a href="#s01" class="toc-link" data-section="s01"><span class="toc-num">01</span> Beslenme</a></li>
+      <li><a href="#s02" class="toc-link" data-section="s02"><span class="toc-num">02</span> Hareket</a></li>
+      <li><a href="#s03" class="toc-link" data-section="s03"><span class="toc-num">03</span> Uyku</a></li>
+      <li><a href="#s04" class="toc-link" data-section="s04"><span class="toc-num">04</span> Bağışıklık</a></li>
+      <li><a href="#s05" class="toc-link" data-section="s05"><span class="toc-num">05</span> Doğa</a></li>
+      <li class="toc-sep"></li>
+      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
+    </ul>
+  </nav>
+
+  <article class="article">
+
+<!-- GİRİŞ -->
+<div class="section" id="giris">
+  <h2>Giriş</h2>
+
+  <p>Bir gün içinde kaç kez kendini suçluyorsun? Gece gereksiz atıştırma, sabah kalkamama, akşam spora gidememe. Her seferinde aynı açıklama: disiplinsiz, düzensiz, tembel. Peki ya bunların hiçbiri senin suçun değilse?</p>
+
+  <p>İnsan bedeni yaklaşık 300.000 yıl önce bugünkü haline ulaştı.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> O bedenin evrimleştiği dünya, şimdikinden radikal biçimde farklıydı: yiyecek kıttı, hareket zorunluydu, gece karanlıktı, her yer doğaydı ve bağırsaklarımız mikroplarla doluydu. Son 200 yılda, yani evrimsel zaman çizelgesinde göz kırpması kadar kısa bir sürede, bu koşulların hepsini tersine çevirdik. Yiyecek sonsuz, hareket gereksiz, gece aydınlık, doğa uzak ve her şey steril.</p>
+
+  <p>Sonuç: 300.000 yıllık bir yazılım, 200 yıllık bir donanımda çalışmaya zorlanıyor. Buna evrimsel uyumsuzluk (evolutionary mismatch) deniyor.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> Ve bu uyumsuzluğun en somut, en günlük, en çok hissedilen yansımaları bedeninde.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 01 -->
+<div class="section" id="s01">
+  <div class="section-num">01</div>
+  <h2>Ne yediğini değil, neye <i>programlandığını</i> bilmek</h2>
+
+  <p>Atalarımız için şeker ve yağ bulmak nadir ve değerli bir olaydı. Bal buldun mu, durmazdın. Yağlı bir av yakaladın mı, olabildiğince yerdin. Çünkü bir sonraki öğünün ne zaman geleceği belirsizdi. "Yiyebildiğin kadar ye" bir karakter kusuru değildi, hayatta kalma stratejisiydi.</p>
+
+  <p>Bu strateji genlerimize işledi. 1962'de genetikçi James Neel buna "thrifty gene hypothesis" (tutumlu gen hipotezi) adını verdi.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Fikir basit: yağ depolamada verimli olan genler kıtlık dönemlerinde avantaj sağladı ve nesiller boyu seçildi. Sorun şu ki artık kıtlık yok, ama genler hâlâ var.</p>
+
+  <p>Daha da ilginci: doğada şeker ve yağ nadiren bir arada bulunur. Meyve tatlıdır ama yağsızdır. Et yağlıdır ama tatlı değildir. Ama bir dilim pizza, bir top dondurma, bir paket bisküvi? İkisini aynı anda sunuyor. 2024'te Cell Metabolism'de yayımlanan bir araştırmada McDougle ve arkadaşları, bağırsaktan beyne giden şeker ve yağ için <i>ayrı</i> sinir devreleri olduğunu gösterdi.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> İkisi aynı anda tetiklendiğinde, aşırı yeme dürtüsü katlanıyor. Ultra-işlenmiş gıdalar tam olarak bunu yapıyor: doğada asla bir arada olmayan iki sinyali aynı anda göndererek beynin ödül sistemini hackliyor.</p>
+
+  <p>Ve bu hacklenme kalıcı olabiliyor. Yine Cell Metabolism'de yayımlanan bir çalışmada DiFeliceantonio ve arkadaşları (2023), normal kilolu katılımcılara 8 hafta boyunca günde iki küçük şekerli-yağlı atıştırmalık verdi. Sadece 8 hafta. Sonuç: beynin dopamin devreleri yeniden şekillendi, katılımcılar düşük yağlı yiyeceklere karşı daha az tercih göstermeye başladı.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Beyin, daha yoğun ödülü öğrenmişti.</p>
+
+  <p>2023'te PNAS'ta yayımlanan bir başka çalışma bu tabloya evrimsel bir derinlik ekliyor. Raghanti ve arkadaşları insan beynini diğer primatlarla karşılaştırdığında, nucleus accumbens bölgesinde (beynin ödül merkezi) çok daha yoğun nöropeptid Y buldu.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> Bu molekül hedonik yeme dürtüsünü artırıyor. Evrimde bu bir avantajdı, çünkü kalori bulmak zordu. Ama süpermarket çağında aynı mekanizma dezavantaja dönüyor.</p>
+
+  <p>Peki buna ne yapabilirsin? İlk adım, "iradesizim" çerçevesini bırakmak. İkincisi, beynin evrimsel olarak tanımadığı kombinasyonları fark etmek. Üç öğün artı iki atıştırmalık düzeni tamamen modern bir icat. Atalarımız düzenli yemiyordu; av bulduğunda yedi, bulamadığında saatlerce, bazen günlerce aç kaldı. Aralıklı açlık (intermittent fasting) aslında varsayılan metabolik modumuzdu. 2025'te BMJ'de yayımlanan bir network meta-analizi (99 randomize kontrollü çalışma, 6.582 katılımcı), aralıklı oruç yöntemlerinin vücut ağırlığı, bel çevresi, LDL kolesterol, kan basıncı ve açlık kan şekerini anlamlı şekilde düşürdüğünü gösterdi.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Benzer şekilde ketojenik durum, yani bedenin karbonhidrat yerine yağ yakarak enerji üretmesi, özellikle kış aylarında ve uzun av aralarında atalarımızın normal metabolik durumuydu. Sürekli glikoz akışı tarım devrimiyle başladı, evrimsel tarihimizin son yüzde 0.004'ü.</p>
+
+  <p>Bir de büyük resme bakmakta fayda var. ABD'nin 1992 beslenme piramidi tahılları tabanına koyup yağları tepeye yerleştirmişti. Bu büyük ölçüde tarım lobisinin etkisiydi, evrimsel gerçeklikle ilgisi yoktu. Atalarımızın diyetinde tahıl marjinaldi, tarım öncesi neredeyse hiç yoktu. Bu piramit nesillerin beslenme alışkanlıklarını şekillendirdi ve ancak 2011'de "MyPlate" ile değiştirildi.</p>
+
+  <p class="transition">Yediğimiz arttı. Bunun yanına en iyi ne yakışırdı? Daha az hareket, tabii ki. Ve burada şaşırtıcı bir şey daha var: sorun sadece hareketin azalması değil.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 02 -->
+<div class="section" id="s02">
+  <div class="section-num">02</div>
+  <h2>Sandalyen seni <i>öldürüyor</i>, ama oturmak değil</h2>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 03 -->
+<div class="section" id="s03">
+  <div class="section-num">03</div>
+  <h2>Bedenin hâlâ güneşe göre <i>çalışıyor</i></h2>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 04 -->
+<div class="section" id="s04">
+  <div class="section-num">04</div>
+  <h2>Çok temiz bir dünya, <i>hasta</i> bir bağışıklık sistemi</h2>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 05 -->
+<div class="section" id="s05">
+  <div class="section-num">05</div>
+  <h2>Beton ve ekran arasında kaybolmuş bir <i>hayvan</i></h2>
+</div>
+
+<!-- KAYNAKLAR -->
+<div class="conclusion" id="kaynaklar">
+  <h2>Kaynaklar</h2>
+  <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem;">
+    <li id="ref-20"><strong>20.</strong> Referans eklenecek.</li>
+  </ol>
+</div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Mart 2026</p>
+  </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+  <script>
+    let savedPosition = null;
+
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(function() {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+  </script>
+
+  <script>
+  (function() {
+    var toc = document.getElementById('tocSidebar');
+    var links = toc.querySelectorAll('.toc-link');
+    var hero = document.querySelector('.hero');
+    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
+
+    // Build expandable sub-headings for each TOC entry
+    links.forEach(function(link) {
+      var sid = link.dataset.section;
+      var li = link.parentElement;
+      var subItems = [];
+
+      if (sid === 'kaynaklar') return;
+
+      var sectionEl = document.getElementById(sid);
+      if (sectionEl) {
+        var subHeadings = sectionEl.querySelectorAll('.sub-heading[id]');
+        subHeadings.forEach(function(sh) {
+          subItems.push({ id: sh.id, title: sh.textContent.trim() });
+        });
+      }
+
+      if (subItems.length === 0) return;
+
+      // Wrap link in a row container
+      var row = document.createElement('div');
+      row.className = 'toc-row';
+      li.insertBefore(row, link);
+      row.appendChild(link);
+
+      // Add toggle button
+      var toggle = document.createElement('button');
+      toggle.className = 'toc-toggle';
+      toggle.innerHTML = '\u25B6';
+      toggle.setAttribute('aria-label', 'Alt başlıkları göster');
+      row.appendChild(toggle);
+
+      // Build sub-list
+      var subs = document.createElement('ul');
+      subs.className = 'toc-subs';
+      subItems.forEach(function(item) {
+        var subLi = document.createElement('li');
+        var subLink = document.createElement('a');
+        subLink.href = '#' + item.id;
+        subLink.className = 'toc-sub-link';
+        subLink.dataset.target = item.id;
+        subLink.textContent = item.title;
+        subLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          var t = document.getElementById(item.id);
+          if (t) {
+            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#' + item.id);
+          }
+        });
+        subLi.appendChild(subLink);
+        subs.appendChild(subLi);
+      });
+      li.appendChild(subs);
+      li.classList.add('toc-item');
+
+      // Accordion toggle
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wasExpanded = li.classList.contains('expanded');
+        toc.querySelectorAll('.toc-item.expanded').forEach(function(item) {
+          item.classList.remove('expanded');
+        });
+        if (!wasExpanded) li.classList.add('expanded');
+      });
+    });
+
+    // Show/hide TOC based on scroll past hero
+    function updateVisibility() {
+      if (!hero) return;
+      if (hero.getBoundingClientRect().bottom < 0) {
+        toc.classList.add('visible');
+      } else {
+        toc.classList.remove('visible');
+      }
+    }
+
+    // Active section tracking
+    var currentActive = null;
+    function setActive(id) {
+      if (currentActive === id) return;
+      currentActive = id;
+      links.forEach(function(link) {
+        link.classList.toggle('active', link.dataset.section === id);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Active sub-heading tracking
+    var subObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var subLink = toc.querySelector('.toc-sub-link[data-target="' + entry.target.id + '"]');
+          if (subLink) {
+            toc.querySelectorAll('.toc-sub-link.active').forEach(function(l) { l.classList.remove('active'); });
+            subLink.classList.add('active');
+          }
+        }
+      });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    toc.querySelectorAll('.toc-sub-link').forEach(function(subLink) {
+      var target = document.getElementById(subLink.dataset.target);
+      if (target) subObserver.observe(target);
+    });
+
+    // Smooth scroll on main TOC link click
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.section);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + this.dataset.section);
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>
