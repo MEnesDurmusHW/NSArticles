@@ -301,6 +301,18 @@
     text-align: justify;
   }
 
+  /* Punch lines */
+  .punch {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--accent);
+    text-align: center;
+    margin: 2.2rem auto;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
   /* Transition text between sections */
   .transition {
     font-style: italic;
@@ -616,7 +628,9 @@
 
   <p>İnsan bedeni yaklaşık 300.000 yıl önce bugünkü haline ulaştı.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> O bedenin evrimleştiği dünya, şimdikinden radikal biçimde farklıydı: yiyecek kıttı, hareket zorunluydu, gece karanlıktı, her yer doğaydı ve bağırsaklarımız mikroplarla doluydu. Son 200 yılda, yani evrimsel zaman çizelgesinde göz kırpması kadar kısa bir sürede, bu koşulların hepsini tersine çevirdik. Yiyecek sonsuz, hareket gereksiz, gece aydınlık, doğa uzak ve her şey steril.</p>
 
-  <p>Sonuç: 300.000 yıllık bir yazılım, 200 yıllık bir donanımda çalışmaya zorlanıyor. Buna evrimsel uyumsuzluk (evolutionary mismatch) deniyor.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> Ve bu uyumsuzluğun en somut, en günlük, en çok hissedilen yansımaları bedeninde.</p>
+  <p class="punch">300.000 yıllık bir yazılım, 200 yıllık bir donanımda çalışmaya zorlanıyor.</p>
+
+  <p>Buna evrimsel uyumsuzluk (evolutionary mismatch) deniyor.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a> Ve bu uyumsuzluğun en somut, en günlük, en çok hissedilen yansımaları bedeninde.</p>
 </div>
 
 <div class="section-divider"></div>
@@ -626,17 +640,59 @@
   <div class="section-num">01</div>
   <h2>Ne yediğini değil, neye <i>programlandığını</i> bilmek</h2>
 
-  <p>Atalarımız için şeker ve yağ bulmak nadir ve değerli bir olaydı. Bal buldun mu, durmazdın. Yağlı bir av yakaladın mı, olabildiğince yerdin. Çünkü bir sonraki öğünün ne zaman geleceği belirsizdi. "Yiyebildiğin kadar ye" bir karakter kusuru değildi, hayatta kalma stratejisiydi.</p>
+  <p>Atalarımız için şeker ve yağ bulmak nadir ve değerli bir olaydı. Bal buldun mu, durmazdın. Yağlı bir av yakaladın mı, olabildiğince yerdin. Çünkü bir sonraki öğünün ne zaman geleceği belirsizdi.</p>
+
+  <p class="punch">"Yiyebildiğin kadar ye" bir karakter kusuru değildi, hayatta kalma stratejisiydi.</p>
 
   <p>Bu strateji genlerimize işledi. 1962'de genetikçi James Neel buna "thrifty gene hypothesis" (tutumlu gen hipotezi) adını verdi.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Fikir basit: yağ depolamada verimli olan genler kıtlık dönemlerinde avantaj sağladı ve nesiller boyu seçildi. Sorun şu ki artık kıtlık yok, ama genler hâlâ var.</p>
 
   <p>Daha da ilginci: doğada şeker ve yağ nadiren bir arada bulunur. Meyve tatlıdır ama yağsızdır. Et yağlıdır ama tatlı değildir. Ama bir dilim pizza, bir top dondurma, bir paket bisküvi? İkisini aynı anda sunuyor. 2024'te Cell Metabolism'de yayımlanan bir araştırmada McDougle ve arkadaşları, bağırsaktan beyne giden şeker ve yağ için <i>ayrı</i> sinir devreleri olduğunu gösterdi.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> İkisi aynı anda tetiklendiğinde, aşırı yeme dürtüsü katlanıyor. Ultra-işlenmiş gıdalar tam olarak bunu yapıyor: doğada asla bir arada olmayan iki sinyali aynı anda göndererek beynin ödül sistemini hackliyor.</p>
 
-  <p>Ve bu hacklenme kalıcı olabiliyor. Yine Cell Metabolism'de yayımlanan bir çalışmada DiFeliceantonio ve arkadaşları (2023), normal kilolu katılımcılara 8 hafta boyunca günde iki küçük şekerli-yağlı atıştırmalık verdi. Sadece 8 hafta. Sonuç: beynin dopamin devreleri yeniden şekillendi, katılımcılar düşük yağlı yiyeceklere karşı daha az tercih göstermeye başladı.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Beyin, daha yoğun ödülü öğrenmişti.</p>
+  <p>Ve bu etki kalıcı olabiliyor. Yine Cell Metabolism'de yayımlanan bir çalışmada DiFeliceantonio ve arkadaşları (2023), normal kilolu katılımcılara 8 hafta boyunca günde iki küçük şekerli-yağlı atıştırmalık verdi. Sadece iki küçük atıştırmalık, günlük rutinlerine ek olarak.</p>
 
-  <p>2023'te PNAS'ta yayımlanan bir başka çalışma bu tabloya evrimsel bir derinlik ekliyor. Raghanti ve arkadaşları insan beynini diğer primatlarla karşılaştırdığında, nucleus accumbens bölgesinde (beynin ödül merkezi) çok daha yoğun nöropeptid Y buldu.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> Bu molekül hedonik yeme dürtüsünü artırıyor. Evrimde bu bir avantajdı, çünkü kalori bulmak zordu. Ama süpermarket çağında aynı mekanizma dezavantaja dönüyor.</p>
+  <div class="experiment">
+    <div class="experiment-title">DiFeliceantonio ve ark., 2023</div>
+    <p>8 hafta sonunda beyin taramaları yapıldığında, katılımcıların dopamin devreleri yeniden şekillenmişti. Yüksek yağlı yiyeceklere verdikleri beyin tepkisi artmış, düşük yağlı yiyeceklere olan tercihleri azalmıştı.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></p>
+  </div>
 
-  <p>Peki buna ne yapabilirsin? İlk adım, "iradesizim" çerçevesini bırakmak. İkincisi, beynin evrimsel olarak tanımadığı kombinasyonları fark etmek. Üç öğün artı iki atıştırmalık düzeni tamamen modern bir icat. Atalarımız düzenli yemiyordu; av bulduğunda yedi, bulamadığında saatlerce, bazen günlerce aç kaldı. Aralıklı açlık (intermittent fasting) aslında varsayılan metabolik modumuzdu. 2025'te BMJ'de yayımlanan bir network meta-analizi (99 randomize kontrollü çalışma, 6.582 katılımcı), aralıklı oruç yöntemlerinin vücut ağırlığı, bel çevresi, LDL kolesterol, kan basıncı ve açlık kan şekerini anlamlı şekilde düşürdüğünü gösterdi.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Benzer şekilde ketojenik durum, yani bedenin karbonhidrat yerine yağ yakarak enerji üretmesi, özellikle kış aylarında ve uzun av aralarında atalarımızın normal metabolik durumuydu. Sürekli glikoz akışı tarım devrimiyle başladı, evrimsel tarihimizin son yüzde 0.004'ü.</p>
+  <p>Yani beyin fazladan kalori almıyordu sadece, o kalorilerin <i>türünü</i> öğrenip daha fazlasını istemeye başlıyordu. 8 haftada.</p>
+
+  <p>2023'te PNAS'ta yayımlanan bir başka çalışma bu tabloya evrimsel bir derinlik ekliyor. Raghanti ve arkadaşları insan beynini diğer primatlarla karşılaştırdığında, nucleus accumbens bölgesinde (beynin ödül merkezi) çok daha yoğun nöropeptid Y buldu.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> Bu molekül hedonik yeme dürtüsünü artırıyor. Evrimde bu bir avantajdı, çünkü kalori bulmak zordu ve bulduğunda olabildiğince yemeni sağlayan bir mekanizma hayatta kalma şansını artırıyordu. Ama süpermarket çağında, kalorinin her köşe başında beklediği bir dünyada, aynı mekanizma tam tersine çalışıyor.</p>
+
+  <p>Peki buna ne yapabilirsin? İlk adım, "iradesizim" çerçevesini bırakmak. Beynin 300.000 yıllık bir programla çalışıyor ve ultra-işlenmiş gıdalar bu programı istismar etmek üzere tasarlanmış.</p>
+
+  <p class="punch">Bu bir irade savaşı değil, bir tasarım sorunu.</p>
+
+  <p>İkinci adım, atalarımızın yeme düzenine bakmak. Üç öğün artı iki atıştırmalık düzeni tamamen modern bir icat. Atalarımız düzenli yemiyordu; av bulduğunda yedi, bulamadığında saatlerce, bazen günlerce aç kaldı. Aralıklı açlık (intermittent fasting) aslında varsayılan metabolik modumuzdu. Benzer şekilde ketojenik durum, yani bedenin karbonhidrat yerine yağ yakarak enerji üretmesi, özellikle kış aylarında ve uzun av aralarında atalarımızın normal metabolik durumuydu. Sürekli glikoz akışı tarım devrimiyle başladı, evrimsel tarihimizin son yüzde 0.004'ü.</p>
+
+  <p>Ve bu eski düzene yaklaşmanın işe yaradığını gösteren ciddi kanıtlar var. Üstelik faydalar sadece kilo kaybıyla sınırlı değil.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Sutton ve ark., 2018 — Cell Metabolism</div>
+    <p>Diyabet riski taşıyan erkeklere 5 hafta boyunca 6 saatlik erken yeme penceresi uygulandı. Katılımcılar kilo vermedi, kalori kısıtlaması da yoktu, sadece yeme saatleri değişti. 5 hafta sonra insülin seviyeleri düştü, vücudun insüline tepkisi güçlendi, kan basıncı belirgin şekilde azaldı ve oksidatif stres belirteçleri geriledi.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></p>
+  </div>
+
+  <p>Kilo değişmeden. Sadece yeme zamanlamasını değiştirerek. Bu, insanlarda aralıklı orucun kilo kaybından bağımsız faydalarını gösteren ilk kontrollü çalışmaydı.</p>
+
+  <p>Bunun bir sebebi var. Yaklaşık 16 saatten uzun açlık dönemlerinde beden otofaji (autophagy) denen bir süreci başlatıyor: hücreler hasarlı bileşenlerini, bozulmuş proteinlerini temizleyip geri dönüştürüyor. Bir nevi hücresel bakım modu. Sürekli beslendiğinde bu temizlik hiç yapılamıyor, çünkü beden sürekli "inşaat" modunda kalıyor.<a href="#ref-28" class="ref" onclick="savePos(this)">28</a> Yoshinori Ohsumi bu mekanizmayı keşfettiği için 2016 Nobel Tıp Ödülü'nü aldı.</p>
+
+  <p>Açlık ayrıca beynin BDNF (brain-derived neurotrophic factor) üretimini artırıyor; hafıza ve bilişsel fonksiyon için kritik bir protein.<a href="#ref-29" class="ref" onclick="savePos(this)">29</a> Ve açlık sırasında üretilen ketonlar inflamasyonu baskılıyor, yani bedenin kronik iltihap seviyesini düşürüyor.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a></p>
+
+  <p>Kilo kaybı açısından da sonuçlar güçlü.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Liu ve ark., 2022 — NEJM</div>
+    <p>139 obez katılımcı 12 ay boyunca takip edildi. Bir grup günde 8 saatlik bir yeme penceresi (16:8) ile kalori kısıtlaması uyguladı, diğer grup sadece kalori kısıtlaması. Her iki grubun uyum oranı neredeyse aynıydı (%84 ve %83.8). Ama 12 ay sonra 16:8 grubu 8 kilo verdi, sadece kalori kısıtlaması grubu 6.3 kilo. Yağ kütlesinde fark daha da belirgin: 16:8 grubunda 5.9 kilo yağ kaybı, diğer grupta 4.5 kilo.<a href="#ref-26" class="ref" onclick="savePos(this)">26</a></p>
+  </div>
+
+  <p>Aynı uyum, aynı kalori hedefi, farklı sonuç. Yeme penceresini daraltmak, bedenin yağ yakma mekanizmalarını farklı bir şekilde harekete geçiriyor.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine</div>
+    <p>İki gruba aynı haftalık kalori açığı hedefi verildi. Bir grup her gün kalori kıstı, diğer grup haftada 3 gün çok düşük kalorili yedi, 4 gün normal. 12 ay sonra: aralıklı oruç grubu ortalama %7.6 kilo verdi, günlük kısıtlama grubu %5. Çalışmayı bırakan katılımcı oranı aralıklı oruçta %19, günlük kısıtlamada %30.<a href="#ref-25" class="ref" onclick="savePos(this)">25</a></p>
+  </div>
+
+  <p>Burada fark metabolik değil, davranışsal. "Her gün biraz az ye" sürekli irade gerektiriyor. "3 gün kıs, 4 gün normal ye" ise bir kural koyup uygulamak. Birinde her öğün bir karar veriyorsun, diğerinde kararı bir kere verip devam ediyorsun.</p>
 
   <p>Bir de büyük resme bakmakta fayda var. ABD'nin 1992 beslenme piramidi tahılları tabanına koyup yağları tepeye yerleştirmişti. Bu büyük ölçüde tarım lobisinin etkisiydi, evrimsel gerçeklikle ilgisi yoktu. Atalarımızın diyetinde tahıl marjinaldi, tarım öncesi neredeyse hiç yoktu. Bu piramit nesillerin beslenme alışkanlıklarını şekillendirdi ve ancak 2011'de "MyPlate" ile değiştirildi.</p>
 
@@ -649,6 +705,40 @@
 <div class="section" id="s02">
   <div class="section-num">02</div>
   <h2>Sandalyen seni <i>öldürüyor</i>, ama oturmak değil</h2>
+
+  <p>"Oturmak yeni sigara" cümlesini muhtemelen duymuşsundur. Ama bu tam olarak doğru değil.</p>
+
+  <p>Önce zarara bakalım.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Gao ve ark., 2024 — JAMA Network Open</div>
+    <p>Tayvan'da yüz binlerce çalışan 1996'dan 2017'ye kadar takip edildi. İşte çoğunlukla oturanlar, oturmayanlara kıyasla %16 daha yüksek genel ölüm riski ve %34 daha yüksek kardiyovasküler ölüm riski taşıyordu.<a href="#ref-31" class="ref" onclick="savePos(this)">31</a></p>
+  </div>
+
+  <div class="experiment">
+    <div class="experiment-title">Ajufo ve ark., 2024 — JACC</div>
+    <p>UK Biobank verisiyle 89.530 kişi incelendi. Günde 10.6 saatten fazla hareketsiz kalan katılımcılarda kalp yetmezliği ve kardiyovasküler ölüm riski belirgin şekilde artıyordu. Kritik detay: bu risk düzenli spor yapanlarda bile geçerliydi.<a href="#ref-32" class="ref" onclick="savePos(this)">32</a></p>
+  </div>
+
+  <p>Rakamlar korkutucu. Ama hikayenin tamamı bu değil.</p>
+
+  <p>2020'de PNAS'ta yayımlanan bir araştırmada Raichlen ve arkadaşları, Tanzanya'daki Hadza avcı-toplayıcılarına akselerometre taktı.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Sonuç herkesin beklentisini alt üst etti: Hadza yetişkinleri günde ortalama 9.9 saat hareketsiz. Bu rakam modern ofis çalışanlarıyla neredeyse aynı. Ama Hadza'da kalp-damar hastalığı risk belirteçleri (trigliserit, kolesterol) çok düşük. Aynı süre hareketsizlik, tamamen farklı sağlık sonuçları. Neden?</p>
+
+  <p>Çünkü Hadza sandalyede oturmuyor. Çömeliyor, diz çöküyor, yere oturuyor. Araştırmacılar EMG (kas aktivitesi ölçümü) ile baktığında, bu "aktif dinlenme" pozisyonlarının bacak kaslarında sandalyeye kıyasla çok daha yüksek aktivite yarattığını gördü. Sandalyede oturduğunda kasların neredeyse tamamen kapanıyor. Çömeldiğinde ise denge ve destek için sürekli çalışmak zorunda. Raichlen ve ekibi buna "Inactivity Mismatch Hypothesis" (hareketsizlik uyumsuzluğu hipotezi) adını verdi: sorun ne kadar oturduğumuz değil, <i>nasıl</i> oturduğumuz.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></p>
+
+  <p>Peki neden kas aktivitesi bu kadar önemli? Kaslar çalışmadığında, yağları enerji olarak parçalayan enzimler (lipoprotein lipaz gibi) üretilmiyor. Bu da kanda trigliserit ve kolesterol birikmesine yol açıyor. American Heart Association'ın yayımladığı bir bilim raporuna göre, sadece 3 saat kesintisiz oturma damar fonksiyonunu bozuyor. Ama her 30 dakikada 5 dakikalık hafif yürüyüş bu bozulmayı tamamen engelliyor.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a></p>
+
+  <p>Bir de hareketin kendisi var. Avcı-toplayıcı ve çiftçi topluluklarda erkekler ve kadınlar günde 1-2 saat orta-yüksek yoğunlukta fiziksel aktivite yapıyor ve günlük 12.000'den fazla adım atıyor.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Modern ofis çalışanı? Ortalama 22 dakika ve 4.000-5.000 adım. Evrimsel biyolog John Speakman'ın açıkladığı gibi, sedanter davranış aslında evrimsel olarak seçilmiş bir strateji.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Enerji tasarrufu hayatta kalmak için kritikti. Ama atalarımızın bir alt sınırı vardı: yiyecek bulmak için hareket etmek <i>zorundalardı</i>. Modern dünyada bu zorunluluk kalktı ve doğal fren ortadan kayboldu.</p>
+
+  <p>Sandalyenin kendisi de evrimsel bir yenilik. Kitlesel sandalye kullanımı sanayileşmeyle geldi. Öncesinde sıradan insanlar yere oturuyordu, çömeliyordu, diz çöküyordu. Sandalye bir statü sembolüydü.</p>
+
+  <p>Peki ne yapabilirsin? JACC çalışmasının bir bulgusu burada yol gösteriyor: günde sadece 30 dakika fazladan orta yoğunlukta aktivite kalp yetmezliği riskini %15, kardiyovasküler ölüm riskini %10 düşürüyor. Hafif aktivite bile fark yaratıyor: kalp yetmezliği riskinde %6, kardiyovasküler ölümde %9 azalma.<a href="#ref-32" class="ref" onclick="savePos(this)">32</a> Ve JAMA çalışmasının belki de en önemli bulgusu: oturma ile ayakta durmayı gün içinde değişimli yapan çalışanlarda artmış ölüm riski tamamen ortadan kalkıyordu.<a href="#ref-31" class="ref" onclick="savePos(this)">31</a></p>
+
+  <p>Yani tek bir "doğru pozisyon" aramak yanlış soru. Ayakta masa alıp 8 saat sabit ayakta durmak da çözüm değil, araştırmalar uzun süre hareketsiz ayakta durmanın da damar sertliğini artırabildiğini gösteriyor. Asıl evrimsel model sabit bir pozisyon değil, sürekli çeşitlilik. Atalarımız bir saat çömelip, sonra yürüyüp, sonra yere oturup, sonra bir şey taşıyordu. Pilates topu, ayakta masa, yere oturma, bunların hepsi araç. Ama hiçbiri tek başına cevap değil. Cevap, aralarında sürekli geçiş yapmak.</p>
+
+  <p class="punch">En iyi oturma pozisyonu, bir sonraki pozisyondur.</p>
+
+  <p class="transition">Gün boyu nasıl oturduğun önemli. Peki nasıl yattığın? Atalarımızda uykusuzluk diye bir şey yoktu. Ne değişti?</p>
 </div>
 
 <div class="section-divider"></div>
