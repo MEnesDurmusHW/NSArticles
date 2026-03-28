@@ -35,7 +35,7 @@
   /* Hero */
   .hero {
     position: relative;
-    min-height: 60vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,12 +48,16 @@
   .hero::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1400&q=80') center/cover no-repeat;
-    opacity: 0.15;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
     z-index: 0;
   }
-  [data-theme="dark"] .hero::before { opacity: 0.08; }
 
   .hero > * { position: relative; z-index: 1; }
 
@@ -64,6 +68,8 @@
     letter-spacing: 2.5px;
     color: var(--accent);
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
   }
 
   .hero h1 {
@@ -73,6 +79,8 @@
     line-height: 1.2;
     max-width: 600px;
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
   }
 
   .hero h1 em { font-style: italic; color: var(--accent); }
@@ -82,6 +90,41 @@
     color: var(--text-dim);
     max-width: 520px;
     line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  /* Keyframes */
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.15); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.5); opacity: 1; }
+  }
+
+  /* Scroll Hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 32px;
+    background: var(--accent);
+    opacity: 0.4;
+    animation: scrollPulse 2s ease-in-out infinite;
   }
 
   /* Summary Cards */
@@ -106,7 +149,7 @@
     transition: transform 0.2s ease;
   }
 
-  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
 
   .stat-card .stat-icon {
     font-size: 1.8rem;
@@ -135,7 +178,7 @@
   .clock-section {
     max-width: 680px;
     margin: 0 auto;
-    padding: 2rem 2rem 3rem;
+    padding: 1rem 2rem 1.5rem;
     text-align: center;
   }
 
@@ -143,14 +186,14 @@
     font-family: var(--serif);
     font-size: 1.4rem;
     font-weight: 400;
-    margin-bottom: 2rem;
+    margin-bottom: 0.8rem;
     color: var(--text);
   }
 
   .clock-container {
     display: inline-block;
     position: relative;
-    max-width: 340px;
+    max-width: 300px;
     width: 100%;
   }
 
@@ -160,7 +203,7 @@
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 1.5rem;
+    margin-top: 0.8rem;
     font-size: 0.9rem;
   }
 
@@ -218,8 +261,22 @@
   .section-divider {
     width: 40px;
     height: 1px;
-    background: var(--divider);
-    margin: 3rem 0;
+    background: var(--accent);
+    margin: 3.5rem 0;
+    opacity: 0.3;
+    position: relative;
+  }
+
+  .section-divider::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -12px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
   }
 
   /* Info/Tip/Warning boxes */
@@ -391,7 +448,10 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
+
+  .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
 
   .benefit-card .benefit-icon {
     font-size: 1.4rem;
@@ -437,10 +497,10 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s ease;
   }
 
-  .faq-question:hover { color: var(--accent); }
+  .faq-question:hover { color: var(--accent); transform: translateX(4px); }
 
   .faq-question .faq-arrow {
     flex-shrink: 0;
@@ -454,7 +514,7 @@
   .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .faq-answer-inner {
@@ -574,9 +634,9 @@
   @media (max-width: 768px) {
     .summary-grid { grid-template-columns: repeat(2, 1fr); }
     .benefit-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .hero { min-height: 80vh; padding: 3rem 1.5rem; }
     .guide { padding: 2rem 1.5rem 3rem; }
-    .clock-section { padding: 1.5rem 1.5rem 2rem; }
+    .clock-section { padding: 1rem 1.5rem 1.5rem; }
   }
 
   @media (max-width: 480px) {
@@ -584,12 +644,12 @@
     .stat-card { padding: 18px 12px; }
     .stat-card .stat-icon { font-size: 1.4rem; }
     .stat-card .stat-value { font-size: 0.9rem; }
-    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero { min-height: 70vh; padding: 2.5rem 1.2rem; }
     .hero h1 { font-size: 1.8rem; }
     .guide { padding: 1.5rem 1.2rem 2.5rem; }
     .section h2 { font-size: 1.3rem; }
     .benefit-grid { grid-template-columns: 1fr; }
-    .clock-container { max-width: 280px; }
+    .clock-container { max-width: 250px; }
   }
 
   @media (max-width: 360px) {
@@ -600,7 +660,7 @@
 <body>
 
   <div class="grain"></div>
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
   </button>
@@ -609,7 +669,8 @@
   <section class="hero">
     <p class="hero-tag">Pratik Rehber</p>
     <h1>16:8 Aralıklı Oruç <em>Rehberi</em></h1>
-    <p class="hero-desc">Gunde 8 saat ye, 16 saat oruç tut. En yaygin ve en kolay uygulanabilen aralikli oruc protokolu.</p>
+    <p class="hero-desc">Günde 8 saat ye, 16 saat oruç tut. En yaygın ve en kolay uygulanabilen aralıklı oruç protokolü.</p>
+    <div class="scroll-hint"><div class="line"></div></div>
   </section>
 
   <div class="divider"></div>
@@ -618,78 +679,74 @@
   <section class="summary-section">
     <div class="summary-grid">
       <div class="stat-card">
-        <span class="stat-icon">&#128337;</span>
         <div class="stat-label">Yeme penceresi</div>
         <div class="stat-value">8 saat</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#127769;</span>
-        <div class="stat-label">Oruc penceresi</div>
+        <div class="stat-label">Oruç penceresi</div>
         <div class="stat-value">16 saat</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#9989;</span>
         <div class="stat-label">Zorluk</div>
-        <div class="stat-value">Baslangic</div>
+        <div class="stat-value">Başlangıç</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#128200;</span>
-        <div class="stat-label">Kanit duzeyi</div>
-        <div class="stat-value">Guclu</div>
+        <div class="stat-label">Kanıt düzeyi</div>
+        <div class="stat-value">Güçlü</div>
       </div>
     </div>
   </section>
 
   <!-- Clock Diagram -->
   <section class="clock-section">
-    <h2>Gunluk Zaman Penceresi</h2>
+    <h2>Günlük Zaman Penceresi</h2>
     <div class="clock-container">
-      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="-30 -10 360 330" xmlns="http://www.w3.org/2000/svg">
         <!-- Background circle -->
         <circle cx="150" cy="150" r="120" fill="none" stroke="var(--border)" stroke-width="2"/>
 
         <!-- Fasting arc: 20:00 to 12:00 (16 hours = 240 degrees) -->
-        <!-- Starting from top (12 o'clock = -90deg), 20:00 = 150deg, going 240deg -->
         <circle cx="150" cy="150" r="105" fill="none"
-                stroke="var(--text-muted)" stroke-width="28" stroke-opacity="0.15"
-                stroke-dasharray="439.82 220.89"
-                stroke-dashoffset="-109.96"
+                stroke="var(--text-muted)" stroke-width="28" stroke-opacity="0.18"
+                stroke-dasharray="439.82 219.91"
+                stroke-dashoffset="-54.98"
                 stroke-linecap="round"/>
 
         <!-- Eating arc: 12:00 to 20:00 (8 hours = 120 degrees) -->
         <circle cx="150" cy="150" r="105" fill="none"
-                stroke="var(--green)" stroke-width="28" stroke-opacity="0.7"
+                stroke="var(--green)" stroke-width="28" stroke-opacity="0.8"
                 stroke-dasharray="219.91 439.82"
-                stroke-dashoffset="-109.96"
+                stroke-dashoffset="164.93"
                 stroke-linecap="round"/>
 
-        <!-- Hour markers and labels -->
-        <!-- 12:00 (top-ish, eating starts) -->
-        <text x="150" y="35" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="13" font-weight="600">12:00</text>
-        <!-- 16:00 -->
-        <text x="260" y="155" text-anchor="start" fill="var(--text-dim)" font-family="DM Sans" font-size="11">16:00</text>
-        <!-- 20:00 (eating ends) -->
-        <text x="150" y="278" text-anchor="middle" fill="var(--orange)" font-family="DM Sans" font-size="13" font-weight="600">20:00</text>
-        <!-- 00:00 -->
-        <text x="35" y="155" text-anchor="end" fill="var(--text-dim)" font-family="DM Sans" font-size="11">00:00</text>
-        <!-- 08:00 -->
-        <text x="84" y="62" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">08:00</text>
-        <!-- 04:00 -->
-        <text x="60" y="220" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">04:00</text>
+        <!-- Hour labels (24h clock: 12:00 at top, 15deg per hour) -->
+        <!-- 12:00 at top -->
+        <text x="150" y="16" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="13" font-weight="600">12:00</text>
+        <!-- 16:00: 60deg CW from top -->
+        <text x="262" y="87" text-anchor="start" fill="var(--text-dim)" font-family="DM Sans" font-size="11">16:00</text>
+        <!-- 20:00: 120deg CW from top -->
+        <text x="262" y="220" text-anchor="start" fill="var(--orange)" font-family="DM Sans" font-size="13" font-weight="600">20:00</text>
+        <!-- 00:00: 180deg = bottom -->
+        <text x="150" y="290" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">00:00</text>
+        <!-- 04:00: 240deg CW from top -->
+        <text x="38" y="220" text-anchor="end" fill="var(--text-dim)" font-family="DM Sans" font-size="11">04:00</text>
+        <!-- 08:00: 300deg CW from top -->
+        <text x="38" y="87" text-anchor="end" fill="var(--text-dim)" font-family="DM Sans" font-size="11">08:00</text>
 
         <!-- Center labels -->
-        <text x="150" y="138" text-anchor="middle" fill="var(--text)" font-family="Playfair Display" font-size="28" font-weight="400">16:8</text>
-        <text x="150" y="162" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">aralikli oruc</text>
+        <text x="150" y="140" text-anchor="middle" fill="var(--text)" font-family="Playfair Display" font-size="28" font-weight="400">16:8</text>
+        <text x="150" y="163" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">aralıklı oruç</text>
 
-        <!-- Small dots for hours -->
-        <circle cx="150" cy="30" r="3" fill="var(--green)"/>
-        <circle cx="150" cy="270" r="3" fill="var(--orange)"/>
+        <!-- Dots at eating window boundaries -->
+        <circle cx="150" cy="30" r="4" fill="var(--green)"/>
+        <!-- 20:00: (150+120*sin120, 150-120*cos120) = (254, 210) -->
+        <circle cx="254" cy="210" r="4" fill="var(--orange)"/>
       </svg>
     </div>
 
     <div class="clock-legend">
       <span><span class="legend-dot eating"></span>Yeme (12:00 - 20:00)</span>
-      <span><span class="legend-dot fasting"></span>Oruc (20:00 - 12:00)</span>
+      <span><span class="legend-dot fasting"></span>Oruç (20:00 - 12:00)</span>
     </div>
   </section>
 
@@ -699,10 +756,10 @@
   <nav class="toc-sidebar" id="tocSidebar">
     <ul>
       <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
-      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
-      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
-      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
-      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasıl çalışır?</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydaları</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasıl başlanır?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Örnek program</a></li>
       <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
       <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
       <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
@@ -717,16 +774,16 @@
       <div class="section-num">01</div>
       <h2>Nedir?</h2>
 
-      <p>16:8 aralikli oruc (intermittent fasting), gunun 16 saatinde hicbir kalori almaman, kalan 8 saatlik pencerede normal sekilde yemeni iceren bir beslenme zamanlama protokolu. Bir diyet degil, bir <i>zamanlama stratejisi</i>.</p>
+      <p>16:8 aralıklı oruç (intermittent fasting), günün 16 saatinde hiçbir kalori almaman, kalan 8 saatlik pencerede normal şekilde yemeni içeren bir beslenme zamanlama protokolü. Bir diyet değil, bir <i>zamanlama stratejisi</i>.</p>
 
-      <p>En yaygin uygulama: oglen 12:00'de ilk ogun, aksam 20:00'de son ogun. Arada istedigin gibi yersin. 20:00'den sonra ertesi gun 12:00'ye kadar sadece su, sade kahve veya bitki cayi icersin.</p>
+      <p>En yaygın uygulama: öğlen 12:00'de ilk öğün, akşam 20:00'de son öğün. Arada istediğin gibi yersin. 20:00'den sonra ertesi gün 12:00'ye kadar sadece su, sade kahve veya bitki çayı içersin.</p>
 
       <div class="info-box note">
-        <div class="info-box-title">Onemli</div>
-        <p>16:8 bir kalori kisitlamasi degil. Yeme penceresinde yeterli ve dengeli beslenmen gerekiyor. Amac az yemek degil, yeme zamanlamasini degistirmek.</p>
+        <div class="info-box-title">Önemli</div>
+        <p>16:8 bir kalori kısıtlaması değil. Yeme penceresinde yeterli ve dengeli beslenmen gerekiyor. Amaç az yemek değil, yeme zamanlamasını değiştirmek.</p>
       </div>
 
-      <p>Bu yaklasim ilk bakista modern gorunse de aslinda atalarimizin varsayilan yeme duzeni buydu. Avci-toplayicilar duzensiz yiyordu; av bulduklarinda yediler, bulamadiklarina saatlerce ac kaldilar. Uc ogun arti iki atistirmalik tamamen modern bir icat.</p>
+      <p>Bu yaklaşım ilk bakışta modern görünse de aslında atalarımızın varsayılan yeme düzeni buydu. Avcı-toplayıcılar düzensiz yiyordu; av bulduklarında yediler, bulamadıklarına saatlerce aç kaldılar. Üç öğün artı iki atıştırmalık tamamen modern bir icat.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -734,157 +791,164 @@
     <!-- 02 Nasil calisir -->
     <div class="section" id="nasil-calisir">
       <div class="section-num">02</div>
-      <h2>Nasil calisir?</h2>
+      <h2>Nasıl çalışır?</h2>
 
-      <p>Yedikten sonra bedenin oncelikle glikozu (kan sekerini) enerji olarak kullanir. Glikoz bitince karacigerdeki glikojen depolarini bosaltir. Bu genellikle 10-14 saat surer. Glikojen de bitince beden yag yakmaya baslar. Bu gecise "metabolik gecis" (metabolic switch) deniyor.</p>
+      <p>Yedikten sonra bedenin öncelikle glikozu (kan şekerini) enerji olarak kullanır. Glikoz bitince karacığerdeki glikojen depolarını boşaltır. Bu genellikle 10-14 saat sürer. Glikojen de bitince beden yağ yakmaya başlar. Bu geçişe "metabolik geçiş" (metabolic switch) deniyor.</p>
 
-      <p>16 saatlik oruc penceresi tam bu gecisi tetiklemek icin tasarlanmis. 12-14 saatte glikojen biter, kalan 2-4 saatte beden aktif olarak yag yakar ve bazi onarim sureclerini baslatir.</p>
+      <p>16 saatlik oruç penceresi tam bu geçişi tetiklemek için tasarlanmış. 12-14 saatte glikojen biter, kalan 2-4 saatte beden aktif olarak yağ yakar ve bazı onarım süreçlerini başlatır.</p>
 
-      <h3 class="sub-heading">Oruc sirasinda bedeninde ne oluyor?</h3>
+      <h3 class="sub-heading">Oruç sırasında bedeninde ne oluyor?</h3>
 
       <ul class="checklist">
-        <li><strong>0-6 saat:</strong> Bedenin son ogunu sindirir, glikoz kullanir. Insulin yuksek.</li>
-        <li><strong>6-12 saat:</strong> Glikoz azalir, glikojen depolarindan enerji cekilir. Insulin dusmeye baslar.</li>
-        <li><strong>12-16 saat:</strong> Glikojen bitmek uzere. Yag yakimi baslar. Insulin dusuk. Otofaji (hucresel temizlik) harekete gecer.</li>
-        <li><strong>16-24 saat:</strong> Yag yakimi hiz kazanir. Keton uretimi artar. BDNF (beyin icin buyume faktoru) yukselir.</li>
+        <li><strong>0-6 saat:</strong> Bedenin son öğünü sindirir, glikoz kullanır. İnsülin yüksek.</li>
+        <li><strong>6-12 saat:</strong> Glikoz azalır, glikojen depolarından enerji çekilir. İnsülin düşmeye başlar.</li>
+        <li><strong>12-16 saat:</strong> Glikojen bitmek üzere. Yağ yakımı başlar. İnsülin düşük. Otofaji (hücresel temizlik) harekete geçer.</li>
+        <li><strong>16-24 saat:</strong> Yağ yakımı hız kazanır. Keton üretimi artar. BDNF (beyin için büyüme faktörü) yükselir.</li>
       </ul>
 
       <div class="info-box tip">
         <div class="info-box-title">Otofaji nedir?</div>
-        <p>Hucrelerin hasarli bilesenlerini, bozulmus proteinlerini temizleyip geri donusturme sureci. Bir nevi hucresel bakim modu. Yoshinori Ohsumi bu mekanizmayi kesfettigi icin 2016 Nobel Tip Odulu'nu aldi. Otofaji genellikle 16+ saat acliktan sonra belirgin sekilde aktiflesir.</p>
+        <p>Hücrelerin hasarlı bileşenlerini, bozulmuş proteinlerini temizleyip geri dönüştürme süreci. Bir nevi hücresel bakım modu. Yoshinori Ohsumi bu mekanizmayı keşfettiği için 2016 Nobel Tıp Ödülü'nü aldı. Otofaji genellikle 16+ saat açlıktan sonra belirgin şekilde aktifleşir.</p>
+      </div>
+
+      <div class="info-box tip">
+        <div class="info-box-title">16:8'in kritik avantajı</div>
+        <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 16:8'te bu olmuyor. Her gün 8 saatlik pencerede normal şekilde besleniyorsun. Beden her gün yeterli enerjiyi alıyor, bu yüzden açlık moduna geçmeye fırsat bulamıyor. Metabolizma hızı korunuyor, yağ yakımı devam ediyor.</p>
+        <p>Klasik diyetlerde metabolik yavaşlama kaçınılmaz. Ama 16:8'te oruç süresi sadece 16 saat, her günün yarısında yiyorsun. Beden bunu kronik kıtlık olarak algılamıyor, geçici bir ara olarak algılıyor. Sonuç: aynı kalori alımıyla daha etkili yağ yakımı, daha az metabolik direnç.</p>
       </div>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 03 Nasil baslanir -->
-    <div class="section" id="nasil-baslanir">
+    <!-- 03 Faydalari -->
+    <div class="section" id="faydalari">
       <div class="section-num">03</div>
-      <h2>Nasil baslanir?</h2>
+      <h2>Araştırma destekli faydaları</h2>
 
-      <p>Hemen 16 saatlik oruca baslamak zor olabilir. Kademeli bir gecis cok daha surdurulebilir.</p>
+      <div class="benefit-grid">
+        <div class="benefit-card">
+
+          <div class="benefit-title">Kilo kontrolü</div>
+          <div class="benefit-desc">Yağ yakımını arttırır, insülin dirençini azaltır.</div>
+        </div>
+        <div class="benefit-card">
+
+          <div class="benefit-title">Bilişsel fonksiyon</div>
+          <div class="benefit-desc">BDNF üretimini arttırır, hafıza ve öğrenmeyi destekler.</div>
+        </div>
+        <div class="benefit-card">
+
+          <div class="benefit-title">Kalp sağlığı</div>
+          <div class="benefit-desc">Kan basıncını düşürür, kolesterol profilini iyileştirir.</div>
+        </div>
+        <div class="benefit-card">
+
+          <div class="benefit-title">Hücresel onarım</div>
+          <div class="benefit-desc">Otofaji ile hasarlı hücreler temizlenir ve geri dönüştürülür.</div>
+        </div>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Sutton ve ark., 2018 — Cell Metabolism</div>
+        <p>Diyabet riski taşıyan erkeklere 5 hafta boyunca 6 saatlik erken yeme penceresi uygulandı. Katılımcılar kilo vermedi, kalori kısıtlaması da yoktu, sadece yeme saatleri değişti. 5 hafta sonra insülin seviyeleri düştü, kan basıncı belirgin şekilde azaldı ve oksidatif stres belirteçleri geriledi.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Liu ve ark., 2022 — NEJM</div>
+        <p>139 obez katılımcı 12 ay boyunca takip edildi. 16:8 grubu 8 kilo verdi, sadece kalori kısıtlaması grubu 6.3 kilo. Yağ kütlesinde fark daha da belirgin: 16:8 grubunda 5.9 kilo yağ kaybı, diğer grupta 4.5 kilo. Aynı kalori hedefi, farklı sonuç.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">de Cabo ve Mattson, 2019 — NEJM (Derleme)</div>
+        <p>Aralıklı oruçun sağlık, yaşlanma ve hastalık üzerindeki etkilerini inceleyen kapsamlı derleme. Aralıklı oruç insülin duyarlılığını iyileştiriyor, oksidatif stresi azaltıyor, inflamasyonu baskılıyor ve hücresel onarım süreçlerini aktive ediyor. Etkiler hayvan modellerinde de insan çalışmalarında da tutarlı.</p>
+      </div>
+    </div>
+
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">04</div>
+      <h2>Nasıl başlanır?</h2>
+
+      <p>Hemen 16 saatlik oruça başlamak zor olabilir. Kademeli bir geçiş çok daha sürdürülebilir.</p>
 
       <ol class="step-list">
-        <li><strong>1. Hafta: 12:12 ile basla.</strong> Ornegin 08:00-20:00 arasi ye, 20:00'den sonra hicbir sey yeme. Bu cogu insan icin zaten normal duzene yakin.</li>
-        <li><strong>2. Hafta: 14:10'a gec.</strong> Sabah kahvaltisini 10:00'a kaydir. Yeme penceren 10:00-20:00 olsun.</li>
-        <li><strong>3. Hafta: 16:8'e ulaş.</strong> Kahvaltiyi oglen 12:00'ye kaydir. Yeme penceren 12:00-20:00. Hedef pencere.</li>
-        <li><strong>Sonrasi: Kendine uyarla.</strong> 12:00-20:00 herkes icin ideal olmak zorunda degil. 10:00-18:00 veya 13:00-21:00 da olabilir. Onemli olan 16 saatlik orucu tutmak.</li>
+        <li><span><strong>1. Hafta: 12:12 ile başla.</strong> Örneğin 08:00-20:00 arası ye, 20:00'den sonra hiçbir şey yeme. Bu çoğu insan için zaten normal düzene yakın.</span></li>
+        <li><span><strong>2. Hafta: 14:10'a geç.</strong> Sabah kahvaltısını 10:00'a kaydır. Yeme penceren 10:00-20:00 olsun.</span></li>
+        <li><span><strong>3. Hafta: 16:8'e ulaş.</strong> Kahvaltıyı öğlen 12:00'ye kaydır. Yeme penceren 12:00-20:00. Hedef pencere.</span></li>
+        <li><span><strong>Sonrası: Kendine uyarla.</strong> 12:00-20:00 herkes için ideal olmak zorunda değil. 10:00-18:00 veya 13:00-21:00 da olabilir. Önemli olan 16 saatlik oruçu tutmak.</span></li>
       </ol>
 
       <div class="info-box tip">
-        <div class="info-box-title">Ipucu</div>
-        <p>Sabahları ac kalmak zor geliyorsa: sade siyah kahve veya yesil cay ic. Kalorisi yok, orucu bozmuyor ve aclik hissini bastirir. Sut, seker veya tatlandirici ekleme.</p>
+        <div class="info-box-title">İpucu</div>
+        <p>Sabahları aç kalmak zor geliyorsa: sade siyah kahve veya yeşil çay iç. Kalorisi yok, oruçu bozmuyor ve açlık hissini bastırır. Süt, şeker veya tatlandırıcı ekleme.</p>
       </div>
 
-      <h3 class="sub-heading">Oruc sirasinda ne icebilirsin?</h3>
+      <h3 class="sub-heading">Oruç sırasında ne içebilirsin?</h3>
 
       <ul class="checklist">
-        <li><strong>Su:</strong> Sinirsiz. Limonlu su da olur.</li>
-        <li><strong>Siyah kahve:</strong> Sade, sutsuz, sekersiz.</li>
-        <li><strong>Yesil/bitki cayi:</strong> Sade.</li>
-        <li><strong>Maden suyu:</strong> Dogal, aromali olmayanlar.</li>
-        <li class="caution"><strong>Sut, seker, bal:</strong> Orucu bozar. Kullanma.</li>
-        <li class="caution"><strong>Diyet icecekler:</strong> Teknik olarak orucu bozmaz ama insulin tepkisi yaratabilir.</li>
+        <li><strong>Su:</strong> Sınırsız. Limonlu su da olur.</li>
+        <li><strong>Siyah kahve:</strong> Sade, sütsüz, şekersiz.</li>
+        <li><strong>Yeşil/bitki çayı:</strong> Sade.</li>
+        <li><strong>Maden suyu:</strong> Doğal, aromalı olmayanlar.</li>
+        <li class="caution"><strong>Süt, şeker, bal:</strong> Oruçu bozar. Kullanma.</li>
+        <li class="caution"><strong>Diyet içecekler:</strong> Teknik olarak oruçu bozmaz ama insülin tepkisi yaratabilir.</li>
       </ul>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 04 Ornek program -->
+    <!-- 05 Ornek program -->
     <div class="section" id="ornek-program">
-      <div class="section-num">04</div>
-      <h2>Ornek gunluk program</h2>
+      <div class="section-num">05</div>
+      <h2>Örnek günlük program</h2>
 
-      <p>Asagidaki tablo tipik bir 16:8 gununu gosteriyor. Saatler esnektir, kendi rutinine uyarla.</p>
+      <p>Aşağıdaki tablo tipik bir 16:8 gününü gösteriyor. Saatler esnektir, kendi rutinine uyarla.</p>
 
       <div class="meal-table-wrapper">
         <table class="meal-table">
           <thead>
             <tr>
               <th>Saat</th>
-              <th>Ogun</th>
-              <th>Ornek</th>
+              <th>Öğün</th>
+              <th>Örnek</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="time-col">07:00</td>
-              <td class="meal-col">Uyanis</td>
-              <td>Su, sade kahve veya yesil cay</td>
+              <td class="meal-col">Uyanış</td>
+              <td>Su, sade kahve veya yeşil çay</td>
             </tr>
             <tr>
               <td class="time-col">12:00</td>
-              <td class="meal-col">1. Ogun</td>
-              <td>Yumurta, avokado, tam tahilli ekmek, sebze. Veya protein agirlikli bir salata.</td>
+              <td class="meal-col">1. Öğün</td>
+              <td>Yumurta, avokado, tam tahilli ekmek, sebze. Veya protein ağırlıklı bir salata.</td>
             </tr>
             <tr>
               <td class="time-col">15:30</td>
-              <td class="meal-col">Ara ogun</td>
-              <td>Bir avuc badem, meyve, yogurt veya protein bar.</td>
+              <td class="meal-col">Ara öğün</td>
+              <td>Bir avuç badem, meyve, yoğurt veya protein bar.</td>
             </tr>
             <tr>
               <td class="time-col">19:30</td>
-              <td class="meal-col">2. Ogun</td>
-              <td>Tavuk/balik, pilav veya patates, bol sebze. Dengeli bir ana ogun.</td>
+              <td class="meal-col">2. Öğün</td>
+              <td>Tavuk/balık, pilav veya patates, bol sebze. Dengeli bir ana öğün.</td>
             </tr>
             <tr>
               <td class="time-col">20:00</td>
-              <td class="meal-col">Pencere kapanir</td>
-              <td>Son lokmani 20:00'den once bitir. Bundan sonra sadece su/cay.</td>
+              <td class="meal-col">Pencere kapanır</td>
+              <td>Son lokmanı 20:00'den önce bitir. Bundan sonra sadece su/çay.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="info-box note">
-        <div class="info-box-title">Kalori hakkinda</div>
-        <p>16:8 bir kalori kisitlamasi degil. Gunluk kalori ihtiyacini 8 saatlik pencereye sigmak onemli. Cok az yersen metabolizman yavaslar ve surduremezsin. Normal porsiyonlarda, dengeli ye.</p>
-      </div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 05 Faydalari -->
-    <div class="section" id="faydalari">
-      <div class="section-num">05</div>
-      <h2>Arastirma destekli faydalari</h2>
-
-      <div class="benefit-grid">
-        <div class="benefit-card">
-          <span class="benefit-icon">&#9878;</span>
-          <div class="benefit-title">Kilo kontrolu</div>
-          <div class="benefit-desc">Yag yakimini arttirir, insulin direncini azaltir.</div>
-        </div>
-        <div class="benefit-card">
-          <span class="benefit-icon">&#129504;</span>
-          <div class="benefit-title">Bilissel fonksiyon</div>
-          <div class="benefit-desc">BDNF uretimini arttirir, hafiza ve ogrenmeyi destekler.</div>
-        </div>
-        <div class="benefit-card">
-          <span class="benefit-icon">&#10084;&#65039;</span>
-          <div class="benefit-title">Kalp sagligi</div>
-          <div class="benefit-desc">Kan basincini dusurur, kolesterol profilini iyilestirir.</div>
-        </div>
-        <div class="benefit-card">
-          <span class="benefit-icon">&#128296;</span>
-          <div class="benefit-title">Hucresel onarim</div>
-          <div class="benefit-desc">Otofaji ile hasarli hucreler temizlenir ve geri donusturulur.</div>
-        </div>
-      </div>
-
-      <div class="experiment">
-        <div class="experiment-title">Sutton ve ark., 2018 — Cell Metabolism</div>
-        <p>Diyabet riski tasiyan erkeklere 5 hafta boyunca 6 saatlik erken yeme penceresi uygulandi. Katilimcilar kilo vermedi, kalori kisitlamasi da yoktu, sadece yeme saatleri degisti. 5 hafta sonra insulin seviyeleri dustu, kan basinci belirgin sekilde azaldi ve oksidatif stres belirtecleri geriledi.</p>
-      </div>
-
-      <div class="experiment">
-        <div class="experiment-title">Liu ve ark., 2022 — NEJM</div>
-        <p>139 obez katilimci 12 ay boyunca takip edildi. 16:8 grubu 8 kilo verdi, sadece kalori kisitlamasi grubu 6.3 kilo. Yag kutlesinde fark daha da belirgin: 16:8 grubunda 5.9 kilo yag kaybi, diger grupta 4.5 kilo. Ayni kalori hedefi, farkli sonuc.</p>
-      </div>
-
-      <div class="experiment">
-        <div class="experiment-title">de Cabo ve Mattson, 2019 — NEJM (Derleme)</div>
-        <p>Aralikli orucun saglik, yaslanma ve hastalik uzerindeki etkilerini inceleyen kapsamli derleme. Aralikli oruc insulin duyarliligini iyilestiriyor, oksidatif stresi azaltiyor, inflamasyonu baskilıyor ve hucresel onarim sureclerini aktive ediyor. Etkiler hayvan modellerinde de insan calismalarinda da tutarli.</p>
+        <div class="info-box-title">Kalori hakkında</div>
+        <p>16:8 bir kalori kısıtlaması değil. Günlük kalori ihtiyacını 8 saatlik pencereye sığmak önemli. Çok az yersen metabolizman yavaşlar ve sürdüremezsin. Normal porsiyonlarda, dengeli ye.</p>
       </div>
     </div>
 
@@ -896,23 +960,23 @@
       <h2>Dikkat edilecekler</h2>
 
       <div class="info-box warning">
-        <div class="info-box-title">Kimler uygulamamali?</div>
-        <p>Hamile veya emziren kadinlar. 18 yas alti cocuklar ve ergenler. Yeme bozuklugu gecmisi olan kisiler. Tip 1 diyabet veya insulin kullanan Tip 2 diyabet hastalari (doktor kontrolu sart). Dusuk tansiyon problemi olan kisiler. Ciddi kronik hastaligi olanlar mutlaka doktoruna danismali.</p>
+        <div class="info-box-title">Kimler uygulamamalı?</div>
+        <p>Hamile veya emziren kadınlar. 18 yaş altı çocuklar ve ergenler. Yeme bozukluğu geçmişi olan kişiler. Tip 1 diyabet veya insülin kullanan Tip 2 diyabet hastaları (doktor kontrolü şart). Düşük tansiyon problemi olan kişiler. Ciddi kronik hastalığı olanlar mutlaka doktoruna danışmalı.</p>
       </div>
 
-      <h3 class="sub-heading">Olasi yan etkiler (genellikle gecici)</h3>
+      <h3 class="sub-heading">Olası yan etkiler (genellikle geçici)</h3>
 
       <ul class="checklist">
-        <li class="caution"><strong>Bas agrisi:</strong> Ilk birkaç gun sik. Bol su ic, elektrolit dengesine dikkat et.</li>
-        <li class="caution"><strong>Aclik hissi:</strong> Ilk 1-2 hafta yogun olabilir. Kademeli gecis bu sorunu azaltir.</li>
-        <li class="caution"><strong>Halsizlik:</strong> Beden metabolik gecise uyum saglayana kadar surbilir. Genellikle 1 hafta icinde duzellir.</li>
-        <li class="caution"><strong>Sinirlilik:</strong> Dusuk kan sekeri kaynaklı olabilir. Yeme penceresinde yeterli kalori almanla ilgili.</li>
-        <li><strong>Uyku iyilesmesi:</strong> Cogu kisi yatmadan 2-3 saat once yemeyi birakmanin uyku kalitesini artirdigini bildiriyor.</li>
+        <li class="caution"><strong>Baş ağrısı:</strong> İlk birkaç gün sık. Bol su iç, elektrolit dengesine dikkat et.</li>
+        <li class="caution"><strong>Açlık hissi:</strong> İlk 1-2 hafta yoğun olabilir. Kademeli geçiş bu sorunu azaltır.</li>
+        <li class="caution"><strong>Halsizlik:</strong> Beden metabolik geçişe uyum sağlayana kadar sürebilir. Genellikle 1 hafta içinde düzelir.</li>
+        <li class="caution"><strong>Sinirlilik:</strong> Düşük kan şekeri kaynaklı olabilir. Yeme penceresinde yeterli kalori almanla ilgili.</li>
+        <li><strong>Uyku iyileşmesi:</strong> Çoğu kişi yatmadan 2-3 saat önce yemeyi bırakmanın uyku kalitesini arttırdığını bildiriyor.</li>
       </ul>
 
       <div class="info-box tip">
-        <div class="info-box-title">Altin kural</div>
-        <p>Bedenini dinle. Bas donmesi, treme veya asiri halsizlik hissedersen orucu boz. 16:8 bir disiplin testi degil, bir saglik araci. Kotu hissettiren herhangi bir sey "saglikli" degildir.</p>
+        <div class="info-box-title">Altın kural</div>
+        <p>Bedenini dinle. Baş dönmesi, treme veya aşırı halsizlik hissedersen oruçu boz. 16:8 bir disiplin testi değil, bir sağlık aracı. Kötü hissettiren herhangi bir şey "sağlıklı" değildir.</p>
       </div>
     </div>
 
@@ -926,21 +990,21 @@
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Kahve orucu bozar mi?
+            Kahve oruçu bozar mı?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Sade siyah kahve orucu bozmaz (2-5 kalori). Ama sut, seker, krema veya tatlandirici eklersen orucu bozarsin. Bir miktar MCT yagi veya hindistancevizi yagi de tartismali; teknik olarak orucu bozar ama otofajiyi tamamen durdurmayabilir.</div>
+            <div class="faq-answer-inner">Sade siyah kahve oruçu bozmaz (2-5 kalori). Ama süt, şeker, krema veya tatlandırıcı eklersen oruçu bozarsın. Bir miktar MCT yağı veya hindistancevizi yağı da tartışmalı; teknik olarak oruçu bozar ama otofajiyi tamamen durdurmayabilir.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Her gun yapmak zorunda miyim?
+            Her gün yapmak zorunda miyim?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Hayir. Haftada 5 gun uygulayip 2 gun normal yemek de isleyen bir yaklasim. Bazi insanlar sadece hafta icinde uyguluyor. Tutarlilik onemli ama esneklik de surdurulebilirlik icin kritik. Bir gun bozdugun icin her sey sifirlanmaz.</div>
+            <div class="faq-answer-inner">Hayır. Haftada 5 gün uygulayıp 2 gün normal yemek de işleyen bir yaklaşım. Bazı insanlar sadece hafta içinde uyguluyor. Tutarlılık önemli ama esneklik de sürdürülebilirlik için kritik. Bir gün bozduğun için her şey sıfırlanmaz.</div>
           </div>
         </div>
 
@@ -950,7 +1014,7 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Evet. Hafif-orta yoğunlukta egzersiz (yuruyus, yoga, hafif agirlik) oruclu yapilabilir. Yogun antrenman yapiyorsan yeme penceresine denk getirmek daha iyi olabilir. Bazi sporcular oruclu antrenmanda yag yakiminin arttigini raporluyor ama performans gerektiren durumlar icin bireysel farkliliklar onemli.</div>
+            <div class="faq-answer-inner">Evet. Hafif-orta yoğunlukta egzersiz (yürüyüş, yoga, hafif ağırlık) oruçlu yapılabilir. Yoğun antrenman yapıyorsan yeme penceresine denk getirmek daha iyi olabilir. Bazı sporcular oruçlu antrenmanda yağ yakımının arttığını raporluyor ama performans gerektiren durumlar için bireysel farklılıklar önemli.</div>
           </div>
         </div>
 
@@ -960,33 +1024,31 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">16 saatlik oructe belirgin kas kaybi beklenmez, ozellikle yeterli protein aliyorsan ve direnç antrenmani yapiyorsan. Arastirmalar 16:8'in yag kaybini artirirken kas kutlesini buyuk olcude korudigini gosteriyor. Ancak cok uzun sureli aclik (24+ saat) farkli olabilir.</div>
+            <div class="faq-answer-inner">16 saatlik oruçta belirgin kas kaybı beklenmez, özellikle yeterli protein alıyorsan ve direnç antrenmanı yapıyorsan. Araştırmalar 16:8'in yağ kaybını arttırırken kas kütlesini büyük ölçüde koruduğunu gösteriyor. Ancak çok uzun süreli açlık (24+ saat) farklı olabilir.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Kadinlar icin farkli mi?
+            Kadınlar için farklı mi?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Bazi kadinlar uzun oruc surelerinde hormonal degisiklikler yasayabilir. Adet duzensizligi veya hormonal sorunlar fark edersen oruc suresini kisalt (14:10 gibi). Hamilelik ve emzirme donemlerinde aralikli oruc uygulanmamali. Kademeli baslayip bedeninin tepkisini izlemek en guvenli yaklasim.</div>
+            <div class="faq-answer-inner">Bazı kadınlar uzun oruç sürelerinde hormonal değişiklikler yaşayabilir. Adet düzensizliği veya hormonal sorunlar fark edersen oruç süresini kısalt (14:10 gibi). Hamilelik ve emzirme dönemlerinde aralıklı oruç uygulanmamalı. Kademeli başlayıp bedeninin tepkisini izlemek en güvenli yaklaşım.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Ne kadar surede sonuc gorurüm?
+            Ne kadar sürede sonuç görürüm?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Metabolik degisiklikler (insulin duyarliligi, enerji) 1-2 haftada hissedilebilir. Kilo degisimi genellikle 3-4 haftada fark edilir. Ama bu cok bireysel. Onemli olan kisa vadeli sonuclara degil, surdurulebilir bir yasam bicimi olarak bakmak.</div>
+            <div class="faq-answer-inner">Metabolik değişiklikler (insülin duyarlılığı, enerji) 1-2 haftada hissedilebilir. Kilo değişimi genellikle 3-4 haftada fark edilir. Ama bu çok bireysel. Önemli olan kısa vadeli sonuçlara değil, sürdürülebilir bir yaşam biçimi olarak bakmak.</div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="section-divider"></div>
 
     <!-- 08 Kaynaklar -->
     <div class="references" id="kaynaklar">

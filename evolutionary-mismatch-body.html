@@ -411,6 +411,84 @@
     transform: scale(1.1);
   }
 
+  /* Guide Links */
+  .guide-links {
+    margin: 2.5rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .guide-links-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .guide-links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .guide-link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .guide-link-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border-color: var(--accent);
+  }
+
+  .guide-link-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .guide-link-tag {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .guide-link-title {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .guide-link-arrow {
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    opacity: 0.5;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .guide-link-card:hover .guide-link-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
   /* Tablet */
   @media (max-width: 768px) {
     .hero { padding: 1.5rem; min-height: 90vh; }
@@ -694,6 +772,33 @@
   <p>Burada fark metabolik değil, davranışsal. "Her gün biraz az ye" sürekli irade gerektiriyor. "3 gün kıs, 4 gün normal ye" ise bir kural koyup uygulamak. Birinde her öğün bir karar veriyorsun, diğerinde kararı bir kere verip devam ediyorsun.</p>
 
   <p>Bir de büyük resme bakmakta fayda var. 1992'de ABD'nin resmi beslenme piramidi tahılları tabanına koyup yağları tepeye yerleştirmişti. Bu büyük ölçüde tarım lobisinin etkisiydi, evrimsel gerçeklikle ilgisi yoktu. Atalarımızın diyetinde tahıl marjinaldi, tarım öncesi neredeyse hiç yoktu. Bu piramit nesillerin beslenme alışkanlıklarını şekillendirdi. 2026 Ocak'ta, 34 yıl sonra, ABD resmi beslenme rehberini tamamen değiştirdi: piramit ters çevrildi. Protein ve sebzeler en üste çıktı, tahıllar en alta indi. Ultra-işlenmiş gıdalar ilk kez açıkça eleştirildi, eklenen şeker için "sağlıklı bir diyetin parçası olarak hiçbir miktar önerilmez" denildi. 34 yıl ve nesiller boyunca yanlış yönlendirme. Evrimsel perspektif bunu çoktan söylüyordu.</p>
+
+  <div class="guide-links">
+    <div class="guide-links-label">Pratik Rehberler</div>
+    <div class="guide-links-grid">
+      <a href="guide-intermittent-16-8.html" class="guide-link-card">
+        <div class="guide-link-info">
+          <div class="guide-link-tag">Rehber</div>
+          <div class="guide-link-title">16:8 Aralıklı Oruç Rehberi</div>
+        </div>
+        <span class="guide-link-arrow">&#9654;</span>
+      </a>
+      <a href="guide-intermittent-4-3.html" class="guide-link-card">
+        <div class="guide-link-info">
+          <div class="guide-link-tag">Rehber</div>
+          <div class="guide-link-title">4:3 Aralıklı Oruç Rehberi</div>
+        </div>
+        <span class="guide-link-arrow">&#9654;</span>
+      </a>
+      <a href="guide-ketogenic.html" class="guide-link-card">
+        <div class="guide-link-info">
+          <div class="guide-link-tag">Rehber</div>
+          <div class="guide-link-title">Ketojenik Diyet Rehberi</div>
+        </div>
+        <span class="guide-link-arrow">&#9654;</span>
+      </a>
+    </div>
+  </div>
 
   <p class="transition">Yediğimiz arttı. Bunun yanına en iyi ne yakışırdı? Daha az hareket, tabii ki. Ve burada şaşırtıcı bir şey daha var: sorun sadece hareketin azalması değil.</p>
 </div>

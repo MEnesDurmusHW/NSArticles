@@ -49,7 +49,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1400&q=80') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80') center/cover no-repeat;
     opacity: 0.12;
     z-index: 0;
   }
@@ -330,7 +330,7 @@
 <body>
 
   <div class="grain"></div>
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
   </button>
@@ -338,8 +338,8 @@
   <!-- Hero -->
   <section class="hero">
     <p class="hero-tag">Pratik Rehber</p>
-    <h1>4:3 Aralikli Oruc <em>Rehberi</em></h1>
-    <p class="hero-desc">Haftada 3 gun kalori kisitlamasi, 4 gun normal beslenme. Daha yogun ama daha etkili bir aralikli oruc protokolu.</p>
+    <h1>4:3 Aralıklı Oruç <em>Rehberi</em></h1>
+    <p class="hero-desc">Haftada 3 gün kalori kısıtlaması, 4 gün normal beslenme. Daha yoğun ama daha etkili bir aralıklı oruç protokolü.</p>
   </section>
 
   <div class="divider"></div>
@@ -348,71 +348,67 @@
   <section class="summary-section">
     <div class="summary-grid">
       <div class="stat-card">
-        <span class="stat-icon">&#128197;</span>
-        <div class="stat-label">Kisitlama gunleri</div>
+        <div class="stat-label">Kısıtlama günleri</div>
         <div class="stat-value">Haftada 3</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#127860;</span>
-        <div class="stat-label">Normal gunler</div>
+        <div class="stat-label">Normal günler</div>
         <div class="stat-value">Haftada 4</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#9888;&#65039;</span>
         <div class="stat-label">Zorluk</div>
         <div class="stat-value">Orta-ileri</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#128200;</span>
-        <div class="stat-label">Kanit duzeyi</div>
-        <div class="stat-value">Guclu</div>
+        <div class="stat-label">Kanıt düzeyi</div>
+        <div class="stat-value">Güçlü</div>
       </div>
     </div>
   </section>
 
   <!-- Week Calendar -->
   <section class="calendar-section">
-    <h2>Haftalik Takvim</h2>
+    <h2>Örnek Haftalık Takvim</h2>
     <div class="week-grid">
       <div class="day-card normal">
-        <span class="day-icon">&#127869;</span>
+
         <div class="day-name">Pzt</div>
         <div class="day-label">Normal</div>
       </div>
       <div class="day-card fast">
-        <span class="day-icon">&#128167;</span>
+
         <div class="day-name">Sal</div>
         <div class="day-label">~500 kcal</div>
       </div>
       <div class="day-card normal">
-        <span class="day-icon">&#127869;</span>
-        <div class="day-name">Car</div>
+
+        <div class="day-name">Çar</div>
         <div class="day-label">Normal</div>
       </div>
       <div class="day-card fast">
-        <span class="day-icon">&#128167;</span>
+
         <div class="day-name">Per</div>
         <div class="day-label">~500 kcal</div>
       </div>
       <div class="day-card normal">
-        <span class="day-icon">&#127869;</span>
+
         <div class="day-name">Cum</div>
         <div class="day-label">Normal</div>
       </div>
       <div class="day-card fast">
-        <span class="day-icon">&#128167;</span>
+
         <div class="day-name">Cmt</div>
         <div class="day-label">~500 kcal</div>
       </div>
       <div class="day-card normal">
-        <span class="day-icon">&#127869;</span>
+
         <div class="day-name">Paz</div>
         <div class="day-label">Normal</div>
       </div>
     </div>
     <div class="calendar-legend">
       <span><span class="legend-dot normal"></span>Normal beslenme</span>
-      <span><span class="legend-dot fast"></span>Kisitlama (~500 kcal)</span>
+      <span><span class="legend-dot fast"></span>Kısıtlama (~500 kcal)</span>
     </div>
   </section>
 
@@ -422,11 +418,11 @@
   <nav class="toc-sidebar" id="tocSidebar">
     <ul>
       <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
-      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
-      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
-      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
-      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
-      <li><a href="#karsilastirma" class="toc-link" data-section="karsilastirma">16:8 ile farki</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasıl çalışır?</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydaları</a></li>
+      <li><a href="#karsilastirma" class="toc-link" data-section="karsilastirma">16:8 ile farkı</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasıl başlanır?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Örnek program</a></li>
       <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
       <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
       <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
@@ -441,13 +437,13 @@
       <div class="section-num">01</div>
       <h2>Nedir?</h2>
 
-      <p>4:3 aralikli oruc, haftanin 3 gununde kalori aliminizi ciddi sekilde kisitlamaniz (~500 kcal kadinlar, ~600 kcal erkekler), kalan 4 gunde normal yemeniz uzerine kurulu bir protokol. Bazi kaynaklarda "alternate day fasting" (gun asiri oruc) varyasyonu olarak da gecer.</p>
+      <p>4:3 aralıklı oruç, haftanın 3 gününde kalori alımınızı ciddi şekilde kısıtlamanız (~500 kcal kadınlar, ~600 kcal erkekler), kalan 4 günde normal yemeniz üzerine kurulu bir protokol. Bazı kaynaklarda "alternate day fasting" (gün aşırı oruç) varyasyonu olarak da geçer.</p>
 
-      <p>16:8'den farkli olarak burada her gun uygulanmiyor. Kisitlama gunlerinde tamamen ac kalmak yerine cok dusuk kalorili besleniyorsun. Bu, tamamen ac kalmaya gore daha surdurulebilir ve sosyal hayatla daha uyumlu.</p>
+      <p>16:8'den farklı olarak burada her gün uygulanmıyor. Kısıtlama günlerinde tamamen aç kalmak yerine çok düşük kalorili besleniyorsun. Bu, tamamen aç kalmaya göre daha sürdürülebilir ve sosyal hayatla daha uyumlu.</p>
 
       <div class="info-box note">
         <div class="info-box-title">Temel prensip</div>
-        <p>Kisitlama gunlerinde yaklasik 500 kcal alirsin. Bu genellikle 1-2 kucuk ogun demek. Normal gunlerde kalori saymana gerek yok, dengeli ve normal porsiyonlarda yersin.</p>
+        <p>Kısıtlama günlerinde yaklaşık 500 kcal alırsın. Bu genellikle 1-2 küçük öğün demek. Normal günlerde kalori saymana gerek yok, dengeli ve normal porsiyonlarda yersin.</p>
       </div>
     </div>
 
@@ -456,127 +452,63 @@
     <!-- 02 Nasil calisir -->
     <div class="section" id="nasil-calisir">
       <div class="section-num">02</div>
-      <h2>Nasil calisir?</h2>
+      <h2>Nasıl çalışır?</h2>
 
-      <p>4:3'un metabolik etkisi 16:8'e benzer ama daha yogundur. Kisitlama gunlerinde beden glikojen depolarini tamamen bosaltir ve uzun sureli yag yakimi moduna girer. Normal gunlerde ise beden toparlanir, kaslar beslenir ve enerji depolari yenilenir.</p>
+      <p>4:3'ün metabolik etkisi 16:8'e benzer ama daha yoğundur. Kısıtlama günlerinde beden glikojen depolarını tamamen boşaltır ve uzun süreli yağ yakımı moduna girer. Normal günlerde ise beden toparlanır, kaslar beslenir ve enerji depoları yenilenir.</p>
 
-      <p>Bu "dalgali" yaklasim bedenin metabolik esnekligini arttirir: yani bedenin ihtiyaca gore glikoz ve yag arasinda gecis yapma becerisini guclendirir. Metabolik esneklik sagliklı metabolizmanin temel gostergelerinden biri.</p>
+      <p>Bu "dalgalı" yaklaşım bedenin metabolik esnekliğini arttırır: yani bedenin ihtiyaca göre glikoz ve yağ arasında geçiş yapma becerisini güçlendirir. Metabolik esneklik sağlıklı metabolizmanın temel göstergelerinden biri.</p>
 
-      <h3 class="sub-heading">Kisitlama gununde ne oluyor?</h3>
+      <h3 class="sub-heading">Kısıtlama gününde ne oluyor?</h3>
 
-      <p>500 kcal civarinda beslendiginizde beden hizla glikojen depolarini bosaltir. Gercek aclik olmadigi icin stres tepkisi minimaldır, ama yag yakimi ve otofaji surecleris aktif sekilde calisir. Ertesi gun normal yediginizde beden bu surecleri durdurur ve yeniden insaat moduna gecer.</p>
-
-      <p>Bu dongu, surekli kalori kisitlamasinin aksine metabolizmanin yavaslamasini engelliyor. Bedenin "aclik moduna" girmesine firsat vermiyor cunku her kisitlama gununun ardından normal beslenme geliyor.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 03 Nasil baslanir -->
-    <div class="section" id="nasil-baslanir">
-      <div class="section-num">03</div>
-      <h2>Nasil baslanir?</h2>
-
-      <ol class="step-list">
-        <li><strong>Oncelikle 16:8'i dene.</strong> Eger 16:8'i hic denemediysen, once 2-3 hafta 16:8 uygula. Bu bedenini aralikli oruca hazirlar.</li>
-        <li><strong>5:2 ile basla.</strong> Haftada sadece 2 gun kisitlama yap, 5 gun normal ye. 2-3 hafta sonra rahat hissedersen 4:3'e gec.</li>
-        <li><strong>Kisitlama gunlerini planla.</strong> Art arda 2 kisitlama gunu koyma. Sal-Per-Cmt veya Pzt-Car-Cum gibi esit aralikli dagitimlar ideal.</li>
-        <li><strong>500 kcal'i akilli kullan.</strong> Protein agirlikli, lifli yiyeceklere odaklan. Bunlar tok tutar. Sekeri ve islenmiş karbonhidrati minimumda tut.</li>
-        <li><strong>Normal gunlerde asiriya kacma.</strong> "Dun ac kaldim, bugun telafi edeyim" dusuncesine dusme. Normal porsiyonlarda, dengeli ye.</li>
-      </ol>
+      <p>500 kcal civarında beslendiğinizde beden hızla glikojen depolarını boşaltır. Gerçek açlık olmadığı için stres tepkisi minimaldır, ama yağ yakımı ve otofaji süreçleri aktif şekilde çalışır. Ertesi gün normal yediğinizde beden bu süreçleri durdurur ve yeniden inşaat moduna geçer.</p>
 
       <div class="info-box tip">
-        <div class="info-box-title">Ipucu</div>
-        <p>Kisitlama gunlerinde ogunlerini mumkun oldugunca gec ye. Ornegin ogleye kadar sadece su/kahve ic, sonra kuçuk bir ogle ogunu ve kucuk bir aksam ogunu ye. Boylece aclik suresini daha kolay yonetirsin.</p>
+        <div class="info-box-title">4:3'ün kritik avantajı</div>
+        <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az kalori yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 4:3'te bu olmuyor. Kısıtlama gününün hemen ardından normal beslenme geliyor. Beden açlık moduna geçmeye fırsat bulamıyor. Metabolizma hızı korunuyor, yağ yakımı devam ediyor.</p>
+        <p>Catenacci ve ark.'nın çalışması bunu rakamlarla doğruluyor: 12 ay sonra aralıklı oruç grubunun bazal metabolizma hızı günlük kısıtlama grubuna göre daha az düşmüş. Yani aynı kalori açığıyla daha fazla kilo kaybı, daha az metabolik direnç.</p>
       </div>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 04 Ornek program -->
-    <div class="section" id="ornek-program">
-      <div class="section-num">04</div>
-      <h2>Ornek haftalik program</h2>
-
-      <h3 class="sub-heading">Kisitlama gunu (~500 kcal)</h3>
-
-      <div class="meal-table-wrapper">
-        <table class="meal-table">
-          <thead>
-            <tr>
-              <th>Saat</th>
-              <th>Ogun</th>
-              <th>Ornek (~500 kcal toplam)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="time-col">07:00</td>
-              <td class="meal-col">Sabah</td>
-              <td>Su, sade kahve veya yesil cay</td>
-            </tr>
-            <tr>
-              <td class="time-col">13:00</td>
-              <td class="meal-col">Ogle (~250 kcal)</td>
-              <td>Haslama yumurta (2 adet), bol yesil salata, zeytinyagi. Veya tavuk gogsu + buharda sebze.</td>
-            </tr>
-            <tr>
-              <td class="time-col">19:00</td>
-              <td class="meal-col">Aksam (~250 kcal)</td>
-              <td>Izgara balik (150g), buharda brokoli, limon. Veya mercimek corbasi (1 kase) + salata.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="sub-heading">Normal gun</h3>
-
-      <p>Normal gunlerde ozel bir kisitlama yok. Dengeli beslen, yeterli protein al, sebze ve meyve tuket. Kalori saymanagerek yok. Normal porsiyonlarda 2-3 ogun ye.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 05 Faydalari -->
+    <!-- 03 Faydalari -->
     <div class="section" id="faydalari">
-      <div class="section-num">05</div>
-      <h2>Arastirma destekli faydalari</h2>
+      <div class="section-num">03</div>
+      <h2>Araştırma destekli faydaları</h2>
 
       <div class="benefit-grid">
         <div class="benefit-card">
-          <span class="benefit-icon">&#9878;</span>
-          <div class="benefit-title">Daha fazla kilo kaybi</div>
-          <div class="benefit-desc">Gunluk kisitlamaya kiyasla daha etkili yag kaybi.</div>
+          <div class="benefit-title">Daha fazla kilo kaybı</div>
+          <div class="benefit-desc">Günlük kısıtlamaya kıyasla daha etkili yağ kaybı.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#128170;</span>
-          <div class="benefit-title">Daha yuksek uyum</div>
-          <div class="benefit-desc">Her gun kisitlamaya gore daha az birakma orani.</div>
+          <div class="benefit-title">Daha yüksek uyum</div>
+          <div class="benefit-desc">Her gün kısıtlamaya göre daha az bırakma oranı.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#128260;</span>
           <div class="benefit-title">Metabolik esneklik</div>
-          <div class="benefit-desc">Bedenin glikoz-yag gecisini guclendirir.</div>
+          <div class="benefit-desc">Bedenin glikoz-yağ geçişini güçlendirir.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#128296;</span>
           <div class="benefit-title">Derin otofaji</div>
-          <div class="benefit-desc">Uzun kisitlama gunleri daha yogun hucresel temizlik saglar.</div>
+          <div class="benefit-desc">Uzun kısıtlama günleri daha yoğun hücresel temizlik sağlar.</div>
         </div>
       </div>
 
       <div class="experiment">
         <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine</div>
-        <p>Iki gruba ayni haftalik kalori acigi hedefi verildi. Bir grup her gun kalori kisti, diger grup haftada 3 gun cok dusuk kalorili yedi, 4 gun normal. 12 ay sonra: aralikli oruc grubu vucut agirliginin ortalama %7.6'sini kaybetti, gunluk kisitlama grubu %5'ini. Calismayı birakan katilimci orani aralikli oructa %19, gunluk kisitlamada %30.</p>
+        <p>İki gruba aynı haftalık kalori açığı hedefi verildi. Bir grup her gün kalori kıstı, diğer grup haftada 3 gün çok düşük kalorili yedi, 4 gün normal. 12 ay sonra: aralıklı oruç grubu vücut ağırlığının ortalama %7.6'sını kaybetti, günlük kısıtlama grubu %5'ini. Çalışmayı bırakan katılımcı oranı aralıklı oruçta %19, günlük kısıtlamada %30.</p>
       </div>
 
-      <p>Burada fark metabolik degil, davranissal. "Her gun biraz az ye" surekli irade gerektiriyor. "3 gun kis, 4 gun normal ye" ise bir kural koyup uygulamak. Birinde her ogun bir karar veriyorsun, digerinde karari bir kere verip devam ediyorsun.</p>
+      <p>Burada fark metabolik değil, davranışsal. "Her gün biraz az ye" sürekli irade gerektiriyor. "3 gün kısıtla, 4 gün normal ye" ise bir kural koyup uygulamak. Birinde her öğün bir karar veriyorsun, diğerinde kararı bir kere verip devam ediyorsun.</p>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 06 Karsilastirma -->
+    <!-- 04 Karsilastirma -->
     <div class="section" id="karsilastirma">
-      <div class="section-num">06</div>
-      <h2>16:8 ile farki</h2>
+      <div class="section-num">04</div>
+      <h2>16:8 ile farkı</h2>
 
       <table class="compare-table">
         <thead>
@@ -588,47 +520,111 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>Siklik</strong></td>
-            <td>Her gun</td>
-            <td>Haftada 3 gun</td>
+            <td><strong>Sıklık</strong></td>
+            <td>Her gün</td>
+            <td>Haftada 3 gün</td>
           </tr>
           <tr>
-            <td><strong>Kisitlama</strong></td>
-            <td>Zamanlama (16 saat oruc)</td>
-            <td>Kalori (~500 kcal/gun)</td>
+            <td><strong>Kısıtlama</strong></td>
+            <td>Zamanlama (16 saat oruç)</td>
+            <td>Kalori (~500 kcal/gün)</td>
           </tr>
           <tr>
             <td><strong>Zorluk</strong></td>
-            <td>Baslangic</td>
+            <td>Başlangıç</td>
             <td>Orta-ileri</td>
           </tr>
           <tr>
-            <td><strong>Kilo kaybi</strong></td>
+            <td><strong>Kilo kaybı</strong></td>
             <td>Orta</td>
-            <td>Yuksek</td>
+            <td>Yüksek</td>
           </tr>
           <tr>
-            <td><strong>Uyum orani</strong></td>
-            <td>Yuksek</td>
-            <td>Orta (ama gunlukten iyi)</td>
+            <td><strong>Uyum oranı</strong></td>
+            <td>Yüksek</td>
+            <td>Orta (ama günlükten iyi)</td>
           </tr>
           <tr>
             <td><strong>Sosyal etki</strong></td>
-            <td>Dusuk (sadece sabah atlaniyor)</td>
-            <td>Orta (kisitlama gunlerinde sosyal yemekler zor)</td>
+            <td>Düşük (sadece sabah atlanıyor)</td>
+            <td>Orta (kısıtlama günlerinde sosyal yemekler zor)</td>
           </tr>
           <tr>
             <td><strong>Kime uygun</strong></td>
-            <td>Herkese, baslangiç icin ideal</td>
-            <td>16:8'i deneyip daha fazla sonuc isteyenler</td>
+            <td>Herkese, başlangıç için ideal</td>
+            <td>16:8'i deneyip daha fazla sonuç isteyenler</td>
           </tr>
         </tbody>
       </table>
 
       <div class="info-box note">
-        <div class="info-box-title">Hangisini secmeliyim?</div>
-        <p>Daha once aralikli oruc denemediysen 16:8 ile basla. Rahat hissedersen ve daha agresif sonuclar istersen 4:3'e gecebilirsin. Ikisini birlikte de uygulayabilirsin: normal gunlerde 16:8, kisitlama gunlerinde dusuk kalori.</p>
+        <div class="info-box-title">Hangisini seçmeliyim?</div>
+        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. Rahat hissedersen ve daha agresif sonuçlar istersen 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori.</p>
       </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">05</div>
+      <h2>Nasıl başlanır?</h2>
+
+      <ol class="step-list">
+        <li><span><strong>Öncelikle 16:8'i dene.</strong> Eğer 16:8'i hiç denemediysen, önce 2-3 hafta 16:8 uygula. Bu bedenini aralıklı oruça hazırlar.</span></li>
+        <li><span><strong>5:2 ile başla.</strong> Haftada sadece 2 gün kısıtlama yap, 5 gün normal ye. 2-3 hafta sonra rahat hissedersen 4:3'e geç.</span></li>
+        <li><span><strong>Kısıtlama günlerini planla.</strong> Art arda 2 kısıtlama günü koyma. Sal-Per-Cmt veya Pzt-Çar-Cum gibi eşit aralıklı dağıtımlar ideal.</span></li>
+        <li><span><strong>500 kcal'i akıllı kullan.</strong> Protein ağırlıklı, lifli yiyeceklere odaklan. Bunlar tok tutar. Şekeri ve işlenmiş karbonhidratı minimumda tut.</span></li>
+        <li><span><strong>Normal günlerde aşırıya kaçma.</strong> "Dün aç kaldım, bugün telafi edeyim" düşüncesine düşme. Normal porsiyonlarda, dengeli ye.</span></li>
+      </ol>
+
+      <div class="info-box tip">
+        <div class="info-box-title">İpucu</div>
+        <p>Kısıtlama günlerinde öğünlerini mümkün olduğunca geç ye. Örneğin öğleye kadar sadece su/kahve iç, sonra küçük bir öğle öğünü ve küçük bir akşam öğünü ye. Böylece açlık süresini daha kolay yönetirsin.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">06</div>
+      <h2>Örnek haftalık program</h2>
+
+      <h3 class="sub-heading">Kısıtlama günü (~500 kcal)</h3>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Saat</th>
+              <th>Öğün</th>
+              <th>Örnek (~500 kcal toplam)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">07:00</td>
+              <td class="meal-col">Sabah</td>
+              <td>Su, sade kahve veya yeşil çay</td>
+            </tr>
+            <tr>
+              <td class="time-col">13:00</td>
+              <td class="meal-col">Öğle (~250 kcal)</td>
+              <td>Haşlama yumurta (2 adet), bol yeşil salata, zeytinyağı. Veya tavuk göğsü + buharda sebze.</td>
+            </tr>
+            <tr>
+              <td class="time-col">19:00</td>
+              <td class="meal-col">Akşam (~250 kcal)</td>
+              <td>Izgara balık (150g), buharda brokoli, limon. Veya mercimek çorbası (1 kase) + salata.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">Normal gün</h3>
+
+      <p>Normal günlerde özel bir kısıtlama yok. Dengeli beslen, yeterli protein al, sebze ve meyve tüket. Kalori saymana gerek yok. Normal porsiyonlarda 2-3 öğün ye.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -639,18 +635,18 @@
       <h2>Dikkat edilecekler</h2>
 
       <div class="info-box warning">
-        <div class="info-box-title">Kimler uygulamamali?</div>
-        <p>Hamile veya emziren kadinlar. 18 yas alti cocuklar ve ergenler. Yeme bozuklugu gecmisi olan kisiler. Tip 1 diyabet veya insulin kullanan Tip 2 diyabet hastalari. Ciddi kronik hastaligi olanlar mutlaka doktoruna danismali.</p>
+        <div class="info-box-title">Kimler uygulamamalı?</div>
+        <p>Hamile veya emziren kadınlar. 18 yaş altı çocuklar ve ergenler. Yeme bozukluğu geçmişi olan kişiler. Tip 1 diyabet veya insülin kullanan Tip 2 diyabet hastaları. Ciddi kronik hastalığı olanlar mutlaka doktoruna danışmalı.</p>
       </div>
 
-      <h3 class="sub-heading">Kisitlama gunlerinde dikkat</h3>
+      <h3 class="sub-heading">Kısıtlama günlerinde dikkat</h3>
 
       <ul class="checklist">
-        <li class="caution"><strong>Yogun egzersiz yapma.</strong> Kisitlama gunlerinde agir antrenman yerine hafif yuruyus veya yoga tercih et.</li>
-        <li class="caution"><strong>Proteini ihmal etme.</strong> 500 kcal'in onemli bir kismini proteinden al. Kas kaybini onler ve tok tutar.</li>
-        <li class="caution"><strong>Bol su ic.</strong> Kisitlama gunlerinde dehidrasyon riski daha yuksek. Gunde en az 2-3 litre su.</li>
-        <li class="caution"><strong>Art arda 2 kisitlama gunu koyma.</strong> Araya mutlaka normal gun koy.</li>
-        <li><strong>Uykunadikkat et.</strong> Cok ac yatmak uyku kalitesini bozabilir. Aksam ogununu yatmadan 2-3 saat once ye.</li>
+        <li class="caution"><strong>Yoğun egzersiz yapma.</strong> Kısıtlama günlerinde ağır antrenman yerine hafif yürüyüş veya yoga tercih et.</li>
+        <li class="caution"><strong>Proteini ihmal etme.</strong> 500 kcal'in önemli bir kısmını proteinden al. Kas kaybını önler ve tok tutar.</li>
+        <li class="caution"><strong>Bol su iç.</strong> Kısıtlama günlerinde dehidrasyon riski daha yüksek. Günde en az 2-3 litre su.</li>
+        <li class="caution"><strong>Art arda 2 kısıtlama günü koyma.</strong> Araya mutlaka normal gün koy.</li>
+        <li><strong>Uykuna dikkat et.</strong> Çok aç yatmak uyku kalitesini bozabilir. Akşam öğününü yatmadan 2-3 saat önce ye.</li>
       </ul>
     </div>
 
@@ -659,52 +655,50 @@
     <!-- 08 SSS -->
     <div class="section" id="sss">
       <div class="section-num">08</div>
-      <h2>Sik sorulan sorular</h2>
+      <h2>Sık sorulan sorular</h2>
 
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            500 kcal'i nasil hesaplarim?
+            500 kcal'i nasıl hesaplarım?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Protein agirlikli basit yiyecekler sec. 2 haslama yumurta (~140 kcal), 150g tavuk gogsu (~165 kcal), 1 kase sebze corbasi (~100 kcal), bol salata (~50-80 kcal). Paketli gidalarda besin degeri etiketlerini oku. Kalori takip uygulamasi (MyFitnessPal gibi) ilk birkac gun yardimci olabilir.</div>
+            <div class="faq-answer-inner">Protein ağırlıklı basit yiyecekler seç. 2 haşlama yumurta (~140 kcal), 150g tavuk göğsü (~165 kcal), 1 kase sebze çorbası (~100 kcal), bol salata (~50-80 kcal). Paketli gıdalarda besin değeri etiketlerini oku. Kalori takip uygulaması (MyFitnessPal gibi) ilk birkaç gün yardımcı olabilir.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Kisitlama gunlerinde cok ac kaliyorum, ne yapayim?
+            Kısıtlama günlerinde çok aç kalıyorum, ne yapayım?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Once 5:2 ile basla (haftada 2 kisitlama gunu). Protein ve lif agirlikli yiyecekler sec, bunlar daha uzun tok tutar. Bol su ve sade kahve/cay ic. Ogunlerini gec saatlere kaydir (ornegin 13:00 ve 19:00). Birkaç hafta sonra beden adapte olur ve aclik hissi azalir.</div>
+            <div class="faq-answer-inner">Önce 5:2 ile başla (haftada 2 kısıtlama günü). Protein ve lif ağırlıklı yiyecekler seç, bunlar daha uzun tok tutar. Bol su ve sade kahve/çay iç. Öğünlerini geç saatlere kaydır (örneğin 13:00 ve 19:00). Birkaç hafta sonra beden adapte olur ve açlık hissi azalır.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Normal gunlerde istedigim kadar yiyebilir miyim?
+            Normal günlerde istediğim kadar yiyebilir miyim?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Normal porsiyonlarda, dengeli ye. Kalori saymanagerek yok ama "dun ac kaldim, bugun her seyi yiyeyim" dusuncesine dusme. Arastirmalar 4:3 uygulayan kisilerin normal gunlerde dogal olarak biraz daha az yedigini gosteriyor. Bedenini dinle, ac olduğunda ye, doyduğunda dur.</div>
+            <div class="faq-answer-inner">Normal porsiyonlarda, dengeli ye. Kalori saymana gerek yok ama "dün aç kaldım, bugün her şeyi yiyeyim" düşüncesine düşme. Araştırmalar 4:3 uygulayan kişilerin normal günlerde doğal olarak biraz daha az yediğini gösteriyor. Bedenini dinle, aç olduğunda ye, doyduğunda dur.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Hangi gunleri kisitlama gunu yapmaliyim?
+            Hangi günleri kısıtlama günü yapmalıyım?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Sosyal programina ve is temposuna gore sec. Kisitlama gunlerinde yogun sosyal yemekler veya agir is gunleri olmamasina dikkat et. Esit aralikli dagitim (Sal-Per-Cmt veya Pzt-Car-Cum gibi) ideal. Her hafta ayni gunleri kullanmak rutin olusturur.</div>
+            <div class="faq-answer-inner">Sosyal programına ve iş temposuna göre seç. Kısıtlama günlerinde yoğun sosyal yemekler veya ağır iş günleri olmamasına dikkat et. Eşit aralıklı dağıtım (Sal-Per-Cmt veya Pzt-Çar-Cum gibi) ideal. Her hafta aynı günleri kullanmak rutin oluşturur.</div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="section-divider"></div>
 
     <!-- 09 Kaynaklar -->
     <div class="references" id="kaynaklar">
@@ -721,7 +715,7 @@
 
   <div class="divider"></div>
 
-  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmus</span></a>
+  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
 
   <script>
   function toggleFaq(btn) {

@@ -32,20 +32,37 @@
   body { font-family: 'Source Sans 3', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
   /* Hero */
-  .hero { position: relative; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1400&q=80') center/cover no-repeat; opacity: 0.12; z-index: 0; }
-  [data-theme="dark"] .hero::before { opacity: 0.06; }
+  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); pointer-events: none; animation: breathe 6s ease-in-out infinite; z-index: 0; }
   .hero > * { position: relative; z-index: 1; }
-  .hero-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 1rem; }
-  .hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; max-width: 600px; margin-bottom: 1rem; }
+  .hero-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; max-width: 600px; margin-bottom: 1rem; opacity: 0; animation: fadeUp 1s ease 0.6s forwards; }
   .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero-desc { font-size: 1.1rem; color: var(--text-dim); max-width: 520px; line-height: 1.6; }
+  .hero-desc { font-size: 1.1rem; color: var(--text-dim); max-width: 520px; line-height: 1.6; opacity: 0; animation: fadeUp 1s ease 0.9s forwards; }
+
+  /* Keyframes */
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.15); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.5); opacity: 1; }
+  }
+
+  /* Scroll Hint */
+  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 1; }
+  .scroll-hint .line { width: 1px; height: 32px; background: var(--accent); opacity: 0.4; animation: scrollPulse 2s ease-in-out infinite; }
 
   /* Summary Cards */
   .summary-section { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 2rem; }
   .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 16px; text-align: center; transition: transform 0.2s ease; }
-  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
   .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
   .stat-card .stat-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-dim); margin-bottom: 6px; }
   .stat-card .stat-value { font-family: var(--serif); font-size: 1rem; line-height: 1.4; color: var(--text); }
@@ -70,7 +87,8 @@
   .section-num { font-family: var(--serif); font-size: 0.85rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.5rem; }
   .section h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400; line-height: 1.3; margin-bottom: 1.5rem; color: var(--text); }
   .section p { margin-bottom: 1.3rem; font-size: 1.05rem; text-align: justify; }
-  .section-divider { width: 40px; height: 1px; background: var(--divider); margin: 3rem 0; }
+  .section-divider { width: 40px; height: 1px; background: var(--accent); margin: 3.5rem 0; opacity: 0.3; position: relative; }
+  .section-divider::after { content: ''; position: absolute; top: -3px; right: -12px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
   .sub-heading { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text); margin: 2.2rem 0 1rem; }
 
   /* Info boxes */
@@ -129,7 +147,8 @@
 
   /* Benefit Cards */
   .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; }
-  .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
+  .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
   .benefit-card .benefit-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
   .benefit-card .benefit-title { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
   .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
@@ -137,11 +156,11 @@
   /* FAQ */
   .faq-list { margin: 1.5rem 0; }
   .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-question { width: 100%; background: none; border: none; padding: 18px 0; font-family: 'Source Sans 3', sans-serif; font-size: 1.02rem; font-weight: 500; color: var(--text); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s; }
-  .faq-question:hover { color: var(--accent); }
+  .faq-question { width: 100%; background: none; border: none; padding: 18px 0; font-family: 'Source Sans 3', sans-serif; font-size: 1.02rem; font-weight: 500; color: var(--text); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s, transform 0.2s ease; }
+  .faq-question:hover { color: var(--accent); transform: translateX(4px); }
   .faq-question .faq-arrow { flex-shrink: 0; font-size: 0.7rem; color: var(--accent); transition: transform 0.3s; }
   .faq-item.open .faq-arrow { transform: rotate(90deg); }
-  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   .faq-answer-inner { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; }
   .faq-item.open .faq-answer { max-height: 500px; }
 
@@ -163,13 +182,13 @@
   @media (max-width: 768px) {
     .summary-grid { grid-template-columns: repeat(2, 1fr); }
     .benefit-grid, .food-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .hero { min-height: 80vh; padding: 3rem 1.5rem; }
     .guide { padding: 2rem 1.5rem 3rem; }
   }
   @media (max-width: 480px) {
     .summary-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .stat-card { padding: 18px 12px; }
-    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero { min-height: 70vh; padding: 2.5rem 1.2rem; }
     .hero h1 { font-size: 1.8rem; }
     .guide { padding: 1.5rem 1.2rem 2.5rem; }
     .section h2 { font-size: 1.3rem; }
@@ -181,7 +200,7 @@
 <body>
 
   <div class="grain"></div>
-  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
   </button>
@@ -190,7 +209,8 @@
   <section class="hero">
     <p class="hero-tag">Pratik Rehber</p>
     <h1>Ketojenik Diyet <em>Rehberi</em></h1>
-    <p class="hero-desc">Yuksek yag, dusuk karbonhidrat. Bedenini yag yakma moduna geciren beslenme stratejisi.</p>
+    <p class="hero-desc">Yüksek yağ, düşük karbonhidrat. Bedenini yağ yakma moduna geçiren beslenme stratejisi.</p>
+    <div class="scroll-hint"><div class="line"></div></div>
   </section>
 
   <div class="divider"></div>
@@ -199,22 +219,18 @@
   <section class="summary-section">
     <div class="summary-grid">
       <div class="stat-card">
-        <span class="stat-icon">&#129361;</span>
-        <div class="stat-label">Yag orani</div>
+        <div class="stat-label">Yağ oranı</div>
         <div class="stat-value">%70-75</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#129385;</span>
         <div class="stat-label">Protein</div>
         <div class="stat-value">%20-25</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#127834;</span>
         <div class="stat-label">Karbonhidrat</div>
         <div class="stat-value">%5-10</div>
       </div>
       <div class="stat-card">
-        <span class="stat-icon">&#9888;&#65039;</span>
         <div class="stat-label">Zorluk</div>
         <div class="stat-value">Orta-ileri</div>
       </div>
@@ -223,7 +239,7 @@
 
   <!-- Macro Chart -->
   <section class="macro-section">
-    <h2>Makro Besin Dagilimi</h2>
+    <h2>Makro Besin Dağılımı</h2>
     <div class="macro-chart">
       <svg viewBox="0 0 260 260">
         <!-- Fat: 70% = 252 degrees -->
@@ -238,7 +254,7 @@
       </svg>
     </div>
     <div class="macro-legend">
-      <span class="macro-legend-item"><span class="macro-dot fat"></span>Yag (%70-75)</span>
+      <span class="macro-legend-item"><span class="macro-dot fat"></span>Yağ (%70-75)</span>
       <span class="macro-legend-item"><span class="macro-dot protein"></span>Protein (%20-25)</span>
       <span class="macro-legend-item"><span class="macro-dot carb"></span>Karbonhidrat (%5-10)</span>
     </div>
@@ -250,11 +266,11 @@
   <nav class="toc-sidebar" id="tocSidebar">
     <ul>
       <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
-      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasıl çalışır?</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydaları</a></li>
       <li><a href="#yiyecekler" class="toc-link" data-section="yiyecekler">Ne yenir, ne yenmez?</a></li>
-      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
-      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
-      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasıl başlanır?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Örnek program</a></li>
       <li><a href="#keto-grip" class="toc-link" data-section="keto-grip">Keto gribi</a></li>
       <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
       <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
@@ -270,13 +286,13 @@
       <div class="section-num">01</div>
       <h2>Nedir?</h2>
 
-      <p>Ketojenik diyet, karbonhidrat aliminizi ciddi sekilde kisitlayip (gunluk kalorinizin %5-10'u) yagin cok artirdigi (gunluk kalorinizin %70-75'i) bir beslenme bicimi. Amac: bedeninizi birincil yakit olarak glikoz yerine yag ve ketonlari kullanmaya gecirmek.</p>
+      <p>Ketojenik diyet, karbonhidrat alımınızı ciddi şekilde kısıtlayıp (günlük kalorinizin %5-10'u) yağın çok arttırdığı (günlük kalorinizin %70-75'i) bir beslenme biçimi. Amaç: bedeninizi birincil yakıt olarak glikoz yerine yağ ve ketonları kullanmaya geçirmek.</p>
 
-      <p>Bu durum "ketozis" olarak adlandirilir. Ketoziste karaciger yag asitlerini parcalayarak keton cisimcikleri uretir. Bu ketonlar glikoz yerine beyin dahil tum vucut tarafindan enerji kaynagi olarak kullanilir.</p>
+      <p>Bu durum "ketozis" olarak adlandırılır. Ketoziste karaciğer yağ asitlerini parçalayarak keton cisimcikleri üretir. Bu ketonlar glikoz yerine beyin dahil tüm vücut tarafından enerji kaynağı olarak kullanılır.</p>
 
       <div class="info-box note">
         <div class="info-box-title">Evrimsel perspektif</div>
-        <p>Ketojenik durum atalarimiz icin normal bir metabolik durumdu. Ozellikle kis aylarinda ve uzun av aralarinda karbonhidrat kaynaklari (meyve, kok) azaldiginda beden otomatik olarak yag yakarak enerji uretiyordu. Surekli glikoz akisi tarim devrimiyle basladi, evrimsel tarihimizin son %0.004'u.</p>
+        <p>Ketojenik durum atalarımız için normal bir metabolik durumdu. Özellikle kış aylarında ve uzun av aralarında karbonhidrat kaynakları (meyve, kök) azaldığında beden otomatik olarak yağ yakarak enerji üretiyordu. Sürekli glikoz akışı tarım devrimiyle başladı, evrimsel tarihimizin son %0.004'u.</p>
       </div>
     </div>
 
@@ -285,168 +301,174 @@
     <!-- 02 Nasil calisir -->
     <div class="section" id="nasil-calisir">
       <div class="section-num">02</div>
-      <h2>Nasil calisir?</h2>
+      <h2>Nasıl çalışır?</h2>
 
-      <p>Normal beslendiginizde bedeniniz karbonhidratlari glikoza cevirir ve birincil yakit olarak kullanir. Karbonhidrat aliminizi gunluk 20-50 grama dusurdugunuzde (yaklasik 1-2 dilim ekmek kadar) beden 2-4 gun icinde glikoz yerine yag yakmaya gecer.</p>
+      <p>Normal beslendiğinizde bedeniniz karbonhidratları glikoza çevirir ve birincil yakıt olarak kullanır. Karbonhidrat alımınızı günlük 20-50 grama düşürdüğünüzde (yaklaşık 1-2 dilim ekmek kadar) beden 2-4 gün içinde glikoz yerine yağ yakmaya geçer.</p>
 
-      <h3 class="sub-heading">Ketozise gecis sureci</h3>
+      <h3 class="sub-heading">Ketozise geçiş süreci</h3>
 
       <ul class="checklist">
-        <li><strong>Gun 1-2:</strong> Glikojen depolari bosalir. Yorgunluk ve bas agrisi baslayabilir.</li>
-        <li><strong>Gun 2-4:</strong> Beden keton uretmeye baslar. "Keto gribi" belirtileri gorulebilir.</li>
-        <li><strong>Gun 4-7:</strong> Keton seviyeleri yukselir. Enerji geri gelmeye baslar.</li>
-        <li><strong>Hafta 2-4:</strong> Beden ketoza adapte olur. Zihinsel berraklik ve istikrarli enerji bildiren kisiler cok.</li>
+        <li><strong>Gün 1-2:</strong> Glikojen depoları boşalır. Yorgunluk ve baş ağrısı başlayabilir.</li>
+        <li><strong>Gün 2-4:</strong> Beden keton üretmeye başlar. "Keto gribi" belirtileri görülebilir.</li>
+        <li><strong>Gün 4-7:</strong> Keton seviyeleri yükselir. Enerji geri gelmeye başlar.</li>
+        <li><strong>Hafta 2-4:</strong> Beden ketoza adapte olur. Zihinsel berraklık ve istikrarlı enerji bildiren kişiler çok.</li>
       </ul>
 
-      <p>Ketozda oldugunuzu anlamanin en guvenilir yolu keton olcum stripleri (idrar veya kan). Kan keton seviyesi 0.5-3.0 mmol/L arasi "beslenme ketozu" olarak kabul edilir.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 03 Yiyecekler -->
-    <div class="section" id="yiyecekler">
-      <div class="section-num">03</div>
-      <h2>Ne yenir, ne yenmez?</h2>
-
-      <div class="food-grid">
-        <div class="food-card eat">
-          <div class="food-card-title">&#9989; Yenebilir</div>
-          <ul>
-            <li>Yumurta</li>
-            <li>Kirmizi et, tavuk, balik</li>
-            <li>Avokado</li>
-            <li>Zeytinyagi, tereyagi, hindistancevizi yagi</li>
-            <li>Peynir, krema</li>
-            <li>Ceviz, badem, findik</li>
-            <li>Yesil yaprakli sebzeler</li>
-            <li>Brokoli, karnabahar, kabak</li>
-            <li>Mantar, domates (az)</li>
-            <li>Cilek, ahududu (az)</li>
-          </ul>
-        </div>
-        <div class="food-card avoid">
-          <div class="food-card-title">&#10060; Kacinilacak</div>
-          <ul>
-            <li>Ekmek, makarna, pirinc</li>
-            <li>Seker, bal, sekerli icecekler</li>
-            <li>Patates, tatli patates</li>
-            <li>Muz, uzum, mango</li>
-            <li>Tahillar, musli</li>
-            <li>Baklagiller (nohut, fasulye)</li>
-            <li>Meyve sulari</li>
-            <li>Bira</li>
-            <li>Dusuk yagli urunler</li>
-            <li>Ultra-islenmis gidalar</li>
-          </ul>
-        </div>
-      </div>
+      <p>Ketozda olduğunuzu anlamanın en güvenilir yolu keton ölçüm stripleri (idrar veya kan). Kan keton seviyesi 0.5-3.0 mmol/L arası "beslenme ketozu" olarak kabul edilir.</p>
 
       <div class="info-box tip">
-        <div class="info-box-title">Ipucu</div>
-        <p>Besin etiketlerinde "net karbonhidrat" hesapla: Toplam karbonhidrat - lif = net karbonhidrat. Gunluk net karbonhidrat hedefin 20-50 gram arasi olmali.</p>
+        <div class="info-box-title">Ketojenik diyetin kritik avantajı</div>
+        <p>Klasik kalori kısıtlama diyetlerinde beden hala glikozu birincil yakıt olarak kullanmaya devam eder. Glikoz azaldığında metabolizma yavaşlar, açlık hormonları (özellikle grelin) artar ve beden "açlık moduna" girer. Bu yüzden kronik diyet yapanlar sürekli aç hisseder ve metabolizmaları baskılanır.</p>
+        <p>Ketoziste ise durum tamamen farklıdır. Beden birincil yakıt kaynağını glikozdan yağa ve ketonlara geçirdiği için, depolanmış vücut yağı aktif olarak mobilize edilir ve yakılır. Beden bol miktarda yakıta (yağ depolarına) erişebildiği için "açlık moduna" girmez, metabolik hız daha iyi korunur. Aynı zamanda ketonlar iştah hormonlarını baskılayıcı etki gösterir, bu da açlık hissinin belirgin şekilde azalmasını sağlar. Sonuç olarak ketojenik diyet, kalori kısıtlamasının getirdiği metabolik yavaşlama ve kronik açlık döngüsünü kırarak yağ kaybını daha sürdürülebilir hale getirir.</p>
       </div>
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- 04 Nasil baslanir -->
-    <div class="section" id="nasil-baslanir">
-      <div class="section-num">04</div>
-      <h2>Nasil baslanir?</h2>
-
-      <ol class="step-list">
-        <li><strong>Mutfagini temizle.</strong> Ekmek, makarna, seker, tahillar ve sekerliyiyecekleri kaldir. Gorunmeyen karbonhidrat kaynaklarini (sos, ketcap, hazir gidalar) kontrol et.</li>
-        <li><strong>Ilk hafta: 50g karb ile basla.</strong> Direkt 20g'a inmek zor olabilir. Ilk hafta 50g net karbonhidrat hedefle, sonra kademeli olarak 20-30g'a dusur.</li>
-        <li><strong>Yag kaynagini sec.</strong> Zeytinyagi, avokado, tereyagi, hindistancevizi yagi, ceviz. Kaliteli yag kaynaklari kullan, trans yaglardan kacin.</li>
-        <li><strong>Protein dengesini kur.</strong> Cok az protein kas kaybina yol acar, cok fazla protein ketozdan cikarabilir (glikoneogenez). Vucut kilon basina 1.2-1.7g protein hedefle.</li>
-        <li><strong>Elektrolitleri ihmal etme.</strong> Keto baslangiçta su ve elektrolit kaybi olur. Tuz, magnezyum ve potasyum aliminı artir.</li>
-        <li><strong>Ilk 2 haftayi atla.</strong> En zor kisim bu. Keto gribi belirtileri gecici. 2 hafta sonra cogu kisi belirgin sekilde daha iyi hissediyor.</li>
-      </ol>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 05 Ornek program -->
-    <div class="section" id="ornek-program">
-      <div class="section-num">05</div>
-      <h2>Ornek gunluk program</h2>
-
-      <div class="meal-table-wrapper">
-        <table class="meal-table">
-          <thead>
-            <tr>
-              <th>Ogun</th>
-              <th>Ornek</th>
-              <th>Makro</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="meal-col">Kahvalti</td>
-              <td>3 yumurta tereyaginda, avokado yarisi, bir avuc ispanak</td>
-              <td>~450 kcal, 35g yag, 3g karb</td>
-            </tr>
-            <tr>
-              <td class="meal-col">Ogle</td>
-              <td>Tavuk butlari (zeytinyaginda), bol yesil salata, feta peyniri, ceviz</td>
-              <td>~550 kcal, 40g yag, 5g karb</td>
-            </tr>
-            <tr>
-              <td class="meal-col">Ara ogun</td>
-              <td>Bir avuc badem + 2 dilim peynir</td>
-              <td>~250 kcal, 20g yag, 3g karb</td>
-            </tr>
-            <tr>
-              <td class="meal-col">Aksam</td>
-              <td>Somon (200g), buharda brokoli, tereyagi sos</td>
-              <td>~600 kcal, 42g yag, 4g karb</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p><strong>Gunluk toplam:</strong> ~1850 kcal, ~137g yag (%67), ~95g protein (%21), ~15g net karb (%3). Yag ve karbonhidrat oranlari bireysel ihtiyaca gore ayarlanabilir.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- 06 Faydalari -->
+    <!-- 03 Faydalari -->
     <div class="section" id="faydalari">
-      <div class="section-num">06</div>
-      <h2>Arastirma destekli faydalari</h2>
+      <div class="section-num">03</div>
+      <h2>Araştırma destekli faydaları</h2>
 
       <div class="benefit-grid">
         <div class="benefit-card">
-          <span class="benefit-icon">&#9878;</span>
-          <div class="benefit-title">Yag kaybi</div>
-          <div class="benefit-desc">Beden birincil yakit olarak yag yakar, ozellikle karin bolgesi yagi azalir.</div>
+
+          <div class="benefit-title">Yağ kaybı</div>
+          <div class="benefit-desc">Beden birincil yakıt olarak yağ yakar, özellikle karın bölgesi yağı azalır.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#129504;</span>
-          <div class="benefit-title">Zihinsel berraklik</div>
-          <div class="benefit-desc">Ketonlar beyin icin verimli bir yakit kaynagi. Birçok kisi odaklanma artisi bildiriyor.</div>
+
+          <div class="benefit-title">Zihinsel berraklık</div>
+          <div class="benefit-desc">Ketonlar beyin için verimli bir yakıt kaynağı. Birçok kişi odaklanma artışı bildiriyor.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#128293;</span>
-          <div class="benefit-title">Inflamasyon azalmasi</div>
-          <div class="benefit-desc">Ketonlar NLRP3 inflamazomunu baskilar, kronik iltihabi azaltir.</div>
+
+          <div class="benefit-title">İnflamasyon azalması</div>
+          <div class="benefit-desc">Ketonlar NLRP3 inflamazomunu baskılar, kronik iltihabı azaltır.</div>
         </div>
         <div class="benefit-card">
-          <span class="benefit-icon">&#128200;</span>
-          <div class="benefit-title">Kan sekeri kontrolu</div>
-          <div class="benefit-desc">Insulin direnci azalir, Tip 2 diyabet yonetiminde etkili.</div>
+
+          <div class="benefit-title">Kan şekeri kontrolü</div>
+          <div class="benefit-desc">İnsülin direnci azalır, Tip 2 diyabet yönetiminde etkili.</div>
         </div>
       </div>
 
       <div class="experiment">
         <div class="experiment-title">Youm ve ark., 2015 — Nature Medicine</div>
-        <p>Keton metaboliti beta-hidroksibütirat (BHB), NLRP3 inflamazom kompleksini bloke ediyor. Bu kompleks kronik inflamasyonun ana suruculerinden biri. Yani ketoziste uretilen ketonlar sadece enerji kaynagi degil, ayni zamanda anti-inflamatuar molekuller.</p>
+        <p>Keton metaboliti beta-hidroksibütirat (BHB), NLRP3 inflamazom kompleksini bloke ediyor. Bu kompleks kronik inflamasyonun ana sürücülerinden biri. Yani ketoziste üretilen ketonlar sadece enerji kaynağı değil, aynı zamanda anti-inflamatuar moleküller.</p>
       </div>
 
       <div class="experiment">
-        <div class="experiment-title">Epilepsi Tedavisi — 100+ yillik klinik kullanim</div>
-        <p>Ketojenik diyet ilk olarak 1920'lerde epilepsi tedavisi icin gelistirildi. Ilaca direncli epilepside hala en etkili diyetsel mudahalelerden biri. Nobetleri %50'den fazla azaltabiliyor. Bu, keto diyetinin en eski ve en guclu klinik kanit tabanına sahip oldugu alan.</p>
+        <div class="experiment-title">Epilepsi Tedavisi, 100+ yıllık klinik kullanım</div>
+        <p>Ketojenik diyet ilk olarak 1920'lerde epilepsi tedavisi için geliştirildi. İlaca dirençli epilepside hala en etkili diyetsel müdahalelerden biri. Nöbetleri %50'den fazla azaltabiliyor. Bu, keto diyetinin en eski ve en güçlü klinik kanıt tabanına sahip olduğu alan.</p>
       </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Yiyecekler -->
+    <div class="section" id="yiyecekler">
+      <div class="section-num">04</div>
+      <h2>Ne yenir, ne yenmez?</h2>
+
+      <div class="food-grid">
+        <div class="food-card eat">
+          <div class="food-card-title">Yenebilir</div>
+          <ul>
+            <li>Yumurta</li>
+            <li>Kırmızı et, tavuk, balık</li>
+            <li>Avokado</li>
+            <li>Zeytinyağı, tereyağı, hindistancevizi yağı</li>
+            <li>Peynir, krema</li>
+            <li>Ceviz, badem, fındık</li>
+            <li>Yeşil yapraklı sebzeler</li>
+            <li>Brokoli, karnabahar, kabak</li>
+            <li>Mantar, domates (az)</li>
+            <li>Çilek, ahududu (az)</li>
+          </ul>
+        </div>
+        <div class="food-card avoid">
+          <div class="food-card-title">Kaçınılacak</div>
+          <ul>
+            <li>Ekmek, makarna, pirinç</li>
+            <li>Şeker, bal, şekerli içecekler</li>
+            <li>Patates, tatlı patates</li>
+            <li>Muz, üzüm, mango</li>
+            <li>Tahıllar, müsli</li>
+            <li>Baklagiller (nohut, fasulye)</li>
+            <li>Meyve suları</li>
+            <li>Bira</li>
+            <li>Düşük yağlı ürünler</li>
+            <li>Ultra-işlenmiş gıdalar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box tip">
+        <div class="info-box-title">İpucu</div>
+        <p>Besin etiketlerinde "net karbonhidrat" hesapla: Toplam karbonhidrat - lif = net karbonhidrat. Günlük net karbonhidrat hedefin 20-50 gram arası olmalı.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">05</div>
+      <h2>Nasıl başlanır?</h2>
+
+      <ol class="step-list">
+        <li><span><strong>Mutfağını temizle.</strong> Ekmek, makarna, şeker, tahıllar ve şekerli yiyecekleri kaldır. Görünmeyen karbonhidrat kaynaklarını (sos, ketçap, hazır gıdalar) kontrol et.</span></li>
+        <li><span><strong>İlk hafta: 50g karb ile başla.</strong> Direkt 20g'a inmek zor olabilir. İlk hafta 50g net karbonhidrat hedefle, sonra kademeli olarak 20-30g'a düşür.</span></li>
+        <li><span><strong>Yağ kaynağını seç.</strong> Zeytinyağı, avokado, tereyağı, hindistancevizi yağı, ceviz. Kaliteli yağ kaynakları kullan, trans yağlardan kaçın.</span></li>
+        <li><span><strong>Protein dengesini kur.</strong> Çok az protein kas kaybına yol açar, çok fazla protein ketozdan çıkarabilir (glikoneogenez). Vücut kilon başına 1.2-1.7g protein hedefle.</span></li>
+        <li><span><strong>Elektrolitleri ihmal etme.</strong> Keto başlangıçta su ve elektrolit kaybı olur. Tuz, magnezyum ve potasyum alımını artır.</span></li>
+        <li><span><strong>İlk 2 haftayı atla.</strong> En zor kısım bu. Keto gribi belirtileri geçici. 2 hafta sonra çoğu kişi belirgin şekilde daha iyi hissediyor.</span></li>
+      </ol>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">06</div>
+      <h2>Örnek günlük program</h2>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Öğün</th>
+              <th>Örnek</th>
+              <th>Makro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="meal-col">Kahvaltı</td>
+              <td>3 yumurta tereyağında, avokado yarısı, bir avuç ıspanak</td>
+              <td>~450 kcal, 35g yağ, 3g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Öğle</td>
+              <td>Tavuk butları (zeytinyağında), bol yeşil salata, feta peyniri, ceviz</td>
+              <td>~550 kcal, 40g yağ, 5g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Ara öğün</td>
+              <td>Bir avuc badem + 2 dilim peynir</td>
+              <td>~250 kcal, 20g yağ, 3g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Akşam</td>
+              <td>Somon (200g), buharda brokoli, tereyağı sos</td>
+              <td>~600 kcal, 42g yağ, 4g karb</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Günlük toplam:</strong> ~1850 kcal, ~137g yağ (%67), ~95g protein (%21), ~15g net karb (%3). Yağ ve karbonhidrat oranları bireysel ihtiyaca göre ayarlanabilir.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -456,37 +478,37 @@
       <div class="section-num">07</div>
       <h2>Keto gribi (keto flu)</h2>
 
-      <p>Ketojenik diyete baslayanların cogu ilk 2-7 gunde "keto gribi" olarak bilinen belirtiler yasiyar. Bu gercek bir grip degil, bedenin glikozdan keton yakitina gecis sirasinda yasadigi adaptasyon donemi.</p>
+      <p>Ketojenik diyete başlayanların çoğu ilk 2-7 günde "keto gribi" olarak bilinen belirtiler yaşıyor. Bu gerçek bir grip değil, bedenin glikozdan keton yakıtına geçiş sırasında yaşadığı adaptasyon dönemi.</p>
 
       <h3 class="sub-heading">Belirtiler</h3>
 
       <ul class="checklist">
-        <li class="caution"><strong>Bas agrisi</strong></li>
+        <li class="caution"><strong>Baş ağrısı</strong></li>
         <li class="caution"><strong>Yorgunluk, halsizlik</strong></li>
-        <li class="caution"><strong>Mide bulantisi</strong></li>
-        <li class="caution"><strong>Basdönmesi</strong></li>
-        <li class="caution"><strong>Sinirlilik, konsantrasyon guclugu</strong></li>
-        <li class="caution"><strong>Kas kramplari</strong></li>
+        <li class="caution"><strong>Mide bulantısı</strong></li>
+        <li class="caution"><strong>Baş dönmesi</strong></li>
+        <li class="caution"><strong>Sinirlilik, konsantrasyon güçlüğü</strong></li>
+        <li class="caution"><strong>Kas krampları</strong></li>
       </ul>
 
       <div class="info-box info">
         <div class="info-box-title">Neden oluyor?</div>
-        <p>Karbonhidrat kisitladiginda insulin dusuyor. Dusuk insulin bobreklere daha fazla sodyum atmaları sinyali veriyor. Sodyumla birlikte su, potasyum ve magnezyum da kaybediliyor. Belirtilerin cogu bu elektrolit dengesizliginden kaynaklaniyor.</p>
+        <p>Karbonhidrat kısıtladığında insülin düşüyor. Düşük insülin böbreklere daha fazla sodyum atmaları sinyali veriyor. Sodyumla birlikte su, potasyum ve magnezyum da kaybediliyor. Belirtilerin çoğu bu elektrolit dengesizliğinden kaynaklanıyor.</p>
       </div>
 
-      <h3 class="sub-heading">Nasil hafifletilir?</h3>
+      <h3 class="sub-heading">Nasıl hafifletilir?</h3>
 
       <ul class="checklist">
-        <li><strong>Bol su ic.</strong> Gunluk 2.5-3 litre minimum.</li>
-        <li><strong>Tuz aliminı artir.</strong> Yemeklere ekstra tuz ekle, kemik suyu ic.</li>
-        <li><strong>Magnezyum takviyesi al.</strong> 200-400mg/gun.</li>
-        <li><strong>Potasyum iceren gidalar tuket.</strong> Avokado, ispanak, mantar.</li>
-        <li><strong>Kademeli gecis yap.</strong> Direkt 20g karba inmek yerine once 50g ile basla.</li>
+        <li><strong>Bol su iç.</strong> Günlük 2.5-3 litre minimum.</li>
+        <li><strong>Tuz alımını artır.</strong> Yemeklere ekstra tuz ekle, kemik suyu iç.</li>
+        <li><strong>Magnezyum takviyesi al.</strong> 200-400mg/gün.</li>
+        <li><strong>Potasyum içeren gıdalar tüket.</strong> Avokado, ıspanak, mantar.</li>
+        <li><strong>Kademeli geçiş yap.</strong> Direkt 20g karba inmek yerine önce 50g ile başla.</li>
       </ul>
 
       <div class="info-box tip">
-        <div class="info-box-title">Iyi haber</div>
-        <p>Keto gribi gecicidir. Cogu kisi 3-7 gun icinde iyilesir. Elektrolitlere dikkat edildiğinde belirtiler onemli olcude hafifler veya hic yasanmaz.</p>
+        <div class="info-box-title">İyi haber</div>
+        <p>Keto gribi geçicidir. Çoğu kişi 3-7 gün içinde iyileşir. Elektrolitlere dikkat edildiğinde belirtiler önemli ölçüde hafifler veya hiç yaşanmaz.</p>
       </div>
     </div>
 
@@ -498,18 +520,18 @@
       <h2>Dikkat edilecekler</h2>
 
       <div class="info-box warning">
-        <div class="info-box-title">Kimler uygulamamali?</div>
-        <p>Tip 1 diyabet hastalari (ketoasidoz riski). Pankreatit gecmisi olanlar. Karaciger veya bobrek hastaligi olanlar. Hamile veya emziren kadinlar. Yeme bozuklugu gecmisi olanlar. Safra kesesi cikarilmis olan kisiler dikkatli olmali (yag sindirimi etkilenir). Herhangi bir kronik hastalıgin varsa mutlaka doktoruna danis.</p>
+        <div class="info-box-title">Kimler uygulamamalı?</div>
+        <p>Tip 1 diyabet hastaları (ketoasidoz riski). Pankreatit geçmişi olanlar. Karaciğer veya böbrek hastalığı olanlar. Hamile veya emziren kadınlar. Yeme bozukluğu geçmişi olanlar. Safra kesesi çıkarılmış olan kişiler dikkatli olmalı (yağ sindirimi etkilenir). Herhangi bir kronik hastalığın varsa mutlaka doktoruna danış.</p>
       </div>
 
       <h3 class="sub-heading">Uzun vadeli dikkat edilecekler</h3>
 
       <ul class="checklist">
-        <li class="caution"><strong>Lif alimı:</strong> Dusuk karbonhidrat, dusuk lif anlamina gelebilir. Yesil yaprakli sebzelere onem ver.</li>
-        <li class="caution"><strong>Kolesterol:</strong> Bazi kisilerde LDL kolesterol artabilir. Duzenli kan testi yaptir.</li>
-        <li class="caution"><strong>Sosyal zorluklar:</strong> Karbonhidrat agirlikli Turk mutfagi (ekmek, pilav, borek) ile ketojenik diyet uyumsuz. Sosyal ortamlarda zorluk yasayabilirsin.</li>
-        <li class="caution"><strong>Surdurulebilirlik:</strong> Ketojenik diyet uzun vadede herkes icin surdurulebilir degil. Bazi kisiler donemleri olarak (birkaç ay keto, sonra normal beslenme) uyguluyor.</li>
-        <li><strong>Besin cesitliligi:</strong> Kisitli gida gruplari yuzunden vitamin/mineral eksikligi olabilir. Gerekirse multivitamin kullan.</li>
+        <li class="caution"><strong>Lif alımı:</strong> Düşük karbonhidrat, düşük lif anlamına gelebilir. Yeşil yapraklı sebzelere önem ver.</li>
+        <li class="caution"><strong>Kolesterol:</strong> Bazı kişilerde LDL kolesterol artabilir. Düzenli kan testi yaptır.</li>
+        <li class="caution"><strong>Sosyal zorluklar:</strong> Karbonhidrat ağırlıklı Türk mutfağı (ekmek, pilav, börek) ile ketojenik diyet uyumsuz. Sosyal ortamlarda zorluk yaşayabilirsin.</li>
+        <li class="caution"><strong>Sürdürülebilirlik:</strong> Ketojenik diyet uzun vadede herkes için sürdürülebilir değil. Bazı kişiler dönemsel olarak (birkaç ay keto, sonra normal beslenme) uyguluyor.</li>
+        <li><strong>Besin çeşitliliği:</strong> Kısıtlı gıda grupları yüzünden vitamin/mineral eksikliği olabilir. Gerekirse multivitamin kullan.</li>
       </ul>
     </div>
 
@@ -518,16 +540,16 @@
     <!-- 09 SSS -->
     <div class="section" id="sss">
       <div class="section-num">09</div>
-      <h2>Sik sorulan sorular</h2>
+      <h2>Sık sorulan sorular</h2>
 
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Ketozda oldugumu nasil anlarim?
+            Ketozda olduğumu nasıl anlarım?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">En guvenilir yontem kan keton olcumu (0.5-3.0 mmol/L). Idrar stripleri daha ucuz ama daha az hassas. Belirtiler: agizda metalik tat, artan susuzluk, azalan istah, artan enerji ve zihinsel berraklik. Keton nefesi (aseton kokusu) de yaygin bir isaret.</div>
+            <div class="faq-answer-inner">En güvenilir yöntem kan keton ölçümü (0.5-3.0 mmol/L). İdrar stripleri daha ucuz ama daha az hassas. Belirtiler: ağızda metalik tat, artan susuzluk, azalan iştah, artan enerji ve zihinsel berraklık. Keton nefesi (aseton kokusu) da yaygın bir işaret.</div>
           </div>
         </div>
 
@@ -537,7 +559,7 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Evet, ama adaptasyon sureci gerekiyor. Ilk 2-4 haftada performans dusebilir. Beden ketoza adapte olduktan sonra dayaniklilik sporlari icin mükemmel bir yakit sistemi olusturdugunu bildiren sporcular var. Yogun anaerobik aktivite (sprint, agir squat) icin glikoz daha verimli olabilir; bazi sporcular "hedefli keto" (antrenman oncesi 15-30g karb) uyguluyor.</div>
+            <div class="faq-answer-inner">Evet, ama adaptasyon süreci gerekiyor. İlk 2-4 haftada performans düşebilir. Beden ketoza adapte olduktan sonra dayanıklılık sporları için mükemmel bir yakıt sistemi oluşturduğunu bildiren sporcular var. Yoğun anaerobik aktivite (sprint, ağır squat) için glikoz daha verimli olabilir; bazı sporcular "hedefli keto" (antrenman öncesi 15-30g karb) uyguluyor.</div>
           </div>
         </div>
 
@@ -547,33 +569,31 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Cogu meyve karbonhidrat acsindan yuksek. Ama dusuk sekerli meyveler az miktarda tuketilebilir: cilek (100g = ~6g net karb), ahududu, bögürtlen, avokado (teknik olarak meyve). Muz, uzum, elma, mango gibi meyveler ketozdan cikarabilir.</div>
+            <div class="faq-answer-inner">Çoğu meyve karbonhidrat açısından yüksek. Ama düşük şekerli meyveler az miktarda tüketilebilir: çilek (100g = ~6g net karb), ahududu, böğürtlen, avokado (teknik olarak meyve). Muz, üzüm, elma, mango gibi meyveler ketozdan çıkarabilir.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Keto diyeti ne kadar sure uygulamaliyim?
+            Keto diyeti ne kadar süre uygulamalıyım?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Net bir limit yok. Epilepsi tedavisinde yillarca uygulanabiliyor. Kilo verme amacli ise genellikle 3-6 ay onerilir, sonra daha esnek bir dusuk karbonhidrat duzeni. Bazi kisiler "donemsel keto" yapiyor: 2-3 ay keto, sonra 1 ay normal, tekrar keto. Uzun vadeli uygulamada duzenli kan testleri onerilir.</div>
+            <div class="faq-answer-inner">Net bir limit yok. Epilepsi tedavisinde yıllarca uygulanabiliyor. Kilo verme amaçlı ise genellikle 3-6 ay önerilir, sonra daha esnek bir düşük karbonhidrat düzeni. Bazı kişiler "dönemsel keto" yapıyor: 2-3 ay keto, sonra 1 ay normal, tekrar keto. Uzun vadeli uygulamada düzenli kan testleri önerilir.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Keto ile aralikli orucu birlikte uygulayabilir miyim?
+            Keto ile aralıklı oruçu birlikte uygulayabilir miyim?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Evet, cogu kisi bu ikisini birlikte uyguladiklari icin sinerjik etki goruldugunu bildiriyor. Keto zaten aclik hissini azaltiyor (ketonlar istah baskilar), bu da aralikli orucu kolaylastiriyor. 16:8 + keto populer bir kombinasyon. Ama ikisine de ayni anda baslamak zor olabilir. Once birine alis, sonra digeri ekle.</div>
+            <div class="faq-answer-inner">Evet, çoğu kişi bu ikisini birlikte uyguladıkları için sinerjik etki görüldüğünü bildiriyor. Keto zaten açlık hissini azaltıyor (ketonlar iştah baskılar), bu da aralıklı oruçu kolaylaştırıyor. 16:8 + keto popüler bir kombinasyon. Ama ikisine de aynı anda başlamak zor olabilir. Önce birine alış, sonra diğerini ekle.</div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="section-divider"></div>
 
     <!-- 10 Kaynaklar -->
     <div class="references" id="kaynaklar">
