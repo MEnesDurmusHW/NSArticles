@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16:8 Aralıklı Oruç Rehberi — NS Articles</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4a9d5b;
+    --green-dim: rgba(74, 157, 91, 0.1);
+    --orange: #d4862a;
+    --orange-dim: rgba(212, 134, 42, 0.1);
+    --red: #c0392b;
+    --red-dim: rgba(192, 57, 43, 0.08);
+  }
+  [data-theme="dark"] {
+    --green: #6abf7b;
+    --green-dim: rgba(106, 191, 123, 0.12);
+    --orange: #e8a84c;
+    --orange-dim: rgba(232, 168, 76, 0.12);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.1);
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1400&q=80') center/cover no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+  }
+  [data-theme="dark"] .hero::before { opacity: 0.08; }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* Summary Cards */
+  .summary-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); }
+
+  .stat-card .stat-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .stat-card .stat-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .stat-card .stat-value {
+    font-family: var(--serif);
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* Clock Diagram Section */
+  .clock-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .clock-section h2 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .clock-container {
+    display: inline-block;
+    position: relative;
+    max-width: 340px;
+    width: 100%;
+  }
+
+  .clock-container svg { width: 100%; height: auto; }
+
+  .clock-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .clock-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-dot.eating { background: var(--green); }
+  .legend-dot.fasting { background: var(--text-muted); opacity: 0.4; }
+
+  /* Guide Content */
+  .guide {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+
+  .section {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .section p {
+    margin-bottom: 1.3rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3rem 0;
+  }
+
+  /* Info/Tip/Warning boxes */
+  .info-box {
+    border-radius: 0 8px 8px 0;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .info-box.tip {
+    background: var(--green-dim);
+    border-left: 3px solid var(--green);
+  }
+
+  .info-box.warning {
+    background: var(--red-dim);
+    border-left: 3px solid var(--red);
+  }
+
+  .info-box.note {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+  }
+
+  .info-box-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .info-box.tip .info-box-title { color: var(--green); }
+  .info-box.warning .info-box-title { color: var(--red); }
+  .info-box.note .info-box-title { color: var(--accent); }
+
+  .info-box p {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    text-align: justify;
+  }
+
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* Experiment boxes (research) */
+  .experiment {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .experiment-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .experiment p {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    text-align: justify;
+  }
+
+  .experiment p:last-child { margin-bottom: 0; }
+
+  /* Meal Plan Table */
+  .meal-table-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .meal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 480px;
+  }
+
+  .meal-table th {
+    background: var(--accent-glow);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .meal-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+
+  .meal-table tr:last-child td { border-bottom: none; }
+
+  .meal-table tr:nth-child(even) td { background: var(--surface); }
+
+  .meal-table .time-col {
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    width: 90px;
+  }
+
+  .meal-table .meal-col { font-weight: 500; width: 120px; }
+
+  /* Step List */
+  .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    counter-reset: step-counter;
+  }
+
+  .step-list li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .step-list li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .step-list li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Benefit Cards */
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 1.5rem 0;
+  }
+
+  .benefit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px;
+  }
+
+  .benefit-card .benefit-icon {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .benefit-card .benefit-title {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .benefit-card .benefit-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* FAQ Accordion */
+  .faq-list {
+    margin: 1.5rem 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px 0;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--accent); }
+
+  .faq-question .faq-arrow {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    color: var(--accent);
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-answer-inner {
+    padding: 0 0 18px;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .faq-item.open .faq-answer { max-height: 500px; }
+
+  /* Image sections */
+  .guide-image {
+    width: 100%;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    object-fit: cover;
+    max-height: 300px;
+  }
+
+  /* Sub heading */
+  .sub-heading {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 2.2rem 0 1rem;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .checklist li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    background: var(--green-dim);
+  }
+
+  .checklist li.caution::before {
+    border-color: var(--orange);
+    background: var(--orange-dim);
+  }
+
+  .checklist li.danger::before {
+    border-color: var(--red);
+    background: var(--red-dim);
+  }
+
+  /* References */
+  .references {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .references h2 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+  }
+
+  .references ol {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 2;
+    padding-left: 1.2rem;
+  }
+
+  /* TOC Sidebar */
+  .toc-sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(16px, calc((100vw - 680px) / 2 - 220px));
+    width: 180px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .toc-sidebar.visible { opacity: 1; pointer-events: auto; }
+  .toc-sidebar ul { list-style: none; margin: 0; padding: 0; }
+  .toc-sidebar .toc-link {
+    display: block;
+    padding: 5px 0 5px 12px;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .toc-sidebar .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+  .toc-sidebar .toc-link:hover { color: var(--text); }
+  @media (max-width: 1100px) { .toc-sidebar { display: none; } }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .guide { padding: 2rem 1.5rem 3rem; }
+    .clock-section { padding: 1.5rem 1.5rem 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card { padding: 18px 12px; }
+    .stat-card .stat-icon { font-size: 1.4rem; }
+    .stat-card .stat-value { font-size: 0.9rem; }
+    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .guide { padding: 1.5rem 1.2rem 2.5rem; }
+    .section h2 { font-size: 1.3rem; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .clock-container { max-width: 280px; }
+  }
+
+  @media (max-width: 360px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-tag">Pratik Rehber</p>
+    <h1>16:8 Aralıklı Oruç <em>Rehberi</em></h1>
+    <p class="hero-desc">Gunde 8 saat ye, 16 saat oruç tut. En yaygin ve en kolay uygulanabilen aralikli oruc protokolu.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Summary Cards -->
+  <section class="summary-section">
+    <div class="summary-grid">
+      <div class="stat-card">
+        <span class="stat-icon">&#128337;</span>
+        <div class="stat-label">Yeme penceresi</div>
+        <div class="stat-value">8 saat</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#127769;</span>
+        <div class="stat-label">Oruc penceresi</div>
+        <div class="stat-value">16 saat</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#9989;</span>
+        <div class="stat-label">Zorluk</div>
+        <div class="stat-value">Baslangic</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#128200;</span>
+        <div class="stat-label">Kanit duzeyi</div>
+        <div class="stat-value">Guclu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clock Diagram -->
+  <section class="clock-section">
+    <h2>Gunluk Zaman Penceresi</h2>
+    <div class="clock-container">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background circle -->
+        <circle cx="150" cy="150" r="120" fill="none" stroke="var(--border)" stroke-width="2"/>
+
+        <!-- Fasting arc: 20:00 to 12:00 (16 hours = 240 degrees) -->
+        <!-- Starting from top (12 o'clock = -90deg), 20:00 = 150deg, going 240deg -->
+        <circle cx="150" cy="150" r="105" fill="none"
+                stroke="var(--text-muted)" stroke-width="28" stroke-opacity="0.15"
+                stroke-dasharray="439.82 220.89"
+                stroke-dashoffset="-109.96"
+                stroke-linecap="round"/>
+
+        <!-- Eating arc: 12:00 to 20:00 (8 hours = 120 degrees) -->
+        <circle cx="150" cy="150" r="105" fill="none"
+                stroke="var(--green)" stroke-width="28" stroke-opacity="0.7"
+                stroke-dasharray="219.91 439.82"
+                stroke-dashoffset="-109.96"
+                stroke-linecap="round"/>
+
+        <!-- Hour markers and labels -->
+        <!-- 12:00 (top-ish, eating starts) -->
+        <text x="150" y="35" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="13" font-weight="600">12:00</text>
+        <!-- 16:00 -->
+        <text x="260" y="155" text-anchor="start" fill="var(--text-dim)" font-family="DM Sans" font-size="11">16:00</text>
+        <!-- 20:00 (eating ends) -->
+        <text x="150" y="278" text-anchor="middle" fill="var(--orange)" font-family="DM Sans" font-size="13" font-weight="600">20:00</text>
+        <!-- 00:00 -->
+        <text x="35" y="155" text-anchor="end" fill="var(--text-dim)" font-family="DM Sans" font-size="11">00:00</text>
+        <!-- 08:00 -->
+        <text x="84" y="62" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">08:00</text>
+        <!-- 04:00 -->
+        <text x="60" y="220" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">04:00</text>
+
+        <!-- Center labels -->
+        <text x="150" y="138" text-anchor="middle" fill="var(--text)" font-family="Playfair Display" font-size="28" font-weight="400">16:8</text>
+        <text x="150" y="162" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11">aralikli oruc</text>
+
+        <!-- Small dots for hours -->
+        <circle cx="150" cy="30" r="3" fill="var(--green)"/>
+        <circle cx="150" cy="270" r="3" fill="var(--orange)"/>
+      </svg>
+    </div>
+
+    <div class="clock-legend">
+      <span><span class="legend-dot eating"></span>Yeme (12:00 - 20:00)</span>
+      <span><span class="legend-dot fasting"></span>Oruc (20:00 - 12:00)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TOC Sidebar -->
+  <nav class="toc-sidebar" id="tocSidebar">
+    <ul>
+      <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
+      <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
+      <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
+      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
+    </ul>
+  </nav>
+
+  <!-- Guide Content -->
+  <article class="guide">
+
+    <!-- 01 Nedir -->
+    <div class="section" id="nedir">
+      <div class="section-num">01</div>
+      <h2>Nedir?</h2>
+
+      <p>16:8 aralikli oruc (intermittent fasting), gunun 16 saatinde hicbir kalori almaman, kalan 8 saatlik pencerede normal sekilde yemeni iceren bir beslenme zamanlama protokolu. Bir diyet degil, bir <i>zamanlama stratejisi</i>.</p>
+
+      <p>En yaygin uygulama: oglen 12:00'de ilk ogun, aksam 20:00'de son ogun. Arada istedigin gibi yersin. 20:00'den sonra ertesi gun 12:00'ye kadar sadece su, sade kahve veya bitki cayi icersin.</p>
+
+      <div class="info-box note">
+        <div class="info-box-title">Onemli</div>
+        <p>16:8 bir kalori kisitlamasi degil. Yeme penceresinde yeterli ve dengeli beslenmen gerekiyor. Amac az yemek degil, yeme zamanlamasini degistirmek.</p>
+      </div>
+
+      <p>Bu yaklasim ilk bakista modern gorunse de aslinda atalarimizin varsayilan yeme duzeni buydu. Avci-toplayicilar duzensiz yiyordu; av bulduklarinda yediler, bulamadiklarina saatlerce ac kaldilar. Uc ogun arti iki atistirmalik tamamen modern bir icat.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 Nasil calisir -->
+    <div class="section" id="nasil-calisir">
+      <div class="section-num">02</div>
+      <h2>Nasil calisir?</h2>
+
+      <p>Yedikten sonra bedenin oncelikle glikozu (kan sekerini) enerji olarak kullanir. Glikoz bitince karacigerdeki glikojen depolarini bosaltir. Bu genellikle 10-14 saat surer. Glikojen de bitince beden yag yakmaya baslar. Bu gecise "metabolik gecis" (metabolic switch) deniyor.</p>
+
+      <p>16 saatlik oruc penceresi tam bu gecisi tetiklemek icin tasarlanmis. 12-14 saatte glikojen biter, kalan 2-4 saatte beden aktif olarak yag yakar ve bazi onarim sureclerini baslatir.</p>
+
+      <h3 class="sub-heading">Oruc sirasinda bedeninde ne oluyor?</h3>
+
+      <ul class="checklist">
+        <li><strong>0-6 saat:</strong> Bedenin son ogunu sindirir, glikoz kullanir. Insulin yuksek.</li>
+        <li><strong>6-12 saat:</strong> Glikoz azalir, glikojen depolarindan enerji cekilir. Insulin dusmeye baslar.</li>
+        <li><strong>12-16 saat:</strong> Glikojen bitmek uzere. Yag yakimi baslar. Insulin dusuk. Otofaji (hucresel temizlik) harekete gecer.</li>
+        <li><strong>16-24 saat:</strong> Yag yakimi hiz kazanir. Keton uretimi artar. BDNF (beyin icin buyume faktoru) yukselir.</li>
+      </ul>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Otofaji nedir?</div>
+        <p>Hucrelerin hasarli bilesenlerini, bozulmus proteinlerini temizleyip geri donusturme sureci. Bir nevi hucresel bakim modu. Yoshinori Ohsumi bu mekanizmayi kesfettigi icin 2016 Nobel Tip Odulu'nu aldi. Otofaji genellikle 16+ saat acliktan sonra belirgin sekilde aktiflesir.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">03</div>
+      <h2>Nasil baslanir?</h2>
+
+      <p>Hemen 16 saatlik oruca baslamak zor olabilir. Kademeli bir gecis cok daha surdurulebilir.</p>
+
+      <ol class="step-list">
+        <li><strong>1. Hafta: 12:12 ile basla.</strong> Ornegin 08:00-20:00 arasi ye, 20:00'den sonra hicbir sey yeme. Bu cogu insan icin zaten normal duzene yakin.</li>
+        <li><strong>2. Hafta: 14:10'a gec.</strong> Sabah kahvaltisini 10:00'a kaydir. Yeme penceren 10:00-20:00 olsun.</li>
+        <li><strong>3. Hafta: 16:8'e ulaş.</strong> Kahvaltiyi oglen 12:00'ye kaydir. Yeme penceren 12:00-20:00. Hedef pencere.</li>
+        <li><strong>Sonrasi: Kendine uyarla.</strong> 12:00-20:00 herkes icin ideal olmak zorunda degil. 10:00-18:00 veya 13:00-21:00 da olabilir. Onemli olan 16 saatlik orucu tutmak.</li>
+      </ol>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Ipucu</div>
+        <p>Sabahları ac kalmak zor geliyorsa: sade siyah kahve veya yesil cay ic. Kalorisi yok, orucu bozmuyor ve aclik hissini bastirir. Sut, seker veya tatlandirici ekleme.</p>
+      </div>
+
+      <h3 class="sub-heading">Oruc sirasinda ne icebilirsin?</h3>
+
+      <ul class="checklist">
+        <li><strong>Su:</strong> Sinirsiz. Limonlu su da olur.</li>
+        <li><strong>Siyah kahve:</strong> Sade, sutsuz, sekersiz.</li>
+        <li><strong>Yesil/bitki cayi:</strong> Sade.</li>
+        <li><strong>Maden suyu:</strong> Dogal, aromali olmayanlar.</li>
+        <li class="caution"><strong>Sut, seker, bal:</strong> Orucu bozar. Kullanma.</li>
+        <li class="caution"><strong>Diyet icecekler:</strong> Teknik olarak orucu bozmaz ama insulin tepkisi yaratabilir.</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">04</div>
+      <h2>Ornek gunluk program</h2>
+
+      <p>Asagidaki tablo tipik bir 16:8 gununu gosteriyor. Saatler esnektir, kendi rutinine uyarla.</p>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Saat</th>
+              <th>Ogun</th>
+              <th>Ornek</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">07:00</td>
+              <td class="meal-col">Uyanis</td>
+              <td>Su, sade kahve veya yesil cay</td>
+            </tr>
+            <tr>
+              <td class="time-col">12:00</td>
+              <td class="meal-col">1. Ogun</td>
+              <td>Yumurta, avokado, tam tahilli ekmek, sebze. Veya protein agirlikli bir salata.</td>
+            </tr>
+            <tr>
+              <td class="time-col">15:30</td>
+              <td class="meal-col">Ara ogun</td>
+              <td>Bir avuc badem, meyve, yogurt veya protein bar.</td>
+            </tr>
+            <tr>
+              <td class="time-col">19:30</td>
+              <td class="meal-col">2. Ogun</td>
+              <td>Tavuk/balik, pilav veya patates, bol sebze. Dengeli bir ana ogun.</td>
+            </tr>
+            <tr>
+              <td class="time-col">20:00</td>
+              <td class="meal-col">Pencere kapanir</td>
+              <td>Son lokmani 20:00'den once bitir. Bundan sonra sadece su/cay.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box note">
+        <div class="info-box-title">Kalori hakkinda</div>
+        <p>16:8 bir kalori kisitlamasi degil. Gunluk kalori ihtiyacini 8 saatlik pencereye sigmak onemli. Cok az yersen metabolizman yavaslar ve surduremezsin. Normal porsiyonlarda, dengeli ye.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Faydalari -->
+    <div class="section" id="faydalari">
+      <div class="section-num">05</div>
+      <h2>Arastirma destekli faydalari</h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <span class="benefit-icon">&#9878;</span>
+          <div class="benefit-title">Kilo kontrolu</div>
+          <div class="benefit-desc">Yag yakimini arttirir, insulin direncini azaltir.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#129504;</span>
+          <div class="benefit-title">Bilissel fonksiyon</div>
+          <div class="benefit-desc">BDNF uretimini arttirir, hafiza ve ogrenmeyi destekler.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#10084;&#65039;</span>
+          <div class="benefit-title">Kalp sagligi</div>
+          <div class="benefit-desc">Kan basincini dusurur, kolesterol profilini iyilestirir.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128296;</span>
+          <div class="benefit-title">Hucresel onarim</div>
+          <div class="benefit-desc">Otofaji ile hasarli hucreler temizlenir ve geri donusturulur.</div>
+        </div>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Sutton ve ark., 2018 — Cell Metabolism</div>
+        <p>Diyabet riski tasiyan erkeklere 5 hafta boyunca 6 saatlik erken yeme penceresi uygulandi. Katilimcilar kilo vermedi, kalori kisitlamasi da yoktu, sadece yeme saatleri degisti. 5 hafta sonra insulin seviyeleri dustu, kan basinci belirgin sekilde azaldi ve oksidatif stres belirtecleri geriledi.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Liu ve ark., 2022 — NEJM</div>
+        <p>139 obez katilimci 12 ay boyunca takip edildi. 16:8 grubu 8 kilo verdi, sadece kalori kisitlamasi grubu 6.3 kilo. Yag kutlesinde fark daha da belirgin: 16:8 grubunda 5.9 kilo yag kaybi, diger grupta 4.5 kilo. Ayni kalori hedefi, farkli sonuc.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">de Cabo ve Mattson, 2019 — NEJM (Derleme)</div>
+        <p>Aralikli orucun saglik, yaslanma ve hastalik uzerindeki etkilerini inceleyen kapsamli derleme. Aralikli oruc insulin duyarliligini iyilestiriyor, oksidatif stresi azaltiyor, inflamasyonu baskilıyor ve hucresel onarim sureclerini aktive ediyor. Etkiler hayvan modellerinde de insan calismalarinda da tutarli.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Dikkat edilecekler -->
+    <div class="section" id="dikkat">
+      <div class="section-num">06</div>
+      <h2>Dikkat edilecekler</h2>
+
+      <div class="info-box warning">
+        <div class="info-box-title">Kimler uygulamamali?</div>
+        <p>Hamile veya emziren kadinlar. 18 yas alti cocuklar ve ergenler. Yeme bozuklugu gecmisi olan kisiler. Tip 1 diyabet veya insulin kullanan Tip 2 diyabet hastalari (doktor kontrolu sart). Dusuk tansiyon problemi olan kisiler. Ciddi kronik hastaligi olanlar mutlaka doktoruna danismali.</p>
+      </div>
+
+      <h3 class="sub-heading">Olasi yan etkiler (genellikle gecici)</h3>
+
+      <ul class="checklist">
+        <li class="caution"><strong>Bas agrisi:</strong> Ilk birkaç gun sik. Bol su ic, elektrolit dengesine dikkat et.</li>
+        <li class="caution"><strong>Aclik hissi:</strong> Ilk 1-2 hafta yogun olabilir. Kademeli gecis bu sorunu azaltir.</li>
+        <li class="caution"><strong>Halsizlik:</strong> Beden metabolik gecise uyum saglayana kadar surbilir. Genellikle 1 hafta icinde duzellir.</li>
+        <li class="caution"><strong>Sinirlilik:</strong> Dusuk kan sekeri kaynaklı olabilir. Yeme penceresinde yeterli kalori almanla ilgili.</li>
+        <li><strong>Uyku iyilesmesi:</strong> Cogu kisi yatmadan 2-3 saat once yemeyi birakmanin uyku kalitesini artirdigini bildiriyor.</li>
+      </ul>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Altin kural</div>
+        <p>Bedenini dinle. Bas donmesi, treme veya asiri halsizlik hissedersen orucu boz. 16:8 bir disiplin testi degil, bir saglik araci. Kotu hissettiren herhangi bir sey "saglikli" degildir.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 SSS -->
+    <div class="section" id="sss">
+      <div class="section-num">07</div>
+      <h2>Sık sorulan sorular</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Kahve orucu bozar mi?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Sade siyah kahve orucu bozmaz (2-5 kalori). Ama sut, seker, krema veya tatlandirici eklersen orucu bozarsin. Bir miktar MCT yagi veya hindistancevizi yagi de tartismali; teknik olarak orucu bozar ama otofajiyi tamamen durdurmayabilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Her gun yapmak zorunda miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Hayir. Haftada 5 gun uygulayip 2 gun normal yemek de isleyen bir yaklasim. Bazi insanlar sadece hafta icinde uyguluyor. Tutarlilik onemli ama esneklik de surdurulebilirlik icin kritik. Bir gun bozdugun icin her sey sifirlanmaz.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Spor yaparken 16:8 uygulanabilir mi?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Evet. Hafif-orta yoğunlukta egzersiz (yuruyus, yoga, hafif agirlik) oruclu yapilabilir. Yogun antrenman yapiyorsan yeme penceresine denk getirmek daha iyi olabilir. Bazi sporcular oruclu antrenmanda yag yakiminin arttigini raporluyor ama performans gerektiren durumlar icin bireysel farkliliklar onemli.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Kas kaybeder miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">16 saatlik oructe belirgin kas kaybi beklenmez, ozellikle yeterli protein aliyorsan ve direnç antrenmani yapiyorsan. Arastirmalar 16:8'in yag kaybini artirirken kas kutlesini buyuk olcude korudigini gosteriyor. Ancak cok uzun sureli aclik (24+ saat) farkli olabilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Kadinlar icin farkli mi?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Bazi kadinlar uzun oruc surelerinde hormonal degisiklikler yasayabilir. Adet duzensizligi veya hormonal sorunlar fark edersen oruc suresini kisalt (14:10 gibi). Hamilelik ve emzirme donemlerinde aralikli oruc uygulanmamali. Kademeli baslayip bedeninin tepkisini izlemek en guvenli yaklasim.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Ne kadar surede sonuc gorurüm?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Metabolik degisiklikler (insulin duyarliligi, enerji) 1-2 haftada hissedilebilir. Kilo degisimi genellikle 3-4 haftada fark edilir. Ama bu cok bireysel. Onemli olan kisa vadeli sonuclara degil, surdurulebilir bir yasam bicimi olarak bakmak.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 Kaynaklar -->
+    <div class="references" id="kaynaklar">
+      <h2>Kaynaklar</h2>
+      <ol>
+        <li>Sutton, E.F., et al. (2018). Early time-restricted feeding improves insulin sensitivity, blood pressure, and oxidative stress. <i>Cell Metabolism</i>, 27(6), 1212-1221.</li>
+        <li>Liu, D., et al. (2022). Calorie restriction with or without time-restricted eating in weight loss. <i>NEJM</i>, 386(16), 1495-1504.</li>
+        <li>de Cabo, R. & Mattson, M.P. (2019). Effects of intermittent fasting on health, aging, and disease. <i>NEJM</i>, 381(26), 2541-2551.</li>
+        <li>Mattson, M.P., et al. (2018). Intermittent metabolic switching, neuroplasticity and brain health. <i>Nature Reviews Neuroscience</i>, 19(2), 63-80.</li>
+        <li>Ohsumi, Y. (2016). Nobel Lecture: Autophagy - intracellular recycling system. Nobel Prize in Physiology or Medicine.</li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmus</span></a>
+
+  <script>
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  }
+  </script>
+
+  <script>
+  (function() {
+    var toc = document.getElementById('tocSidebar');
+    var links = toc.querySelectorAll('.toc-link');
+    var hero = document.querySelector('.hero');
+    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
+
+    function updateVisibility() {
+      if (!hero) return;
+      if (hero.getBoundingClientRect().bottom < 0) {
+        toc.classList.add('visible');
+      } else {
+        toc.classList.remove('visible');
+      }
+    }
+
+    var currentActive = null;
+    function setActive(id) {
+      if (currentActive === id) return;
+      currentActive = id;
+      links.forEach(function(link) {
+        link.classList.toggle('active', link.dataset.section === id);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.section);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + this.dataset.section);
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>

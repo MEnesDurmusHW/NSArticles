@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4:3 Aralıklı Oruç Rehberi — NS Articles</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4a9d5b;
+    --green-dim: rgba(74, 157, 91, 0.1);
+    --orange: #d4862a;
+    --orange-dim: rgba(212, 134, 42, 0.1);
+    --red: #c0392b;
+    --red-dim: rgba(192, 57, 43, 0.08);
+  }
+  [data-theme="dark"] {
+    --green: #6abf7b;
+    --green-dim: rgba(106, 191, 123, 0.12);
+    --orange: #e8a84c;
+    --orange-dim: rgba(232, 168, 76, 0.12);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.1);
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1400&q=80') center/cover no-repeat;
+    opacity: 0.12;
+    z-index: 0;
+  }
+  [data-theme="dark"] .hero::before { opacity: 0.06; }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* Summary Cards */
+  .summary-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .stat-card .stat-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-dim); margin-bottom: 6px; }
+  .stat-card .stat-value { font-family: var(--serif); font-size: 1rem; line-height: 1.4; color: var(--text); }
+
+  /* Week Calendar */
+  .calendar-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .calendar-section h2 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .day-card {
+    border-radius: 10px;
+    padding: 16px 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+
+  .day-card:hover { transform: translateY(-2px); }
+
+  .day-card.normal {
+    background: var(--green-dim);
+    border-color: var(--green);
+  }
+
+  .day-card.fast {
+    background: var(--orange-dim);
+    border-color: var(--orange);
+  }
+
+  .day-name {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .day-card.normal .day-name { color: var(--green); }
+  .day-card.fast .day-name { color: var(--orange); }
+
+  .day-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+
+  .day-icon {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-dot.normal { background: var(--green); }
+  .legend-dot.fast { background: var(--orange); }
+
+  /* Guide Content */
+  .guide {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+
+  .section { margin-bottom: 3.5rem; }
+  .section-num { font-family: var(--serif); font-size: 0.85rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.5rem; }
+  .section h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400; line-height: 1.3; margin-bottom: 1.5rem; color: var(--text); }
+  .section p { margin-bottom: 1.3rem; font-size: 1.05rem; text-align: justify; }
+  .section-divider { width: 40px; height: 1px; background: var(--divider); margin: 3rem 0; }
+
+  .sub-heading { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text); margin: 2.2rem 0 1rem; }
+
+  /* Info boxes */
+  .info-box { border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .info-box.tip { background: var(--green-dim); border-left: 3px solid var(--green); }
+  .info-box.warning { background: var(--red-dim); border-left: 3px solid var(--red); }
+  .info-box.note { background: var(--accent-glow); border-left: 3px solid var(--accent); }
+  .info-box-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .info-box.tip .info-box-title { color: var(--green); }
+  .info-box.warning .info-box-title { color: var(--red); }
+  .info-box.note .info-box-title { color: var(--accent); }
+  .info-box p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* Experiment boxes */
+  .experiment { background: var(--accent-glow); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .experiment-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .experiment p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .experiment p:last-child { margin-bottom: 0; }
+
+  /* Meal Table */
+  .meal-table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 8px; border: 1px solid var(--border); }
+  .meal-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 480px; }
+  .meal-table th { background: var(--accent-glow); font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); padding: 14px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .meal-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  .meal-table tr:last-child td { border-bottom: none; }
+  .meal-table tr:nth-child(even) td { background: var(--surface); }
+  .meal-table .time-col { font-weight: 600; color: var(--accent); white-space: nowrap; width: 90px; }
+  .meal-table .meal-col { font-weight: 500; width: 120px; }
+
+  /* Step List */
+  .step-list { list-style: none; padding: 0; margin: 1.5rem 0; counter-reset: step-counter; }
+  .step-list li { counter-increment: step-counter; display: flex; gap: 16px; margin-bottom: 1.2rem; align-items: flex-start; }
+  .step-list li::before { content: counter(step-counter); flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-glow); color: var(--accent); font-family: var(--serif); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-list li strong { color: var(--text); font-weight: 600; }
+
+  /* Benefit Cards */
+  .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; }
+  .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
+  .benefit-card .benefit-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+  .benefit-card .benefit-title { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 1rem 0; }
+  .checklist li { padding: 6px 0 6px 28px; position: relative; font-size: 1rem; margin-bottom: 4px; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 12px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--green); background: var(--green-dim); }
+  .checklist li.caution::before { border-color: var(--orange); background: var(--orange-dim); }
+  .checklist li.danger::before { border-color: var(--red); background: var(--red-dim); }
+
+  /* FAQ */
+  .faq-list { margin: 1.5rem 0; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question { width: 100%; background: none; border: none; padding: 18px 0; font-family: 'Source Sans 3', sans-serif; font-size: 1.02rem; font-weight: 500; color: var(--text); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s; }
+  .faq-question:hover { color: var(--accent); }
+  .faq-question .faq-arrow { flex-shrink: 0; font-size: 0.7rem; color: var(--accent); transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .faq-answer-inner { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; }
+  .faq-item.open .faq-answer { max-height: 500px; }
+
+  /* Comparison table */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .compare-table th { background: var(--accent-glow); color: var(--accent); font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 12px 16px; text-align: left; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* References */
+  .references { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--divider); }
+  .references h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 1.2rem; }
+  .references ol { font-size: 0.82rem; color: var(--text-dim); line-height: 2; padding-left: 1.2rem; }
+
+  /* TOC Sidebar */
+  .toc-sidebar { position: fixed; top: 50%; transform: translateY(-50%); left: max(16px, calc((100vw - 680px) / 2 - 220px)); width: 180px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .toc-sidebar.visible { opacity: 1; pointer-events: auto; }
+  .toc-sidebar ul { list-style: none; margin: 0; padding: 0; }
+  .toc-sidebar .toc-link { display: block; padding: 5px 0 5px 12px; font-family: var(--sans); font-size: 0.72rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s, border-color 0.2s; border-left: 2px solid transparent; line-height: 1.4; }
+  .toc-sidebar .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+  .toc-sidebar .toc-link:hover { color: var(--text); }
+  @media (max-width: 1100px) { .toc-sidebar { display: none; } }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .guide { padding: 2rem 1.5rem 3rem; }
+    .week-grid { gap: 6px; }
+    .day-card { padding: 12px 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card { padding: 18px 12px; }
+    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .guide { padding: 1.5rem 1.2rem 2.5rem; }
+    .section h2 { font-size: 1.3rem; }
+    .day-card { padding: 10px 2px; }
+    .day-name { font-size: 0.6rem; }
+    .day-icon { font-size: 1.1rem; }
+    .day-label { font-size: 0.65rem; }
+  }
+
+  @media (max-width: 360px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-tag">Pratik Rehber</p>
+    <h1>4:3 Aralikli Oruc <em>Rehberi</em></h1>
+    <p class="hero-desc">Haftada 3 gun kalori kisitlamasi, 4 gun normal beslenme. Daha yogun ama daha etkili bir aralikli oruc protokolu.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Summary Cards -->
+  <section class="summary-section">
+    <div class="summary-grid">
+      <div class="stat-card">
+        <span class="stat-icon">&#128197;</span>
+        <div class="stat-label">Kisitlama gunleri</div>
+        <div class="stat-value">Haftada 3</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#127860;</span>
+        <div class="stat-label">Normal gunler</div>
+        <div class="stat-value">Haftada 4</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#9888;&#65039;</span>
+        <div class="stat-label">Zorluk</div>
+        <div class="stat-value">Orta-ileri</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#128200;</span>
+        <div class="stat-label">Kanit duzeyi</div>
+        <div class="stat-value">Guclu</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Week Calendar -->
+  <section class="calendar-section">
+    <h2>Haftalik Takvim</h2>
+    <div class="week-grid">
+      <div class="day-card normal">
+        <span class="day-icon">&#127869;</span>
+        <div class="day-name">Pzt</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+        <span class="day-icon">&#128167;</span>
+        <div class="day-name">Sal</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+        <span class="day-icon">&#127869;</span>
+        <div class="day-name">Car</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+        <span class="day-icon">&#128167;</span>
+        <div class="day-name">Per</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+        <span class="day-icon">&#127869;</span>
+        <div class="day-name">Cum</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+        <span class="day-icon">&#128167;</span>
+        <div class="day-name">Cmt</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+        <span class="day-icon">&#127869;</span>
+        <div class="day-name">Paz</div>
+        <div class="day-label">Normal</div>
+      </div>
+    </div>
+    <div class="calendar-legend">
+      <span><span class="legend-dot normal"></span>Normal beslenme</span>
+      <span><span class="legend-dot fast"></span>Kisitlama (~500 kcal)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TOC Sidebar -->
+  <nav class="toc-sidebar" id="tocSidebar">
+    <ul>
+      <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
+      <li><a href="#karsilastirma" class="toc-link" data-section="karsilastirma">16:8 ile farki</a></li>
+      <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
+      <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
+      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
+    </ul>
+  </nav>
+
+  <!-- Guide Content -->
+  <article class="guide">
+
+    <!-- 01 Nedir -->
+    <div class="section" id="nedir">
+      <div class="section-num">01</div>
+      <h2>Nedir?</h2>
+
+      <p>4:3 aralikli oruc, haftanin 3 gununde kalori aliminizi ciddi sekilde kisitlamaniz (~500 kcal kadinlar, ~600 kcal erkekler), kalan 4 gunde normal yemeniz uzerine kurulu bir protokol. Bazi kaynaklarda "alternate day fasting" (gun asiri oruc) varyasyonu olarak da gecer.</p>
+
+      <p>16:8'den farkli olarak burada her gun uygulanmiyor. Kisitlama gunlerinde tamamen ac kalmak yerine cok dusuk kalorili besleniyorsun. Bu, tamamen ac kalmaya gore daha surdurulebilir ve sosyal hayatla daha uyumlu.</p>
+
+      <div class="info-box note">
+        <div class="info-box-title">Temel prensip</div>
+        <p>Kisitlama gunlerinde yaklasik 500 kcal alirsin. Bu genellikle 1-2 kucuk ogun demek. Normal gunlerde kalori saymana gerek yok, dengeli ve normal porsiyonlarda yersin.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 Nasil calisir -->
+    <div class="section" id="nasil-calisir">
+      <div class="section-num">02</div>
+      <h2>Nasil calisir?</h2>
+
+      <p>4:3'un metabolik etkisi 16:8'e benzer ama daha yogundur. Kisitlama gunlerinde beden glikojen depolarini tamamen bosaltir ve uzun sureli yag yakimi moduna girer. Normal gunlerde ise beden toparlanir, kaslar beslenir ve enerji depolari yenilenir.</p>
+
+      <p>Bu "dalgali" yaklasim bedenin metabolik esnekligini arttirir: yani bedenin ihtiyaca gore glikoz ve yag arasinda gecis yapma becerisini guclendirir. Metabolik esneklik sagliklı metabolizmanin temel gostergelerinden biri.</p>
+
+      <h3 class="sub-heading">Kisitlama gununde ne oluyor?</h3>
+
+      <p>500 kcal civarinda beslendiginizde beden hizla glikojen depolarini bosaltir. Gercek aclik olmadigi icin stres tepkisi minimaldır, ama yag yakimi ve otofaji surecleris aktif sekilde calisir. Ertesi gun normal yediginizde beden bu surecleri durdurur ve yeniden insaat moduna gecer.</p>
+
+      <p>Bu dongu, surekli kalori kisitlamasinin aksine metabolizmanin yavaslamasini engelliyor. Bedenin "aclik moduna" girmesine firsat vermiyor cunku her kisitlama gununun ardından normal beslenme geliyor.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">03</div>
+      <h2>Nasil baslanir?</h2>
+
+      <ol class="step-list">
+        <li><strong>Oncelikle 16:8'i dene.</strong> Eger 16:8'i hic denemediysen, once 2-3 hafta 16:8 uygula. Bu bedenini aralikli oruca hazirlar.</li>
+        <li><strong>5:2 ile basla.</strong> Haftada sadece 2 gun kisitlama yap, 5 gun normal ye. 2-3 hafta sonra rahat hissedersen 4:3'e gec.</li>
+        <li><strong>Kisitlama gunlerini planla.</strong> Art arda 2 kisitlama gunu koyma. Sal-Per-Cmt veya Pzt-Car-Cum gibi esit aralikli dagitimlar ideal.</li>
+        <li><strong>500 kcal'i akilli kullan.</strong> Protein agirlikli, lifli yiyeceklere odaklan. Bunlar tok tutar. Sekeri ve islenmiş karbonhidrati minimumda tut.</li>
+        <li><strong>Normal gunlerde asiriya kacma.</strong> "Dun ac kaldim, bugun telafi edeyim" dusuncesine dusme. Normal porsiyonlarda, dengeli ye.</li>
+      </ol>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Ipucu</div>
+        <p>Kisitlama gunlerinde ogunlerini mumkun oldugunca gec ye. Ornegin ogleye kadar sadece su/kahve ic, sonra kuçuk bir ogle ogunu ve kucuk bir aksam ogunu ye. Boylece aclik suresini daha kolay yonetirsin.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">04</div>
+      <h2>Ornek haftalik program</h2>
+
+      <h3 class="sub-heading">Kisitlama gunu (~500 kcal)</h3>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Saat</th>
+              <th>Ogun</th>
+              <th>Ornek (~500 kcal toplam)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">07:00</td>
+              <td class="meal-col">Sabah</td>
+              <td>Su, sade kahve veya yesil cay</td>
+            </tr>
+            <tr>
+              <td class="time-col">13:00</td>
+              <td class="meal-col">Ogle (~250 kcal)</td>
+              <td>Haslama yumurta (2 adet), bol yesil salata, zeytinyagi. Veya tavuk gogsu + buharda sebze.</td>
+            </tr>
+            <tr>
+              <td class="time-col">19:00</td>
+              <td class="meal-col">Aksam (~250 kcal)</td>
+              <td>Izgara balik (150g), buharda brokoli, limon. Veya mercimek corbasi (1 kase) + salata.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading">Normal gun</h3>
+
+      <p>Normal gunlerde ozel bir kisitlama yok. Dengeli beslen, yeterli protein al, sebze ve meyve tuket. Kalori saymanagerek yok. Normal porsiyonlarda 2-3 ogun ye.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Faydalari -->
+    <div class="section" id="faydalari">
+      <div class="section-num">05</div>
+      <h2>Arastirma destekli faydalari</h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <span class="benefit-icon">&#9878;</span>
+          <div class="benefit-title">Daha fazla kilo kaybi</div>
+          <div class="benefit-desc">Gunluk kisitlamaya kiyasla daha etkili yag kaybi.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128170;</span>
+          <div class="benefit-title">Daha yuksek uyum</div>
+          <div class="benefit-desc">Her gun kisitlamaya gore daha az birakma orani.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128260;</span>
+          <div class="benefit-title">Metabolik esneklik</div>
+          <div class="benefit-desc">Bedenin glikoz-yag gecisini guclendirir.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128296;</span>
+          <div class="benefit-title">Derin otofaji</div>
+          <div class="benefit-desc">Uzun kisitlama gunleri daha yogun hucresel temizlik saglar.</div>
+        </div>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine</div>
+        <p>Iki gruba ayni haftalik kalori acigi hedefi verildi. Bir grup her gun kalori kisti, diger grup haftada 3 gun cok dusuk kalorili yedi, 4 gun normal. 12 ay sonra: aralikli oruc grubu vucut agirliginin ortalama %7.6'sini kaybetti, gunluk kisitlama grubu %5'ini. Calismayı birakan katilimci orani aralikli oructa %19, gunluk kisitlamada %30.</p>
+      </div>
+
+      <p>Burada fark metabolik degil, davranissal. "Her gun biraz az ye" surekli irade gerektiriyor. "3 gun kis, 4 gun normal ye" ise bir kural koyup uygulamak. Birinde her ogun bir karar veriyorsun, digerinde karari bir kere verip devam ediyorsun.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Karsilastirma -->
+    <div class="section" id="karsilastirma">
+      <div class="section-num">06</div>
+      <h2>16:8 ile farki</h2>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>16:8</th>
+            <th>4:3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Siklik</strong></td>
+            <td>Her gun</td>
+            <td>Haftada 3 gun</td>
+          </tr>
+          <tr>
+            <td><strong>Kisitlama</strong></td>
+            <td>Zamanlama (16 saat oruc)</td>
+            <td>Kalori (~500 kcal/gun)</td>
+          </tr>
+          <tr>
+            <td><strong>Zorluk</strong></td>
+            <td>Baslangic</td>
+            <td>Orta-ileri</td>
+          </tr>
+          <tr>
+            <td><strong>Kilo kaybi</strong></td>
+            <td>Orta</td>
+            <td>Yuksek</td>
+          </tr>
+          <tr>
+            <td><strong>Uyum orani</strong></td>
+            <td>Yuksek</td>
+            <td>Orta (ama gunlukten iyi)</td>
+          </tr>
+          <tr>
+            <td><strong>Sosyal etki</strong></td>
+            <td>Dusuk (sadece sabah atlaniyor)</td>
+            <td>Orta (kisitlama gunlerinde sosyal yemekler zor)</td>
+          </tr>
+          <tr>
+            <td><strong>Kime uygun</strong></td>
+            <td>Herkese, baslangiç icin ideal</td>
+            <td>16:8'i deneyip daha fazla sonuc isteyenler</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box note">
+        <div class="info-box-title">Hangisini secmeliyim?</div>
+        <p>Daha once aralikli oruc denemediysen 16:8 ile basla. Rahat hissedersen ve daha agresif sonuclar istersen 4:3'e gecebilirsin. Ikisini birlikte de uygulayabilirsin: normal gunlerde 16:8, kisitlama gunlerinde dusuk kalori.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 Dikkat -->
+    <div class="section" id="dikkat">
+      <div class="section-num">07</div>
+      <h2>Dikkat edilecekler</h2>
+
+      <div class="info-box warning">
+        <div class="info-box-title">Kimler uygulamamali?</div>
+        <p>Hamile veya emziren kadinlar. 18 yas alti cocuklar ve ergenler. Yeme bozuklugu gecmisi olan kisiler. Tip 1 diyabet veya insulin kullanan Tip 2 diyabet hastalari. Ciddi kronik hastaligi olanlar mutlaka doktoruna danismali.</p>
+      </div>
+
+      <h3 class="sub-heading">Kisitlama gunlerinde dikkat</h3>
+
+      <ul class="checklist">
+        <li class="caution"><strong>Yogun egzersiz yapma.</strong> Kisitlama gunlerinde agir antrenman yerine hafif yuruyus veya yoga tercih et.</li>
+        <li class="caution"><strong>Proteini ihmal etme.</strong> 500 kcal'in onemli bir kismini proteinden al. Kas kaybini onler ve tok tutar.</li>
+        <li class="caution"><strong>Bol su ic.</strong> Kisitlama gunlerinde dehidrasyon riski daha yuksek. Gunde en az 2-3 litre su.</li>
+        <li class="caution"><strong>Art arda 2 kisitlama gunu koyma.</strong> Araya mutlaka normal gun koy.</li>
+        <li><strong>Uykunadikkat et.</strong> Cok ac yatmak uyku kalitesini bozabilir. Aksam ogununu yatmadan 2-3 saat once ye.</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 SSS -->
+    <div class="section" id="sss">
+      <div class="section-num">08</div>
+      <h2>Sik sorulan sorular</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            500 kcal'i nasil hesaplarim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Protein agirlikli basit yiyecekler sec. 2 haslama yumurta (~140 kcal), 150g tavuk gogsu (~165 kcal), 1 kase sebze corbasi (~100 kcal), bol salata (~50-80 kcal). Paketli gidalarda besin degeri etiketlerini oku. Kalori takip uygulamasi (MyFitnessPal gibi) ilk birkac gun yardimci olabilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Kisitlama gunlerinde cok ac kaliyorum, ne yapayim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Once 5:2 ile basla (haftada 2 kisitlama gunu). Protein ve lif agirlikli yiyecekler sec, bunlar daha uzun tok tutar. Bol su ve sade kahve/cay ic. Ogunlerini gec saatlere kaydir (ornegin 13:00 ve 19:00). Birkaç hafta sonra beden adapte olur ve aclik hissi azalir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Normal gunlerde istedigim kadar yiyebilir miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Normal porsiyonlarda, dengeli ye. Kalori saymanagerek yok ama "dun ac kaldim, bugun her seyi yiyeyim" dusuncesine dusme. Arastirmalar 4:3 uygulayan kisilerin normal gunlerde dogal olarak biraz daha az yedigini gosteriyor. Bedenini dinle, ac olduğunda ye, doyduğunda dur.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Hangi gunleri kisitlama gunu yapmaliyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Sosyal programina ve is temposuna gore sec. Kisitlama gunlerinde yogun sosyal yemekler veya agir is gunleri olmamasina dikkat et. Esit aralikli dagitim (Sal-Per-Cmt veya Pzt-Car-Cum gibi) ideal. Her hafta ayni gunleri kullanmak rutin olusturur.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 Kaynaklar -->
+    <div class="references" id="kaynaklar">
+      <h2>Kaynaklar</h2>
+      <ol>
+        <li>Catenacci, V.A., et al. (2025). Intermittent versus daily calorie restriction for weight loss. <i>Annals of Internal Medicine</i>.</li>
+        <li>de Cabo, R. & Mattson, M.P. (2019). Effects of intermittent fasting on health, aging, and disease. <i>NEJM</i>, 381(26), 2541-2551.</li>
+        <li>Harvie, M., et al. (2011). The effects of intermittent or continuous energy restriction on weight loss and metabolic disease risk markers. <i>International Journal of Obesity</i>, 35(5), 714-727.</li>
+        <li>Varady, K.A., et al. (2022). Clinical application of intermittent fasting for weight loss. <i>Annual Review of Nutrition</i>, 42, 223-245.</li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmus</span></a>
+
+  <script>
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  }
+  </script>
+
+  <script>
+  (function() {
+    var toc = document.getElementById('tocSidebar');
+    var links = toc.querySelectorAll('.toc-link');
+    var hero = document.querySelector('.hero');
+    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
+
+    function updateVisibility() {
+      if (!hero) return;
+      toc.classList.toggle('visible', hero.getBoundingClientRect().bottom < 0);
+    }
+
+    var currentActive = null;
+    function setActive(id) {
+      if (currentActive === id) return;
+      currentActive = id;
+      links.forEach(function(link) { link.classList.toggle('active', link.dataset.section === id); });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    sectionIds.forEach(function(id) { var el = document.getElementById(id); if (el) observer.observe(el); });
+
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.section);
+        if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.replaceState(null, '', '#' + this.dataset.section); }
+      });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>

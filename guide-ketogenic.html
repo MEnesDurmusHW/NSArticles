@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketojenik Diyet Rehberi — NS Articles</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4a9d5b;
+    --green-dim: rgba(74, 157, 91, 0.1);
+    --orange: #d4862a;
+    --orange-dim: rgba(212, 134, 42, 0.1);
+    --red: #c0392b;
+    --red-dim: rgba(192, 57, 43, 0.08);
+    --blue: #3498db;
+    --blue-dim: rgba(52, 152, 219, 0.08);
+  }
+  [data-theme="dark"] {
+    --green: #6abf7b;
+    --green-dim: rgba(106, 191, 123, 0.12);
+    --orange: #e8a84c;
+    --orange-dim: rgba(232, 168, 76, 0.12);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.1);
+    --blue: #5dade2;
+    --blue-dim: rgba(93, 173, 226, 0.1);
+  }
+
+  body { font-family: 'Source Sans 3', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  /* Hero */
+  .hero { position: relative; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1400&q=80') center/cover no-repeat; opacity: 0.12; z-index: 0; }
+  [data-theme="dark"] .hero::before { opacity: 0.06; }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; color: var(--accent); margin-bottom: 1rem; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 1.2; max-width: 600px; margin-bottom: 1rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc { font-size: 1.1rem; color: var(--text-dim); max-width: 520px; line-height: 1.6; }
+
+  /* Summary Cards */
+  .summary-section { max-width: 800px; margin: 0 auto; padding: 3rem 2rem 2rem; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 16px; text-align: center; transition: transform 0.2s ease; }
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .stat-card .stat-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-dim); margin-bottom: 6px; }
+  .stat-card .stat-value { font-family: var(--serif); font-size: 1rem; line-height: 1.4; color: var(--text); }
+
+  /* Macro Chart Section */
+  .macro-section { max-width: 680px; margin: 0 auto; padding: 2rem 2rem 3rem; text-align: center; }
+  .macro-section h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; margin-bottom: 2rem; color: var(--text); }
+
+  .macro-chart { display: inline-block; position: relative; width: 260px; height: 260px; }
+  .macro-chart svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+  .macro-legend { display: flex; justify-content: center; gap: 24px; margin-top: 1.5rem; flex-wrap: wrap; }
+  .macro-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-dim); }
+  .macro-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .macro-dot.fat { background: var(--accent); }
+  .macro-dot.protein { background: var(--green); }
+  .macro-dot.carb { background: var(--text-muted); }
+
+  /* Guide Content */
+  .guide { max-width: 680px; margin: 0 auto; padding: 2rem 2rem 4rem; }
+  .section { margin-bottom: 3.5rem; }
+  .section-num { font-family: var(--serif); font-size: 0.85rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.5rem; }
+  .section h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400; line-height: 1.3; margin-bottom: 1.5rem; color: var(--text); }
+  .section p { margin-bottom: 1.3rem; font-size: 1.05rem; text-align: justify; }
+  .section-divider { width: 40px; height: 1px; background: var(--divider); margin: 3rem 0; }
+  .sub-heading { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text); margin: 2.2rem 0 1rem; }
+
+  /* Info boxes */
+  .info-box { border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .info-box.tip { background: var(--green-dim); border-left: 3px solid var(--green); }
+  .info-box.warning { background: var(--red-dim); border-left: 3px solid var(--red); }
+  .info-box.note { background: var(--accent-glow); border-left: 3px solid var(--accent); }
+  .info-box.info { background: var(--blue-dim); border-left: 3px solid var(--blue); }
+  .info-box-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .info-box.tip .info-box-title { color: var(--green); }
+  .info-box.warning .info-box-title { color: var(--red); }
+  .info-box.note .info-box-title { color: var(--accent); }
+  .info-box.info .info-box-title { color: var(--blue); }
+  .info-box p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* Experiment boxes */
+  .experiment { background: var(--accent-glow); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .experiment-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .experiment p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .experiment p:last-child { margin-bottom: 0; }
+
+  /* Food Grid */
+  .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 1.5rem 0; }
+  .food-card { border-radius: 10px; padding: 18px 16px; }
+  .food-card.eat { background: var(--green-dim); border: 1px solid var(--green); }
+  .food-card.avoid { background: var(--red-dim); border: 1px solid var(--red); }
+  .food-card-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .food-card.eat .food-card-title { color: var(--green); }
+  .food-card.avoid .food-card-title { color: var(--red); }
+  .food-card ul { list-style: none; padding: 0; margin: 0; }
+  .food-card li { font-size: 0.92rem; padding: 3px 0; color: var(--text); }
+
+  /* Meal Table */
+  .meal-table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 8px; border: 1px solid var(--border); }
+  .meal-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 480px; }
+  .meal-table th { background: var(--accent-glow); font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); padding: 14px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .meal-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  .meal-table tr:last-child td { border-bottom: none; }
+  .meal-table tr:nth-child(even) td { background: var(--surface); }
+  .meal-table .time-col { font-weight: 600; color: var(--accent); white-space: nowrap; width: 90px; }
+  .meal-table .meal-col { font-weight: 500; width: 120px; }
+
+  /* Step List */
+  .step-list { list-style: none; padding: 0; margin: 1.5rem 0; counter-reset: step-counter; }
+  .step-list li { counter-increment: step-counter; display: flex; gap: 16px; margin-bottom: 1.2rem; align-items: flex-start; }
+  .step-list li::before { content: counter(step-counter); flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-glow); color: var(--accent); font-family: var(--serif); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-list li strong { color: var(--text); font-weight: 600; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 1rem 0; }
+  .checklist li { padding: 6px 0 6px 28px; position: relative; font-size: 1rem; margin-bottom: 4px; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 12px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--green); background: var(--green-dim); }
+  .checklist li.caution::before { border-color: var(--orange); background: var(--orange-dim); }
+  .checklist li.danger::before { border-color: var(--red); background: var(--red-dim); }
+
+  /* Benefit Cards */
+  .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; }
+  .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
+  .benefit-card .benefit-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+  .benefit-card .benefit-title { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* FAQ */
+  .faq-list { margin: 1.5rem 0; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question { width: 100%; background: none; border: none; padding: 18px 0; font-family: 'Source Sans 3', sans-serif; font-size: 1.02rem; font-weight: 500; color: var(--text); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s; }
+  .faq-question:hover { color: var(--accent); }
+  .faq-question .faq-arrow { flex-shrink: 0; font-size: 0.7rem; color: var(--accent); transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .faq-answer-inner { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; }
+  .faq-item.open .faq-answer { max-height: 500px; }
+
+  /* References */
+  .references { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--divider); }
+  .references h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 1.2rem; }
+  .references ol { font-size: 0.82rem; color: var(--text-dim); line-height: 2; padding-left: 1.2rem; }
+
+  /* TOC Sidebar */
+  .toc-sidebar { position: fixed; top: 50%; transform: translateY(-50%); left: max(16px, calc((100vw - 680px) / 2 - 220px)); width: 180px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .toc-sidebar.visible { opacity: 1; pointer-events: auto; }
+  .toc-sidebar ul { list-style: none; margin: 0; padding: 0; }
+  .toc-sidebar .toc-link { display: block; padding: 5px 0 5px 12px; font-family: var(--sans); font-size: 0.72rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s, border-color 0.2s; border-left: 2px solid transparent; line-height: 1.4; }
+  .toc-sidebar .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+  .toc-sidebar .toc-link:hover { color: var(--text); }
+  @media (max-width: 1100px) { .toc-sidebar { display: none; } }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefit-grid, .food-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .guide { padding: 2rem 1.5rem 3rem; }
+  }
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card { padding: 18px 12px; }
+    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .guide { padding: 1.5rem 1.2rem 2.5rem; }
+    .section h2 { font-size: 1.3rem; }
+    .macro-chart { width: 220px; height: 220px; }
+  }
+  @media (max-width: 360px) { .summary-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema degistir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-tag">Pratik Rehber</p>
+    <h1>Ketojenik Diyet <em>Rehberi</em></h1>
+    <p class="hero-desc">Yuksek yag, dusuk karbonhidrat. Bedenini yag yakma moduna geciren beslenme stratejisi.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Summary Cards -->
+  <section class="summary-section">
+    <div class="summary-grid">
+      <div class="stat-card">
+        <span class="stat-icon">&#129361;</span>
+        <div class="stat-label">Yag orani</div>
+        <div class="stat-value">%70-75</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#129385;</span>
+        <div class="stat-label">Protein</div>
+        <div class="stat-value">%20-25</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#127834;</span>
+        <div class="stat-label">Karbonhidrat</div>
+        <div class="stat-value">%5-10</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">&#9888;&#65039;</span>
+        <div class="stat-label">Zorluk</div>
+        <div class="stat-value">Orta-ileri</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Macro Chart -->
+  <section class="macro-section">
+    <h2>Makro Besin Dagilimi</h2>
+    <div class="macro-chart">
+      <svg viewBox="0 0 260 260">
+        <!-- Fat: 70% = 252 degrees -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="var(--accent)" stroke-width="40" stroke-dasharray="440 628.3" stroke-dashoffset="0" opacity="0.8"/>
+        <!-- Protein: 25% = 90 degrees -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="var(--green)" stroke-width="40" stroke-dasharray="157 628.3" stroke-dashoffset="-440" opacity="0.8"/>
+        <!-- Carb: 5% = 18 degrees -->
+        <circle cx="130" cy="130" r="100" fill="none" stroke="var(--text-muted)" stroke-width="40" stroke-dasharray="31.4 628.3" stroke-dashoffset="-597" opacity="0.4"/>
+        <!-- Center text -->
+        <text x="130" y="122" text-anchor="middle" fill="var(--text)" font-family="Playfair Display" font-size="22" font-weight="400" transform="rotate(90 130 130)">Keto</text>
+        <text x="130" y="146" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="11" transform="rotate(90 130 130)">makro oranlar</text>
+      </svg>
+    </div>
+    <div class="macro-legend">
+      <span class="macro-legend-item"><span class="macro-dot fat"></span>Yag (%70-75)</span>
+      <span class="macro-legend-item"><span class="macro-dot protein"></span>Protein (%20-25)</span>
+      <span class="macro-legend-item"><span class="macro-dot carb"></span>Karbonhidrat (%5-10)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TOC Sidebar -->
+  <nav class="toc-sidebar" id="tocSidebar">
+    <ul>
+      <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
+      <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasil calisir?</a></li>
+      <li><a href="#yiyecekler" class="toc-link" data-section="yiyecekler">Ne yenir, ne yenmez?</a></li>
+      <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasil baslanir?</a></li>
+      <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Ornek program</a></li>
+      <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydalari</a></li>
+      <li><a href="#keto-grip" class="toc-link" data-section="keto-grip">Keto gribi</a></li>
+      <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
+      <li><a href="#sss" class="toc-link" data-section="sss">SSS</a></li>
+      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
+    </ul>
+  </nav>
+
+  <!-- Guide Content -->
+  <article class="guide">
+
+    <!-- 01 Nedir -->
+    <div class="section" id="nedir">
+      <div class="section-num">01</div>
+      <h2>Nedir?</h2>
+
+      <p>Ketojenik diyet, karbonhidrat aliminizi ciddi sekilde kisitlayip (gunluk kalorinizin %5-10'u) yagin cok artirdigi (gunluk kalorinizin %70-75'i) bir beslenme bicimi. Amac: bedeninizi birincil yakit olarak glikoz yerine yag ve ketonlari kullanmaya gecirmek.</p>
+
+      <p>Bu durum "ketozis" olarak adlandirilir. Ketoziste karaciger yag asitlerini parcalayarak keton cisimcikleri uretir. Bu ketonlar glikoz yerine beyin dahil tum vucut tarafindan enerji kaynagi olarak kullanilir.</p>
+
+      <div class="info-box note">
+        <div class="info-box-title">Evrimsel perspektif</div>
+        <p>Ketojenik durum atalarimiz icin normal bir metabolik durumdu. Ozellikle kis aylarinda ve uzun av aralarinda karbonhidrat kaynaklari (meyve, kok) azaldiginda beden otomatik olarak yag yakarak enerji uretiyordu. Surekli glikoz akisi tarim devrimiyle basladi, evrimsel tarihimizin son %0.004'u.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 Nasil calisir -->
+    <div class="section" id="nasil-calisir">
+      <div class="section-num">02</div>
+      <h2>Nasil calisir?</h2>
+
+      <p>Normal beslendiginizde bedeniniz karbonhidratlari glikoza cevirir ve birincil yakit olarak kullanir. Karbonhidrat aliminizi gunluk 20-50 grama dusurdugunuzde (yaklasik 1-2 dilim ekmek kadar) beden 2-4 gun icinde glikoz yerine yag yakmaya gecer.</p>
+
+      <h3 class="sub-heading">Ketozise gecis sureci</h3>
+
+      <ul class="checklist">
+        <li><strong>Gun 1-2:</strong> Glikojen depolari bosalir. Yorgunluk ve bas agrisi baslayabilir.</li>
+        <li><strong>Gun 2-4:</strong> Beden keton uretmeye baslar. "Keto gribi" belirtileri gorulebilir.</li>
+        <li><strong>Gun 4-7:</strong> Keton seviyeleri yukselir. Enerji geri gelmeye baslar.</li>
+        <li><strong>Hafta 2-4:</strong> Beden ketoza adapte olur. Zihinsel berraklik ve istikrarli enerji bildiren kisiler cok.</li>
+      </ul>
+
+      <p>Ketozda oldugunuzu anlamanin en guvenilir yolu keton olcum stripleri (idrar veya kan). Kan keton seviyesi 0.5-3.0 mmol/L arasi "beslenme ketozu" olarak kabul edilir.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 Yiyecekler -->
+    <div class="section" id="yiyecekler">
+      <div class="section-num">03</div>
+      <h2>Ne yenir, ne yenmez?</h2>
+
+      <div class="food-grid">
+        <div class="food-card eat">
+          <div class="food-card-title">&#9989; Yenebilir</div>
+          <ul>
+            <li>Yumurta</li>
+            <li>Kirmizi et, tavuk, balik</li>
+            <li>Avokado</li>
+            <li>Zeytinyagi, tereyagi, hindistancevizi yagi</li>
+            <li>Peynir, krema</li>
+            <li>Ceviz, badem, findik</li>
+            <li>Yesil yaprakli sebzeler</li>
+            <li>Brokoli, karnabahar, kabak</li>
+            <li>Mantar, domates (az)</li>
+            <li>Cilek, ahududu (az)</li>
+          </ul>
+        </div>
+        <div class="food-card avoid">
+          <div class="food-card-title">&#10060; Kacinilacak</div>
+          <ul>
+            <li>Ekmek, makarna, pirinc</li>
+            <li>Seker, bal, sekerli icecekler</li>
+            <li>Patates, tatli patates</li>
+            <li>Muz, uzum, mango</li>
+            <li>Tahillar, musli</li>
+            <li>Baklagiller (nohut, fasulye)</li>
+            <li>Meyve sulari</li>
+            <li>Bira</li>
+            <li>Dusuk yagli urunler</li>
+            <li>Ultra-islenmis gidalar</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Ipucu</div>
+        <p>Besin etiketlerinde "net karbonhidrat" hesapla: Toplam karbonhidrat - lif = net karbonhidrat. Gunluk net karbonhidrat hedefin 20-50 gram arasi olmali.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">04</div>
+      <h2>Nasil baslanir?</h2>
+
+      <ol class="step-list">
+        <li><strong>Mutfagini temizle.</strong> Ekmek, makarna, seker, tahillar ve sekerliyiyecekleri kaldir. Gorunmeyen karbonhidrat kaynaklarini (sos, ketcap, hazir gidalar) kontrol et.</li>
+        <li><strong>Ilk hafta: 50g karb ile basla.</strong> Direkt 20g'a inmek zor olabilir. Ilk hafta 50g net karbonhidrat hedefle, sonra kademeli olarak 20-30g'a dusur.</li>
+        <li><strong>Yag kaynagini sec.</strong> Zeytinyagi, avokado, tereyagi, hindistancevizi yagi, ceviz. Kaliteli yag kaynaklari kullan, trans yaglardan kacin.</li>
+        <li><strong>Protein dengesini kur.</strong> Cok az protein kas kaybina yol acar, cok fazla protein ketozdan cikarabilir (glikoneogenez). Vucut kilon basina 1.2-1.7g protein hedefle.</li>
+        <li><strong>Elektrolitleri ihmal etme.</strong> Keto baslangiçta su ve elektrolit kaybi olur. Tuz, magnezyum ve potasyum aliminı artir.</li>
+        <li><strong>Ilk 2 haftayi atla.</strong> En zor kisim bu. Keto gribi belirtileri gecici. 2 hafta sonra cogu kisi belirgin sekilde daha iyi hissediyor.</li>
+      </ol>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">05</div>
+      <h2>Ornek gunluk program</h2>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Ogun</th>
+              <th>Ornek</th>
+              <th>Makro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="meal-col">Kahvalti</td>
+              <td>3 yumurta tereyaginda, avokado yarisi, bir avuc ispanak</td>
+              <td>~450 kcal, 35g yag, 3g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Ogle</td>
+              <td>Tavuk butlari (zeytinyaginda), bol yesil salata, feta peyniri, ceviz</td>
+              <td>~550 kcal, 40g yag, 5g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Ara ogun</td>
+              <td>Bir avuc badem + 2 dilim peynir</td>
+              <td>~250 kcal, 20g yag, 3g karb</td>
+            </tr>
+            <tr>
+              <td class="meal-col">Aksam</td>
+              <td>Somon (200g), buharda brokoli, tereyagi sos</td>
+              <td>~600 kcal, 42g yag, 4g karb</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Gunluk toplam:</strong> ~1850 kcal, ~137g yag (%67), ~95g protein (%21), ~15g net karb (%3). Yag ve karbonhidrat oranlari bireysel ihtiyaca gore ayarlanabilir.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Faydalari -->
+    <div class="section" id="faydalari">
+      <div class="section-num">06</div>
+      <h2>Arastirma destekli faydalari</h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <span class="benefit-icon">&#9878;</span>
+          <div class="benefit-title">Yag kaybi</div>
+          <div class="benefit-desc">Beden birincil yakit olarak yag yakar, ozellikle karin bolgesi yagi azalir.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#129504;</span>
+          <div class="benefit-title">Zihinsel berraklik</div>
+          <div class="benefit-desc">Ketonlar beyin icin verimli bir yakit kaynagi. Birçok kisi odaklanma artisi bildiriyor.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128293;</span>
+          <div class="benefit-title">Inflamasyon azalmasi</div>
+          <div class="benefit-desc">Ketonlar NLRP3 inflamazomunu baskilar, kronik iltihabi azaltir.</div>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">&#128200;</span>
+          <div class="benefit-title">Kan sekeri kontrolu</div>
+          <div class="benefit-desc">Insulin direnci azalir, Tip 2 diyabet yonetiminde etkili.</div>
+        </div>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Youm ve ark., 2015 — Nature Medicine</div>
+        <p>Keton metaboliti beta-hidroksibütirat (BHB), NLRP3 inflamazom kompleksini bloke ediyor. Bu kompleks kronik inflamasyonun ana suruculerinden biri. Yani ketoziste uretilen ketonlar sadece enerji kaynagi degil, ayni zamanda anti-inflamatuar molekuller.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Epilepsi Tedavisi — 100+ yillik klinik kullanim</div>
+        <p>Ketojenik diyet ilk olarak 1920'lerde epilepsi tedavisi icin gelistirildi. Ilaca direncli epilepside hala en etkili diyetsel mudahalelerden biri. Nobetleri %50'den fazla azaltabiliyor. Bu, keto diyetinin en eski ve en guclu klinik kanit tabanına sahip oldugu alan.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 Keto gribi -->
+    <div class="section" id="keto-grip">
+      <div class="section-num">07</div>
+      <h2>Keto gribi (keto flu)</h2>
+
+      <p>Ketojenik diyete baslayanların cogu ilk 2-7 gunde "keto gribi" olarak bilinen belirtiler yasiyar. Bu gercek bir grip degil, bedenin glikozdan keton yakitina gecis sirasinda yasadigi adaptasyon donemi.</p>
+
+      <h3 class="sub-heading">Belirtiler</h3>
+
+      <ul class="checklist">
+        <li class="caution"><strong>Bas agrisi</strong></li>
+        <li class="caution"><strong>Yorgunluk, halsizlik</strong></li>
+        <li class="caution"><strong>Mide bulantisi</strong></li>
+        <li class="caution"><strong>Basdönmesi</strong></li>
+        <li class="caution"><strong>Sinirlilik, konsantrasyon guclugu</strong></li>
+        <li class="caution"><strong>Kas kramplari</strong></li>
+      </ul>
+
+      <div class="info-box info">
+        <div class="info-box-title">Neden oluyor?</div>
+        <p>Karbonhidrat kisitladiginda insulin dusuyor. Dusuk insulin bobreklere daha fazla sodyum atmaları sinyali veriyor. Sodyumla birlikte su, potasyum ve magnezyum da kaybediliyor. Belirtilerin cogu bu elektrolit dengesizliginden kaynaklaniyor.</p>
+      </div>
+
+      <h3 class="sub-heading">Nasil hafifletilir?</h3>
+
+      <ul class="checklist">
+        <li><strong>Bol su ic.</strong> Gunluk 2.5-3 litre minimum.</li>
+        <li><strong>Tuz aliminı artir.</strong> Yemeklere ekstra tuz ekle, kemik suyu ic.</li>
+        <li><strong>Magnezyum takviyesi al.</strong> 200-400mg/gun.</li>
+        <li><strong>Potasyum iceren gidalar tuket.</strong> Avokado, ispanak, mantar.</li>
+        <li><strong>Kademeli gecis yap.</strong> Direkt 20g karba inmek yerine once 50g ile basla.</li>
+      </ul>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Iyi haber</div>
+        <p>Keto gribi gecicidir. Cogu kisi 3-7 gun icinde iyilesir. Elektrolitlere dikkat edildiğinde belirtiler onemli olcude hafifler veya hic yasanmaz.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 Dikkat -->
+    <div class="section" id="dikkat">
+      <div class="section-num">08</div>
+      <h2>Dikkat edilecekler</h2>
+
+      <div class="info-box warning">
+        <div class="info-box-title">Kimler uygulamamali?</div>
+        <p>Tip 1 diyabet hastalari (ketoasidoz riski). Pankreatit gecmisi olanlar. Karaciger veya bobrek hastaligi olanlar. Hamile veya emziren kadinlar. Yeme bozuklugu gecmisi olanlar. Safra kesesi cikarilmis olan kisiler dikkatli olmali (yag sindirimi etkilenir). Herhangi bir kronik hastalıgin varsa mutlaka doktoruna danis.</p>
+      </div>
+
+      <h3 class="sub-heading">Uzun vadeli dikkat edilecekler</h3>
+
+      <ul class="checklist">
+        <li class="caution"><strong>Lif alimı:</strong> Dusuk karbonhidrat, dusuk lif anlamina gelebilir. Yesil yaprakli sebzelere onem ver.</li>
+        <li class="caution"><strong>Kolesterol:</strong> Bazi kisilerde LDL kolesterol artabilir. Duzenli kan testi yaptir.</li>
+        <li class="caution"><strong>Sosyal zorluklar:</strong> Karbonhidrat agirlikli Turk mutfagi (ekmek, pilav, borek) ile ketojenik diyet uyumsuz. Sosyal ortamlarda zorluk yasayabilirsin.</li>
+        <li class="caution"><strong>Surdurulebilirlik:</strong> Ketojenik diyet uzun vadede herkes icin surdurulebilir degil. Bazi kisiler donemleri olarak (birkaç ay keto, sonra normal beslenme) uyguluyor.</li>
+        <li><strong>Besin cesitliligi:</strong> Kisitli gida gruplari yuzunden vitamin/mineral eksikligi olabilir. Gerekirse multivitamin kullan.</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 09 SSS -->
+    <div class="section" id="sss">
+      <div class="section-num">09</div>
+      <h2>Sik sorulan sorular</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Ketozda oldugumu nasil anlarim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">En guvenilir yontem kan keton olcumu (0.5-3.0 mmol/L). Idrar stripleri daha ucuz ama daha az hassas. Belirtiler: agizda metalik tat, artan susuzluk, azalan istah, artan enerji ve zihinsel berraklik. Keton nefesi (aseton kokusu) de yaygin bir isaret.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Keto diyetiyle spor yapabilir miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Evet, ama adaptasyon sureci gerekiyor. Ilk 2-4 haftada performans dusebilir. Beden ketoza adapte olduktan sonra dayaniklilik sporlari icin mükemmel bir yakit sistemi olusturdugunu bildiren sporcular var. Yogun anaerobik aktivite (sprint, agir squat) icin glikoz daha verimli olabilir; bazi sporcular "hedefli keto" (antrenman oncesi 15-30g karb) uyguluyor.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Meyve yiyebilir miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Cogu meyve karbonhidrat acsindan yuksek. Ama dusuk sekerli meyveler az miktarda tuketilebilir: cilek (100g = ~6g net karb), ahududu, bögürtlen, avokado (teknik olarak meyve). Muz, uzum, elma, mango gibi meyveler ketozdan cikarabilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Keto diyeti ne kadar sure uygulamaliyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Net bir limit yok. Epilepsi tedavisinde yillarca uygulanabiliyor. Kilo verme amacli ise genellikle 3-6 ay onerilir, sonra daha esnek bir dusuk karbonhidrat duzeni. Bazi kisiler "donemsel keto" yapiyor: 2-3 ay keto, sonra 1 ay normal, tekrar keto. Uzun vadeli uygulamada duzenli kan testleri onerilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Keto ile aralikli orucu birlikte uygulayabilir miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Evet, cogu kisi bu ikisini birlikte uyguladiklari icin sinerjik etki goruldugunu bildiriyor. Keto zaten aclik hissini azaltiyor (ketonlar istah baskilar), bu da aralikli orucu kolaylastiriyor. 16:8 + keto populer bir kombinasyon. Ama ikisine de ayni anda baslamak zor olabilir. Once birine alis, sonra digeri ekle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 10 Kaynaklar -->
+    <div class="references" id="kaynaklar">
+      <h2>Kaynaklar</h2>
+      <ol>
+        <li>Youm, Y.H., et al. (2015). The ketone metabolite beta-hydroxybutyrate blocks NLRP3 inflammasome-mediated inflammatory disease. <i>Nature Medicine</i>, 21, 263-269.</li>
+        <li>de Cabo, R. & Mattson, M.P. (2019). Effects of intermittent fasting on health, aging, and disease. <i>NEJM</i>, 381(26), 2541-2551.</li>
+        <li>Paoli, A., et al. (2013). Beyond weight loss: A review of the therapeutic uses of very-low-carbohydrate (ketogenic) diets. <i>European Journal of Clinical Nutrition</i>, 67(8), 789-796.</li>
+        <li>Volek, J.S. & Phinney, S.D. (2011). <i>The Art and Science of Low Carbohydrate Living</i>. Beyond Obesity LLC.</li>
+        <li>Kossoff, E.H., et al. (2018). Optimal clinical management of children receiving dietary therapies for epilepsy. <i>Epilepsia Open</i>, 3(2), 175-192.</li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmus</span></a>
+
+  <script>
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  }
+  </script>
+
+  <script>
+  (function() {
+    var toc = document.getElementById('tocSidebar');
+    var links = toc.querySelectorAll('.toc-link');
+    var hero = document.querySelector('.hero');
+    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
+
+    function updateVisibility() {
+      if (!hero) return;
+      toc.classList.toggle('visible', hero.getBoundingClientRect().bottom < 0);
+    }
+
+    var currentActive = null;
+    function setActive(id) {
+      if (currentActive === id) return;
+      currentActive = id;
+      links.forEach(function(link) { link.classList.toggle('active', link.dataset.section === id); });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    sectionIds.forEach(function(id) { var el = document.getElementById(id); if (el) observer.observe(el); });
+
+    links.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById(this.dataset.section);
+        if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.replaceState(null, '', '#' + this.dataset.section); }
+      });
+    });
+
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>
