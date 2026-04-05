@@ -258,7 +258,7 @@
   .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
   .benefit-card .benefit-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
   .benefit-card .benefit-title { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+  .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text); opacity: 0.75; line-height: 1.5; }
 
   /* Checklist */
   .checklist { list-style: none; padding: 0; margin: 1rem 0; }
@@ -287,7 +287,15 @@
   /* References */
   .references { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--divider); }
   .references h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 1.2rem; }
-  .references ol { font-size: 0.82rem; color: var(--text-dim); line-height: 2; padding-left: 1.2rem; }
+  .references ol { font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; }
+
+  /* Inline ref links */
+  a.ref { font-size: 0.7em; vertical-align: super; color: var(--accent); text-decoration: none; font-weight: 600; margin-left: 1px; }
+  a.ref:hover { text-decoration: underline; }
+
+  /* FAB back button */
+  #fab-back { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; z-index: 90; }
+  #fab-back:hover { transform: scale(1.1); }
 
   /* TOC Sidebar */
   .toc-sidebar { position: fixed; top: 50%; transform: translateY(-50%); left: max(16px, calc((100vw - 680px) / 2 - 220px)); width: 180px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
@@ -420,7 +428,7 @@
       <li><a href="#nedir" class="toc-link" data-section="nedir">Nedir?</a></li>
       <li><a href="#nasil-calisir" class="toc-link" data-section="nasil-calisir">Nasıl çalışır?</a></li>
       <li><a href="#faydalari" class="toc-link" data-section="faydalari">Faydaları</a></li>
-      <li><a href="#karsilastirma" class="toc-link" data-section="karsilastirma">16:8 ile farkı</a></li>
+      <li><a href="#karsilastirma" class="toc-link" data-section="karsilastirma">Karşılaştırma</a></li>
       <li><a href="#nasil-baslanir" class="toc-link" data-section="nasil-baslanir">Nasıl başlanır?</a></li>
       <li><a href="#ornek-program" class="toc-link" data-section="ornek-program">Örnek program</a></li>
       <li><a href="#dikkat" class="toc-link" data-section="dikkat">Dikkat edilecekler</a></li>
@@ -463,9 +471,10 @@
       <p>500 kcal civarında beslendiğinizde beden hızla glikojen depolarını boşaltır. Gerçek açlık olmadığı için stres tepkisi minimaldır, ama yağ yakımı ve otofaji süreçleri aktif şekilde çalışır. Ertesi gün normal yediğinizde beden bu süreçleri durdurur ve yeniden inşaat moduna geçer.</p>
 
       <div class="info-box tip">
-        <div class="info-box-title">4:3'ün kritik avantajı</div>
-        <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az kalori yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 4:3'te bu olmuyor. Kısıtlama gününün hemen ardından normal beslenme geliyor. Beden açlık moduna geçmeye fırsat bulamıyor. Metabolizma hızı korunuyor, yağ yakımı devam ediyor.</p>
-        <p>Catenacci ve ark.'nın çalışması bunu rakamlarla doğruluyor: 12 ay sonra aralıklı oruç grubunun bazal metabolizma hızı günlük kısıtlama grubuna göre daha az düşmüş. Yani aynı kalori açığıyla daha fazla kilo kaybı, daha az metabolik direnç.</p>
+        <div class="info-box-title">4:3'ün kritik avantajı: metabolizma korunuyor</div>
+        <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az kalori yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 4:3'te bu olmuyor. Kısıtlama gününün hemen ardından normal beslenme geliyor. Beden açlık moduna geçmeye fırsat bulamıyor.</p>
+        <p>Heilbronn ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> bunu doğrudan ölçmüş: 22 gün boyunca gün aşırı oruç uygulayan katılımcılarda bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmemiş. Buna karşılık açlık insülini %57 azalmış (P&lt;0.001). Yani beden metabolizmayı yavaşlatmadan yağ yakım moduna geçiyor.</p>
+        <p>Catenacci ve ark.'nın 12 aylık çalışması<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> da bunu destekliyor: 4:3 grubu aynı kalori açığı hedefiyle günlük kısıtlama grubundan %50 daha fazla kilo kaybetmiş (%7.6'ya karşı %5, P=0.040). Bu farkın büyük kısmı metabolizmanın korunmasıyla açıklanıyor.</p>
       </div>
     </div>
 
@@ -478,29 +487,62 @@
 
       <div class="benefit-grid">
         <div class="benefit-card">
-          <div class="benefit-title">Daha fazla kilo kaybı</div>
-          <div class="benefit-desc">Günlük kısıtlamaya kıyasla daha etkili yağ kaybı.</div>
+          <div class="benefit-title">%7.6 kilo kaybı</div>
+          <div class="benefit-desc">12 ayda vücut ağırlığının %7.6'sı. Günlük kısıtlamada bu oran %5. <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
         </div>
         <div class="benefit-card">
-          <div class="benefit-title">Daha yüksek uyum</div>
-          <div class="benefit-desc">Her gün kısıtlamaya göre daha az bırakma oranı.</div>
+          <div class="benefit-title">%85 daha fazla yağ kaybı</div>
+          <div class="benefit-desc">3 ayda 3.7 kg saf yağ kaybı. Günlük kısıtlamada 2.0 kg. <a href="#ref-3" class="ref" onclick="savePos(this)">3</a></div>
         </div>
         <div class="benefit-card">
-          <div class="benefit-title">Metabolik esneklik</div>
-          <div class="benefit-desc">Bedenin glikoz-yağ geçişini güçlendirir.</div>
+          <div class="benefit-title">İnsülin direncinde 6 kat fark</div>
+          <div class="benefit-desc">HOMA-IR'de %24 düşüş. Günlük kısıtlamada sadece %4. <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
         </div>
         <div class="benefit-card">
-          <div class="benefit-title">Derin otofaji</div>
-          <div class="benefit-desc">Uzun kısıtlama günleri daha yoğun hücresel temizlik sağlar.</div>
+          <div class="benefit-title">%37 daha az bırakma</div>
+          <div class="benefit-desc">Katılımcıların %81'i 12 ayı tamamladı. Günlük kısıtlamada %70. <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
         </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Metabolizma hızı korunuyor</div>
+          <div class="benefit-desc">Bazal metabolizma hızında anlamlı düşüş yok. Sürekli diyetlerde metabolizma yavaşlar. <a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Kas kaybı yok</div>
+          <div class="benefit-desc">12 haftada 3.6 kg yağ gitti, kas kütlesi yerinde kaldı. Diyetlerin en büyük sorunu burada yok. <a href="#ref-4" class="ref" onclick="savePos(this)">4</a></div>
+        </div>
+      </div>
+
+      <div class="info-box note">
+        <div class="info-box-title">P değeri nedir?</div>
+        <p>Aşağıdaki çalışmalarda P değerleri göreceksiniz. P değeri bir sonucun tesadüf olma ihtimalini gösterir. P=0.001 demek sonucun şans eseri çıkma olasılığı binde bir. Bilimde P&lt;0.05 (%5'in altı) anlamlı kabul edilir. P ne kadar küçükse sonuç o kadar güvenilir.</p>
       </div>
 
       <div class="experiment">
-        <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine</div>
-        <p>İki gruba aynı haftalık kalori açığı hedefi verildi. Bir grup her gün kalori kıstı, diğer grup haftada 3 gün çok düşük kalorili yedi, 4 gün normal. 12 ay sonra: aralıklı oruç grubu vücut ağırlığının ortalama %7.6'sını kaybetti, günlük kısıtlama grubu %5'ini. Çalışmayı bırakan katılımcı oranı aralıklı oruçta %19, günlük kısıtlamada %30.</p>
+        <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
+        <p>165 yetişkin, 12 ay. İki gruba aynı haftalık kalori açığı hedefi verildi. Bir grup her gün kalori kıstı, diğer grup haftada 3 gün çok düşük kalorili yedi, 4 gün normal. 12 ay sonra: 4:3 grubu vücut ağırlığının ortalama %7.6'sını kaybetti (7.7 kg), günlük kısıtlama grubu %5'ini (4.8 kg). Aradaki fark 2.89 kg (P=0.040). Çalışmayı bırakan katılımcı oranı 4:3'te %19, günlük kısıtlamada %30. Hedef kilo kaybına (%5+) ulaşma oranı: 4:3'te %58, günlük kısıtlamada %47.</p>
       </div>
 
-      <p>Burada fark metabolik değil, davranışsal. "Her gün biraz az ye" sürekli irade gerektiriyor. "3 gün kısıtla, 4 gün normal ye" ise bir kural koyup uygulamak. Birinde her öğün bir karar veriyorsun, diğerinde kararı bir kere verip devam ediyorsun.</p>
+      <div class="experiment">
+        <div class="experiment-title">Harvie ve ark., 2011 — International Journal of Obesity <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
+        <p>107 kadın, 6 ay. Haftada 2 gün kısıtlama (5:2) ile günlük kalori kısıtlaması karşılaştırıldı. Aynı toplam kalori açığına rağmen insülin direnci (HOMA-IR) sonuçları çarpıcı biçimde farklıydı: aralıklı oruç grubunda %24 düşüş, günlük kısıtlama grubunda sadece %4 (P=0.001). Kilo kaybı benzer (6.4 kg vs 5.6 kg), ama metabolik iyileşme 6 kat daha güçlü.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Harvie ve ark., 2013 — British Journal of Nutrition <a href="#ref-3" class="ref" onclick="savePos(this)">3</a></div>
+        <p>115 kadın, 3 ay. Haftada 2 gün kısıtlama vs günlük kısıtlama. Yağ kaybı: aralıklı oruç grubunda 3.7 kg, günlük kısıtlamada 2.0 kg (P=0.007). Hedef kilo kaybına (%5+) ulaşan katılımcı oranı: aralıklı oruçta %65, günlük kısıtlamada %40. Açlık insülini aralıklı oruçta anlamlı biçimde düştü (43.2'den 34.8 pmol/L'ye, P=0.017), günlük kısıtlamada neredeyse değişmedi.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Heilbronn ve ark., 2005 — American Journal of Clinical Nutrition <a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
+        <p>16 katılımcı, 22 gün, gün aşırı oruç. Kritik bulgu: bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmedi. Sürekli kalori kısıtlamasında metabolizmanın yavaşlaması en büyük sorunken, aralıklı oruçta bu sorun ortaya çıkmıyor. Açlık insülini %57 düştü (P&lt;0.001). Yağ oksidasyonu günde 15 gramın üzerinde arttı.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Varady ve ark., 2013 — Nutrition Journal <a href="#ref-4" class="ref" onclick="savePos(this)">4</a></div>
+        <p>32 kişi, 12 hafta, gün aşırı oruç. 5.2 kg kilo kaybı (%6.5). Önemli ayrıntı: kaybedilen 3.6 kg saf yağ kütlesiydi, yağsız kütle (kas) korundu. Trigliserit %20 düştü (P&lt;0.05). LDL partikül boyutu büyüdü (P&lt;0.01), bu kalp-damar sağlığı için olumlu bir gösterge.</p>
+      </div>
+
+      <p>Beş farklı araştırma grubunun sonuçları aynı tabloya işaret ediyor: aralıklı kısıtlama, günlük kısıtlamayla aynı kalori açığında daha iyi sonuç veriyor. İki temel mekanizma var. Birincisi metabolik: beden sürekli kıtlık yerine dalgalı bir sinyal alıyor, bu yüzden metabolizmayı yavaşlatmıyor. İkincisi davranışsal: "her gün biraz az ye" sürekli irade gerektiriyor, her öğünde bir karar veriyorsun. "3 gün kısıtla, 4 gün normal ye" ise kararı bir kere verip devam etmek. Karar yorgunluğu düşüyor, uyum artıyor.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -508,58 +550,84 @@
     <!-- 04 Karsilastirma -->
     <div class="section" id="karsilastirma">
       <div class="section-num">04</div>
-      <h2>16:8 ile farkı</h2>
+      <h2>Diğer yöntemlerle karşılaştırma</h2>
 
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>16:8</th>
-            <th>4:3</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Sıklık</strong></td>
-            <td>Her gün</td>
-            <td>Haftada 3 gün</td>
-          </tr>
-          <tr>
-            <td><strong>Kısıtlama</strong></td>
-            <td>Zamanlama (16 saat oruç)</td>
-            <td>Kalori (~500 kcal/gün)</td>
-          </tr>
-          <tr>
-            <td><strong>Zorluk</strong></td>
-            <td>Başlangıç</td>
-            <td>Orta-ileri</td>
-          </tr>
-          <tr>
-            <td><strong>Kilo kaybı</strong></td>
-            <td>Orta</td>
-            <td>Yüksek</td>
-          </tr>
-          <tr>
-            <td><strong>Uyum oranı</strong></td>
-            <td>Yüksek</td>
-            <td>Orta (ama günlükten iyi)</td>
-          </tr>
-          <tr>
-            <td><strong>Sosyal etki</strong></td>
-            <td>Düşük (sadece sabah atlanıyor)</td>
-            <td>Orta (kısıtlama günlerinde sosyal yemekler zor)</td>
-          </tr>
-          <tr>
-            <td><strong>Kime uygun</strong></td>
-            <td>Herkese, başlangıç için ideal</td>
-            <td>16:8'i deneyip daha fazla sonuç isteyenler</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>4:3'ü en çok sorulan diğer yöntemlerle karşılaştıralım. Tablodaki rakamlar doğrudan araştırma sonuçlarından alınmıştır.</p>
+
+      <div style="overflow-x: auto; margin: 1.5rem 0; border-radius: 8px;">
+        <table class="compare-table" style="min-width: 640px; margin: 0;">
+          <thead>
+            <tr>
+              <th></th>
+              <th>4:3</th>
+              <th>5:2</th>
+              <th>16:8</th>
+              <th>Günlük kısıtlama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ne yapıyorsun?</strong></td>
+              <td>Haftada 3 gün ~500 kcal</td>
+              <td>Haftada 2 gün ~500 kcal</td>
+              <td>Her gün 8 saatte ye</td>
+              <td>Her gün daha az ye</td>
+            </tr>
+            <tr>
+              <td><strong>Kilo kaybı</strong></td>
+              <td>%7.6 (12 ay)</td>
+              <td>%5-6 (6 ay)</td>
+              <td>%3-5 (12 hafta)</td>
+              <td>%5 (12 ay)</td>
+            </tr>
+            <tr>
+              <td><strong>Kas korunumu</strong></td>
+              <td>Yüksek</td>
+              <td>Yüksek</td>
+              <td>Orta</td>
+              <td>Düşük</td>
+            </tr>
+            <tr>
+              <td><strong>Metabolizma yavaşlar mı?</strong></td>
+              <td>Hayır</td>
+              <td>Hayır</td>
+              <td>Kısmen</td>
+              <td>Evet</td>
+            </tr>
+            <tr>
+              <td><strong>Bırakma oranı</strong></td>
+              <td>%19</td>
+              <td>~%20</td>
+              <td>~%15</td>
+              <td>%30</td>
+            </tr>
+            <tr>
+              <td><strong>Zorluk</strong></td>
+              <td>Zor</td>
+              <td>Orta</td>
+              <td>Kolay</td>
+              <td>Kolay ama monoton</td>
+            </tr>
+            <tr>
+              <td><strong>Esneklik</strong></td>
+              <td>Normal günler serbest</td>
+              <td>Normal günler serbest</td>
+              <td>Yeme saatleri sabit</td>
+              <td>Her öğün kontrollü</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>4:3 ve 5:2 aynı mantıkla çalışıyor: belirli günlerde kısıtla, diğer günlerde normal ye. 4:3 haftada bir ekstra kısıtlama günü ekleyerek daha güçlü kilo kaybı sağlıyor. 5:2 ise neredeyse aynı metabolik faydaları daha az zorlukla veriyor. Aralarındaki fark büyük değil, asıl fark ikisinin de günlük kısıtlamadan çok daha iyi çalışması.</p>
+
+      <h3 class="sub-heading">Peki ya ketojenik diyet?</h3>
+
+      <p>Keto diyetle doğrudan karşılaştırma yapan büyük ölçekli bir çalışma henüz yok. Ancak temel farklar net: keto tüm karbonhidratları kısıtlar, 4:3 ise sadece belirli günlerde kaloriyi kısıtlar. Normal günlerinde ekmek, meyve, pilav yiyebilirsin. Keto'da bunların hiçbiri yok. Uzun vadeli sürdürülebilirlik açısından 4:3'ün avantajı büyük, çünkü hiçbir besin grubunu tamamen yasaklamıyor.</p>
 
       <div class="info-box note">
         <div class="info-box-title">Hangisini seçmeliyim?</div>
-        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. Rahat hissedersen ve daha agresif sonuçlar istersen 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori.</p>
+        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. 16:8'e alıştıktan sonra 5:2'ye, ardından 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori. Ketojenik diyet ise tamamen farklı bir yaklaşım; besin grubu kısıtlaması istemiyorsan aralıklı oruç modelleri daha esnek bir alternatif.</p>
       </div>
     </div>
 
@@ -571,7 +639,7 @@
       <h2>Nasıl başlanır?</h2>
 
       <ol class="step-list">
-        <li><span><strong>Öncelikle 16:8'i dene.</strong> Eğer 16:8'i hiç denemediysen, önce 2-3 hafta 16:8 uygula. Bu bedenini aralıklı oruça hazırlar.</span></li>
+        <li><span><strong>Öncelikle 16:8'i dene.</strong> Eğer 16:8'i hiç denemediysen, önce 2-3 hafta 16:8 uygula. Bu bedenini aralıklı oruca hazırlar.</span></li>
         <li><span><strong>5:2 ile başla.</strong> Haftada sadece 2 gün kısıtlama yap, 5 gün normal ye. 2-3 hafta sonra rahat hissedersen 4:3'e geç.</span></li>
         <li><span><strong>Kısıtlama günlerini planla.</strong> Art arda 2 kısıtlama günü koyma. Sal-Per-Cmt veya Pzt-Çar-Cum gibi eşit aralıklı dağıtımlar ideal.</span></li>
         <li><span><strong>500 kcal'i akıllı kullan.</strong> Protein ağırlıklı, lifli yiyeceklere odaklan. Bunlar tok tutar. Şekeri ve işlenmiş karbonhidratı minimumda tut.</span></li>
@@ -647,6 +715,7 @@
         <li class="caution"><strong>Bol su iç.</strong> Kısıtlama günlerinde dehidrasyon riski daha yüksek. Günde en az 2-3 litre su.</li>
         <li class="caution"><strong>Art arda 2 kısıtlama günü koyma.</strong> Araya mutlaka normal gün koy.</li>
         <li><strong>Uykuna dikkat et.</strong> Çok aç yatmak uyku kalitesini bozabilir. Akşam öğününü yatmadan 2-3 saat önce ye.</li>
+        <li><strong>Kan değerlerini takip et.</strong> 4:3'e başladıktan 2-3 ay sonra kan tahlili yaptır. Özellikle açlık şekeri, insülin, trigliserit ve LDL kolesterol değerlerini kontrol ettir. Bir araştırmada<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> uzun süreli aralıklı oruç uygulayanlarda LDL kolesterolde hafif yükselme gözlenmiş. Doktorunla birlikte takip et.</li>
       </ul>
     </div>
 
@@ -704,10 +773,14 @@
     <div class="references" id="kaynaklar">
       <h2>Kaynaklar</h2>
       <ol>
-        <li>Catenacci, V.A., et al. (2025). Intermittent versus daily calorie restriction for weight loss. <i>Annals of Internal Medicine</i>.</li>
-        <li>de Cabo, R. & Mattson, M.P. (2019). Effects of intermittent fasting on health, aging, and disease. <i>NEJM</i>, 381(26), 2541-2551.</li>
-        <li>Harvie, M., et al. (2011). The effects of intermittent or continuous energy restriction on weight loss and metabolic disease risk markers. <i>International Journal of Obesity</i>, 35(5), 714-727.</li>
-        <li>Varady, K.A., et al. (2022). Clinical application of intermittent fasting for weight loss. <i>Annual Review of Nutrition</i>, 42, 223-245.</li>
+        <li id="ref-1"><strong>Heilbronn, L.K., et al. (2005).</strong> Alternate-day fasting in nonobese subjects: effects on body weight, body composition, and energy metabolism. <em>American Journal of Clinical Nutrition</em>, 81(1), 69-73. <a href="https://pubmed.ncbi.nlm.nih.gov/15640462/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-2"><strong>Harvie, M.N., et al. (2011).</strong> The effects of intermittent or continuous energy restriction on weight loss and metabolic disease risk markers. <em>International Journal of Obesity</em>, 35(5), 714-727. <a href="https://pubmed.ncbi.nlm.nih.gov/20921964/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-3"><strong>Harvie, M., et al. (2013).</strong> The effect of intermittent energy and carbohydrate restriction v. daily energy restriction on weight loss and metabolic disease risk markers in overweight women. <em>British Journal of Nutrition</em>, 110(8), 1534-1547. <a href="https://pubmed.ncbi.nlm.nih.gov/23591120/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-4"><strong>Varady, K.A., et al. (2013).</strong> Alternate day fasting for weight loss in normal weight and overweight subjects: a randomized controlled trial. <em>Nutrition Journal</em>, 12, 146. <a href="https://pubmed.ncbi.nlm.nih.gov/24215592/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-5"><strong>Trepanowski, J.F., et al. (2017).</strong> Effect of alternate-day fasting on weight loss, weight maintenance, and cardioprotection among metabolically healthy obese adults. <em>JAMA Internal Medicine</em>, 177(7), 930-938. <a href="https://pubmed.ncbi.nlm.nih.gov/28459931/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-6"><strong>de Cabo, R. & Mattson, M.P. (2019).</strong> Effects of intermittent fasting on health, aging, and disease. <em>NEJM</em>, 381(26), 2541-2551. <a href="https://pubmed.ncbi.nlm.nih.gov/31881139/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-7"><strong>Varady, K.A., et al. (2022).</strong> Clinical application of intermittent fasting for weight loss. <em>Annual Review of Nutrition</em>, 42, 223-245. <a href="https://pubmed.ncbi.nlm.nih.gov/35584814/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-8"><strong>Catenacci, V.A., et al. (2025).</strong> The effect of 4:3 intermittent fasting on weight loss at 12 months: a randomized clinical trial. <em>Annals of Internal Medicine</em>, 178(5), 634-644. <a href="https://pubmed.ncbi.nlm.nih.gov/40163873/" target="_blank" style="color: var(--accent);">Link</a></li>
       </ol>
     </div>
 
@@ -716,6 +789,24 @@
   <div class="divider"></div>
 
   <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script>
+  var savedPosition = null;
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() { document.getElementById('fab-back').style.display = 'flex'; }, 300);
+  }
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() { document.getElementById('fab-back').style.display = 'none'; savedPosition = null; }, 600);
+    }
+  }
+  </script>
 
   <script>
   function toggleFaq(btn) {

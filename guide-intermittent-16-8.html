@@ -535,6 +535,258 @@
     max-height: 300px;
   }
 
+  /* Research / Science Panel */
+  .science-panel {
+    margin: 2rem 0;
+  }
+
+  .science-panel h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .metric-glossary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .metric-card summary {
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    transition: background 0.2s;
+  }
+
+  .metric-card summary::-webkit-details-marker { display: none; }
+
+  .metric-card summary::after {
+    content: '+';
+    margin-left: auto;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+  }
+
+  .metric-card[open] summary::after {
+    content: '-';
+  }
+
+  .metric-card summary:hover { background: var(--accent-glow); }
+
+  .metric-card .metric-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .metric-card .metric-body {
+    padding: 0 14px 14px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .metric-card .metric-body .metric-range {
+    display: inline-block;
+    background: var(--accent-glow);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-weight: 500;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-top: 6px;
+  }
+
+  .research-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .research-block summary {
+    padding: 16px 18px;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: background 0.2s;
+  }
+
+  .research-block summary::-webkit-details-marker { display: none; }
+
+  .research-block summary:hover { background: var(--accent-glow); }
+
+  .research-block summary .research-meta {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .research-block summary .research-arrow {
+    float: right;
+    color: var(--accent);
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+  }
+
+  .research-block[open] summary .research-arrow {
+    transform: rotate(90deg);
+  }
+
+  .research-block .research-body {
+    padding: 0 18px 18px;
+  }
+
+  .research-block .research-body p {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .research-block .research-body p:last-child { margin-bottom: 0; }
+
+  .chart-wrapper {
+    margin: 0.8rem 0;
+  }
+
+  .chart-wrapper svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .chart-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .chart-legend .cl-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 0.8rem 0;
+  }
+
+  .data-table th {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: var(--accent-glow); }
+
+  /* Term tooltips */
+  .term {
+    border-bottom: 1px dotted var(--text-dim);
+    cursor: help;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .term .term-tip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-dim);
+    white-space: normal;
+    width: max-content;
+    max-width: 260px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .term .term-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--border);
+  }
+
+  .term:hover .term-tip,
+  .term.active .term-tip {
+    display: block;
+  }
+
+  /* Prevent tooltip from going off-screen on left/right edges */
+  .term-left .term-tip { left: 0; transform: none; }
+  .term-left .term-tip::after { left: 16px; transform: none; }
+  .term-right .term-tip { left: auto; right: 0; transform: none; }
+  .term-right .term-tip::after { left: auto; right: 16px; transform: none; }
+
+  @media (max-width: 480px) {
+    .metric-glossary { grid-template-columns: 1fr; }
+    .term .term-tip { max-width: 220px; font-size: 0.75rem; }
+  }
+
   /* Sub heading */
   .sub-heading {
     font-family: var(--serif);
@@ -779,8 +1031,10 @@
       <p>En yaygın uygulama: öğlen 12:00'de ilk öğün, akşam 20:00'de son öğün. Arada istediğin gibi yersin. 20:00'den sonra ertesi gün 12:00'ye kadar sadece su, sade kahve veya bitki çayı içersin.</p>
 
       <div class="info-box note">
-        <div class="info-box-title">Önemli</div>
-        <p>16:8 bir kalori kısıtlaması değil. Yeme penceresinde yeterli ve dengeli beslenmen gerekiyor. Amaç az yemek değil, yeme zamanlamasını değiştirmek.</p>
+        <div class="info-box-title">Peki kalori saymak gerekiyor mu?</div>
+        <p>16:8 bir kalori sayma programı değil, bir zamanlama stratejisi. Ama kilo vermek için kalori açığı hâlâ gerekli. Burada sihir yok.</p>
+        <p>16:8'in asıl kolaylığı şu: 8 saatlik pencereye 3 büyük öğün + atıştırmalık sığdırmak zor olduğundan, çoğu kişi zorlamadan, kendiliğinden daha az kalori alıyor. Araştırmalarda 16:8 uygulayan gruplar bilinçli bir kısıtlama yapmadan ortalama %10-20 daha az kalori almış ve kilo vermiş. Kilo kaybı yine kalori açığından geliyor, ama 16:8 bu açığı "az ye" baskısı olmadan, doğal şekilde oluşturuyor.</p>
+        <p>Öte yandan, yeme penceresinde aşırı kalori alırsan kilo vermezsin. Yeterli ve dengeli beslenmen gerekiyor.</p>
       </div>
 
       <p>Bu yaklaşım ilk bakışta modern görünse de aslında atalarımızın varsayılan yeme düzeni buydu. Avcı-toplayıcılar düzensiz yiyordu; av bulduklarında yediler, bulamadıklarına saatlerce aç kaldılar. Üç öğün artı iki atıştırmalık tamamen modern bir icat.</p>
@@ -795,7 +1049,7 @@
 
       <p>Yedikten sonra bedenin öncelikle glikozu (kan şekerini) enerji olarak kullanır. Glikoz bitince karacığerdeki glikojen depolarını boşaltır. Bu genellikle 10-14 saat sürer. Glikojen de bitince beden yağ yakmaya başlar. Bu geçişe "metabolik geçiş" (metabolic switch) deniyor.</p>
 
-      <p>16 saatlik oruç penceresi tam bu geçişi tetiklemek için tasarlanmış. 12-14 saatte glikojen biter, kalan 2-4 saatte beden aktif olarak yağ yakar ve bazı onarım süreçlerini başlatır.</p>
+      <p>16 saatlik oruç penceresi tam bu geçişi tetiklemek için tasarlanmış. 12-14 saatte glikojen tükenir ve beden yağ yakımına geçer. 16. saate kadar olan süre bu geçişi pekiştirir, otofaji gibi onarım süreçlerini başlatır. 16 saatten sonra da oruç devam ederse yağ yakımı ve keton üretimi hız kazanmaya devam eder.</p>
 
       <h3 class="sub-heading">Oruç sırasında bedeninde ne oluyor?</h3>
 
@@ -811,10 +1065,407 @@
         <p>Hücrelerin hasarlı bileşenlerini, bozulmuş proteinlerini temizleyip geri dönüştürme süreci. Bir nevi hücresel bakım modu. Yoshinori Ohsumi bu mekanizmayı keşfettiği için 2016 Nobel Tıp Ödülü'nü aldı. Otofaji genellikle 16+ saat açlıktan sonra belirgin şekilde aktifleşir.</p>
       </div>
 
+      <!-- Science Panel -->
+      <div class="science-panel">
+        <h3>Peki bu değişimler gerçekten ölçülmüş mü?</h3>
+        <p>Evet. Aşağıda oruç sırasında insan kanında ölçülen gerçek değişimleri gösteren araştırma verileri var.</p>
+
+        <details class="metric-card" style="grid-column: 1 / -1; margin-bottom: 1rem;">
+          <summary style="font-size: 0.9rem;">Grafiklerdeki belirteçler ne anlama geliyor?</summary>
+          <div class="metric-body">
+            <div class="metric-glossary" style="margin-top: 8px;">
+              <div class="metric-card" style="border: none; background: none; padding: 0;">
+                <div class="metric-body" style="padding: 0;">
+                  <span class="metric-dot" style="background: #e74c3c; display: inline-block; vertical-align: middle; margin-right: 4px;"></span>
+                  <strong style="color: var(--text);">Glikoz (kan şekeri)</strong><br>
+                  Bedenin birincil yakıtı. Yemek yedikten sonra yükselir, insülin yardımıyla hücrelere alınır. Oruçta kademeli olarak düşer.
+                  <span class="metric-range">Normal: 70-100 mg/dL (aç karnına)</span>
+                </div>
+              </div>
+              <div class="metric-card" style="border: none; background: none; padding: 0;">
+                <div class="metric-body" style="padding: 0;">
+                  <span class="metric-dot" style="background: #3498db; display: inline-block; vertical-align: middle; margin-right: 4px;"></span>
+                  <strong style="color: var(--text);">İnsülin</strong><br>
+                  Pankreasın ürettiği hormon. Glikozu hücrelere sokar, yağ depolanmasını uyarır. İnsülin yüksekken yağ yakımı engellenir. Orucun temel etkisi insülini düşürerek yağ yakımının önünü açmasıdır.
+                  <span class="metric-range">Normal: 5-25 microU/mL (aç karnına)</span>
+                </div>
+              </div>
+              <div class="metric-card" style="border: none; background: none; padding: 0;">
+                <div class="metric-body" style="padding: 0;">
+                  <span class="metric-dot" style="background: #e67e22; display: inline-block; vertical-align: middle; margin-right: 4px;"></span>
+                  <strong style="color: var(--text);">Keton (BHB)</strong><br>
+                  Karaciğerin yağ asitlerinden ürettiği alternatif yakıt molekülü. Glikoz azaldığında beyin ve kaslar ketonu yakıt olarak kullanabilir. Keton yükselmesi, bedenin aktif olarak yağ yaktığının göstergesidir.
+                  <span class="metric-range">Normal (tok): 0.05 mM | Oruçta: 0.3-0.8 mM</span>
+                </div>
+              </div>
+              <div class="metric-card" style="border: none; background: none; padding: 0;">
+                <div class="metric-body" style="padding: 0;">
+                  <span class="metric-dot" style="background: #27ae60; display: inline-block; vertical-align: middle; margin-right: 4px;"></span>
+                  <strong style="color: var(--text);">Serbest yağ asidi (FFA)</strong><br>
+                  Yağ dokusundan kana salınan yakıt molekülleri. İnsülin düştüğünde yağ dokusu bunları kana bırakır. Bir kısmı doğrudan yakılır, bir kısmı karaciğerde ketona dönüştürülür.
+                  <span class="metric-range">Normal: 0.1-0.5 mM | Oruçta: 0.7-1.0 mM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Research 1: Klein et al. 1993 -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Klein et al. (1993)</div>
+            <div class="research-meta">Progressive alterations in lipid and glucose metabolism during short-term fasting in young adult men. American Journal of Physiology, 265(5), E801-E806</div>
+          </div>
+          <div class="research-body">
+            <p>6 sağlıklı genç erkekte 12-72 saatlik oruç boyunca <span class="term">izotop işaretleyiciler<span class="term-tip">Vücuda verilen zararsız işaretli moleküller. Bunların kanda izlenmesiyle hangi yakıtın ne hızda kullanıldığı ölçülür.</span></span> ve <span class="term">indirekt kalorimetre<span class="term-tip">Nefesteki oksijen tüketimi ve karbondioksit üretimini ölçerek bedenin ne kadar enerji harcadığını ve hangi yakıtı (yağ mı, şeker mi) yaktığını hesaplayan cihaz.</span></span> kullanarak metabolik değişimleri ölçmüşler. Kritik bulgu: yağ dokusundan mobilizasyon (<span class="term">lipoliz<span class="term-tip">Yağ hücrelerindeki trigliseritlerin parçalanarak kana serbest yağ asidi olarak salınması. Yağ yakımının ilk adımı.</span></span>) 18-24 saat arasında iki katına çıkıyor.</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parametre</th>
+                  <th>12. saat</th>
+                  <th>72. saat</th>
+                  <th>Değişim</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Glikoz (mmol/L)</td><td>5.58</td><td>4.14</td><td style="color: var(--green);">%25 düşüş</td></tr>
+                <tr><td>İnsülin (pmol/L)</td><td>64.6</td><td>30.1</td><td style="color: var(--green);">%53 düşüş</td></tr>
+                <tr><td><span class="term term-left">Gliserol<span class="term-tip">Yağ moleküllerinin (trigliserit) parçalanmasıyla açığa çıkan madde. Kandaki gliserol seviyesi yağ yakımının ne kadar aktif olduğunu gösterir.</span></span> salınımı (umol/kg/dk)</td><td>2.08</td><td>4.36</td><td style="color: var(--green);">2 kat artış</td></tr>
+                <tr><td><span class="term term-left">Palmitat<span class="term-tip">En yaygın doymuş yağ asidi. Yağ dokusundan kana salınan palmitatın ölçümü, lipolizin (yağ yıkımının) ne hızda gerçekleştiğini gösterir.</span></span> salınımı (umol/kg/dk)</td><td>1.63</td><td>3.26</td><td style="color: var(--green);">2 kat artış</td></tr>
+                <tr><td>Glikoz üretimi (umol/kg/dk)</td><td>11.0</td><td>8.3</td><td style="color: var(--green);">%25 düşüş</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Değerler ortalama &#177; SEM olarak raporlanmıştır. Gliserol ve palmitat salınımı yağ dokusundan mobilizasyonun (lipolizin) göstergesidir.</p>
+          </div>
+        </div>
+
+        <div class="info-box note">
+          <div class="info-box-title">P değeri nedir?</div>
+          <p>Aşağıdaki çalışmalarda P değerleri göreceksiniz. P değeri bir sonucun tesadüf olma ihtimalini gösterir. P=0.001 demek sonucun şans eseri çıkma olasılığı binde bir. Bilimde P&lt;0.05 (%5'in altı) anlamlı kabul edilir. P ne kadar küçükse sonuç o kadar güvenilir.</p>
+        </div>
+
+        <!-- Research 2: Zauner et al. 2000 -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Zauner et al. (2000)</div>
+            <div class="research-meta">Resting energy expenditure in short-term starvation is increased as a result of an increase in serum norepinephrine. American Journal of Clinical Nutrition, 71(6), 1511-1515</div>
+          </div>
+          <div class="research-body">
+            <p>11 sağlıklı kişide 84 saatlik (3.5 gün) oruç boyunca <span class="term">bazal metabolizma<span class="term-tip">Bedenin hiçbir şey yapmadan, sadece hayatta kalmak için (nefes, kalp atışı, hücre yenilenmesi) harcadığı enerji miktarı. Dinlenme halinde ölçülür.</span></span> hızını ölçmüşler. Sonuç: oruç metabolizmayı yavaşlatmıyor, <strong>hızlandırıyor</strong>.</p>
+
+            <div class="chart-wrapper">
+              <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="200" y="14" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Bazal metabolizma hızı (kJ/dk) ve norepinefrin (pmol/L)</text>
+
+                <!-- Grid -->
+                <line x1="50" y1="30" x2="50" y2="170" stroke="var(--border)" stroke-width="1"/>
+                <line x1="50" y1="170" x2="350" y2="170" stroke="var(--border)" stroke-width="1"/>
+                <line x1="50" y1="100" x2="350" y2="100" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4" opacity="0.3"/>
+
+                <!-- X axis -->
+                <text x="100" y="188" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="10">Gün 1</text>
+                <text x="200" y="188" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="10">Gün 2</text>
+                <text x="300" y="188" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="10">Gün 3-4</text>
+
+                <!-- REE bars: 3.97 → 4.12 → 4.53 kJ/min. Scale: 3.5=170, 5.0=30 → range 140px for 1.5 units -->
+                <!-- 3.97: y = 170 - (3.97-3.5)/1.5*140 = 170 - 43.8 = 126.2 -->
+                <!-- 4.12: y = 170 - (4.12-3.5)/1.5*140 = 170 - 57.9 = 112.1 -->
+                <!-- 4.53: y = 170 - (4.53-3.5)/1.5*140 = 170 - 96.1 = 73.9 -->
+                <rect x="75" y="126" width="50" height="44" rx="4" fill="var(--green)" opacity="0.3"/>
+                <rect x="175" y="112" width="50" height="58" rx="4" fill="var(--green)" opacity="0.5"/>
+                <rect x="275" y="74" width="50" height="96" rx="4" fill="var(--green)" opacity="0.7"/>
+                <text x="100" y="121" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="11" font-weight="600">3.97</text>
+                <text x="200" y="107" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="11" font-weight="600">4.12</text>
+                <text x="300" y="69" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="11" font-weight="600">4.53</text>
+
+                <!-- Norepinephrine line: 1716 → 2264 → 3728 pmol/L -->
+                <!-- Scale these to chart: 1500=160, 4000=40 → range 120px for 2500 units -->
+                <!-- 1716: y = 160 - (1716-1500)/2500*120 = 160 - 10.4 = 149.6 -->
+                <!-- 2264: y = 160 - (2264-1500)/2500*120 = 160 - 36.7 = 123.3 -->
+                <!-- 3728: y = 160 - (3728-1500)/2500*120 = 160 - 107.0 = 53.0 -->
+                <polyline points="100,150 200,123 300,53" fill="none" stroke="#e67e22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="100" cy="150" r="4" fill="#e67e22"/>
+                <circle cx="200" cy="123" r="4" fill="#e67e22"/>
+                <circle cx="300" cy="53" r="4" fill="#e67e22"/>
+                <text x="112" y="158" fill="#e67e22" font-family="DM Sans" font-size="8">1716</text>
+                <text x="212" y="119" fill="#e67e22" font-family="DM Sans" font-size="8">2264</text>
+                <text x="312" y="49" fill="#e67e22" font-family="DM Sans" font-size="8">3728</text>
+
+                <!-- +14% label -->
+                <text x="300" y="210" text-anchor="middle" fill="var(--green)" font-family="DM Sans" font-size="10" font-weight="600">+%14 metabolizma</text>
+                <!-- +117% label -->
+                <text x="300" y="42" text-anchor="middle" fill="#e67e22" font-family="DM Sans" font-size="8">+%117 norepinefrin</text>
+              </svg>
+            </div>
+            <div class="chart-legend">
+              <span><span class="cl-dot" style="background:var(--green)"></span>Bazal metabolizma (kJ/dk)</span>
+              <span><span class="cl-dot" style="background:#e67e22"></span>Norepinefrin (pmol/L)</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 6px;">Yaygın kanının aksine, kısa süreli oruçta metabolizma yavaşlamıyor. Beden <span class="term">norepinefrin<span class="term-tip">Böbrek üstü bezlerinden salgılanan stres hormonu. "Savaş ya da kaç" tepkisini tetikler, kalp hızını artırır, yağ yakımını hızlandırır ve zihni keskinleştirir. Adrenalinin kuzeni.</span></span> salgılayarak metabolizmayı %14 hızlandırıyor. (p &lt; 0.05)</p>
+          </div>
+        </div>
+
+        <!-- Research 3: Heilbronn et al. 2005 -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Heilbronn et al. (2005)</div>
+            <div class="research-meta">Alternate-day fasting in nonobese subjects: effects on body weight, body composition, and energy metabolism. American Journal of Clinical Nutrition, 81(1), 69-73</div>
+          </div>
+          <div class="research-body">
+            <p>16 kişide (8 erkek, 8 kadın) 22 gün boyunca günaşırı oruç (bir gün ye, bir gün yeme) uygulamışlar. Sonuçlar:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parametre</th>
+                  <th>Başlangıç</th>
+                  <th>22. gün</th>
+                  <th>Değişim</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Vücut ağırlığı</td><td>70.0 kg</td><td>68.6 kg</td><td style="color: var(--green);">-1.4 kg (%2.5)</td></tr>
+                <tr><td>Yağ kütlesi</td><td>16.6 kg</td><td>15.8 kg</td><td style="color: var(--green);">-0.8 kg (%4)</td></tr>
+                <tr><td><span class="term term-left">Yağ oksidasyonu<span class="term-tip">Bedenin yağı yakarak enerji üretme hızı. Günde kaç gram yağın yakıt olarak kullanıldığını gösterir.</span></span></td><td>64 g/gün</td><td>101 g/gün</td><td style="color: var(--green); font-weight: 600;">+%58 artış</td></tr>
+                <tr><td>Karbonhidrat oksidasyonu</td><td>175 g/gün</td><td>81 g/gün</td><td style="color: var(--green);">-%54 düşüş</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 6px;">Beden yakıt kaynağını değiştirmiş: günlük yağ yakımı 64'ten 101 grama çıkarken, karbonhidrat kullanımı 175'ten 81 grama düşmüş. Açlık insülini %57 düşmüş (p &lt; 0.001), bazal metabolizma ise yavaşlamamış. Erkeklerde öğün sonrası toplam insülin yanıtı 207'den 130'a düştü (p &lt; 0.03), yani beden aynı yemeği daha az insülinle kontrol eder hale geldi. İlginç şekilde kadınlarda bu etki görülmedi.</p>
+          </div>
+        </div>
+
+        <!-- Research 4: Sutton et al. 2018 -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Sutton et al. (2018)</div>
+            <div class="research-meta">Early time-restricted feeding improves insulin sensitivity, blood pressure, and oxidative stress even without weight loss in men with prediabetes. Cell Metabolism, 27(6), 1212-1221</div>
+          </div>
+          <div class="research-body">
+            <p><span class="term">Prediyabetli<span class="term-tip">Kan şekeri normalin üstünde ama henüz diyabet seviyesinde değil. Müdahale edilmezse tip 2 diyabete ilerleyebilir.</span></span> 8 erkekte 5 hafta boyunca 6 saatlik yeme penceresi (~18 saat oruç) uygulamışlar. Kalori aynı, kilo kaybı yok. Sadece öğün zamanlaması değişmiş. Sonuçlar:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ne değişti?</th>
+                  <th>Ne kadar?</th>
+                  <th>Bu ne demek?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tansiyon</td>
+                  <td style="color: var(--green); font-weight: 600;">-11 / -10 mmHg</td>
+                  <td style="font-size: 0.78rem;">Standart tansiyon ilacı (örn. losartan) ile elde edilen düşüşe eşdeğer</td>
+                </tr>
+                <tr>
+                  <td>Açlık insülini</td>
+                  <td style="color: var(--green); font-weight: 600;">-2.9 mU/L</td>
+                  <td style="font-size: 0.78rem;">Tip 2 diyabet riskini belirgin şekilde azaltan düzeyde bir iyileşme</td>
+                </tr>
+                <tr>
+                  <td><span class="term term-left">Oksidatif stres<span class="term-tip">Hücrelere zarar veren serbest radikallerin birikmesi. Yaşlanma, kanser ve kronik hastalıkların temel mekanizmalarından biri. Düşük olması iyi.</span></span></td>
+                  <td style="color: var(--green);">%14 azalma</td>
+                  <td style="font-size: 0.78rem;">Hücrelere zarar veren serbest radikaller %14 azalmış. Küçük gibi görünse de bu, 5 haftada ilaçsız elde edilmiş bir iyileşme</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 6px;">Tüm değişimler istatistiksel olarak anlamlı (p &lt; 0.05). Hiçbir katılımcı kilo vermemiş, kalori kısıtlaması uygulanmamış. Tek değişken: yeme saatleri.</p>
+          </div>
+        </div>
+
+        <!-- Research 5: Jamshed et al. 2019 -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Jamshed et al. (2019)</div>
+            <div class="research-meta">Early time-restricted feeding improves 24-hour glucose levels and affects markers of the circadian clock, aging, and autophagy in humans. Nutrients, 11(6), 1234</div>
+          </div>
+          <div class="research-body">
+            <p>11 kişide sadece 4 gün erken zaman kısıtlamalı beslenme (08:00-14:00 yeme penceresi) uygulamışlar. Sonuçlar:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parametre</th>
+                  <th>Değişim</th>
+                  <th>Anlamlılık</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>24 saatlik ortalama glikoz</td><td>-4 mg/dL</td><td>p = 0.0003</td></tr>
+                <tr><td>Glisemik dalgalanma</td><td>-12 mg/dL</td><td>p = 0.001</td></tr>
+                <tr><td>Sabah açlık insülini</td><td>Düşüş</td><td>p &lt; 0.05</td></tr>
+                <tr><td>Sabah ketonları</td><td>Artış</td><td>p &lt; 0.04</td></tr>
+                <tr><td style="font-weight: 500;"><span class="term term-left">SIRT1<span class="term-tip">Sirtuin 1 proteini. Hücrelerin strese dayanıklılığını artıran, DNA onarımını destekleyen ve yaşlanmayı yavaşlatan bir gen. Kalori kısıtlaması ve oruçla aktive olur.</span></span> (yaşlanma geni)</td><td style="color: var(--green); font-weight: 600;"><span class="term">Ekspresyon<span class="term-tip">Bir genin "açılarak" protein üretmesi. Gen ekspresyonu arttı demek, o gen daha aktif çalışmaya başladı demek.</span></span> arttı</td><td>p &lt; 0.04</td></tr>
+                <tr><td style="font-weight: 500;"><span class="term term-left">LC3A<span class="term-tip">Otofaji sürecinde kritik rol oynayan bir protein. LC3A ekspresyonunun artması, hücrelerin "temizlik moduna" geçtiğinin göstergesi.</span></span> (otofaji geni)</td><td style="color: var(--green); font-weight: 600;">Ekspresyon arttı</td><td>p &lt; 0.04</td></tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 6px;">Sadece 4 günde otofaji ve yaşlanma ile ilişkili gen ekspresyonlarında ölçülebilir değişim. Bu, aralıklı orucun hücresel düzeyde ne kadar hızlı etki ettiğini gösteriyor.</p>
+          </div>
+        </div>
+
+        <!-- Research 6: Cahill (brain fuel) -->
+        <div class="research-block">
+          <div style="padding: 16px 18px 4px;">
+            <div style="font-family: var(--sans); font-size: 0.88rem; font-weight: 500; color: var(--text);">Cahill &amp; Owen (1967-2006)</div>
+            <div class="research-meta">Fuel Metabolism in Starvation. Annual Review of Nutrition, 26, 1-22 | Brain Metabolism during Fasting. Journal of Clinical Investigation, 46(10), 1589-1595</div>
+          </div>
+          <div class="research-body">
+            <p>George Cahill'in onlarca yıla yayılan açlık fizyolojisi çalışmaları, oruç metabolizmasının temelini oluşturur. En çarpıcı bulgu: uzun oruçta beyin yakıt kaynağını tamamen değiştiriyor.</p>
+
+            <div class="chart-wrapper">
+              <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Title -->
+                <text x="200" y="14" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Beynin yakıt kaynağı değişimi (oruç süresine göre)</text>
+
+                <!-- Stacked area chart concept: glucose shrinks, ketones grow -->
+                <!-- Background bar for reference -->
+                <text x="25" y="37" text-anchor="end" fill="var(--text-dim)" font-family="DM Sans" font-size="8" transform="rotate(-90, 25, 80)">Enerji oranı</text>
+
+                <!-- Day labels -->
+                <text x="80" y="185" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Tok</text>
+                <text x="170" y="185" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Gün 1</text>
+                <text x="260" y="185" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Gün 3</text>
+                <text x="350" y="185" text-anchor="middle" fill="var(--text-dim)" font-family="DM Sans" font-size="9">Hafta 3+</text>
+
+                <!-- Glucose bars (shrinking) -->
+                <!-- Tok: 100%, D1: 85%, D3: 55%, W3: 25% → heights out of 140px, base at y=170 -->
+                <rect x="55" y="30" width="50" height="140" rx="4" fill="#e74c3c" opacity="0.25"/>
+                <rect x="145" y="51" width="50" height="119" rx="4" fill="#e74c3c" opacity="0.25"/>
+                <rect x="235" y="93" width="50" height="77" rx="4" fill="#e74c3c" opacity="0.25"/>
+                <rect x="325" y="135" width="50" height="35" rx="4" fill="#e74c3c" opacity="0.25"/>
+
+                <!-- Ketone bars (growing) - stacked on top -->
+                <rect x="55" y="28" width="50" height="2" rx="1" fill="#e67e22" opacity="0.6"/>
+                <rect x="145" y="30" width="50" height="21" rx="4" fill="#e67e22" opacity="0.6"/>
+                <rect x="235" y="30" width="50" height="63" rx="4" fill="#e67e22" opacity="0.6"/>
+                <rect x="325" y="30" width="50" height="105" rx="4" fill="#e67e22" opacity="0.6"/>
+
+                <!-- Percentage labels -->
+                <text x="80" y="105" text-anchor="middle" fill="#e74c3c" font-family="DM Sans" font-size="11" font-weight="600">%100</text>
+                <text x="170" y="115" text-anchor="middle" fill="#e74c3c" font-family="DM Sans" font-size="10">%85</text>
+                <text x="260" y="135" text-anchor="middle" fill="#e74c3c" font-family="DM Sans" font-size="10">%55</text>
+                <text x="350" y="155" text-anchor="middle" fill="#e74c3c" font-family="DM Sans" font-size="10">%25</text>
+
+                <text x="170" y="46" text-anchor="middle" fill="#e67e22" font-family="DM Sans" font-size="9">%15</text>
+                <text x="260" y="65" text-anchor="middle" fill="#e67e22" font-family="DM Sans" font-size="10">%45</text>
+                <text x="350" y="85" text-anchor="middle" fill="#e67e22" font-family="DM Sans" font-size="11" font-weight="600">%75</text>
+              </svg>
+            </div>
+            <div class="chart-legend">
+              <span><span class="cl-dot" style="background:#e74c3c"></span>Glikoz</span>
+              <span><span class="cl-dot" style="background:#e67e22"></span>Keton</span>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Parametre</th>
+                  <th>Tok</th>
+                  <th>Gün 3</th>
+                  <th>Hafta 2-3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Kan şekeri (mg/dL)</td><td>100</td><td>65</td><td>55-65</td></tr>
+                <tr><td>Keton / BHB (mM)</td><td>&lt; 0.1</td><td>1.6</td><td>5-7</td></tr>
+                <tr><td>Beynin günlük şeker ihtiyacı</td><td>~80 g</td><td>~55 g</td><td>~30 g</td></tr>
+              </tbody>
+            </table>
+
+            <p style="font-size: 0.88rem; color: var(--text); margin-top: 1rem;">Peki beden nasıl haftalarca aç kalabiliyor?</p>
+            <p style="font-size: 0.82rem; color: var(--text-dim);">Çünkü iki farklı yakıt deposu var ve boyutları çok farklı:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Yakıt deposu</th>
+                  <th>Miktar</th>
+                  <th>Ne kadar yeter?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="term term-left">Glikojen<span class="term-tip">Karaciğer ve kaslarda depolanan şeker. Kolay erişilir ama sınırlı miktarda. Oruçta ilk tüketilen yakıt deposu.</span></span> (şeker deposu)</td>
+                  <td>~2,000 kcal</td>
+                  <td>Yaklaşık 1 gün</td>
+                </tr>
+                <tr>
+                  <td>Yağ deposu</td>
+                  <td>~100,000 kcal</td>
+                  <td style="color: var(--green); font-weight: 500;">Haftalarca</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 6px;">Yağ deposu glikojenin yaklaşık 50 katı. Beyin normalde sadece şeker kullanır ama oruç uzadıkça ketona geçiş yaparak şeker ihtiyacını 80 g'dan 30 g'a düşürür. Bu sayede beden yağ deposunu verimli şekilde kullanabilir. Owen ve arkadaşları bu geçişi <span class="term">juguler ven kateterizasyonu<span class="term-tip">Boyundaki ana toplardamara ince bir tüp yerleştirerek beyinden dönen kanı doğrudan analiz etme yöntemi. Beynin hangi yakıtı ne kadar kullandığını ölçmenin en kesin yolu.</span></span> ile doğrudan ölçmüştür.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="info-box tip">
         <div class="info-box-title">16:8'in kritik avantajı</div>
         <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 16:8'te bu olmuyor. Her gün 8 saatlik pencerede normal şekilde besleniyorsun. Beden her gün yeterli enerjiyi alıyor, bu yüzden açlık moduna geçmeye fırsat bulamıyor. Metabolizma hızı korunuyor, yağ yakımı devam ediyor.</p>
         <p>Klasik diyetlerde metabolik yavaşlama kaçınılmaz. Ama 16:8'te oruç süresi sadece 16 saat, her günün yarısında yiyorsun. Beden bunu kronik kıtlık olarak algılamıyor, geçici bir ara olarak algılıyor. Sonuç: aynı kalori alımıyla daha etkili yağ yakımı, daha az metabolik direnç.</p>
+      </div>
+
+      <h3 class="sub-heading">Daha uzun oruç tutabilir miyim?</h3>
+      <p>16:8, aralıklı orucun en yaygın ve en iyi araştırılan modeli. Ama tek model değil. Bazı kişiler 16 saatten fazla oruç tutmayı tercih edebiliyor. Aşağıdaki tablo popüler modelleri karşılaştırıyor:</p>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Oruç / Yeme</th>
+              <th>Zorluk</th>
+              <th>Kime uygun?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>14:10</strong></td>
+              <td>14 saat oruç, 10 saat yeme</td>
+              <td>Kolay</td>
+              <td>Yeni başlayanlar, ilk adım</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--green);">16:8</strong></td>
+              <td>16 saat oruç, 8 saat yeme</td>
+              <td>Orta</td>
+              <td>Çoğu kişi için ideal denge</td>
+            </tr>
+            <tr>
+              <td><strong>18:6</strong></td>
+              <td>18 saat oruç, 6 saat yeme</td>
+              <td>Orta-zor</td>
+              <td>16:8'e alışanlar, daha fazla yağ yakımı isteyenler</td>
+            </tr>
+            <tr>
+              <td><strong>20:4</strong></td>
+              <td>20 saat oruç, 4 saat yeme</td>
+              <td>Zor</td>
+              <td>Deneyimliler, kısa pencere tercih edenler</td>
+            </tr>
+            <tr>
+              <td><strong>OMAD</strong></td>
+              <td>~23 saat oruç, 1 öğün</td>
+              <td>Çok zor</td>
+              <td>İleri düzey, dikkatli beslenme gerektirir</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box note">
+        <div class="info-box-title">OMAD nedir?</div>
+        <p>OMAD (One Meal A Day), günde tek öğün yeme modelidir. Genellikle 23:1 olarak uygulanır: günün tamamında tek bir büyük öğün yersin, geri kalan zamanda sadece su ve kalorisiz içecekler tüketirsin.</p>
+        <p>OMAD'ın avantajı daha uzun oruç süresi sayesinde otofaji ve keton üretiminin belirgin şekilde artmasıdır. Ancak ciddi riskleri de vardır: tek öğünde yeterli kalori ve besin almak zordur, kas kaybı riski artar, sosyal hayatla uyumsuzluk yaratabilir ve uzun vadede metabolik adaptasyona yol açabilir. Tıbbi gözetim altında olmadan günlük OMAD uygulaması önerilmez.</p>
+      </div>
+
+      <div class="info-box tip">
+        <div class="info-box-title">Hangi modeli seçmeliyim?</div>
+        <p>16:8 çoğu kişi için en iyi denge noktasıdır: metabolik geçişi tetikleyecek kadar uzun, yeterli beslenmeye izin verecek kadar geniş. 16:8'e alışan ve daha fazlasını denemek isteyenler 18:6'ya geçebilir. 20:4 ve OMAD ileri düzey uygulamalardır, deneyim ve dikkatli beslenme planlaması gerektirir. Önemli olan tutarlılık: "haftada 5 gün 16:8 yapmak", "haftada 2 gün OMAD yapmak"tan daha etkili.</p>
       </div>
     </div>
 
@@ -860,7 +1511,7 @@
 
       <div class="experiment">
         <div class="experiment-title">de Cabo ve Mattson, 2019 — NEJM (Derleme)</div>
-        <p>Aralıklı oruçun sağlık, yaşlanma ve hastalık üzerindeki etkilerini inceleyen kapsamlı derleme. Aralıklı oruç insülin duyarlılığını iyileştiriyor, oksidatif stresi azaltıyor, inflamasyonu baskılıyor ve hücresel onarım süreçlerini aktive ediyor. Etkiler hayvan modellerinde de insan çalışmalarında da tutarlı.</p>
+        <p>Aralıklı orucun sağlık, yaşlanma ve hastalık üzerindeki etkilerini inceleyen kapsamlı derleme. Aralıklı oruç insülin duyarlılığını iyileştiriyor, oksidatif stresi azaltıyor, inflamasyonu baskılıyor ve hücresel onarım süreçlerini aktive ediyor. Etkiler hayvan modellerinde de insan çalışmalarında da tutarlı.</p>
       </div>
     </div>
 
@@ -872,18 +1523,18 @@
       <div class="section-num">04</div>
       <h2>Nasıl başlanır?</h2>
 
-      <p>Hemen 16 saatlik oruça başlamak zor olabilir. Kademeli bir geçiş çok daha sürdürülebilir.</p>
+      <p>Hemen 16 saatlik oruca başlamak zor olabilir. Kademeli bir geçiş çok daha sürdürülebilir.</p>
 
       <ol class="step-list">
         <li><span><strong>1. Hafta: 12:12 ile başla.</strong> Örneğin 08:00-20:00 arası ye, 20:00'den sonra hiçbir şey yeme. Bu çoğu insan için zaten normal düzene yakın.</span></li>
         <li><span><strong>2. Hafta: 14:10'a geç.</strong> Sabah kahvaltısını 10:00'a kaydır. Yeme penceren 10:00-20:00 olsun.</span></li>
         <li><span><strong>3. Hafta: 16:8'e ulaş.</strong> Kahvaltıyı öğlen 12:00'ye kaydır. Yeme penceren 12:00-20:00. Hedef pencere.</span></li>
-        <li><span><strong>Sonrası: Kendine uyarla.</strong> 12:00-20:00 herkes için ideal olmak zorunda değil. 10:00-18:00 veya 13:00-21:00 da olabilir. Önemli olan 16 saatlik oruçu tutmak.</span></li>
+        <li><span><strong>Sonrası: Kendine uyarla.</strong> 12:00-20:00 herkes için ideal olmak zorunda değil. 10:00-18:00 veya 13:00-21:00 da olabilir. Önemli olan 16 saatlik orucu tutmak.</span></li>
       </ol>
 
       <div class="info-box tip">
         <div class="info-box-title">İpucu</div>
-        <p>Sabahları aç kalmak zor geliyorsa: sade siyah kahve veya yeşil çay iç. Kalorisi yok, oruçu bozmuyor ve açlık hissini bastırır. Süt, şeker veya tatlandırıcı ekleme.</p>
+        <p>Sabahları aç kalmak zor geliyorsa: sade siyah kahve veya yeşil çay iç. Kalorisi yok, orucu bozmuyor ve açlık hissini bastırır. Süt, şeker veya tatlandırıcı ekleme.</p>
       </div>
 
       <h3 class="sub-heading">Oruç sırasında ne içebilirsin?</h3>
@@ -894,7 +1545,7 @@
         <li><strong>Yeşil/bitki çayı:</strong> Sade.</li>
         <li><strong>Maden suyu:</strong> Doğal, aromalı olmayanlar.</li>
         <li class="caution"><strong>Süt, şeker, bal:</strong> Oruçu bozar. Kullanma.</li>
-        <li class="caution"><strong>Diyet içecekler:</strong> Teknik olarak oruçu bozmaz ama insülin tepkisi yaratabilir.</li>
+        <li class="caution"><strong>Diyet içecekler:</strong> Teknik olarak orucu bozmaz ama insülin tepkisi yaratabilir.</li>
       </ul>
     </div>
 
@@ -976,7 +1627,7 @@
 
       <div class="info-box tip">
         <div class="info-box-title">Altın kural</div>
-        <p>Bedenini dinle. Baş dönmesi, treme veya aşırı halsizlik hissedersen oruçu boz. 16:8 bir disiplin testi değil, bir sağlık aracı. Kötü hissettiren herhangi bir şey "sağlıklı" değildir.</p>
+        <p>Bedenini dinle. Baş dönmesi, treme veya aşırı halsizlik hissedersen orucu boz. 16:8 bir disiplin testi değil, bir sağlık aracı. Kötü hissettiren herhangi bir şey "sağlıklı" değildir.</p>
       </div>
     </div>
 
@@ -990,11 +1641,11 @@
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Kahve oruçu bozar mı?
+            Kahve orucu bozar mı?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Sade siyah kahve oruçu bozmaz (2-5 kalori). Ama süt, şeker, krema veya tatlandırıcı eklersen oruçu bozarsın. Bir miktar MCT yağı veya hindistancevizi yağı da tartışmalı; teknik olarak oruçu bozar ama otofajiyi tamamen durdurmayabilir.</div>
+            <div class="faq-answer-inner">Sade siyah kahve orucu bozmaz (2-5 kalori). Ama süt, şeker, krema veya tatlandırıcı eklersen orucu bozarsın. Bir miktar MCT yağı veya hindistancevizi yağı da tartışmalı; teknik olarak orucu bozar ama otofajiyi tamamen durdurmayabilir.</div>
           </div>
         </div>
 
@@ -1030,7 +1681,7 @@
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            Kadınlar için farklı mi?
+            Kadınlar için farklı mı?
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
@@ -1066,7 +1717,7 @@
 
   <div class="divider"></div>
 
-  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmus</span></a>
+  <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
 
   <script>
   function toggleFaq(btn) {
@@ -1131,6 +1782,24 @@
     window.addEventListener('scroll', updateVisibility, { passive: true });
     updateVisibility();
   })();
+  </script>
+
+  <script>
+  // Term tooltips: tap to toggle on mobile
+  document.querySelectorAll('.term').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelectorAll('.term.active').forEach(function(t) {
+        if (t !== el) t.classList.remove('active');
+      });
+      el.classList.toggle('active');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.term.active').forEach(function(t) {
+      t.classList.remove('active');
+    });
+  });
   </script>
 
 </body>
