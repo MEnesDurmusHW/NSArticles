@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breadcrumbing: Dijital Çağın Duygusal Manipülasyonu</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* This article is locked to a dramatic dark + red palette that matches its subject
+     (manipulation, ambiguity). It intentionally overrides the site light/dark theme. */
+  :root,
+  [data-theme="light"],
+  [data-theme="dark"] {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a26;
+    --text: #ece9e3;
+    --text-dim: #9a9aaa;
+    --text-muted: #5a5a6a;
+    --accent: #e74c3c;
+    --accent-soft: #c0392b;
+    --accent-glow: rgba(231, 76, 60, 0.1);
+    --accent-dim: rgba(231, 76, 60, 0.08);
+    --border: #2a2a36;
+    --divider: #2a2a36;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.1);
+    --green: #4ecb8d;
+    --green-dim: rgba(78, 203, 141, 0.1);
+    --blue: #5b9bf5;
+    --blue-dim: rgba(91, 155, 245, 0.1);
+    --purple: #b28ad6;
+    --purple-dim: rgba(178, 138, 214, 0.12);
+    --gold: #d4a65a;
+    --gold-dim: rgba(212, 166, 90, 0.12);
+  }
+
+  /* Grain always on for this dark-locked article */
+  .grain { opacity: 1 !important; }
+
+  body {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO - full-viewport dramatic dark/red */
+  .hero {
+    min-height: 100vh;
+    padding: 60px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a0707 0%, #120b10 55%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 35%, rgba(231, 76, 60, 0.14) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 22px;
+    color: #f5f2ee;
+    letter-spacing: -1px;
+  }
+  .hero h1 em {
+    color: var(--accent);
+    font-style: normal;
+    display: block;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(245, 242, 238, 0.65);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  h2 em { color: var(--accent); font-style: italic; }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .muted-p {
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  /* Red emphasis for inline <strong> in body copy */
+  p strong,
+  .muted-p strong,
+  .info-box li strong,
+  .personal-note p strong,
+  .warning-box p strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* QUOTE */
+  .quote-block {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .quote-block .source {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* COMPARISON TABLE */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 540px;
+  }
+  .comparison-table th {
+    background: var(--surface);
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .comparison-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tr:hover td { background: var(--surface); }
+  .comparison-table td strong { color: var(--text); font-weight: 600; }
+  .t-yes { color: var(--green); font-weight: 500; }
+  .t-no { color: var(--red); font-weight: 500; }
+  .t-maybe { color: var(--gold); font-weight: 500; }
+
+  /* STATS */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-card .number {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-card .number .unit {
+    font-size: 20px;
+    color: var(--accent);
+    opacity: 0.75;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .stat-card.small .number { font-size: 22px; }
+  .stat-card.small .label { color: var(--accent); margin-top: 8px; font-weight: 500; }
+  .stat-card.small .subtitle {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.3;
+    display: block;
+  }
+
+  /* DONUT */
+  .donut-section {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    margin: 28px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .donut-chart {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .donut-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 108px;
+    height: 108px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .donut-center .num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .donut-center .lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dim);
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* BAR CHART */
+  .bar-chart {
+    margin: 24px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 22px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-label {
+    width: 170px;
+    font-size: 13px;
+    color: var(--text-dim);
+    text-align: right;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+  .bar-track {
+    flex: 1;
+    height: 26px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  .bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* CULTURAL COMPARISON */
+  .cultural-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0 18px;
+  }
+  .culture-col {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 22px;
+    position: relative;
+  }
+  .culture-col.india { border-top: 3px solid var(--accent); }
+  .culture-col.spain { border-top: 3px solid var(--gold); }
+  .culture-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .culture-col.spain .culture-label { color: var(--gold); }
+  .culture-n {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .culture-style {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .culture-desc {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+  .culture-stats {
+    display: flex;
+    gap: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+  }
+  .culture-stats .stat-k {
+    color: var(--accent);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    margin-right: 2px;
+  }
+  .culture-col.spain .culture-stats .stat-k { color: var(--gold); }
+
+  .stats-explain {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 14px 0 18px;
+  }
+  .stats-explain .row {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+  .stats-explain .row:last-child { margin-bottom: 0; }
+  .stats-explain .term {
+    color: var(--accent);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .cultural-grid { grid-template-columns: 1fr; }
+  }
+
+  /* INFO BOX */
+  .info-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 18px 0;
+  }
+  .info-box .title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .info-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .info-box li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .info-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  /* CYCLE */
+  .cycle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 22px;
+    margin: 24px 0;
+  }
+  .cycle-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+  }
+  .cycle-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+    background: var(--accent);
+    color: var(--bg);
+    margin-top: 2px;
+  }
+  .cycle-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .cycle-text strong {
+    color: var(--text);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .cycle-arrow {
+    padding: 0 0 0 14px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-family: var(--serif);
+    letter-spacing: 6px;
+  }
+  .cycle-loop {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* WARNING */
+  .warning-box {
+    background: var(--red-dim);
+    border: 1px solid rgba(201, 64, 64, 0.2);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 24px 0;
+  }
+  [data-theme="dark"] .warning-box {
+    border-color: rgba(232, 84, 84, 0.25);
+  }
+  .warning-box .title {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .warning-box p {
+    color: var(--text);
+    font-size: 14.5px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  .warning-box p:last-child { margin-bottom: 0; }
+
+  /* PERSONAL NOTE */
+  .personal-note {
+    background: var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .personal-note .note-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .personal-note p {
+    font-size: 14.5px;
+    color: var(--text);
+    margin-bottom: 0;
+    line-height: 1.7;
+  }
+
+  /* SAMPLE TAG */
+  .sample-tag {
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  /* INLINE REFERENCES */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+
+  li:target {
+    background: var(--accent-dim);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* REFERENCES */
+  .ref-section {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+
+  /* FAB BACK */
+  #fab-back {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* FEEDBACK */
+  .feedback {
+    padding: 0 0 60px;
+    text-align: center;
+  }
+  .feedback p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* CLOSING */
+  .closing {
+    padding: 60px 0 20px;
+    text-align: center;
+  }
+  .closing blockquote {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .closing blockquote em { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 30px; }
+    h2 { font-size: 24px; }
+    .bar-label { width: 110px; font-size: 12px; }
+    .comparison-table { font-size: 13px; }
+    .comparison-table th, .comparison-table td { padding: 10px 12px; }
+    .donut-section { flex-direction: column; padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+
+<!-- HERO (full bleed) -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Psikoloji & İlişkiler</div>
+    <h1>Dijital Çağda <em>Breadcrumbing</em></h1>
+    <p class="hero-sub">Flörtöz ama bağlayıcı olmayan sinyallerle karşı tarafı oltada tutan, dijital çağın en sinsi duygusal manipülasyon biçimlerinden biri.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: TANIM -->
+  <section>
+    <div class="section-number">Bölüm 01</div>
+    <h2>Breadcrumbing <em>Nedir?</em></h2>
+    <p>Breadcrumbing; bir kişinin romantik ya da cinsel bir partner adayına <strong>düşük çaba gerektiren flörtöz sinyaller</strong> göndererek ilgi gösterirken, aslında ilişkiyi ilerletme niyetinin bulunmaması durumudur. Terim, Grimm Kardeşler'in Hansel ve Gretel masalındaki ekmek kırıntılarına bir göndermedir: takip etmeye yetecek kadar kırıntı bırakılır, ama hiçbir zaman hedefe ulaştırmaz. Merriam-Webster fiil formunun ilk kullanımını yaklaşık 2010 olarak kaydediyor; flört bağlamında yaygınlaşması 2016-2017 dönemine denk düşer.</p>
+
+    <div class="quote-block">
+      "Flörtöz ama bağlanma içermeyen mesajlar aracılığıyla, karşı tarafı fazla çaba harcamadan ilgili tutma davranışı."
+      <span class="source">Operasyonel tanım, Rodríguez-García ve ark., 2020 / Navarro ve ark., 2020</span>
+    </div>
+
+    <h3>Benzer Davranışlardan Nasıl Ayrılır?</h3>
+    <div class="table-wrap">
+      <table class="comparison-table">
+        <tr>
+          <th>Davranış</th><th>Tanım</th><th>Niyet</th><th>İletişim</th>
+        </tr>
+        <tr>
+          <td><strong>Breadcrumbing</strong></td>
+          <td>Flörtöz sinyaller, ama bağlanma yok</td>
+          <td>İlgi ve onay toplamak</td>
+          <td><span class="t-maybe">Aralıklı</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ghosting</strong></td>
+          <td>İletişimi aniden ve tamamen kesmek</td>
+          <td>İlişkiden kaçınmak</td>
+          <td><span class="t-no">Sıfır</span></td>
+        </tr>
+        <tr>
+          <td><strong>Benching</strong></td>
+          <td>Yedek seçenek olarak bekletmek</td>
+          <td>Seçenekleri açık tutmak</td>
+          <td><span class="t-maybe">Düşük</span></td>
+        </tr>
+        <tr>
+          <td><strong>Love Bombing</strong></td>
+          <td>Aşırı ilgi ve iltifat yağmuru</td>
+          <td>Hızla bağımlılık yaratmak</td>
+          <td><span class="t-yes">Aşırı yoğun</span></td>
+        </tr>
+        <tr>
+          <td><strong>Situationship</strong></td>
+          <td>Tanımsız, belirsiz ilişki</td>
+          <td>Esneklik, riskten kaçınma</td>
+          <td><span class="t-maybe">Değişken</span></td>
+        </tr>
+        <tr>
+          <td><strong>Orbiting</strong></td>
+          <td>Mesajlaşma yok ama sosyal medyada izlemeye devam</td>
+          <td>Uzaktan takip</td>
+          <td><span class="t-maybe">Pasif</span></td>
+        </tr>
+      </table>
+    </div>
+    <p class="muted-p">Breadcrumbing'in diğerlerinden asıl farkı sürekli belirsizlik yaratması. Ghosting'de ilişki aniden biter; breadcrumbing'de ne başlar ne biter, askıda kalır.</p>
+  </section>
+
+  <!-- SECTION 2: RAKAMLAR -->
+  <section>
+    <div class="section-number">Bölüm 02</div>
+    <h2>Rakamlarla <em>Breadcrumbing</em></h2>
+    <p>İspanya'da 626 yetişkinle yapılan bir boylamsal anketin ilk raporunda<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> katılımcıların büyük kısmı son bir yılda bu davranışa maruz kaldığını söylüyor. Breadcrumbing, ghosting'den yaklaşık üç kat daha yaygın çıktı.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="number">14.1<span class="unit">%</span></div>
+        <div class="label">Son 1 yılda 3 veya daha fazla kez breadcrumbing'e maruz kalan yetişkin oranı<span style="display:block; font-style:italic; color:var(--text-muted); margin-top:6px; font-size:11px;">İspanya, n=626</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="number">3<span class="unit">x</span></div>
+        <div class="label">Breadcrumbing'in ghosting'e kıyasla görülme sıklığı<span style="display:block; font-style:italic; color:var(--text-muted); margin-top:6px; font-size:11px;">%14.1 vs %4.8</span></div>
+      </div>
+    </div>
+
+    <h3>Örneklem Dağılımı</h3>
+    <p class="muted-p">626 İspanyol yetişkinden oluşan örneklemin dört gruba dağılımı:</p>
+    <div class="donut-section">
+      <div class="donut-chart" style="background: conic-gradient(var(--accent) 0deg 51deg, var(--gold) 51deg 68deg, var(--purple) 68deg 77deg, var(--surface-2) 77deg 360deg);">
+        <div class="donut-center"><div class="num">626</div><div class="lbl">KATILIMCI</div></div>
+      </div>
+      <div class="donut-legend">
+        <div class="legend-item"><div class="legend-dot" style="background: var(--accent)"></div>Breadcrumbing mağduru (%14.1)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--gold)"></div>Ghosting mağduru (%4.8)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div>Her iki davranışın mağduru (%2.4)</div>
+        <div class="legend-item"><div class="legend-dot" style="background: var(--surface-2); border: 1px solid var(--border)"></div>Etkilenmemiş (%78.8)</div>
+      </div>
+    </div>
+    <p class="muted-p" style="font-size: 13px; margin-top: 12px;">Kaynak: Navarro ve ark., 2020, IJERPH. Oranlar İspanya'daki 626 kişilik örneklem için geçerli; küresel bir prevalans tahmini değildir.</p>
+  </section>
+
+  <!-- SECTION 3: NEDEN -->
+  <section>
+    <div class="section-number">Bölüm 03</div>
+    <h2>Neden <em>Yapıyorlar?</em></h2>
+    <p>Hindistan ve İspanya'da toplam 638 genç yetişkinle yapılan bir kesitsel çalışma<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> breadcrumbing'in arkasındaki ortak zemine işaret ediyor: <strong>bağlanma güvensizliği</strong>. Hem kaygılı hem kaçıngan bağlanma davranışı yordadı; fakat hangi stilin baskın yordayıcı olduğu kültüre göre farklılaştı.</p>
+
+    <div class="cultural-grid">
+      <div class="culture-col india">
+        <div class="culture-label">HİNDİSTAN</div>
+        <div class="culture-n">n = 304</div>
+        <div class="culture-style">Kaygılı Bağlanma</div>
+        <div class="culture-desc">Reddedilme korkusu, sürekli onay ihtiyacı, yalnız kalamama</div>
+        <div class="culture-stats">
+          <div><span class="stat-k">&beta;</span>= 0.58</div>
+          <div><span class="stat-k">R&sup2;</span>= 0.505</div>
+        </div>
+      </div>
+      <div class="culture-col spain">
+        <div class="culture-label">İSPANYA</div>
+        <div class="culture-n">n = 334</div>
+        <div class="culture-style">Kaçıngan Bağlanma</div>
+        <div class="culture-desc">Yakınlıktan kaçınma, güvenli mesafe ihtiyacı, duygusal çekilme</div>
+        <div class="culture-stats">
+          <div><span class="stat-k">&beta;</span>= 0.46</div>
+          <div><span class="stat-k">R&sup2;</span>= 0.368</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-explain">
+      <div class="row"><span class="term">&beta; (beta):</span> İki değişken arasındaki ilişkinin standardize edilmiş gücü; -1 ile +1 arasında değer alır. Davranış bilimlerinde 0.3 orta, 0.5 ve üzeri güçlü ilişki sayılır. Hindistan'daki 0.58, kaygılı bağlanma ile breadcrumbing arasında güçlü ve pozitif bir bağın varlığını gösteriyor.</div>
+      <div class="row"><span class="term">R&sup2; (açıklanan varyans):</span> Modelin bağımlı değişkendeki (breadcrumbing'deki) değişkenliğin ne kadarını açıkladığı. 0.505 ≈ %50.5 demek: Hindistan örnekleminde breadcrumbing davranışındaki farklılığın yaklaşık yarısı tek başına kaygılı bağlanma ile açıklanabiliyor. Sosyal bilimler için oldukça yüksek bir oran.</div>
+    </div>
+
+    <p class="muted-p">Araştırmacılar bu farkı kültürel zemine bağlıyor: kolektivist Hindistan'da aileyle ve çevreyle iç içe büyümek, reddedilme kaygısını belirginleştiriyor; daha bireyci İspanya'da ise özerklik vurgusu, yakınlıktan kaçınmayı normalleştiriyor. İki farklı zeminden aynı davranış üretiliyor.</p>
+
+    <h3>İki Güvensizlik, Aynı Davranış</h3>
+    <div class="info-box">
+      <div class="title">Kaygılı Tip İçin Breadcrumbing</div>
+      <ul>
+        <li>Reddedilme korkusu yüksek; bu yüzden karşı tarafı tamamen bırakamaz</li>
+        <li>Sürekli onay ve ilgi ihtiyacı duyar</li>
+        <li>Birden fazla kaynaktan validasyon toplar</li>
+        <li>Amaç: garanti bir ilgi akışı kurmak</li>
+      </ul>
+    </div>
+    <div class="info-box">
+      <div class="title">Kaçıngan Tip İçin Breadcrumbing</div>
+      <ul>
+        <li>Yakınlıktan ve bağlanmadan kaçınır</li>
+        <li>Karşı taraf yaklaşınca geri çekilir, uzaklaşınca geri çağırır</li>
+        <li>İlişkiyi ilerletmeden ilgi toplar</li>
+        <li>Amaç: güvenli mesafeden iletişim kurmak</li>
+      </ul>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label">Pratikte</div>
+      <p>İki farklı güvensizlik stili, aynı davranışı farklı sebeplerle üretir. Kaçıngan tip yakınlıktan kaçmak için breadcrumbing yapar, kaygılı tip ise reddedilmemek için. İkisi de ilişkiyi değil kendi kaygısını yönetiyor; karşı tarafı bu kaygı yönetiminin aracına dönüştürüyor.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DÖNGÜ -->
+  <section>
+    <div class="section-number">Bölüm 04</div>
+    <h2>Breadcrumbing <em>Döngüsü</em></h2>
+    <p>Breadcrumbing tek seferlik bir davranış değil, kendini tekrarlayan bir döngü. Mağdur her seferinde umutlanır ve hayal kırıklığına uğrar. Bu yapısı nedeniyle davranışsal psikolojide tanıdık bir örüntüye, <strong>değişken oranlı pekiştirmeye</strong> (slot makinesi etkisi) benzer. Ne zaman geleceği belli olmayan ödül, davranışın sürmesini ve kolay bırakılamamasını sağlar.</p>
+
+    <div class="cycle">
+      <div class="cycle-step"><div class="cycle-num">1</div><div class="cycle-text"><strong>Cazibe (Charm)</strong>Sıcak, flörtöz, ilgili davranış. İltifatlar, özel hissettirme.</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">2</div><div class="cycle-text"><strong>Ümit Verme (Leading On)</strong>Geleceğe dair ipuçları, somutlaşmayan planlar, belirsiz sözler.</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">3</div><div class="cycle-text"><strong>Tutarsızlık (Incongruence)</strong>Sözler ve davranışlar uyuşmuyor. Sıcak ve soğuk arasında salınım.</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">4</div><div class="cycle-text"><strong>Duygusal Yatırımdan Kaçınma</strong>Derin konuşmalardan kaçma, bahane üretme, konuyu değiştirme.</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">5</div><div class="cycle-text"><strong>Commitment Belirsizliği</strong>İlişki tanımsız kalır. "Biz neyiz?" sorusu sürekli ertelenir.</div></div>
+      <div class="cycle-loop">Döngü yeniden başa sarar</div>
+    </div>
+
+    <p>Breadcrumbing'i bu kadar yıkıcı kılan, bu sonsuz ertelemedir: ilişki ne ilerletilir ne sonlandırılır, karşı taraf askıda tutulur. Mağdur her "cazibe" aşamasında umutlanır, her "kaçınma" aşamasında çöker; çıkamadığı bir karasızlık döngüsüne yerleşir.</p>
+  </section>
+
+  <!-- SECTION 5: PSİKOLOJİK ETKİLER -->
+  <section>
+    <div class="section-number">Bölüm 05</div>
+    <h2>Mağdurdaki <em>Psikolojik Etkiler</em></h2>
+    <p>Navarro ve ark.'nın 626 kişilik örnekleminde breadcrumbing mağdurlarının üç çıktıda anlamlı fark gösterdiği bulundu: hayat memnuniyetinde azalma, yalnızlık ve çaresizlik duygularında artış.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> İlginç olan, aynı çalışmada <strong>ghosting mağdurlarında bu çıktıların hiçbiri anlamlı değişmedi.</strong></p>
+
+    <div class="stat-grid">
+      <div class="stat-card small">
+        <span class="subtitle">Hayat<br>Memnuniyeti</span>
+        <div class="label">Anlamlı azalma</div>
+      </div>
+      <div class="stat-card small">
+        <span class="subtitle">Yalnızlık<br>Hissi</span>
+        <div class="label">Anlamlı artış</div>
+      </div>
+      <div class="stat-card small">
+        <span class="subtitle">Çaresizlik<br>Hissi</span>
+        <div class="label">Anlamlı artış</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      "Breadcrumbing mağdurları, ghosting mağdurlarıyla ve hiçbir davranışa maruz kalmamış kişilerle karşılaştırıldığında en düşük hayat memnuniyetini ve en yüksek çaresizlik skorunu raporladı."
+      <span class="source">Navarro ve ark., 2020, IJERPH, n=626</span>
+    </div>
+
+    <p>Bu asimetrinin nedeni kısmen yapısaldır. Ghosting'de ilişki biter, beyin bir yas süreci başlatabilir ve zamanla kapanma mümkün olur. Breadcrumbing'de ilişki <strong>ne başlar ne biter</strong>; belirsizlik sürdüğü için beyin kapanma ve iyileşme sürecine geçemez.</p>
+
+    <h3>Breadcrumbing ve Paranoid Düşünce</h3>
+    <p>Birleşik Krallık'ta 544 yetişkinle yapılan 2025 tarihli bir çalışma<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> breadcrumbing'e maruz kalmanın paranoid düşünce kalıplarıyla dolaylı olarak ilişkili olduğunu gösterdi. Bu ilişki doğrudan değil, <strong>algılanan sosyal destek</strong> üzerinden işliyordu:</p>
+
+    <div class="cycle">
+      <div class="cycle-step"><div class="cycle-num">1</div><div class="cycle-text">Breadcrumbing'e maruz kalma</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">2</div><div class="cycle-text">"İnsanlara güvenemem" şemasının yerleşmesi</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">3</div><div class="cycle-text">Algılanan sosyal desteğin zayıflaması</div></div>
+      <div class="cycle-arrow">.  .  .</div>
+      <div class="cycle-step"><div class="cycle-num">4</div><div class="cycle-text">Paranoid düşünce kalıplarının güçlenmesi</div></div>
+    </div>
+
+    <p>Aynı örneklemde erkeklerin algıladığı sosyal destek daha düşüktü ve daha genç katılımcılar daha yüksek paranoid düşünce skorları gösterdi. Çalışmanın ikinci yayını<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> genç yaşın ve düşük sosyal desteğin breadcrumbing'e karşı kırılganlığı artırdığını, ghosting ve gaslighting'in ise breadcrumbing ile pozitif korele olduğunu ortaya koydu.</p>
+  </section>
+
+  <!-- SECTION 6: KORUNMA -->
+  <section>
+    <div class="section-number">Bölüm 06</div>
+    <h2>Kendini <em>Korumak İçin</em></h2>
+
+    <div class="warning-box">
+      <div class="title">Erken Uyarı İşaretleri</div>
+      <p>Mesajlara sürekli geç dönüyor ama yüz yüze sıcak davranıyor.</p>
+      <p>Plan yapılıyor, ama hep ertelenen ya da somutlaşmayan planlar.</p>
+      <p>Hisler konuşulduğunda konu değişiyor veya espriye bağlanıyor.</p>
+      <p>Siz uzaklaşmaya başladığınızda geri çekmeye çalışıyor, ama yaklaşınca yine mesafe koyuyor.</p>
+      <p>"Seni tanımaya ihtiyacım var" ve "zaman lazım" sözlerinin süresi bitmiyor.</p>
+      <p>Sosyal medyada tutarlı bir şekilde görünür ama mesajlaşmada seçici.</p>
+    </div>
+
+    <h3>Pratik Kurallar</h3>
+    <div class="info-box">
+      <div class="title">İlişkiyi Ayağa Kaldırmak İçin</div>
+      <ul>
+        <li>İlk 3-4 buluşmada niyetinizi sade bir dille söyleyin; karşılık görmüyorsanız ısrar etmeyin</li>
+        <li>Sözlere değil davranış tutarlılığına bakın; güven davranış ritminde saklıdır</li>
+        <li>Karşılık görmeden duygusal yatırım yapmayın; yatırım tek yönlü ise zaten ilişki değildir</li>
+        <li>"Belki" cevabını "hayır" olarak okuyun; net evet kadar bağlayıcı hiçbir cevap yoktur</li>
+        <li>Belirsizlik bir aydan uzun sürdüyse döngünün içinde olma ihtimaliniz yüksek</li>
+        <li>Değerlerinizden taviz vermeyi düşünüyorsanız yanlış kişiyle olabilirsiniz</li>
+        <li>Dışarıdan bakan yakınlarınızın gözlemini ciddiye alın; içeriden göremediğinizi görebilirler</li>
+      </ul>
+    </div>
+
+    <div class="personal-note">
+      <div class="note-label">Önemli</div>
+      <p>Breadcrumbing'den çıkmanın tek yolu, davranışın aldığı ilgiyi kesmektir. Net bir konuşma başlatın ve belirsizlik sürerse iletişimi sınırlayın. Araştırmalar, sosyal desteğin bu süreçte kısmi bir tampon görevi gördüğünü gösteriyor; yakın arkadaşlar ve gerektiğinde terapötik destek belirsizliğin yarattığı boşluğu doldurmak için işlevseldir.</p>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <blockquote>
+      "Breadcrumbing'i yıkıcı yapan şey verdiği umut değil, bitmeyen belirsizliktir.<br><br>
+      Bir ilişki ya vardır ya yoktur; <em>arada kalan her şey</em> genellikle yoktur."
+    </blockquote>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <h3>Kaynaklar</h3>
+    <ol class="references">
+      <li id="ref-1">Navarro, R., Larrañaga, E., Yubero, S. & Víllora, B. (2020). Psychological Correlates of Ghosting and Breadcrumbing Experiences: A Preliminary Study among Adults. <em>International Journal of Environmental Research and Public Health</em>, 17(3), 1116. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7037474/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/PMC7037474</a></li>
+      <li id="ref-2">Khattar, V., Upadhyay, S. & Navarro, R. (2023). Attachment insecurity and breadcrumbing engagement in young adults: a cross-sectional, cross-country study in India and Spain. <em>BMC Psychology</em>, 11, 355. <a href="https://link.springer.com/article/10.1186/s40359-023-01404-y" target="_blank" rel="noopener">link.springer.com/article/10.1186/s40359-023-01404-y</a></li>
+      <li id="ref-3">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Breadcrumbing by a Dating Partner, Perceived Social Support, and Paranoia. <em>Journal of Aggression, Maltreatment & Trauma</em>. <a href="https://www.tandfonline.com/doi/full/10.1080/10926771.2025.2555567" target="_blank" rel="noopener">tandfonline.com/doi/full/10.1080/10926771.2025.2555567</a></li>
+      <li id="ref-4">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Vulnerability to Breadcrumbing in a Sample of Adults in the United Kingdom: A Cross-Sectional Survey Study. <em>Psychological Interventions (MDPI)</em>, 7(3), 71. <a href="https://www.mdpi.com/2813-9844/7/3/71" target="_blank" rel="noopener">mdpi.com/2813-9844/7/3/71</a></li>
+      <li id="ref-5">Rodríguez-García, M. C., Márquez-Hernández, V. V., Granados-Gámez, G., Aguilera-Manrique, G. & Gutiérrez-Puertas, L. (2020). Development and Validation of Breadcrumbing in Affective-Sexual Relationships (BREAD-ASR) Questionnaire. <em>IJERPH</em>, 17(24), 9548. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7766626/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/PMC7766626</a></li>
+    </ol>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+</div>
+
+<button id="fab-back" onclick="goBack()" title="Metne dön">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+<script>
+  let savedPosition = null;
+
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() {
+      document.getElementById('fab-back').style.display = 'flex';
+    }, 300);
+  }
+
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'none';
+        savedPosition = null;
+      }, 600);
+    }
+  }
+</script>
+
+</body>
+</html>
