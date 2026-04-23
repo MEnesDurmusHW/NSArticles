@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article Carousel — NS Articles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2F2EF;
+    --panel: #FAFAF8;
+    --canvas: #FAFAF8;
+    --text: #1A1A1A;
+    --accent: #2D2D2D;
+    --subtle: #8A8A80;
+    --border: #E0E0DB;
+    --dot: #D4D4CE;
+    --danger: #C0392B;
+    --main-bg: #EDEDEA;
+    --card-hover: #EEEEE9;
+
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .app { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+  header.bar {
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    flex-wrap: wrap;
+  }
+
+  header.bar h1 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  header.bar p {
+    font-size: 13px;
+    color: var(--subtle);
+    margin-top: 4px;
+  }
+
+  .header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+  .article-picker {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: 13px;
+    color: var(--text);
+    font-family: var(--sans);
+    cursor: pointer;
+    min-width: 260px;
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--panel);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-primary:disabled { cursor: wait; opacity: 0.6; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-ghost:hover { border-color: var(--text); }
+
+  .layout { display: flex; flex: 1; min-height: 0; }
+
+  aside.slides {
+    width: 220px;
+    min-width: 220px;
+    border-right: 1px solid var(--border);
+    background: var(--panel);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+
+  .slide-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: all 0.15s;
+    background: transparent;
+    text-align: left;
+    font-family: var(--sans);
+    position: relative;
+  }
+  .slide-item.active {
+    background: var(--card-hover);
+    border-color: var(--dot);
+  }
+  .slide-item .num {
+    font-size: 11px;
+    color: var(--subtle);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .slide-item .tpl-tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    font-weight: 600;
+  }
+  .slide-item .title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-slide {
+    margin-top: 4px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px dashed var(--dot);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--subtle);
+    font-family: var(--sans);
+  }
+
+  main.preview-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: var(--main-bg);
+  }
+
+  .preview-box {
+    width: min(400px, 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  /* ---------- Slide preview (shared frame) ---------- */
+  .slide-preview {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--canvas);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10%;
+    position: relative;
+    overflow: hidden;
+    color: var(--text);
+  }
+
+  .slide-preview .top-line {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: var(--text);
+  }
+
+  .slide-preview .num {
+    font-family: var(--sans);
+    font-size: 0.7em;
+    color: var(--subtle);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .slide-preview .center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .slide-preview h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+    white-space: pre-line;
+  }
+
+  .slide-preview p {
+    font-family: var(--sans);
+    color: var(--accent);
+    line-height: 1.6;
+    max-width: 90%;
+  }
+
+  .slide-preview .dots { display: flex; gap: 6px; align-items: center; }
+  .slide-preview .dots .dot {
+    width: 7px; height: 7px; border-radius: 4px;
+    background: var(--dot);
+    transition: all 0.3s;
+  }
+  .slide-preview .dots .dot.active { width: 24px; background: var(--text); }
+
+  /* ---------- Template variants (preview) ---------- */
+  .slide-preview[data-tpl="cover"] h2 { font-size: 2em; }
+  .slide-preview[data-tpl="cover"] p { font-size: 0.95em; max-width: 95%; }
+
+  .slide-preview[data-tpl="section"] .section-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.75em;
+    font-weight: 600;
+    color: var(--subtle);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.6em;
+  }
+  .slide-preview[data-tpl="section"] .section-question {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95em;
+    color: var(--subtle);
+    line-height: 1.45;
+    margin-bottom: 0.9em;
+    max-width: 95%;
+  }
+  .slide-preview[data-tpl="section"] h2 {
+    font-size: 1.95em;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  .slide-preview[data-tpl="section"] p { display: none; }
+
+  .slide-preview[data-tpl="quote"] h2 {
+    font-style: italic;
+    font-size: 1.8em;
+    line-height: 1.35;
+  }
+  .slide-preview[data-tpl="quote"] h2::before { content: '\201C'; color: var(--dot); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-right: 0.05em; }
+  .slide-preview[data-tpl="quote"] h2::after { content: '\201D'; color: var(--dot); font-size: 1.4em; line-height: 0; vertical-align: -0.3em; margin-left: 0.05em; }
+  .slide-preview[data-tpl="quote"] p { display: none; }
+
+  .slide-preview[data-tpl="outro"] h2 { font-size: 1.2em; color: var(--subtle); font-weight: 600; margin-bottom: 0.4em; letter-spacing: 0.05em; text-transform: uppercase; }
+  .slide-preview[data-tpl="outro"] p { font-family: var(--serif); font-style: italic; font-size: 1.35em; color: var(--text); line-height: 1.4; max-width: 100%; }
+
+  .slide-preview[data-tpl="cta"] .center { justify-content: center; align-items: center; text-align: center; }
+  .slide-preview[data-tpl="cta"] h2 { font-family: var(--sans); font-size: 0.82em; color: var(--subtle); letter-spacing: 0.25em; text-transform: uppercase; font-weight: 600; margin-bottom: 1.2em; }
+  .slide-preview[data-tpl="cta"] p { font-family: var(--serif); font-size: 2.6em; color: var(--text); font-weight: 700; text-align: center; line-height: 1.1; letter-spacing: -0.01em; }
+  .slide-preview[data-tpl="cta"] .cta-rule { width: 40px; height: 1px; background: var(--dot); margin: 1.1em 0; }
+  .slide-preview[data-tpl="cta"] .cta-footer { font-family: var(--sans); font-size: 0.78em; color: var(--subtle); line-height: 1.5; max-width: 80%; text-align: center; }
+
+  /* ---------- Editor ---------- */
+  aside.editor {
+    width: 300px;
+    min-width: 280px;
+    border-left: 1px solid var(--border);
+    background: var(--panel);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-y: auto;
+  }
+
+  aside.editor label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  aside.editor select,
+  aside.editor input,
+  aside.editor textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fff;
+    resize: vertical;
+    outline: none;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  aside.editor textarea:focus,
+  aside.editor input:focus,
+  aside.editor select:focus { border-color: var(--text); }
+
+  aside.editor textarea.title {
+    font-size: 15px;
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  aside.editor textarea.desc { line-height: 1.55; }
+
+  aside.editor input.num {
+    font-family: var(--serif);
+    font-weight: 700;
+  }
+
+  .editor-actions { display: flex; gap: 10px; }
+
+  .btn-outline {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--text);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--sans);
+  }
+
+  .btn-delete {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--danger);
+    font-family: var(--sans);
+  }
+  .btn-delete:disabled { cursor: not-allowed; color: var(--dot); opacity: 0.5; }
+
+  .hint-box {
+    margin-top: auto;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: 12px;
+    color: var(--subtle);
+    line-height: 1.5;
+  }
+
+  .home-logo {
+    text-align: center;
+    padding: 16px 0 24px;
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    display: block;
+  }
+  .home-logo .logo-text { font-family: var(--serif); font-size: 18px; color: var(--subtle); letter-spacing: -0.3px; display: block; }
+  .home-logo .logo-author { display: block; font-family: var(--sans); font-size: 11px; color: var(--subtle); margin-top: 4px; letter-spacing: 0.5px; opacity: 0.6; }
+  .home-logo:hover .logo-text { color: var(--text); }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    aside.slides, aside.editor {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+    aside.slides { max-height: 180px; flex-direction: row; overflow-x: auto; overflow-y: hidden; }
+    aside.slides .slide-item { min-width: 180px; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="bar">
+      <div>
+        <h1>Article Carousel</h1>
+        <p>Makale &rarr; Instagram 1080&times;1080 PNG</p>
+      </div>
+      <div class="header-actions">
+        <select id="article-picker" class="article-picker"></select>
+        <button id="load-article" class="btn-ghost">Yükle</button>
+        <button id="export-all" class="btn-primary">Tümünü İndir</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="slides" id="slide-list"></aside>
+
+      <main class="preview-wrap">
+        <div class="preview-box">
+          <div class="slide-preview" id="preview" data-tpl="cover">
+            <div class="top-line"></div>
+            <div class="num" id="preview-num"></div>
+            <div class="center" id="preview-center"></div>
+            <div class="dots" id="preview-dots"></div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="editor">
+        <div>
+          <label for="edit-template">Şablon</label>
+          <select id="edit-template">
+            <option value="cover">Cover &mdash; Kapak</option>
+            <option value="section">Section &mdash; Bölüm</option>
+            <option value="quote">Quote &mdash; Alıntı</option>
+            <option value="outro">Outro &mdash; Sonuç</option>
+            <option value="cta">CTA &mdash; Son Slayt</option>
+          </select>
+        </div>
+        <div id="num-field">
+          <label for="edit-num">Numara / Etiket</label>
+          <input id="edit-num" class="num" type="text" />
+        </div>
+        <div>
+          <label for="edit-title">Başlık</label>
+          <textarea id="edit-title" class="title" rows="3"></textarea>
+        </div>
+        <div>
+          <label for="edit-desc">Açıklama / Alt Metin</label>
+          <textarea id="edit-desc" class="desc" rows="4"></textarea>
+        </div>
+
+        <div class="editor-actions">
+          <button id="export-one" class="btn-outline">Bu Slaytı İndir</button>
+          <button id="remove-slide" class="btn-delete">Sil</button>
+        </div>
+
+        <div class="hint-box">
+          Slaytlar makale veri modelinden otomatik üretilir. Yeni makale için <code>articles-data.js</code>'e entry ekle; arayüz hemen listeler. Başlıkta satır atlamak için Enter.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <a href="all.html" class="home-logo">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </a>
+
+<script src="articles-data.js"></script>
+<script>
+(function() {
+  const SLIDE_W = 1080;
+  const SLIDE_H = 1080;
+
+  const FONTS = {
+    heading: "'Playfair Display', Georgia, serif",
+    body: "'DM Sans', 'Helvetica Neue', sans-serif",
+  };
+
+  const C = {
+    bg: '#FAFAF8',
+    text: '#1A1A1A',
+    accent: '#2D2D2D',
+    subtle: '#8A8A80',
+    faint: '#D4D4CE',
+    dot: '#D4D4CE',
+    dotActive: '#1A1A1A',
+    line: '#1A1A1A',
+  };
+
+  const articles = window.NS_ARTICLES || [];
+
+  const state = {
+    slug: null,
+    slides: [],
+    selectedSlide: 0,
+    exporting: false,
+  };
+
+  const el = {
+    picker: document.getElementById('article-picker'),
+    loadArticle: document.getElementById('load-article'),
+    list: document.getElementById('slide-list'),
+    preview: document.getElementById('preview'),
+    previewNum: document.getElementById('preview-num'),
+    previewCenter: document.getElementById('preview-center'),
+    previewDots: document.getElementById('preview-dots'),
+    editTemplate: document.getElementById('edit-template'),
+    editNum: document.getElementById('edit-num'),
+    editTitle: document.getElementById('edit-title'),
+    editDesc: document.getElementById('edit-desc'),
+    numField: document.getElementById('num-field'),
+    exportAll: document.getElementById('export-all'),
+    exportOne: document.getElementById('export-one'),
+    removeSlide: document.getElementById('remove-slide'),
+  };
+
+  function padNum(n) { return String(n).padStart(2, '0'); }
+
+  // -------- Populate article picker --------
+  articles.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a.slug;
+    opt.textContent = a.title.length > 60 ? a.title.slice(0, 57) + '…' : a.title;
+    el.picker.appendChild(opt);
+  });
+
+  // -------- Build slides from an article --------
+  function buildSlidesFromArticle(article) {
+    const slides = [];
+    if (article.title) {
+      slides.push({
+        template: 'cover',
+        num: 'NS ARTICLES',
+        title: article.title,
+        desc: article.subtitle || '',
+      });
+    }
+    const quotes = article.quotes || [];
+    (article.sections || []).forEach((s, idx) => {
+      slides.push({
+        template: 'section',
+        num: s.num || '',
+        title: s.key || s.heading,
+        desc: s.key ? s.heading : '',
+      });
+      // Interleave any quotes flagged to appear after this section
+      quotes.forEach(q => {
+        if (q.after === idx) {
+          slides.push({
+            template: 'quote',
+            num: '',
+            title: q.text,
+            desc: q.attribution || '',
+          });
+        }
+      });
+    });
+    if (article.conclusion) {
+      slides.push({
+        template: 'outro',
+        num: 'SONUÇ',
+        title: 'SONUÇ',
+        desc: article.conclusion,
+      });
+    }
+    let ctaTitle = 'OKUMAK İÇİN';
+    let ctaBody = 'NS Articles';
+    let ctaFooter = '';
+    if (typeof article.cta === 'string') {
+      ctaBody = article.cta;
+    } else if (article.cta && typeof article.cta === 'object') {
+      if (article.cta.title) ctaTitle = article.cta.title;
+      if (article.cta.body) ctaBody = article.cta.body;
+      if (article.cta.footer) ctaFooter = article.cta.footer;
+    }
+    slides.push({
+      template: 'cta',
+      num: '',
+      title: ctaTitle,
+      desc: ctaBody,
+      footer: ctaFooter,
+    });
+    return slides;
+  }
+
+  function loadArticle(slug) {
+    const article = articles.find(a => a.slug === slug);
+    if (!article) return;
+    state.slug = slug;
+    state.slides = buildSlidesFromArticle(article);
+    state.selectedSlide = 0;
+    renderAll();
+  }
+
+  // -------- List --------
+  function renderList() {
+    el.list.innerHTML = '';
+    state.slides.forEach((s, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'slide-item' + (i === state.selectedSlide ? ' active' : '');
+      btn.type = 'button';
+      btn.innerHTML = `
+        <div class="num"><span>Slayt ${i + 1}</span><span class="tpl-tag">${s.template}</span></div>
+        <div class="title"></div>
+      `;
+      btn.querySelector('.title').textContent = (s.title || '').split('\n')[0] || '(boş)';
+      btn.addEventListener('click', () => {
+        state.selectedSlide = i;
+        renderAll();
+      });
+      el.list.appendChild(btn);
+    });
+    const add = document.createElement('button');
+    add.className = 'add-slide';
+    add.type = 'button';
+    add.textContent = '+ Boş Slayt Ekle';
+    add.addEventListener('click', () => {
+      state.slides.push({ template: 'section', num: '', title: 'Yeni Başlık', desc: '' });
+      state.selectedSlide = state.slides.length - 1;
+      renderAll();
+    });
+    el.list.appendChild(add);
+  }
+
+  // -------- Preview --------
+  function renderPreview() {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    const total = state.slides.length;
+    el.preview.dataset.tpl = s.template;
+    el.previewNum.textContent = s.num || `${padNum(state.selectedSlide + 1)} / ${padNum(total)}`;
+
+    el.previewCenter.innerHTML = '';
+
+    // index label (non-cover templates show page-count)
+    if (s.template !== 'cover') {
+      el.previewNum.textContent = `${padNum(state.selectedSlide + 1)} / ${padNum(total)}`;
+    }
+
+    // For section template: question goes ABOVE the takeaway
+    if (s.template === 'section' && s.desc) {
+      const q = document.createElement('div');
+      q.className = 'section-question';
+      q.textContent = s.desc;
+      el.previewCenter.appendChild(q);
+    }
+
+    const h = document.createElement('h2');
+    h.textContent = s.title || '';
+    el.previewCenter.appendChild(h);
+
+    // Non-section templates still use desc below
+    if (s.desc && s.template !== 'section') {
+      const p = document.createElement('p');
+      p.textContent = s.desc;
+      el.previewCenter.appendChild(p);
+    }
+
+    // CTA: optional hairline divider + footer below the brand
+    if (s.template === 'cta' && s.footer) {
+      const rule = document.createElement('div');
+      rule.className = 'cta-rule';
+      el.previewCenter.appendChild(rule);
+      const foot = document.createElement('div');
+      foot.className = 'cta-footer';
+      foot.textContent = s.footer;
+      el.previewCenter.appendChild(foot);
+    }
+
+    el.previewDots.innerHTML = '';
+  }
+
+  // -------- Editor --------
+  function renderEditor() {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    el.editTemplate.value = s.template;
+    el.editNum.value = s.num || '';
+    el.editTitle.value = s.title || '';
+    el.editDesc.value = s.desc || '';
+    el.removeSlide.disabled = state.slides.length <= 1;
+    // Hide num field for templates that don't use it prominently
+    el.numField.style.display = (s.template === 'cta') ? 'none' : '';
+  }
+
+  function renderAll() {
+    renderList();
+    renderPreview();
+    renderEditor();
+  }
+
+  el.editTemplate.addEventListener('change', e => {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    s.template = e.target.value;
+    renderAll();
+  });
+  el.editNum.addEventListener('input', e => {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    s.num = e.target.value;
+    renderList();
+    renderPreview();
+  });
+  el.editTitle.addEventListener('input', e => {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    s.title = e.target.value;
+    renderList();
+    renderPreview();
+  });
+  el.editDesc.addEventListener('input', e => {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    s.desc = e.target.value;
+    renderPreview();
+  });
+  el.removeSlide.addEventListener('click', () => {
+    if (state.slides.length <= 1) return;
+    state.slides.splice(state.selectedSlide, 1);
+    state.selectedSlide = Math.min(state.selectedSlide, state.slides.length - 1);
+    renderAll();
+  });
+
+  el.loadArticle.addEventListener('click', () => loadArticle(el.picker.value));
+  el.picker.addEventListener('change', () => loadArticle(el.picker.value));
+
+  // -------- Canvas drawing --------
+  function wrapWords(ctx, text, maxWidth) {
+    const out = [];
+    text.split('\n').forEach(rawLine => {
+      const words = rawLine.split(' ');
+      let current = '';
+      for (const word of words) {
+        const test = current ? current + ' ' + word : word;
+        if (ctx.measureText(test).width > maxWidth && current) {
+          out.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current) out.push(current);
+    });
+    return out;
+  }
+
+  function drawTopLine(ctx, W, pad) {
+    ctx.fillStyle = C.line;
+    ctx.fillRect(pad, 0, W - pad * 2, 4);
+  }
+
+  function drawNum(ctx, text, pad, W) {
+    ctx.fillStyle = C.subtle;
+    ctx.font = `400 ${Math.round(W * 0.028)}px ${FONTS.body}`;
+    ctx.textBaseline = 'top';
+    ctx.fillText(text, pad, pad);
+  }
+
+  function drawDots(ctx, W, H, pad, index, total) {
+    const dotY = H - pad;
+    const dotR = 5;
+    const activeW = 28;
+    let dotX = pad;
+    for (let i = 0; i < total; i++) {
+      if (i === index) {
+        ctx.fillStyle = C.dotActive;
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(dotX, dotY - dotR, activeW, dotR * 2, dotR);
+          ctx.fill();
+        } else {
+          ctx.fillRect(dotX, dotY - dotR, activeW, dotR * 2);
+        }
+        dotX += activeW + 8;
+      } else {
+        ctx.fillStyle = C.dot;
+        ctx.beginPath();
+        ctx.arc(dotX + dotR, dotY, dotR, 0, Math.PI * 2);
+        ctx.fill();
+        dotX += dotR * 2 + 8;
+      }
+    }
+  }
+
+  function drawTextBlock(ctx, lines, x, y, lineHeight) {
+    for (const line of lines) {
+      ctx.fillText(line, x, y);
+      y += lineHeight;
+    }
+    return y;
+  }
+
+  // Template-specific drawers all return after filling the slide
+  const drawers = {
+    cover(ctx, slide, W, H) {
+      const pad = W * 0.1;
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      drawTopLine(ctx, W, pad);
+      drawNum(ctx, slide.num || 'NS ARTICLES', pad, W);
+
+      // Title big
+      const titleSize = Math.round(W * 0.072);
+      ctx.fillStyle = C.text;
+      ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
+      ctx.textBaseline = 'top';
+      const titleLines = wrapWords(ctx, slide.title || '', W - pad * 2);
+      const titleLH = titleSize * 1.2;
+
+      const descSize = Math.round(W * 0.032);
+      const descLH = descSize * 1.55;
+      let descLines = [];
+      if (slide.desc) {
+        ctx.font = `400 ${descSize}px ${FONTS.body}`;
+        descLines = wrapWords(ctx, slide.desc, (W - pad * 2) * 0.95);
+      }
+
+      const totalH = titleLines.length * titleLH + (descLines.length > 0 ? 40 + descLines.length * descLH : 0);
+      let y = (H - totalH) / 2;
+
+      ctx.fillStyle = C.text;
+      ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
+      y = drawTextBlock(ctx, titleLines, pad, y, titleLH);
+
+      if (descLines.length > 0) {
+        y += 40;
+        ctx.fillStyle = C.accent;
+        ctx.font = `400 ${descSize}px ${FONTS.body}`;
+        drawTextBlock(ctx, descLines, pad, y, descLH);
+      }
+    },
+
+    section(ctx, slide, W, H) {
+      const pad = W * 0.1;
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      drawTopLine(ctx, W, pad);
+      if (slide._indexLabel) drawNum(ctx, slide._indexLabel, pad, W);
+
+      // 1) Question — small italic serif (context prompt)
+      const qSize = Math.round(W * 0.034);
+      const qFont = `italic 400 ${qSize}px ${FONTS.heading}`;
+      ctx.font = qFont;
+      ctx.textBaseline = 'top';
+      const qLines = slide.desc ? wrapWords(ctx, slide.desc, (W - pad * 2) * 0.95) : [];
+      const qLH = qSize * 1.45;
+
+      // 2) Hero: key takeaway — big serif bold (the answer)
+      const titleSize = Math.round(W * 0.072);
+      const titleFont = `700 ${titleSize}px ${FONTS.heading}`;
+      ctx.font = titleFont;
+      const titleLines = wrapWords(ctx, slide.title || '', W - pad * 2);
+      const titleLH = titleSize * 1.2;
+
+      const gapAfterQuestion = 32;
+
+      const totalH =
+        (qLines.length > 0 ? qLines.length * qLH + gapAfterQuestion : 0) +
+        titleLines.length * titleLH;
+
+      let y = (H - totalH) / 2;
+
+      if (qLines.length > 0) {
+        ctx.fillStyle = C.subtle;
+        ctx.font = qFont;
+        drawTextBlock(ctx, qLines, pad, y, qLH);
+        y += qLines.length * qLH + gapAfterQuestion;
+      }
+
+      ctx.fillStyle = C.text;
+      ctx.font = titleFont;
+      drawTextBlock(ctx, titleLines, pad, y, titleLH);
+    },
+
+    quote(ctx, slide, W, H) {
+      const pad = W * 0.1;
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      drawTopLine(ctx, W, pad);
+      if (slide._indexLabel) drawNum(ctx, slide._indexLabel, pad, W);
+
+      const qSize = Math.round(W * 0.06);
+      ctx.font = `italic 700 ${qSize}px ${FONTS.heading}`;
+      ctx.textBaseline = 'top';
+      const lines = wrapWords(ctx, '“' + (slide.title || '') + '”', W - pad * 2);
+      const lh = qSize * 1.3;
+      let y = (H - lines.length * lh) / 2;
+      ctx.fillStyle = C.text;
+      drawTextBlock(ctx, lines, pad, y, lh);
+    },
+
+    outro(ctx, slide, W, H) {
+      const pad = W * 0.1;
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      drawTopLine(ctx, W, pad);
+      if (slide._indexLabel) drawNum(ctx, slide._indexLabel, pad, W);
+
+      // Small eyebrow
+      const eyeSize = Math.round(W * 0.03);
+      ctx.font = `600 ${eyeSize}px ${FONTS.body}`;
+      ctx.textBaseline = 'top';
+      const eyeText = (slide.title || 'SONUÇ').toUpperCase();
+      const eyeLH = eyeSize * 1.5;
+
+      // Description — serif italic, large
+      const descSize = Math.round(W * 0.048);
+      const descFont = `italic 400 ${descSize}px ${FONTS.heading}`;
+      ctx.font = descFont;
+      const descLines = wrapWords(ctx, slide.desc || '', W - pad * 2);
+      const descLH = descSize * 1.4;
+
+      const gap = 30;
+      const totalH = eyeLH + gap + descLines.length * descLH;
+      let y = (H - totalH) / 2;
+
+      ctx.fillStyle = C.subtle;
+      ctx.font = `600 ${eyeSize}px ${FONTS.body}`;
+      ctx.fillText(eyeText, pad, y);
+      y += eyeLH + gap;
+
+      ctx.fillStyle = C.text;
+      ctx.font = descFont;
+      drawTextBlock(ctx, descLines, pad, y, descLH);
+    },
+
+    cta(ctx, slide, W, H) {
+      const pad = W * 0.1;
+      ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+      drawTopLine(ctx, W, pad);
+      if (slide._indexLabel) drawNum(ctx, slide._indexLabel, pad, W);
+
+      // Eyebrow
+      const eyeSize = Math.round(W * 0.026);
+      const eyeText = (slide.title || 'OKUMAK İÇİN').toUpperCase();
+      const eyeLH = eyeSize * 1.5;
+
+      // Brand / hero line — non-italic serif for a "mark" feel
+      const brandSize = Math.round(W * 0.11);
+      const brandFont = `700 ${brandSize}px ${FONTS.heading}`;
+      ctx.font = brandFont;
+      ctx.textBaseline = 'top';
+      const brandLines = wrapWords(ctx, slide.desc || 'NS Articles', W - pad * 2);
+      const brandLH = brandSize * 1.1;
+
+      // Footer
+      const footText = slide.footer || '';
+      const footSize = Math.round(W * 0.024);
+      const footFont = `400 ${footSize}px ${FONTS.body}`;
+      ctx.font = footFont;
+      const footLines = footText ? wrapWords(ctx, footText, (W - pad * 2) * 0.8) : [];
+      const footLH = footSize * 1.55;
+
+      // Spacings
+      const gapAfterEye = 40;
+      const gapBeforeRule = 36;
+      const ruleH = footLines.length > 0 ? 1 : 0;
+      const gapAfterRule = footLines.length > 0 ? 36 : 0;
+
+      const totalH =
+        eyeLH + gapAfterEye +
+        brandLines.length * brandLH +
+        (footLines.length > 0
+          ? gapBeforeRule + ruleH + gapAfterRule + footLines.length * footLH
+          : 0);
+
+      let y = (H - totalH) / 2;
+
+      // Eyebrow — centered, letter-spaced (manual tracking approximation)
+      ctx.textAlign = 'center';
+      ctx.fillStyle = C.subtle;
+      ctx.font = `600 ${eyeSize}px ${FONTS.body}`;
+      // approximate letter-spacing by spacing chars manually
+      const trackedEyebrow = eyeText.split('').join(' '); // thin space between chars
+      ctx.fillText(trackedEyebrow, W / 2, y);
+      y += eyeLH + gapAfterEye;
+
+      // Brand
+      ctx.fillStyle = C.text;
+      ctx.font = brandFont;
+      for (const line of brandLines) {
+        ctx.fillText(line, W / 2, y);
+        y += brandLH;
+      }
+
+      if (footLines.length > 0) {
+        // Hairline divider
+        y += gapBeforeRule;
+        ctx.fillStyle = C.faint;
+        const ruleW = W * 0.05;
+        ctx.fillRect((W - ruleW) / 2, y, ruleW, 1);
+        y += ruleH + gapAfterRule;
+
+        // Footer text — centered
+        ctx.fillStyle = C.subtle;
+        ctx.font = footFont;
+        for (const line of footLines) {
+          ctx.fillText(line, W / 2, y);
+          y += footLH;
+        }
+      }
+
+      ctx.textAlign = 'left';
+    },
+  };
+
+  function drawSlideToCanvas(canvas, slide, index, total) {
+    const ctx = canvas.getContext('2d');
+    ctx.save();
+    // Provide indexLabel (e.g. "03 / 10") as fallback meta for non-cover slides
+    const slideWithMeta = Object.assign({}, slide, {
+      _indexLabel: `${padNum(index + 1)} / ${padNum(total)}`,
+    });
+    const drawer = drawers[slide.template] || drawers.section;
+    drawer(ctx, slideWithMeta, SLIDE_W, SLIDE_H);
+    ctx.restore();
+  }
+
+  function exportSlide(idx) {
+    const canvas = document.createElement('canvas');
+    canvas.width = SLIDE_W;
+    canvas.height = SLIDE_H;
+    drawSlideToCanvas(canvas, state.slides[idx], idx, state.slides.length);
+    const link = document.createElement('a');
+    const slugPart = state.slug ? state.slug + '-' : '';
+    link.download = `${slugPart}slide-${padNum(idx + 1)}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  el.exportOne.addEventListener('click', () => exportSlide(state.selectedSlide));
+
+  el.exportAll.addEventListener('click', async () => {
+    if (state.exporting) return;
+    state.exporting = true;
+    el.exportAll.disabled = true;
+    el.exportAll.textContent = 'Exporting...';
+    for (let i = 0; i < state.slides.length; i++) {
+      await new Promise(r => setTimeout(r, 250));
+      exportSlide(i);
+    }
+    state.exporting = false;
+    el.exportAll.disabled = false;
+    el.exportAll.textContent = 'Tümünü İndir';
+  });
+
+  // -------- Initial --------
+  function init() {
+    if (articles.length === 0) {
+      el.list.innerHTML = '<div style="padding:12px;color:var(--subtle);font-size:13px;">articles-data.js boş ya da yüklenemedi.</div>';
+      return;
+    }
+    loadArticle(articles[0].slug);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

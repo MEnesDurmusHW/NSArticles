@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel Generator — NS Articles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2F2EF;
+    --panel: #FAFAF8;
+    --canvas: #FAFAF8;
+    --text: #1A1A1A;
+    --accent: #2D2D2D;
+    --subtle: #8A8A80;
+    --border: #E0E0DB;
+    --border-soft: #E5E5E0;
+    --dot: #D4D4CE;
+    --danger: #C0392B;
+    --main-bg: #EDEDEA;
+    --card-hover: #EEEEE9;
+
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  header.bar {
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+
+  header.bar h1 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  header.bar p {
+    font-size: 13px;
+    color: var(--subtle);
+    margin-top: 4px;
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--panel);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-primary:disabled { cursor: wait; opacity: 0.6; }
+
+  .layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  aside.slides {
+    width: 220px;
+    min-width: 220px;
+    border-right: 1px solid var(--border);
+    background: var(--panel);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+
+  .slide-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: all 0.15s;
+    background: transparent;
+    text-align: left;
+    font-family: var(--sans);
+  }
+  .slide-item.active {
+    background: var(--card-hover);
+    border-color: var(--dot);
+  }
+  .slide-item .num {
+    font-size: 11px;
+    color: var(--subtle);
+    margin-bottom: 4px;
+  }
+  .slide-item .title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .add-slide {
+    margin-top: 4px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px dashed var(--dot);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--subtle);
+    font-family: var(--sans);
+  }
+
+  main.preview-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: var(--main-bg);
+  }
+
+  .preview-box {
+    width: min(400px, 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .slide-preview {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--canvas);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-preview .top-line {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: var(--text);
+  }
+
+  .slide-preview .num {
+    font-family: var(--sans);
+    font-size: 0.7em;
+    color: var(--subtle);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .slide-preview .center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+  }
+
+  .slide-preview h2 {
+    font-family: var(--serif);
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+    white-space: pre-line;
+  }
+
+  .slide-preview p {
+    font-family: var(--sans);
+    font-size: 0.85em;
+    color: var(--accent);
+    line-height: 1.6;
+    max-width: 90%;
+  }
+
+  .slide-preview .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .slide-preview .dots .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--dot);
+    transition: all 0.3s;
+  }
+  .slide-preview .dots .dot.active {
+    width: 24px;
+    background: var(--text);
+  }
+
+  aside.editor {
+    width: 300px;
+    min-width: 280px;
+    border-left: 1px solid var(--border);
+    background: var(--panel);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  aside.editor label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  aside.editor textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fff;
+    resize: vertical;
+    outline: none;
+    color: var(--text);
+  }
+
+  aside.editor textarea:focus {
+    border-color: var(--text);
+  }
+
+  aside.editor textarea.title {
+    font-size: 15px;
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  aside.editor textarea.desc {
+    font-size: 14px;
+    font-family: var(--sans);
+    color: var(--accent);
+    line-height: 1.55;
+  }
+
+  .editor-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-outline {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--text);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: var(--sans);
+  }
+
+  .btn-delete {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--danger);
+    font-family: var(--sans);
+  }
+  .btn-delete:disabled {
+    cursor: not-allowed;
+    color: var(--dot);
+    opacity: 0.5;
+  }
+
+  .hint-box {
+    margin-top: auto;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: var(--bg);
+    font-size: 12px;
+    color: var(--subtle);
+    line-height: 1.5;
+  }
+
+  .home-logo {
+    text-align: center;
+    padding: 16px 0 24px;
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    display: block;
+  }
+  .home-logo .logo-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--subtle);
+    letter-spacing: -0.3px;
+    display: block;
+  }
+  .home-logo .logo-author {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--subtle);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+  }
+  .home-logo:hover .logo-text {
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    aside.slides, aside.editor {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+    aside.slides { max-height: 180px; flex-direction: row; overflow-x: auto; overflow-y: hidden; }
+    aside.slides .slide-item { min-width: 160px; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="bar">
+      <div>
+        <h1>Carousel Generator</h1>
+        <p>Instagram 1080&times;1080 &middot; PNG Export</p>
+      </div>
+      <button id="export-all" class="btn-primary">Tümünü İndir</button>
+    </header>
+
+    <div class="layout">
+      <aside class="slides" id="slide-list"></aside>
+
+      <main class="preview-wrap">
+        <div class="preview-box">
+          <div class="slide-preview" id="preview">
+            <div class="top-line"></div>
+            <div class="num" id="preview-num"></div>
+            <div class="center">
+              <h2 id="preview-title"></h2>
+              <p id="preview-desc"></p>
+            </div>
+            <div class="dots" id="preview-dots"></div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="editor">
+        <div>
+          <label for="edit-title">Başlık</label>
+          <textarea id="edit-title" class="title" rows="3"></textarea>
+        </div>
+        <div>
+          <label for="edit-desc">Açıklama</label>
+          <textarea id="edit-desc" class="desc" rows="4"></textarea>
+        </div>
+        <div class="editor-actions">
+          <button id="export-one" class="btn-outline">Bu Slaytı İndir</button>
+          <button id="remove-slide" class="btn-delete">Sil</button>
+        </div>
+        <div class="hint-box">
+          Her slayt 1080&times;1080px PNG olarak export edilir. Başlıkta satır atlamak için Enter kullan.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <a href="all.html" class="home-logo">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </a>
+
+<script>
+(function() {
+  const SLIDE_W = 1080;
+  const SLIDE_H = 1080;
+
+  const FONTS = {
+    heading: "'Playfair Display', Georgia, serif",
+    body: "'DM Sans', 'Helvetica Neue', sans-serif",
+  };
+
+  const THEME = {
+    bg: '#FAFAF8',
+    text: '#1A1A1A',
+    accent: '#2D2D2D',
+    subtle: '#8A8A80',
+    dot: '#D4D4CE',
+    dotActive: '#1A1A1A',
+    brandLine: '#1A1A1A',
+  };
+
+  const state = {
+    slides: [
+      {
+        id: 1,
+        title: "Taş Devri Beyni,\n21. Yüzyıl Bedeni",
+        desc: "Evrimsel uyumsuzluk serisinin ilk bölümü: Bedenin neden bu çağa uyum sağlayamıyor?",
+      },
+      {
+        id: 2,
+        title: "İrade Gücün Zayıf\nOlduğu İçin Değil",
+        desc: "Sorun sende değil. Kibrit bozuksa, kibriti suçla.",
+      },
+    ],
+    selectedSlide: 0,
+    exporting: false,
+  };
+
+  const el = {
+    list: document.getElementById('slide-list'),
+    preview: document.getElementById('preview'),
+    previewNum: document.getElementById('preview-num'),
+    previewTitle: document.getElementById('preview-title'),
+    previewDesc: document.getElementById('preview-desc'),
+    previewDots: document.getElementById('preview-dots'),
+    editTitle: document.getElementById('edit-title'),
+    editDesc: document.getElementById('edit-desc'),
+    exportAll: document.getElementById('export-all'),
+    exportOne: document.getElementById('export-one'),
+    removeSlide: document.getElementById('remove-slide'),
+  };
+
+  function padNum(n) { return String(n).padStart(2, '0'); }
+
+  function renderList() {
+    el.list.innerHTML = '';
+    state.slides.forEach((s, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'slide-item' + (i === state.selectedSlide ? ' active' : '');
+      btn.type = 'button';
+      btn.innerHTML = `
+        <div class="num">Slayt ${i + 1}</div>
+        <div class="title"></div>
+      `;
+      btn.querySelector('.title').textContent = s.title.split('\n')[0];
+      btn.addEventListener('click', () => {
+        state.selectedSlide = i;
+        renderAll();
+      });
+      el.list.appendChild(btn);
+    });
+    const add = document.createElement('button');
+    add.className = 'add-slide';
+    add.type = 'button';
+    add.textContent = '+ Slayt Ekle';
+    add.addEventListener('click', addSlide);
+    el.list.appendChild(add);
+  }
+
+  function renderPreview() {
+    const s = state.slides[state.selectedSlide] || state.slides[0];
+    const total = state.slides.length;
+    el.previewNum.textContent = `${padNum(state.selectedSlide + 1)} / ${padNum(total)}`;
+    el.previewTitle.textContent = s.title;
+    if (s.desc) {
+      el.previewDesc.textContent = s.desc;
+      el.previewDesc.style.display = '';
+    } else {
+      el.previewDesc.style.display = 'none';
+    }
+    el.previewDots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === state.selectedSlide ? ' active' : '');
+      el.previewDots.appendChild(d);
+    }
+  }
+
+  function renderEditor() {
+    const s = state.slides[state.selectedSlide] || state.slides[0];
+    el.editTitle.value = s.title;
+    el.editDesc.value = s.desc || '';
+    el.removeSlide.disabled = state.slides.length <= 1;
+  }
+
+  function renderAll() {
+    renderList();
+    renderPreview();
+    renderEditor();
+  }
+
+  function addSlide() {
+    const newId = Math.max(0, ...state.slides.map(s => s.id)) + 1;
+    state.slides.push({ id: newId, title: 'Yeni Başlık', desc: 'Açıklama ekle...' });
+    state.selectedSlide = state.slides.length - 1;
+    renderAll();
+  }
+
+  function removeSlide() {
+    if (state.slides.length <= 1) return;
+    state.slides.splice(state.selectedSlide, 1);
+    state.selectedSlide = Math.min(state.selectedSlide, state.slides.length - 1);
+    renderAll();
+  }
+
+  function updateCurrent(field, value) {
+    const s = state.slides[state.selectedSlide];
+    if (!s) return;
+    s[field] = value;
+    // only re-render preview + list (avoid resetting textarea selection)
+    renderList();
+    renderPreview();
+  }
+
+  el.editTitle.addEventListener('input', e => updateCurrent('title', e.target.value));
+  el.editDesc.addEventListener('input', e => updateCurrent('desc', e.target.value));
+  el.removeSlide.addEventListener('click', removeSlide);
+
+  function drawSlideToCanvas(canvas, slide, index, total) {
+    const ctx = canvas.getContext('2d');
+    const W = SLIDE_W;
+    const H = SLIDE_H;
+    const pad = W * 0.1;
+
+    ctx.fillStyle = THEME.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = THEME.brandLine;
+    ctx.fillRect(pad, 0, W - pad * 2, 4);
+
+    ctx.fillStyle = THEME.subtle;
+    ctx.font = `400 ${Math.round(W * 0.028)}px ${FONTS.body}`;
+    ctx.textBaseline = 'top';
+    const numText = `${padNum(index + 1)} / ${padNum(total)}`;
+    ctx.fillText(numText, pad, pad);
+
+    ctx.fillStyle = THEME.text;
+    ctx.textBaseline = 'top';
+    const titleSize = Math.round(W * 0.065);
+    ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
+
+    const titleLines = slide.title.split('\n');
+    const allTitleLines = [];
+    const maxTitleW = W - pad * 2;
+
+    for (const rawLine of titleLines) {
+      const words = rawLine.split(' ');
+      let current = '';
+      for (const word of words) {
+        const test = current ? current + ' ' + word : word;
+        if (ctx.measureText(test).width > maxTitleW && current) {
+          allTitleLines.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current) allTitleLines.push(current);
+    }
+
+    const titleLineHeight = titleSize * 1.3;
+    const descSize = Math.round(W * 0.034);
+    const descLineHeight = descSize * 1.65;
+
+    const descLines = [];
+    if (slide.desc) {
+      ctx.font = `400 ${descSize}px ${FONTS.body}`;
+      const maxDescW = maxTitleW * 0.9;
+      const dWords = slide.desc.split(' ');
+      let dCurrent = '';
+      for (const w of dWords) {
+        const test = dCurrent ? dCurrent + ' ' + w : w;
+        if (ctx.measureText(test).width > maxDescW && dCurrent) {
+          descLines.push(dCurrent);
+          dCurrent = w;
+        } else {
+          dCurrent = test;
+        }
+      }
+      if (dCurrent) descLines.push(dCurrent);
+    }
+
+    const totalContentH =
+      allTitleLines.length * titleLineHeight +
+      (descLines.length > 0 ? 30 + descLines.length * descLineHeight : 0);
+
+    let startY = (H - totalContentH) / 2;
+
+    ctx.fillStyle = THEME.text;
+    ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
+    for (const line of allTitleLines) {
+      ctx.fillText(line, pad, startY);
+      startY += titleLineHeight;
+    }
+
+    if (descLines.length > 0) {
+      startY += 30;
+      ctx.fillStyle = THEME.accent;
+      ctx.font = `400 ${descSize}px ${FONTS.body}`;
+      for (const line of descLines) {
+        ctx.fillText(line, pad, startY);
+        startY += descLineHeight;
+      }
+    }
+
+    const dotY = H - pad;
+    const dotR = 5;
+    const activeW = 28;
+    let dotX = pad;
+    for (let i = 0; i < total; i++) {
+      if (i === index) {
+        ctx.fillStyle = THEME.dotActive;
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(dotX, dotY - dotR, activeW, dotR * 2, dotR);
+          ctx.fill();
+        } else {
+          ctx.fillRect(dotX, dotY - dotR, activeW, dotR * 2);
+        }
+        dotX += activeW + 8;
+      } else {
+        ctx.fillStyle = THEME.dot;
+        ctx.beginPath();
+        ctx.arc(dotX + dotR, dotY, dotR, 0, Math.PI * 2);
+        ctx.fill();
+        dotX += dotR * 2 + 8;
+      }
+    }
+  }
+
+  function exportSlide(idx) {
+    const canvas = document.createElement('canvas');
+    canvas.width = SLIDE_W;
+    canvas.height = SLIDE_H;
+    drawSlideToCanvas(canvas, state.slides[idx], idx, state.slides.length);
+    const link = document.createElement('a');
+    link.download = `slide-${padNum(idx + 1)}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  el.exportOne.addEventListener('click', () => exportSlide(state.selectedSlide));
+
+  el.exportAll.addEventListener('click', async () => {
+    if (state.exporting) return;
+    state.exporting = true;
+    el.exportAll.disabled = true;
+    el.exportAll.textContent = 'Exporting...';
+    for (let i = 0; i < state.slides.length; i++) {
+      await new Promise(r => setTimeout(r, 200));
+      exportSlide(i);
+    }
+    state.exporting = false;
+    el.exportAll.disabled = false;
+    el.exportAll.textContent = 'Tümünü İndir';
+  });
+
+  // initial render — wait for webfonts so canvas export matches preview
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(renderAll);
+  } else {
+    renderAll();
+  }
+})();
+</script>
+</body>
+</html>
