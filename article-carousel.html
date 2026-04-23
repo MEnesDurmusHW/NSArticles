@@ -15,6 +15,7 @@
     --subtle: #8A8A80;
     --border: #E0E0DB;
     --dot: #D4D4CE;
+    --emph: #96622F;
     --danger: #C0392B;
     --main-bg: #EDEDEA;
     --card-hover: #EEEEE9;
@@ -233,6 +234,15 @@
     color: var(--accent);
     line-height: 1.6;
     max-width: 90%;
+  }
+
+  .slide-preview h2 em,
+  .slide-preview p em,
+  .slide-preview .section-question em,
+  .slide-preview .cta-footer em {
+    font-style: italic;
+    color: var(--emph);
+    font-weight: inherit;
   }
 
   .slide-preview .dots { display: flex; gap: 6px; align-items: center; }
@@ -496,6 +506,7 @@
     dot: '#D4D4CE',
     dotActive: '#1A1A1A',
     line: '#1A1A1A',
+    emph: '#96622F',
   };
 
   const articles = window.NS_ARTICLES || [];
@@ -652,18 +663,18 @@
     if (s.template === 'section' && s.desc) {
       const q = document.createElement('div');
       q.className = 'section-question';
-      q.textContent = s.desc;
+      q.innerHTML = s.desc;
       el.previewCenter.appendChild(q);
     }
 
     const h = document.createElement('h2');
-    h.textContent = s.title || '';
+    h.innerHTML = s.title || '';
     el.previewCenter.appendChild(h);
 
     // Non-section templates still use desc below
     if (s.desc && s.template !== 'section') {
       const p = document.createElement('p');
-      p.textContent = s.desc;
+      p.innerHTML = s.desc;
       el.previewCenter.appendChild(p);
     }
 
@@ -674,7 +685,7 @@
       el.previewCenter.appendChild(rule);
       const foot = document.createElement('div');
       foot.className = 'cta-footer';
-      foot.textContent = s.footer;
+      foot.innerHTML = s.footer;
       el.previewCenter.appendChild(foot);
     }
 
@@ -739,7 +750,9 @@
   // -------- Canvas drawing --------
   function wrapWords(ctx, text, maxWidth) {
     const out = [];
-    text.split('\n').forEach(rawLine => {
+    // Strip any inline <em> tags for plain wrapping
+    const stripped = String(text).replace(/<\/?em>/g, '');
+    stripped.split('\n').forEach(rawLine => {
       const words = rawLine.split(' ');
       let current = '';
       for (const word of words) {
@@ -754,6 +767,92 @@
       if (current) out.push(current);
     });
     return out;
+  }
+
+  // ---- Emphasis-aware text utilities ----
+  // Accept a string like "Hiçbir şey, <em>yapabileceğin</em> en iyi şey."
+  // Tokenize to [{text, emph}] preserving word boundaries and newlines.
+  function tokenizeEmphasis(str) {
+    const parts = [];
+    const s = String(str);
+    const re = /<em>([\s\S]*?)<\/em>/g;
+    let last = 0;
+    let m;
+    while ((m = re.exec(s)) !== null) {
+      if (m.index > last) parts.push({ text: s.slice(last, m.index), emph: false });
+      parts.push({ text: m[1], emph: true });
+      last = re.lastIndex;
+    }
+    if (last < s.length) parts.push({ text: s.slice(last), emph: false });
+
+    const tokens = [];
+    for (const part of parts) {
+      // Split preserving explicit newlines as separator tokens
+      const lines = part.text.split('\n');
+      lines.forEach((line, i) => {
+        const words = line.split(/\s+/).filter(w => w.length > 0);
+        for (const w of words) tokens.push({ text: w, emph: part.emph, br: false });
+        if (i < lines.length - 1) tokens.push({ text: '', emph: false, br: true });
+      });
+    }
+    return tokens;
+  }
+
+  function wrapEmphasizedTokens(ctx, tokens, maxWidth, baseFont, emphFont) {
+    ctx.font = baseFont;
+    const spaceW = ctx.measureText(' ').width;
+    const lines = [];
+    let line = [];
+    let lineW = 0;
+    for (const tok of tokens) {
+      if (tok.br) {
+        lines.push(line);
+        line = [];
+        lineW = 0;
+        continue;
+      }
+      ctx.font = tok.emph ? emphFont : baseFont;
+      const tokW = ctx.measureText(tok.text).width;
+      const needed = line.length > 0 ? spaceW + tokW : tokW;
+      if (lineW + needed > maxWidth && line.length > 0) {
+        lines.push(line);
+        line = [tok];
+        lineW = tokW;
+      } else {
+        line.push(tok);
+        lineW += needed;
+      }
+    }
+    if (line.length > 0) lines.push(line);
+    return lines;
+  }
+
+  function drawEmphasizedLines(ctx, lines, x, y, lineHeight, baseFont, emphFont, baseColor, emphColor, align) {
+    ctx.font = baseFont;
+    const spaceW = ctx.measureText(' ').width;
+    for (const line of lines) {
+      // compute line width for center/right alignment
+      let lineW = 0;
+      for (let i = 0; i < line.length; i++) {
+        const tok = line[i];
+        ctx.font = tok.emph ? emphFont : baseFont;
+        lineW += ctx.measureText(tok.text).width;
+        if (i > 0) lineW += spaceW;
+      }
+      let cx = x;
+      if (align === 'center') cx = x - lineW / 2;
+      else if (align === 'right') cx = x - lineW;
+      for (let i = 0; i < line.length; i++) {
+        const tok = line[i];
+        ctx.font = tok.emph ? emphFont : baseFont;
+        ctx.fillStyle = tok.emph ? emphColor : baseColor;
+        if (i > 0) cx += spaceW;
+        ctx.fillText(tok.text, cx, y);
+        cx += ctx.measureText(tok.text).width;
+      }
+      y += lineHeight;
+    }
+    return y;
   }
 
   function drawTopLine(ctx, W, pad) {
@@ -810,34 +909,32 @@
       drawTopLine(ctx, W, pad);
       drawNum(ctx, slide.num || 'NS ARTICLES', pad, W);
 
-      // Title big
+      // Title big — emphasis-aware
       const titleSize = Math.round(W * 0.072);
-      ctx.fillStyle = C.text;
-      ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
+      const baseFont = `700 ${titleSize}px ${FONTS.heading}`;
+      const emphFont = `italic 700 ${titleSize}px ${FONTS.heading}`;
       ctx.textBaseline = 'top';
-      const titleLines = wrapWords(ctx, slide.title || '', W - pad * 2);
+      const titleTokens = tokenizeEmphasis(slide.title || '');
+      const titleLines = wrapEmphasizedTokens(ctx, titleTokens, W - pad * 2, baseFont, emphFont);
       const titleLH = titleSize * 1.2;
 
       const descSize = Math.round(W * 0.032);
+      const descBase = `400 ${descSize}px ${FONTS.body}`;
+      const descEmph = `italic 400 ${descSize}px ${FONTS.body}`;
       const descLH = descSize * 1.55;
       let descLines = [];
       if (slide.desc) {
-        ctx.font = `400 ${descSize}px ${FONTS.body}`;
-        descLines = wrapWords(ctx, slide.desc, (W - pad * 2) * 0.95);
+        descLines = wrapEmphasizedTokens(ctx, tokenizeEmphasis(slide.desc), (W - pad * 2) * 0.95, descBase, descEmph);
       }
 
       const totalH = titleLines.length * titleLH + (descLines.length > 0 ? 40 + descLines.length * descLH : 0);
       let y = (H - totalH) / 2;
 
-      ctx.fillStyle = C.text;
-      ctx.font = `700 ${titleSize}px ${FONTS.heading}`;
-      y = drawTextBlock(ctx, titleLines, pad, y, titleLH);
+      y = drawEmphasizedLines(ctx, titleLines, pad, y, titleLH, baseFont, emphFont, C.text, C.emph, 'left');
 
       if (descLines.length > 0) {
         y += 40;
-        ctx.fillStyle = C.accent;
-        ctx.font = `400 ${descSize}px ${FONTS.body}`;
-        drawTextBlock(ctx, descLines, pad, y, descLH);
+        drawEmphasizedLines(ctx, descLines, pad, y, descLH, descBase, descEmph, C.accent, C.emph, 'left');
       }
     },
 
@@ -849,17 +946,19 @@
 
       // 1) Question — small italic serif (context prompt)
       const qSize = Math.round(W * 0.034);
-      const qFont = `italic 400 ${qSize}px ${FONTS.heading}`;
-      ctx.font = qFont;
+      const qBase = `italic 400 ${qSize}px ${FONTS.heading}`;
+      const qEmph = `italic 700 ${qSize}px ${FONTS.heading}`;
       ctx.textBaseline = 'top';
-      const qLines = slide.desc ? wrapWords(ctx, slide.desc, (W - pad * 2) * 0.95) : [];
+      const qLines = slide.desc
+        ? wrapEmphasizedTokens(ctx, tokenizeEmphasis(slide.desc), (W - pad * 2) * 0.95, qBase, qEmph)
+        : [];
       const qLH = qSize * 1.45;
 
       // 2) Hero: key takeaway — big serif bold (the answer)
       const titleSize = Math.round(W * 0.072);
-      const titleFont = `700 ${titleSize}px ${FONTS.heading}`;
-      ctx.font = titleFont;
-      const titleLines = wrapWords(ctx, slide.title || '', W - pad * 2);
+      const titleBase = `700 ${titleSize}px ${FONTS.heading}`;
+      const titleEmph = `italic 700 ${titleSize}px ${FONTS.heading}`;
+      const titleLines = wrapEmphasizedTokens(ctx, tokenizeEmphasis(slide.title || ''), W - pad * 2, titleBase, titleEmph);
       const titleLH = titleSize * 1.2;
 
       const gapAfterQuestion = 32;
@@ -871,15 +970,11 @@
       let y = (H - totalH) / 2;
 
       if (qLines.length > 0) {
-        ctx.fillStyle = C.subtle;
-        ctx.font = qFont;
-        drawTextBlock(ctx, qLines, pad, y, qLH);
-        y += qLines.length * qLH + gapAfterQuestion;
+        y = drawEmphasizedLines(ctx, qLines, pad, y, qLH, qBase, qEmph, C.subtle, C.emph, 'left');
+        y += gapAfterQuestion;
       }
 
-      ctx.fillStyle = C.text;
-      ctx.font = titleFont;
-      drawTextBlock(ctx, titleLines, pad, y, titleLH);
+      drawEmphasizedLines(ctx, titleLines, pad, y, titleLH, titleBase, titleEmph, C.text, C.emph, 'left');
     },
 
     quote(ctx, slide, W, H) {

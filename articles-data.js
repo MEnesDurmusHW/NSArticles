@@ -23,7 +23,7 @@
 window.NS_ARTICLES = [
   {
     slug: 'the-science-of-doing-nothing',
-    title: 'Hiçbir şey yapmamak, yapabileceğin en verimli şey olabilir.',
+    title: 'Hiçbir şey yapmamak, <em>yapabileceğin</em> en verimli şey olabilir.',
     subtitle: 'Beyin bilimi, psikoloji ve tıp araştırmalarının "boş vakit" hakkında söyledikleri.',
     sections: [
       {
