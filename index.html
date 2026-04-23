@@ -94,6 +94,41 @@
     color: var(--text);
     transform: translateY(-50%) translateX(4px);
   }
+
+  /* Red-accent variant: visible red presence with soft radial glow,
+     theme-aware (light + dark), but not as dramatic as the article hero. */
+  .article-card.card-red {
+    border-color: rgba(201, 64, 64, 0.4);
+    background:
+      radial-gradient(ellipse at 85% 100%, rgba(201, 64, 64, 0.12) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(201, 64, 64, 0.03) 0%, rgba(201, 64, 64, 0.07) 100%),
+      var(--surface);
+  }
+  [data-theme="dark"] .article-card.card-red {
+    border-color: rgba(231, 76, 60, 0.45);
+    background:
+      radial-gradient(ellipse at 85% 100%, rgba(231, 76, 60, 0.15) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(231, 76, 60, 0.04) 0%, rgba(231, 76, 60, 0.08) 100%),
+      var(--surface);
+  }
+  .article-card.card-red .tag {
+    color: #c94040;
+    font-weight: 700;
+  }
+  [data-theme="dark"] .article-card.card-red .tag {
+    color: #e74c3c;
+    font-weight: 700;
+  }
+  .article-card.card-red:hover {
+    border-color: #c94040;
+    box-shadow: 0 4px 22px rgba(201, 64, 64, 0.18);
+  }
+  [data-theme="dark"] .article-card.card-red:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 4px 24px rgba(231, 76, 60, 0.22);
+  }
+  .article-card.card-red:hover .arrow { color: #c94040; }
+  [data-theme="dark"] .article-card.card-red:hover .arrow { color: #e74c3c; }
 </style>
 </head>
 <body>
@@ -127,6 +162,13 @@
         <span class="tag">İlişkiler</span>
         <h2>İlişki & Evlilik Rehberi</h2>
         <p class="desc">Sağlıklı ilişkiler ve evlilik üzerine kapsamlı bir rehber.</p>
+        <span class="arrow">&rarr;</span>
+      </a>
+
+      <a href="breadcrumbing-preview.html" class="article-card card-red">
+        <span class="tag">Psikoloji & İlişkiler</span>
+        <h2>Dijital Çağda Breadcrumbing</h2>
+        <p class="desc">Flörtöz sinyallerle karşı tarafı oltada tutan manipülasyonun tanımı, döngüsü ve psikolojik etkileri.</p>
         <span class="arrow">&rarr;</span>
       </a>
 

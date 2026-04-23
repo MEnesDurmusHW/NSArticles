@@ -561,18 +561,61 @@
     margin-bottom: 2px;
   }
   .cycle-arrow {
-    padding: 0 0 0 14px;
-    color: var(--text-muted);
-    font-size: 14px;
-    font-family: var(--serif);
-    letter-spacing: 6px;
+    width: 32px;
+    height: 20px;
+    margin: 2px 0;
+    position: relative;
+    font-size: 0;
   }
+  .cycle-arrow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    box-shadow: 0 7px 0 var(--text-muted), 0 14px 0 var(--text-muted);
+  }
+  .cycle.chain .cycle-step { align-items: center; }
+  .cycle.chain .cycle-num { margin-top: 0; }
   .cycle-loop {
     margin-top: 12px;
     text-align: center;
     font-size: 13px;
     color: var(--accent);
     font-style: italic;
+  }
+  .cycle-text .cycle-en {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 4px;
+    letter-spacing: 0.2px;
+  }
+  .cycle-desc {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 4px 0 10px;
+  }
+  .cycle-examples {
+    margin-top: 6px;
+    padding-left: 12px;
+    border-left: 2px solid rgba(231, 76, 60, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .cycle-examples span {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.55;
+    padding: 2px 0;
   }
 
   /* WARNING */
@@ -787,7 +830,7 @@
 <div class="container">
 
   <!-- SECTION 1: TANIM -->
-  <section>
+  <section id="s01">
     <div class="section-number">Bölüm 01</div>
     <h2>Breadcrumbing <em>Nedir?</em></h2>
     <p>Breadcrumbing; bir kişinin romantik ya da cinsel bir partner adayına <strong>düşük çaba gerektiren flörtöz sinyaller</strong> göndererek ilgi gösterirken, aslında ilişkiyi ilerletme niyetinin bulunmaması durumudur. Terim, Grimm Kardeşler'in Hansel ve Gretel masalındaki ekmek kırıntılarına bir göndermedir: takip etmeye yetecek kadar kırıntı bırakılır, ama hiçbir zaman hedefe ulaştırmaz. Merriam-Webster fiil formunun ilk kullanımını yaklaşık 2010 olarak kaydediyor; flört bağlamında yaygınlaşması 2016-2017 dönemine denk düşer.</p>
@@ -845,7 +888,7 @@
   </section>
 
   <!-- SECTION 2: RAKAMLAR -->
-  <section>
+  <section id="s02">
     <div class="section-number">Bölüm 02</div>
     <h2>Rakamlarla <em>Breadcrumbing</em></h2>
     <p>İspanya'da 626 yetişkinle yapılan bir boylamsal anketin ilk raporunda<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> katılımcıların büyük kısmı son bir yılda bu davranışa maruz kaldığını söylüyor. Breadcrumbing, ghosting'den yaklaşık üç kat daha yaygın çıktı.</p>
@@ -878,7 +921,7 @@
   </section>
 
   <!-- SECTION 3: NEDEN -->
-  <section>
+  <section id="s03">
     <div class="section-number">Bölüm 03</div>
     <h2>Neden <em>Yapıyorlar?</em></h2>
     <p>Hindistan ve İspanya'da toplam 638 genç yetişkinle yapılan bir kesitsel çalışma<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> breadcrumbing'in arkasındaki ortak zemine işaret ediyor: <strong>bağlanma güvensizliği</strong>. Hem kaygılı hem kaçıngan bağlanma davranışı yordadı; fakat hangi stilin baskın yordayıcı olduğu kültüre göre farklılaştı.</p>
@@ -940,59 +983,135 @@
   </section>
 
   <!-- SECTION 4: DÖNGÜ -->
-  <section>
+  <section id="s04">
     <div class="section-number">Bölüm 04</div>
     <h2>Breadcrumbing <em>Döngüsü</em></h2>
-    <p>Breadcrumbing tek seferlik bir davranış değil, kendini tekrarlayan bir döngü. Mağdur her seferinde umutlanır ve hayal kırıklığına uğrar. Bu yapısı nedeniyle davranışsal psikolojide tanıdık bir örüntüye, <strong>değişken oranlı pekiştirmeye</strong> (slot makinesi etkisi) benzer. Ne zaman geleceği belli olmayan ödül, davranışın sürmesini ve kolay bırakılamamasını sağlar.</p>
+    <p>Breadcrumbing tek seferlik bir davranış değil, kendini tekrarlayan bir örüntü. Aşağıdaki 5 aşama bir nitel çalışmada<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> belirlenmiş; aynı davranışlar, bağımsız olarak geliştirilen BREAD-ASR davranış anketinin<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> alt boyutlarında (iletişim, kaçınma, commitment, bağımlılık) psikometrik olarak da ölçülebilir hale gelmiş. Yani örüntü tek bir çalışmaya değil, birbirinden bağımsız yöntemlerde tekrarlanan tutarlı bir yapıya işaret ediyor.</p>
+
+    <p>Bu örüntüden çıkmayı zorlaştıran şey, davranışsal psikolojide <strong>değişken oranlı pekiştirme</strong> olarak bilinen mekanizma: rastgele aralıklı ödüller, sabit aralıklılara göre çok daha bağımlılık yaratıcıdır. Slot makinesi ve dating uygulamalarıyla aynı ilke. Navarro ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> bu mekanizmayı breadcrumbing'e doğrudan bağlıyor: "öngörülemeyen olası ödülü bekleme" durumu, hem gerginliği hem olumsuz psikolojik etkileri üretiyor.</p>
 
     <div class="cycle">
-      <div class="cycle-step"><div class="cycle-num">1</div><div class="cycle-text"><strong>Cazibe (Charm)</strong>Sıcak, flörtöz, ilgili davranış. İltifatlar, özel hissettirme.</div></div>
+      <div class="cycle-step">
+        <div class="cycle-num">1</div>
+        <div class="cycle-text">
+          <strong>Cazibe<span class="cycle-en">Charm</span></strong>
+          <div class="cycle-desc">Yoğun ilgi, hızlı yakınlaşma, özel hissettirme. İlk 1-2 hafta yüksek tempoda bir baseline kurar; ileride "eski günler"in özlemi buradan gelir.</div>
+          <div class="cycle-examples">
+            <span>Yoğun iltifatlar ve "özel" hissettiren jestler</span>
+            <span>Anında dönen mesajlar, kesintisiz ilgi akışı</span>
+            <span>Erken samimiyet ve hızlı "biz" hissi</span>
+          </div>
+        </div>
+      </div>
       <div class="cycle-arrow">.  .  .</div>
-      <div class="cycle-step"><div class="cycle-num">2</div><div class="cycle-text"><strong>Ümit Verme (Leading On)</strong>Geleceğe dair ipuçları, somutlaşmayan planlar, belirsiz sözler.</div></div>
+      <div class="cycle-step">
+        <div class="cycle-num">2</div>
+        <div class="cycle-text">
+          <strong>Ümit Verme<span class="cycle-en">Leading On</span></strong>
+          <div class="cycle-desc">Geleceğe dair ipuçları. Plan yapılır gibi olur ama tarih, yer, detay yoktur; sadece fikri diri tutar.</div>
+          <div class="cycle-examples">
+            <span>Tarihsiz, detaysız gelecek vaatleri ("bir ara", "yakında")</span>
+            <span>"Sync'iz", "uyumluyuz", "chemistry var" gibi erken yakınlık etiketleri</span>
+            <span>Tanıştırma ve paylaşılan plan vaatlerinin havada kalması</span>
+            <span>Çok erken evrede söylenen bağlayıcı sözler</span>
+          </div>
+        </div>
+      </div>
       <div class="cycle-arrow">.  .  .</div>
-      <div class="cycle-step"><div class="cycle-num">3</div><div class="cycle-text"><strong>Tutarsızlık (Incongruence)</strong>Sözler ve davranışlar uyuşmuyor. Sıcak ve soğuk arasında salınım.</div></div>
+      <div class="cycle-step">
+        <div class="cycle-num">3</div>
+        <div class="cycle-text">
+          <strong>Tutarsızlık<span class="cycle-en">Incongruence</span></strong>
+          <div class="cycle-desc">Sözler ve davranış ritmi uyuşmaz. Öngörülebilirlik yoktur; asıl bağımlılık yaratan aşama budur.</div>
+          <div class="cycle-examples">
+            <span>Uzun sessizliklerden sonra ani, samimi geri dönüşler</span>
+            <span>Sosyal medyada yüksek görünürlük, özel mesajda sönük ilgi</span>
+            <span>Yüz yüze sıcak ton, uzaktan mesafeli ton (ya da tersi)</span>
+            <span>Başkasıyla yakalandığında sorulmadan çerçeveleyen hızlı savunma</span>
+          </div>
+        </div>
+      </div>
       <div class="cycle-arrow">.  .  .</div>
-      <div class="cycle-step"><div class="cycle-num">4</div><div class="cycle-text"><strong>Duygusal Yatırımdan Kaçınma</strong>Derin konuşmalardan kaçma, bahane üretme, konuyu değiştirme.</div></div>
+      <div class="cycle-step">
+        <div class="cycle-num">4</div>
+        <div class="cycle-text">
+          <strong>Duygusal Yatırımdan Kaçınma<span class="cycle-en">Avoidance</span></strong>
+          <div class="cycle-desc">Fiziksel yakınlık olabilir, derin sohbet olmaz. "Biz neyiz?" sorusu her seferinde savuşturulur.</div>
+          <div class="cycle-examples">
+            <span>Derin sorulara yüzeysel ya da mizahi cevaplar</span>
+            <span>Gelecek konuları karşısında belirsizliği tercih etme</span>
+            <span>Duygusal anlarda konunun yön değiştirmesi</span>
+          </div>
+        </div>
+      </div>
       <div class="cycle-arrow">.  .  .</div>
-      <div class="cycle-step"><div class="cycle-num">5</div><div class="cycle-text"><strong>Commitment Belirsizliği</strong>İlişki tanımsız kalır. "Biz neyiz?" sorusu sürekli ertelenir.</div></div>
+      <div class="cycle-step">
+        <div class="cycle-num">5</div>
+        <div class="cycle-text">
+          <strong>Commitment Belirsizliği<span class="cycle-en">Commitment Uncertainty</span></strong>
+          <div class="cycle-desc">İlişki tanımını erteleme, önceki vaatleri sulandırma, kararı her seferinde "sonraya" bırakma.</div>
+          <div class="cycle-examples">
+            <span>İlişki tanımını erteleme, "zamanı değil" savunması</span>
+            <span>Bağlanma konuşuldukça geri çekilme</span>
+            <span>Başka romantik seçenekleri açık tutma</span>
+            <span>Önceki bağlayıcı sözlerin zaman içinde sulandırılması</span>
+          </div>
+        </div>
+      </div>
       <div class="cycle-loop">Döngü yeniden başa sarar</div>
     </div>
 
-    <p>Breadcrumbing'i bu kadar yıkıcı kılan, bu sonsuz ertelemedir: ilişki ne ilerletilir ne sonlandırılır, karşı taraf askıda tutulur. Mağdur her "cazibe" aşamasında umutlanır, her "kaçınma" aşamasında çöker; çıkamadığı bir karasızlık döngüsüne yerleşir.</p>
+    <p>Bu 5 aşama her zaman düzgün bir sırayla gelmez; karışır, tekrarlar, bazıları atlanır. <strong>Önemli olan örüntüyü fark edebilmek.</strong> Kendi ilişkinde ya da yakın birinin hikâyesinde bu aşamalardan üçünü veya daha fazlasını tanıyorsan, büyük ihtimalle döngünün içindesin; onu dışarıdan izleyen biri değilsin.</p>
+
+    <div class="warning-box">
+      <div class="title">Sık Eşlik Eden Örüntü: Gaslighting</div>
+      <p>Breadcrumbing nadiren tek başına gelir. Cherry ve ark.'nın 544 yetişkinle yaptığı 2025 UK çalışmasında breadcrumbing ile gaslighting arasında pozitif korelasyon bulundu<a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Klinik literatür bu birlikteliğin belirgin bir biçimini tanımlar: <strong>DARVO</strong>, yani <em>Deny, Attack, Reverse Victim and Offender</em>; inkar et, saldır, mağdur ile faili yer değiştir.</p>
+      <p>Tipik belirtileri: sık ve küçük yalanlar; hatırlamıyormuş ya da anlamamış gibi davranma; soru sorulduğunda karşı tarafı "aşırı tepki veriyor" ilan ederek kendini mağdur konumuna yerleştirme. Breadcrumbing'in yarattığı belirsizlik, DARVO ile birleştiğinde mağdurun kendi algısına güvenini zayıflatır; çıkmak çok daha zorlaşır.</p>
+    </div>
   </section>
 
   <!-- SECTION 5: PSİKOLOJİK ETKİLER -->
-  <section>
+  <section id="s05">
     <div class="section-number">Bölüm 05</div>
     <h2>Mağdurdaki <em>Psikolojik Etkiler</em></h2>
-    <p>Navarro ve ark.'nın 626 kişilik örnekleminde breadcrumbing mağdurlarının üç çıktıda anlamlı fark gösterdiği bulundu: hayat memnuniyetinde azalma, yalnızlık ve çaresizlik duygularında artış.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> İlginç olan, aynı çalışmada <strong>ghosting mağdurlarında bu çıktıların hiçbiri anlamlı değişmedi.</strong></p>
+    <p>Navarro ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> 626 yetişkinlik örneklemini üç psikolojik ölçekte karşılaştırdı: hayat memnuniyeti, çaresizlik ve yalnızlık. Aşağıdaki tabloda grup ortalamaları, breadcrumbing mağdurlarının üç ölçekte de net bir sapma gösterdiğini, ghosting mağdurlarının ise "mağdur değil" grubuyla neredeyse aynı skorları tutturduğunu ortaya koyuyor:</p>
 
-    <div class="stat-grid">
-      <div class="stat-card small">
-        <span class="subtitle">Hayat<br>Memnuniyeti</span>
-        <div class="label">Anlamlı azalma</div>
-      </div>
-      <div class="stat-card small">
-        <span class="subtitle">Yalnızlık<br>Hissi</span>
-        <div class="label">Anlamlı artış</div>
-      </div>
-      <div class="stat-card small">
-        <span class="subtitle">Çaresizlik<br>Hissi</span>
-        <div class="label">Anlamlı artış</div>
-      </div>
+    <div class="table-wrap">
+      <table class="comparison-table">
+        <tr>
+          <th>Ölçek</th>
+          <th>Mağdur değil<br><span style="font-weight:400; letter-spacing:0; text-transform:none; color:var(--text-muted);">n=493</span></th>
+          <th>Breadcrumbing<br><span style="font-weight:400; letter-spacing:0; text-transform:none; color:var(--text-muted);">n=88</span></th>
+          <th>Ghosting<br><span style="font-weight:400; letter-spacing:0; text-transform:none; color:var(--text-muted);">n=30</span></th>
+        </tr>
+        <tr>
+          <td>Hayat memnuniyeti<br><span style="color:var(--text-muted); font-size:12px;">yüksek = iyi</span></td>
+          <td>3.46</td>
+          <td><span class="t-no">3.19 &darr;</span></td>
+          <td><span class="t-maybe">3.43</span></td>
+        </tr>
+        <tr>
+          <td>Çaresizlik<br><span style="color:var(--text-muted); font-size:12px;">yüksek = kötü</span></td>
+          <td>2.05</td>
+          <td><span class="t-no">2.35 &uarr;</span></td>
+          <td><span class="t-maybe">2.23</span></td>
+        </tr>
+        <tr>
+          <td>Yalnızlık<br><span style="color:var(--text-muted); font-size:12px;">yüksek = kötü</span></td>
+          <td>5.04</td>
+          <td><span class="t-no">5.30 &uarr;</span></td>
+          <td><span class="t-maybe">5.14</span></td>
+        </tr>
+      </table>
     </div>
+    <p class="muted-p">Değerler grup ortalamaları (Navarro ve ark. 2020, IJERPH). ANOVA sonuçları üç ölçekte de anlamlı (F = 4.96 - 8.34, p &lt; 0.001). Regresyon modellerinde breadcrumbing, üç çıktıyla da istatistiksel olarak ilişkili (β = -0.08 hayat memnuniyeti; +0.14 çaresizlik; +0.08 yalnızlık; hepsi p &lt; 0.01). Etki büyüklükleri küçük (η² = 0.04 - 0.08), ama ghosting için aynı üç ölçekte <strong>hiçbir ilişki istatistiksel olarak anlamlı değil</strong>. Breadcrumbing 3/3, ghosting 0/3.</p>
 
-    <div class="quote-block">
-      "Breadcrumbing mağdurları, ghosting mağdurlarıyla ve hiçbir davranışa maruz kalmamış kişilerle karşılaştırıldığında en düşük hayat memnuniyetini ve en yüksek çaresizlik skorunu raporladı."
-      <span class="source">Navarro ve ark., 2020, IJERPH, n=626</span>
-    </div>
+    <p>Mesele etkinin büyüklüğü değil, <strong>varlığı ile yokluğu arasındaki fark</strong>. Ghosting'de ilişki biter, beyin bir yas süreci başlatabilir ve zamanla kapanma mümkün olur. Breadcrumbing'de ilişki <strong>ne başlar ne biter</strong>; belirsizlik sürdüğü için beyin kapanma ve iyileşme sürecine geçemez. Küçük ama ısrarlı bir aşınma olarak hayatın üç farklı eksenine birden yayılıyor.</p>
 
-    <p>Bu asimetrinin nedeni kısmen yapısaldır. Ghosting'de ilişki biter, beyin bir yas süreci başlatabilir ve zamanla kapanma mümkün olur. Breadcrumbing'de ilişki <strong>ne başlar ne biter</strong>; belirsizlik sürdüğü için beyin kapanma ve iyileşme sürecine geçemez.</p>
+    <h3>Paranoid Düşünce: Dolaylı Ama Anlamlı</h3>
+    <p>Birleşik Krallık'ta 544 yetişkinle yapılan iki paralel çalışma<a href="#ref-3" class="ref" onclick="savePos(this)">3</a><a href="#ref-4" class="ref" onclick="savePos(this)">4</a> kültürel olarak İspanya ve Hindistan'a göre bize daha yakın bir örneklemde başka önemli bulgular ortaya koyuyor. En dikkat çekici olanı şu: breadcrumbing ile paranoid düşünce arasındaki <strong>doğrudan</strong> korelasyon zayıftır. Yıkım <strong>dolaylı yoldan</strong>, algılanan sosyal desteğin zayıflaması üzerinden yürür.</p>
 
-    <h3>Breadcrumbing ve Paranoid Düşünce</h3>
-    <p>Birleşik Krallık'ta 544 yetişkinle yapılan 2025 tarihli bir çalışma<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> breadcrumbing'e maruz kalmanın paranoid düşünce kalıplarıyla dolaylı olarak ilişkili olduğunu gösterdi. Bu ilişki doğrudan değil, <strong>algılanan sosyal destek</strong> üzerinden işliyordu:</p>
-
-    <div class="cycle">
+    <div class="cycle chain">
       <div class="cycle-step"><div class="cycle-num">1</div><div class="cycle-text">Breadcrumbing'e maruz kalma</div></div>
       <div class="cycle-arrow">.  .  .</div>
       <div class="cycle-step"><div class="cycle-num">2</div><div class="cycle-text">"İnsanlara güvenemem" şemasının yerleşmesi</div></div>
@@ -1002,11 +1121,16 @@
       <div class="cycle-step"><div class="cycle-num">4</div><div class="cycle-text">Paranoid düşünce kalıplarının güçlenmesi</div></div>
     </div>
 
-    <p>Aynı örneklemde erkeklerin algıladığı sosyal destek daha düşüktü ve daha genç katılımcılar daha yüksek paranoid düşünce skorları gösterdi. Çalışmanın ikinci yayını<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> genç yaşın ve düşük sosyal desteğin breadcrumbing'e karşı kırılganlığı artırdığını, ghosting ve gaslighting'in ise breadcrumbing ile pozitif korele olduğunu ortaya koydu.</p>
+    <p class="muted-p">Aracılık (mediation) yolu istatistiksel olarak anlamlı: β = 0.09, Z = 4.11, p &lt; 0.001. Yani breadcrumbing doğrudan "paranoid yapmıyor"; sosyal güven ağını yıpratarak güvensizlik ikliminin önünü açıyor.</p>
+
+    <div class="info-box">
+      <div class="title">Maruziyet eşit, etki değil: erkekler daha kırılgan</div>
+      <p style="margin-bottom:0; color:var(--text); font-size:14.5px; line-height:1.65;">Aynı çalışmanın en ilginç asimetrisi: kadın-erkek breadcrumbing'e maruz kalma oranlarında anlamlı fark yok, bu davranış kimlik üzerinden seçim yapmıyor. Ama <strong>sonuçları</strong> eşit değil. Cinsiyet aracılık modelinde erkeklerin algıladığı sosyal destek anlamlı ölçüde daha düşük çıktı (β = -0.05, p = 0.027). Sosyal destek tamponu zayıfladığında paranoid düşünce güçleniyor; kadınlar genelde daha sağlam bir destek ağına sahip olduğu için aynı davranışa maruz kalsalar da psikolojik etki daha yumuşak kalıyor.</p>
+    </div>
   </section>
 
   <!-- SECTION 6: KORUNMA -->
-  <section>
+  <section id="s06">
     <div class="section-number">Bölüm 06</div>
     <h2>Kendini <em>Korumak İçin</em></h2>
 
@@ -1052,11 +1176,12 @@
   <div class="ref-section">
     <h3>Kaynaklar</h3>
     <ol class="references">
-      <li id="ref-1">Navarro, R., Larrañaga, E., Yubero, S. & Víllora, B. (2020). Psychological Correlates of Ghosting and Breadcrumbing Experiences: A Preliminary Study among Adults. <em>International Journal of Environmental Research and Public Health</em>, 17(3), 1116. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7037474/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/PMC7037474</a></li>
-      <li id="ref-2">Khattar, V., Upadhyay, S. & Navarro, R. (2023). Attachment insecurity and breadcrumbing engagement in young adults: a cross-sectional, cross-country study in India and Spain. <em>BMC Psychology</em>, 11, 355. <a href="https://link.springer.com/article/10.1186/s40359-023-01404-y" target="_blank" rel="noopener">link.springer.com/article/10.1186/s40359-023-01404-y</a></li>
-      <li id="ref-3">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Breadcrumbing by a Dating Partner, Perceived Social Support, and Paranoia. <em>Journal of Aggression, Maltreatment & Trauma</em>. <a href="https://www.tandfonline.com/doi/full/10.1080/10926771.2025.2555567" target="_blank" rel="noopener">tandfonline.com/doi/full/10.1080/10926771.2025.2555567</a></li>
-      <li id="ref-4">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Vulnerability to Breadcrumbing in a Sample of Adults in the United Kingdom: A Cross-Sectional Survey Study. <em>Psychological Interventions (MDPI)</em>, 7(3), 71. <a href="https://www.mdpi.com/2813-9844/7/3/71" target="_blank" rel="noopener">mdpi.com/2813-9844/7/3/71</a></li>
-      <li id="ref-5">Rodríguez-García, M. C., Márquez-Hernández, V. V., Granados-Gámez, G., Aguilera-Manrique, G. & Gutiérrez-Puertas, L. (2020). Development and Validation of Breadcrumbing in Affective-Sexual Relationships (BREAD-ASR) Questionnaire. <em>IJERPH</em>, 17(24), 9548. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7766626/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/PMC7766626</a></li>
+      <li id="ref-1">Navarro, R., Larrañaga, E., Yubero, S. & Víllora, B. (2020). Psychological Correlates of Ghosting and Breadcrumbing Experiences: A Preliminary Study among Adults. <em>International Journal of Environmental Research and Public Health</em>, 17(3), 1116. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7037474/" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-2">Khattar, V., Upadhyay, S. & Navarro, R. (2023). Attachment insecurity and breadcrumbing engagement in young adults: a cross-sectional, cross-country study in India and Spain. <em>BMC Psychology</em>, 11, 355. <a href="https://link.springer.com/article/10.1186/s40359-023-01404-y" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-3">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Breadcrumbing by a Dating Partner, Perceived Social Support, and Paranoia. <em>Journal of Aggression, Maltreatment & Trauma</em>. <a href="https://www.tandfonline.com/doi/full/10.1080/10926771.2025.2555567" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-4">Cherry, L., Leibovitz, T. L. & Bell, V. (2025). Vulnerability to Breadcrumbing in a Sample of Adults in the United Kingdom: A Cross-Sectional Survey Study. <em>Psychological Interventions (MDPI)</em>, 7(3), 71. <a href="https://www.mdpi.com/2813-9844/7/3/71" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-5">Rodríguez-García, M. C., Márquez-Hernández, V. V., Granados-Gámez, G., Aguilera-Manrique, G. & Gutiérrez-Puertas, L. (2020). Development and Validation of Breadcrumbing in Affective-Sexual Relationships (BREAD-ASR) Questionnaire. <em>IJERPH</em>, 17(24), 9548. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7766626/" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-6">Khattar, V., Upadhyay, S. & Navarro, R. (2023). Young Adults' Perception of Breadcrumbing Victimization in Dating Relationships. <em>Societies</em>, 13(2), 41. (Nitel odak grubu çalışması; 5 davranışsal temanın kaynağı.) <a href="https://www.mdpi.com/2075-4698/13/2/41" target="_blank" rel="noopener">link</a></li>
     </ol>
   </div>
 
