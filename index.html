@@ -95,40 +95,96 @@
     transform: translateY(-50%) translateX(4px);
   }
 
-  /* Red-accent variant: visible red presence with soft radial glow,
-     theme-aware (light + dark), but not as dramatic as the article hero. */
-  .article-card.card-red {
-    border-color: rgba(201, 64, 64, 0.4);
+  /* Topic-colored card variants.
+     Each card gets its own color token; styling pattern is shared.
+     Theme-aware (light + dark); subtle by design. */
+  .article-card.card-red,
+  .article-card.card-rose,
+  .article-card.card-purple,
+  .article-card.card-green,
+  .article-card.card-teal,
+  .article-card.card-sienna {
+    border-color: rgba(var(--c-rgb), 0.4);
     background:
-      radial-gradient(ellipse at 85% 100%, rgba(201, 64, 64, 0.12) 0%, transparent 55%),
-      linear-gradient(135deg, rgba(201, 64, 64, 0.03) 0%, rgba(201, 64, 64, 0.07) 100%),
+      radial-gradient(ellipse at 85% 100%, rgba(var(--c-rgb), 0.12) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(var(--c-rgb), 0.03) 0%, rgba(var(--c-rgb), 0.07) 100%),
       var(--surface);
   }
-  [data-theme="dark"] .article-card.card-red {
-    border-color: rgba(231, 76, 60, 0.45);
+  [data-theme="dark"] .article-card.card-red,
+  [data-theme="dark"] .article-card.card-rose,
+  [data-theme="dark"] .article-card.card-purple,
+  [data-theme="dark"] .article-card.card-green,
+  [data-theme="dark"] .article-card.card-teal,
+  [data-theme="dark"] .article-card.card-sienna {
+    border-color: rgba(var(--c-rgb-d), 0.45);
     background:
-      radial-gradient(ellipse at 85% 100%, rgba(231, 76, 60, 0.15) 0%, transparent 55%),
-      linear-gradient(135deg, rgba(231, 76, 60, 0.04) 0%, rgba(231, 76, 60, 0.08) 100%),
+      radial-gradient(ellipse at 85% 100%, rgba(var(--c-rgb-d), 0.15) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(var(--c-rgb-d), 0.04) 0%, rgba(var(--c-rgb-d), 0.08) 100%),
       var(--surface);
   }
-  .article-card.card-red .tag {
-    color: #c94040;
+
+  /* Per-variant color tokens (light / dark) */
+  .article-card.card-red    { --c-rgb: 201, 64, 64;  --c-rgb-d: 231, 76, 60; }
+  .article-card.card-rose   { --c-rgb: 184, 82, 110; --c-rgb-d: 212, 120, 152; }
+  .article-card.card-purple { --c-rgb: 122, 82, 168; --c-rgb-d: 178, 138, 214; }
+  .article-card.card-green  { --c-rgb: 45, 138, 94;  --c-rgb-d: 78, 203, 141; }
+  .article-card.card-teal   { --c-rgb: 44, 130, 138; --c-rgb-d: 90, 195, 200; }
+  .article-card.card-sienna { --c-rgb: 154, 90, 47;  --c-rgb-d: 196, 135, 74; }
+
+  /* Shared tag + hover behavior */
+  .article-card.card-red .tag,
+  .article-card.card-rose .tag,
+  .article-card.card-purple .tag,
+  .article-card.card-green .tag,
+  .article-card.card-teal .tag,
+  .article-card.card-sienna .tag {
+    color: rgb(var(--c-rgb));
     font-weight: 700;
   }
-  [data-theme="dark"] .article-card.card-red .tag {
-    color: #e74c3c;
-    font-weight: 700;
+  [data-theme="dark"] .article-card.card-red .tag,
+  [data-theme="dark"] .article-card.card-rose .tag,
+  [data-theme="dark"] .article-card.card-purple .tag,
+  [data-theme="dark"] .article-card.card-green .tag,
+  [data-theme="dark"] .article-card.card-teal .tag,
+  [data-theme="dark"] .article-card.card-sienna .tag {
+    color: rgb(var(--c-rgb-d));
   }
-  .article-card.card-red:hover {
-    border-color: #c94040;
-    box-shadow: 0 4px 22px rgba(201, 64, 64, 0.18);
+
+  .article-card.card-red:hover,
+  .article-card.card-rose:hover,
+  .article-card.card-purple:hover,
+  .article-card.card-green:hover,
+  .article-card.card-teal:hover,
+  .article-card.card-sienna:hover {
+    border-color: rgb(var(--c-rgb));
+    box-shadow: 0 4px 22px rgba(var(--c-rgb), 0.18);
   }
-  [data-theme="dark"] .article-card.card-red:hover {
-    border-color: #e74c3c;
-    box-shadow: 0 4px 24px rgba(231, 76, 60, 0.22);
+  [data-theme="dark"] .article-card.card-red:hover,
+  [data-theme="dark"] .article-card.card-rose:hover,
+  [data-theme="dark"] .article-card.card-purple:hover,
+  [data-theme="dark"] .article-card.card-green:hover,
+  [data-theme="dark"] .article-card.card-teal:hover,
+  [data-theme="dark"] .article-card.card-sienna:hover {
+    border-color: rgb(var(--c-rgb-d));
+    box-shadow: 0 4px 24px rgba(var(--c-rgb-d), 0.22);
   }
-  .article-card.card-red:hover .arrow { color: #c94040; }
-  [data-theme="dark"] .article-card.card-red:hover .arrow { color: #e74c3c; }
+
+  .article-card.card-red:hover .arrow,
+  .article-card.card-rose:hover .arrow,
+  .article-card.card-purple:hover .arrow,
+  .article-card.card-green:hover .arrow,
+  .article-card.card-teal:hover .arrow,
+  .article-card.card-sienna:hover .arrow {
+    color: rgb(var(--c-rgb));
+  }
+  [data-theme="dark"] .article-card.card-red:hover .arrow,
+  [data-theme="dark"] .article-card.card-rose:hover .arrow,
+  [data-theme="dark"] .article-card.card-purple:hover .arrow,
+  [data-theme="dark"] .article-card.card-green:hover .arrow,
+  [data-theme="dark"] .article-card.card-teal:hover .arrow,
+  [data-theme="dark"] .article-card.card-sienna:hover .arrow {
+    color: rgb(var(--c-rgb-d));
+  }
 </style>
 </head>
 <body>
@@ -144,21 +200,14 @@
     </div>
 
     <div class="articles">
-      <a href="the-science-of-doing-nothing-preview.html" class="article-card">
+      <a href="the-science-of-doing-nothing-preview.html" class="article-card card-teal">
         <span class="tag">Bilim & Psikoloji</span>
         <h2>Hiçbir Şey Yapmamanın Bilimi</h2>
         <p class="desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="illusion-of-control.html" class="article-card">
-        <span class="tag">Farkındalık</span>
-        <h2>Kontrol Yanılgısı & Farkındalık</h2>
-        <p class="desc">Kontrol etme ihtiyacının ardındaki yanılgılar ve farkındalık yolu.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="relationships.html" class="article-card">
+      <a href="relationships.html" class="article-card card-rose">
         <span class="tag">İlişkiler</span>
         <h2>İlişki & Evlilik Rehberi</h2>
         <p class="desc">Sağlıklı ilişkiler ve evlilik üzerine kapsamlı bir rehber.</p>
@@ -172,21 +221,21 @@
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="brain-memory-story-machine-preview.html" class="article-card">
+      <a href="brain-memory-story-machine-preview.html" class="article-card card-purple">
         <span class="tag">Nörobilim & Psikoloji</span>
         <h2>Beyin, Hafıza ve Hikâye Makinesi</h2>
         <p class="desc">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="emotional-skills-preview.html" class="article-card">
+      <a href="emotional-skills-preview.html" class="article-card card-teal">
         <span class="tag">Bilim & Psikoloji</span>
         <h2>Hayatı Yönetmek Değil, Tepkilerini Yönetmek</h2>
         <p class="desc">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="evolutionary-mismatch-body-preview.html" class="article-card">
+      <a href="evolutionary-mismatch-body-preview.html" class="article-card card-sienna">
         <span class="tag">Evrimsel Uyumsuzluk</span>
         <h2>Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
         <p class="desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
