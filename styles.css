@@ -70,11 +70,11 @@ body {
   opacity: 0.4;
 }
 
-/* --- Theme Toggle --- */
-.theme-toggle {
+/* --- Top-right Toolbar (theme + share) --- */
+.theme-toggle,
+.share-toggle {
   position: fixed;
   top: 20px;
-  right: 20px;
   z-index: 999;
   width: 40px;
   height: 40px;
@@ -89,12 +89,17 @@ body {
   padding: 0;
 }
 
-.theme-toggle:hover {
+.theme-toggle { right: 20px; }
+.share-toggle { right: 70px; }
+
+.theme-toggle:hover,
+.share-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
 
-.theme-toggle svg {
+.theme-toggle svg,
+.share-toggle svg {
   width: 18px;
   height: 18px;
 }
@@ -144,4 +149,211 @@ body {
 
 .home-logo:hover .logo-text {
   color: var(--accent);
+}
+
+/* --- Share Modal --- */
+.share-open { overflow: hidden; }
+
+.share-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.share-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+[data-theme="dark"] .share-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.share-modal.is-open .share-backdrop {
+  opacity: 1;
+}
+
+.share-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  transform: translateY(8px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.share-modal.is-open .share-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.share-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.share-close:hover { color: var(--accent); }
+.share-close svg { width: 16px; height: 16px; }
+
+.share-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0 0 6px;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.share-page-title {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0 0 18px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.share-url-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.share-url {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+
+.share-url:focus { border-color: var(--accent); }
+
+.share-copy {
+  padding: 10px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.share-copy:hover { opacity: 0.9; }
+
+.share-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.share-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+}
+
+.share-action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.share-action svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.share-action[data-action="native"] { grid-column: 1 / -1; }
+
+.share-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--divider);
+  margin-top: 4px;
+}
+
+.share-qr-frame {
+  width: 220px;
+  height: 220px;
+  padding: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-qr-frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.share-qr-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 12px 0 0;
+  letter-spacing: 0.3px;
+}
+
+.share-status {
+  font-size: 12px;
+  color: var(--accent);
+  text-align: center;
+  margin: 8px 0 0;
+  min-height: 16px;
+}
+
+@media (max-width: 480px) {
+  .share-panel { padding: 24px 18px 18px; }
+  .share-actions { grid-template-columns: 1fr; }
+  .share-qr-frame { width: 200px; height: 200px; }
 }
