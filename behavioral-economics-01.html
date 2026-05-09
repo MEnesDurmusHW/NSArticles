@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homo Economicus: Ekonominin Hayal Ettiği İnsan</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 35%, var(--accent-glow) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.12;
+    max-width: 880px;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-top: 1.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.85s forwards;
+  }
+  .hero-byline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+  .hero-wip {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px dashed var(--accent);
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ARTICLE */
+  .article {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5rem 2rem 0.5rem;
+  }
+
+  .section { margin-bottom: 3.5rem; }
+  .article > .section:last-child { margin-bottom: 0; }
+  .article .prompt:last-child { margin-bottom: 0; }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2.05rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.005em;
+  }
+
+  .article p {
+    margin-bottom: 1.4rem;
+    font-size: 1.06rem;
+    color: var(--text);
+    text-align: justify;
+  }
+  .post-quiz p {
+    margin-bottom: 1.4rem;
+    font-size: 1.06rem;
+    color: var(--text);
+    text-align: justify;
+  }
+
+  .article p em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .lede {
+    font-size: 1.15rem !important;
+    line-height: 1.7;
+  }
+
+  /* PROMPT — small inline command-line vibe */
+  .prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+    padding: 0.9rem 1.2rem;
+    margin: 2rem 0 0;
+    border-radius: 2px;
+  }
+
+  /* PROPS LIST — the homo economicus traits */
+  .traits {
+    margin: 1.8rem 0 2rem;
+    border-top: 1px solid var(--divider);
+  }
+  .trait {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--divider);
+    align-items: baseline;
+  }
+  .trait-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .trait-text {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  @media (max-width: 600px) {
+    .trait { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+
+  /* QUIZ INTRO */
+  .quiz-intro {
+    max-width: 720px;
+    margin: 1.5rem auto 1rem;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .quiz-intro .quiz-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .quiz-intro p {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* QUIZ STACK */
+  .quiz-stack {
+    max-width: 720px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem 2rem 1.8rem;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .quiz-card.answered {
+    border-color: var(--accent);
+    box-shadow: 0 1px 0 var(--accent-glow), 0 8px 32px -16px var(--accent-glow);
+  }
+
+  .quiz-card .quiz-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .quiz-card .quiz-q {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .scenario-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 1.4rem 0 0.7rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--divider);
+  }
+  .scenario-label:first-of-type { border-top: none; padding-top: 0; margin-top: 0.2rem; }
+  .scenario-prompt {
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    width: 100%;
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .option-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .option-btn .opt-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .option-btn.selected {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .option-btn.selected .opt-letter {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .reveal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+  }
+  .reveal.show {
+    max-height: 1000px;
+    opacity: 1;
+    margin-top: 1.4rem;
+  }
+  .reveal-inner {
+    border-top: 1px solid var(--divider);
+    padding-top: 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .reveal-inner strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* CONTINUATION after quiz */
+  .post-quiz {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+
+  .section-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3rem auto;
+  }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
+  }
+
+  .wip-banner {
+    max-width: 560px;
+    margin: 2.5rem auto 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px dashed var(--divider);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .wip-banner strong {
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Side-note callout — for off-narrative / research caveats */
+  .side-note {
+    margin: 1.8rem 0 2rem;
+    padding: 1.2rem 1.4rem 1.1rem;
+    background: var(--accent-glow);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+  .side-note .note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.55rem;
+  }
+  .side-note p {
+    margin: 0 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.7;
+    color: var(--text);
+    text-align: left !important;
+  }
+  .side-note p + p { margin-top: 0.7rem !important; }
+
+  /* Skip-section button — for deep-dive sections */
+  .skip-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 2rem;
+    padding: 0.85rem 1.1rem;
+    background: transparent;
+    border: 1px dashed var(--divider);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+  }
+  .skip-section:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    background: var(--accent-glow);
+  }
+  .skip-section .skip-label {
+    flex: 1;
+  }
+  .skip-section .skip-label strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-weight: 500;
+  }
+  .skip-section .skip-arrow {
+    font-size: 1.1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+  .skip-section:hover .skip-arrow {
+    transform: translateX(4px);
+  }
+
+  /* References — inline */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+
+  /* REFERENCES */
+  .ref-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references li em { font-style: italic; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+  ol.references li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* FAB back-to-text */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; min-height: 88vh; }
+    .article { padding: 3.5rem 1.5rem 2rem; }
+    .quiz-card { padding: 1.6rem 1.4rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
+    .hero-sub { font-size: 0.98rem; }
+    .article p { font-size: 1rem; }
+    .lede { font-size: 1.05rem !important; }
+    .quiz-card .quiz-q { font-size: 1.05rem; }
+    .scenario-prompt { font-size: 0.98rem; }
+    .option-btn { font-size: 0.92rem; padding: 0.75rem 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Davranışsal Ekonomi · Seri</div>
+    <h1>Ekonominin sana dair varsaydığı insan, <em>sen değilsin.</em></h1>
+    <p class="hero-sub">İki yüzyıllık bir kurguyu beş soruyla çürütmek.</p>
+    <div class="hero-byline">M. Enes Durmuş</div>
+    <div class="hero-wip">Devam ediyor</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <article class="article">
+
+    <div class="section" id="s01">
+      <div class="section-num">01 · Giriş</div>
+      <h2>Ekonominin insanı nasıl hayal ettiği</h2>
+
+      <p class="lede">Bir an için durup şu soruyu kendine sor. Bugüne kadar verdiğin kararlardan hangileri tamamen rasyoneldi? Hangi kararını verirken tüm seçenekleri masaya yatırıp her birinin maliyetini, faydasını, olasılığını matematiksel bir hesapla karşılaştırdın? Sonra hangi kararından sonra "keşke o anki dürtüyle değil de soğukkanlılıkla düşünseydim" dedin?</p>
+
+      <p>Bu sorulara dürüst cevap verdiğinde ortaya çıkan tablo, klasik ekonominin sana dair varsayımlarıyla pek örtüşmüyor. Çünkü o varsayımlara göre sen, önüne çıkan her seçimde piyasadaki tüm alternatifleri inceleyen, her birinin getireceği faydayı bütçenle karşılaştıran, fırsat maliyetlerini hesaplayan ve faydanı maksimize eden seçeneği bulan bir varlıksın. İçtiğin her kahveyi, aldığın her aboneliği, harcadığın her saati optimize ediyorsun. Plan yaptığında planına uyuyorsun. Bugün vereceğin söz, yarın da geçerli kalıyor. Geçen yıl tasarruf etmeye karar vermiştin, o yüzden bugün hâlâ tasarruf ediyorsun.</p>
+
+      <p>Hiç kimse böyle yaşamıyor. Ama yaklaşık 200 yıldır ekonomi biliminin temel insan modeli tam olarak buydu <a href="#ref-1" class="ref" onclick="savePos(this)">1</a>.</p>
+
+      <p>İddialı bir cümle, biliyorum. O zaman bunu ispatlamak yerine sana göstereyim.</p>
+
+      <div class="prompt">
+        &gt; Aşağıda beş basit soru var. Her birine cevap ver, sonra altındaki açıklamayı oku.
+      </div>
+    </div>
+
+  </article>
+
+  <!-- QUIZ INTRO -->
+  <div class="quiz-intro">
+    <span class="quiz-tag">Mini Test · 5 Soru</span>
+    <p>Sezgisel olarak cevapla. Doğru ya da yanlış yok; ne yaptığını fark etmek var.</p>
+  </div>
+
+  <!-- QUIZ STACK -->
+  <div class="quiz-stack">
+
+    <!-- Q1 -->
+    <div class="quiz-card" data-quiz="single">
+      <div class="quiz-num">SORU 01</div>
+      <div class="quiz-q">İki seçenek var. Hangisini seçersin?</div>
+      <div class="options">
+        <button class="option-btn" data-q="1"><span class="opt-letter">A</span><span>Kesin 800 TL kazanmak</span></button>
+        <button class="option-btn" data-q="1"><span class="opt-letter">B</span><span>%85 ihtimalle 1000 TL kazanmak (%15 ihtimalle hiçbir şey kazanmamak)</span></button>
+      </div>
+      <div class="reveal" id="r1">
+        <div class="reveal-inner">
+          Matematiksel olarak <strong>B seçeneğinin beklenen değeri 850 TL</strong>, A'dan 50 TL daha fazla. Rasyonel bir karar verici B'yi seçer. Ama insanların büyük çoğunluğu A'yı seçer. Buna <strong>kesinlik etkisi</strong> deniyor. Riskten kaçmak için para bırakıyoruz <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-card" data-quiz="single">
+      <div class="quiz-num">SORU 02</div>
+      <div class="quiz-q">İki seçenek var. Hangisini seçersin?</div>
+      <div class="options">
+        <button class="option-btn" data-q="2"><span class="opt-letter">A</span><span>Kesin 800 TL kaybetmek</span></button>
+        <button class="option-btn" data-q="2"><span class="opt-letter">B</span><span>%85 ihtimalle 1000 TL kaybetmek (%15 ihtimalle hiçbir şey kaybetmemek)</span></button>
+      </div>
+      <div class="reveal" id="r2">
+        <div class="reveal-inner">
+          Şimdi ilginç bir şey oluyor. Aynı insanların büyük çoğunluğu bu sefer <strong>B</strong>'yi seçer. Yani kazanç söz konusuysa kesin olanı, kayıp söz konusuysa kumarı tercih ediyoruz. Aynı kişi, aynı oran, aynı miktarlar. Rasyonel bir karar vericinin tutarlı davranması beklenir. Burada ise tercih, sonucun "kazanç" mı yoksa "kayıp" diye sunulduğuna göre tamamen tersine dönüyor <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-card" data-quiz="dual">
+      <div class="quiz-num">SORU 03</div>
+      <div class="quiz-q">İki senaryo. İkisine de cevap ver.</div>
+
+      <div class="scenario-label">Senaryo A · Tişört</div>
+      <p class="scenario-prompt">Yeni bir tişört almak için dükkana gittin. Tişört 500 TL. Tam ödeme yapacakken biri sana 15 dakika uzaktaki bir dükkanda aynı tişörtün 350 TL olduğunu söylüyor. 150 TL tasarruf etmek için o dükkana gider misin?</p>
+      <div class="options">
+        <button class="option-btn" data-q="3a"><span class="opt-letter">A</span><span>Evet, giderim</span></button>
+        <button class="option-btn" data-q="3a"><span class="opt-letter">B</span><span>Hayır, gitmem</span></button>
+      </div>
+
+      <div class="scenario-label">Senaryo B · Laptop</div>
+      <p class="scenario-prompt">Yeni bir laptop almak için dükkana gittin. Laptop 105.000 TL. Tam ödeme yapacakken biri sana 15 dakika uzaktaki bir dükkanda aynı laptopın 104.850 TL olduğunu söylüyor. 150 TL tasarruf etmek için o dükkana gider misin?</p>
+      <div class="options">
+        <button class="option-btn" data-q="3b"><span class="opt-letter">A</span><span>Evet, giderim</span></button>
+        <button class="option-btn" data-q="3b"><span class="opt-letter">B</span><span>Hayır, gitmem</span></button>
+      </div>
+
+      <div class="reveal" id="r3">
+        <div class="reveal-inner">
+          İki senaryoda da kazanç aynı: <strong>15 dakika karşılığında 150 TL</strong>. Rasyonel bir karar verici iki senaryoda da aynı cevabı vermeli. Ama insanların çoğu tişörtte gider, laptopta gitmez. Çünkü 150 TL'yi mutlak değer olarak değil, oran olarak değerlendiriyoruz. 500 TL'nin yanında 150 TL büyük, 105.000 TL'nin yanında küçük. Halbuki cebinden çıkan para tam olarak aynı <a href="#ref-12" class="ref" onclick="savePos(this)">12</a>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-card" data-quiz="dual">
+      <div class="quiz-num">SORU 04</div>
+      <div class="quiz-q">İki senaryo. İkisine de cevap ver.</div>
+
+      <div class="scenario-label">Senaryo A · Kayıp Bilet</div>
+      <p class="scenario-prompt">Sinemaya gittin. 200 TL'lik biletini gişede aldın. Salona girerken biletini kaybettiğini fark ettin. Yine 200 TL ödeyip yeni bilet alır mısın?</p>
+      <div class="options">
+        <button class="option-btn" data-q="4a"><span class="opt-letter">A</span><span>Evet, alırım</span></button>
+        <button class="option-btn" data-q="4a"><span class="opt-letter">B</span><span>Hayır, almam</span></button>
+      </div>
+
+      <div class="scenario-label">Senaryo B · Kayıp Nakit</div>
+      <p class="scenario-prompt">Sinemaya gittin. Biletini henüz almadın. Gişeye yaklaşırken cebinden 200 TL nakit kaybettiğini fark ettin. Yine de bilet alıp filmi izler misin?</p>
+      <div class="options">
+        <button class="option-btn" data-q="4b"><span class="opt-letter">A</span><span>Evet, alırım</span></button>
+        <button class="option-btn" data-q="4b"><span class="opt-letter">B</span><span>Hayır, almam</span></button>
+      </div>
+
+      <div class="reveal" id="r4">
+        <div class="reveal-inner">
+          İki senaryoda da kayıp aynı: <strong>200 TL</strong>. Ekonomik olarak hiçbir fark yok. Ama insanların çoğu bileti kaybettiyse vazgeçer, nakdi kaybettiyse bilet alır. Çünkü zihnimizde "sinema bütçesi" diye bir hesap var. Bilet kaybedildiğinde "iki kere bilet ödemek" gibi geliyor, nakit kaybedildiğinde ise sinema bütçesinden hâlâ ödeme yapılmamış sayılıyor. Aynı para, farklı cüzdanlar <a href="#ref-12" class="ref" onclick="savePos(this)">12</a>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="quiz-card" data-quiz="single">
+      <div class="quiz-num">SORU 05</div>
+      <div class="quiz-q">İki seçenek var. Hangisini seçersin?</div>
+      <div class="options">
+        <button class="option-btn" data-q="5"><span class="opt-letter">A</span><span>%80 ihtimalle 100 TL kazanmak (%20 ihtimalle hiçbir şey kazanmamak)</span></button>
+        <button class="option-btn" data-q="5"><span class="opt-letter">B</span><span>%25 ihtimalle 400 TL kazanmak (%75 ihtimalle hiçbir şey kazanmamak)</span></button>
+      </div>
+      <div class="reveal" id="r5">
+        <div class="reveal-inner">
+          İnsanların çoğu A'yı seçer, çünkü "kazanma ihtimalim çok yüksek" diye düşünür. Ama matematiksel olarak <strong>B daha iyi</strong>. A'nın beklenen değeri 80 TL (0.80 × 100), B'nin beklenen değeri 100 TL (0.25 × 400). Hesap yapmak için iki saniye duraklasak farkı görürdük, ama duraklamayız. Yüksek olasılığa kafamız öyle takılır ki, miktarın da hesabın bir parçası olduğunu unuturuz <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- POST-QUIZ -->
+  <article class="post-quiz">
+
+    <p>Bu beşi, davranışsal ekonominin temel bulgularından sadece birkaçı. Daha onlarcası var. Hepsinin ortak noktası şu: aynı insan, aynı durumda, sadece sorunun nasıl sunulduğuna göre tamamen farklı kararlar veriyor. Klasik ekonominin "tutarlı tercihli, rasyonel optimize edici" insanı bu testleri geçemez.</p>
+
+    <p>Peki o zaman ekonomi biliminin yaklaşık iki yüzyıldır temel aldığı bu insan modeli ne işe yarıyordu? Bu modelin adı <em>homo economicus</em>, yani "ekonomik insan". Kavramın temellerini John Stuart Mill 1836'da bir makalesinde atmıştı <a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Mill'e göre ekonomi bilimi, insanı tüm karmaşıklığıyla incelemez. Sadece servet biriktirme arzusuyla hareket eden, bu arzunun karşısına çıkan engelleri rasyonel olarak hesaplayan soyut bir varlığı inceler. Mill bunun bir kurgu olduğunu açıkça söylüyordu, bilimi yapılabilir kılmak için kabul edilen bir basitleştirme. Yaklaşık yüz yıl boyunca neoklasik ekonomistler bu kurguyu matematiksel modellerin merkezine oturttular ve 20. yüzyılda Lionel Robbins'in eliyle iyice formalize ettiler <a href="#ref-1" class="ref" onclick="savePos(this)">1</a> <a href="#ref-3" class="ref" onclick="savePos(this)">3</a>. Ekonomik insan artık şu özelliklere sahip varsayılıyordu:</p>
+
+    <div class="traits">
+      <div class="trait">
+        <div class="trait-label">Tam bilgili</div>
+        <div class="trait-text">Karşı karşıya olduğu tüm seçenekleri ve bu seçeneklerin tüm sonuçlarını biliyor.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-label">Tutarlı</div>
+        <div class="trait-text">Eğer A'yı B'ye, B'yi C'ye tercih ediyorsa, A'yı C'ye de tercih eder. Tercihleri zaman içinde değişmez, bağlama göre kaymaz.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-label">Sınırsız hesap</div>
+        <div class="trait-text">Karmaşık olasılıkları, geleceğin bugünkü değerini, çok değişkenli denklemleri zihninde anında çözebiliyor.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-label">Sınırsız irade</div>
+        <div class="trait-text">Plan yaptığında planına uyar. Bugün diyetteyse yarın da diyettedir.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-label">Dar bencillik</div>
+        <div class="trait-text">Kendi faydasını maksimize eder. Başkalarının faydası ancak kendi faydasını etkilediği ölçüde önemlidir.</div>
+      </div>
+    </div>
+
+    <p>Bu varsayımlar bir araya geldiğinde ortaya hem matematiksel olarak çok zarif hem de gerçek insanla neredeyse hiç ilişkisi olmayan bir model çıkıyor <a href="#ref-1" class="ref" onclick="savePos(this)">1</a>. Modelin gücü, denklemlerle çalışılabilir olmasıydı. Ekonomistler bu varsayımlar sayesinde piyasaların nasıl dengeye geldiğini, fiyatların nasıl oluştuğunu, refahın nasıl maksimize edileceğini formel olarak gösterebiliyordu. Tüketici tercihi teorisi, firma teorisi, endüstriyel organizasyon, refah teoremleri. Neoklasik ekonominin tüm temel direkleri bu rasyonel optimizasyon şemasının üzerine kuruluydu <a href="#ref-1" class="ref" onclick="savePos(this)">1</a>.</p>
+
+    <p>Bu basitleştirmenin bedeli oldu, çünkü bedava değildi. Ekonomi, zarif modellerini kurarken gerçek insandan vazgeçmişti. Tasarruf edemeyen, kötü ilişkiden çıkamayan, indirim diye ihtiyacı olmayan şeyleri alan, sigara bırakacağına yemin edip pazartesi sabah yine yakan, emekliliği için bir lira biriktirmemişken yeni telefon almak için kredi çeken insan modelin dışında kalıyordu. Daha doğrusu, bu insan "irrasyonel" diye bir kenara konuyor, modellerin açıklayamadığı bu davranışlar "anomali" olarak etiketleniyordu.</p>
+
+    <p>Ama bir anomali ne kadar yaygınlaşırsa, "anomali" kelimesi o kadar anlamını kaybeder. 20. yüzyılın ortalarına gelindiğinde, modellerin açıklayamadığı bu davranışların aslında istisna değil, kural olduğu giderek daha açık hâle geldi. Ve ilk ciddi çatlak, beklenmedik bir yerden geldi. Bir psikolog olarak değil, ekonomist olarak çalışan ve modelin temel varsayımlarına içeriden saldıran bir adamdan, Herbert Simon'dan.</p>
+
+    <div class="section-divider"></div>
+
+    <div class="section" id="s02">
+      <div class="section-num">02 · Çatlağın Başlangıcı</div>
+      <h2>Herbert Simon ve sınırlı rasyonalite</h2>
+
+      <a href="#s03" class="skip-section">
+        <span class="skip-label"><strong>Meraklısına</strong>Bu bölüm Simon'un hikayesi ve akademik temeller. Genel akış sana yetiyorsa bir sonraki bölüme geç.</span>
+        <span class="skip-arrow">&rarr;</span>
+      </a>
+
+      <p>İlk büyük itiraz, beklenmedik bir yerden geldi. Bir psikologdan değil, eleştirilen geleneğin tam içinden çalışan bir ekonomistten. Herbert Simon, ekonomi, siyaset bilimi, bilişsel psikoloji ve yapay zeka gibi farklı alanlarda çalışan, tek bir disipline sığmayan bir akademisyendi <a href="#ref-9" class="ref" onclick="savePos(this)">9</a>. Belediyelerde ve şirketlerde insanların nasıl çalıştığını birinci elden inceledi. Fark ettiği şey basit ama yıkıcıydı: gerçek hayatta hiçbir yönetici, hiçbir çalışan, hiçbir tüketici klasik ekonominin varsaydığı şekilde karar vermiyordu.</p>
+
+      <p>Yöneticiler tüm seçenekleri masaya yatırıp her birini değerlendirip optimum olanı seçmiyordu. Buna ne zamanları yetiyordu, ne dikkatleri, ne hafızaları, ne hesap güçleri. Onun yerine seçenekleri sırayla değerlendiriyor, "yeterince iyi" gözüken birini bulduklarında orada duruyor ve onu seçiyorlardı. Daha iyisi olabilirdi belki, ama daha iyiyi aramak başlı başına maliyetliydi <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>.</p>
+
+      <p>Simon bu davranışa bir isim verdi. İngilizce <em>satisfy</em> (tatmin etmek) ve <em>suffice</em> (yeterli olmak) kelimelerini birleştirip <em>satisficing</em> sözcüğünü türetti <a href="#ref-5" class="ref" onclick="savePos(this)">5</a> <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>. Türkçeye çevirmek kolay değil ama yaklaşık olarak "yeterleme" diyebiliriz. İnsan optimize etmiyor, yeterliyordu. Mükemmeli aramıyor, yeterince iyiyi buluyor ve duruyordu.</p>
+
+      <p>Simon bu kavramı 1955'te yayımladığı bir makalede formalize etti ve daha geniş bir teoriye bağladı: <em>bounded rationality</em>, yani sınırlı rasyonalite <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>. İnsan rasyonel olmaya çalışıyordu, ama rasyonalitesi sınırlıydı. Sınırlı çünkü dikkati sınırlı, hafızası sınırlı, hesap gücü sınırlı, zamanı sınırlı, sahip olduğu bilgi sınırlıydı.</p>
+
+      <p>Kavramın gücü, klasik ekonomiyi tamamen reddetmemesinde yatıyordu. Simon insanların irrasyonel olduğunu söylemiyordu. Aksine, içinde bulundukları sınırlar göz önüne alındığında insanların oldukça rasyonel davrandıklarını söylüyordu. Sorun insanlarda değil, ekonomik modelin onlardan beklediği imkansız hesaplama yükündeydi <a href="#ref-6" class="ref" onclick="savePos(this)">6</a> <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>.</p>
+
+      <p>Simon 1978'de Nobel Ekonomi Ödülü'nü kazandı <a href="#ref-6" class="ref" onclick="savePos(this)">6</a>. Saldırısı içeriden olduğu için özellikle güçlüydü. Bir psikolog "ekonomik insan saçma bir kurgu" deseydi, ekonomistler bunu disiplinin dışından gelen bir eleştiri olarak savuşturabilirdi. Ama Simon bir ekonomistti, hem de Nobel ödüllü bir ekonomist. Onu görmezden gelmek mümkün değildi.</p>
+
+      <p>Yine de Simon'un fikirleri ana akım ekonomi tarafından tam olarak benimsenmedi. Sınırlı rasyonalite teorisi, klasik rasyonalite teorisi kadar matematiksel olarak temiz modeller üretmiyordu <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>. Ekonomistlerin çoğu zarif modellerini bırakmaya niyetli değildi. Çatlak açılmıştı, ama duvar henüz yıkılmamıştı. Yıkıcı darbeyi vurmak için iki İsrailli psikoloğun gelmesi gerekiyordu.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section" id="s03">
+      <div class="section-num">03 · Devrim</div>
+      <h2>Kahneman, Tversky ve Prospect Theory</h2>
+
+      <a href="#s04" class="skip-section">
+        <span class="skip-label"><strong>Meraklısına</strong>Bu bölüm Prospect Theory'nin doğuşu ve akademik tarih. Detaya girmek istemiyorsan bir sonraki bölüme geç.</span>
+        <span class="skip-arrow">&rarr;</span>
+      </a>
+
+      <p>İkili 1969'da Kudüs'te tanıştı. Daniel Kahneman ve Amos Tversky, ikisi de İbrani Üniversitesi'nde psikoloji çalışıyordu <a href="#ref-15" class="ref" onclick="savePos(this)">15</a>. Karakterleri tamamen zıttı. Kahneman içine kapanık, kuşkucu, kendi fikirlerini sürekli sorgulayan biri. Tversky dışa dönük, kendine güvenen, hızlı düşünen biri. Ama bir araya geldiklerinde, sonraki on yıllarca davranış bilimini şekillendirecek bir ortaklık doğdu. Birbirlerinin ofislerinde saatlerce tartıştılar, fikirleri birlikte ürettiler, makaleleri öyle iç içe yazdılar ki hangi cümlenin kimden geldiğini sonradan kendileri bile söyleyemiyordu <a href="#ref-15" class="ref" onclick="savePos(this)">15</a>.</p>
+
+      <p>İkilinin yaklaşımı Simon'dan farklıydı. Simon insanların sınırlı rasyonel olduğunu söyledi ama bu sınırların <em>nasıl</em> işlediğini sistematik olarak göstermedi. Kahneman ve Tversky tam da bunu yaptılar. İnsan zihninin nasıl ve hangi yönlerde sistematik olarak yanıldığını ortaya koymak için onlarca deney tasarladılar. Sundukları bir cümleyle, bir sayıyla, bir kelimeyle insanların kararlarını öngörülebilir biçimde değiştirebileceklerini gösterdiler <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>.</p>
+
+      <p>İlk büyük çıkışlarını 1974'te <em>Science</em> dergisinde yayımladıkları "Judgment Under Uncertainty: Heuristics and Biases" (Belirsizlik Altında Yargı: Sezgisel Yöntemler ve Önyargılar) makalesiyle yaptılar <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>. Makale, insanların belirsiz durumlarda kararlarını üç temel kestirme yöntemle aldığını öne sürüyordu. <em>Temsililik</em> (representativeness): bir olayın olasılığını, ait olduğu kategoriye ne kadar benzediğine göre değerlendirme. <em>Bulunabilirlik</em> (availability): bir olayın olasılığını, aklımıza ne kadar çabuk geldiğine göre değerlendirme. <em>Çıpalama</em> (anchoring): bir tahmin yaparken önce duyduğumuz bir sayıdan etkilenip ona yakın bir cevap verme. Bu üç heuristic genelde işe yarıyordu, ama belirli durumlarda sistematik ve öngörülebilir hatalara yol açıyordu <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>.</p>
+
+      <p>Bu makale tek başına bile alanı dönüştürebilirdi. Ama asıl bomba beş yıl sonra patladı. 1979'da Kahneman ve Tversky, <em>Econometrica</em> dergisinde "Prospect Theory: An Analysis of Decision under Risk" (Beklenti Teorisi: Risk Altında Karar Analizi) başlıklı makaleyi yayımladılar <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>. Makale, klasik ekonominin risk altındaki kararları açıklamak için kullandığı Beklenen Fayda Teorisi'nin tutarlı bir şekilde gerçeği yakalayamadığını gösteriyor ve yerine yeni bir model öneriyordu.</p>
+
+      <p>Bu modelin temel iddiası şuydu: insanlar kararlarını mutlak servet düzeyine göre değil, bir <em>referans noktasına</em> göre veriyorlar. Yani bin lira kazanmak ile bin lira kaybetmek aynı büyüklükte iki olay değil. Kayıp, eşit miktardaki kazançtan yaklaşık iki kat daha ağır basıyor. Buna <em>kayıp kaçınması</em> (loss aversion) deniyor <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>. Ek olarak insanlar küçük olasılıkları olduğundan büyük, büyük olasılıkları olduğundan küçük gibi algılıyorlar. Kazanç bölgesinde riskten kaçıyor, kayıp bölgesinde riske atılıyorlar <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>. Bölüm 1'deki birinci ve ikinci sorularda gördüğün davranışlar, tam olarak Prospect Theory'nin tahmin ettiği şey.</p>
+
+      <div class="side-note">
+        <div class="note-label">Etkinin Ölçeği</div>
+        <p><em>Econometrica</em>, ekonomi dünyasının en prestijli dergilerinden biri. 1979 makalesi, derginin tarihinde en çok atıf alan makale haline geldi. Daha çarpıcısı, herhangi bir ekonomi dergisinde yayımlanmış herhangi bir makaleden daha fazla atıf aldı. 9.000'i aşan akademik atıfla, davranışsal ekonominin kurucu metni sayılıyor <a href="#ref-14" class="ref" onclick="savePos(this)">14</a>.</p>
+      </div>
+
+      <p>İkili sonraki yıllarda işlerini geliştirmeye devam etti. Çerçeveleme etkilerini gösterdiler. Klasik deneylerinde insanlara şu senaryoyu sundular: 600 kişiyi öldürmesi beklenen bir salgın hastalık var, iki müdahale seçeneği bulunuyor. Birinci formülasyonda seçenekler şöyle sunuldu: A programı seçilirse 200 kişi kurtulur. B programı seçilirse 1/3 ihtimalle 600 kişi de kurtulur, 2/3 ihtimalle kimse kurtulmaz. İnsanların büyük çoğunluğu A'yı seçti, kesin kazancı yeğledi. Sonra aynı senaryo başka bir gruba farklı kelimelerle sunuldu: C programı seçilirse 400 kişi ölür. D programı seçilirse 1/3 ihtimalle kimse ölmez, 2/3 ihtimalle 600 kişi ölür. Bu sefer çoğunluk D'yi seçti, kumarı yeğledi. Oysa A ile C tıpatıp aynı sonuç, B ile D de tıpatıp aynı sonuç. Sadece "kurtulan" kelimesi yerine "ölen" kelimesi kullanılınca insanların tercihleri tersine döndü. Sayılar değişmedi, sonuçlar değişmedi, sadece çerçeve değişti <a href="#ref-12" class="ref" onclick="savePos(this)">12</a>.</p>
+
+      <p>Zihinsel muhasebeyi araştırdılar: insanlar parayı tek bir havuz olarak değil, birbirinden ayrı zihinsel hesaplara bölerek kullanıyordu. Bölüm 1'in dördüncü sorusu (kayıp bilet vs kayıp nakit) bu fenomeni gösteriyor.</p>
+
+      <p>Tversky 1996'da, henüz 59 yaşındayken cilt kanserinden öldü <a href="#ref-15" class="ref" onclick="savePos(this)">15</a>. Kahneman 2002'de Nobel Ekonomi Ödülü'nü kazandı <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>. Nobel komitesi açıklamasında "psikolojik araştırmalardan içgörüleri ekonomik bilime entegre etmesi, özellikle belirsizlik altında insan yargısı ve karar verme alanında" diyerek ödülün gerekçesini açıkladı <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>. Tversky hayatta olsaydı ödülü onunla paylaşacaktı; Nobel kuralı ödülün ölmüş kişilere verilmesini engelliyor. Kahneman ödül konuşmasında çalışmanın ortak olduğunu defalarca vurguladı <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>.</p>
+
+      <p>Kahneman ve Tversky'nin yaptığı şey, Simon'un başlattığı çatlağı tam bir yıkıma çevirdi. Çünkü Simon "insanlar optimum karar veremez" demişti. Kahneman ve Tversky bunu somutlaştırdı: insanlar şu spesifik durumlarda, şu spesifik şekillerde, şu büyüklükteki etkilerle yanılıyor. Belirsizlik somut delil oldu. Anomali kataloğu büyüdükçe büyüdü, ana akım ekonomi artık görmezden gelemeyeceği bir kanıt yığınıyla karşı karşıyaydı.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section" id="s04">
+      <div class="section-num">04 · İki Sistem</div>
+      <h2>Sistem 1 ve Sistem 2: beyin nasıl karar veriyor</h2>
+
+      <p>Kahneman 2011'de yayımladığı <em>Thinking, Fast and Slow</em> (Hızlı ve Yavaş Düşünme) kitabıyla, on yıllarca süren araştırmasını tek bir çerçeveye topladı. Bu çerçeve, davranışsal ekonomiyi sadece akademisyenlerin değil, milyonlarca okurun anladığı bir şey haline getirdi. Ana fikri sadeydi: zihnimiz iki farklı modda çalışıyor. Kahneman bunlara <em>Sistem 1</em> ve <em>Sistem 2</em> dedi <a href="#ref-17" class="ref" onclick="savePos(this)">17</a>.</p>
+
+      <p>Sistem 1 hızlıdır. Otomatik çalışır. Çaba istemez, neredeyse fark etmeden devreye girer. Bir yüzü tanıdığında, "2 + 2 = ?" sorusunu okuduğunda, biri sana doğru top fırlattığında, eğri çizilmiş bir resmi gördüğünde Sistem 1 çalışıyor. Sezgilerin, ilk izlenimlerin, refleksif yargıların kaynağı burası. Sürekli açık. Yorulmaz. Ama hata da yapar, çünkü kestirme yollar kullanır. Sistem 1 dünyanın bir modelini sürekli ve hızlıca üretir, ancak bu model gerçeğin yaklaşık bir versiyonu, kaba bir özetidir.</p>
+
+      <p>Sistem 2 yavaştır. Çabalı çalışır. Dikkat ister, enerji harcar. Bir matematik problemini çözerken, yeni bir adres ezberlerken, kalabalık bir partide bir sesi takip ederken, vergi beyannamesini doldururken Sistem 2 devrededir. Kontrollü, analitik, mantıklı düşünmenin kaynağı burası. Ama Sistem 2 tembeldir. Çağrılmazsa kendiliğinden devreye girmez. Ve devreye girdiğinde de hızla yorulur, kaynaklarını koruma eğilimindedir.</p>
+
+      <p>Sistem 1 ve Sistem 2 arasındaki ilişki şöyle işliyor: Sistem 1 sürekli olarak öneriler üretir, hisler, sezgiler, niyetler. Eğer Sistem 2 bu önerileri onaylarsa, hisler inanca, sezgiler eyleme dönüşür. Çoğu zaman Sistem 2, Sistem 1'in önerilerini sorgulamadan kabul eder. Sadece bir şeyler ters gittiğinde, Sistem 1'in beceremediği bir hesap karşına çıktığında devreye girer. Sonuç: günlük hayatımızın büyük kısmında kararlarımızı aslında Sistem 1 veriyor, biz Sistem 2'nin verdiğini sanıyoruz.</p>
+
+      <p>Bu çerçevenin gücü, davranışsal ekonominin tüm bulgularını tek bir mekanizmaya bağlayabilmesinde. Çıpalama etkisi neden oluyor? Çünkü duyduğumuz ilk sayı Sistem 1 tarafından otomatik olarak çıpa olarak alınıyor, Sistem 2 sonradan ondan uzaklaşmaya çalışıyor ama yeterince uzaklaşamıyor. Çerçeveleme etkisi neden oluyor? Çünkü Sistem 1 bir ifadenin "kazanç" mı "kayıp" mı çerçevesinde sunulduğuna anında tepki veriyor, Sistem 2 bu çerçevenin yüzeysel olduğunu anlamadan karar veriyoruz. Bölüm 1'deki beşinci sorudaki olasılık hatası neden oluyor? Çünkü Sistem 1 büyük yüzdeyi görüp "kazanma şansım yüksek" diye otomatik tepki veriyor, Sistem 2 hesap yapmak için duraklamıyor.</p>
+
+      <div class="side-note">
+        <div class="note-label">Küçük bir not</div>
+        <p>Sistem 1 / Sistem 2 ayrımı pedagojik olarak çok başarılı, ama mecazi bir çerçeve. Beyinde gerçekten "Sistem 1" diye bir bölge ya da "Sistem 2" diye ayrı bir devre yok. Kahneman bunu kitabında zaten açıkça belirtiyor: bu sistemler "karakter" ya da "ajan" değil, davranışsal kalıplara verilen kullanışlı isimler. Yani gerçek bir bölünme değil, faydalı bir metafor.</p>
+      </div>
+
+      <p>Bu metaforun neden bu kadar gerçekçi hissettirdiğini anlamak için ise daha derin bir soruya inmek gerekiyor: Sistem 1 dediğimiz şey neden var?</p>
+
+      <p>Cevap evrimde yatıyor. Atalarımızın yaşadığı dünyayı düşün. Bir ses duyuyorsun çalılıkların arkasından. Eğer rüzgardan duyduğun bu sesi "olasılıksal değerlendirme yapıp en iyi tepkiyi formel olarak hesaplayayım" diye düşünürken oraya bir aslan dalarsa, gen havuzundan çıkarsın. Ama hiç düşünmeden, Sistem 1 ile, anında kaçanlar yaşadı ve çoğaldı. Sezgisel, hızlı, kestirme yola dayalı düşünme insan beyninin en eski parçası, milyonlarca yıllık seçilim baskısının ürünü. Tehlikeyi anında tanımak, yüzleri tanımak, yiyeceğin tazeliğini koklayarak anlamak, kabile içinde kimin dost kimin düşman olduğunu bir bakışta hissetmek, bütün bunlar atalarımızın hayatta kalmasını sağlayan Sistem 1 yetenekleri.</p>
+
+      <p>Sistem 2 ise çok daha yeni. Soyut akıl yürütme, matematik, planlama, hipotetik düşünce, uzun vadeli mantıksal hesaplar yapan kapasite, beynimizin görece geç gelişen prefrontal korteksiyle çalışıyor. Sistem 2'nin yapabildiği bu işler, atalarımızın günlük hayatında neredeyse hiç gerekmedi. Bir avcı toplayıcının "%85 ihtimalle kazanç vs %100 kesin kazanç" gibi olasılıksal hesaplar yapmasına gerek yoktu. "Yiyecek var, al" ya da "tehlike var, kaç" mantığı fazlasıyla yetiyordu.</p>
+
+      <p>Sorun şu ki bizim beynimiz hâlâ aynı beyin. Dünya binlerce yılda inanılmaz değişti, ama biyolojik donanımımız değişmedi. Atalarımızın dünyasında muhtemelen 100-150 kişiyle etkileşim halindeyken bir avcı toplayıcının olasılık hesabına ihtiyacı yoktu. Bugün ise bir kahve seçerken 30 farklı seçeneğin arasından, bir kredi kartını seçerken karmaşık vade ve faiz hesaplarının arasından, bir yatırımı değerlendirirken çok değişkenli olasılık matrislerinin arasından geçmemiz gerekiyor. Modern hayat, Sistem 2'nin en güçlü olduğu görevlerle dolu. Ama biz hâlâ kararlarımızın çoğunu Sistem 1 ile veriyoruz.</p>
+
+      <p>İşte davranışsal ekonominin keşfettiği "anomalilerin" pek çoğu buradan kaynaklanıyor. Bunlar beyin hatası değil, bir uyumsuzluk. Sistem 1, atalarımızın yaşadığı dünya için son derece iyi tasarlanmış. Modern dünya için ise sistematik yanılgılar üretiyor. Çıpalama etkisi savana koşullarında belki bir avantajdı, çünkü duyduğun ilk bilgi kaynağı genelde dürüst bir kabile üyesiydi. Bugün ise bir emlakçının söylediği fiyat, bir restoran menüsündeki tuzak yemek, bir indirim etiketindeki üstü çizilmiş eski fiyat, hepsi Sistem 1'in bu eski refleksini sömürmek için tasarlanmış araçlar.</p>
+
+      <p>Bu bakış açısı, davranışsal ekonominin "insanlar irrasyonel" mesajını da yumuşatır. İnsanlar irrasyonel değil. Atalarının yaşadığı dünya için son derece rasyonel evrimleşmiş bir beynin, atalarının asla görmediği bir dünyada çalışmasını izliyoruz. Sistem 1 bozuk değil, sadece kendi alanından çıkarılmış. Modern dünyanın çıpalı fiyatlandırma, varsayılan seçenekler, çerçeveleme oyunlarıyla dolu ortamı, Sistem 1'in tasarlanmadığı bir savaş alanı.</p>
+    </div>
+
+    <div class="section" id="s05">
+      <div class="section-num">05 · Söz vs. Eylem</div>
+      <h2>Ne söylediğine değil, ne yaptığına bak: Revealed Preferences</h2>
+
+      <p>Davranışsal ekonominin Kahneman ve Tversky'den önce de derin bir kökü vardı. 1938'de Paul Samuelson küçük ama radikal bir makale yayımladı <a href="#ref-18" class="ref" onclick="savePos(this)">18</a>. Samuelson ileride Nobel kazanacak ve modern iktisadın matematiksel temellerini atacaktı. Ama ilk büyük katkısı bir kavram netleştirmesiydi: ekonomistler tüketici tercihlerini anlamak için yanlış soruyu soruyordu.</p>
+
+      <p>Klasik yaklaşım, insanların ne istediğini anlamak için onlara sormaktı. Anketler düzenleniyor, niyetler kayıt altına alınıyor, beyan edilen tercihler analiz ediliyordu. Samuelson bu yaklaşımın temelden hatalı olduğunu söyledi. İnsanların ne istediğini bilmenin tek güvenilir yolu, onların ne yaptığına bakmaktı. Söz değil eylem. Beyan değil davranış. Samuelson buna <em>revealed preferences</em>, yani "açığa çıkan tercihler" adını verdi <a href="#ref-19" class="ref" onclick="savePos(this)">19</a>.</p>
+
+      <p>Aradaki fark teknik gibi görünebilir ama pratik sonuçları büyük. Bir insana "sigara bırakmak istiyor musun?" diye sorduğunda neredeyse herkes "evet" der. Ama gerçek tercih, o kişinin sabah uyandığında ne yaptığında ortaya çıkar. Bir tüketiciye "sağlıklı yemek mi tercih edersin, fast food mu?" diye sorduğunda çoğu sağlıklıyı söyler. Ama gerçekte neyi tercih ettiği, market sepetinde ne olduğuna bakılarak anlaşılır. Beyan edilen tercih ile açığa çıkan tercih arasındaki uçurum, davranışsal ekonominin keşfedeceği büyük gerçeklerden biridir.</p>
+
+      <p>İnsanların ne yapacağını tahmin etmenin en iyi yolu, onlara sormak değil, ne yaptıklarına bakmaktır. Eylem söze ihanet eder, ama eylem gerçeği söyler. Çünkü söz ucuzdur. Sözü söylerken sosyal beklentiler, kendi kendini kandırma, gelecekteki kendine dair iyimser tahminler devreye girer.</p>
+
+      <p>Bu farkın en güzel ampirik gösterimlerinden biri 2006'da yayımlandı. İki ekonomist, Stefano DellaVigna ve Ulrike Malmendier, Amerika'da üç farklı spor salonunun verilerine eriştiler. Toplam 7.752 üyenin üç yıl boyunca yapılan tüm ziyaretlerini, ödedikleri ücretleri, seçtikleri sözleşme türlerini analiz ettiler <a href="#ref-20" class="ref" onclick="savePos(this)">20</a>. Buldukları şey klasik ekonomik teoriyi çürüten bir şeydi.</p>
+
+      <p>Spor salonları üyelere genelde iki seçenek sunuyordu. Birincisi aylık abonelikti, ortalama 70 dolar civarında, sınırsız kullanım hakkı veriyordu. İkincisi 10 ziyaret kartıydı, ziyaret başına 10 dolar, toplam 100 dolar. Aylık aboneliği seçen üyeler, klasik ekonomi mantığına göre, en az ayda 10 kez salona gitmeleri gereken kişilerdi. Aksi halde 10 ziyaret kartı daha mantıklıydı.</p>
+
+      <p>Veriler ne diyordu peki? Aylık abonelik seçen üyeler ortalama olarak ayda 4.3 kez salona gidiyordu. Yani her ziyaret için ortalama 17 dolar ödüyorlardı. Halbuki ziyaret başına 10 dolar ödeyebilecekleri bir seçenek hemen önlerinde duruyordu. Üyelik süreleri boyunca bu üyelerin her biri ortalama 600 dolar fazla ödeme yapmıştı <a href="#ref-20" class="ref" onclick="savePos(this)">20</a>. Sadece bu üç salonda toplam yüz binlerce dolarlık bir kayıp.</p>
+
+      <p>Bu insanlar mantıksız mı? Değil. Onlara üyelik aldıklarında neden aylık aboneliği seçtiklerini sorsanız muhtemelen "Bu yıl daha çok spor yapacağım, sınırsız kullanım daha uygun" derlerdi. Beyan edilen tercih buydu: spor yapmak istiyorum, sık sık geleceğim, sınırsız erişim mantıklı. Ama açığa çıkan tercih farklıydı: ayda 4 kez geliyorum, yani aslında o kadar da spor yapmak istemiyorum, ya da iradem yetmiyor. Beyan ettikleri kişiyle gerçekte oldukları kişi farklıydı.</p>
+
+      <p>DellaVigna ve Malmendier'in bulduğu daha çarpıcı bir şey daha vardı. Aylık abonelik seçen üyeler, yıllık sözleşme yapanlara göre %17 daha uzun süre üye kalıyordu. Bu da rasyonel görünmüyor. Yıllık sözleşme yapan biri zaten taahhüt vermiş demektir, en azından bir yıl üye kalır. Aylık sözleşme yapan ise her ay iptal etme özgürlüğüne sahiptir. Mantık olarak aylık olanların daha çabuk iptal etmesi beklenirdi. Ama tam tersi oluyordu. Çünkü iptal etmek aktif bir karar gerektiriyordu, gidip iptal işlemini yapmak gerekiyordu, ve insanlar bu küçük zahmeti almak yerine sürekli "gelecek ay gideceğim, gelecek ay iptal ederim" diyordu. Açığa çıkan tercih: gerçekte spor yapmak istemiyoruz, ama spor yapan biri olduğumuza inanmak istiyoruz, bu yüzden üyeliği bozmuyoruz.</p>
+
+      <p>Davranışsal ekonomi bu yüzden anket bilimi değil, davranış bilimi. Söze değil eyleme bakar, niyete değil veriye güvenir. Geçmişteki davranışın geleceği tahmin etmedeki gücü, anketlerin gücünden kat kat fazladır. İşletmeler bu içgörüyü A/B testleriyle, gerçek tıklama oranlarıyla, kullanıcı davranışı verileriyle değerlendirir. Politika yapıcılar vergi kaçakçılığını anketlerle değil, ödeme verilerine bakarak ve davranış değiştirici müdahaleler tasarlayarak çözer. Klasik ekonominin "rasyonel optimize edici" insan modelinden uzaklaşmanın asıl yolu da burada başlıyor. Çünkü artık ekonomistler insanların ne demesi gerektiğini değil, ne yaptığını inceliyor. Ve gördükleri şey, klasik teoriyle çoğu zaman uyuşmuyor.</p>
+    </div>
+
+    <div class="wip-banner" id="wip">
+      <strong>Devam Edecek</strong>
+      Seri sonraki bölümlerle sürecek. Yayınlandığında burayı güncelleyeceğim.
+    </div>
+
+  </article>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <h3>Kaynaklar</h3>
+    <ol class="references">
+      <li id="ref-1">Urbina, D. A., &amp; Ruiz-Villaverde, A. (2019). A Critical Review of Homo Economicus from Five Approaches. <em>The American Journal of Economics and Sociology</em>, 78(1), 63-93. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ajes.12258" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-2">Persky, J. (1995). The Ethology of Homo Economicus. <em>Journal of Economic Perspectives</em>, 9(2), 221-231.</li>
+      <li id="ref-3">Wikipedia: Homo Economicus. <a href="https://en.wikipedia.org/wiki/Homo_economicus" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-4">Mill, J. S. (1836). On the Definition of Political Economy. <em>London and Westminster Review</em>.</li>
+      <li id="ref-5">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99-118. <a href="https://doi.org/10.2307/1884852" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-6">Simon, H. A. (1978). Rational Decision-Making in Business Organizations. Nobel Prize Lecture. <a href="https://www.nobelprize.org/uploads/2018/06/simon-lecture.pdf" target="_blank" rel="noopener">pdf</a></li>
+      <li id="ref-7">Schilirò, D. (2018). Economic Decisions and Simon's Notion of Bounded Rationality. <em>International Business Research</em>, 11(7), 64-75. <a href="https://ideas.repec.org/a/ibn/ibrjnl/v11y2018i7p64-75.html" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-8">Klaes, M., &amp; Sent, E. M. (2005). A Conceptual History of the Emergence of Bounded Rationality. <em>History of Political Economy</em>, 37(1), 27-59.</li>
+      <li id="ref-9">Wikipedia: Bounded Rationality. <a href="https://en.wikipedia.org/wiki/Bounded_rationality" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-10">Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. <em>Science</em>, 185(4157), 1124-1131. <a href="https://doi.org/10.1126/science.185.4157.1124" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-11">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263-291. <a href="https://doi.org/10.2307/1914185" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-12">Tversky, A., &amp; Kahneman, D. (1981). The Framing of Decisions and the Psychology of Choice. <em>Science</em>, 211(4481), 453-458. <a href="https://doi.org/10.1126/science.7455683" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-13">Barberis, N. C. (2013). Thirty Years of Prospect Theory in Economics: A Review and Assessment. <em>Journal of Economic Perspectives</em>, 27(1), 173-196. <a href="https://www.aeaweb.org/articles?id=10.1257/jep.27.1.173" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-14">Data Colada [15] Citing Prospect Theory. <a href="https://datacolada.org/15" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-15">Lewis, M. (2017). <em>The Undoing Project: A Friendship That Changed Our Minds</em>. W. W. Norton &amp; Company.</li>
+      <li id="ref-16">Kahneman, D. (2002). Maps of Bounded Rationality. Nobel Prize Lecture. <a href="https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman/lecture/" target="_blank" rel="noopener">link</a></li>
+      <li id="ref-17">Kahneman, D. (2011). <em>Thinking, Fast and Slow</em>. Farrar, Straus and Giroux.</li>
+      <li id="ref-18">Samuelson, P. A. (1938). A Note on the Pure Theory of Consumer's Behaviour. <em>Economica</em>, 5(17), 61-71.</li>
+      <li id="ref-19">Samuelson, P. A. (1948). Consumption Theory in Terms of Revealed Preference. <em>Economica</em>, 15(60), 243-253.</li>
+      <li id="ref-20">DellaVigna, S., &amp; Malmendier, U. (2006). Paying Not to Go to the Gym. <em>American Economic Review</em>, 96(3), 694-719. <a href="https://www.aeaweb.org/articles?id=10.1257/aer.96.3.694" target="_blank" rel="noopener">link</a></li>
+    </ol>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön" aria-label="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Mayıs 2026 · Devam ediyor</p>
+  </section>
+
+  <script>
+    // Reference back-navigation
+    let savedPosition = null;
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(() => {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+
+    // Quiz interaction
+    document.querySelectorAll('.quiz-card').forEach(card => {
+      const mode = card.dataset.quiz; // single | dual
+      const buttons = card.querySelectorAll('.option-btn');
+      const reveal = card.querySelector('.reveal');
+      const answered = new Set();
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const group = btn.dataset.q;
+          // Clear previous selection in same group
+          card.querySelectorAll(`.option-btn[data-q="${group}"]`).forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          answered.add(group);
+
+          const groups = new Set();
+          card.querySelectorAll('.option-btn').forEach(b => groups.add(b.dataset.q));
+          const allAnswered = [...groups].every(g => answered.has(g));
+
+          if (allAnswered) {
+            reveal.classList.add('show');
+            card.classList.add('answered');
+          }
+        });
+      });
+    });
+  </script>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+</body>
+</html>
