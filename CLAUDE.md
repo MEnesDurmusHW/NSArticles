@@ -34,6 +34,8 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **Feedback**: Articles end with a feedback section linking to a Google Form
 - **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`
 - **No em dashes**: Never use the em dash character (—) in article content or any user-facing text. Restructure the sentence, use a comma, or use a period instead
+- **One body font per article**: Pick a single body font (`var(--sans)` or one explicit serif) and use it consistently across ALL body content of that article: hero subtitle, intro paragraphs, sections, sidebars, quiz/interactive blocks, callouts, post-quiz continuation, footer text. Headings can use `var(--serif)` (Playfair) and small UI labels can use a mono font, but body copy must not switch fonts mid-article. If you load a font in the `<link>` tag, every place it appears must follow the same rule
+- **Justified body text**: All body paragraphs in articles must use `text-align: justify`. Apply it to every paragraph container in the article, including quiz/interactive blocks and post-quiz continuation sections. Do NOT justify hero subtitles, captions, list items, or single-line UI text
 
 ## Page Footer
 
