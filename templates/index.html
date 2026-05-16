@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================================
@@ -562,6 +562,280 @@
     }
 
     /* =========================================================
+       Card 09 · Specimen — Inter + Plex Mono spec rail
+       ========================================================= */
+    .card-09 {
+      padding: 22px 22px 18px;
+    }
+
+    .card-09 .body {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card-09 .spec {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-top: 6px;
+      border-top: 1px solid var(--accent);
+      line-height: 1.4;
+    }
+
+    .card-09 .spec b {
+      display: block;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .card-09 .title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+
+    .card-09 .dek {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-09 .card-foot {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 10 · Manifold — 3 yoğunluk hint
+       ========================================================= */
+    .card-10 .lane-header {
+      display: grid;
+      grid-template-columns: 0.85fr 1.25fr 2fr;
+      gap: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .card-10 .lane-header .num { color: var(--accent); font-weight: 600; margin-right: 4px; }
+
+    .card-10 .lanes {
+      display: grid;
+      grid-template-columns: 0.85fr 1.25fr 2fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .card-10 .lane-tldr {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 1.35;
+      padding-left: 8px;
+      border-left: 2px solid var(--accent);
+      color: var(--text);
+    }
+
+    .card-10 .lane-hl {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .card-10 .lane-full {
+      font-family: 'Source Serif 4', serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-dim);
+    }
+
+    .card-10 .title {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: -0.014em;
+      margin: 18px 0 6px;
+    }
+
+    .card-10 .dek {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-10 .card-foot {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 11 · Pulse — sol mini pulse chart
+       ========================================================= */
+    .card-11 .body {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card-11 .pulse-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-11 .pulse-chart .bar {
+      background: var(--surface);
+      border-left: 3px solid var(--text-muted);
+      padding: 4px 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .card-11 .pulse-chart .bar.b1 { padding-top: 5px; padding-bottom: 5px; }
+    .card-11 .pulse-chart .bar.b2 { padding-top: 11px; padding-bottom: 11px; border-left-color: var(--accent); color: var(--text); background: var(--accent-glow); }
+    .card-11 .pulse-chart .bar.b3 { padding-top: 8px; padding-bottom: 8px; }
+
+    .card-11 .head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--text);
+    }
+
+    .card-11 .title {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: -0.016em;
+      margin-bottom: 10px;
+    }
+
+    .card-11 .dek {
+      font-family: 'Newsreader', serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-11 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 12 · Apparatus — dot-grid + OBS label
+       ========================================================= */
+    .card-12 {
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at 1px 1px, var(--divider) 1px, transparent 0);
+      background-size: 16px 16px;
+      background-position: -1px -1px;
+    }
+
+    .card-12 .id-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+
+    .card-12 .id-row .accent { color: var(--accent); font-weight: 500; }
+
+    .card-12 .obs-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .card-12 .title {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 1.05;
+      letter-spacing: -0.022em;
+      margin-bottom: 14px;
+    }
+
+    .card-12 .finding {
+      padding: 10px 14px;
+      border: 1px solid var(--accent);
+      background: var(--accent-glow);
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .card-12 .finding-tag {
+      position: absolute;
+      top: -7px;
+      left: 10px;
+      padding: 1px 6px;
+      background: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .card-12 .finding p {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .card-12 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
        Footer note
        ========================================================= */
     .gallery-foot {
@@ -736,9 +1010,88 @@
         </div>
       </a>
 
+      <!-- 09 Specimen -->
+      <a href="09-specimen.html" class="card card-09">
+        <div class="body">
+          <div class="spec"><b>DISPLAY</b>Inter SB / 42 / 1.0 / -25</div>
+          <div>
+            <div class="title">Specimen</div>
+            <div class="dek">Makale kendini gösterir; her elementin tipografi spec'i mono ile sol margin'da yazılı.</div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">[09]</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 10 Manifold -->
+      <a href="10-manifold.html" class="card card-10">
+        <div>
+          <div class="lane-header">
+            <span><span class="num">①</span>TL;DR</span>
+            <span><span class="num">②</span>Vurgular</span>
+            <span><span class="num">③</span>Tam</span>
+          </div>
+          <div class="lanes">
+            <div class="lane-tldr">Bir cümle.</div>
+            <div class="lane-hl">Birkaç vurgu, orta yoğunluk.</div>
+            <div class="lane-full">Tam metin; klasik akış, justified paragraflar.</div>
+          </div>
+          <div class="title">Manifold</div>
+          <div class="dek">Aynı makale 3 yoğunlukta paralel sunulur; okur derinliği seçer.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">10</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 11 Pulse -->
+      <a href="11-pulse.html" class="card card-11">
+        <div class="body">
+          <div>
+            <div class="head">Pulse</div>
+            <div class="pulse-chart">
+              <div class="bar b1">01 ·2m</div>
+              <div class="bar b2">02 ·4m</div>
+              <div class="bar b3">03 ·2m</div>
+            </div>
+          </div>
+          <div>
+            <div class="title">Pulse</div>
+            <div class="dek">Bölümlerin okuma süresi sol rail'da pulse chart olur; gövde yoğunluğu sürelere göre değişir.</div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">11</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 12 Apparatus -->
+      <a href="12-apparatus.html" class="card card-12">
+        <div>
+          <div class="id-row">
+            <span><span class="accent">INDEX</span> BILISSEL.042</span>
+            <span>16.05.26</span>
+          </div>
+          <div class="obs-tag">OBS.012 — Apparatus</div>
+          <div class="title">Apparatus</div>
+          <div class="finding">
+            <span class="finding-tag">Finding</span>
+            <p>Lab defteri estetiği; OBS. etiketleri, dot-grid, tarih damgası, FINDING callout.</p>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">[12]</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
     </div>
 
-    <p class="gallery-foot">8 taslak · aynı içerik · farklı tipografi</p>
+    <p class="gallery-foot">12 taslak · aynı içerik · farklı tipografi</p>
   </main>
 
   <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">

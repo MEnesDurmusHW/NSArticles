@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11 · Pulse — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 11 · Pulse
+       Orijinal: okuma süresi sol rail'da pulse-chart olur.
+       Bölümün görsel ağırlığı içerik yoğunluğuyla aynı.
+       ========================================================= */
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Newsreader', Georgia, serif;
+      font-variation-settings: "opsz" 16;
+    }
+
+    .page {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 40px 32px 64px;
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* --- Pulse rail (sticky chart) --- */
+    .pulse-rail {
+      position: sticky;
+      top: 32px;
+      align-self: start;
+    }
+
+    .rail-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--text);
+    }
+
+    .pulse-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      padding: 6px 10px;
+      background: var(--surface);
+      border-left: 3px solid var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+
+    .bar:hover {
+      border-left-color: var(--accent);
+      color: var(--text);
+    }
+
+    .bar.active {
+      background: var(--accent);
+      border-left-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .bar .num { margin-right: auto; font-weight: 600; }
+    .bar .time { opacity: 0.7; font-size: 9.5px; }
+
+    .rail-total {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--divider);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .rail-total strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* --- Article column --- */
+    .article {
+      min-width: 0;
+      max-width: 680px;
+    }
+
+    /* --- Top meta --- */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--divider);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+
+    .topbar .accent { color: var(--accent); font-weight: 500; }
+
+    /* --- Hero --- */
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Newsreader', serif;
+      font-variation-settings: "opsz" 72;
+      font-weight: 500;
+      font-size: clamp(40px, 5.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      margin-bottom: 18px;
+      max-width: 18ch;
+    }
+
+    .hero-sub {
+      font-family: 'Newsreader', serif;
+      font-variation-settings: "opsz" 24;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(19px, 2.1vw, 22px);
+      line-height: 1.45;
+      color: var(--text-dim);
+      max-width: 36ch;
+      margin-bottom: 32px;
+    }
+
+    .byline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .byline .author { color: var(--accent); font-weight: 500; margin-right: 12px; }
+
+    /* --- Sections (density varies) --- */
+    .section {
+      padding-top: 56px;
+      margin-bottom: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .section[data-density="low"] { padding-top: 40px; margin-bottom: 40px; }
+    .section[data-density="mid"] { padding-top: 56px; margin-bottom: 56px; }
+    .section[data-density="high"] { padding-top: 80px; margin-bottom: 80px; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .section-meta {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-variation-settings: "opsz" 36;
+      font-weight: 500;
+      font-size: clamp(24px, 3vw, 30px);
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      color: var(--text);
+    }
+
+    /* --- Body paragraphs (line-height varies with density) --- */
+    .article p {
+      font-family: 'Newsreader', serif;
+      font-variation-settings: "opsz" 18;
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.3em;
+      font-weight: 400;
+    }
+
+    .section[data-density="high"] p {
+      line-height: 1.82;
+      margin-bottom: 1.55em;
+    }
+
+    .section[data-density="low"] p {
+      line-height: 1.6;
+      margin-bottom: 1.1em;
+    }
+
+    /* --- Pull quote --- */
+    .pullquote {
+      font-family: 'Newsreader', serif;
+      font-variation-settings: "opsz" 60;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(24px, 3.2vw, 30px);
+      line-height: 1.3;
+      color: var(--text);
+      padding: 28px 0;
+      margin: 48px 0;
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 1px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      margin: 72px 0 32px;
+      padding-top: 24px;
+      border-top: 2px solid var(--text);
+    }
+
+    .references h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      font-family: 'Newsreader', serif;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-dim);
+      padding: 10px 0 10px 40px;
+      position: relative;
+    }
+
+    .references li::before {
+      content: counter(ref, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      top: 12px;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin: 48px 0 32px;
+      padding: 28px;
+      border: 1px solid var(--divider);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .feedback p {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text-dim);
+      margin: 0;
+      max-width: 40ch;
+    }
+
+    .feedback a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 11px 18px;
+      text-decoration: none;
+    }
+
+    /* --- Mobile: rail collapses to horizontal strip --- */
+    @media (max-width: 800px) {
+      .page { grid-template-columns: 1fr; gap: 28px; padding: 28px 22px 48px; }
+      .pulse-rail {
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        padding: 12px 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--divider);
+      }
+      .rail-head { padding-bottom: 8px; margin-bottom: 10px; }
+      .pulse-stack { flex-direction: row; gap: 6px; overflow-x: auto; }
+      .bar { flex: 1 0 auto; padding: 8px 10px; }
+      .rail-total { display: none; }
+      .article p { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+
+    <aside class="pulse-rail" aria-label="Bölüm pulse">
+      <div class="rail-head">Pulse</div>
+      <div class="pulse-stack">
+        <a class="bar" href="#s0" data-target="s0" style="padding-top: 4px; padding-bottom: 4px;">
+          <span class="num">00</span><span class="time">·15s</span>
+        </a>
+        <a class="bar" href="#s1" data-target="s1" style="padding-top: 10px; padding-bottom: 10px;">
+          <span class="num">01</span><span class="time">·2m</span>
+        </a>
+        <a class="bar" href="#s2" data-target="s2" style="padding-top: 22px; padding-bottom: 22px;">
+          <span class="num">02</span><span class="time">·4m</span>
+        </a>
+        <a class="bar" href="#s3" data-target="s3" style="padding-top: 7px; padding-bottom: 7px;">
+          <span class="num">03</span><span class="time">·2m</span>
+        </a>
+      </div>
+      <div class="rail-total">
+        Toplam <strong>9 dk</strong><br>3 bölüm
+      </div>
+    </aside>
+
+    <article class="article">
+
+      <div class="topbar">
+        <span><span class="accent">NS</span> / PULSE — DOSYA 11</span>
+        <span>Mayıs 2026</span>
+      </div>
+
+      <div class="kicker">Bilişsel Davranış · Deneme</div>
+      <h1 class="hero h1">Tembel bir matematikçi olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="byline"><span class="author">M. Enes Durmuş</span> · 9 dakika · 3 bölüm</div>
+
+      <section class="section" id="s0" data-density="low">
+        <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+      </section>
+
+      <section class="section" id="s1" data-density="mid">
+        <header class="section-head">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Sezginin kökeni</h2>
+          <span class="section-meta">~2 dk</span>
+        </header>
+        <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+        <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+        <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+      </section>
+
+      <section class="section" id="s2" data-density="high">
+        <header class="section-head">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Yanılgı değil, tasarım</h2>
+          <span class="section-meta">~4 dk</span>
+        </header>
+        <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+        <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+        <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli. Bu, kararı çevreden soyutlayıp tek başına "doğru ya da yanlış" diye damgalayan klasik anlayıştan keskin bir kopuş anlamına gelir; aynı kestirmenin bir bağlamda kusur, başka bir bağlamda erdem olarak okunmasına alan açar.</p>
+      </section>
+
+      <section class="section" id="s3" data-density="low">
+        <header class="section-head">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Sonuç</h2>
+          <span class="section-meta">~2 dk</span>
+        </header>
+        <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+        <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+      </section>
+
+      <section class="references">
+        <h3>Kaynaklar</h3>
+        <ol>
+          <li id="r1">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li id="r2">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li id="r3">Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun? Geri bildirim ileride yazılacakları şekillendiriyor.</p>
+        <a href="#">Geri bildirim</a>
+      </section>
+
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+
+  <script>
+    (function() {
+      var bars = Array.prototype.slice.call(document.querySelectorAll('.bar'));
+      var sections = bars.map(function(b) {
+        return document.getElementById(b.getAttribute('data-target'));
+      }).filter(Boolean);
+
+      function onScroll() {
+        var y = window.scrollY + 120;
+        var active = sections[0];
+        sections.forEach(function(s) {
+          if (s.offsetTop <= y) active = s;
+        });
+        bars.forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-target') === active.id);
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
