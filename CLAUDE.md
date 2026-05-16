@@ -13,6 +13,7 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 - **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, share toggle, share modal, divider, home logo
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
 - **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). Self-contained; no per-page setup beyond loading the script and rendering the toggle button
+- **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
 
 ## Theme System
@@ -47,6 +48,8 @@ Every page (article, gallery, preview) must include the same top-right toolbar a
 1. **Theme toggle**: `<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">` with moon + sun SVGs. Requires `<script src="theme.js"></script>` in `<head>`.
 2. **Share toggle**: `<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">` with the three-dot share SVG (placed immediately after `theme-toggle`). Requires `<script src="share.js" defer></script>` in `<head>`. Styles already live in `styles.css`; `share.js` auto-creates the modal on first open.
 
+**Favicon** (in `<head>` of every page): `<link rel="icon" type="image/svg+xml" href="favicon.svg">` (use `../favicon.svg` from subdirectories).
+
 **Bottom-center signature** (except `index.html`), before `</body>`:
 
 1. **Home logo**: `<a href="index.html" class="home-logo"><span>NS Articles</span></a>` — navigates back to the landing page
@@ -69,7 +72,7 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, and `<link rel="stylesheet" href="styles.css">`
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, and `<link rel="stylesheet" href="styles.css">`
 4. In `<body>`: add the grain overlay, theme toggle button, share toggle button (immediately after theme toggle), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
