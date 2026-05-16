@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İrade Bir Erdem Değil, Bir Tasarım Hatası</title>
+<script src="theme.js"></script>
+<script src="qrcode.js" defer></script>
+<script src="share.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 760px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Article content */
+  .article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .section p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section .ref {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem 0;
+  }
+
+  /* Sub-headings */
+  .sub-heading {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    margin-top: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 2px solid var(--accent);
+    padding: 0.6rem 0 0.6rem 1.4rem;
+    margin: 2rem 0;
+    text-align: left;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .conclusion h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 1.5rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* Reference links */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  a.ref:hover {
+    text-decoration: underline;
+  }
+
+  /* Highlight target reference */
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* Back to text FAB */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #fab-back:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .article { padding: 3rem 1.5rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .article { padding: 2.5rem 1.2rem; }
+
+    .section h2 { font-size: 1.4rem; }
+
+    .section p { font-size: 1rem; }
+
+    .pull-quote { font-size: 1.05rem; padding-left: 1rem; }
+
+    .scroll-hint { bottom: 1.5rem; }
+
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .section h2 { font-size: 1.25rem; }
+    .section p { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+  <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+
+  <section class="hero">
+    <h1>İrade bir <em>erdem</em> değil, bir tasarım hatası.</h1>
+    <p class="hero-sub">İradeye güvenmek neden başarısız bir strateji ve araştırmaların gösterdiği alternatif.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Hedefe ulaşmanın yolunu daha iradeli olmakta arıyoruz.
+      Peki ya iradeye ne kadar yüklenirsek <span class="highlight">o kadar başarısız oluyorsak?</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <article class="article">
+
+    <!-- 01 -->
+    <div class="section" id="s01">
+      <div class="section-num">01</div>
+      <h2>İrade gerçekten bir erdem mi?</h2>
+      <p>İnsanların hedeflerine ulaşmak için kullandıkları en yaygın strateji şu: Daha iradeli ol. Daha disiplinli davran, daha kararlı ol, daha güçlü dur. Ama bu strateji kulağa hoş gelse de ufacık bir kusuru var: Baştan sona yanlış olması. Hatta araştırmalar gösteriyor ki, insanlar iradeye ne kadar çok yüklenirse o kadar çok başarısız oluyor. Asıl mesele iradeni güçlendirmek değil de iradeye olan ihtiyacını azaltmak olabilir mi?</p>
+      <p>Bu çerçeveleme hayatın her yerinde. Diyetini bozduysan iraden zayıf, erken kalkamıyorsan tembel, ertelediysen disiplinsiz. Peki bilim bu konuda ne diyor? Araştırmalar şaşırtıcı bir sonuç gösteriyor: İradenin merkeze koyulduğu hayatlar değil, iradeye ihtiyaç duymayan sistemler işe yarıyor.</p>
+      <p>Peki irade gerçekte nasıl çalışıyor? Bu sorunun cevabı sanıldığından daha karmaşık. Bilim hâlâ tek bir modelde anlaşamasa da, üzerinde birleştiği bir şey var: İrade ne sanıldığı gibi bir erdem, ne de sanıldığı gibi bir kas.</p>
+      <p>Bu makalede iradenin gerçekte nasıl çalıştığını, iradeye dayalı sistemin neden bir erdem değil bir tasarım hatası olduğunu ve iradeyi merkeze koyan sistemlerin neden çoğu zaman geri teptiğini inceleyeceğiz.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 -->
+    <div class="section" id="s02">
+      <div class="section-num">02</div>
+      <h2>İrade bir kas mıdır, gerçekten tükenir mi?</h2>
+      <p>İradenin "kas gibi" çalıştığı fikri uzun süre psikolojinin popüler hikâyelerinden biriydi. 1998'de Roy Baumeister ve ekibi, ünlü "turp ve kurabiye" deneyini yayımladı. Aç katılımcıların bir kısmına taze pişmiş kurabiye yemeleri, diğerlerine ise yalnızca turpla yetinip kurabiyeyi reddetmeleri söylendi. Ardından herkese çözümü olmayan bir bulmaca verildi. Kurabiyeye direnmek zorunda kalan grup, bulmacayı çok daha çabuk bıraktı. Baumeister bu sonucu öz-denetimin sınırlı bir kaynağı olduğu, kullandıkça tükendiği şeklinde yorumladı ve buna "ego depletion" (ego tükenmesi) adını verdi <a href="#ref-1" class="ref" onclick="savePos(this)">1</a>.</p>
+      <p>Bu fikir popüler kültüre hızla yayıldı. Kahvaltıda zor karar verirsen akşam diyetin bozulurdu, çünkü iradenin enerjisini tüketmiştin. CEO'lar her gün aynı tişörtü giymeye başladı çünkü "karar yorgunluğu"ndan kaçınıyordu. İrade artık bir kas gibi çalışıyordu: kullan, yorul, dinlen, güçlen.</p>
+      <p>Sorun şu ki, bilim bu hikâyeyi olduğu gibi onaylamadı. 2016'da Hagger ve arkadaşları, 23 farklı laboratuvarda 2.141 katılımcıyla yürütülen önceden kayıtlı bir çoklu-merkez replikasyon çalışması yayımladılar. Sonuç: ego tükenmesi etkisi, sıfırdan ayırt edilemeyecek kadar küçüktü <a href="#ref-2" class="ref" onclick="savePos(this)">2</a>. Sonraki meta-analizler de yayın yanlılığını düzelttiğinde etkinin neredeyse kaybolduğunu gösterdi <a href="#ref-3" class="ref" onclick="savePos(this)">3</a>.</p>
+      <p>Michael Inzlicht ve Brandon Schmeichel daha da ileri gittiler: ego tükenmesi diye gözlemlenen şey, fiziksel bir enerjinin bitmesi değil, motivasyon ve dikkatin kayması olabilirdi <a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Yani "iraden tükendi" dediğin an, aslında "artık o şeyi yapmak istemiyorsun"un kibar bir tercümesiydi. İnzlicht'in kendi sözleriyle, ego tükenmesi hipotezi muhtemelen yanlıştı ve alanın bunu kabul etmesi gerekiyordu <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>.</p>
+      <p>İrade hâlâ var, ama bir yakıt deposu gibi değil. Daha çok, içinde bulunduğun anki motivasyonun, dikkatinin ve duygu durumunun ortak ürünü. Ve bu üçü de senin kontrolünde değil, büyük ölçüde tasarım meselesi.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 -->
+    <div class="section" id="s03">
+      <div class="section-num">03</div>
+      <h2>İradesi yüksek insanlar gerçekten daha çok mu direniyor?</h2>
+      <p>İradenin bir erdem olarak yüceltilmesi şu sezgiye dayanır: Disiplinli insanlar, biz zayıfların direnemediği isteklere kahramanca karşı koyabiliyor olmalı. Wilhelm Hofmann ve ekibinin 2012'deki günlük çalışması bu sezgiyi tepetaklak etti.</p>
+      <p>Araştırmacılar 205 yetişkine bir hafta boyunca her gün rastgele saatlerde bildirim gönderdi. Katılımcılar o an bir istek hissedip hissetmediklerini, bu isteğin neye yönelik olduğunu ve buna direnip direnmediklerini bildirdi. Toplamda yedi binden fazla anlık raporlama toplandı. Sonra katılımcıların öz-denetim puanları, gerçek hayattaki başarı göstergeleriyle karşılaştırıldı <a href="#ref-6" class="ref" onclick="savePos(this)">6</a>.</p>
+      <p>Bulgular şaşırtıcıydı. Yüksek öz-denetim puanlı insanlar, isteklerine düşüklerden daha fazla direnmiyordu. Aslında bir adım daha şaşırtıcı bir şey ortaya çıktı: Onlar gün boyu daha az istek yaşıyordu. Şekerli yiyecek görmüyorlardı, çünkü mutfakta şekerli yiyecek bulundurmuyorlardı. Çalışırken telefonlarına bakma dürtüsüyle savaşmıyorlardı, çünkü telefonu başka odada bırakmışlardı.</p>
+      <p class="pull-quote">İradesi yüksek görünenler, mücadeleyi daha iyi kazananlar değil; mücadeleye hiç girmeyenlerdi.</p>
+      <p>2015'te Brian Galla ve Angela Duckworth aynı bulguyu altı farklı çalışmada doğruladı: Öz-denetim ile yaşam başarısı arasındaki ilişkinin büyük kısmını alışkanlıklar açıklıyordu, anlık direnç değil <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>. "Disiplinli" insanlar, sabah erken kalkmak için savaşmıyordu; sabah erken kalkma rutini onlar için otomatik hale gelmişti. Spor salonuna gitmek için kendilerini ikna etmeleri gerekmiyordu; iş çıkışı yolu zaten salondan geçiyordu.</p>
+      <p>Hatta klasik marshmallow deneyi bile bu çerçeveyle yeniden okunabilir. Walter Mischel'in çalışmalarında, ödülü daha uzun süre bekleyebilen çocukların ortak özelliği "süper iradeli" olmaları değildi. Marshmallow'a bakmamayı, dikkatlerini başka yere yöneltmeyi, ödülü zihinlerinde başka şeye benzetmeyi başaranlardı. Yani strateji kullananlar, çıplak iradeyle savaşanlara üstün geldi <a href="#ref-8" class="ref" onclick="savePos(this)">8</a>.</p>
+      <p>İradesi yüksek olarak adlandırdığımız insanlar, aslında iradeye az ihtiyaç duyacak şekilde yaşamayı becerenlerdir. Bu önemli bir ayrım: Performansın kaynağını yanlış yere atfedersek, çözümü de yanlış yerde ararız.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 -->
+    <div class="section" id="s04">
+      <div class="section-num">04</div>
+      <h2>Karakter mi, durum mu? Davranışı asıl belirleyen ne?</h2>
+      <p>Bir başka yanılsama daha var: İnsanların davranışlarının çoğunu karakter belirlediğini düşünürüz. Tembel adam tembeldir, çalışkan adam çalışkandır. Ama sosyal psikolojinin son yetmiş yılda topladığı kanıtlar başka bir hikâye anlatıyor: Davranışı belirleyen şeyin büyük kısmı karakter değil, durumdur.</p>
+      <p>Stanley Milgram'ın 1963 itaat deneylerinde, sıradan insanların yüzde 65'i bir otorite figürü emrettiğinde başka bir insana ölümcül olabilecek elektrik şoku verecek düğmeye bastı <a href="#ref-9" class="ref" onclick="savePos(this)">9</a>. Bu insanların hiçbiri sadist değildi; deney öncesinde böyle bir şey yapmayacaklarını söylüyorlardı. Davranışı belirleyen şey karakterleri değil, içine konuldukları durumdu.</p>
+      <p>Daha küçük ama belki daha rahatsız edici bir deney: Darley ve Batson, ilahiyat öğrencilerine "iyi Samaritan" benzetmesi üzerine konuşma vermek için diğer binaya geçmelerini istedi. Bazı öğrencilere "geç kaldın" denildi, bazılarına denmedi. Yolda inleyen, yardıma ihtiyacı olan bir adam koydular. Sonuç: Konunun "yardımseverlik" olması fark etmedi. Geç kaldığını düşünen öğrencilerin sadece yüzde 10'u durup yardım etti; aceleyi olmayanlarda bu oran yüzde 63'tü <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>. Karakter değişmemişti, durum değişmişti.</p>
+      <p>Wendy Wood'un alışkanlık üzerine kapsamlı araştırmaları aynı resmi gösteriyor: Günlük davranışlarımızın yaklaşık yüzde 43'ü, o anda neredeyse hiç düşünmeden, aynı bağlamda aynı tepkiyi vererek gerçekleşiyor <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>. Yani günün büyük kısmında "neyi yapmak istediğimize" değil, "bağlamın bize neyi yaptırdığına" yanıt veriyoruz.</p>
+      <p>Bunun pratik sonucu açık: İradeni güçlendirmek yerine, doğru yapmak istediğin davranışı çıkaran bağlamı tasarlamak çok daha verimli. Çikolatayı görmediğin sürece çikolataya direnmek zorunda kalmazsın. Telefon başka odadayken sosyal medyaya bakma dürtüsünü bastırmak zorunda kalmazsın. Karakter değişimi yıllar sürer; durum değişimi bir akşam yeter.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 -->
+    <div class="section" id="s05">
+      <div class="section-num">05</div>
+      <h2>İradeye dayalı sistem neden geri teper?</h2>
+      <p>İradeye dayalı sistemin kırılgan olmasının birkaç sebebi var. İlki istatistiksel: İrade, doğası gereği dalgalı bir kaynaktır. Yorgunken, açken, üzgünken, geç saatte, sosyal baskı altındayken aynı seviyede çalışmaz. Hofmann ve ekibi yaptıkları başka bir çalışmada, akşam saatlerinde isteklere direnme yeteneğinin sabahla kıyaslandığında belirgin biçimde düştüğünü gösterdi <a href="#ref-12" class="ref" onclick="savePos(this)">12</a>. Eğer planın gücün en zayıf olduğu anda iradenin devreye girmesine bağlıysa, planın değil, kendin yenilgiye yatırım yapıyorsun demektir.</p>
+      <p>İkincisi, motivasyonel: Bir aktiviteyi "yapmak zorunda olduğun" şey olarak çerçevelemek, o aktiviteyi anlamlı hissetmeni zorlaştırır. Edward Deci ve Richard Ryan'ın öz-belirleme teorisi (Self-Determination Theory) gösteriyor ki insan motivasyonu özerklik hissine bağlıdır: bir işi kendi seçimin gibi hissettiğinde yapmaya devam ediyorsun, kendine dayatma gibi hissettiğinde direnç oluşuyor <a href="#ref-13" class="ref" onclick="savePos(this)">13</a>. İrade çağrısı ise tam da o iç dayatmayı kuruyor: "Yapmalısın, dur, vazgeçme." Bu çağrı tekrar ettikçe motivasyon yıpranıyor.</p>
+      <p>Üçüncüsü, paradoksal: Bir düşünceyi bastırmaya çalıştığında o düşünce daha çok geri geliyor. Daniel Wegner'ın klasik "beyaz ayıyı düşünme" deneylerinde, beyaz ayıyı düşünmemeleri söylenen katılımcılar, böyle bir kısıtlama almayanlardan daha sık beyaz ayıyı düşündüklerini bildirdi <a href="#ref-14" class="ref" onclick="savePos(this)">14</a>. Çikolatayı düşünme dediğinde çikolata aklından çıkmıyor. Diyet kitabı okudukça yemek aklından çıkmıyor. Bastırma, dürtüyü zayıflatmak yerine güçlendiriyor.</p>
+      <p>Dördüncüsü, dramatik: Janet Polivy ve Peter Herman, kısıtlı yiyenler üzerinde yıllarca çalıştı ve "ne fark eder" etkisi adını verdikleri bir kalıp buldular. Bir diyetçi diyetini ufak bir miktarda bozduğunda, "zaten bozdum, ne fark eder" diyerek diyetini tamamen rafa kaldırma ihtimali yüksek oluyordu <a href="#ref-15" class="ref" onclick="savePos(this)">15</a>. Hayır ya da evet, sıfır ya da bir mantığıyla çalışan iradeye dayalı sistemler, küçük bir sapmayı tam bir çöküşe çeviriyor. Halbuki bağlama dayalı bir sistemde "bugün de aynı yere otur, aynı saatte" geri dönülebilir.</p>
+      <p>Beşincisi, sosyal: İrade kişisel bir başarısızlık dili kurar. "Yapamadıysan zayıfsın." Bu dil, yapısal sorunları görünmez kılar. Geceleri çalıştığın için sabah kalkamıyorsundur, ama mesele uyku rutini değil "iradensizlik" olarak kayıtlara geçer. Kötü tasarlanmış bir iş günü, bireysel bir karakter kusuru gibi yaşanır. Bu da çözümü yanlış yere yönlendirir: Sistem değil, kendinle savaşa girersin.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 -->
+    <div class="section" id="s06">
+      <div class="section-num">06</div>
+      <h2>İrade yerine ne koyalım: Tasarım yaklaşımı</h2>
+      <p>İradeden uzaklaşmak, hedefsiz yaşamak anlamına gelmiyor. Tam tersine, hedefe ulaşmanın yükünü kişisel kahramanlıktan alıp ortamın, bağlamın ve önceden verilmiş kararların üzerine dağıtmak. Bu yaklaşım birkaç başlık altında toparlanabilir.</p>
+
+      <h3 class="sub-heading">Sürtünmeyi tasarla.</h3>
+      <p>Davranışsal ekonomide "kahve çiroz prensibi" gibi bilinen bir gözlem var: Bir davranışın sıklığı, o davranışı yapmak için aşman gereken çabayla ters orantılı. Richard Thaler ve Cass Sunstein, "Nudge" kitabında bu fikri seçim mimarisi adıyla sistemleştirdi <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>. Hollanda'da, organ bağışı için "varsayılan evet, çıkmak istersen formu doldur" sistemine geçen ülkelerde bağış oranı yüzde 90'lara çıktı; aynı kültürel bölgede "varsayılan hayır" olan ülkelerde yüzde 15-20 civarında kaldı <a href="#ref-17" class="ref" onclick="savePos(this)">17</a>. Aynı insanlar, aynı tercihler, farklı varsayılan. Sonuç dramatik.</p>
+      <p>Aynı mantık günlük yaşamda da işliyor. Telefonu yatak başucuna koymak ile başka odada bırakmak arasındaki fark on saniyelik bir mesafe. Ama o on saniye, sabah ilk yarım saatte ne yaptığını belirliyor. Spor kıyafetini bir akşam önceden hazır koymak iradeyi devre dışı bırakıyor; çünkü sabah karar verilecek hiçbir şey kalmıyor. Görmek istemediğin yiyeceği eve almamak, görmemek için savaşmaktan çok daha az enerji gerektiriyor.</p>
+
+      <h3 class="sub-heading">Niyeti bağlama bağla: Eğer-O zaman planlama.</h3>
+      <p>Peter Gollwitzer "implementation intentions" (uygulama niyetleri) adını verdiği basit ama güçlü bir yöntemi inceledi: niyeti, gerçekleşeceği bağlamla birlikte ifade etmek. "Daha çok spor yapacağım" yerine "salı ve perşembe işten çıkar çıkmaz salona uğrayacağım." Gollwitzer ve Sheeran'ın 94 çalışma üzerinde yaptığı meta-analizde, böyle eğer-o zaman planlaması yapmak hedefe ulaşma olasılığını orta-büyük düzeyde artırdı <a href="#ref-18" class="ref" onclick="savePos(this)">18</a>.</p>
+      <p>Mekanizma sade: Beyin, niyeti bağlamla eşleştirdiğinde, o bağlama her girdiğinde davranışı otomatik olarak hatırlatıyor. Bağlam ipucu olarak çalışıyor, irade çağrısı gerekmiyor. Yaprak büyüdükçe ağaca yapışıyor; sen onu her gün yapıştırmak zorunda kalmıyorsun.</p>
+
+      <h3 class="sub-heading">Küçük başla, kimlik üzerinden büyüt.</h3>
+      <p>BJ Fogg'un Stanford'daki davranış modeli üç bileşene dayanıyor: motivasyon, yetenek ve tetikleyici. Bunlardan en kırılganı motivasyondur, gün içinde sürekli dalgalanır. Stratejik olan, yetenek tarafını artırmak yani davranışı yapması en kolay versiyonuna indirgemek. Diş ipi kullanmaya başlamak için "her gün tüm dişlerimi temizleyeceğim" demek yerine "her gün sadece bir dişi temizleyeceğim" demek <a href="#ref-19" class="ref" onclick="savePos(this)">19</a>. Hedef küçük olduğu için motivasyon dip yapsa bile gerçekleşiyor; bir kez başladığında çoğu zaman daha fazlasını yapıyorsun.</p>
+      <p>Wendy Wood ve David Neal'in alışkanlık araştırması bunu tamamlar: Bir davranış belirli bir bağlamda yeterince tekrarlandığında, kararla değil bağlamla tetiklenmeye başlıyor <a href="#ref-20" class="ref" onclick="savePos(this)">20</a>. Yaklaşık 66 günlük tutarlı tekrar sonrası çoğu basit davranış otomatikleşiyor <a href="#ref-21" class="ref" onclick="savePos(this)">21</a>. Bu, "iradenin kaslandığı" değil, davranışın artık iradeye ihtiyaç duymadığı durum.</p>
+      <p>Buna bir de kimlik boyutu ekleniyor. Carol Dweck'in benlik teorisi, davranışın kim olduğunla nasıl çerçevelendiğine bağlı olarak farklı sürdüğünü gösteriyor: "Bunu yapmam lazım" yerine "Ben böyle biriyim" diyebildiğinde davranış daha az çatışmayla devam ediyor <a href="#ref-22" class="ref" onclick="savePos(this)">22</a>. "Sigara içmemeye çalışıyorum" diyenlerle "Sigara içmeyen biriyim" diyenler arasındaki başarı farkı küçük ama anlamlıdır.</p>
+
+      <h3 class="sub-heading">Bağlama duyarsız hedeflerden bağlama gömülü hedeflere geç.</h3>
+      <p>Tipik bir yeni yıl hedefi: "Bu yıl daha sağlıklı yiyeceğim." Soyut, ölçüsüz, bağlamsız. Tasarım yaklaşımı bunu somut bağlamlara çevirir: "Akşam yemeği her gün saat sekizden önce, masada, telefon başka odada, sebze tabağı en yakın yerde olacak." Hedef değil, ortam tarif edilmiştir. Davranış oraya yerleştirildiğinde başka türlü yapmak için ayrı bir çaba gerekecektir, yapmak için değil.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 -->
+    <div class="section" id="s07">
+      <div class="section-num">07</div>
+      <h2>İrade hiç gerekmiyor mu?</h2>
+      <p>Buraya kadar anlatılanlar iradeyi tamamen reddetmek değil. İrade, sistemlerin boşluğunda devreye girer ve gerçek bir psikolojik kaynaktır. Yeni bir alışkanlığı kurmaya başlarken, beklenmedik bir engelle karşılaştığında, kriz anlarında iradeye gerçekten ihtiyacın var. Mesele iradeyi yok saymak değil, onu doğru yere koymak.</p>
+      <p>İrade, bir kıvılcımdır, kalıcı bir motor değil. Sistem kurarken bir hamle yapmak için kullanılır; sonra sistem onun yerini alır. Spor salonu üyeliğini almak için biraz irade gerekir; ama gidişi kalıcı kılan, salonu evinin yolunda olacak şekilde seçmiş olmandır. İlk hafta diş ipi kullanmak için kararlılık gerekir; ama dördüncü ayda otomatik hale geldiğinde, artık iradenin işi bitmiştir.</p>
+      <p>İrade aynı zamanda bir göstergedir. Kendini sürekli zorlamak zorunda hissediyorsan, bu sıklıkla iradenin değil, tasarımın sorunu olduğunun habercisidir. Aynı davranışı haftalarca güç bela yapan biri, kendini eleştirmek yerine bağlamı incelemeyi denemelidir: Bu davranış için ortam destekleyici mi, yoksa düşmanca mı?</p>
+      <p class="pull-quote">Sürekli iradeye başvurmak zorunda kalıyorsan, sorun büyük ihtimalle iradende değil, tasarımında.</p>
+      <p>Bu çerçeveden bakınca, "iradeli ol" tavsiyesi yumuşak bir biçimde sorumluluğu yanlış yere yıkmaktadır. Yapısal soruna karakter çözümü öneriyor. Tıpkı bir sokakta sürekli kaza olmasını "sürücülerin dikkatsizliği" diye açıklayıp yolun tasarımını sorgulamamak gibi. Bir noktada sürücü değişir ama kaza devam eder; çünkü asıl problem yoldadır.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 -->
+    <div class="section" id="s08">
+      <div class="section-num">08</div>
+      <h2>Pratikte ne yapmalı?</h2>
+      <p>Aşağıdakiler bir reçete değil; iradeye olan bağımlılığını azaltmanın somut yolları. Hepsini birden uygulamak gerekmiyor, bir tanesini denemek bile yön değiştirir.</p>
+
+      <h3 class="sub-heading">Sabah kararlarını akşam ver.</h3>
+      <p>Sabah ne giyeceğine, ne yiyeceğine, ilk işine ne zaman başlayacağına o anda karar veriyorsan, günün ilk yarım saatinde iradeyi bir dizi küçük seçimle tüketiyorsun. Bu kararları bir önceki akşam ver. Spor kıyafetin hazır, kahvaltın seçili, ilk işinin ne olduğu yazılı. Sabah, uygulamaktan başka bir şey yapman gerekmiyor.</p>
+
+      <h3 class="sub-heading">Dürtüye savaşma, mesafe koy.</h3>
+      <p>Sosyal medyaya bakmama mücadelesini kazanmak yerine, telefonu çalışma yerinden uzakta tut. Şekerli yiyeceğe direnmek yerine, eve almama kuralını koy. Yatakta dizi izlememe iradesinin yerine, televizyonu yatak odasından çıkarma kararı koy. Mesafe, iradenin yapamadığını otomatik olarak yapar.</p>
+
+      <h3 class="sub-heading">Niyetini bağlama bağla.</h3>
+      <p>"Daha çok yürüyeceğim" yerine "öğle yemeğinden sonra, masamdan kalkıp 10 dakika dışarıda yürüyeceğim." "Daha az ekran" yerine "yatağa girmeden önce telefonu mutfak tezgâhına koyacağım." Niyet bir bağlama yapışmadığı sürece havada kalır.</p>
+
+      <h3 class="sub-heading">Sapmayı normal kabul et.</h3>
+      <p>Sıfır-bir mantığı her küçük sapmayı bir bahaneye çevirir. "Bugünü kaçırdım, yarından devam." mantığı, "Bu öğünü kaçırdım, akşam yine aynı düzene geri dönerim." mantığından çok daha kırılgan. Polivy ve Herman'ın "ne fark eder" etkisini hatırla: Sapmayı çöküşe çeviren şey sapmanın kendisi değil, ona verdiğin anlam.</p>
+
+      <h3 class="sub-heading">Çevreni iradeli yap, kendini değil.</h3>
+      <p>İdeal davranışlar, ortam onları en kolay yapan ve istenmeyenleri en zor yapan biçimde dizayn edildiğinde gerçekleşir. Bu bir lüks değil, asıl strateji. Sabahları okumak istiyorsan kitabı yastığının üstüne bırak. Daha çok su içmek istiyorsan masada her zaman dolu bir sürahi olsun. Daha az atıştırma istiyorsan atıştırmalıkları görüş alanından çıkar.</p>
+
+      <h3 class="sub-heading">Kendini suçlamayı sisteme bakmaya çevir.</h3>
+      <p>Bir hedefe ulaşamadığında ilk içgüdü kendini iradesiz görmek olabilir. Bir sonraki refleks şu olmalı: Bu davranışı yapmak için ortam ne kadar destekleyiciydi? Sapma anında dürtüyle aramda hangi mesafe vardı? Önceden verdiğim hangi kararlar beni anlık karar vermeye zorladı? Bu sorular sorumluluğu kaldırmaz, doğru yere koyar.</p>
+    </div>
+
+    <!-- Sonuç -->
+    <div class="conclusion" id="s09">
+      <h2>Sonuç</h2>
+      <p>İrade vardır, ama düşündüğümüz şey değildir. Tükenen bir kas değil, motivasyonun, dikkatin ve duygu durumunun anlık bileşkesi. Yüksek öz-denetim sahibi insanlar daha çok direnmiyor, daha az direnme durumuna düşüyor. Davranışı belirleyen şey büyük ölçüde karakter değil bağlam; dolayısıyla davranışı değiştirmenin en etkili yolu da bağlamı değiştirmek.</p>
+      <p>İradeye dayalı bir hayat dalgalı, kırılgan ve yorucudur. Çünkü kazanmak için her gün savaşmayı gerektirir. Tasarıma dayalı bir hayat ise savaşı baştan yapmaz. Önce ortamı kurar, sonra ortam davranışı yürütür. İrade orada bir destekleyici olarak kalır, başroldeki kahraman değil.</p>
+      <p>O zaman asıl soru "Nasıl daha iradeli olabilirim?" değil. Asıl soru: "Bu davranışa ihtiyacım olduğunda iradeye başvurmak zorunda kalmamak için neyi nasıl tasarlayabilirim?"</p>
+    </div>
+
+    <!-- Kaynakça -->
+    <div class="conclusion" style="border-top: none; padding-top: 1rem;">
+      <h2>Kaynakça</h2>
+      <ol style="font-size: 0.88rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem;">
+        <li id="ref-1">Baumeister, R. F., Bratslavsky, E., Muraven, M., &amp; Tice, D. M. (1998). Ego depletion: Is the active self a limited resource? <em>Journal of Personality and Social Psychology</em>, 74(5), 1252–1265. <a href="https://doi.org/10.1037/0022-3514.74.5.1252" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-2">Hagger, M. S., Chatzisarantis, N. L. D., et al. (2016). A multilab preregistered replication of the ego-depletion effect. <em>Perspectives on Psychological Science</em>, 11(4), 546–573. <a href="https://doi.org/10.1177/1745691616652873" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-3">Carter, E. C., Kofler, L. M., Forster, D. E., &amp; McCullough, M. E. (2015). A series of meta-analytic tests of the depletion effect: Self-control does not seem to rely on a limited resource. <em>Journal of Experimental Psychology: General</em>, 144(4), 796–815. <a href="https://doi.org/10.1037/xge0000083" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-4">Inzlicht, M. &amp; Schmeichel, B. J. (2012). What is ego depletion? Toward a mechanistic revision of the resource model of self-control. <em>Perspectives on Psychological Science</em>, 7(5), 450–463. <a href="https://doi.org/10.1177/1745691612454134" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-5">Inzlicht, M., Schmeichel, B. J., &amp; Macrae, C. N. (2014). Why self-control seems (but may not be) limited. <em>Trends in Cognitive Sciences</em>, 18(3), 127–133. <a href="https://doi.org/10.1016/j.tics.2013.12.009" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-6">Hofmann, W., Baumeister, R. F., Förster, G., &amp; Vohs, K. D. (2012). Everyday temptations: An experience sampling study of desire, conflict, and self-control. <em>Journal of Personality and Social Psychology</em>, 102(6), 1318–1335. <a href="https://doi.org/10.1037/a0026545" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-7">Galla, B. M. &amp; Duckworth, A. L. (2015). More than resisting temptation: Beneficial habits mediate the relationship between self-control and positive life outcomes. <em>Journal of Personality and Social Psychology</em>, 109(3), 508–525. <a href="https://doi.org/10.1037/pspp0000026" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-8">Mischel, W., Shoda, Y., &amp; Rodriguez, M. L. (1989). Delay of gratification in children. <em>Science</em>, 244(4907), 933–938. <a href="https://doi.org/10.1126/science.2658056" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-9">Milgram, S. (1963). Behavioral study of obedience. <em>Journal of Abnormal and Social Psychology</em>, 67(4), 371–378. <a href="https://doi.org/10.1037/h0040525" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-10">Darley, J. M. &amp; Batson, C. D. (1973). "From Jerusalem to Jericho": A study of situational and dispositional variables in helping behavior. <em>Journal of Personality and Social Psychology</em>, 27(1), 100–108. <a href="https://doi.org/10.1037/h0034449" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-11">Wood, W., Quinn, J. M., &amp; Kashy, D. A. (2002). Habits in everyday life: Thought, emotion, and action. <em>Journal of Personality and Social Psychology</em>, 83(6), 1281–1297. <a href="https://doi.org/10.1037/0022-3514.83.6.1281" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-12">Hofmann, W., Vohs, K. D., &amp; Baumeister, R. F. (2012). What people desire, feel conflicted about, and try to resist in everyday life. <em>Psychological Science</em>, 23(6), 582–588. <a href="https://doi.org/10.1177/0956797612437426" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-13">Ryan, R. M. &amp; Deci, E. L. (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. <em>American Psychologist</em>, 55(1), 68–78. <a href="https://selfdeterminationtheory.org/SDT/documents/2000_RyanDeci_SDT.pdf" target="_blank" style="color: var(--accent);">pdf</a></li>
+        <li id="ref-14">Wegner, D. M., Schneider, D. J., Carter, S. R., &amp; White, T. L. (1987). Paradoxical effects of thought suppression. <em>Journal of Personality and Social Psychology</em>, 53(1), 5–13. <a href="https://doi.org/10.1037/0022-3514.53.1.5" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-15">Polivy, J. &amp; Herman, C. P. (1985). Dieting and binging: A causal analysis. <em>American Psychologist</em>, 40(2), 193–201. <a href="https://doi.org/10.1037/0003-066X.40.2.193" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-16">Thaler, R. H. &amp; Sunstein, C. R. (2008). <em>Nudge: Improving Decisions About Health, Wealth, and Happiness</em>. Yale University Press. <a href="https://yalebooks.yale.edu/book/9780300122237/nudge/" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-17">Johnson, E. J. &amp; Goldstein, D. (2003). Do defaults save lives? <em>Science</em>, 302(5649), 1338–1339. <a href="https://doi.org/10.1126/science.1091721" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-18">Gollwitzer, P. M. &amp; Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis of effects and processes. <em>Advances in Experimental Social Psychology</em>, 38, 69–119. <a href="https://doi.org/10.1016/S0065-2601(06)38002-1" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-19">Fogg, B. J. (2019). <em>Tiny Habits: The Small Changes That Change Everything</em>. Houghton Mifflin Harcourt. <a href="https://tinyhabits.com/book/" target="_blank" style="color: var(--accent);">link</a></li>
+        <li id="ref-20">Wood, W. &amp; Neal, D. T. (2007). A new look at habits and the habit-goal interface. <em>Psychological Review</em>, 114(4), 843–863. <a href="https://doi.org/10.1037/0033-295X.114.4.843" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-21">Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., &amp; Wardle, J. (2010). How are habits formed: Modelling habit formation in the real world. <em>European Journal of Social Psychology</em>, 40(6), 998–1009. <a href="https://doi.org/10.1002/ejsp.674" target="_blank" style="color: var(--accent);">doi</a></li>
+        <li id="ref-22">Dweck, C. S. (2006). <em>Mindset: The New Psychology of Success</em>. Random House. <a href="https://www.penguinrandomhouse.com/books/44330/mindset-by-carol-s-dweck-phd/" target="_blank" style="color: var(--accent);">link</a></li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Mayıs 2026</p>
+  </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script>
+    let savedPosition = null;
+
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(() => {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+  </script>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+</body>
+</html>
