@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>14 · Spine — NS Articles</title>
+  <script src="../theme.js"></script>
+  <script src="../share.js" defer></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 14 · Spine
+       İyileştirme: kalıcı sol omurga — TOC + per-section
+       progress bar + okunan/kalan zaman + scroll-spy.
+       ========================================================= */
+
+    html { scroll-behavior: smooth; }
+
+    body { font-family: var(--sans); }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 32px 56px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* --- Spine (sticky left dashboard) --- */
+    .spine {
+      position: sticky;
+      top: 32px;
+      align-self: start;
+      padding: 24px 28px 28px 0;
+      border-right: 1px solid var(--divider);
+    }
+
+    .spine-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .spine-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .spine-toc {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+
+    .toc-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      padding: 10px 0 11px;
+      text-decoration: none;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--divider);
+      transition: color 0.15s;
+      --progress: 0%;
+    }
+
+    .toc-item:hover { color: var(--text); }
+
+    .toc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      padding-top: 1px;
+    }
+
+    .toc-title {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .toc-item.done .toc-num { color: var(--accent); }
+    .toc-item.done .toc-title { color: var(--text-dim); }
+
+    .toc-item.active { color: var(--text); }
+    .toc-item.active .toc-num { color: var(--accent); font-weight: 600; }
+    .toc-item.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      height: 2px;
+      width: var(--progress);
+      background: var(--accent);
+      transition: width 0.18s ease;
+    }
+
+    /* --- Spine meta (time consumed/remaining) --- */
+    .spine-meta {
+      padding: 16px 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta-row .label { color: var(--text-muted); }
+    .meta-row .value { color: var(--text); font-weight: 600; }
+    .meta-row.accent .value { color: var(--accent); }
+
+    /* --- Spine bar (overall reading progress) --- */
+    .spine-bar {
+      height: 3px;
+      background: var(--divider);
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spine-bar-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.18s;
+    }
+
+    .spine-foot {
+      display: flex;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .spine-foot a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .spine-foot a:hover { color: var(--accent); }
+
+    /* --- Article column --- */
+    .article {
+      min-width: 0;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(40px, 5.4vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      margin-bottom: 22px;
+      max-width: 20ch;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(18px, 2vw, 21px);
+      line-height: 1.5;
+      color: var(--text-dim);
+      max-width: 38ch;
+      margin-bottom: 36px;
+    }
+
+    .hero-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 56px;
+    }
+
+    .hero-meta .accent { color: var(--accent); margin-right: 12px; font-weight: 500; }
+
+    /* --- Body sections --- */
+    .section {
+      padding-top: 48px;
+      margin-bottom: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .section + .section { border-top: 1px solid var(--divider); }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(26px, 3vw, 32px);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .article p {
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.3em;
+      font-weight: 400;
+    }
+
+    /* --- Pull quote --- */
+    .pullquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(23px, 2.9vw, 28px);
+      line-height: 1.36;
+      color: var(--text);
+      padding: 8px 0 8px 24px;
+      border-left: 2px solid var(--accent);
+      margin: 40px 0 40px 12px;
+    }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 1px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      margin: 72px 0 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .references h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .references ol { list-style: none; counter-reset: ref; }
+    .references li {
+      counter-increment: ref;
+      font-family: var(--sans);
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-dim);
+      padding: 10px 0 10px 32px;
+      position: relative;
+    }
+    .references li::before {
+      content: counter(ref) ".";
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 500;
+      top: 12px;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin: 48px 0 32px;
+      padding: 28px;
+      border: 1px solid var(--divider);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .feedback p {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text-dim);
+      margin: 0;
+      max-width: 38ch;
+    }
+
+    .feedback a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 11px 18px;
+      text-decoration: none;
+    }
+
+    /* --- Mobile: spine collapses to top strip --- */
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; gap: 28px; padding: 24px 22px 40px; }
+      .spine {
+        position: sticky;
+        top: 0;
+        padding: 12px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+        background: var(--bg);
+        z-index: 10;
+      }
+      .spine-title, .spine-foot { display: none; }
+      .spine-toc { flex-direction: row; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 8px; }
+      .toc-item { flex: 1 0 auto; border-bottom: 2px solid var(--divider); padding: 6px 10px; }
+      .spine-meta { flex-direction: row; padding: 8px 0; gap: 24px; }
+      .spine-bar { display: none; }
+      .article p { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+  <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+
+  <main class="page">
+
+    <aside class="spine" aria-label="Makale gezintisi">
+      <div class="spine-eyebrow">NS / Bilişsel</div>
+      <h2 class="spine-title">Tembel matematikçi olarak insan beyni</h2>
+
+      <nav class="spine-toc">
+        <a class="toc-item" href="#s0" data-target="s0">
+          <span class="toc-num">00</span><span class="toc-title">Giriş</span>
+        </a>
+        <a class="toc-item" href="#s1" data-target="s1">
+          <span class="toc-num">01</span><span class="toc-title">Sezginin kökeni</span>
+        </a>
+        <a class="toc-item" href="#s2" data-target="s2">
+          <span class="toc-num">02</span><span class="toc-title">Yanılgı değil, tasarım</span>
+        </a>
+        <a class="toc-item" href="#s3" data-target="s3">
+          <span class="toc-num">03</span><span class="toc-title">Sonuç</span>
+        </a>
+      </nav>
+
+      <div class="spine-meta">
+        <div class="meta-row accent">
+          <span class="label">İlerleme</span>
+          <span class="value" id="pct">0%</span>
+        </div>
+        <div class="meta-row">
+          <span class="label">Geçen</span>
+          <span class="value" id="elapsed">0 dk</span>
+        </div>
+        <div class="meta-row">
+          <span class="label">Kalan</span>
+          <span class="value" id="remaining">9 dk</span>
+        </div>
+      </div>
+
+      <div class="spine-bar"><div class="spine-bar-fill" id="bar-fill"></div></div>
+
+      <div class="spine-foot">
+        <a href="#top">↑ Yukarı</a>
+        <a href="../index.html">← NS</a>
+      </div>
+    </aside>
+
+    <article class="article" id="top">
+
+      <div class="hero-eyebrow">Bilişsel Davranış · Deneme</div>
+      <h1>Tembel bir <em>matematikçi</em> olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="hero-meta">
+        <span class="accent">M. Enes Durmuş</span> 9 dk okuma · Mayıs 2026
+      </div>
+
+      <section class="section" id="s0">
+        <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+      </section>
+
+      <section class="section" id="s1">
+        <div class="section-num">Bölüm 01</div>
+        <h2 class="section-title">Sezginin kökeni</h2>
+        <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+        <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+        <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+      </section>
+
+      <section class="section" id="s2">
+        <div class="section-num">Bölüm 02</div>
+        <h2 class="section-title">Yanılgı değil, tasarım</h2>
+        <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+        <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+        <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+      </section>
+
+      <section class="section" id="s3">
+        <div class="section-num">Bölüm 03</div>
+        <h2 class="section-title">Sonuç</h2>
+        <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+        <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+      </section>
+
+      <section class="references">
+        <h3>Kaynaklar</h3>
+        <ol>
+          <li id="r1">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li id="r2">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li id="r3">Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun?</p>
+        <a href="#">Geri bildirim</a>
+      </section>
+
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+
+  <script>
+    (function() {
+      var items = Array.prototype.slice.call(document.querySelectorAll('.toc-item'));
+      var sections = items.map(function(i) { return document.getElementById(i.getAttribute('data-target')); }).filter(Boolean);
+      var totalMins = 9;
+      var elapsedEl = document.getElementById('elapsed');
+      var remainingEl = document.getElementById('remaining');
+      var pctEl = document.getElementById('pct');
+      var barFill = document.getElementById('bar-fill');
+
+      function onScroll() {
+        var y = window.scrollY + 100;
+        var active = -1;
+        sections.forEach(function(s, i) {
+          if (s.offsetTop <= y) active = i;
+        });
+
+        items.forEach(function(item, i) {
+          item.classList.toggle('active', i === active);
+          item.classList.toggle('done', i < active);
+        });
+
+        if (active >= 0 && active < sections.length) {
+          var cur = sections[active];
+          var next = sections[active + 1];
+          var start = cur.offsetTop;
+          var end = next ? next.offsetTop : (document.body.scrollHeight - window.innerHeight);
+          var progress = Math.min(1, Math.max(0, (y - start) / Math.max(1, end - start)));
+          items[active].style.setProperty('--progress', (progress * 100) + '%');
+        }
+
+        var total = Math.max(1, document.body.scrollHeight - window.innerHeight);
+        var ratio = Math.min(1, Math.max(0, window.scrollY / total));
+        var elapsed = Math.round(ratio * totalMins);
+        var remaining = Math.max(0, totalMins - elapsed);
+        elapsedEl.textContent = elapsed + ' dk';
+        remainingEl.textContent = remaining + ' dk';
+        pctEl.textContent = Math.round(ratio * 100) + '%';
+        barFill.style.width = (ratio * 100) + '%';
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

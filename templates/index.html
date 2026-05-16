@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
     /* =========================================================
@@ -837,6 +837,303 @@
     }
 
     /* =========================================================
+       Card 13 · Annotated — NS palette + sidenote
+       ========================================================= */
+    .card-13 .body {
+      display: grid;
+      grid-template-columns: 1fr 130px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card-13 .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .card-13 .title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: -0.016em;
+      margin-bottom: 10px;
+    }
+
+    .card-13 .title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+    .card-13 .dek {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-13 .sidenote {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--text-dim);
+      padding-left: 10px;
+      border-left: 1px solid var(--accent);
+      margin-top: 18px;
+    }
+
+    .card-13 .sidenote .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .card-13 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 14 · Spine — mini left dashboard
+       ========================================================= */
+    .card-14 .body {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .card-14 .mini-spine {
+      padding-right: 14px;
+      border-right: 1px solid var(--divider);
+    }
+
+    .card-14 .mini-spine .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .card-14 .toc-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .card-14 .toc-mini .item {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 6px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--divider);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      line-height: 1.3;
+      color: var(--text-dim);
+    }
+
+    .card-14 .toc-mini .item .n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .card-14 .toc-mini .item.active {
+      color: var(--text);
+      position: relative;
+    }
+    .card-14 .toc-mini .item.active .n { color: var(--accent); font-weight: 600; }
+    .card-14 .toc-mini .item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .card-14 .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .card-14 .title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+    }
+
+    .card-14 .dek {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-14 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 15 · Beacon — key idea callout
+       ========================================================= */
+    .card-15 .key-idea {
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      margin-bottom: 16px;
+    }
+
+    .card-15 .key-idea .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .card-15 .key-idea .text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.42;
+      color: var(--text);
+    }
+
+    .card-15 .title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 1.05;
+      letter-spacing: -0.016em;
+      margin-bottom: 8px;
+    }
+
+    .card-15 .title em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+    .card-15 .dek {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+
+    .card-15 .essence {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: baseline;
+      padding-top: 10px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .card-15 .essence .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .card-15 .essence .text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .card-15 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 16 · Refined — premium typographic detail
+       ========================================================= */
+    .card-16 {
+      padding: 30px 28px 22px;
+    }
+
+    .card-16 .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .card-16 .title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      margin-bottom: 14px;
+    }
+
+    .card-16 .title em { font-style: italic; color: var(--accent); }
+
+    .card-16 .pullquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 15.5px;
+      line-height: 1.35;
+      color: var(--text);
+      margin: 0 0 12px 22px;
+      position: relative;
+      max-width: 24em;
+    }
+
+    .card-16 .pullquote::before {
+      content: "\201C";
+      position: absolute;
+      left: -22px;
+      top: -8px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .card-16 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.24em;
+      font-size: 10.5px;
+      border-top: 1px solid var(--text);
+    }
+
+    /* =========================================================
        Footer note
        ========================================================= */
     .gallery-foot {
@@ -1093,9 +1390,82 @@
         </div>
       </a>
 
+      <!-- 13 Annotated -->
+      <a href="13-annotated.html" class="card card-13">
+        <div class="body">
+          <div>
+            <div class="kicker">13 · NS palette + sidenotes</div>
+            <div class="title">Annotated</div>
+            <div class="dek">Mevcut NS kimliği (Playfair + DM Sans, krem palet) üzerine Tufte sidenotes eklemiş hali.</div>
+          </div>
+          <div class="sidenote"><span class="num">1</span>Notlar paragrafın yanında, dipnotta değil.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">13</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 14 Spine -->
+      <a href="14-spine.html" class="card card-14">
+        <div class="body">
+          <div class="mini-spine">
+            <div class="eyebrow">NS / 14</div>
+            <div class="toc-mini">
+              <div class="item"><span class="n">00</span>Giriş</div>
+              <div class="item active"><span class="n">01</span>Köken</div>
+              <div class="item"><span class="n">02</span>Tasarım</div>
+              <div class="item"><span class="n">03</span>Sonuç</div>
+            </div>
+          </div>
+          <div>
+            <div class="kicker">14 · Sol omurga</div>
+            <div class="title">Spine</div>
+            <div class="dek">Kalıcı sol dashboard: TOC + per-bölüm progress + okunan/kalan dakika, scroll-spy ile aktif bölüm.</div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">14</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 15 Beacon -->
+      <a href="15-beacon.html" class="card card-15">
+        <div>
+          <div class="key-idea">
+            <span class="label">Anahtar fikir</span>
+            <div class="text">Her bölüm bir kısa cümleyle açılır, bir kısa cümleyle kapanır.</div>
+          </div>
+          <div class="title">Beacon</div>
+          <div class="dek">Bölüm başında bold "anahtar fikir", sonunda italik "bölümün özü". Yapı hatırlama yardımcısı.</div>
+          <div class="essence">
+            <span class="label">Özü</span>
+            <span class="text">Okur ne taşıyacağını her zaman bilir.</span>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">15</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 16 Refined -->
+      <a href="16-refined.html" class="card card-16">
+        <div>
+          <div class="kicker">16 · Typografik craft</div>
+          <div class="title">Tembel bir <em>matematikçi</em></div>
+          <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+        </div>
+        <div class="card-foot">
+          <span class="num">16</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
     </div>
 
-    <p class="gallery-foot">12 taslak · aynı içerik · farklı tipografi</p>
+    <p class="gallery-foot">16 taslak · aynı içerik · farklı tipografi</p>
   </main>
 
   <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
