@@ -10,8 +10,9 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 
 - **`index.html`** — Curated landing page (previews + key articles only)
 - **`all.html`** — Full listing of all articles
-- **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, divider, home logo
+- **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, share toggle, share modal, divider, home logo
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
+- **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). Self-contained; no per-page setup beyond loading the script and rendering the toggle button
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
 
 ## Theme System
@@ -37,12 +38,23 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **One body font per article**: Pick a single body font (`var(--sans)` or one explicit serif) and use it consistently across ALL body content of that article: hero subtitle, intro paragraphs, sections, sidebars, quiz/interactive blocks, callouts, post-quiz continuation, footer text. Headings can use `var(--serif)` (Playfair) and small UI labels can use a mono font, but body copy must not switch fonts mid-article. If you load a font in the `<link>` tag, every place it appears must follow the same rule
 - **Justified body text**: All body paragraphs in articles must use `text-align: justify`. Apply it to every paragraph container in the article, including quiz/interactive blocks and post-quiz continuation sections. Do NOT justify hero subtitles, captions, list items, or single-line UI text
 
-## Page Footer
+## Page Chrome
 
-Every page (except `index.html`) must have these at the bottom, before `</body>`:
+Every page (article, gallery, preview) must include the same top-right toolbar and bottom-center signature.
+
+**Top-right toolbar** (fixed, right-to-left in this order):
+
+1. **Theme toggle**: `<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">` with moon + sun SVGs. Requires `<script src="theme.js"></script>` in `<head>`.
+2. **Share toggle**: `<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">` with the three-dot share SVG (placed immediately after `theme-toggle`). Requires `<script src="share.js" defer></script>` in `<head>`. Styles already live in `styles.css`; `share.js` auto-creates the modal on first open.
+
+**Bottom-center signature** (except `index.html`), before `</body>`:
 
 1. **Home logo**: `<a href="index.html" class="home-logo"><span>NS Articles</span></a>` — navigates back to the landing page
 2. **Author credit**: `by M. Enes Durmuş` — displayed below or alongside the home logo
+
+Pages in subdirectories (e.g. `templates/`) use `../theme.js`, `../share.js`, `../styles.css`, `../index.html` for the home logo.
+
+Utility/tooling pages (e.g. `article-carousel.html`, `carousel-generator.html`) do not need the share button.
 
 ## Development
 
@@ -57,8 +69,8 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. Add `<script src="theme.js"></script>` and `<link rel="stylesheet" href="styles.css">` in `<head>`
-4. Add the grain overlay, theme toggle button, and home logo + author credit
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, and `<link rel="stylesheet" href="styles.css">`
+4. In `<body>`: add the grain overlay, theme toggle button, share toggle button (immediately after theme toggle), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
 
