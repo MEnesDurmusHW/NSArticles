@@ -8,158 +8,592 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Grotesk:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', -apple-system, sans-serif; }
+    /* =========================================================
+       Gallery — each card mimics its template's typographic voice
+       ========================================================= */
 
-    .page {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 88px 32px 56px;
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
     }
 
-    .gallery-eyebrow {
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 72px 32px 56px;
+    }
+
+    /* --- Page header (sade, jenerik) --- */
+    .head-eyebrow {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    .gallery-title {
+    .head-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 500;
-      font-size: clamp(36px, 5vw, 52px);
+      font-size: clamp(34px, 5vw, 48px);
       line-height: 1.1;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.018em;
       color: var(--text);
-      margin-bottom: 16px;
-      max-width: 18ch;
+      margin-bottom: 12px;
     }
 
-    .gallery-lede {
+    .head-lede {
       font-family: 'Inter', sans-serif;
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.55;
       color: var(--text-dim);
       max-width: 56ch;
-      margin-bottom: 64px;
-      font-weight: 400;
+      margin-bottom: 56px;
     }
 
-    .legend {
+    /* --- Grid --- */
+    .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 48px;
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.5;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .legend-item strong {
-      display: block;
-      color: var(--text);
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      margin-bottom: 3px;
-    }
-
-    .templates {
-      list-style: none;
-      counter-reset: tpl;
-      border-top: 1px solid var(--divider);
-    }
-
-    .templates li {
-      counter-increment: tpl;
-      border-bottom: 1px solid var(--divider);
-    }
-
-    .templates a {
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 24px;
-      padding: 28px 8px;
-      align-items: baseline;
+      min-height: 260px;
+      padding: 28px 28px 22px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 0;
       color: var(--text);
       text-decoration: none;
-      transition: background 0.18s ease;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.18s ease, transform 0.18s ease;
     }
 
-    .templates a:hover {
-      background: var(--surface);
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
-    .tpl-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--divider);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-foot .num { color: var(--accent); font-weight: 600; }
+    .card-foot .arrow { color: var(--text-dim); transition: color 0.18s, transform 0.18s; }
+    .card:hover .card-foot .arrow { color: var(--accent); transform: translateX(4px); }
+
+    /* =========================================================
+       Card 01 · Editorial — Playfair + Source Serif 4
+       ========================================================= */
+    .card-01 .kicker {
+      font-family: 'Source Serif 4', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .card-01 .title {
+      font-family: 'Playfair Display', Georgia, serif;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .card-01 .dek {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--text-dim);
+      text-align: center;
+      max-width: 26ch;
+      margin: 0 auto;
+    }
+
+    .card-01 .card-foot {
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+    }
+
+    /* =========================================================
+       Card 02 · Spread — Space Grotesk + Inter
+       ========================================================= */
+    .card-02 .top {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--text);
+      margin-bottom: 18px;
+    }
+
+    .card-02 .top .accent { color: var(--accent); }
+
+    .card-02 .body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: baseline;
+    }
+
+    .card-02 .num-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 84px;
+      line-height: 0.84;
+      letter-spacing: -0.04em;
       color: var(--accent);
     }
 
-    .tpl-body {
-      min-width: 0;
+    .card-02 .title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
     }
 
-    .tpl-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 500;
-      font-size: 26px;
-      line-height: 1.15;
-      letter-spacing: -0.015em;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .tpl-desc {
-      font-size: 14.5px;
-      line-height: 1.55;
+    .card-02 .dek {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
       color: var(--text-dim);
-      max-width: 56ch;
     }
 
-    .tpl-meta {
+    .card-02 .card-foot {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      align-self: center;
-      white-space: nowrap;
+      letter-spacing: 0.18em;
+      border-top: 4px solid var(--accent);
+      padding-top: 14px;
     }
 
-    .templates a:hover .tpl-meta { color: var(--accent); }
+    /* =========================================================
+       Card 03 · Letter — Inter only, sessiz
+       ========================================================= */
+    .card-03 {
+      padding: 36px 32px 24px;
+    }
 
-    .footer-note {
-      margin-top: 56px;
-      padding: 20px 0;
+    .card-03 .kicker {
+      font-family: 'Inter', sans-serif;
       font-size: 13px;
       color: var(--text-muted);
-      text-align: center;
-      border-top: 1px solid var(--divider);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      font-weight: 400;
     }
 
-    @media (max-width: 600px) {
-      .page { padding: 56px 22px 40px; }
-      .templates a {
-        grid-template-columns: 48px 1fr;
-        gap: 16px;
-        padding: 22px 4px;
-      }
-      .tpl-meta { display: none; }
-      .tpl-name { font-size: 22px; }
+    .card-03 .kicker .accent { color: var(--accent); font-weight: 500; }
+
+    .card-03 .title {
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1.18;
+      letter-spacing: -0.022em;
+      margin-bottom: 16px;
+    }
+
+    .card-03 .dek {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text-dim);
+      font-weight: 400;
+      max-width: 38ch;
+    }
+
+    .card-03 .card-foot {
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top-color: transparent;
+    }
+
+    /* =========================================================
+       Card 04 · Print — IBM Plex Mono + Sans, brütalist
+       ========================================================= */
+    .card-04 {
+      padding: 0;
+      border: 1px solid var(--text);
+      background: var(--bg);
+    }
+
+    .card-04:hover { border-color: var(--accent); }
+
+    .card-04 .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .card-04 .topbar .accent { color: var(--accent); font-weight: 500; }
+
+    .card-04 .body {
+      padding: 24px 24px 12px;
+      flex: 1;
+    }
+
+    .card-04 .title {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .card-04 .dek {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-04 .card-foot {
+      margin: 0;
+      padding: 12px 24px;
+      border-top: 6px double var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Card 05 · Marginalia — EB Garamond + sidenote
+       ========================================================= */
+    .card-05 .body {
+      display: grid;
+      grid-template-columns: 1fr 130px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card-05 .kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .card-05 .title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: -0.012em;
+      margin-bottom: 10px;
+    }
+
+    .card-05 .dek {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+
+    .card-05 .sidenote {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--text-dim);
+      padding-left: 10px;
+      border-left: 1px solid var(--accent);
+      margin-top: 24px;
+    }
+
+    .card-05 .sidenote .num {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-right: 4px;
+    }
+
+    .card-05 .card-foot {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* =========================================================
+       Card 06 · Broadsheet — Oswald + Lora, gazete
+       ========================================================= */
+    .card-06 .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-top: 2px solid var(--text);
+      border-bottom: 1px solid var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .card-06 .masthead .brand {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--text);
+    }
+
+    .card-06 .masthead .accent { color: var(--accent); }
+
+    .card-06 .hero {
+      text-align: center;
+    }
+
+    .card-06 .kicker {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .card-06 .title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      line-height: 0.96;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .card-06 .dek {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-dim);
+      max-width: 28ch;
+      margin: 0 auto 12px;
+    }
+
+    .card-06 .asterism {
+      font-family: 'Lora', serif;
+      color: var(--accent);
+      letter-spacing: 0.5em;
+      font-size: 12px;
+      padding-left: 0.5em;
+    }
+
+    .card-06 .card-foot {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+    }
+
+    /* =========================================================
+       Card 07 · Atelier — Variable Fraunces, watermark
+       ========================================================= */
+    .card-07 {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-07 .watermark {
+      position: absolute;
+      right: -20px;
+      top: -28px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 100;
+      font-style: italic;
+      font-size: 220px;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .card-07 > * { position: relative; z-index: 1; }
+
+    .card-07 .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .card-07 .title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 100;
+      font-size: 56px;
+      line-height: 0.92;
+      letter-spacing: -0.024em;
+      margin-bottom: 10px;
+    }
+
+    .card-07 .title em {
+      font-style: italic;
+      font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 100;
+      color: var(--accent);
+    }
+
+    .card-07 .dek {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 22, "wght" 400, "SOFT" 60;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--text-dim);
+      max-width: 32ch;
+    }
+
+    .card-07 .card-foot {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.2em;
+      border-top: 2px solid var(--accent);
+    }
+
+    /* =========================================================
+       Card 08 · Codex — Spectral, kitap bölümü
+       ========================================================= */
+    .card-08 {
+      text-align: center;
+    }
+
+    .card-08 .chapter-mark {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .card-08 .chapter-num {
+      font-family: 'Spectral', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .card-08 .rule {
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 20px;
+      opacity: 0.6;
+    }
+
+    .card-08 .title {
+      font-family: 'Spectral', serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 1.15;
+      letter-spacing: -0.014em;
+      margin-bottom: 10px;
+    }
+
+    .card-08 .dek {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text-dim);
+      max-width: 30ch;
+      margin: 0 auto;
+    }
+
+    .card-08 .card-foot {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      letter-spacing: 0.18em;
+    }
+
+    /* =========================================================
+       Footer note
+       ========================================================= */
+    .gallery-foot {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--divider);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Responsive: single column on mobile */
+    @media (max-width: 760px) {
+      .gallery { grid-template-columns: 1fr; }
+      .page { padding: 48px 22px 40px; }
+      .card-05 .body { grid-template-columns: 1fr; }
+      .card-05 .sidenote { margin-top: 12px; }
+      .card-07 .watermark { font-size: 160px; opacity: 0.08; }
+    }
+
+    @media (max-width: 480px) {
+      .card { min-height: 220px; padding: 22px 22px 18px; }
+      .card-01 .title { font-size: 36px; }
+      .card-02 .num-big { font-size: 64px; }
+      .card-02 .title { font-size: 26px; }
+      .card-04 .title { font-size: 30px; }
+      .card-05 .title { font-size: 30px; }
+      .card-06 .title { font-size: 30px; }
+      .card-07 .title { font-size: 46px; }
+      .card-08 .title { font-size: 30px; }
     }
   </style>
 </head>
@@ -171,100 +605,140 @@
   </button>
 
   <main class="page">
-    <div class="gallery-eyebrow">NS Articles · İç Yapı</div>
-    <h1 class="gallery-title">Makale tasarım taslakları</h1>
-    <p class="gallery-lede">Her taslak aynı Türkçe makaleyi (Simon, Kahneman, Gigerenzer üzerine kısa bir deneme) farklı bir tipografi diliyle sunar. Karar verirken yalnızca tasarımı karşılaştırmak için içerik sabit tutuldu. Dark/light her ikisinde test et.</p>
+    <div class="head-eyebrow">NS Articles · İç Yapı</div>
+    <h1 class="head-title">Makale tasarım taslakları</h1>
+    <p class="head-lede">Her kart kendi şablonunun tipografik dilini taklit eder. Karta tıklayınca aynı Türkçe makale (Simon, Kahneman, Gigerenzer üzerine bir deneme) tam boy görüntülenir. Dark/light her ikisinde test et.</p>
 
-    <div class="legend">
-      <div class="legend-item"><strong>Tema</strong>Sağ üstteki butondan dark/light geçişi.</div>
-      <div class="legend-item"><strong>Mobil</strong>Hepsi 320px'e kadar test edildi.</div>
-      <div class="legend-item"><strong>İçerik</strong>Yaklaşık 9 dakikalık bir okuma.</div>
+    <div class="gallery">
+
+      <!-- 01 Editorial -->
+      <a href="01-editorial.html" class="card card-01">
+        <div>
+          <div class="kicker">Bilişsel Davranış · Deneme</div>
+          <div class="title">Editorial</div>
+          <div class="dek">Klasik dergi · drop cap · küçük majüskül başlıklar · dar serif kolon</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">I</span>
+          <span>Görüntüle <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 02 Spread -->
+      <a href="02-spread.html" class="card card-02">
+        <div>
+          <div class="top"><span class="accent">NS</span> / SPREAD &nbsp;·&nbsp; CİLT 02</div>
+          <div class="body">
+            <span class="num-big">02</span>
+            <div>
+              <div class="title">Spread</div>
+              <div class="dek">Swiss modüler · asimetrik grid · dev display rakamlar · marginalia rail</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">02</span>
+          <span>Aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 03 Letter -->
+      <a href="03-letter.html" class="card card-03">
+        <div>
+          <div class="kicker"><span class="accent">03</span> &nbsp;·&nbsp; sessiz longform</div>
+          <div class="title">Letter</div>
+          <div class="dek">Tek kolon, geniş whitespace, italik bölüm başlıkları. Neredeyse renksiz palet, yalnızca Inter.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">03</span>
+          <span>oku <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 04 Print -->
+      <a href="04-print.html" class="card card-04">
+        <div class="topbar">
+          <span><span class="accent">NS</span> / DOSYA 04</span>
+          <span>PRINT</span>
+        </div>
+        <div class="body">
+          <div class="title">Print</div>
+          <div class="dek">Brütalist editorial · mono başlık + sans gövde · 1px sayfa çerçevesi · double rule pull quote.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">[04]</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 05 Marginalia -->
+      <a href="05-marginalia.html" class="card card-05">
+        <div class="body">
+          <div>
+            <div class="kicker">05 · Akademik</div>
+            <div class="title">Marginalia</div>
+            <div class="dek">Notlar dipnotta değil, paragrafın yanındaki margin'da. Tufte tekniği, EB Garamond.</div>
+          </div>
+          <div class="sidenote"><span class="num">1</span>Sidenote tam buraya düşer, metnin yanına.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">05</span>
+          <span>Görüntüle <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 06 Broadsheet -->
+      <a href="06-broadsheet.html" class="card card-06">
+        <div>
+          <div class="masthead">
+            <span class="brand">NS Articles</span>
+            <span>Pazar <span class="accent">·</span> Dosya 06</span>
+          </div>
+          <div class="hero">
+            <div class="kicker">Bilişsel Davranış</div>
+            <div class="title">Broadsheet</div>
+            <div class="dek">Pazar gazetesi tefrikası; condensed display, italik byline, decorative drop cap.</div>
+            <div class="asterism">* * *</div>
+          </div>
+        </div>
+        <div class="card-foot">
+          <span class="num">06</span>
+          <span>Oku <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 07 Atelier -->
+      <a href="07-atelier.html" class="card card-07">
+        <span class="watermark" aria-hidden="true">7</span>
+        <div>
+          <div class="kicker">07 · Variable Display</div>
+          <div class="title"><em>Atelier</em></div>
+          <div class="dek">Variable Fraunces; aynı font ailesi opsz aksisiyle hem dev display hem rahat gövde.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">07</span>
+          <span>aç <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <!-- 08 Codex -->
+      <a href="08-codex.html" class="card card-08">
+        <div>
+          <div class="chapter-mark">Sekizinci Bölüm</div>
+          <div class="chapter-num">VIII</div>
+          <div class="rule"></div>
+          <div class="title">Codex</div>
+          <div class="dek">Penguin Classics havası; centered hero, italik dek, klasik girintili paragraflar, Spectral.</div>
+        </div>
+        <div class="card-foot">
+          <span class="num">viii</span>
+          <span>oku <span class="arrow">→</span></span>
+        </div>
+      </a>
+
     </div>
 
-    <ol class="templates">
-      <li>
-        <a href="01-editorial.html">
-          <span class="tpl-num">01</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Editorial</div>
-            <div class="tpl-desc">Klasik dergi denemesi. Dar serif kolon, accent renkli drop cap, küçük majüskül başlıklar, ince vertical bar pull quote. Playfair Display + Source Serif 4.</div>
-          </div>
-          <span class="tpl-meta">Klasik Dergi</span>
-        </a>
-      </li>
-      <li>
-        <a href="02-spread.html">
-          <span class="tpl-num">02</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Spread</div>
-            <div class="tpl-desc">Swiss modüler. Geniş asimetrik grid, dev display rakamlar, sağda sticky marginalia rail, accent rule banner pull quote. Space Grotesk + Inter.</div>
-          </div>
-          <span class="tpl-meta">Swiss Modüler</span>
-        </a>
-      </li>
-      <li>
-        <a href="03-letter.html">
-          <span class="tpl-num">03</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Letter</div>
-            <div class="tpl-desc">Sessiz longform. Tek kolon, geniş whitespace, italik bölüm başlıkları, neredeyse renksiz palet. Yalnızca Inter, kalın hiyerarşi olmadan.</div>
-          </div>
-          <span class="tpl-meta">Sessiz Longform</span>
-        </a>
-      </li>
-      <li>
-        <a href="04-print.html">
-          <span class="tpl-num">04</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Print</div>
-            <div class="tpl-desc">Brütalist editorial. Mono başlık + sans gövde, 1px çerçeveli sayfa, double rule pull quote, mono tipografik işaretler. IBM Plex Sans + Mono.</div>
-          </div>
-          <span class="tpl-meta">Brütalist</span>
-        </a>
-      </li>
-      <li>
-        <a href="05-marginalia.html">
-          <span class="tpl-num">05</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Marginalia</div>
-            <div class="tpl-desc">Tufte/akademik. Kaynaklar ve notlar paragrafın yanındaki margin'da, dipnotta değil. Klasik kitap dizimi, geniş sağ margin. EB Garamond.</div>
-          </div>
-          <span class="tpl-meta">Akademik</span>
-        </a>
-      </li>
-      <li>
-        <a href="06-broadsheet.html">
-          <span class="tpl-num">06</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Broadsheet</div>
-            <div class="tpl-desc">Pazar gazetesi tefrikası. Condensed bold display başlık, dateline, italik byline, asterism bölüm ayırıcıları, decorative drop cap. Oswald + Lora.</div>
-          </div>
-          <span class="tpl-meta">Gazete Tefrikası</span>
-        </a>
-      </li>
-      <li>
-        <a href="07-atelier.html">
-          <span class="tpl-num">07</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Atelier</div>
-            <div class="tpl-desc">Variable Fraunces. Aynı font ailesi opsz aksisiyle hem dev display hem rahat gövde, kontur accent renk bloğu, modern dergi havası.</div>
-          </div>
-          <span class="tpl-meta">Variable Display</span>
-        </a>
-      </li>
-      <li>
-        <a href="08-codex.html">
-          <span class="tpl-num">08</span>
-          <div class="tpl-body">
-            <div class="tpl-name">Codex</div>
-            <div class="tpl-desc">Kitap bölümü açılışı. Penguin Classics havası, centered hero, italik dek, klasik girintili paragraf düzeni, asterism, small caps chapter label. Spectral.</div>
-          </div>
-          <span class="tpl-meta">Kitap Bölümü</span>
-        </a>
-      </li>
-    </ol>
-
-    <p class="footer-note">8 taslak · aynı içerik · farklı tipografi</p>
+    <p class="gallery-foot">8 taslak · aynı içerik · farklı tipografi</p>
   </main>
 
   <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
