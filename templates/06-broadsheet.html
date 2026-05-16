@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 · Broadsheet — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 06 · Broadsheet
+       Pazar gazetesi tefrikası: condensed display + Lora gövde.
+       ========================================================= */
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 36px 28px 60px;
+    }
+
+    /* --- Masthead / Dateline --- */
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-top: 3px solid var(--text);
+      border-bottom: 1px solid var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 48px;
+    }
+
+    .masthead .brand {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--text);
+    }
+
+    .masthead .accent { color: var(--accent); font-weight: 500; }
+
+    /* --- Hero (centered, gazete kapağı) --- */
+    .hero {
+      text-align: center;
+      padding: 16px 0 40px;
+    }
+
+    .kicker {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(46px, 7.6vw, 84px);
+      line-height: 0.96;
+      letter-spacing: -0.012em;
+      text-transform: uppercase;
+      color: var(--text);
+      max-width: 16ch;
+      margin: 0 auto 28px;
+    }
+
+    .hero-sub {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(19px, 2.2vw, 22px);
+      line-height: 1.42;
+      color: var(--text-dim);
+      max-width: 38ch;
+      margin: 0 auto 36px;
+    }
+
+    .byline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    .byline .author {
+      font-style: normal;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    /* --- Hairline + rule with center diamond --- */
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0;
+      color: var(--text-muted);
+    }
+
+    .rule::before, .rule::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .rule .mark {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      letter-spacing: 0.6em;
+      color: var(--accent);
+      padding-left: 0.6em;
+    }
+
+    /* --- Article body --- */
+    .article p {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.74;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.2em;
+      font-weight: 400;
+    }
+
+    /* Decorative drop cap (square framed) */
+    .article > p:first-of-type::first-letter {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 4.4em;
+      line-height: 0.9;
+      float: left;
+      padding: 8px 14px 4px;
+      margin: 6px 14px 0 0;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--text);
+      text-transform: uppercase;
+    }
+
+    /* --- Section title (gazete tefrika başlığı) --- */
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: center;
+      margin: 48px 0 24px;
+    }
+
+    /* --- Pull quote (decorative) --- */
+    .pullquote {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(24px, 3.2vw, 30px);
+      line-height: 1.35;
+      color: var(--text);
+      text-align: center;
+      padding: 32px 24px;
+      margin: 48px auto;
+      max-width: 28em;
+      position: relative;
+    }
+
+    .pullquote::before,
+    .pullquote::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto;
+    }
+
+    .pullquote::before { margin-bottom: 24px; }
+    .pullquote::after { margin-top: 24px; }
+
+    /* --- Refs (superscript with serif numerals) --- */
+    .ref {
+      font-family: 'Lora', serif;
+      font-size: 0.72em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-style: italic;
+      padding: 0 1px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      margin: 80px 0 32px;
+      padding: 32px 28px;
+      background: var(--surface);
+      border-top: 3px solid var(--text);
+      border-bottom: 1px solid var(--text);
+    }
+
+    .references h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      font-family: 'Lora', serif;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text-dim);
+      padding: 8px 0 8px 36px;
+      position: relative;
+    }
+
+    .references li::before {
+      content: counter(ref) ".";
+      position: absolute;
+      left: 12px;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin: 48px 0 32px;
+      padding: 28px 24px;
+      text-align: center;
+      border: 1px dashed var(--text);
+    }
+
+    .feedback p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .feedback a {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--text);
+      padding: 10px 20px;
+      text-decoration: none;
+      border: 1px solid var(--text);
+    }
+
+    .feedback a:hover { background: var(--accent); border-color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .page { padding: 24px 20px 40px; }
+      .masthead { font-size: 9.5px; letter-spacing: 0.16em; padding: 12px 0; gap: 12px; }
+      .hero { padding: 8px 0 24px; }
+      .article p { font-size: 17px; line-height: 1.68; }
+      .article > p:first-of-type::first-letter {
+        font-size: 3.8em;
+        padding: 6px 10px 2px;
+        margin: 4px 10px 0 0;
+      }
+      .references { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+    <div class="masthead">
+      <span class="brand">NS Articles</span>
+      <span>Pazar <span class="accent">·</span> 16 Mayıs 2026 <span class="accent">·</span> Dosya 06</span>
+    </div>
+
+    <section class="hero">
+      <div class="kicker">Bilişsel Davranış · Deneme</div>
+      <h1>Tembel bir matematikçi olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="byline">
+        <span>Yazan</span>
+        <span class="author">M. Enes Durmuş</span>
+      </div>
+    </section>
+
+    <div class="rule"><span class="mark">* * *</span></div>
+
+    <article class="article">
+      <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+
+      <h2 class="section-title">Sezginin Kökeni</h2>
+
+      <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+
+      <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+      <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+
+      <h2 class="section-title">Yanılgı Değil, Tasarım</h2>
+
+      <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+
+      <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+
+      <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+
+      <div class="rule"><span class="mark">* * *</span></div>
+
+      <h2 class="section-title">Sonuç</h2>
+
+      <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+
+      <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+
+      <section class="references">
+        <h3>Kaynaklar</h3>
+        <ol>
+          <li id="r1">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li id="r2">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li id="r3">Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun?</p>
+        <a href="#">Geri Bildirim Ver</a>
+      </section>
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>

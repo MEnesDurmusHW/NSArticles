@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 · Spread — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 02 · Spread
+       Swiss modüler: asimetrik grid, dev display, marginalia.
+       ========================================================= */
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-feature-settings: "kern", "liga", "ss01", "cv11";
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 48px 60px;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      padding: 32px 0 56px;
+      border-bottom: 3px solid var(--text);
+      margin-bottom: 64px;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .eyebrow-row .eyebrow {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(48px, 9vw, 112px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(18px, 1.9vw, 22px);
+      line-height: 1.44;
+      font-weight: 400;
+      color: var(--text-dim);
+      max-width: 56ch;
+    }
+
+    /* --- Asymmetric layout: main + side rail --- */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 64px;
+    }
+
+    .aside {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .aside-sticky {
+      position: sticky;
+      top: 40px;
+    }
+
+    .aside-block {
+      margin-bottom: 32px;
+      padding-top: 16px;
+      border-top: 2px solid var(--text);
+    }
+
+    .aside-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .aside-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+
+    .aside-toc {
+      list-style: none;
+    }
+
+    .aside-toc li {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--divider);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .aside-toc li:last-child { border-bottom: none; }
+
+    .aside-toc .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .aside-toc a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .aside-toc a:hover { color: var(--accent); }
+
+    /* --- Article --- */
+    .article p {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.3em;
+      font-weight: 400;
+    }
+
+    .article p:first-of-type {
+      font-size: 21px;
+      line-height: 1.55;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: end;
+      gap: 28px;
+      margin: 88px 0 36px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--text);
+    }
+
+    .section-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(64px, 9vw, 110px);
+      line-height: 0.84;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: clamp(24px, 3.2vw, 36px);
+      line-height: 1.06;
+      letter-spacing: -0.022em;
+      color: var(--text);
+      padding-bottom: 8px;
+    }
+
+    /* --- Pull quote (banner) --- */
+    .pullquote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: clamp(24px, 3.4vw, 36px);
+      line-height: 1.18;
+      letter-spacing: -0.022em;
+      color: var(--text);
+      padding: 40px 0;
+      margin: 56px 0;
+      border-top: 4px solid var(--accent);
+      border-bottom: 4px solid var(--accent);
+      text-align: left;
+    }
+
+    .pullquote-attr {
+      display: block;
+      margin-top: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 2px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References block --- */
+    .references {
+      margin: 88px 0 32px;
+      padding-top: 24px;
+      border-top: 3px solid var(--text);
+    }
+
+    .references h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .references ol {
+      list-style: none;
+    }
+
+    .references li {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--divider);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-dim);
+    }
+
+    .references li::before {
+      counter-increment: ref;
+      content: counter(ref, decimal-leading-zero);
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .references ol { counter-reset: ref; }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin-top: 56px;
+      padding: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .feedback p {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 40ch;
+      margin: 0;
+    }
+
+    .feedback a {
+      display: inline-block;
+      padding: 12px 22px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      text-decoration: none;
+      border-radius: 0;
+    }
+
+    .feedback a:hover { opacity: 0.88; }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; gap: 40px; }
+      .aside { order: 2; }
+      .aside-sticky { position: static; }
+      .page { padding: 40px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 32px 20px; }
+      .article p { font-size: 17px; line-height: 1.66; }
+      .article p:first-of-type { font-size: 19px; }
+      .section-header { grid-template-columns: 1fr; gap: 8px; }
+      .pullquote { font-size: 22px; padding: 28px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow-row">
+        <span class="eyebrow">Bilişsel Davranış / Cilt 03</span>
+        <span>2026 · 9 dk okuma</span>
+      </div>
+      <h1>Tembel bir matematikçi olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+    </section>
+
+    <div class="layout">
+      <article class="article">
+        <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+
+        <header class="section-header" id="s1">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Sezginin kökeni</h2>
+        </header>
+
+        <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+
+        <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+        <blockquote class="pullquote">
+          Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.
+          <span class="pullquote-attr">— Bölüm 01</span>
+        </blockquote>
+
+        <header class="section-header" id="s2">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Yanılgı değil, tasarım</h2>
+        </header>
+
+        <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+
+        <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+
+        <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+
+        <header class="section-header" id="s3">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Sonuç</h2>
+        </header>
+
+        <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+
+        <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+
+        <section class="references">
+          <h3>Kaynaklar</h3>
+          <ol>
+            <li id="r1"><div>Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</div></li>
+            <li id="r2"><div>Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</div></li>
+            <li id="r3"><div>Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</div></li>
+          </ol>
+        </section>
+
+        <section class="feedback">
+          <p>Bu yazı hakkında ne düşünüyorsun? Geri bildirimin ileride yazılan parçaları şekillendiriyor.</p>
+          <a href="#">Geri bildirim ver</a>
+        </section>
+      </article>
+
+      <aside class="aside">
+        <div class="aside-sticky">
+          <div class="aside-block">
+            <div class="aside-label">İçindekiler</div>
+            <ul class="aside-toc">
+              <li><span class="num">01</span><a href="#s1">Sezginin kökeni</a></li>
+              <li><span class="num">02</span><a href="#s2">Yanılgı değil, tasarım</a></li>
+              <li><span class="num">03</span><a href="#s3">Sonuç</a></li>
+            </ul>
+          </div>
+          <div class="aside-block">
+            <div class="aside-label">Yazar</div>
+            <p class="aside-text">M. Enes Durmuş — bilişsel davranış üzerine yazıyor.</p>
+          </div>
+          <div class="aside-block">
+            <div class="aside-label">Konu</div>
+            <p class="aside-text">Sınırlı rasyonellik, sezgi ve karar verme süreçlerinde evrim psikolojisi.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>

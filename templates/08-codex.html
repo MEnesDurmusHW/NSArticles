@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>08 · Codex — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 08 · Codex
+       Kitap bölümü açılışı: centered hero, indented paragraflar.
+       ========================================================= */
+
+    body {
+      font-family: 'Spectral', Georgia, serif;
+      font-feature-settings: "kern", "liga", "onum";
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 120px 28px 80px;
+    }
+
+    /* --- Hero (centered chapter opening) --- */
+    .hero {
+      text-align: center;
+      margin-bottom: 96px;
+    }
+
+    .chapter-mark {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .chapter-num {
+      font-family: 'Spectral', serif;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+
+    .chapter-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 56px;
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      font-family: 'Spectral', serif;
+      font-weight: 500;
+      font-size: clamp(34px, 4.6vw, 46px);
+      line-height: 1.18;
+      letter-spacing: -0.014em;
+      color: var(--text);
+      margin: 0 auto 28px;
+      max-width: 18ch;
+    }
+
+    .hero-sub {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 2vw, 21px);
+      line-height: 1.5;
+      color: var(--text-dim);
+      max-width: 32ch;
+      margin: 0 auto 48px;
+    }
+
+    .byline {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .byline .name {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Body (klasik kitap dizimi) --- */
+    .article p {
+      font-family: 'Spectral', Georgia, serif;
+      font-size: 18.5px;
+      line-height: 1.72;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      text-indent: 1.6em;
+      margin-bottom: 0.4em;
+      font-weight: 400;
+    }
+
+    .article > p:first-of-type {
+      text-indent: 0;
+    }
+
+    /* Drop cap (klasik, sade) */
+    .article > p:first-of-type::first-letter {
+      font-family: 'Spectral', serif;
+      font-weight: 500;
+      font-size: 3.8em;
+      line-height: 0.92;
+      float: left;
+      padding: 6px 10px 0 0;
+      margin: 4px 4px 0 0;
+      color: var(--accent);
+    }
+
+    /* --- Section (centered italic) --- */
+    .section-break {
+      text-align: center;
+      margin: 56px 0;
+      font-family: 'Spectral', serif;
+      font-size: 16px;
+      letter-spacing: 1.2em;
+      color: var(--text-muted);
+      padding-left: 1.2em;
+    }
+
+    .section-label {
+      text-align: center;
+      margin: 72px 0 28px;
+    }
+
+    .section-mark {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: -0.008em;
+      color: var(--text);
+    }
+
+    /* İlk paragraf section sonrası indent reset */
+    .section-label + p {
+      text-indent: 0;
+    }
+
+    /* --- Pull quote (centered italic) --- */
+    .pullquote {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(22px, 2.7vw, 26px);
+      line-height: 1.4;
+      color: var(--text);
+      text-align: center;
+      padding: 32px 0;
+      margin: 48px 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      max-width: 28em;
+      margin-left: auto;
+      margin-right: auto;
+      text-indent: 0;
+    }
+
+    .pullquote + p { text-indent: 0; }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 0.72em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0 1px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      margin: 96px 0 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .references h3 {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      font-family: 'Spectral', serif;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-dim);
+      padding: 10px 0 10px 36px;
+      position: relative;
+      text-indent: 0;
+    }
+
+    .references li::before {
+      content: counter(ref, lower-roman) ".";
+      position: absolute;
+      left: 0;
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 500;
+      width: 28px;
+      text-align: right;
+      top: 10px;
+    }
+
+    /* --- Feedback (kitap kolofon hissi) --- */
+    .feedback {
+      margin: 64px 0 24px;
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .feedback p {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      text-indent: 0;
+    }
+
+    .feedback a {
+      font-family: 'Spectral', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+    }
+
+    .feedback a:hover { opacity: 0.8; }
+
+    @media (max-width: 600px) {
+      .page { padding: 64px 24px 48px; }
+      .hero { margin-bottom: 64px; }
+      .chapter-num { font-size: 38px; margin-bottom: 32px; }
+      .chapter-rule { margin-bottom: 36px; }
+      .hero h1 { font-size: 30px; }
+      .article p { font-size: 17px; line-height: 1.68; }
+      .article > p:first-of-type::first-letter { font-size: 3.2em; }
+      .section-break { letter-spacing: 0.8em; margin: 40px 0; }
+      .pullquote { font-size: 19px; padding: 22px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+    <section class="hero">
+      <div class="chapter-mark">Birinci Bölüm</div>
+      <div class="chapter-num">I</div>
+      <div class="chapter-rule"></div>
+      <h1>Tembel bir matematikçi olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="byline"><span class="name">M. Enes Durmuş</span> · Mayıs 2026</div>
+    </section>
+
+    <article class="article">
+      <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+
+      <div class="section-label">
+        <span class="section-mark">Birinci Kısım</span>
+        <h2 class="section-title">Sezginin kökeni</h2>
+      </div>
+
+      <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+
+      <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+      <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+
+      <p>Bu kısayolların hangi koşullarda doğru sonuç verdiği, hangi koşullarda yanıltıcı olduğu sorusu, bu yazının kalan bölümünün ana ekseni olacak.</p>
+
+      <div class="section-label">
+        <span class="section-mark">İkinci Kısım</span>
+        <h2 class="section-title">Yanılgı değil, tasarım</h2>
+      </div>
+
+      <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+
+      <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+
+      <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+
+      <div class="section-break">. . .</div>
+
+      <div class="section-label">
+        <span class="section-mark">Üçüncü Kısım</span>
+        <h2 class="section-title">Sonuç</h2>
+      </div>
+
+      <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+
+      <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+
+      <section class="references">
+        <h3>Kaynaklar</h3>
+        <ol>
+          <li id="r1">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li id="r2">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li id="r3">Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun?</p>
+        <a href="#">Geri bildirim bırak</a>
+      </section>
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 · Print — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 04 · Print
+       Brütalist editorial: mono başlık, sert grid, double rule.
+       ========================================================= */
+
+    body {
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    }
+
+    .page-frame {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .page {
+      border: 1px solid var(--text);
+      background: var(--bg);
+    }
+
+    /* --- Top bar (sayfa metası) --- */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
+      border-bottom: 1px solid var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .topbar .accent {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* --- Hero --- */
+    .hero {
+      padding: 48px 36px;
+      border-bottom: 1px solid var(--text);
+    }
+
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 5.8vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-sub {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: clamp(17px, 1.8vw, 20px);
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      max-width: 56ch;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 32px;
+      border-top: 1px solid var(--text);
+    }
+
+    .hero-meta > div {
+      padding: 16px 0 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .hero-meta > div + div {
+      padding-left: 20px;
+      border-left: 1px solid var(--divider);
+    }
+
+    .hero-meta strong {
+      display: block;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .hero-meta span {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* --- Body --- */
+    .article-body {
+      padding: 0 36px;
+    }
+
+    .section {
+      padding: 48px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--divider);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .section-label::before {
+      content: "//";
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: clamp(22px, 2.8vw, 28px);
+      line-height: 1.18;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: -0.012em;
+      margin-bottom: 32px;
+    }
+
+    .article p {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 16.5px;
+      line-height: 1.72;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.25em;
+      font-weight: 400;
+    }
+
+    .article p:first-of-type {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* --- Pull quote --- */
+    .pullquote {
+      font-family: 'IBM Plex Mono', monospace;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(20px, 2.5vw, 26px);
+      line-height: 1.42;
+      color: var(--text);
+      padding: 36px;
+      margin: 40px -36px;
+      border-top: 8px double var(--text);
+      border-bottom: 8px double var(--text);
+      background: var(--surface);
+      text-align: left;
+    }
+
+    .pullquote::before {
+      content: "[ pull quote ]";
+      display: block;
+      font-style: normal;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 2px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      padding: 32px 36px;
+      border-top: 6px double var(--text);
+    }
+
+    .references h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--divider);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+
+    .references li:last-child { border-bottom: none; }
+
+    .references li::before {
+      content: "[" counter(ref, decimal-leading-zero) "]";
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      padding: 28px 36px;
+      border-top: 1px solid var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .feedback p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: 0;
+    }
+
+    .feedback a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid var(--text);
+    }
+
+    .feedback a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 720px) {
+      .page-frame { padding: 16px 8px 32px; }
+      .hero { padding: 36px 24px; }
+      .article-body { padding: 0 24px; }
+      .pullquote { padding: 24px; margin: 32px -24px; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .hero-meta > div + div {
+        padding-left: 0;
+        padding-top: 12px;
+        margin-top: 12px;
+        border-left: none;
+        border-top: 1px solid var(--divider);
+      }
+      .references, .feedback { padding-left: 24px; padding-right: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .topbar { padding: 12px 20px; font-size: 10px; gap: 12px; flex-wrap: wrap; }
+      .article p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <div class="page-frame">
+    <main class="page">
+      <div class="topbar">
+        <span><span class="accent">NS</span> / ARTICLES — DOSYA 04</span>
+        <span>2026 · 09 DK</span>
+      </div>
+
+      <section class="hero">
+        <div class="hero-eyebrow">Bilişsel Davranış / Deneme</div>
+        <h1>Tembel bir matematikçi olarak insan beyni</h1>
+        <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+        <div class="hero-meta">
+          <div><strong>Yazar</strong><span>M. Enes Durmuş</span></div>
+          <div><strong>Konu</strong><span>Sınırlı rasyonellik</span></div>
+          <div><strong>Yayın</strong><span>Mayıs 2026</span></div>
+        </div>
+      </section>
+
+      <article class="article">
+        <div class="article-body">
+
+          <div class="section">
+            <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+          </div>
+
+          <div class="section">
+            <div class="section-label">Bölüm 01</div>
+            <h2 class="section-title">Sezginin kökeni</h2>
+            <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+            <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+            <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+          </div>
+
+          <div class="section">
+            <div class="section-label">Bölüm 02</div>
+            <h2 class="section-title">Yanılgı değil, tasarım</h2>
+            <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+            <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+            <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+          </div>
+
+          <div class="section">
+            <div class="section-label">Bölüm 03</div>
+            <h2 class="section-title">Sonuç</h2>
+            <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+            <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+          </div>
+
+        </div>
+
+        <section class="references">
+          <h3>// Kaynaklar</h3>
+          <ol>
+            <li id="r1"><div>Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</div></li>
+            <li id="r2"><div>Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</div></li>
+            <li id="r3"><div>Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</div></li>
+          </ol>
+        </section>
+
+        <section class="feedback">
+          <p>// Bu yazıya tepki ver</p>
+          <a href="#">Geri bildirim →</a>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 · Atelier — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 07 · Atelier
+       Variable Fraunces: opsz axis ile dev display + rahat gövde.
+       ========================================================= */
+
+    body {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 14, "SOFT" 30, "wght" 400;
+      font-feature-settings: "kern", "liga", "ss01";
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 40px 64px;
+    }
+
+    /* --- Top bar --- */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .topbar .accent {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* --- Hero (typographic poster) --- */
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px 0 80px;
+      margin-bottom: 64px;
+    }
+
+    /* Decorative accent watermark */
+    .hero-mark {
+      position: absolute;
+      top: -16px;
+      right: 0;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 100;
+      font-style: italic;
+      font-size: clamp(180px, 32vw, 360px);
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 100;
+      font-weight: 500;
+      font-size: clamp(56px, 11vw, 144px);
+      line-height: 0.92;
+      letter-spacing: -0.028em;
+      color: var(--text);
+      margin-bottom: 40px;
+      max-width: 12ch;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 100;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 36, "wght" 400, "SOFT" 60;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 26px);
+      line-height: 1.4;
+      color: var(--text-dim);
+      max-width: 38ch;
+      margin-bottom: 56px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-top: 24px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .hero-meta .label { color: var(--accent); font-weight: 500; margin-right: 8px; }
+
+    /* --- Article body --- */
+    .article {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .article p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 14, "wght" 400, "SOFT" 30;
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.3em;
+    }
+
+    .article p:first-of-type {
+      font-size: 22px;
+      line-height: 1.55;
+      font-variation-settings: "opsz" 22, "wght" 400, "SOFT" 40;
+      color: var(--text);
+      margin-bottom: 1.5em;
+    }
+
+    .article > p:first-of-type::first-letter {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 100;
+      font-style: italic;
+      font-size: 5.2em;
+      line-height: 0.86;
+      float: left;
+      padding: 8px 14px 0 0;
+      color: var(--accent);
+    }
+
+    /* --- Section title --- */
+    .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 60, "wght" 500, "SOFT" 80;
+      font-style: italic;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      margin: 80px 0 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--divider);
+      max-width: 18ch;
+    }
+
+    .section-title .num {
+      display: inline-block;
+      font-style: normal;
+      font-variation-settings: "opsz" 60, "wght" 600, "SOFT" 0;
+      font-size: 0.5em;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-right: 0.4em;
+      vertical-align: 0.3em;
+    }
+
+    /* --- Pull quote (expressive italic) --- */
+    .pullquote {
+      font-family: 'Fraunces', Georgia, serif;
+      font-variation-settings: "opsz" 96, "wght" 400, "SOFT" 100;
+      font-style: italic;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.18;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      padding: 36px 0;
+      margin: 56px 0;
+      text-align: left;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .pullquote::before {
+      content: """;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 144, "wght" 300, "SOFT" 100;
+      font-style: italic;
+      font-size: 1.4em;
+      color: var(--accent);
+      line-height: 0;
+      vertical-align: -0.2em;
+      margin-right: 6px;
+    }
+
+    /* --- Refs --- */
+    .ref {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 14, "wght" 600;
+      font-size: 0.72em;
+      vertical-align: super;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0 1px;
+    }
+    .ref:hover { text-decoration: underline; }
+
+    /* --- References --- */
+    .references {
+      margin: 96px 0 32px;
+      padding-top: 32px;
+      border-top: 2px solid var(--accent);
+    }
+
+    .references h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 14, "wght" 400;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-dim);
+      padding: 10px 0 10px 36px;
+      position: relative;
+    }
+
+    .references li::before {
+      content: counter(ref);
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      top: 14px;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin: 64px 0 32px;
+      padding: 36px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .feedback p {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "opsz" 22, "wght" 400, "SOFT" 60;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text);
+      margin: 0;
+      max-width: 36ch;
+    }
+
+    .feedback a {
+      display: inline-block;
+      padding: 12px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      text-decoration: none;
+      border-radius: 24px;
+    }
+
+    .feedback a:hover { opacity: 0.88; }
+
+    @media (max-width: 720px) {
+      .page { padding: 24px 22px 48px; }
+      .topbar { font-size: 10px; gap: 12px; }
+      .hero { min-height: auto; padding: 24px 0 48px; margin-bottom: 32px; }
+      .hero-mark { font-size: 28vw; opacity: 0.08; }
+      .hero h1 { font-size: clamp(40px, 12vw, 64px); }
+      .article p { font-size: 17.5px; line-height: 1.65; }
+      .article p:first-of-type { font-size: 19.5px; }
+      .article > p:first-of-type::first-letter { font-size: 4.4em; }
+      .pullquote { font-size: 24px; padding: 24px 0; }
+      .section-title { font-size: 28px; margin-top: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+    <div class="topbar">
+      <span><span class="accent">NS</span> / ARTICLES — DOSYA 07</span>
+      <span>2026 · 9 dk</span>
+    </div>
+
+    <section class="hero">
+      <span class="hero-mark" aria-hidden="true">7</span>
+      <div class="hero-eyebrow">Bilişsel Davranış · Deneme</div>
+      <h1>Tembel bir <em>matematikçi</em> olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="hero-meta">
+        <span><span class="label">Yazar</span>M. Enes Durmuş</span>
+        <span><span class="label">Tarih</span>Mayıs 2026</span>
+        <span><span class="label">Süre</span>9 dakika</span>
+      </div>
+    </section>
+
+    <article class="article">
+      <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor. Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+
+      <h2 class="section-title"><span class="num">I.</span>Sezginin kökeni</h2>
+
+      <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<a class="ref" href="#r1">1</a>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+
+      <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+      <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+
+      <h2 class="section-title"><span class="num">II.</span>Yanılgı değil, tasarım</h2>
+
+      <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler<a class="ref" href="#r2">2</a>. İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+
+      <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+
+      <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar<a class="ref" href="#r3">3</a>. Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+
+      <h2 class="section-title"><span class="num">III.</span>Sonuç</h2>
+
+      <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+
+      <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+
+      <section class="references">
+        <h3>Kaynaklar</h3>
+        <ol>
+          <li id="r1">Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li id="r2">Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li id="r3">Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun? Geri bildirim ileride yazılacakları şekillendiriyor.</p>
+        <a href="#">Geri bildirim</a>
+      </section>
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>

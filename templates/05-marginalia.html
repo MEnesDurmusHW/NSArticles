@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 · Marginalia — NS Articles</title>
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Template 05 · Marginalia
+       Tufte/akademik: yan margin'a düşen sidenote'lar.
+       ========================================================= */
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-feature-settings: "kern", "liga", "onum";
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 96px 56px 64px;
+    }
+
+    /* --- Hero (sol-hizalı, sade) --- */
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(40px, 5.6vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      color: var(--text);
+      margin-bottom: 20px;
+      max-width: 22ch;
+    }
+
+    .hero-sub {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(20px, 2.2vw, 24px);
+      line-height: 1.4;
+      color: var(--text-dim);
+      max-width: 36ch;
+      margin-bottom: 40px;
+    }
+
+    .meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 56px;
+    }
+
+    .meta-dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--text-muted); opacity: 0.6;
+    }
+
+    /* --- Article + sidenote katmanı --- */
+    .article {
+      max-width: 900px;
+      padding-right: 280px;
+      position: relative;
+    }
+
+    .article p {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19.5px;
+      line-height: 1.66;
+      color: var(--text);
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1.2em;
+      font-weight: 400;
+    }
+
+    /* Section heading — küçük chapter etiketi */
+    .section-label {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin: 64px 0 24px;
+    }
+
+    .section-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.2;
+      color: var(--text);
+      letter-spacing: -0.008em;
+    }
+
+    /* --- Sidenote (Tufte tekniği: float + negatif margin) --- */
+    .sn-ref {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62em;
+      vertical-align: super;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0 1px;
+      cursor: pointer;
+    }
+
+    .sidenote {
+      float: right;
+      clear: right;
+      margin: 4px -280px 16px 0;
+      width: 240px;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-dim);
+      padding-left: 14px;
+      border-left: 1px solid var(--accent);
+      text-align: left;
+      hyphens: auto;
+    }
+
+    .sidenote .num {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-right: 6px;
+      vertical-align: 1px;
+    }
+
+    /* --- Pull quote — sade, italik, küçük majüskül signature --- */
+    .pullquote {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(22px, 2.7vw, 27px);
+      line-height: 1.4;
+      color: var(--text);
+      padding: 28px 0;
+      margin: 40px 0;
+      text-align: center;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      max-width: 32em;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* --- References (full bibliography below) --- */
+    .references {
+      margin: 88px 0 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--divider);
+      max-width: 600px;
+    }
+
+    .references h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .references ol {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references li {
+      counter-increment: ref;
+      font-family: 'EB Garamond', serif;
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text-dim);
+      padding: 10px 0 10px 32px;
+      position: relative;
+    }
+
+    .references li::before {
+      content: counter(ref) ".";
+      position: absolute;
+      left: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      top: 13px;
+    }
+
+    /* --- Feedback --- */
+    .feedback {
+      margin: 64px 0 40px;
+      max-width: 600px;
+    }
+
+    .feedback p {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .feedback a {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+    }
+
+    /* --- Mobile: sidenote'lar inline blok olur --- */
+    @media (max-width: 900px) {
+      .page { padding: 56px 24px 40px; }
+      .article { padding-right: 0; max-width: 100%; }
+      .sidenote {
+        float: none;
+        clear: none;
+        display: block;
+        width: 100%;
+        margin: 12px 0 24px;
+        padding: 14px 16px;
+        background: var(--surface);
+        border-left: 2px solid var(--accent);
+        font-size: 14.5px;
+      }
+      .article p { font-size: 18px; line-height: 1.7; }
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 48px 20px 32px; }
+      .meta { font-size: 10px; gap: 12px; }
+      .pullquote { font-size: 19px; padding: 20px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Bilişsel Davranış · Deneme</div>
+      <h1>Tembel bir matematikçi olarak insan beyni</h1>
+      <p class="hero-sub">Karar verirken kullandığımız kestirmeler hata değil, milyonlarca yıllık bir tasarımın parçası.</p>
+      <div class="meta">
+        <span>M. Enes Durmuş</span>
+        <span class="meta-dot"></span>
+        <span>9 dk okuma</span>
+        <span class="meta-dot"></span>
+        <span>Mayıs 2026</span>
+      </div>
+    </section>
+
+    <article class="article">
+      <p>Sabah uyandığımız andan akşam yatmaya gittiğimiz ana kadar yüzlerce karar veriyoruz. Bu kararların büyük çoğunluğu, düşündüğümüzden çok daha az hesaplama içeriyor. Beyin, hesaplamayı pahalı bulduğunda kestirme yollara başvuruyor.<span class="sn-ref">1</span><span class="sidenote"><span class="num">1</span>Bu enerji ekonomisi yalnızca bir benzetme değildir; beyin vücut ağırlığının yüzde ikisidir ama enerji tüketiminin yüzde yirmisini alır.</span> Bu kestirmeler modern hayatta zaman zaman bizi yanıltsa da, ortaya çıktıkları çevrede son derece işlevseldi.</p>
+
+      <div class="section-label">
+        <span class="section-num">Bölüm I</span>
+        <h2 class="section-title">Sezginin kökeni</h2>
+      </div>
+
+      <p>Bir kararın doğru olabilmesi için tüm olasılıkların değerlendirilmesi gerekir. Ama beyin sınırlı zaman, sınırlı enerji ve sınırlı dikkatle çalışıyor. Herbert Simon bu durumu "sınırlı rasyonellik" olarak tanımladığında<span class="sn-ref">2</span><span class="sidenote"><span class="num">2</span>Simon, 1955. <em>A Behavioral Model of Rational Choice.</em> Ekonomi disiplinindeki "ideal hesapçı insan" varsayımına karşı yazılmış ilk önemli metinlerdendir.</span>, ekonomi disiplini henüz insanı sonsuz hesaplama gücüne sahip bir makine gibi düşünüyordu. Simon, beynin gerçek davranışını betimlemek için yeni bir kavramsal çerçeveye ihtiyaç olduğunu söyledi.</p>
+
+      <p>Sezgi, bu çerçevenin merkezine yerleşti. Sezgi yokken karar yavaştır, yorucudur ve çoğu durumda imkansızdır. Sezgi, milyonlarca yıllık bir filtre olarak çalışır; hangi durumda ne yapılmalı sorusuna, bilinçli zihne hiç uğramadan cevap verir.</p>
+
+      <blockquote class="pullquote">Sezgi bir hata değil, milyonlarca yıllık bir kısayoldur.</blockquote>
+
+      <div class="section-label">
+        <span class="section-num">Bölüm II</span>
+        <h2 class="section-title">Yanılgı değil, tasarım</h2>
+      </div>
+
+      <p>Daniel Kahneman ve Amos Tversky, 1970'lerde sistematik olarak hatalı görünen kararları araştırdıklarında ilginç bir kalıp keşfettiler.<span class="sn-ref">3</span><span class="sidenote"><span class="num">3</span>İkilinin <em>Prospect Theory</em> makalesi (1979), psikolojiyi ekonomiye taşıyan dönüm noktasıydı. Kahneman 2002'de Nobel aldı; Tversky'nin Nobel'i göremeden vefat etmesi alanın hâlâ konuştuğu bir hassasiyet.</span> İnsanlar matematiksel olarak yanlış cevaplar veriyordu, ama bu yanlışlar tesadüfi değildi. Aynı yanlışlar, aynı durumlarda, aynı yönde tekrarlanıyordu.</p>
+
+      <p>Bu örüntülere "bilişsel önyargı" denildi. Ama bu isim biraz haksızlıktı. Önyargı kelimesi bir kusuru çağrıştırır. Oysa Kahneman ve Tversky'nin keşfettiği şey, beynin doğal çalışma biçimiydi. Beyin kesin olmadığı için değil, hız ve verim için bu kestirmeleri kullanıyordu.</p>
+
+      <p>Modern psikolojide buna "ekolojik rasyonellik" diyorlar.<span class="sn-ref">4</span><span class="sidenote"><span class="num">4</span>Gerd Gigerenzer'in çalışmaları, sezgisel kararların doğru ortamda istatistiksel modellerden bile daha iyi sonuç verdiğini gösterir. Bkz. <em>Gut Feelings</em>, 2007.</span> Bir kararın doğruluğu yalnızca matematiksel kesinliğine göre değil, içinde alındığı çevreye göre de değerlendirilmeli.</p>
+
+      <div class="section-label">
+        <span class="section-num">Bölüm III</span>
+        <h2 class="section-title">Sonuç</h2>
+      </div>
+
+      <p>Beynin tembelliği bir kusur olarak okunduğunda, modern insanın günlük hayatı sürekli bir hata kaynağı gibi görünür. Oysa aynı tembellik, başka bir bakış açısından, milyarlarca yıllık evrimsel mühendisliğin sonucudur.</p>
+
+      <p>Modern dünyanın bizden istediği kararlar, beynin evrildiği çevredekilerden çok farklı. Bu uyumsuzluk, bilişsel önyargıların görünür olmasını sağlıyor. Ama önyargı dediğimiz şey çoğu zaman bir hata değil, yanlış bir bağlamda tezahür eden bir tasarımdır.</p>
+
+      <section class="references">
+        <h3>Kaynakça</h3>
+        <ol>
+          <li>Simon, H. A. (1955). A Behavioral Model of Rational Choice. <em>The Quarterly Journal of Economics</em>, 69(1), 99–118.</li>
+          <li>Kahneman, D., &amp; Tversky, A. (1979). Prospect Theory: An Analysis of Decision under Risk. <em>Econometrica</em>, 47(2), 263–292.</li>
+          <li>Gigerenzer, G. (2007). <em>Gut Feelings: The Intelligence of the Unconscious</em>. Viking.</li>
+        </ol>
+      </section>
+
+      <section class="feedback">
+        <p>Bu yazı hakkında ne düşünüyorsun?</p>
+        <a href="#">Geri bildirim bırak</a>
+      </section>
+    </article>
+  </main>
+
+  <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </div>
+</body>
+</html>
