@@ -14,6 +14,7 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
 - **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). Self-contained; no per-page setup beyond loading the script and rendering the toggle button
 - **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
+- **`og-default.png`** — 1200×630 Open Graph image used as the social-share preview for every page. Branded NS Articles cover. Source design lives in `og-default.svg`; the PNG is what social platforms fetch (WhatsApp does not render SVG)
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
 
 ## Theme System
@@ -50,6 +51,25 @@ Every page (article, gallery, preview) must include the same top-right toolbar a
 
 **Favicon** (in `<head>` of every page): `<link rel="icon" type="image/svg+xml" href="favicon.svg">` (use `../favicon.svg` from subdirectories).
 
+**Open Graph / social previews** (in `<head>` of every page) — required for WhatsApp, X, LinkedIn, Telegram, Slack link previews:
+
+```html
+<meta name="description" content="{page description}">
+<meta property="og:type" content="article">          <!-- "website" for index/all/404/templates index -->
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="{page title}">
+<meta property="og:description" content="{page description}">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/{path}">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+```
+
+Rules: `og:url` and `og:image` must be absolute (full `https://...`). WhatsApp ignores SVG — keep `og:image` pointing to the PNG. WhatsApp caches scraped previews for ~7 days; if you change a page's OG meta, force a refetch via `https://developers.facebook.com/tools/debug/`. Per-article values: take `og:title` from the page `<title>` (drop the " — NS Articles" suffix) and `og:description` from the hero subtitle / lede.
+
 **Bottom-center signature** (except `index.html`), before `</body>`:
 
 1. **Home logo**: `<a href="index.html" class="home-logo"><span>NS Articles</span></a>` — navigates back to the landing page
@@ -72,7 +92,7 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, and `<link rel="stylesheet" href="styles.css">`
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), and `<link rel="stylesheet" href="styles.css">`
 4. In `<body>`: add the grain overlay, theme toggle button, share toggle button (immediately after theme toggle), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it

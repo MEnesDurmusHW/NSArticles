@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#FAF7F2"/>
+
+  <!-- Top-left favicon-style mark -->
+  <rect x="64" y="64" width="56" height="56" rx="8" fill="#96622F"/>
+  <text x="92" y="103" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="26" font-weight="500" letter-spacing="-0.5"
+        fill="#FAF7F2">NS</text>
+
+  <!-- Brand small label, top-right -->
+  <text x="1136" y="98" text-anchor="end"
+        font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace"
+        font-size="14" letter-spacing="3"
+        fill="#9E9A92">NS · ARTICLES</text>
+
+  <!-- Center wordmark -->
+  <text x="600" y="305" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="120" font-weight="500" letter-spacing="-3"
+        fill="#1A1A1E">NS Articles</text>
+
+  <!-- Tagline -->
+  <text x="600" y="378" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-style="italic" font-size="34" font-weight="400"
+        fill="#6B665E">Bilim, psikoloji ve davranış üzerine denemeler</text>
+
+  <!-- Accent rule -->
+  <line x1="552" y1="430" x2="648" y2="430" stroke="#96622F" stroke-width="2"/>
+
+  <!-- Author credit -->
+  <text x="600" y="468" text-anchor="middle"
+        font-family="'DM Sans', -apple-system, 'Helvetica Neue', sans-serif"
+        font-size="18" font-weight="500" letter-spacing="5"
+        fill="#9E9A92">M. ENES DURMUŞ</text>
+
+  <!-- Bottom-left URL -->
+  <text x="64" y="566" text-anchor="start"
+        font-family="'JetBrains Mono', 'SF Mono', Menlo, monospace"
+        font-size="13" letter-spacing="2"
+        fill="#9E9A92">menesdurmushw.github.io/NSArticles</text>
+</svg>
