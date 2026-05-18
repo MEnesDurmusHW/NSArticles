@@ -44,6 +44,10 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 
 Every page (article, gallery, preview) must include the same top-right toolbar and bottom-center signature.
 
+**Top-left button** (fixed, single button):
+
+- **Home toggle**: `<a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön">NS</a>` — sticky serif "NS" mark that returns to the landing page. Use `href="../index.html"` from subdirectories. Styles live in `styles.css`. Skip on `index.html` itself and on pure tooling pages (`article-carousel.html`, `carousel-generator.html`).
+
 **Top-right toolbar** (fixed, right-to-left in this order):
 
 1. **Theme toggle**: `<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">` with moon + sun SVGs. Requires `<script src="theme.js"></script>` in `<head>`.
@@ -93,7 +97,7 @@ Open any `.html` file directly in a browser — no server or build step required
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
 3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), and `<link rel="stylesheet" href="styles.css">`
-4. In `<body>`: add the grain overlay, theme toggle button, share toggle button (immediately after theme toggle), and home logo + author credit at the bottom
+4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
 

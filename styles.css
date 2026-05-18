@@ -70,9 +70,10 @@ body {
   opacity: 0.4;
 }
 
-/* --- Top-right Toolbar (theme + share) --- */
+/* --- Sticky toolbar buttons (home, theme, share) --- */
 .theme-toggle,
-.share-toggle {
+.share-toggle,
+.home-toggle {
   position: fixed;
   top: 20px;
   z-index: 999;
@@ -87,15 +88,31 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 .theme-toggle { right: 20px; }
 .share-toggle { right: 70px; }
+.home-toggle {
+  left: 20px;
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
 
 .theme-toggle:hover,
 .share-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.home-toggle:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .theme-toggle svg,
