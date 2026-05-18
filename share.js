@@ -8,6 +8,7 @@
 
   var modal = null;
   var qrRendered = false;
+  var activeInfo = null;
 
   function $(sel, root) { return (root || document).querySelector(sel); }
 
@@ -15,6 +16,10 @@
     var url = location.href;
     var title = document.title || 'NS Articles';
     return { url: url, title: title };
+  }
+
+  function currentInfo() {
+    return activeInfo || pageInfo();
   }
 
   function copyToClipboard(text) {
@@ -101,7 +106,7 @@
     });
 
     $('[data-action="native"]', modal).addEventListener('click', function () {
-      var info = pageInfo();
+      var info = currentInfo();
       if (navigator.share) {
         navigator.share({ title: info.title, url: info.url }).catch(function () {});
       }
@@ -126,7 +131,7 @@
 
   function renderQR() {
     if (!window.QRCode) return;
-    var info = pageInfo();
+    var info = currentInfo();
     var frame = $('.share-qr-frame', modal);
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     var svg = window.QRCode.toSVG(info.url, {
@@ -140,7 +145,7 @@
   }
 
   function open() {
-    var info = pageInfo();
+    var info = currentInfo();
     ensureModal();
     $('.share-page-title', modal).textContent = info.title;
     $('.share-url', modal).value = info.url;
@@ -163,16 +168,38 @@
     if (!modal) return;
     modal.classList.remove('is-open');
     document.documentElement.classList.remove('share-open');
-    setTimeout(function () { modal.hidden = true; }, 200);
+    setTimeout(function () {
+      modal.hidden = true;
+      activeInfo = null;
+    }, 200);
   }
 
-  window.openShare = function () {
-    var info = pageInfo();
+  window.openShare = function (opts) {
+    activeInfo = (opts && opts.url) ? {
+      url: opts.url,
+      title: opts.title || document.title || 'NS Articles'
+    } : null;
+    var info = currentInfo();
     // On mobile / supported browsers, prefer the native sheet directly.
     if (navigator.share && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
       navigator.share({ title: info.title, url: info.url }).catch(function () { open(); });
       return;
     }
     open();
+  };
+
+  // Section-level share: reads anchor + heading text from the clicked button.
+  window.openShareSection = function (btn) {
+    var anchor = btn.closest('[id]');
+    var anchorId = anchor ? anchor.getAttribute('id') : '';
+    var heading = btn.parentElement;
+    var clone = heading.cloneNode(true);
+    var btnInClone = clone.querySelector('.heading-share');
+    if (btnInClone) btnInClone.remove();
+    var sectionTitle = (clone.textContent || '').trim().replace(/\s+/g, ' ');
+    var url = location.origin + location.pathname + (anchorId ? '#' + anchorId : '');
+    var pageTitle = (document.title || 'NS Articles').replace(/\s*—\s*NS Articles\s*$/, '');
+    var title = sectionTitle ? pageTitle + ' — ' + sectionTitle : pageTitle;
+    window.openShare({ url: url, title: title });
   };
 })();
