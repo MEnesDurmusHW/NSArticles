@@ -97,12 +97,12 @@ body {
   left: 20px;
   text-decoration: none;
   font-family: var(--serif);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--accent);
   line-height: 1;
-  padding: 2px 2px 0 0;
+  padding: 0 1px 0 0;
 }
 
 .theme-toggle:hover,
