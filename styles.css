@@ -403,25 +403,6 @@ body {
   display: block;
 }
 
-/* Anchor the button to the top-right of any heading that contains it
-   so multi-line headings (title + block subtitle) keep the button beside
-   the first line, not below the whole stack. */
-h1:has(> .heading-share),
-h2:has(> .heading-share),
-h3:has(> .heading-share) {
-  position: relative;
-  padding-right: 38px;
-}
-
-h1:has(> .heading-share) > .heading-share,
-h2:has(> .heading-share) > .heading-share,
-h3:has(> .heading-share) > .heading-share {
-  position: absolute;
-  top: 0.25em;
-  right: 0;
-  margin-left: 0;
-}
-
 h1:hover > .heading-share,
 h2:hover > .heading-share,
 h3:hover > .heading-share,
