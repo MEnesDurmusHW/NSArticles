@@ -12,7 +12,8 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 - **`all.html`** — Full listing of all articles
 - **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, share toggle, share modal, divider, home logo
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
-- **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code
+- **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code. Also fires GoatCounter events: `share-page` for the top-right button, `share-section-{id}` for per-heading buttons
+- **`analytics.js`** — Scroll-depth tracker. Fires GoatCounter events at 25/50/75/100% page scroll thresholds (`scroll-25`, `scroll-50`, etc.). Loaded only on article pages (not on `index.html`, `all.html`, `404.html`, or carousel utility pages)
 - **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
 - **`og-default.png`** — 1200×630 Open Graph image used as the social-share preview for every page. Branded NS Articles cover. Source design lives in `og-default.svg`; the PNG is what social platforms fetch (WhatsApp does not render SVG)
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
@@ -97,10 +98,31 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), and `<link rel="stylesheet" href="styles.css">`
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
 4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
+
+## Analytics
+
+The site uses [GoatCounter](https://www.goatcounter.com/) — privacy-friendly, no cookies, no banner required. Dashboard: `nsdurmus.goatcounter.com`.
+
+**Tracker snippet** (required on EVERY page, including listing and utility pages, placed right before `</head>`):
+
+```html
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+```
+
+**Custom events fired by the site**:
+- `share-page` — top-right share button click
+- `share-section-{id}` — per-heading share button click (the `id` is the `<h2>`'s id attribute)
+- `scroll-25`, `scroll-50`, `scroll-75`, `scroll-100` — reader passes scroll-depth threshold (article pages only)
+
+**Self-exclusion**:
+- IP filter: GoatCounter dashboard → Settings → Ignore IPs
+- Per-device flag: visit `https://menesdurmushw.github.io/NSArticles/?skipgc=t` once on each browser. `all.html` exposes a discreet "İzlemeyi kapat" link near the home logo for this purpose
+
+**Skip `analytics.js`** on `index.html`, `all.html`, `404.html`, and tooling pages (`article-carousel.html`, `carousel-generator.html`). The GoatCounter pageview tracker must still be present on all of them.
 
 ## Git
 

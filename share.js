@@ -12,6 +12,12 @@
 
   function $(sel, root) { return (root || document).querySelector(sel); }
 
+  function trackEvent(path) {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: path, event: true });
+    }
+  }
+
   function pageInfo() {
     var url = location.href;
     var title = document.title || 'NS Articles';
@@ -179,6 +185,7 @@
       url: opts.url,
       title: opts.title || document.title || 'NS Articles'
     } : null;
+    if (!opts) trackEvent('share-page');
     var info = currentInfo();
     // On mobile / supported browsers, prefer the native sheet directly.
     if (navigator.share && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
@@ -200,6 +207,7 @@
     var url = location.origin + location.pathname + (anchorId ? '#' + anchorId : '');
     var pageTitle = (document.title || 'NS Articles').replace(/\s*—\s*NS Articles\s*$/, '');
     var title = sectionTitle ? pageTitle + ' — ' + sectionTitle : pageTitle;
+    trackEvent('share-section-' + (anchorId || 'unknown'));
     window.openShare({ url: url, title: title });
   };
 })();

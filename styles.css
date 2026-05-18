@@ -170,6 +170,28 @@ body {
   color: var(--accent);
 }
 
+.track-optout {
+  text-align: center;
+  margin: -24px 0 0;
+  padding-bottom: 28px;
+}
+
+.track-optout a {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.35;
+  text-decoration: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.track-optout a:hover {
+  opacity: 0.85;
+  color: var(--accent);
+}
+
 /* --- Share Modal --- */
 .share-open { overflow: hidden; }
 
