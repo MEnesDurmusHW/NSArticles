@@ -401,6 +401,13 @@ body {
   .share-qr-frame { width: 200px; height: 200px; }
 }
 
+/* --- Subtitle italic: softer humanist serif for em inside headings --- */
+h2 em,
+h3 em {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-feature-settings: "kern", "liga";
+}
+
 /* --- Per-heading share (plain icon, hover-revealed on desktop, visible on mobile) --- */
 .heading-share {
   display: inline-flex;
