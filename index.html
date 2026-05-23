@@ -122,14 +122,14 @@
      Dual category:   data-cat-1 + data-cat-2 → 3-stop gradient mixing both.
      =========================================== */
 
-  /* Category color tokens (light / dark) — brighter indigo + forest for screen */
-  .article-card[data-cat-1="brain"]                { --cat-1-rgb: 86, 108, 196; --cat-1-rgb-d: 140, 160, 235; }
-  .article-card[data-cat-1="behavioral-economics"] { --cat-1-rgb: 184, 135, 42; --cat-1-rgb-d: 225, 178, 92;  }
-  .article-card[data-cat-1="relationship"]         { --cat-1-rgb: 192, 78, 128; --cat-1-rgb-d: 226, 130, 178; }
-  .article-card[data-cat-1="emotion"]              { --cat-1-rgb: 38, 140, 148; --cat-1-rgb-d: 110, 205, 210; }
-  .article-card[data-cat-1="evolution"]            { --cat-1-rgb: 102, 140, 58; --cat-1-rgb-d: 155, 200, 105; }
-  .article-card[data-cat-1="body"]                 { --cat-1-rgb: 192, 96, 56;  --cat-1-rgb-d: 228, 148, 95;  }
-  .article-card[data-cat-1="personal-development"] { --cat-1-rgb: 196, 152, 52; --cat-1-rgb-d: 230, 193, 108; }
+  /* Category color tokens — bright, saturated, screen-friendly palette */
+  .article-card[data-cat-1="brain"]                { --cat-1-rgb: 110, 138, 230; --cat-1-rgb-d: 145, 168, 240; }
+  .article-card[data-cat-1="behavioral-economics"] { --cat-1-rgb: 218, 168, 65;  --cat-1-rgb-d: 235, 195, 110; }
+  .article-card[data-cat-1="relationship"]         { --cat-1-rgb: 230, 100, 145; --cat-1-rgb-d: 240, 145, 185; }
+  .article-card[data-cat-1="emotion"]              { --cat-1-rgb: 75, 175, 180;  --cat-1-rgb-d: 130, 215, 220; }
+  .article-card[data-cat-1="evolution"]            { --cat-1-rgb: 132, 178, 75;  --cat-1-rgb-d: 175, 215, 120; }
+  .article-card[data-cat-1="body"]                 { --cat-1-rgb: 230, 130, 85;  --cat-1-rgb-d: 240, 165, 110; }
+  .article-card[data-cat-1="personal-development"] { --cat-1-rgb: 230, 175, 80;  --cat-1-rgb-d: 240, 200, 115; }
 
   .article-card[data-cat-2="brain"]                { --cat-2-rgb: 63, 77, 140;  --cat-2-rgb-d: 120, 140, 220; }
   .article-card[data-cat-2="behavioral-economics"] { --cat-2-rgb: 176, 131, 42; --cat-2-rgb-d: 220, 175, 90;  }
@@ -139,18 +139,25 @@
   .article-card[data-cat-2="body"]                 { --cat-2-rgb: 178, 96, 58;  --cat-2-rgb-d: 220, 145, 95;  }
   .article-card[data-cat-2="personal-development"] { --cat-2-rgb: 186, 148, 56; --cat-2-rgb-d: 225, 190, 105; }
 
-  /* All cards: single radial-gradient concentrated in bottom-right corner,
-     fading cleanly to surface. Primary category color only. */
+  /* All cards: diagonal gradient covers the whole card. Primary color is
+     stronger in the top-left corner and gently fades toward bottom-right,
+     so the card reads as "this color" not "mostly gray with a corner tint". */
   .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb), 0.45);
+    border-color: rgba(var(--cat-1-rgb), 0.5);
     background:
-      radial-gradient(ellipse 75% 100% at 100% 100%, rgba(var(--cat-1-rgb), 0.22), transparent 70%),
+      linear-gradient(135deg,
+        rgba(var(--cat-1-rgb), 0.26) 0%,
+        rgba(var(--cat-1-rgb), 0.10) 60%,
+        rgba(var(--cat-1-rgb), 0.05) 100%),
       var(--surface);
   }
   [data-theme="dark"] .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb-d), 0.5);
+    border-color: rgba(var(--cat-1-rgb-d), 0.55);
     background:
-      radial-gradient(ellipse 75% 100% at 100% 100%, rgba(var(--cat-1-rgb-d), 0.22), transparent 70%),
+      linear-gradient(135deg,
+        rgba(var(--cat-1-rgb-d), 0.28) 0%,
+        rgba(var(--cat-1-rgb-d), 0.12) 60%,
+        rgba(var(--cat-1-rgb-d), 0.05) 100%),
       var(--surface);
   }
 
