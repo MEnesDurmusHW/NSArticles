@@ -21,219 +21,240 @@
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
 <link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  body {
+    font-family: var(--sans);
+  }
+
   .container {
-    max-width: 720px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 80px 32px;
+    padding: 120px 40px 96px;
   }
 
-  .header {
-    margin-bottom: 64px;
+  /* ----- Masthead ----- */
+  .masthead {
     text-align: center;
+    margin-bottom: 96px;
   }
 
-  .header h1 {
+  .masthead h1 {
     font-family: var(--serif);
-    font-size: 48px;
+    font-size: 64px;
     font-weight: 400;
-    letter-spacing: -0.5px;
-    margin-bottom: 12px;
+    letter-spacing: -1.4px;
+    line-height: 1;
+    margin: 0;
   }
 
-  .header p {
-    font-size: 16px;
+  .masthead-rule {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.55;
+    margin: 26px auto 22px;
+  }
+
+  .masthead-sub {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3.4px;
+    text-transform: uppercase;
     color: var(--text-dim);
-    font-weight: 400;
+    margin: 0;
   }
 
-  .articles {
+  /* ----- Entries ----- */
+  .entries {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
 
-  .article-card {
-    display: block;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px 32px;
+  .entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 40px;
+    padding: 44px 48px 44px 0;
+    border-top: 1px solid var(--divider);
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
-    position: relative;
+    transition: background-color 0.4s ease;
   }
 
-  .article-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .entry:last-child {
+    border-bottom: 1px solid var(--divider);
   }
 
-  .article-card .tag {
-    display: inline-block;
+  /* Left accent bar — sits in the left margin, OUTSIDE the content column.
+     Desktop: grows in on hover; Mobile: always visible (overridden below). */
+  .entry::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 50%;
+    width: 0;
+    height: 46%;
+    background: var(--cat);
+    border-radius: 2px;
+    transform: translateY(-50%);
+    transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .entry:hover::before {
+    width: 3px;
+  }
+
+  .entry-meta {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 4px;
+  }
+
+  .entry-number {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.4px;
+    color: var(--cat);
+  }
+
+  .entry-tag {
     font-size: 11px;
     font-weight: 600;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
     color: var(--text-dim);
-    margin-bottom: 14px;
-    padding-right: 44px;
+    line-height: 1.55;
   }
 
-  .article-card h2 {
+  /* Multi-category tags: each piece on its own line on desktop;
+     mobile (overridden below) keeps them inline with the separator. */
+  .entry-tag .cat { display: block; }
+  .entry-tag .dot { display: none; }
+
+  .entry-title {
+    grid-column: 2;
+    grid-row: 1;
     font-family: var(--serif);
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 400;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    padding-right: 44px;
-  }
-
-  .article-card .desc {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.6;
-    padding-right: 44px;
-  }
-
-  .article-card .arrow {
-    position: absolute;
-    right: 32px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: var(--text-muted);
-    transition: all 0.3s ease;
-  }
-
-  .article-card:hover .arrow {
+    line-height: 1.22;
+    letter-spacing: -0.4px;
     color: var(--text);
-    transform: translateY(-50%) translateX(4px);
+    margin: 0 0 12px;
   }
 
-  /* Topic-colored card variants.
-     Each card gets its own color token; styling pattern is shared.
-     Theme-aware (light + dark); subtle by design. */
-  /* ===========================================
-     Article cards — category-driven colorization.
-     Single category: data-cat-1 only → color → transparent gradient.
-     Dual category:   data-cat-1 + data-cat-2 → 3-stop gradient mixing both.
-     =========================================== */
-
-  /* Category color tokens — bright, saturated, screen-friendly palette */
-  .article-card[data-cat-1="brain"]                { --cat-1-rgb: 110, 138, 230; --cat-1-rgb-d: 145, 168, 240; }
-  .article-card[data-cat-1="behavioral-economics"] { --cat-1-rgb: 55, 155, 105;  --cat-1-rgb-d: 115, 200, 155; }
-  .article-card[data-cat-1="relationship"]         { --cat-1-rgb: 230, 100, 145; --cat-1-rgb-d: 240, 145, 185; }
-  .article-card[data-cat-1="emotion"]              { --cat-1-rgb: 75, 175, 180;  --cat-1-rgb-d: 130, 215, 220; }
-  .article-card[data-cat-1="evolution"]            { --cat-1-rgb: 132, 178, 75;  --cat-1-rgb-d: 175, 215, 120; }
-  .article-card[data-cat-1="body"]                 { --cat-1-rgb: 230, 130, 85;  --cat-1-rgb-d: 240, 165, 110; }
-  .article-card[data-cat-1="personal-development"] { --cat-1-rgb: 230, 175, 80;  --cat-1-rgb-d: 240, 200, 115; }
-
-  .article-card[data-cat-2="brain"]                { --cat-2-rgb: 63, 77, 140;  --cat-2-rgb-d: 120, 140, 220; }
-  .article-card[data-cat-2="behavioral-economics"] { --cat-2-rgb: 176, 131, 42; --cat-2-rgb-d: 220, 175, 90;  }
-  .article-card[data-cat-2="relationship"]         { --cat-2-rgb: 181, 82, 124; --cat-2-rgb-d: 220, 130, 175; }
-  .article-card[data-cat-2="emotion"]              { --cat-2-rgb: 47, 131, 137; --cat-2-rgb-d: 120, 200, 205; }
-  .article-card[data-cat-2="evolution"]            { --cat-2-rgb: 82, 113, 55;  --cat-2-rgb-d: 145, 185, 100; }
-  .article-card[data-cat-2="body"]                 { --cat-2-rgb: 178, 96, 58;  --cat-2-rgb-d: 220, 145, 95;  }
-  .article-card[data-cat-2="personal-development"] { --cat-2-rgb: 186, 148, 56; --cat-2-rgb-d: 225, 190, 105; }
-
-  /* Two-layer subtle approach: radial concentrated in bottom-right corner
-     gives the card identity, plus a faint diagonal wash that ties it together.
-     With the brighter palette this lands between "barely tinted" and
-     "fully colored card". */
-  .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb), 0.45);
-    background:
-      radial-gradient(ellipse 85% 100% at 100% 100%, rgba(var(--cat-1-rgb), 0.18) 0%, transparent 65%),
-      linear-gradient(135deg, rgba(var(--cat-1-rgb), 0.04) 0%, rgba(var(--cat-1-rgb), 0.10) 100%),
-      var(--surface);
-  }
-  [data-theme="dark"] .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb-d), 0.5);
-    background:
-      radial-gradient(ellipse 85% 100% at 100% 100%, rgba(var(--cat-1-rgb-d), 0.20) 0%, transparent 65%),
-      linear-gradient(135deg, rgba(var(--cat-1-rgb-d), 0.05) 0%, rgba(var(--cat-1-rgb-d), 0.12) 100%),
-      var(--surface);
+  .entry-desc {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin: 0;
+    transition: color 0.3s ease;
   }
 
-  /* Tag uses primary category color */
-  .article-card[data-cat-1] .tag {
-    color: rgb(var(--cat-1-rgb));
-    font-weight: 700;
-  }
-  [data-theme="dark"] .article-card[data-cat-1] .tag {
-    color: rgb(var(--cat-1-rgb-d));
+  .entry:hover .entry-desc {
+    color: var(--text);
   }
 
-  /* Hover — primary category */
-  .article-card[data-cat-1]:hover {
-    border-color: rgb(var(--cat-1-rgb));
-    box-shadow: 0 4px 22px rgba(var(--cat-1-rgb), 0.18);
-  }
-  [data-theme="dark"] .article-card[data-cat-1]:hover {
-    border-color: rgb(var(--cat-1-rgb-d));
-    box-shadow: 0 4px 24px rgba(var(--cat-1-rgb-d), 0.22);
+  .entry-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateY(-50%) translateX(-8px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+      color 0.3s ease;
+    pointer-events: none;
   }
 
-  .article-card[data-cat-1]:hover .arrow {
-    color: rgb(var(--cat-1-rgb));
-  }
-  [data-theme="dark"] .article-card[data-cat-1]:hover .arrow {
-    color: rgb(var(--cat-1-rgb-d));
+  .entry-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
+  .entry:hover .entry-arrow {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    color: var(--cat);
+  }
+
+  /* ----- Category palette ----- */
+  .entry[data-cat="brain"]                 { --cat: #6E8AE6; }
+  .entry[data-cat="behavioral-economics"]  { --cat: #2F9E5F; }
+  .entry[data-cat="relationship"]          { --cat: #E66491; }
+  .entry[data-cat="emotion"]               { --cat: #3BAAB0; }
+  .entry[data-cat="evolution"]             { --cat: #84B24B; }
+  .entry[data-cat="body"]                  { --cat: #E07349; }
+  .entry[data-cat="personal-development"]  { --cat: #D39A3B; }
+
+  [data-theme="dark"] .entry[data-cat="brain"]                 { --cat: #91A8F0; }
+  [data-theme="dark"] .entry[data-cat="behavioral-economics"]  { --cat: #73C89B; }
+  [data-theme="dark"] .entry[data-cat="relationship"]          { --cat: #F091B9; }
+  [data-theme="dark"] .entry[data-cat="emotion"]               { --cat: #82D7DC; }
+  [data-theme="dark"] .entry[data-cat="evolution"]             { --cat: #AFD778; }
+  [data-theme="dark"] .entry[data-cat="body"]                  { --cat: #F0A56E; }
+  [data-theme="dark"] .entry[data-cat="personal-development"]  { --cat: #F0C873; }
+
+  /* ----- Mobile ----- */
   @media (max-width: 600px) {
-    .container {
-      padding: 64px 18px 48px;
-    }
+    .container { padding: 80px 22px 64px; }
+    .masthead { margin-bottom: 64px; }
+    .masthead h1 { font-size: 42px; letter-spacing: -0.8px; }
+    .masthead-rule { margin: 20px auto 18px; }
+    .masthead-sub { font-size: 10px; letter-spacing: 2.6px; }
 
-    .header {
-      margin-bottom: 40px;
+    /* Mobile: single-column. Number hidden; tag carries the color. */
+    .entry {
+      display: block;
+      padding: 30px 0 30px 22px;
     }
-
-    .header h1 {
-      font-size: 34px;
-      letter-spacing: -0.3px;
+    .entry::before {
+      left: 0;
+      width: 3px;
+      height: 38%;
+      transition: none;
     }
-
-    .header p {
-      font-size: 14px;
+    .entry-meta {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 10px;
+      padding-top: 0;
+      margin-bottom: 14px;
     }
-
-    .articles {
-      gap: 14px;
+    .entry-number { display: none; }
+    .entry-tag {
+      color: var(--cat);
+      font-weight: 700;
     }
-
-    .article-card {
-      padding: 22px 20px;
-      border-radius: 14px;
-    }
-
-    .article-card .tag {
-      font-size: 10px;
-      letter-spacing: 1.2px;
+    .entry-tag .cat,
+    .entry-tag .dot { display: inline; }
+    .entry-title {
+      font-size: 25px;
+      letter-spacing: -0.5px;
+      line-height: 1.22;
       margin-bottom: 10px;
-      padding-right: 0;
     }
-
-    .article-card h2 {
-      font-size: 21px;
-      line-height: 1.25;
-      margin-bottom: 8px;
-      padding-right: 0;
-    }
-
-    .article-card .desc {
-      font-size: 13px;
-      line-height: 1.55;
-      padding-right: 0;
-    }
-
-    .article-card .arrow {
-      display: none;
-    }
+    .entry-desc { font-size: 14px; }
+    .entry-arrow { display: none; }
   }
 </style>
   <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -247,69 +268,112 @@
   <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
   </button>
+
   <div class="container">
-    <div class="header">
+    <header class="masthead">
       <h1>NS Articles</h1>
-      <p>Yazılar & Rehberler</p>
+      <span class="masthead-rule" aria-hidden="true"></span>
+      <p class="masthead-sub">Bilim · Psikoloji · Davranış</p>
+    </header>
+
+    <div class="entries">
+      <a href="the-science-of-doing-nothing-preview.html" class="entry" data-cat="brain">
+        <div class="entry-meta">
+          <span class="entry-number">01</span>
+          <span class="entry-tag"><span class="cat">Beyin</span><span class="dot"> · </span><span class="cat">Kişisel Gelişim</span></span>
+        </div>
+        <h2 class="entry-title">Hiçbir Şey Yapmamanın Bilimi</h2>
+        <p class="entry-desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="relationships.html" class="entry" data-cat="relationship">
+        <div class="entry-meta">
+          <span class="entry-number">02</span>
+          <span class="entry-tag">İlişki</span>
+        </div>
+        <h2 class="entry-title">İlişkilerde Neye Bakmalı</h2>
+        <p class="entry-desc">15 dakikalık bir tartışma kaydından çiftin geleceğini bilen 40 yıllık Gottman araştırmasından: ilişkileri öldüren 4 kalıp ve ayakta tutan faktörler.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="brain-memory-story-machine-preview.html" class="entry" data-cat="brain">
+        <div class="entry-meta">
+          <span class="entry-number">03</span>
+          <span class="entry-tag">Beyin</span>
+        </div>
+        <h2 class="entry-title">Beyin, Hafıza ve Hikâye Makinesi</h2>
+        <p class="entry-desc">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="emotional-skills-preview.html" class="entry" data-cat="emotion">
+        <div class="entry-meta">
+          <span class="entry-number">04</span>
+          <span class="entry-tag"><span class="cat">Duygu</span><span class="dot"> · </span><span class="cat">Kişisel Gelişim</span></span>
+        </div>
+        <h2 class="entry-title">Hayatı Yönetmek Değil, Tepkilerini Yönetmek</h2>
+        <p class="entry-desc">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="evolutionary-mismatch-body-preview.html" class="entry" data-cat="evolution">
+        <div class="entry-meta">
+          <span class="entry-number">05</span>
+          <span class="entry-tag">Evrim</span>
+        </div>
+        <h2 class="entry-title">Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
+        <p class="entry-desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="breadcrumbing-preview.html" class="entry" data-cat="relationship">
+        <div class="entry-meta">
+          <span class="entry-number">06</span>
+          <span class="entry-tag">İlişki</span>
+        </div>
+        <h2 class="entry-title">Dijital Çağda Breadcrumbing</h2>
+        <p class="entry-desc">Flörtöz sinyallerle karşı tarafı oltada tutan manipülasyonun tanımı, döngüsü ve psikolojik etkileri.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="behavioral-economics-01-preview.html" class="entry" data-cat="behavioral-economics">
+        <div class="entry-meta">
+          <span class="entry-number">07</span>
+          <span class="entry-tag">Davranışsal Ekonomi</span>
+        </div>
+        <h2 class="entry-title">Homo Economicus: Ekonominin Hayal Ettiği İnsan</h2>
+        <p class="entry-desc">Klasik ekonominin "rasyonel insan" varsayımından Simon, Kahneman, Tversky ve Thaler'e; teoriden günlük hayata.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
+
+      <a href="willpower-design-flaw-preview.html" class="entry" data-cat="personal-development">
+        <div class="entry-meta">
+          <span class="entry-number">08</span>
+          <span class="entry-tag">Kişisel Gelişim</span>
+        </div>
+        <h2 class="entry-title">İrade Bir Erdem Değil, Bir Tasarım Hatası</h2>
+        <p class="entry-desc">İradeye güvenmek neden başarısız bir strateji ve araştırmaların gösterdiği alternatif.</p>
+        <span class="entry-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </span>
+      </a>
     </div>
 
-    <div class="articles">
-      <a href="the-science-of-doing-nothing-preview.html" class="article-card" data-cat-1="brain" data-cat-2="personal-development">
-        <span class="tag">Beyin · Kişisel Gelişim</span>
-        <h2>Hiçbir Şey Yapmamanın Bilimi</h2>
-        <p class="desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="relationships.html" class="article-card" data-cat-1="relationship">
-        <span class="tag">İlişki</span>
-        <h2>İlişki & Evlilik Üzerine Araştırma Bulguları</h2>
-        <p class="desc">Gottman'ın 40+ yıllık laboratuvarından: ilişkileri öldüren 4 örüntü ve ayakta tutan faktörler.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="brain-memory-story-machine-preview.html" class="article-card" data-cat-1="brain">
-        <span class="tag">Beyin</span>
-        <h2>Beyin, Hafıza ve Hikâye Makinesi</h2>
-        <p class="desc">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="emotional-skills-preview.html" class="article-card" data-cat-1="emotion" data-cat-2="personal-development">
-        <span class="tag">Duygu · Kişisel Gelişim</span>
-        <h2>Hayatı Yönetmek Değil, Tepkilerini Yönetmek</h2>
-        <p class="desc">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="evolutionary-mismatch-body-preview.html" class="article-card" data-cat-1="evolution">
-        <span class="tag">Evrim</span>
-        <h2>Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
-        <p class="desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="breadcrumbing-preview.html" class="article-card" data-cat-1="relationship">
-        <span class="tag">İlişki</span>
-        <h2>Dijital Çağda Breadcrumbing</h2>
-        <p class="desc">Flörtöz sinyallerle karşı tarafı oltada tutan manipülasyonun tanımı, döngüsü ve psikolojik etkileri.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="behavioral-economics-01-preview.html" class="article-card" data-cat-1="behavioral-economics">
-        <span class="tag">Davranışsal Ekonomi</span>
-        <h2>Homo Economicus: Ekonominin Hayal Ettiği İnsan</h2>
-        <p class="desc">Klasik ekonominin "rasyonel insan" varsayımından Simon, Kahneman, Tversky ve Thaler'e; teoriden günlük hayata.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-
-      <a href="willpower-design-flaw-preview.html" class="article-card" data-cat-1="personal-development">
-        <span class="tag">Kişisel Gelişim</span>
-        <h2>İrade Bir Erdem Değil, Bir Tasarım Hatası</h2>
-        <p class="desc">İradeye güvenmek neden başarısız bir strateji ve araştırmaların gösterdiği alternatif.</p>
-        <span class="arrow">&rarr;</span>
-      </a>
-    </div>
   </div>
 </body>
 </html>
