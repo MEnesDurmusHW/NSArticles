@@ -112,11 +112,15 @@
 
   /* INTRO — content takes its natural height; JS handles snapping to its top */
   section.intro {
-    padding: 72px 0 80px;
+    padding: 72px 0 32px;
     border-bottom: none;
   }
   section.intro > p:first-of-type {
     margin-top: 0;
+  }
+  /* Tighten the section that immediately follows the intro */
+  section.intro + section {
+    padding-top: 40px;
   }
   .hero-label {
     font-size: 12px;
@@ -634,7 +638,7 @@
   <section class="intro">
     <p>İlişkiler hakkında neredeyse herkesin söyleyecek bir sözü, bir teorisi vardır. Bir çiftin neden ayrıldığı, bir arkadaşlığın neden bittiği, bir evliliğin neden hâlâ ayakta olduğu sorulduğunda kimsenin veriye ihtiyacı yokmuş gibi konuşuruz. Verilen cevaplar genellikle görüneni anlatır: aldatma, para, "uyumsuzluk." Asıl tahmin edici olan şeyleri çoğu zaman ıskalarlar.</p>
 
-    <p>1986'da John Gottman, Washington Üniversitesi'nde sonradan "Love Lab" adıyla anılacak küçük bir gözlem odası açtı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Çiftleri 24 saatliğine apart-stüdyo gibi tasarlanmış bu odaya aldı, kalp atış monitörleri taktı, her konuşmayı kamerayla kaydetti. 40+ yıl boyunca 3.000'i aşkın çift üzerinde benzer çalışmalar yürüttü. Her 6 saniyelik etkileşimi puanlayan SPAFF kodlama sistemini geliştirdi: küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke yalnızca <strong>-1</strong>.</p>
+    <p>1986'da John Gottman, Washington Üniversitesi'nde sonradan "Love Lab" adıyla anılacak küçük bir gözlem odası açtı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Çiftleri 24 saatliğine apart-stüdyo gibi tasarlanmış bu odaya aldı, kalp atış monitörleri taktı, her konuşmayı kamerayla kaydetti. 40+ yıl boyunca 3.000'i aşkın çift üzerinde benzer çalışmalar yürüttü. Her 6 saniyelik etkileşimi belirli duygu kategorilerine puanlayan bir sistem geliştirdi: <strong>SPAFF</strong> (Specific Affect Coding System). Küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke yalnızca <strong>-1</strong>.</p>
 
     <div class="stat-row">
       <div class="stat-box">
@@ -722,6 +726,7 @@
   <section>
     <div class="section-number">Bölüm 02</div>
     <h2 id="h02">İlişkileri Ayakta Tutan Faktörler<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+    <p style="color: var(--text-dim); font-size: 15px;">Sağlıklı bir ilişki, yıkıcı kalıpların yokluğu değil. Aynı 40 yıllık veride, ilişkiyi aktif olarak ayakta tutan dört faktör tekrar tekrar öne çıktı.</p>
 
     <div class="protect-card">
       <h4 id="h10">1. Bağlılık: En Güçlü Tek Öngörücü<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h4>
@@ -835,7 +840,7 @@
 
     <div class="personal-note">
       <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Metrik Tuzağı</div>
-      <p>"Binde 2.19" düşük görünse de yanıltıcıdır çünkü paydada bebekler, bekarlar ve tüm nüfus yer alır. Aynı yıl içindeki boşanma/evlenme oranı %32.9'dur: her 3 evliliğe karşılık yaklaşık 1 boşanma. Kümülatif ömür boyu risk ise muhtemelen %25-35 aralığındadır.</p>
+      <p>Yıllık boşanma sayısı (187.343) çarpıcı bir rakam ama tek başına bağlam vermez. Aynı yıl içinde evlenme sayısına oran %32,9: her 3 evliliğe karşılık yaklaşık 1 boşanma.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Kümülatif ömür boyu risk ise muhtemelen %25-35 aralığında.</p>
     </div>
 
     <h3 id="h16">İki Boşanma Paterni<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
