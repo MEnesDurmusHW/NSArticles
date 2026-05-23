@@ -139,25 +139,22 @@
   .article-card[data-cat-2="body"]                 { --cat-2-rgb: 178, 96, 58;  --cat-2-rgb-d: 220, 145, 95;  }
   .article-card[data-cat-2="personal-development"] { --cat-2-rgb: 186, 148, 56; --cat-2-rgb-d: 225, 190, 105; }
 
-  /* All cards: diagonal gradient covers the whole card. Primary color is
-     stronger in the top-left corner and gently fades toward bottom-right,
-     so the card reads as "this color" not "mostly gray with a corner tint". */
+  /* Two-layer subtle approach: radial concentrated in bottom-right corner
+     gives the card identity, plus a faint diagonal wash that ties it together.
+     With the brighter palette this lands between "barely tinted" and
+     "fully colored card". */
   .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb), 0.5);
+    border-color: rgba(var(--cat-1-rgb), 0.45);
     background:
-      linear-gradient(135deg,
-        rgba(var(--cat-1-rgb), 0.26) 0%,
-        rgba(var(--cat-1-rgb), 0.10) 60%,
-        rgba(var(--cat-1-rgb), 0.05) 100%),
+      radial-gradient(ellipse 85% 100% at 100% 100%, rgba(var(--cat-1-rgb), 0.18) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(var(--cat-1-rgb), 0.04) 0%, rgba(var(--cat-1-rgb), 0.10) 100%),
       var(--surface);
   }
   [data-theme="dark"] .article-card[data-cat-1] {
-    border-color: rgba(var(--cat-1-rgb-d), 0.55);
+    border-color: rgba(var(--cat-1-rgb-d), 0.5);
     background:
-      linear-gradient(135deg,
-        rgba(var(--cat-1-rgb-d), 0.28) 0%,
-        rgba(var(--cat-1-rgb-d), 0.12) 60%,
-        rgba(var(--cat-1-rgb-d), 0.05) 100%),
+      radial-gradient(ellipse 85% 100% at 100% 100%, rgba(var(--cat-1-rgb-d), 0.20) 0%, transparent 65%),
+      linear-gradient(135deg, rgba(var(--cat-1-rgb-d), 0.05) 0%, rgba(var(--cat-1-rgb-d), 0.12) 100%),
       var(--surface);
   }
 
