@@ -408,19 +408,29 @@
 
   /* FOOTER QUOTE */
   .closing {
-    padding: 60px 0 0;
+    padding: 72px 0 0;
     text-align: center;
+    position: relative;
+  }
+  .closing::before {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 36px;
   }
   .closing blockquote {
     font-family: var(--serif);
-    font-size: 20px;
+    font-size: 23px;
     font-style: italic;
-    color: var(--text-dim);
-    line-height: 1.7;
-    max-width: 560px;
+    color: var(--text);
+    line-height: 1.55;
+    max-width: 620px;
     margin: 0 auto 24px;
+    letter-spacing: -0.005em;
   }
-  .closing blockquote em { color: var(--accent); }
+  .closing blockquote em { color: var(--accent); font-weight: 500; }
 
   /* FEEDBACK */
   .feedback {
