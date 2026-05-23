@@ -14,6 +14,7 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
 - **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code. Also fires GoatCounter events: `share-page` for the top-right button, `share-section-{id}` for per-heading buttons
 - **`analytics.js`** — Scroll-depth tracker. Fires GoatCounter events at 25/50/75/100% page scroll thresholds (`scroll-25`, `scroll-50`, etc.). Loaded only on article pages (not on `index.html`, `all.html`, `404.html`, or carousel utility pages)
+- **`toc.js`** — Table of Contents behavior. Mobile drawer toggle, scroll-spy active state for level-1 and level-2 entries, auto expand/collapse of nested children, Esc-to-close. Silently no-ops on pages without a `#toc-rail`. CSS for the rail/drawer lives in `styles.css`
 - **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
 - **`og-default.png`** — 1200×630 Open Graph image used as the social-share preview for every page. Branded NS Articles cover. Source design lives in `og-default.svg`; the PNG is what social platforms fetch (WhatsApp does not render SVG)
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
@@ -98,10 +99,56 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<script src="toc.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
 4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
+
+## Table of Contents
+
+Every article with `<h2>` sections gets a sticky TOC. On desktop (≥1200px) it renders as a left-edge rail with thin markers and active-section scroll-spy. On mobile it collapses into a drawer behind a hamburger button placed in the top-left (next to the home toggle). Backdrop tap, Esc key, or any in-rail link click closes the drawer on mobile.
+
+**Required pieces on each TOC-enabled article**:
+
+1. `<script src="toc.js" defer></script>` in `<head>` (already part of the standard chrome listed in *Adding a New Article*)
+2. The toggle button + backdrop + nav rail markup, inserted right after the `share-toggle` button:
+
+```html
+<button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="14" y2="17"/>
+  </svg>
+</button>
+
+<div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+<nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+  <div class="toc-list">
+    <a href="#h01" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">01</span>
+      <span class="toc-title">Section title</span>
+    </a>
+    <!-- repeat for each h2 -->
+  </div>
+</nav>
+```
+
+**Entry rules**:
+- `href` points to the anchor id of the heading or its wrapping section (`#h01`, `#s01`, etc. — whatever id exists on the target element)
+- `toc-num` is a short label like `01`, `02`. Use `·` for an unnumbered closing section like *Kapanış*
+- `toc-title` should be a *shortened* version of the full `<h2>` text. Long titles truncate with ellipsis, so prefer 1-3 words that capture the section's gist. Look at `willpower-design-flaw.html` for examples
+- For nested sub-sections (`<h3 class="sub-heading">`), wrap the parent level-1 entry as `toc-has-children`, attach a chevron, and add a sibling `<div class="toc-children" data-parent="...">` containing `toc-level-2` entries. Scroll-spy auto-expands the active section's children
+- Optional `<div class="toc-group-label">…</div>` rows inside `toc-children-inner` create italic group headings within nested sub-sections
+
+**Skip TOC on**:
+- Listing pages: `index.html`, `all.html`
+- Utility pages: `404.html`, `article-carousel.html`, `carousel-generator.html`
+- Preview pages and any article without `<h2>` sections (nothing meaningful to point at)
+
+`toc.js` silently no-ops when `#toc-rail` is absent, so loading the script on a non-TOC page is harmless but unnecessary.
 
 ## Analytics
 

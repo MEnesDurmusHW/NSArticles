@@ -21,6 +21,7 @@
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
 <script src="analytics.js" defer></script>
+<script src="toc.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -51,42 +52,87 @@
     line-height: 1.75;
   }
 
+  /* Slide transitions (hero ↔ intro) are handled entirely by JS at the bottom of the page.
+     We keep smooth scrolling for anchor links and the FAB back button. */
+  html {
+    scroll-behavior: smooth;
+  }
+
   .container {
     max-width: 760px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* HERO */
+  /* HERO — fills first viewport, big typography */
   .hero {
-    padding: 80px 0 60px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 80px 0;
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .hero::after {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
+    display: block;
+    width: 64px;
     height: 2px;
     background: var(--accent);
+    margin: 48px auto 0;
+  }
+  .scroll-cue {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    pointer-events: none;
+    animation: scrollCueFade 2.4s ease-in-out infinite;
+  }
+  .scroll-cue::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 20px;
+    margin: 10px auto 0;
+    background: var(--text-muted);
+    opacity: 0.5;
+  }
+  @keyframes scrollCueFade {
+    0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
+    50% { opacity: 0.85; transform: translate(-50%, 4px); }
+  }
+
+  /* INTRO — content takes its natural height; JS handles snapping to its top */
+  section.intro {
+    padding: 72px 0 80px;
+    border-bottom: none;
+  }
+  section.intro > p:first-of-type {
+    margin-top: 0;
   }
   .hero-label {
-    font-size: 11px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 20px;
+    margin-bottom: 28px;
     font-weight: 500;
   }
   .hero h1 {
     font-family: var(--serif);
-    font-size: 42px;
+    font-size: 72px;
     font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 16px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
     color: var(--text);
   }
   .hero h1 em {
@@ -94,11 +140,11 @@
     font-style: italic;
   }
   .hero-sub {
-    font-size: 15px;
+    font-size: 18px;
     color: var(--text-dim);
-    max-width: 500px;
+    max-width: 560px;
     margin: 0 auto;
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   /* SECTIONS */
@@ -506,8 +552,14 @@
   }
   #fab-back:hover { transform: scale(1.1); }
 
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 56px; }
+    .hero-sub { font-size: 16px; }
+  }
   @media (max-width: 600px) {
-    .hero h1 { font-size: 30px; }
+    .hero h1 { font-size: 40px; line-height: 1.1; }
+    .hero-sub { font-size: 15px; }
+    .hero-label { font-size: 11px; letter-spacing: 3px; margin-bottom: 20px; }
     h2 { font-size: 24px; }
     .stat-row { flex-direction: column; }
     .big-question blockquote { font-size: 18px; }
@@ -528,6 +580,45 @@
 <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
 </button>
+<button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="14" y2="17"/>
+  </svg>
+</button>
+
+<div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+<nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+  <div class="toc-list">
+    <a href="#h01" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">01</span>
+      <span class="toc-title">İlişkileri Öldüren 4 Davranış</span>
+    </a>
+    <a href="#h02" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">02</span>
+      <span class="toc-title">Ayakta Tutan Faktörler</span>
+    </a>
+    <a href="#h03" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">03</span>
+      <span class="toc-title">Sayıların Söyledikleri</span>
+    </a>
+    <a href="#h04" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">04</span>
+      <span class="toc-title">Hızlı Referans Kartı</span>
+    </a>
+    <a href="#h05" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">05</span>
+      <span class="toc-title">İki Soru</span>
+    </a>
+  </div>
+</nav>
 
 <div class="container">
 
@@ -536,13 +627,40 @@
     <div class="hero-label">Araştırma Temelli Rehber</div>
     <h1>İlişkilerde <em>Neye Bakmalı</em></h1>
     <p class="hero-sub">Arkadaşlık, ilişki ve evlilik için bilimsel araştırmalardan çıkarılan dersler ve pratik uygulamaları.</p>
+    <div class="scroll-cue">Aşağı kaydır</div>
   </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <p>İlişkiler hakkında neredeyse herkesin söyleyecek bir sözü, bir teorisi vardır. Bir çiftin neden ayrıldığı, bir arkadaşlığın neden bittiği, bir evliliğin neden hâlâ ayakta olduğu sorulduğunda kimsenin veriye ihtiyacı yokmuş gibi konuşuruz. Verilen cevaplar genellikle görüneni anlatır: aldatma, para, "uyumsuzluk." Asıl tahmin edici olan şeyleri çoğu zaman ıskalarlar.</p>
+
+    <p>1986'da John Gottman, Washington Üniversitesi'nde sonradan "Love Lab" adıyla anılacak küçük bir gözlem odası açtı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Çiftleri 24 saatliğine apart-stüdyo gibi tasarlanmış bu odaya aldı, kalp atış monitörleri taktı, her konuşmayı kamerayla kaydetti. 40+ yıl boyunca 3.000'i aşkın çift üzerinde benzer çalışmalar yürüttü. Her 6 saniyelik etkileşimi puanlayan SPAFF kodlama sistemini geliştirdi: küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke yalnızca <strong>-1</strong>.</p>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="number">40+</div>
+        <div class="label">yıl saha araştırması</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">3.000+</div>
+        <div class="label">gözlemlenen çift</div>
+      </div>
+      <div class="stat-box">
+        <div class="number">%93,6</div>
+        <div class="label">15 dakikalık tartışmadan boşanma tahmini (1992)</div>
+      </div>
+    </div>
+
+    <p>1992'de Buehlman, Gottman ve Katz, 15 dakikalık bir tartışma kaydından hangi çiftin 3 yıl içinde boşanacağını <strong>%93,6 doğrulukla</strong> bildi.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Sonraki altı prospektif çalışmada bu oran %83 ile %94 arasında değişti; örneklem, takip süresi ve neyin tahmin edildiği farklıydı, oran da onunla birlikte değişti.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Bağımsız araştırmacılar, modelin yeni çiftlere uygulandığında doğruluğun belirgin biçimde düştüğünü gösterdi; tek bir veri setine "aşırı uydurma" riski gerçekti.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Ama bir şey değişmedi: hangi örneklem alınırsa alınsın aynı küçük davranış kalıpları tahmin gücünü korudu.</p>
+
+    <p>Bu makale ilişkilerde nasıl hissedeceğini söylemiyor. Gottman'ın ve sonraki araştırmaların ortaya koyduğu şeyi haritalıyor: ilişkileri öldüren 4 örüntü, ayakta tutan faktörler, sayıların söyledikleri ve her ilişkide sorulabilecek iki soru.</p>
+  </section>
 
   <!-- SECTION 1: YIKICI KALIPLAR -->
   <section>
     <div class="section-number">Bölüm 01</div>
     <h2 id="h01">İlişkileri Öldüren 4 Davranış<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
-    <p style="color: var(--text-dim); font-size: 15px;">Dr. John Gottman 40+ yıl boyunca binlerce çifti gözlemledi.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> MIT matematik geçmişiyle geliştirdiği SPAFF kodlama sisteminde her 6 saniyelik etkileşim bloğu ağırlıklandırıldı: küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke ve üzüntü ise yalnızca <strong>-1</strong>. Ağırlıklar bile hangi davranışların daha yıkıcı olduğunu gösteriyor. Bu hassasiyette bir sistem sayesinde 15 dakikalık bir tartışmayı izleyerek boşanmayı %88-94 doğrulukla tahmin edebildi.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Tespit ettiği 4 yıkıcı kalıp sadece evlilikte değil, her ikili ilişkide geçerli.</p>
+    <p style="color: var(--text-dim); font-size: 15px;">SPAFF'in puan ağırlıkları zaten hangi davranışların ilişkiyi gerçekten erittiğini gösteriyor: bir <strong>küçümseme</strong>nin etkisini dengelemek için tam bir <strong>mizah</strong> anı, bir <strong>öfke</strong>yi telafi etmek için ise sadece dörtte biri kadarı gerekiyor. Yani çatışmanın varlığı değil, şekli belirleyici. Aşağıdaki 4 kalıp, Gottman'ın araştırmasında en yıkıcı olarak tespit ettikleri ve sadece evlilikte değil, her ikili ilişkide işliyor.</p>
 
     <div class="horseman-card">
       <div class="card-number">1</div>
@@ -596,7 +714,7 @@
 
     <div class="personal-note" style="margin-top: 24px;">
       <div class="note-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:-2px;margin-right:6px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>Çözümsüz Sorunlar: %69</div>
-      <p>Gottman'ın belki de en çarpıcı bulgusu: çiftlerin %69'unun sorunları "perpetual", yani kalıcı ve çözümsüz.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Kişilik farklılıkları, değer farklılıkları, yaşam tarzı tercihleri... Bunlar asla tamamen çözülmüyor; her evlilikte bu tür sorunlar otomatik olarak var. Başarılı çiftlerin başarısız olanlardan farkı sorunları çözmek değil, çözülemeyen sorunlarla nasıl başa çıktıkları. "Masters" çiftler bu sorunları kabul ediyor, birbirleriyle bunlar hakkında konuşabiliyor, hatta bazen gülebiliyor. "Disasters" çiftler ise aynı sorunlarda takılıp gridlock'a (kilitlenme) giriyor ve bu kilitlenme zamanla duygusal kopuşa dönüşüyor.</p>
+      <p>Gottman'ın belki de en çarpıcı bulgusu: çiftlerin %69'unun sorunları "perpetual", yani kalıcı ve çözümsüz.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Kişilik farklılıkları, değer farklılıkları, yaşam tarzı tercihleri... Bunlar asla tamamen çözülmüyor; her evlilikte bu tür sorunlar otomatik olarak var. Başarılı çiftlerin başarısız olanlardan farkı sorunları çözmek değil, çözülemeyen sorunlarla nasıl başa çıktıkları. Gottman bu iki grubu "Masters" (ustalar, ilişkiyi sürdürenler) ve "Disasters" (felaketler, ilişkiyi kaybedenler) olarak adlandırıyor. Masters bu sorunları kabul ediyor, birbirleriyle bunlar hakkında konuşabiliyor, hatta bazen gülebiliyor. Disasters ise aynı sorunlarda takılıp gridlock'a (kilitlenme) giriyor ve bu kilitlenme zamanla duygusal kopuşa dönüşüyor.</p>
     </div>
   </section>
 
@@ -617,7 +735,7 @@
 
     <div class="protect-card">
       <h4 id="h11">2. 5:1 Oranı ve Bağlantı Davetleri<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h4>
-      <p>Mutlu çiftlerde her 1 olumsuz etkileşime karşılık en az 5 olumlu etkileşim var.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Partnerin küçük bağlantı davetlerine (bir yorum, bir bakış, bir dokunuş) yanıt verme oranı kalıcı çiftlerde %86, biten ilişkilerde %33.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></p>
+      <p>Mutlu çiftlerde her 1 olumsuz etkileşime karşılık en az 5 olumlu etkileşim var.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Partnerin küçük bağlantı davetlerine (bir yorum, bir bakış, bir dokunuş) yönelmeye Gottman "turning toward" (yöneliş) adını veriyor. Bu yanıt verme oranı kalıcı çiftlerde %86, biten ilişkilerde %33.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></p>
     </div>
 
     <div class="stat-row">
@@ -647,7 +765,7 @@
 
     <div class="protect-card">
       <h4 id="h13">4. Birlikte Paylaşılan Ritüeller<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h4>
-      <p>Düzenli date night'lar, ortak aktiviteler, birlikte yapılan ritüeller. İlişkiye "biz" kimliği kazandırıyor ve günlük rutinin aşındırıcı etkisine karşı tampon görevi görüyor.</p>
+      <p>Düzenli date night'lar (çiftin baş başa zaman geçirdiği planlı buluşmalar), ortak aktiviteler, birlikte yapılan ritüeller. İlişkiye "biz" kimliği kazandırıyor ve günlük rutinin aşındırıcı etkisine karşı tampon görevi görüyor.</p>
     </div>
 
     <h3 style="margin-top: 40px;" id="h14">Gottman'ın 7 Kat Modeli: Sound Relationship House<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
@@ -921,6 +1039,8 @@
       <li id="ref-13">Karney, B. R. & Bradbury, T. N. (1995). The Longitudinal Course of Marital Quality and Stability: A Review of Theory, Method, and Research. <em>Psychological Bulletin</em>, 118(1), 3-34.</li>
       <li id="ref-14">Lehrer, E. L. (2008). Age at Marriage and Marital Instability: Revisiting the Becker-Landes-Michael Hypothesis. <em>Demography</em>, 45(3), 671-687.</li>
       <li id="ref-15">Aughinbaugh, A., Robles, O. & Sun, H. (2013). Marriage and Divorce: Patterns by Gender, Race, and Educational Attainment. <em>Monthly Labor Review</em>, U.S. Bureau of Labor Statistics.</li>
+      <li id="ref-16">Buehlman, K. T., Gottman, J. M. & Katz, L. F. (1992). How a Couple Views Their Past Predicts Their Future: Predicting Divorce from an Oral History Interview. <em>Journal of Family Psychology</em>, 5(3-4), 295-318.</li>
+      <li id="ref-17">Heyman, R. E. & Smith Slep, A. M. (2001). The Hazards of Predicting Divorce Without Crossvalidation. <em>Journal of Marriage and Family</em>, 63(2), 473-479.</li>
     </ol>
   </div>
 
@@ -956,6 +1076,62 @@
       }, 600);
     }
   }
+
+  // Slide snap: any wheel/touch input at hero or intro top forces decisive snap.
+  // Once past intro, the listeners are inert and normal scroll resumes.
+  (function() {
+    const hero = document.querySelector('.hero');
+    const intro = document.querySelector('section.intro');
+    if (!hero || !intro) return;
+
+    const EDGE_PX = 40; // tolerance around hero/intro snap positions
+    const ANIM_MS = 700;
+    const COOLDOWN_MS = 280;
+    let snapping = false;
+    let cooldownUntil = 0;
+
+    function snapTo(targetY) {
+      snapping = true;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      setTimeout(function() {
+        snapping = false;
+        cooldownUntil = Date.now() + COOLDOWN_MS;
+      }, ANIM_MS);
+    }
+
+    function tryHandle(deltaY, preventable) {
+      if (snapping) return preventable;
+      if (Date.now() < cooldownUntil) return false;
+      const y = window.scrollY;
+      const introTop = intro.offsetTop;
+
+      if (y <= EDGE_PX && deltaY > 0) {
+        snapTo(introTop);
+        return true;
+      }
+      if (Math.abs(y - introTop) <= EDGE_PX && deltaY < 0) {
+        snapTo(0);
+        return true;
+      }
+      return false;
+    }
+
+    window.addEventListener('wheel', function(e) {
+      if (tryHandle(e.deltaY, true)) e.preventDefault();
+      else if (snapping) e.preventDefault();
+    }, { passive: false });
+
+    let touchStartY = 0;
+    window.addEventListener('touchstart', function(e) {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', function(e) {
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(deltaY) < 12) return;
+      tryHandle(deltaY, false);
+    }, { passive: true });
+  })();
 </script>
 
 </body>

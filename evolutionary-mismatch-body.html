@@ -21,6 +21,7 @@
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
 <script src="analytics.js" defer></script>
+<script src="toc.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -682,6 +683,60 @@
   <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
   </button>
+  <button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="14" y2="17"/>
+    </svg>
+  </button>
+
+  <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+  <nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+    <div class="toc-list">
+      <a href="#h01" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">01</span>
+        <span class="toc-title">Giriş</span>
+      </a>
+      <a href="#h02" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">02</span>
+        <span class="toc-title">Programlandığını bilmek</span>
+      </a>
+      <a href="#h03" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">03</span>
+        <span class="toc-title">Sandalye değil, oturmak</span>
+      </a>
+      <a href="#h04" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">04</span>
+        <span class="toc-title">Güneşe göre çalışan beden</span>
+      </a>
+      <a href="#h05" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">05</span>
+        <span class="toc-title">Temiz dünya, hasta bağışıklık</span>
+      </a>
+      <a href="#h06" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">06</span>
+        <span class="toc-title">Beton ve ekran arasında</span>
+      </a>
+      <a href="#h07" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">07</span>
+        <span class="toc-title">Son Söz</span>
+      </a>
+      <a href="#h08" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">08</span>
+        <span class="toc-title">Kaynaklar</span>
+      </a>
+    </div>
+  </nav>
 
   <section class="hero">
     <p class="hero-series">Evrimsel Uyumsuzluk Serisi / Part 1</p>
@@ -702,19 +757,6 @@
 
   <div class="divider"></div>
 
-  <nav class="toc-sidebar" id="tocSidebar">
-    <ul>
-      <li><a href="#giris" class="toc-link" data-section="giris">Giriş</a></li>
-      <li><a href="#s01" class="toc-link" data-section="s01"><span class="toc-num">01</span> Beslenme</a></li>
-      <li><a href="#s02" class="toc-link" data-section="s02"><span class="toc-num">02</span> Hareket</a></li>
-      <li><a href="#s03" class="toc-link" data-section="s03"><span class="toc-num">03</span> Uyku</a></li>
-      <li><a href="#s04" class="toc-link" data-section="s04"><span class="toc-num">04</span> Bağışıklık</a></li>
-      <li><a href="#s05" class="toc-link" data-section="s05"><span class="toc-num">05</span> Doğa</a></li>
-      <li class="toc-sep"></li>
-      <li><a href="#sonsoz" class="toc-link" data-section="sonsoz">Son Söz</a></li>
-      <li><a href="#kaynaklar" class="toc-link" data-section="kaynaklar">Kaynaklar</a></li>
-    </ul>
-  </nav>
 
   <article class="article">
 
@@ -1174,147 +1216,6 @@
         }, 600);
       }
     }
-  </script>
-
-  <script>
-  (function() {
-    var toc = document.getElementById('tocSidebar');
-    var links = toc.querySelectorAll('.toc-link');
-    var hero = document.querySelector('.hero');
-    var sectionIds = Array.from(links).map(function(l) { return l.dataset.section; });
-
-    // Build expandable sub-headings for each TOC entry
-    links.forEach(function(link) {
-      var sid = link.dataset.section;
-      var li = link.parentElement;
-      var subItems = [];
-
-      if (sid === 'kaynaklar') return;
-
-      var sectionEl = document.getElementById(sid);
-      if (sectionEl) {
-        var subHeadings = sectionEl.querySelectorAll('.sub-heading[id]');
-        subHeadings.forEach(function(sh) {
-          subItems.push({ id: sh.id, title: sh.textContent.trim() });
-        });
-      }
-
-      if (subItems.length === 0) return;
-
-      // Wrap link in a row container
-      var row = document.createElement('div');
-      row.className = 'toc-row';
-      li.insertBefore(row, link);
-      row.appendChild(link);
-
-      // Add toggle button
-      var toggle = document.createElement('button');
-      toggle.className = 'toc-toggle';
-      toggle.innerHTML = '\u25B6';
-      toggle.setAttribute('aria-label', 'Alt başlıkları göster');
-      row.appendChild(toggle);
-
-      // Build sub-list
-      var subs = document.createElement('ul');
-      subs.className = 'toc-subs';
-      subItems.forEach(function(item) {
-        var subLi = document.createElement('li');
-        var subLink = document.createElement('a');
-        subLink.href = '#' + item.id;
-        subLink.className = 'toc-sub-link';
-        subLink.dataset.target = item.id;
-        subLink.textContent = item.title;
-        subLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          var t = document.getElementById(item.id);
-          if (t) {
-            t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', '#' + item.id);
-          }
-        });
-        subLi.appendChild(subLink);
-        subs.appendChild(subLi);
-      });
-      li.appendChild(subs);
-      li.classList.add('toc-item');
-
-      // Accordion toggle
-      toggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var wasExpanded = li.classList.contains('expanded');
-        toc.querySelectorAll('.toc-item.expanded').forEach(function(item) {
-          item.classList.remove('expanded');
-        });
-        if (!wasExpanded) li.classList.add('expanded');
-      });
-    });
-
-    // Show/hide TOC based on scroll past hero
-    function updateVisibility() {
-      if (!hero) return;
-      if (hero.getBoundingClientRect().bottom < 0) {
-        toc.classList.add('visible');
-      } else {
-        toc.classList.remove('visible');
-      }
-    }
-
-    // Active section tracking
-    var currentActive = null;
-    function setActive(id) {
-      if (currentActive === id) return;
-      currentActive = id;
-      links.forEach(function(link) {
-        link.classList.toggle('active', link.dataset.section === id);
-      });
-    }
-
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    }, { rootMargin: '-10% 0px -70% 0px' });
-
-    sectionIds.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    // Active sub-heading tracking
-    var subObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var subLink = toc.querySelector('.toc-sub-link[data-target="' + entry.target.id + '"]');
-          if (subLink) {
-            toc.querySelectorAll('.toc-sub-link.active').forEach(function(l) { l.classList.remove('active'); });
-            subLink.classList.add('active');
-          }
-        }
-      });
-    }, { rootMargin: '-10% 0px -70% 0px' });
-
-    toc.querySelectorAll('.toc-sub-link').forEach(function(subLink) {
-      var target = document.getElementById(subLink.dataset.target);
-      if (target) subObserver.observe(target);
-    });
-
-    // Smooth scroll on main TOC link click
-    links.forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var target = document.getElementById(this.dataset.section);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.replaceState(null, '', '#' + this.dataset.section);
-        }
-      });
-    });
-
-    window.addEventListener('scroll', updateVisibility, { passive: true });
-    updateVisibility();
-  })();
   </script>
 
 </body>
