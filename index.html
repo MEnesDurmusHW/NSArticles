@@ -57,14 +57,27 @@
     margin: 26px auto 22px;
   }
 
-  .masthead-sub {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3.4px;
-    text-transform: uppercase;
+  .masthead-intro {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
     color: var(--text-dim);
-    margin: 0;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ----- Signature ----- */
+  .signature {
+    text-align: center;
+    margin-top: 80px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0.1px;
   }
 
   /* ----- Entries ----- */
@@ -219,28 +232,39 @@
     .masthead { margin-bottom: 64px; }
     .masthead h1 { font-size: 42px; letter-spacing: -0.8px; }
     .masthead-rule { margin: 20px auto 18px; }
-    .masthead-sub { font-size: 10px; letter-spacing: 2.6px; }
+    .masthead-intro { font-size: 15px; line-height: 1.5; max-width: 360px; }
 
-    /* Mobile: single-column. Number hidden; tag carries the color. */
+    .signature { margin-top: 56px; font-size: 12px; }
+
+    /* Mobile: single-column. Bar starts at content top (aligned with the
+       number) and ends around the title, so it marks the entry's "header"
+       without spanning the whole block. */
     .entry {
       display: block;
       padding: 30px 0 30px 22px;
     }
     .entry::before {
       left: 0;
+      top: 30px;
+      bottom: auto;
       width: 3px;
-      height: 38%;
+      height: 50%;
+      transform: none;
+      border-radius: 2px;
       transition: none;
     }
     .entry-meta {
       display: flex;
       flex-direction: row;
       align-items: baseline;
-      gap: 10px;
+      gap: 12px;
       padding-top: 0;
       margin-bottom: 14px;
     }
-    .entry-number { display: none; }
+    .entry-number {
+      font-size: 24px;
+      line-height: 1;
+    }
     .entry-tag {
       color: var(--cat);
       font-weight: 700;
@@ -273,7 +297,7 @@
     <header class="masthead">
       <h1>NS Articles</h1>
       <span class="masthead-rule" aria-hidden="true"></span>
-      <p class="masthead-sub">Bilim · Psikoloji · Davranış</p>
+      <p class="masthead-intro">Araştırmaların gösterdiği, çoğumuzun hâlâ atladığı meseleler üzerine kısa denemeler.</p>
     </header>
 
     <div class="entries">
@@ -374,6 +398,7 @@
       </a>
     </div>
 
+    <p class="signature">M. Enes Durmuş</p>
   </div>
 </body>
 </html>
