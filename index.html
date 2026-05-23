@@ -116,92 +116,91 @@
   /* Topic-colored card variants.
      Each card gets its own color token; styling pattern is shared.
      Theme-aware (light + dark); subtle by design. */
-  .article-card.card-red,
-  .article-card.card-rose,
-  .article-card.card-purple,
-  .article-card.card-green,
-  .article-card.card-teal,
-  .article-card.card-sienna {
-    border-color: rgba(var(--c-rgb), 0.4);
+  /* ===========================================
+     Article cards — category-driven colorization.
+     Single category: data-cat-1 only → color → transparent gradient.
+     Dual category:   data-cat-1 + data-cat-2 → 3-stop gradient mixing both.
+     =========================================== */
+
+  /* Category color tokens (light / dark) — both cat-1 and cat-2 slots */
+  .article-card[data-cat-1="brain"]                { --cat-1-rgb: 63, 77, 140;  --cat-1-rgb-d: 120, 140, 220; }
+  .article-card[data-cat-1="behavioral-economics"] { --cat-1-rgb: 176, 131, 42; --cat-1-rgb-d: 220, 175, 90;  }
+  .article-card[data-cat-1="relationship"]         { --cat-1-rgb: 181, 82, 124; --cat-1-rgb-d: 220, 130, 175; }
+  .article-card[data-cat-1="emotion"]              { --cat-1-rgb: 47, 131, 137; --cat-1-rgb-d: 120, 200, 205; }
+  .article-card[data-cat-1="evolution"]            { --cat-1-rgb: 82, 113, 55;  --cat-1-rgb-d: 145, 185, 100; }
+  .article-card[data-cat-1="body"]                 { --cat-1-rgb: 178, 96, 58;  --cat-1-rgb-d: 220, 145, 95;  }
+  .article-card[data-cat-1="personal-development"] { --cat-1-rgb: 186, 148, 56; --cat-1-rgb-d: 225, 190, 105; }
+
+  .article-card[data-cat-2="brain"]                { --cat-2-rgb: 63, 77, 140;  --cat-2-rgb-d: 120, 140, 220; }
+  .article-card[data-cat-2="behavioral-economics"] { --cat-2-rgb: 176, 131, 42; --cat-2-rgb-d: 220, 175, 90;  }
+  .article-card[data-cat-2="relationship"]         { --cat-2-rgb: 181, 82, 124; --cat-2-rgb-d: 220, 130, 175; }
+  .article-card[data-cat-2="emotion"]              { --cat-2-rgb: 47, 131, 137; --cat-2-rgb-d: 120, 200, 205; }
+  .article-card[data-cat-2="evolution"]            { --cat-2-rgb: 82, 113, 55;  --cat-2-rgb-d: 145, 185, 100; }
+  .article-card[data-cat-2="body"]                 { --cat-2-rgb: 178, 96, 58;  --cat-2-rgb-d: 220, 145, 95;  }
+  .article-card[data-cat-2="personal-development"] { --cat-2-rgb: 186, 148, 56; --cat-2-rgb-d: 225, 190, 105; }
+
+  /* Single-category card */
+  .article-card[data-cat-1]:not([data-cat-2]) {
+    border-color: rgba(var(--cat-1-rgb), 0.4);
     background:
-      radial-gradient(ellipse at 85% 100%, rgba(var(--c-rgb), 0.12) 0%, transparent 55%),
-      linear-gradient(135deg, rgba(var(--c-rgb), 0.03) 0%, rgba(var(--c-rgb), 0.07) 100%),
+      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-1-rgb), 0.12) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(var(--cat-1-rgb), 0.03) 0%, rgba(var(--cat-1-rgb), 0.07) 100%),
       var(--surface);
   }
-  [data-theme="dark"] .article-card.card-red,
-  [data-theme="dark"] .article-card.card-rose,
-  [data-theme="dark"] .article-card.card-purple,
-  [data-theme="dark"] .article-card.card-green,
-  [data-theme="dark"] .article-card.card-teal,
-  [data-theme="dark"] .article-card.card-sienna {
-    border-color: rgba(var(--c-rgb-d), 0.45);
+  [data-theme="dark"] .article-card[data-cat-1]:not([data-cat-2]) {
+    border-color: rgba(var(--cat-1-rgb-d), 0.45);
     background:
-      radial-gradient(ellipse at 85% 100%, rgba(var(--c-rgb-d), 0.15) 0%, transparent 55%),
-      linear-gradient(135deg, rgba(var(--c-rgb-d), 0.04) 0%, rgba(var(--c-rgb-d), 0.08) 100%),
+      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-1-rgb-d), 0.15) 0%, transparent 55%),
+      linear-gradient(135deg, rgba(var(--cat-1-rgb-d), 0.04) 0%, rgba(var(--cat-1-rgb-d), 0.08) 100%),
       var(--surface);
   }
 
-  /* Per-variant color tokens (light / dark) */
-  .article-card.card-red    { --c-rgb: 201, 64, 64;  --c-rgb-d: 231, 76, 60; }
-  .article-card.card-rose   { --c-rgb: 184, 82, 110; --c-rgb-d: 212, 120, 152; }
-  .article-card.card-purple { --c-rgb: 122, 82, 168; --c-rgb-d: 178, 138, 214; }
-  .article-card.card-green  { --c-rgb: 45, 138, 94;  --c-rgb-d: 78, 203, 141; }
-  .article-card.card-teal   { --c-rgb: 44, 130, 138; --c-rgb-d: 90, 195, 200; }
-  .article-card.card-sienna { --c-rgb: 154, 90, 47;  --c-rgb-d: 196, 135, 74; }
+  /* Dual-category card — 3-stop diagonal gradient */
+  .article-card[data-cat-1][data-cat-2] {
+    border-color: rgba(var(--cat-1-rgb), 0.4);
+    background:
+      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-2-rgb), 0.14) 0%, transparent 60%),
+      linear-gradient(135deg,
+        rgba(var(--cat-1-rgb), 0.10) 0%,
+        rgba(var(--cat-2-rgb), 0.05) 55%,
+        transparent 100%),
+      var(--surface);
+  }
+  [data-theme="dark"] .article-card[data-cat-1][data-cat-2] {
+    border-color: rgba(var(--cat-1-rgb-d), 0.45);
+    background:
+      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-2-rgb-d), 0.18) 0%, transparent 60%),
+      linear-gradient(135deg,
+        rgba(var(--cat-1-rgb-d), 0.12) 0%,
+        rgba(var(--cat-2-rgb-d), 0.06) 55%,
+        transparent 100%),
+      var(--surface);
+  }
 
-  /* Shared tag + hover behavior */
-  .article-card.card-red .tag,
-  .article-card.card-rose .tag,
-  .article-card.card-purple .tag,
-  .article-card.card-green .tag,
-  .article-card.card-teal .tag,
-  .article-card.card-sienna .tag {
-    color: rgb(var(--c-rgb));
+  /* Tag uses primary category color */
+  .article-card[data-cat-1] .tag {
+    color: rgb(var(--cat-1-rgb));
     font-weight: 700;
   }
-  [data-theme="dark"] .article-card.card-red .tag,
-  [data-theme="dark"] .article-card.card-rose .tag,
-  [data-theme="dark"] .article-card.card-purple .tag,
-  [data-theme="dark"] .article-card.card-green .tag,
-  [data-theme="dark"] .article-card.card-teal .tag,
-  [data-theme="dark"] .article-card.card-sienna .tag {
-    color: rgb(var(--c-rgb-d));
+  [data-theme="dark"] .article-card[data-cat-1] .tag {
+    color: rgb(var(--cat-1-rgb-d));
   }
 
-  .article-card.card-red:hover,
-  .article-card.card-rose:hover,
-  .article-card.card-purple:hover,
-  .article-card.card-green:hover,
-  .article-card.card-teal:hover,
-  .article-card.card-sienna:hover {
-    border-color: rgb(var(--c-rgb));
-    box-shadow: 0 4px 22px rgba(var(--c-rgb), 0.18);
+  /* Hover — primary category */
+  .article-card[data-cat-1]:hover {
+    border-color: rgb(var(--cat-1-rgb));
+    box-shadow: 0 4px 22px rgba(var(--cat-1-rgb), 0.18);
   }
-  [data-theme="dark"] .article-card.card-red:hover,
-  [data-theme="dark"] .article-card.card-rose:hover,
-  [data-theme="dark"] .article-card.card-purple:hover,
-  [data-theme="dark"] .article-card.card-green:hover,
-  [data-theme="dark"] .article-card.card-teal:hover,
-  [data-theme="dark"] .article-card.card-sienna:hover {
-    border-color: rgb(var(--c-rgb-d));
-    box-shadow: 0 4px 24px rgba(var(--c-rgb-d), 0.22);
+  [data-theme="dark"] .article-card[data-cat-1]:hover {
+    border-color: rgb(var(--cat-1-rgb-d));
+    box-shadow: 0 4px 24px rgba(var(--cat-1-rgb-d), 0.22);
   }
 
-  .article-card.card-red:hover .arrow,
-  .article-card.card-rose:hover .arrow,
-  .article-card.card-purple:hover .arrow,
-  .article-card.card-green:hover .arrow,
-  .article-card.card-teal:hover .arrow,
-  .article-card.card-sienna:hover .arrow {
-    color: rgb(var(--c-rgb));
+  .article-card[data-cat-1]:hover .arrow {
+    color: rgb(var(--cat-1-rgb));
   }
-  [data-theme="dark"] .article-card.card-red:hover .arrow,
-  [data-theme="dark"] .article-card.card-rose:hover .arrow,
-  [data-theme="dark"] .article-card.card-purple:hover .arrow,
-  [data-theme="dark"] .article-card.card-green:hover .arrow,
-  [data-theme="dark"] .article-card.card-teal:hover .arrow,
-  [data-theme="dark"] .article-card.card-sienna:hover .arrow {
-    color: rgb(var(--c-rgb-d));
+  [data-theme="dark"] .article-card[data-cat-1]:hover .arrow {
+    color: rgb(var(--cat-1-rgb-d));
   }
 
   @media (max-width: 600px) {
@@ -274,57 +273,57 @@
     </div>
 
     <div class="articles">
-      <a href="the-science-of-doing-nothing-preview.html" class="article-card card-teal">
-        <span class="tag">Bilim & Psikoloji</span>
+      <a href="the-science-of-doing-nothing-preview.html" class="article-card" data-cat-1="brain" data-cat-2="personal-development">
+        <span class="tag">Beyin · Kişisel Gelişim</span>
         <h2>Hiçbir Şey Yapmamanın Bilimi</h2>
         <p class="desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="relationships.html" class="article-card card-rose">
-        <span class="tag">İlişkiler</span>
+      <a href="relationships.html" class="article-card" data-cat-1="relationship">
+        <span class="tag">İlişki</span>
         <h2>İlişki & Evlilik Üzerine Araştırma Bulguları</h2>
         <p class="desc">Dr. John Gottman'ın 40+ yıl boyunca binlerce çifti gözlemleyen araştırmasından bulgular: boşanmayı %88 doğrulukla tahmin eden 4 yıkıcı kalıp ve sağlıklı ilişki dinamikleri.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="brain-memory-story-machine-preview.html" class="article-card card-purple">
-        <span class="tag">Nörobilim & Psikoloji</span>
+      <a href="brain-memory-story-machine-preview.html" class="article-card" data-cat-1="brain">
+        <span class="tag">Beyin</span>
         <h2>Beyin, Hafıza ve Hikâye Makinesi</h2>
         <p class="desc">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="emotional-skills-preview.html" class="article-card card-teal">
-        <span class="tag">Bilim & Psikoloji</span>
+      <a href="emotional-skills-preview.html" class="article-card" data-cat-1="emotion" data-cat-2="personal-development">
+        <span class="tag">Duygu · Kişisel Gelişim</span>
         <h2>Hayatı Yönetmek Değil, Tepkilerini Yönetmek</h2>
         <p class="desc">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="evolutionary-mismatch-body-preview.html" class="article-card card-sienna">
-        <span class="tag">Evrimsel Uyumsuzluk · Bölüm 1</span>
+      <a href="evolutionary-mismatch-body-preview.html" class="article-card" data-cat-1="evolution">
+        <span class="tag">Evrim</span>
         <h2>Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
         <p class="desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="breadcrumbing-preview.html" class="article-card card-red">
-        <span class="tag">Psikoloji & İlişkiler</span>
+      <a href="breadcrumbing-preview.html" class="article-card" data-cat-1="relationship">
+        <span class="tag">İlişki</span>
         <h2>Dijital Çağda Breadcrumbing</h2>
         <p class="desc">Flörtöz sinyallerle karşı tarafı oltada tutan manipülasyonun tanımı, döngüsü ve psikolojik etkileri.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="behavioral-economics-01-preview.html" class="article-card card-green">
-        <span class="tag">Davranışsal Ekonomi · Bölüm 1</span>
+      <a href="behavioral-economics-01-preview.html" class="article-card" data-cat-1="behavioral-economics">
+        <span class="tag">Davranışsal Ekonomi</span>
         <h2>Homo Economicus: Ekonominin Hayal Ettiği İnsan</h2>
         <p class="desc">Klasik ekonominin "rasyonel insan" varsayımından Simon, Kahneman, Tversky ve Thaler'e; teoriden günlük hayata.</p>
         <span class="arrow">&rarr;</span>
       </a>
 
-      <a href="willpower-design-flaw-preview.html" class="article-card card-sienna">
-        <span class="tag">Psikoloji & Davranış</span>
+      <a href="willpower-design-flaw-preview.html" class="article-card" data-cat-1="personal-development">
+        <span class="tag">Kişisel Gelişim</span>
         <h2>İrade Bir Erdem Değil, Bir Tasarım Hatası</h2>
         <p class="desc">İradeye güvenmek neden başarısız bir strateji ve araştırmaların gösterdiği alternatif.</p>
         <span class="arrow">&rarr;</span>
