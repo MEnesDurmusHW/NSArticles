@@ -139,41 +139,20 @@
   .article-card[data-cat-2="body"]                 { --cat-2-rgb: 178, 96, 58;  --cat-2-rgb-d: 220, 145, 95;  }
   .article-card[data-cat-2="personal-development"] { --cat-2-rgb: 186, 148, 56; --cat-2-rgb-d: 225, 190, 105; }
 
-  /* Single-category card */
-  .article-card[data-cat-1]:not([data-cat-2]) {
+  /* All cards: single-color gradient driven by primary category.
+     Secondary category (data-cat-2) shows only in the tag text. */
+  .article-card[data-cat-1] {
     border-color: rgba(var(--cat-1-rgb), 0.4);
     background:
       radial-gradient(ellipse at 85% 100%, rgba(var(--cat-1-rgb), 0.12) 0%, transparent 55%),
       linear-gradient(135deg, rgba(var(--cat-1-rgb), 0.03) 0%, rgba(var(--cat-1-rgb), 0.07) 100%),
       var(--surface);
   }
-  [data-theme="dark"] .article-card[data-cat-1]:not([data-cat-2]) {
+  [data-theme="dark"] .article-card[data-cat-1] {
     border-color: rgba(var(--cat-1-rgb-d), 0.45);
     background:
       radial-gradient(ellipse at 85% 100%, rgba(var(--cat-1-rgb-d), 0.15) 0%, transparent 55%),
       linear-gradient(135deg, rgba(var(--cat-1-rgb-d), 0.04) 0%, rgba(var(--cat-1-rgb-d), 0.08) 100%),
-      var(--surface);
-  }
-
-  /* Dual-category card — 3-stop diagonal gradient */
-  .article-card[data-cat-1][data-cat-2] {
-    border-color: rgba(var(--cat-1-rgb), 0.4);
-    background:
-      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-2-rgb), 0.14) 0%, transparent 60%),
-      linear-gradient(135deg,
-        rgba(var(--cat-1-rgb), 0.10) 0%,
-        rgba(var(--cat-2-rgb), 0.05) 55%,
-        transparent 100%),
-      var(--surface);
-  }
-  [data-theme="dark"] .article-card[data-cat-1][data-cat-2] {
-    border-color: rgba(var(--cat-1-rgb-d), 0.45);
-    background:
-      radial-gradient(ellipse at 85% 100%, rgba(var(--cat-2-rgb-d), 0.18) 0%, transparent 60%),
-      linear-gradient(135deg,
-        rgba(var(--cat-1-rgb-d), 0.12) 0%,
-        rgba(var(--cat-2-rgb-d), 0.06) 55%,
-        transparent 100%),
       var(--surface);
   }
 
