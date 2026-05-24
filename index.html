@@ -90,7 +90,6 @@
     position: relative;
     display: grid;
     grid-template-columns: 150px 1fr;
-    grid-template-rows: auto auto;
     column-gap: 40px;
     padding: 44px 48px 44px 0;
     border-top: 1px solid var(--divider);
@@ -103,33 +102,68 @@
     border-bottom: 1px solid var(--divider);
   }
 
-  /* Left accent bar — sits in the left margin, OUTSIDE the content column.
-     Desktop: grows in on hover; Mobile: always visible (overridden below). */
+  /* Mobile-only bar lives on .entry::before; hidden on desktop. */
   .entry::before {
     content: '';
-    position: absolute;
-    left: -22px;
-    top: 50%;
-    width: 0;
-    height: 46%;
-    background: var(--cat);
-    border-radius: 2px;
-    transform: translateY(-50%);
-    transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-                height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .entry:hover::before {
-    width: 3px;
+    display: none;
   }
 
   .entry-meta {
+    position: relative;
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
+    align-self: start;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding-top: 4px;
+  }
+
+  /* If a series rubric exists, push meta down to row 2 so the rubric
+     can sit at row 1 spanning both columns. */
+  .entry:has(.entry-series) .entry-meta {
+    grid-row: 2 / span 2;
+  }
+
+  /* Desktop accent bar — pseudo on .entry-meta, wraps the meta block.
+     Asymmetric offsets compensate for Playfair Display's tall ascender
+     above number caps, so the bar appears visually centered on the
+     number + tag rather than on the typographic box. Grows in on hover. */
+  .entry-meta::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 4px;
+    bottom: -4px;
+    width: 0;
+    background: var(--cat);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* Multi-category entries have two stacked tag lines — extend the bar
+     more at the bottom to wrap both lines visually. */
+  .entry-meta:has(.entry-tag .cat)::before {
+    top: 4px;
+    bottom: -8px;
+  }
+
+  .entry:hover .entry-meta::before {
+    width: 3px;
+  }
+
+  /* Series rubric — banner across both columns at the top of the entry.
+     Acts as a "section header" for the entry. Only present on series
+     entries (meta and title shift to row 2 via :has() above). */
+  .entry-series {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--accent);
+    margin: 0 0 18px 0;
   }
 
   .entry-number {
@@ -142,6 +176,7 @@
   }
 
   .entry-tag {
+    display: block;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1.6px;
@@ -157,7 +192,7 @@
 
   .entry-title {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
     font-family: var(--serif);
     font-size: 30px;
     font-weight: 400;
@@ -169,7 +204,7 @@
 
   .entry-desc {
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 3;
     font-size: 15px;
     line-height: 1.65;
     color: var(--text-dim);
@@ -211,7 +246,8 @@
 
   /* ----- Category palette ----- */
   .entry[data-cat="brain"]                 { --cat: #6E8AE6; }
-  .entry[data-cat="behavioral-economics"]  { --cat: #2F9E5F; }
+  .entry[data-cat="karar"]                 { --cat: #2F9E5F; }
+  .entry[data-cat="sezgi"]                 { --cat: #7B5EAC; }
   .entry[data-cat="relationship"]          { --cat: #E66491; }
   .entry[data-cat="emotion"]               { --cat: #3BAAB0; }
   .entry[data-cat="evolution"]             { --cat: #84B24B; }
@@ -219,7 +255,8 @@
   .entry[data-cat="personal-development"]  { --cat: #D39A3B; }
 
   [data-theme="dark"] .entry[data-cat="brain"]                 { --cat: #91A8F0; }
-  [data-theme="dark"] .entry[data-cat="behavioral-economics"]  { --cat: #73C89B; }
+  [data-theme="dark"] .entry[data-cat="karar"]                 { --cat: #73C89B; }
+  [data-theme="dark"] .entry[data-cat="sezgi"]                 { --cat: #A88DD0; }
   [data-theme="dark"] .entry[data-cat="relationship"]          { --cat: #F091B9; }
   [data-theme="dark"] .entry[data-cat="emotion"]               { --cat: #82D7DC; }
   [data-theme="dark"] .entry[data-cat="evolution"]             { --cat: #AFD778; }
@@ -236,24 +273,32 @@
 
     .signature { margin-top: 56px; font-size: 12px; }
 
-    /* Mobile: single-column. Bar starts at content top (aligned with the
-       number) and ends around the title, so it marks the entry's "header"
-       without spanning the whole block. */
+    /* Mobile: grid layout — meta and series share row 1 (horizontal),
+       title spans row 2, desc spans row 3. */
     .entry {
-      display: block;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 12px;
       padding: 30px 0 30px 22px;
     }
     .entry::before {
+      display: block;
+      position: absolute;
       left: 0;
       top: 30px;
       bottom: auto;
       width: 3px;
       height: 50%;
-      transform: none;
+      background: var(--cat);
       border-radius: 2px;
+      transform: none;
       transition: none;
     }
+    .entry-meta::before { display: none; }
     .entry-meta {
+      grid-row: 1;
+      grid-column: 1;
+      align-self: baseline;
       display: flex;
       flex-direction: row;
       align-items: baseline;
@@ -271,13 +316,37 @@
     }
     .entry-tag .cat,
     .entry-tag .dot { display: inline; }
+    .entry-series {
+      grid-row: 1;
+      grid-column: 2;
+      align-self: baseline;
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+    /* Drop the "Serisi" word on mobile to keep the label compact. */
+    .entry-series .series-word { display: none; }
+    /* Override the desktop :has() rule that pushes meta to row 2 —
+       mobile keeps meta in row 1, alongside series in col 2. */
+    .entry:has(.entry-series) .entry-meta {
+      grid-row: 1;
+      grid-column: 1;
+    }
     .entry-title {
+      grid-row: 2;
+      grid-column: 1 / -1;
       font-size: 25px;
       letter-spacing: -0.5px;
       line-height: 1.22;
       margin-bottom: 10px;
     }
-    .entry-desc { font-size: 14px; }
+    .entry-desc {
+      grid-row: 3;
+      grid-column: 1 / -1;
+      font-size: 14px;
+    }
     .entry-arrow { display: none; }
   }
 </style>
@@ -354,6 +423,7 @@
           <span class="entry-number">05</span>
           <span class="entry-tag">Evrim</span>
         </div>
+        <p class="entry-series">Evrimsel Uyumsuzluk <span class="series-word">Serisi </span>· 1</p>
         <h2 class="entry-title">Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
         <p class="entry-desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
         <span class="entry-arrow" aria-hidden="true">
@@ -373,11 +443,12 @@
         </span>
       </a>
 
-      <a href="behavioral-economics-01-preview.html" class="entry" data-cat="behavioral-economics">
+      <a href="behavioral-economics-01-preview.html" class="entry" data-cat="karar">
         <div class="entry-meta">
           <span class="entry-number">07</span>
-          <span class="entry-tag">Davranışsal Ekonomi</span>
+          <span class="entry-tag"><span class="cat">Karar</span><span class="dot"> · </span><span class="cat">Sezgi</span></span>
         </div>
+        <p class="entry-series">Davranışsal Ekonomi <span class="series-word">Serisi </span>· 1</p>
         <h2 class="entry-title">Homo Economicus: Ekonominin Hayal Ettiği İnsan</h2>
         <p class="entry-desc">Klasik ekonominin "rasyonel insan" varsayımından Simon, Kahneman, Tversky ve Thaler'e; teoriden günlük hayata.</p>
         <span class="entry-arrow" aria-hidden="true">
