@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paleolitik Zihin, Dijital Dünya</title>
+<meta name="description" content="Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Paleolitik Zihin, Dijital Dünya">
+<meta property="og:description" content="Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/evolutionary-mismatch-mind.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="theme.js"></script>
+<script src="qrcode.js" defer></script>
+<script src="share.js" defer></script>
+<script src="analytics.js" defer></script>
+<script src="toc.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero-series {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    max-width: 760px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero h1 .hero-line {
+    display: block;
+  }
+
+  .hero h1 .hero-line + .hero-line {
+    margin-top: 0.08em;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Question */
+  .question-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .question-section .big-question {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .question-section .big-question .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Article content */
+  .article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.7em;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .section p {
+    margin-bottom: 1.4rem;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section .ref {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem 0;
+  }
+
+  /* Sub-headings */
+  .sub-heading {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+    margin: 2.5rem 0 1.2rem;
+  }
+
+  /* Experiment / info boxes */
+  .experiment {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.6rem 1.8rem;
+    margin: 1.8rem 0;
+  }
+
+  .experiment-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .experiment p {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+
+  .experiment p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Collapsible (extra info) */
+  details.collapsible {
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    margin: 1.8rem 0;
+    padding: 0;
+  }
+
+  details.collapsible > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.1rem 1.6rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  details.collapsible > summary::-webkit-details-marker { display: none; }
+
+  details.collapsible > summary::after {
+    content: '';
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    border-right: 1.5px solid var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    margin-top: -3px;
+  }
+
+  details.collapsible[open] > summary::after {
+    transform: rotate(-135deg);
+    margin-top: 3px;
+  }
+
+  details.collapsible .collapsible-body {
+    padding: 0 1.6rem 1.4rem;
+  }
+
+  details.collapsible .collapsible-body p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  details.collapsible .collapsible-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  details.collapsible .collapsible-body ul {
+    margin: 0.4rem 0 0 1.2rem;
+    padding: 0;
+    font-size: 1rem;
+  }
+
+  details.collapsible .collapsible-body li {
+    margin-bottom: 0.7rem;
+    text-align: justify;
+    line-height: 1.6;
+  }
+
+  details.collapsible .collapsible-body li:last-child { margin-bottom: 0; }
+
+  /* Pull quotes */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .pull-quote .attribution {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-style: normal;
+    color: var(--text-dim);
+  }
+
+  /* Lists inside sections */
+  .section ul, .section ol {
+    margin: 1rem 0 1.4rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .section li {
+    margin-bottom: 0.6rem;
+    text-align: justify;
+  }
+
+  /* Inline link inside body */
+  .section p a.inline-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-glow);
+    transition: border-color 0.2s ease;
+  }
+  .section p a.inline-link:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  /* Conclusion / References */
+  .conclusion {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .conclusion h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  }
+
+  .conclusion p {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+    text-align: justify;
+  }
+
+  /* Punch lines */
+  .punch {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--accent);
+    text-align: center;
+    margin: 1.6rem auto;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  /* Transition text between sections */
+  .transition {
+    font-style: italic;
+    color: var(--text-dim);
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+  }
+
+  .feedback {
+    text-align: center;
+    padding: 0 2rem 1.5rem;
+  }
+
+  .feedback p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  /* Reference links */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  a.ref:hover {
+    text-decoration: underline;
+  }
+
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* Back to text FAB */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  #fab-back:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 1.5rem; min-height: 90vh; }
+    .hero::before { width: 400px; height: 400px; }
+    .question-section { padding: 2.5rem 1.5rem; }
+    .article { padding: 3rem 1.5rem; }
+    .experiment { padding: 1.3rem 1.4rem; }
+    details.collapsible > summary { padding: 1rem 1.3rem; }
+    details.collapsible .collapsible-body { padding: 0 1.3rem 1.2rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero { padding: 1.2rem; min-height: 85vh; }
+    .hero::before { width: 300px; height: 300px; }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      max-width: 100%;
+      margin-top: 1.2rem;
+    }
+
+    .question-section { padding: 2rem 1.2rem; }
+
+    .question-section .big-question {
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .article { padding: 2.5rem 1.2rem; }
+
+    .section h2 { font-size: 1.4rem; }
+    .section p { font-size: 1rem; }
+
+    .experiment { padding: 1.2rem; }
+    .experiment p { font-size: 0.95rem; }
+
+    details.collapsible > summary { font-size: 0.72rem; padding: 0.95rem 1.1rem; }
+    details.collapsible .collapsible-body { padding: 0 1.1rem 1rem; }
+    details.collapsible .collapsible-body p,
+    details.collapsible .collapsible-body ul { font-size: 0.95rem; }
+
+    .scroll-hint { bottom: 1.5rem; }
+    .closing { padding: 2rem 1.2rem; }
+  }
+
+  /* Very small screens */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero-sub { font-size: 0.9rem; }
+    .question-section .big-question { font-size: 1rem; }
+    .section h2 { font-size: 1.25rem; }
+    .section p { font-size: 0.95rem; }
+  }
+</style>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+  <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+  <button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="14" y2="17"/>
+    </svg>
+  </button>
+
+  <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+  <nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+    <div class="toc-list">
+      <a href="#s01" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">01</span>
+        <span class="toc-title">Stres</span>
+      </a>
+      <a href="#kaynaklar" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">·</span>
+        <span class="toc-title">Kaynaklar</span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-series">Evrimsel Uyumsuzluk Serisi / Part 2</p>
+    <h1>
+      <span class="hero-line"><em>Paleolitik</em> Zihin</span>
+      <span class="hero-line"><em>Dijital</em> Dünya</span>
+    </h1>
+    <p class="hero-sub">Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.</p>
+    <div class="scroll-hint">
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="question-section">
+    <p class="big-question">
+      Zihnin değişmedi. <span class="highlight">Çağ değişti.</span>
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+
+  <article class="article">
+
+<!-- 01 STRES -->
+<div class="section" id="s01">
+  <div class="section-num">01</div>
+  <h2 id="h02">Aslan yok, ama bedenin hâlâ <i>kaçıyor</i><button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+  <p>Bir zebra aslandan kaçar. Dakikalar sonra aslan vazgeçer ya da zebra kurtulur. Olay biter. Zebra otlamaya geri döner. Stres tepkisi açıldı, işini gördü, kapandı.</p>
+
+  <p>Sen sabah trafikte kaldın. Kortizol seviyen yükseldi. İşe geç kaldın. Düştü mü? Hayır, yükselmeye devam etti, çünkü patronun seni göreceği toplantıya yetişemiyorsun. Toplantı bitti, kortizol düştü mü? Hayır, çünkü öğleden sonra için bir deadline var. Akşam eve geldin, gevşedin mi? Hayır, çünkü kira son ödeme tarihine yaklaşıyor. Uyumaya çalışıyorsun, ama yarın aynı şey baştan başlayacak. Kira olmayabilir, toplantı olmayabilir, ama çoğumuz gün boyunca bir stres kaynağından diğerine geçiyoruz.</p>
+
+  <p>Bu aslında bir kitabın adı: Robert Sapolsky'nin 30 yıl önce yazdığı <i>Why Zebras Don't Get Ulcers</i> (Zebralar Neden Ülser Olmaz). Sapolsky 30 yıldır Stanford'da stres biyolojisi çalışıyor ve uzun yıllar Kenya'da vahşi babunların kan örneklerini inceledi. Kitabın özeti tek cümle: hayvanlar akut stres yaşar, biz kronik. Onlar aslan görür, kaçar, biter. Biz hayatımızın tamamı boyunca <i>hayali</i> aslanlardan kaçıyoruz.</p>
+
+  <h3 class="sub-heading" id="s01-stresli-mi">Gerçekten stresli miyiz?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Rakamlar bunu doğruluyor.</p>
+
+  <p>2024'te Ipsos'un 31 ülkede yaptığı World Mental Health Day araştırmasında insanların <strong>%62'si</strong> "günlük yaşamımı etkileyecek kadar stresli hissettim" dedi. Bu zaten yüksek bir rakam. Ama Türkiye sıralamada birinci, <strong>%76</strong>. Yani Türkiye'de her 4 kişiden 3'ü günlük yaşamını etkileyecek seviyede stres yaşıyor. Karşılaştırma için, Japonya'da bu oran %44.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+
+  <details class="collapsible">
+    <summary>Dünyada stres: rakamlar</summary>
+    <div class="collapsible-body">
+      <ul>
+        <li>2025 Gallup Global Emotions raporu (144 ülke): yetişkinlerin %37'si "her gün stresli hissediyorum" dedi.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a></li>
+        <li>Dünya Sağlık Örgütü: dünyada 280 milyon insan depresyondan, 301 milyon insan anksiyete bozukluğundan etkileniyor.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></li>
+        <li>Depresyon ve anksiyete birlikte yılda yaklaşık 12 milyar iş gününün kaybına yol açıyor. Bu kayıp iki şekilde oluşuyor: hastalık nedeniyle işe gelememe ve işe gelip ama düşük performansla, yoğun dikkat dağınıklığıyla, hata oranı yüksek şekilde çalışma. WHO bu kaybın küresel ekonomiye yıllık maliyetini yaklaşık 1 trilyon dolar olarak tahmin ediyor.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="collapsible">
+    <summary>İşyeri burnout: dünyadan rakamlar</summary>
+    <div class="collapsible-body">
+      <ul>
+        <li>2024'te küresel olarak çalışanların %52'si burnout (tükenmişlik) yaşıyor. Kadınlarda %59, erkeklerde %46.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>2025 tahminlerine göre çalışanların %82'si burnout riski altında.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>ABD'de doktorların %48'i, hemşirelerin %62'si burnout yaşıyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>Her 4 Amerikalıdan 1'i 30 yaşından önce zirve burnout yaşıyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>Gen Z ve millennial çalışanların yaklaşık yarısı mental sağlık nedeniyle iş bıraktı.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <p>Yüzdeler bir tarafa, asıl mesele şu: stres, atalarımızın çoğunlukla saatler veya günler boyunca yaşadığı bir şeydi. Modern insan onu yıllarca, hatta hayatı boyunca taşıyor.</p>
+
+  <h3 class="sub-heading" id="s01-neden-var">Stres tepkisi neden var?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Stres aslında seni öldürmek için değil, <i>kurtarmak için</i> var. Yaklaşık 550 milyon yıldır omurgalılarda bulunan bu sistem hayatta kalmanın temel mekanizmalarından biri.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></p>
+
+  <p>Atalarımız bir aslan gördüğünde olan şey şudur: beynin hipotalamus bölgesi alarm verir. Hipotalamus, böbrek üstü bezlerini harekete geçiren bir sinyal zinciri başlatır. Bu zincire HPA ekseni denir (Hypothalamus-Pituitary-Adrenal: hipotalamus-hipofiz-böbrek üstü bezi). Böbrek üstü bezleri iki ana hormon salar. Adrenalin saniyeler içinde devreye girer, kalp atışı hızlanır, kan basıncı yükselir, kan kaslara akar, gözbebeği büyür. Kortizol biraz daha yavaş ama daha uzun süreli, glikoz salınır, vücut acil enerjiye boğulur. Sindirim baskılanır, bağışıklık sistemi geçici olarak susturulur, üreme baskılanır. Vücut, tüm enerjiyi şu anki acil duruma yönlendirir.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></p>
+
+  <p>Bu sistem mükemmel çalışıyor. Ama kritik bir özelliği var, <i>geçici</i> olarak tasarlandı. Aslan kaçtı, sistem kapanır. Kortizol seviyesi düşer, sindirim normale döner, bağışıklık aktive olur, üreme fonksiyonları yeniden açılır. Vücut zaten bu modu uzun süre sürdürebilecek durumda değil.</p>
+
+  <p>İşte sorun bu. Modern dünyada hiçbir aslan yok, ama kortizol seviyemiz hiç düşmüyor.</p>
+
+  <h3 class="sub-heading" id="s01-sistem">Sürekli açık kalan sistem ne yapıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Kronik kortizol yükselişi vücudun neredeyse her sistemini etkiliyor.</p>
+
+  <p>Kardiyovasküler sistem (kalp ve damar sistemi) en çok etkilenen yer. Kronik stres hipertansiyon, koroner kalp hastalığı, ateroskleroz (damar sertliği) ve kalp krizi riskini artırıyor.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Bağışıklık sistemi sürekli baskı altında kaldığı için zayıflıyor.</p>
+
+  <p>Beyinde hipokampüs, yani hafıza ve öğrenme merkezi, kronik kortizol altında küçülüyor. Depresyon hastalarında bu hacim azalması ölçülebilir şekilde görülüyor.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Sapolsky depresyonun yalnızca bir kimyasal dengesizlik anlatısıyla açıklanamayacağını savunuyor. Ona göre kronik strese maruz kalan HPA ekseninin disregülasyonu, depresyonun biyolojik temelinde merkezi bir rol oynuyor.</p>
+
+  <p>Hücresel seviyede telomerler (kromozom uçlarındaki koruyucu kapaklar) kısalıyor. Telomerler kısaldıkça biyolojik yaşlanma hızlanıyor. Kronik stres bu süreci hızlandırabiliyor.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Benzer bir mekanizma ciltte de görülüyor, kortizol kolajen üretimini baskılıyor.</p>
+
+  <p>İnflamasyon (vücuttaki kronik iltihap durumu) yaşlanmayla zaten artıyor. Kronik stres bu artışı hızlandırıyor. Yüksek inflamasyon ise damar sertliği, diyabet ve metabolik sendrom gibi pek çok kronik hastalıkla ilişkili.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a></p>
+
+  <p>Uyku da bu döngünün içinde. Yüksek stres seviyesi olan kişilerde insomnia (uykusuzluk) riski yaklaşık <strong>%60</strong> daha yüksek, kronik insomnia riski ise 2 katı.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Uyku bozulunca kortizol daha da yükselir. Kortizol yükselince uyku daha da bozulur. Sonsuz bir döngü.</p>
+
+  <p>Tüm bu mekanizmalar birikince sonuç toplumsal seviyede de görünüyor. ABD'de yaşam beklentisi son 20 yılın en düşük seviyesinde, <strong>76.4 yıl</strong>. Halk sağlığı uzmanları kronik stresi bu düşüşün ana faktörlerinden biri olarak tanımlıyor. "Weathering" (aşınma) hipotezi şunu söylüyor: kronik stres yaşlanmayı hızlandırıyor ve erken ölüme yol açıyor.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a></p>
+
+  <h3 class="sub-heading" id="s01-zebra">Peki neden insan zebra gibi olamıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Çünkü bizde başka hiçbir hayvanda olmayan bir şey var: gelişmiş bir prefrontal korteks. Gelecek planlama, soyut düşünme, başkalarının ne düşündüğünü hesaplama, geçmişi tekrar tekrar yaşama. Bu beceriler insanı insan yapan şeyler.</p>
+
+  <p>Aynı zamanda kronik stresimizin de kaynağı. Zebra aslan yokken aslan düşünmez. Sen yokken bile düşünebilirsin. Bir ay sonrasını, bir yıl sonrasını, hatta hiç olmayacak şeyleri.</p>
+
+  <div class="pull-quote">
+    <p>"İnsanlar geleceği düşünebildikleri için endişe yapan tek tür."</p>
+    <p class="attribution">Robert Sapolsky</p>
+  </div>
+
+  <p>Bu gelişmiş beyin atalarımıza muazzam bir avantaj verdi (alet yapma, planlama, işbirliği), ama beraberinde <i>psikososyal stres</i> dediğimiz bir maliyet getirdi. Fight-or-flight (kaç ya da savaş) sistemini fiziksel tehdit olmadan da tetikleyebilen ilk ve tek tür biziz.</p>
+
+  <p>Sosyal hiyerarşilerde yaşayan diğer primatlarda da benzer örüntüler görülüyor. Sapolsky'nin Kenya'daki uzun yıllar süren babun çalışmasında düşük statülü babunlarda kronik sosyal stres ve depresyona benzer biyolojik hasar örüntüleri bulundu.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a> Sapolsky'nin bu çalışmalardan çıkardığı önemli bir bulgu var: stresin biyolojik etkisini belirleyen şey, tehdidin büyüklüğü değil, <a href="illusion-of-control.html" class="inline-link">kontrol algısıdır</a>. Babunlar arasında en kötü kronik strese giren, en alttaki, durumu üzerinde kontrolü en az olan bireylerdi. Aynı tehditle karşılaşan iki birey, kontrol algıları farklıysa farklı biyolojik tepki veriyor. Kontrol edebileceğini hisseden kişide kortizol daha az yükseliyor, daha hızlı düşüyor.</p>
+
+  <h3 class="sub-heading" id="s01-hadza">Hadza ne yapıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Bu noktada Hadza akla geliyor. Tanzanya'daki Hadza avcı-toplayıcılarının yaşam tarzı sık sık "rahat" olarak tanımlanır. Az çalışıyorlar, çok dinleniyorlar, yan yana yaşıyorlar. Ama gerçek daha karmaşık.</p>
+
+  <p>Bir grup araştırmacı Hadza erkek ve kadınlarının saç kortizol seviyelerini ölçtü. Saç kortizolü, kanın aksine, son 1 ila 2 ayın <i>kronik</i> stres seviyesini gösterir, anlık stresi değil. Sonuçlar Hadza'nın stresten muaf olmadığını gösterdi. Hadza için de gerçek tehlikeler var: ağaçtan düşme, vahşi hayvan saldırıları, su erişimi sorunları.</p>
+
+  <details class="collapsible">
+    <summary>Hadza için gerçek tehlikeler</summary>
+    <div class="collapsible-body">
+      <ul>
+        <li>Ağaçtan düşme (Hadza'da bal toplama ağaçlara tırmanmayı gerektiriyor, ölümle sonuçlanan düşüşler nadir değil).</li>
+        <li>Enfekte yaralar (modern antibiyotik erişimi yok).</li>
+        <li>Vahşi hayvan saldırıları (aslan, leopar, bufalo bölgede).</li>
+        <li>Sıtma ve diğer enfeksiyon hastalıkları.</li>
+        <li>Kuru mevsimde su erişimi sorunları.</li>
+        <li>Pastoral Datooga halkının topraklarına müdahalesiyle azalan büyük av hayvanları.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <p>Ama önemli bir fark var. Hadza'nın stresleri çoğunlukla somut (görünür bir tehdit), kısa süreli (çözülür ya da sonuç verir) ve çözülebilir (kontrol edilebilir bir aksiyon var). Bizim streslerimizin çoğu ise soyut (kira, kariyer, sosyal medya kıyaslamaları), sürekli (mesai bittiğinde de e-posta gelir) ve kontrol edilemez (ekonomik kriz, dünya politikaları).</p>
+
+  <h3 class="sub-heading" id="s01-ne-yapabilirsin">Ne yapabilirsin?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Stres tepkisi tasarımı gereği bir hareketle birlikte gelir, kaç ya da savaş. Atalarımız strese girdiklerinde fiziksel olarak harekete geçiyorlardı. Modern insanın stres döngüsünde ise bu hareket genelde eksik kalıyor, kortizol vücutta birikiyor ama atılamıyor.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Albalawi ve ark., 2023 — Frontiers in Physiology</div>
+    <p>6 hafta düzenli aerobik egzersiz yapan kadınlarda serum kortizol seviyeleri <strong>%20.16</strong> düştü. Egzersize yavaş derin nefes ve mindfulness meditasyonu eklenen grupta düşüş <strong>%30.29</strong>'a çıktı.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
+  </div>
+
+  <p>Düzenli egzersizin stres üzerindeki etkisi muhtemelen bu mekanizmadan geliyor. Egzersiz vücudun "kaçma/savaşma" tepkisini gerçek bir fiziksel aktiviteye dönüştürür ve sonrasında parasempatik sistem (vücudun "dinlenme ve sindirme" sistemi) devreye girer. Bu, stres döngüsünün tamamlanmasına yardımcı olur.</p>
+
+  <p>Doğada vakit geçirmek, derin nefes egzersizleri (nefes verme süresini uzatmak parasempatik sistemi aktive eder), meditasyon, hepsi kortizol seviyelerini ölçülebilir şekilde düşürüyor.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Antonelli ve ark., 2019 — Sistematik derleme ve meta-analiz</div>
+    <p>971 çalışma tarandı, 22'si değerlendirildi. Japon <i>shinrin-yoku</i> (orman banyosu) uygulamasının kortizol seviyelerini ortalama <strong>%12-18</strong> düşürdüğü gösterildi.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Bir başka çalışmada sadece 15 dakikalık orman yürüyüşü katılımcıların <strong>%69'unda</strong> kortizol seviyesini düşürdü.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a></p>
+  </div>
+
+  <div class="experiment">
+    <div class="experiment-title">Mandlik ve ark., 2024 — Stress and Health</div>
+    <p>28 çalışmayı kapsayan sistematik derlemede tek bir yoga, nefes veya meditasyon seansının bile stres belirteçlerini azalttığı, kortizol ölçen 4 çalışmanın hepsinin anlamlı düşüş gösterdiği bulundu.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a></p>
+  </div>
+
+  <p>Genel öneri olarak, haftada 120 dakika doğada vakit geçirmek, fiziksel ve psikolojik sağlık yararları için yeterli "doz" olarak görülüyor.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a></p>
+
+  <p>Sosyal bağlantı da güçlü bir tampondur.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Heinrichs ve ark., 2003 — Biological Psychiatry</div>
+    <p>Katılımcılara stres testi (Trier Social Stress Test) öncesinde dört farklı koşul uygulandı: sosyal destek yok, sadece sosyal destek, sadece intranasal oksitosin ya da ikisi birden. Sosyal destek tek başına kortizol tepkisini azalttı. Ama en düşük kortizol yanıtı sosyal destek ve oksitosin birlikte verildiğinde görüldü.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
+  </div>
+
+  <p>Yanında güvendiğin biri olduğunda, vücudun stresi farklı işliyor. Atalarımız stresi grupla birlikte yaşıyordu, modern insan çoğu zaman tek başına.</p>
+
+  <p>Tüm bunların altında Sapolsky'nin yıllarca süren çalışmalarından çıkan ortak bir ders var. <a href="illusion-of-control.html" class="inline-link">Kontrol algısı</a>, yani durumu yönetebildiğine inanma hissi, stresin biyolojik etkisini en güçlü belirleyen faktörlerden biri.</p>
+
+  <p>Egzersiz bir aksiyondur. Sosyal bağlantı bir destek ağıdır. Meditasyon ve nefes bedeninle ne yaptığına dair bir farkındalıktır. Hepsinin ortak yönü şu, vücudun pasif bir alıcı olmaktan çıkıyor, sen ona bir şey yapıyorsun.</p>
+
+  <p class="punch">Stres tepkisi bedenini kurtarmak için var. Onu nasıl tamamlayacağın senin elinde.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- KAYNAKLAR -->
+<div class="conclusion" id="kaynaklar">
+  <h2 id="h99">Kaynaklar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+    <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; list-style: none;">
+    <li id="ref-1"><strong>1.</strong> Ipsos. (2024). <i>World Mental Health Day 2024 — Global Report</i>. 31 ülkede 23.000+ katılımcı. <a href="https://www.ipsos.com/en/world-mental-health-day-2024" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-2"><strong>2.</strong> Gallup. (2025). <i>Global Emotions Report 2025</i>. 144 ülkede yetişkin örneklemi. <a href="https://www.gallup.com/analytics/349280/gallup-global-emotions-report.aspx" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-3"><strong>3.</strong> World Health Organization. (2022). <i>Mental Health and COVID-19: Early evidence of the pandemic's impact</i>. WHO Scientific Brief. <a href="https://www.who.int/teams/mental-health-and-substance-use/world-mental-health-report" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-4"><strong>4.</strong> Mental Health UK. (2025). <i>The Burnout Report 2025</i>. + Deloitte. (2024). <i>Women @ Work 2024: A Global Outlook</i>. <a href="https://mentalhealth-uk.org/burnout/" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-5"><strong>5.</strong> Denver, R. J. (2009). Structural and functional evolution of vertebrate neuroendocrine stress systems. <i>Annals of the New York Academy of Sciences</i>, 1163, 1-16. <a href="https://doi.org/10.1111/j.1749-6632.2009.04433.x" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-6"><strong>6.</strong> Sapolsky, R. M. (2004). <i>Why Zebras Don't Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</i> (3rd ed.). Holt Paperbacks. <a href="https://www.goodreads.com/book/show/327.Why_Zebras_Don_t_Get_Ulcers" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-7"><strong>7.</strong> Steptoe, A. & Kivimäki, M. (2012). Stress and cardiovascular disease. <i>Nature Reviews Cardiology</i>, 9(6), 360-370. <a href="https://doi.org/10.1038/nrcardio.2012.45" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-8"><strong>8.</strong> Sheline, Y. I., Wang, P. W., Gado, M. H., Csernansky, J. G., & Vannier, M. W. (1996). Hippocampal atrophy in recurrent major depression. <i>PNAS</i>, 93(9), 3908-3913. <a href="https://doi.org/10.1073/pnas.93.9.3908" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-9"><strong>9.</strong> Epel, E. S., Blackburn, E. H., Lin, J., Dhabhar, F. S., Adler, N. E., Morrow, J. D., & Cawthon, R. M. (2004). Accelerated telomere shortening in response to life stress. <i>PNAS</i>, 101(49), 17312-17315. <a href="https://doi.org/10.1073/pnas.0407162101" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-10"><strong>10.</strong> Furman, D., Campisi, J., Verdin, E., et al. (2019). Chronic inflammation in the etiology of disease across the life span. <i>Nature Medicine</i>, 25(12), 1822-1832. <a href="https://doi.org/10.1038/s41591-019-0675-0" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-11"><strong>11.</strong> Kalmbach, D. A., Anderson, J. R., & Drake, C. L. (2018). The impact of stress on sleep: Pathogenic sleep reactivity as a vulnerability to insomnia and circadian disorders. <i>Journal of Sleep Research</i>, 27(6), e12710. <a href="https://doi.org/10.1111/jsr.12710" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-12"><strong>12.</strong> Geronimus, A. T., Hicken, M., Keene, D., & Bound, J. (2006). "Weathering" and age patterns of allostatic load scores among blacks and whites in the United States. <i>American Journal of Public Health</i>, 96(5), 826-833. <a href="https://doi.org/10.2105/AJPH.2004.060749" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-13"><strong>13.</strong> Sapolsky, R. M. (2005). The influence of social hierarchy on primate health. <i>Science</i>, 308(5722), 648-652. <a href="https://doi.org/10.1126/science.1106477" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-14"><strong>14.</strong> Marlowe, F. W. (2010). <i>The Hadza: Hunter-Gatherers of Tanzania</i>. University of California Press. <a href="https://www.ucpress.edu/book/9780520253421/the-hadza" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-15"><strong>15.</strong> Albalawi, H., et al. (2023). The effect of aerobic exercise combined with slow deep breathing and mindfulness meditation on serum cortisol levels in adult women. <i>Frontiers in Physiology</i>, 14. <a href="https://doi.org/10.3389/fphys.2023.1265898" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-16"><strong>16.</strong> Antonelli, M., Barbieri, G., & Donelli, D. (2019). Effects of forest bathing (shinrin-yoku) on levels of cortisol as a stress biomarker: A systematic review and meta-analysis. <i>International Journal of Biometeorology</i>, 63(8), 1117-1134. <a href="https://doi.org/10.1007/s00484-019-01717-x" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-17"><strong>17.</strong> Park, B. J., Tsunetsugu, Y., Kasetani, T., Kagawa, T., & Miyazaki, Y. (2010). The physiological effects of Shinrin-yoku (taking in the forest atmosphere or forest bathing). <i>Environmental Health and Preventive Medicine</i>, 15(1), 18-26. <a href="https://doi.org/10.1007/s12199-009-0086-9" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-18"><strong>18.</strong> Mandlik, G. V., et al. (2024). Effects of single sessions of yoga, breath work, and meditation on stress markers: A systematic review. <i>Stress and Health</i>, 40(2). <a href="https://doi.org/10.1002/smi.3392" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-19"><strong>19.</strong> White, M. P., Alcock, I., Grellier, J., et al. (2019). Spending at least 120 minutes a week in nature is associated with good health and wellbeing. <i>Scientific Reports</i>, 9, 7730. <a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-20"><strong>20.</strong> Heinrichs, M., Baumgartner, T., Kirschbaum, C., & Ehlert, U. (2003). Social support and oxytocin interact to suppress cortisol and subjective responses to psychosocial stress. <i>Biological Psychiatry</i>, 54(12), 1389-1398. <a href="https://doi.org/10.1016/S0006-3223(03)00465-7" target="_blank" style="color: var(--accent);">link</a></li>
+  </ol>
+</div>
+
+  </article>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Mayıs 2026</p>
+  </section>
+
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+  <script>
+    let savedPosition = null;
+
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'flex';
+      }, 300);
+    }
+
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(function() {
+          document.getElementById('fab-back').style.display = 'none';
+          savedPosition = null;
+        }, 600);
+      }
+    }
+  </script>
+
+</body>
+</html>
