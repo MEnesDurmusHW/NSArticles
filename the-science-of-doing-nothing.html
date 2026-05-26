@@ -202,6 +202,148 @@
     margin-bottom: 1.2rem;
   }
 
+  /* Pull-line: quiet italic beat between paragraphs */
+  .section .pull-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 2.3vw, 1.32rem);
+    line-height: 1.55;
+    color: var(--accent);
+    text-align: center;
+    max-width: 540px;
+    margin: 2.6rem auto;
+    padding: 1.2rem 1rem;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  /* Stat callout: comparison pair with caption */
+  .stat-callout {
+    margin: 2.8rem auto;
+    padding: 1.6rem 1rem 1.4rem;
+    max-width: 540px;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .stat-pair {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: clamp(2rem, 7vw, 3.5rem);
+  }
+
+  .stat-half {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-half .num {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: clamp(2.4rem, 6.5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .stat-half .lbl {
+    font-size: 0.74rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.65rem;
+    font-weight: 400;
+  }
+
+  .stat-caption {
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 1.2rem auto 0;
+    max-width: 480px;
+  }
+
+  .stat-caption .ref {
+    margin-left: 1px;
+  }
+
+  .stat-caption .stat-kicker {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* Subtle research / experiment card */
+  .experiment {
+    margin: 2.2rem 0;
+    padding: 1.3rem 1.5rem;
+    background: var(--accent-glow);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .experiment .exp-meta {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.55rem;
+  }
+
+  .experiment p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    text-align: justify;
+  }
+
+  .experiment p + p {
+    margin-top: 0.8rem;
+  }
+
+  /* Cascade: horizontal chain of cause-and-effect */
+  .cascade {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem 0.9rem;
+    margin: 2.4rem auto;
+    padding: 1.4rem 1rem;
+    max-width: 620px;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .cascade-step {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .cascade-step.last {
+    color: var(--accent);
+  }
+
+  .cascade-arrow {
+    color: var(--accent);
+    font-size: 1.05rem;
+    line-height: 1;
+    opacity: 0.7;
+  }
+
   /* Conclusion */
   .conclusion {
     margin-top: 2rem;
@@ -353,6 +495,28 @@
     .scroll-hint { bottom: 1.5rem; }
 
     .closing { padding: 2rem 1.2rem; }
+
+    .section .pull-line {
+      font-size: 1.05rem;
+      padding: 1rem 0.4rem;
+      margin: 2rem auto;
+    }
+
+    .stat-callout {
+      padding: 1.4rem 0.5rem 1.2rem;
+      margin: 2rem auto;
+    }
+    .stat-pair { gap: 1.6rem; }
+    .stat-half .num { font-size: 2.4rem; }
+    .stat-half .lbl { font-size: 0.68rem; letter-spacing: 1.5px; }
+    .stat-caption { font-size: 0.88rem; margin-top: 1rem; }
+
+    .experiment { padding: 1.1rem 1.2rem; margin: 1.8rem 0; }
+    .experiment p { font-size: 0.96rem; }
+    .experiment .exp-meta { font-size: 0.68rem; }
+
+    .cascade { gap: 0.4rem 0.7rem; padding: 1.2rem 0.5rem; }
+    .cascade-step { font-size: 0.92rem; }
   }
 
   /* Very small screens */
@@ -490,7 +654,23 @@
       <p>2001 yılında nörobilimci Marcus Raichle ve ekibi önemli bir keşif yaptı. Deneklere hiçbir görev verilmediğinde, yani beyin teorik olarak "boş" olduğunda, bazı bölgeler aktifleşmeyi bırakmak yerine daha fazla çalışmaya başlıyordu <a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Bu bir hata değildi. Beyin, dışarıdan uyaran almadığı anlarda kendi iç ağını devreye sokuyordu.</p>
       <p>Raichle bu ağa Default Mode Network (varsayılan mod ağı) adını verdi <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>. İsim tesadüf değil: tıpkı bir bilgisayarın arka planda güncellemeleri yüklemesi gibi, beyin de "boş" kaldığında bakım ve organizasyon işlerini yürütüyor.</p>
       <p>Bu ağ devredeyken beyin gün içinde yaşadıklarını düzenliyor, önemli olanı önemsizden ayırıyor. Geçmiş deneyimlerle gelecek senaryolarını birbirine bağlıyor. Farklı anılar arasında normalde kurmayacağın bağlantılar oluşturuyor <a href="#ref-6" class="ref" onclick="savePos(this)">6</a>. Kısacası beyin boşken sessiz değil; dağınık masasını toparlayan biri gibi. Her parçayı yerine koyuyor, gereksizleri atıyor, unuttuğun notları tekrar önüne çıkarıyor.</p>
-      <p>Ve bu ağ hiç de küçük bir operasyon değil. Beyin vücut ağırlığının yaklaşık yüzde ikisini oluşturmasına rağmen toplam enerjinin yüzde yirmisini tüketir ve bu enerjinin büyük kısmı tam da bu "boş" anlarda harcanır <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>. Beyin boşken hiçbir iş yapmıyor değil, sadece farklı bir iş yapıyor.</p>
+
+      <div class="stat-callout">
+        <div class="stat-pair">
+          <div class="stat-half">
+            <span class="num">%2</span>
+            <span class="lbl">vücut ağırlığı</span>
+          </div>
+          <div class="stat-half">
+            <span class="num">%20</span>
+            <span class="lbl">enerji tüketimi</span>
+          </div>
+        </div>
+        <p class="stat-caption">
+          Bu enerjinin büyük kısmı tam da "boş" anlarda harcanır.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a>
+          <span class="stat-kicker">Beyin boşken hiçbir iş yapmıyor değil, sadece farklı bir iş yapıyor.</span>
+        </p>
+      </div>
     </div>
 
     <div class="section-divider"></div>
@@ -502,7 +682,9 @@
       <p>Bir problemi saatlerce düşünürsün, çözüm gelmez. Vazgeçersin, duşa girersin ve cevap bir anda aklına gelir. Bu tesadüf değil.</p>
       <p>Default Mode Network aktifken beyin, bilinçli düşünmenin yapamadığı bir işi yapıyor: birbirinden uzak görünen fikirleri birleştiriyor. Beaty ve arkadaşlarının fMRI çalışmasında, katılımcılardan sıradan nesnelere alışılmadık kullanımlar bulmaları istendi, mesela bir tuğlayla ne yapılabilir? Yaratıcı cevaplar üreten katılımcıların beyinlerinde DMN ile yürütücü kontrol ağı arasındaki bağlantı belirgin şekilde daha güçlüydü <a href="#ref-8" class="ref" onclick="savePos(this)">8</a>. Yani yaratıcılık, sadece serbest hayal kurmak değil; DMN'nin ürettiği ham fikirleri beynin analitik tarafıyla buluşturabilmek.</p>
       <p>Scientific Reports'ta yayımlanan bir başka çalışmada katılımcılardan kısa hikayeler yazmaları istendi. Yazma seansları arasına 10 dakikalık mola verildi. Mola sırasında zihinleri daha çok gezinen katılımcıların ikinci hikayelerindeki yaratıcılık puanı anlamlı ölçüde yükseldi <a href="#ref-9" class="ref" onclick="savePos(this)">9</a>. İlginç olan şu: bu etki sadece aynı hikayeye devam edenlerde görüldü; yani beyin molada "kapanmamıştı", arka planda o hikaye üzerinde çalışmaya devam ediyordu.</p>
-      <p>Bu sadece yaratıcılıkla sınırlı değil. DMN aktifken beyin aynı zamanda yeni bilgileri uzun süreli hafızaya taşıyor <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>. Gün boyu öğrendiğin, deneyimlediğin, konuştuğun her şey, bu "boş" anlarda işlenip kalıcı hale geliyor. Sürekli yeni bilgi almaya devam edersen beyin bunları yerleştirecek zamanı bulamıyor.</p>
+
+      <h3 class="sub-heading" id="h15">Hafızayı yerleştirir, geleceği prova eder.<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+      <p>DMN aktifken beyin aynı zamanda yeni bilgileri uzun süreli hafızaya taşıyor <a href="#ref-10" class="ref" onclick="savePos(this)">10</a>. Gün boyu öğrendiğin, deneyimlediğin, konuştuğun her şey, bu "boş" anlarda işlenip kalıcı hale geliyor. Sürekli yeni bilgi almaya devam edersen beyin bunları yerleştirecek zamanı bulamıyor.</p>
       <p>Bir de karar alma var. DMN, geçmiş deneyimlerini kullanarak gelecek senaryolarını simüle ediyor <a href="#ref-11" class="ref" onclick="savePos(this)">11</a>. "Bu işi kabul etsem ne olur, etmesem ne olur" diye düşündüğün anlar; bu hesaplama boş anlarda yapılıyor. Takvimini sonuna kadar doldurduğunda bu süreci kısıtlamış oluyorsun.</p>
     </div>
 
@@ -513,6 +695,8 @@
       <div class="section-num">05</div>
       <h2 id="h05">Sıkılmaktan neden bu kadar korkuyoruz?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
       <p>Sıkılmayı boş durmakla, boş durmayı da zaman kaybetmekle eşitlemeye alıştık. Ama sıkılma aslında beynin bir sinyali, tıpkı acının "burada bir sorun var" demesi gibi, sıkılma da "şu an yaptığın yeterince anlamlı değil, başka bir yön ara" diyor <a href="#ref-12" class="ref" onclick="savePos(this)">12</a>. Ve beyin bu yeni yönü ararken, beklenmedik bir yan etki ortaya çıkıyor: yaratıcılık.</p>
+
+      <h3 class="sub-heading" id="h16">Sıkıcı görev, yaratıcı zihin.<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
       <p>Academy of Management Discoveries'de yayımlanan bir dizi deneyde katılımcıların bir kısmından sıkıcı bir görev yapmaları istendi, fasulyeleri renklerine göre ayırmak. Ardından herkesten yaratıcı fikirler üretmeleri istendi. Sıkıcı görevi yapan grup, diğerlerine göre hem daha fazla hem daha özgün fikir üretti <a href="#ref-13" class="ref" onclick="savePos(this)">13</a>. Araştırmacılar bunu "çeşitlilik arayan duygu" olarak tanımladı: sıkılma, beyni alışılmadık yönlere itiyordu.</p>
       <p>Bu bulgu tek değildi. Mann ve Cadman katılımcılara dünyanın belki de en sıkıcı görevini verdi: telefon rehberinden numara kopyalamak. Sonrasında bir çift plastik bardağa yaratıcı kullanım alanı bulmalarını istediler. Numara kopyalayanlar kontrol grubundan çok daha yaratıcı fikirler üretti <a href="#ref-14" class="ref" onclick="savePos(this)">14</a>. Gasper ve Middlewood ise bir adım daha ileri gidip sıkılmayı diğer duygu durumlarıyla karşılaştırdı: sıkılan katılımcılar, rahat, neşeli ya da stresli olanlara kıyasla yaratıcılık testlerinde daha yüksek puan aldı <a href="#ref-15" class="ref" onclick="savePos(this)">15</a>.</p>
       <p>Sıkılmak rahatsız edici ama işlevsel. Beyin, dışarıdan yeterli uyaran almadığında içe dönüyor ve DMN devreye giriyor. Sorun sıkılmanın kendisi değil; ona tahammül edemeyip hemen telefona ya da herhangi bir uyarana sığınmak. Her sıkılma anını doldurduğunda, beynin yaratıcı sürecini başlamadan bitirmiş oluyorsun.</p>
@@ -528,6 +712,17 @@
       <p>Sürekli meşguliyet sadece zihinsel bir yük değil, vücudun da bir bedeli var. Beyin sürekli uyarılma halindeyken kortizol (stres hormonu) salgılanmaya devam ediyor. Kısa süreli stres normal ve hatta faydalı: seni odaklar, tepki hızını artırır. Ama bu sistem kapanmazsa sorun başlıyor.</p>
       <p>Sheldon Cohen ve ekibinin PNAS'ta yayımlanan çalışmasında, kronik strese maruz kalan bireylerde kortizol düzenleme mekanizmasının bozulduğu gösterildi <a href="#ref-16" class="ref" onclick="savePos(this)">16</a>. Normalde kortizol işini yapar ve geri çekilir. Ama sürekli stres altında vücut bu sinyale duyarsızlaşıyor; buna glukokortikoid direnci deniyor. Sonuç: kortizol yüksek kalıyor ama vücut onu dinlemiyor. Bu da kronik inflamasyona yol açıyor <a href="#ref-17" class="ref" onclick="savePos(this)">17</a>.</p>
       <p>İnflamasyon kısa vadede bir savunma mekanizması: yaralanmada, enfeksiyonda vücudu korur. Ama kronik hale geldiğinde tam tersi oluyor: kalp-damar hastalıkları, diyabet, depresyon ve hatta nörodejeneratif hastalıklarla ilişkilendiriliyor <a href="#ref-18" class="ref" onclick="savePos(this)">18</a>. Yani sürekli "meşgul olma" hali sadece zihinsel yorgunluk değil; vücudun sessizce yıpranan bir döngüsü.</p>
+
+      <div class="cascade" aria-label="Stres zinciri">
+        <span class="cascade-step">Kronik stres</span>
+        <span class="cascade-arrow" aria-hidden="true">→</span>
+        <span class="cascade-step">Kortizol direnci</span>
+        <span class="cascade-arrow" aria-hidden="true">→</span>
+        <span class="cascade-step">İnflamasyon</span>
+        <span class="cascade-arrow" aria-hidden="true">→</span>
+        <span class="cascade-step last">Hastalık riski</span>
+      </div>
+
       <p>Boş zaman burada bir lüks değil, fizyolojik bir ihtiyaç. Kortizolün düşmesi, inflamasyonun gerilemesi, vücudun kendini onarması için beynin ve vücudun uyarılmadığı anlara ihtiyacı var.</p>
     </div>
 
