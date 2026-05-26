@@ -352,6 +352,478 @@
     color: var(--text-dim);
   }
 
+  /* Strong pull-quote (editorial moment with optional tag) */
+  .pull-quote-strong {
+    position: relative;
+    text-align: center;
+    padding: 2.6rem 1.5rem 2.4rem;
+    margin: 3rem 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  .pull-quote-strong .pull-quote-tag {
+    position: absolute;
+    top: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .pull-quote-strong p {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--text);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .pull-quote-strong em,
+  .pull-quote-strong i {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Phenomena strip — styled list opening */
+  .phenomena-strip {
+    margin: 2.2rem 0;
+    padding: 1.5rem 0 0.2rem;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .phenomena-strip .phenomenon {
+    font-size: 1rem;
+    line-height: 1.55;
+    padding: 0.55rem 0;
+    text-align: left;
+  }
+
+  .phenomena-strip .phenomenon:not(:last-child) {
+    border-bottom: 1px dashed var(--divider);
+  }
+
+  .phenomena-strip .phenomenon strong {
+    color: var(--accent);
+    font-weight: 600;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    letter-spacing: 0.3px;
+  }
+
+  .phenomena-strip .phenomenon i,
+  .phenomena-strip .phenomenon em {
+    font-style: italic;
+  }
+
+  .phenomena-strip .phenomenon .gloss {
+    color: var(--text-dim);
+    font-size: 0.88em;
+    font-style: normal;
+  }
+
+  /* Two-column mode comparison */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2.4rem 0;
+  }
+
+  .modes-grid .mode-card {
+    padding: 1.4rem 1.4rem 1.5rem;
+    background: var(--accent-glow);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .modes-grid .mode-label {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .modes-grid .mode-name {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .modes-grid .mode-card p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin: 0;
+    text-align: justify;
+  }
+
+  .modes-grid .mode-card .mode-attrs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modes-grid .mode-card .mode-attrs li {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0.45rem 0;
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .modes-grid .mode-card .mode-attrs li strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Drill list — Prussian institutional commands */
+  .drill-list {
+    margin: 2.2rem 0;
+    padding: 1.5rem 1.7rem 1.6rem;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+  }
+
+  .drill-list-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .drill-list ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: drill;
+  }
+
+  .drill-list ol li {
+    counter-increment: drill;
+    font-family: var(--serif);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 0.4rem 0;
+    padding-left: 2.4rem;
+    position: relative;
+    text-align: left;
+    color: var(--text);
+  }
+
+  .drill-list ol li::before {
+    content: counter(drill, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.18rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1.2px;
+  }
+
+  /* Definition list — labeled inline items */
+  .def-list {
+    margin: 2rem 0;
+  }
+
+  .def-list .def-item {
+    margin-bottom: 1.1rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  .def-list .def-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .def-list .def-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .def-list .def-text {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+    text-align: justify;
+  }
+
+  /* Danger variant — bodily/health cost lists */
+  .def-list-warning {
+    --danger: #a13929;
+    position: relative;
+    padding: 1.4rem 1.2rem 1rem;
+    background: rgba(161, 57, 41, 0.035);
+    border-radius: 6px;
+    margin: 2.2rem 0;
+  }
+
+  [data-theme="dark"] .def-list-warning {
+    --danger: #d35b46;
+    background: rgba(211, 91, 70, 0.08);
+  }
+
+  .def-list-warning .def-list-tag {
+    display: block;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: var(--danger);
+    margin-bottom: 1.2rem;
+  }
+
+  .def-list-warning .def-list-tag::before,
+  .def-list-warning .def-list-tag::after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--danger);
+    vertical-align: middle;
+    margin: 0 10px;
+    opacity: 0.55;
+  }
+
+  .def-list-warning .def-item {
+    border-left-color: var(--danger);
+    margin-bottom: 1rem;
+    padding-left: 0.95rem;
+  }
+
+  .def-list-warning .def-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .def-list-warning .def-label {
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+  }
+
+  .def-list-warning .def-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--danger);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Stat callout — single dramatic number */
+  .stat-callout {
+    position: relative;
+    text-align: center;
+    padding: 2.6rem 1.5rem 2.2rem;
+    margin: 2.8rem 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  .stat-callout .stat-tag {
+    position: absolute;
+    top: -0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .stat-callout .stat-number {
+    font-family: var(--serif);
+    font-size: 4.2rem;
+    color: var(--accent);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-callout .stat-label {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: 0.3px;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  .stat-callout .stat-source {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Flow channel diagram */
+  .flow-figure {
+    margin: 2.5rem 0;
+    padding: 1.6rem 1.2rem 1.5rem;
+    background: var(--accent-glow);
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+  }
+
+  .flow-diagram {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .flow-diagram .cell { stroke: none; }
+
+  .flow-diagram .cell-flow {
+    fill: var(--accent);
+    fill-opacity: 0.4;
+  }
+
+  .flow-diagram .cell-positive {
+    fill: var(--accent);
+    fill-opacity: 0.16;
+  }
+
+  .flow-diagram .cell-mid-warm {
+    fill: var(--accent);
+    fill-opacity: 0.08;
+  }
+
+  .flow-diagram .cell-mid-cool {
+    fill: var(--text-dim);
+    fill-opacity: 0.08;
+  }
+
+  .flow-diagram .cell-negative {
+    fill: var(--text-dim);
+    fill-opacity: 0.14;
+  }
+
+  .flow-diagram .cell-neutral {
+    fill: var(--text-dim);
+    fill-opacity: 0.04;
+  }
+
+  .flow-diagram .flow-diagonal {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+    fill: none;
+    opacity: 0.55;
+  }
+
+  .flow-diagram .grid-line {
+    stroke: var(--text-dim);
+    stroke-width: 0.5;
+    opacity: 0.3;
+    fill: none;
+  }
+
+  .flow-diagram .chart-border {
+    fill: none;
+    stroke: var(--text-dim);
+    stroke-width: 1;
+    opacity: 0.4;
+  }
+
+  .flow-diagram .axis {
+    stroke: var(--text-dim);
+    stroke-width: 1;
+    opacity: 0.5;
+    fill: none;
+  }
+
+  .flow-diagram .cell-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    fill: var(--text);
+    text-anchor: middle;
+  }
+
+  .flow-diagram .cell-label-flow {
+    fill: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--sans);
+    font-style: normal;
+    letter-spacing: 2.5px;
+  }
+
+  .flow-diagram .cell-label-positive {
+    fill: var(--accent);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .flow-diagram .axis-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    fill: var(--text-dim);
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  .flow-figure figcaption {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 460px;
+    margin: 1.1rem auto 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .modes-grid { grid-template-columns: 1fr; }
+    .pull-quote-strong { padding: 2.2rem 1.2rem 2rem; }
+    .pull-quote-strong p { font-size: 1.15rem; }
+    .drill-list { padding: 1.3rem 1.3rem 1.4rem; }
+    .drill-list ol li { padding-left: 2.2rem; }
+    .stat-callout .stat-number { font-size: 3.2rem; }
+    .stat-callout { padding: 2.2rem 1.2rem 1.8rem; }
+    .flow-figure { padding: 1.2rem 0.8rem; }
+  }
+
   /* Lists inside sections */
   .section ul, .section ol {
     margin: 1rem 0 1.4rem 1.5rem;
@@ -594,6 +1066,11 @@
         <span class="toc-num">01</span>
         <span class="toc-title">Stres</span>
       </a>
+      <a href="#s02" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">02</span>
+        <span class="toc-title">Dikkat</span>
+      </a>
       <a href="#kaynaklar" class="toc-row toc-level-1">
         <span class="toc-marker"></span>
         <span class="toc-num">·</span>
@@ -634,21 +1111,28 @@
 
   <p>Sen sabah trafikte kaldın. Kortizol seviyen yükseldi. İşe geç kaldın. Düştü mü? Hayır, yükselmeye devam etti, çünkü patronun seni göreceği toplantıya yetişemiyorsun. Toplantı bitti, kortizol düştü mü? Hayır, çünkü öğleden sonra için bir deadline var. Akşam eve geldin, gevşedin mi? Hayır, çünkü kira son ödeme tarihine yaklaşıyor. Uyumaya çalışıyorsun, ama yarın aynı şey baştan başlayacak. Kira olmayabilir, toplantı olmayabilir, ama çoğumuz gün boyunca bir stres kaynağından diğerine geçiyoruz.</p>
 
-  <p>Bu aslında bir kitabın adı: Robert Sapolsky'nin 30 yıl önce yazdığı <i>Why Zebras Don't Get Ulcers</i> (Zebralar Neden Ülser Olmaz). Sapolsky 30 yıldır Stanford'da stres biyolojisi çalışıyor ve uzun yıllar Kenya'da vahşi babunların kan örneklerini inceledi. Kitabın özeti tek cümle: hayvanlar akut stres yaşar, biz kronik. Onlar aslan görür, kaçar, biter. Biz hayatımızın tamamı boyunca <i>hayali</i> aslanlardan kaçıyoruz.</p>
+  <p>Bu aslında bir kitabın adı: Robert Sapolsky'nin 30 yıl önce yazdığı <i>Why Zebras Don't Get Ulcers</i><a href="#ref-1" class="ref" onclick="savePos(this)">1</a> (Zebralar Neden Ülser Olmaz). Sapolsky 30 yıldır Stanford'da stres biyolojisi çalışıyor ve uzun yıllar Kenya'da vahşi babunların kan örneklerini inceledi. Kitabın özeti tek cümle: hayvanlar akut stres yaşar, biz kronik. Onlar aslan görür, kaçar, biter. Biz hayatımızın tamamı boyunca <i>hayali</i> aslanlardan kaçıyoruz.</p>
 
   <h3 class="sub-heading" id="s01-stresli-mi">Gerçekten stresli miyiz?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
-  <p>Rakamlar bunu doğruluyor.</p>
+  <p>Rakamlar bunu doğruluyor. 2024'te Ipsos'un 31 ülkede yaptığı World Mental Health Day araştırmasında insanların <strong>%62'si</strong> "günlük yaşamımı etkileyecek kadar stresli hissettim" dedi. Bu zaten yüksek bir rakam. Ama Türkiye sıralamada <strong>birinci</strong>.</p>
 
-  <p>2024'te Ipsos'un 31 ülkede yaptığı World Mental Health Day araştırmasında insanların <strong>%62'si</strong> "günlük yaşamımı etkileyecek kadar stresli hissettim" dedi. Bu zaten yüksek bir rakam. Ama Türkiye sıralamada birinci, <strong>%76</strong>. Yani Türkiye'de her 4 kişiden 3'ü günlük yaşamını etkileyecek seviyede stres yaşıyor. Karşılaştırma için, Japonya'da bu oran %44.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+  <div class="stat-callout">
+    <span class="stat-tag">Türkiye</span>
+    <div class="stat-number">%76</div>
+    <div class="stat-label">"Günlük yaşamımı etkileyecek kadar stresli hissettim"</div>
+    <div class="stat-source">Türkiye 31 ülke arasında birinci. Karşılaştırma için: küresel ortalama %62, Japonya %44.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
+  </div>
+
+  <p>Yani Türkiye'de her 4 kişiden 3'ü günlük yaşamını etkileyecek seviyede stres yaşıyor.</p>
 
   <details class="collapsible">
     <summary>Dünyada stres: rakamlar</summary>
     <div class="collapsible-body">
       <ul>
-        <li>2025 Gallup Global Emotions raporu (144 ülke): yetişkinlerin %37'si "her gün stresli hissediyorum" dedi.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a></li>
-        <li>Dünya Sağlık Örgütü: dünyada 280 milyon insan depresyondan, 301 milyon insan anksiyete bozukluğundan etkileniyor.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></li>
-        <li>Depresyon ve anksiyete birlikte yılda yaklaşık 12 milyar iş gününün kaybına yol açıyor. Bu kayıp iki şekilde oluşuyor: hastalık nedeniyle işe gelememe ve işe gelip ama düşük performansla, yoğun dikkat dağınıklığıyla, hata oranı yüksek şekilde çalışma. WHO bu kaybın küresel ekonomiye yıllık maliyetini yaklaşık 1 trilyon dolar olarak tahmin ediyor.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></li>
+        <li>2025 Gallup Global Emotions raporu (144 ülke): yetişkinlerin %37'si "her gün stresli hissediyorum" dedi.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a></li>
+        <li>Dünya Sağlık Örgütü: dünyada 280 milyon insan depresyondan, 301 milyon insan anksiyete bozukluğundan etkileniyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>Depresyon ve anksiyete birlikte yılda yaklaşık 12 milyar iş gününün kaybına yol açıyor. Bu kayıp iki şekilde oluşuyor: hastalık nedeniyle işe gelememe ve işe gelip ama düşük performansla, yoğun dikkat dağınıklığıyla, hata oranı yüksek şekilde çalışma. WHO bu kaybın küresel ekonomiye yıllık maliyetini yaklaşık 1 trilyon dolar olarak tahmin ediyor.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></li>
       </ul>
     </div>
   </details>
@@ -657,11 +1141,11 @@
     <summary>İşyeri burnout: dünyadan rakamlar</summary>
     <div class="collapsible-body">
       <ul>
-        <li>2024'te küresel olarak çalışanların %52'si burnout (tükenmişlik) yaşıyor. Kadınlarda %59, erkeklerde %46.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
-        <li>2025 tahminlerine göre çalışanların %82'si burnout riski altında.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
-        <li>ABD'de doktorların %48'i, hemşirelerin %62'si burnout yaşıyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
-        <li>Her 4 Amerikalıdan 1'i 30 yaşından önce zirve burnout yaşıyor.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
-        <li>Gen Z ve millennial çalışanların yaklaşık yarısı mental sağlık nedeniyle iş bıraktı.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></li>
+        <li>2024'te küresel olarak çalışanların %52'si burnout (tükenmişlik) yaşıyor. Kadınlarda %59, erkeklerde %46.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></li>
+        <li>2025 tahminlerine göre çalışanların %82'si burnout riski altında.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></li>
+        <li>ABD'de doktorların %48'i, hemşirelerin %62'si burnout yaşıyor.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a></li>
+        <li>Her 4 Amerikalıdan 1'i 30 yaşından önce zirve burnout yaşıyor.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></li>
+        <li>Gen Z ve millennial çalışanların yaklaşık yarısı mental sağlık nedeniyle iş bıraktı.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></li>
       </ul>
     </div>
   </details>
@@ -670,9 +1154,9 @@
 
   <h3 class="sub-heading" id="s01-neden-var">Stres tepkisi neden var?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
-  <p>Stres aslında seni öldürmek için değil, <i>kurtarmak için</i> var. Yaklaşık 550 milyon yıldır omurgalılarda bulunan bu sistem hayatta kalmanın temel mekanizmalarından biri.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></p>
+  <p>Stres aslında seni öldürmek için değil, <i>kurtarmak için</i> var. Yaklaşık 550 milyon yıldır omurgalılarda bulunan bu sistem hayatta kalmanın temel mekanizmalarından biri.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
 
-  <p>Atalarımız bir aslan gördüğünde olan şey şudur: beynin hipotalamus bölgesi alarm verir. Hipotalamus, böbrek üstü bezlerini harekete geçiren bir sinyal zinciri başlatır. Bu zincire HPA ekseni denir (Hypothalamus-Pituitary-Adrenal: hipotalamus-hipofiz-böbrek üstü bezi). Böbrek üstü bezleri iki ana hormon salar. Adrenalin saniyeler içinde devreye girer, kalp atışı hızlanır, kan basıncı yükselir, kan kaslara akar, gözbebeği büyür. Kortizol biraz daha yavaş ama daha uzun süreli, glikoz salınır, vücut acil enerjiye boğulur. Sindirim baskılanır, bağışıklık sistemi geçici olarak susturulur, üreme baskılanır. Vücut, tüm enerjiyi şu anki acil duruma yönlendirir.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></p>
+  <p>Atalarımız bir aslan gördüğünde olan şey şudur: beynin hipotalamus bölgesi alarm verir. Hipotalamus, böbrek üstü bezlerini harekete geçiren bir sinyal zinciri başlatır. Bu zincire HPA ekseni denir (Hypothalamus-Pituitary-Adrenal: hipotalamus-hipofiz-böbrek üstü bezi). Böbrek üstü bezleri iki ana hormon salar. Adrenalin saniyeler içinde devreye girer, kalp atışı hızlanır, kan basıncı yükselir, kan kaslara akar, gözbebeği büyür. Kortizol biraz daha yavaş ama daha uzun süreli, glikoz salınır, vücut acil enerjiye boğulur. Sindirim baskılanır, bağışıklık sistemi geçici olarak susturulur, üreme baskılanır. Vücut, tüm enerjiyi şu anki acil duruma yönlendirir.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
 
   <p>Bu sistem mükemmel çalışıyor. Ama kritik bir özelliği var, <i>geçici</i> olarak tasarlandı. Aslan kaçtı, sistem kapanır. Kortizol seviyesi düşer, sindirim normale döner, bağışıklık aktive olur, üreme fonksiyonları yeniden açılır. Vücut zaten bu modu uzun süre sürdürebilecek durumda değil.</p>
 
@@ -682,17 +1166,33 @@
 
   <p>Kronik kortizol yükselişi vücudun neredeyse her sistemini etkiliyor.</p>
 
-  <p>Kardiyovasküler sistem (kalp ve damar sistemi) en çok etkilenen yer. Kronik stres hipertansiyon, koroner kalp hastalığı, ateroskleroz (damar sertliği) ve kalp krizi riskini artırıyor.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Bağışıklık sistemi sürekli baskı altında kaldığı için zayıflıyor.</p>
+  <div class="def-list def-list-warning">
+    <span class="def-list-tag">Bedensel Maliyet</span>
+    <div class="def-item">
+      <span class="def-label">Kalp ve damar</span>
+      <p class="def-text">Kronik stres hipertansiyon, koroner kalp hastalığı, ateroskleroz (damar sertliği) ve kalp krizi riskini artırıyor.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a></p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Hipokampüs</span>
+      <p class="def-text">Beynin hafıza ve öğrenme merkezi kronik kortizol altında küçülüyor. Depresyon hastalarında bu hacim azalması ölçülebilir şekilde görülüyor.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a></p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Telomerler</span>
+      <p class="def-text">Kromozom uçlarındaki koruyucu kapaklar kısalıyor. Telomerler kısaldıkça biyolojik yaşlanma hızlanıyor.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a></p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">İnflamasyon</span>
+      <p class="def-text">Vücuttaki kronik iltihap yükseliyor. Yüksek inflamasyon damar sertliği, diyabet ve metabolik sendrom ile ilişkili.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Uyku</span>
+      <p class="def-text">Yüksek stresli kişilerde insomnia riski <strong>%60</strong> daha yüksek, kronik insomnia 2 katı.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a> Uyku bozulunca kortizol yükselir, kortizol yükselince uyku bozulur. Sonsuz döngü.</p>
+    </div>
+  </div>
 
-  <p>Beyinde hipokampüs, yani hafıza ve öğrenme merkezi, kronik kortizol altında küçülüyor. Depresyon hastalarında bu hacim azalması ölçülebilir şekilde görülüyor.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Sapolsky depresyonun yalnızca bir kimyasal dengesizlik anlatısıyla açıklanamayacağını savunuyor. Ona göre kronik strese maruz kalan HPA ekseninin disregülasyonu, depresyonun biyolojik temelinde merkezi bir rol oynuyor.</p>
+  <p>Sapolsky depresyonun yalnızca bir kimyasal dengesizlik anlatısıyla açıklanamayacağını savunuyor. Ona göre kronik strese maruz kalan HPA ekseninin disregülasyonu, depresyonun biyolojik temelinde merkezi bir rol oynuyor.</p>
 
-  <p>Hücresel seviyede telomerler (kromozom uçlarındaki koruyucu kapaklar) kısalıyor. Telomerler kısaldıkça biyolojik yaşlanma hızlanıyor. Kronik stres bu süreci hızlandırabiliyor.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Benzer bir mekanizma ciltte de görülüyor, kortizol kolajen üretimini baskılıyor.</p>
-
-  <p>İnflamasyon (vücuttaki kronik iltihap durumu) yaşlanmayla zaten artıyor. Kronik stres bu artışı hızlandırıyor. Yüksek inflamasyon ise damar sertliği, diyabet ve metabolik sendrom gibi pek çok kronik hastalıkla ilişkili.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a></p>
-
-  <p>Uyku da bu döngünün içinde. Yüksek stres seviyesi olan kişilerde insomnia (uykusuzluk) riski yaklaşık <strong>%60</strong> daha yüksek, kronik insomnia riski ise 2 katı.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Uyku bozulunca kortizol daha da yükselir. Kortizol yükselince uyku daha da bozulur. Sonsuz bir döngü.</p>
-
-  <p>Tüm bu mekanizmalar birikince sonuç toplumsal seviyede de görünüyor. ABD'de yaşam beklentisi son 20 yılın en düşük seviyesinde, <strong>76.4 yıl</strong>. Halk sağlığı uzmanları kronik stresi bu düşüşün ana faktörlerinden biri olarak tanımlıyor. "Weathering" (aşınma) hipotezi şunu söylüyor: kronik stres yaşlanmayı hızlandırıyor ve erken ölüme yol açıyor.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a></p>
+  <p>Tüm bu mekanizmalar birikince sonuç toplumsal seviyede de görünüyor. ABD'de yaşam beklentisi son 20 yılın en düşük seviyesinde, <strong>76.4 yıl</strong>. Halk sağlığı uzmanları kronik stresi bu düşüşün ana faktörlerinden biri olarak tanımlıyor. <i>Weathering</i> (aşınma) hipotezi şunu söylüyor: kronik stres yaşlanmayı hızlandırıyor ve erken ölüme yol açıyor.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
 
   <h3 class="sub-heading" id="s01-zebra">Peki neden insan zebra gibi olamıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
@@ -707,7 +1207,7 @@
 
   <p>Bu gelişmiş beyin atalarımıza muazzam bir avantaj verdi (alet yapma, planlama, işbirliği), ama beraberinde <i>psikososyal stres</i> dediğimiz bir maliyet getirdi. Fight-or-flight (kaç ya da savaş) sistemini fiziksel tehdit olmadan da tetikleyebilen ilk ve tek tür biziz.</p>
 
-  <p>Sosyal hiyerarşilerde yaşayan diğer primatlarda da benzer örüntüler görülüyor. Sapolsky'nin Kenya'daki uzun yıllar süren babun çalışmasında düşük statülü babunlarda kronik sosyal stres ve depresyona benzer biyolojik hasar örüntüleri bulundu.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a> Sapolsky'nin bu çalışmalardan çıkardığı önemli bir bulgu var: stresin biyolojik etkisini belirleyen şey, tehdidin büyüklüğü değil, <a href="illusion-of-control.html" class="inline-link">kontrol algısıdır</a>. Babunlar arasında en kötü kronik strese giren, en alttaki, durumu üzerinde kontrolü en az olan bireylerdi. Aynı tehditle karşılaşan iki birey, kontrol algıları farklıysa farklı biyolojik tepki veriyor. Kontrol edebileceğini hisseden kişide kortizol daha az yükseliyor, daha hızlı düşüyor.</p>
+  <p>Sosyal hiyerarşilerde yaşayan diğer primatlarda da benzer örüntüler görülüyor. Sapolsky'nin Kenya'daki uzun yıllar süren babun çalışmasında düşük statülü babunlarda kronik sosyal stres ve depresyona benzer biyolojik hasar örüntüleri bulundu.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Sapolsky'nin bu çalışmalardan çıkardığı önemli bir bulgu var: stresin biyolojik etkisini belirleyen şey, tehdidin büyüklüğü değil, <a href="illusion-of-control.html" class="inline-link">kontrol algısıdır</a>. Babunlar arasında en kötü kronik strese giren, en alttaki, durumu üzerinde kontrolü en az olan bireylerdi. Aynı tehditle karşılaşan iki birey, kontrol algıları farklıysa farklı biyolojik tepki veriyor. Kontrol edebileceğini hisseden kişide kortizol daha az yükseliyor, daha hızlı düşüyor.</p>
 
   <h3 class="sub-heading" id="s01-hadza">Hadza ne yapıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
@@ -724,12 +1224,33 @@
         <li>Vahşi hayvan saldırıları (aslan, leopar, bufalo bölgede).</li>
         <li>Sıtma ve diğer enfeksiyon hastalıkları.</li>
         <li>Kuru mevsimde su erişimi sorunları.</li>
-        <li>Pastoral Datooga halkının topraklarına müdahalesiyle azalan büyük av hayvanları.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a></li>
+        <li>Pastoral Datooga halkının topraklarına müdahalesiyle azalan büyük av hayvanları.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a></li>
       </ul>
     </div>
   </details>
 
-  <p>Ama önemli bir fark var. Hadza'nın stresleri çoğunlukla somut (görünür bir tehdit), kısa süreli (çözülür ya da sonuç verir) ve çözülebilir (kontrol edilebilir bir aksiyon var). Bizim streslerimizin çoğu ise soyut (kira, kariyer, sosyal medya kıyaslamaları), sürekli (mesai bittiğinde de e-posta gelir) ve kontrol edilemez (ekonomik kriz, dünya politikaları).</p>
+  <p>Ama önemli bir fark var.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-label">Hadza</div>
+      <div class="mode-name">Akut Stres</div>
+      <ul class="mode-attrs">
+        <li><strong>Somut:</strong> görünür bir tehdit.</li>
+        <li><strong>Kısa süreli:</strong> çözülür ya da sonuç verir.</li>
+        <li><strong>Çözülebilir:</strong> kontrol edilebilir bir aksiyon var.</li>
+      </ul>
+    </div>
+    <div class="mode-card">
+      <div class="mode-label">Modern</div>
+      <div class="mode-name">Kronik Stres</div>
+      <ul class="mode-attrs">
+        <li><strong>Soyut:</strong> kira, kariyer, sosyal medya kıyaslamaları.</li>
+        <li><strong>Sürekli:</strong> mesai bittiğinde de e-posta gelir.</li>
+        <li><strong>Kontrol edilemez:</strong> ekonomik kriz, dünya politikaları.</li>
+      </ul>
+    </div>
+  </div>
 
   <h3 class="sub-heading" id="s01-ne-yapabilirsin">Ne yapabilirsin?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
@@ -737,7 +1258,7 @@
 
   <div class="experiment">
     <div class="experiment-title">Albalawi ve ark., 2023 — Frontiers in Physiology</div>
-    <p>6 hafta düzenli aerobik egzersiz yapan kadınlarda serum kortizol seviyeleri <strong>%20.16</strong> düştü. Egzersize yavaş derin nefes ve mindfulness meditasyonu eklenen grupta düşüş <strong>%30.29</strong>'a çıktı.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
+    <p>6 hafta düzenli aerobik egzersiz yapan kadınlarda serum kortizol seviyeleri <strong>%20.16</strong> düştü. Egzersize yavaş derin nefes ve mindfulness meditasyonu eklenen grupta düşüş <strong>%30.29</strong>'a çıktı.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a></p>
   </div>
 
   <p>Düzenli egzersizin stres üzerindeki etkisi muhtemelen bu mekanizmadan geliyor. Egzersiz vücudun "kaçma/savaşma" tepkisini gerçek bir fiziksel aktiviteye dönüştürür ve sonrasında parasempatik sistem (vücudun "dinlenme ve sindirme" sistemi) devreye girer. Bu, stres döngüsünün tamamlanmasına yardımcı olur.</p>
@@ -746,21 +1267,21 @@
 
   <div class="experiment">
     <div class="experiment-title">Antonelli ve ark., 2019 — Sistematik derleme ve meta-analiz</div>
-    <p>971 çalışma tarandı, 22'si değerlendirildi. Japon <i>shinrin-yoku</i> (orman banyosu) uygulamasının kortizol seviyelerini ortalama <strong>%12-18</strong> düşürdüğü gösterildi.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Bir başka çalışmada sadece 15 dakikalık orman yürüyüşü katılımcıların <strong>%69'unda</strong> kortizol seviyesini düşürdü.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a></p>
+    <p>971 çalışma tarandı, 22'si değerlendirildi. Japon <i>shinrin-yoku</i> (orman banyosu) uygulamasının kortizol seviyelerini ortalama <strong>%12-18</strong> düşürdüğü gösterildi.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a> Bir başka çalışmada sadece 15 dakikalık orman yürüyüşü katılımcıların <strong>%69'unda</strong> kortizol seviyesini düşürdü.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a></p>
   </div>
 
   <div class="experiment">
     <div class="experiment-title">Mandlik ve ark., 2024 — Stress and Health</div>
-    <p>28 çalışmayı kapsayan sistematik derlemede tek bir yoga, nefes veya meditasyon seansının bile stres belirteçlerini azalttığı, kortizol ölçen 4 çalışmanın hepsinin anlamlı düşüş gösterdiği bulundu.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a></p>
+    <p>28 çalışmayı kapsayan sistematik derlemede tek bir yoga, nefes veya meditasyon seansının bile stres belirteçlerini azalttığı, kortizol ölçen 4 çalışmanın hepsinin anlamlı düşüş gösterdiği bulundu.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
   </div>
 
-  <p>Genel öneri olarak, haftada 120 dakika doğada vakit geçirmek, fiziksel ve psikolojik sağlık yararları için yeterli "doz" olarak görülüyor.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a></p>
+  <p>Genel öneri olarak, haftada 120 dakika doğada vakit geçirmek, fiziksel ve psikolojik sağlık yararları için yeterli "doz" olarak görülüyor.<a href="#ref-21" class="ref" onclick="savePos(this)">21</a></p>
 
   <p>Sosyal bağlantı da güçlü bir tampondur.</p>
 
   <div class="experiment">
     <div class="experiment-title">Heinrichs ve ark., 2003 — Biological Psychiatry</div>
-    <p>Katılımcılara stres testi (Trier Social Stress Test) öncesinde dört farklı koşul uygulandı: sosyal destek yok, sadece sosyal destek, sadece intranasal oksitosin ya da ikisi birden. Sosyal destek tek başına kortizol tepkisini azalttı. Ama en düşük kortizol yanıtı sosyal destek ve oksitosin birlikte verildiğinde görüldü.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
+    <p>Katılımcılara stres testi (Trier Social Stress Test) öncesinde dört farklı koşul uygulandı: sosyal destek yok, sadece sosyal destek, sadece intranasal oksitosin ya da ikisi birden. Sosyal destek tek başına kortizol tepkisini azalttı. Ama en düşük kortizol yanıtı sosyal destek ve oksitosin birlikte verildiğinde görüldü.<a href="#ref-22" class="ref" onclick="savePos(this)">22</a></p>
   </div>
 
   <p>Yanında güvendiğin biri olduğunda, vücudun stresi farklı işliyor. Atalarımız stresi grupla birlikte yaşıyordu, modern insan çoğu zaman tek başına.</p>
@@ -774,30 +1295,315 @@
 
 <div class="section-divider"></div>
 
+<!-- 02 DİKKAT -->
+<div class="section" id="s02">
+  <div class="section-num">02</div>
+  <h2 id="h03">Odaklanmak neden bu kadar <i>zor</i> oldu?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+  <p>Modern dünyada dikkat, bir kıtlık ürünü. Son 20 yılda dikkat etrafında yeni hastalıklar tanındı, yeni kavramlar sözlüğe girdi, yeni endüstriler kuruldu.</p>
+
+  <div class="phenomena-strip">
+    <div class="phenomenon"><strong>ADHD</strong> <span class="gloss">(Dikkat Eksikliği ve Hiperaktivite Bozukluğu)</span> tanıları son 20 yılda neredeyse iki katına çıktı.</div>
+    <div class="phenomenon"><strong><i>Multitasking</i></strong> <span class="gloss">(çoklu görev)</span> bir kariyer becerisi olarak yüceltiliyor.</div>
+    <div class="phenomenon"><strong><i>Doomscrolling</i></strong> <span class="gloss">(kötü haberleri durmadan kaydırarak okuma)</span> sözlüğe girdi.</div>
+    <div class="phenomenon"><strong><i>Brain rot</i></strong> <span class="gloss">(içerik tüketiminden gelen zihinsel donukluk)</span> 2024'ün Oxford yılın kelimesi seçildi.</div>
+    <div class="phenomenon"><strong>Pomodoro, dijital detoks, odak uygulamaları</strong> son 10 yılın yükselen endüstrileri.</div>
+  </div>
+
+  <p>Bunların hepsi tek bir gerçeği işaret ediyor. <strong>Dikkatimizi kaybediyoruz, ama çoğumuz bunu artık fark bile etmiyor.</strong> Telefonu eline alıp ne için aldığını unutmak, bir videonun sonuna gelemeden başka bir şeye geçmek, paragrafın yarısında aklın başka yere kayması, bunlar artık normalleşti. Oysa dikkat sistemimiz 300.000 yıl önce çok farklı bir dünyaya göre kalibre olmuştu. O sistem hâlâ aynı, ama içinde bulunduğu dünya tamamen değişti. Üstelik bu yeni dünyanın büyük bir kısmı, <i>dikkatini çekip tutmak için tasarlanmış</i> durumda.</p>
+
+  <p class="punch">Atalarımızın dikkati iki modda çalışıyordu.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-label">Mod 01</div>
+      <div class="mode-name">Tarama</div>
+      <p>Ufukta hareket var mı? Çalılıkta hışırtı duydun mu? Çocuk neden sessizleşti? Yaprakların arasındaki gözle göremediğin bir yırtıcıyı fark eden ataların gen havuzunu sonraki nesillere bıraktı. Fark edemeyenler bırakamadı.</p>
+    </div>
+    <div class="mode-card">
+      <div class="mode-label">Mod 02</div>
+      <div class="mode-name">Hyperfocus</div>
+      <p>Ok yapıyorsan saatlerce ok yapıyordun. Av peşindeysen saatlerce takip ediyordun. Mağaraya resim çiziyorsan günler sürebiliyordu. Bir göreve tamamen verme yeteneği. Modern psikolojinin <i>flow</i> (akış) dediği şeyin atası.</p>
+    </div>
+  </div>
+
+  <p>İki mod arasında geçiş, <strong>ortam tarafından</strong> tetikleniyordu. Tarama modu sırasında bir şey dikkatini çekerse hyperfocus'a geçerdin. Sonra iş bittiğinde tarama moduna dönerdin. Geçişler ortamın doğal ritmiyle gerçekleşiyordu.</p>
+
+  <p>Şimdi geçişler senin ritminle değil, <strong>dış kaynaklarla</strong> gerçekleşiyor. Bildirim, push uyarı, sonsuz scroll, otomatik oynayan video, ekran köşesindeki kırmızı nokta, kapı zili, açık ofiste birinin yüksek sesli konuşması, e-posta sesi, masada titreyen telefon. Bir kısmı kaçınılmaz, bir kısmı tasarım kararı.</p>
+
+  <h3 class="sub-heading" id="s02-kisaldi-mi">Dikkat süremiz gerçekten kısaldı mı?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Bu sorunun cevabını veren bir kişi var, hem de 20 yılı aşkın süredir aynı şeyi ölçen biri.</p>
+
+  <p>Gloria Mark UC Irvine'da bilişim profesörü. 20 yılı aşkın süredir tek bir şeyi ölçüyor: insanların ekran başında ne kadar süre tek bir göreve odaklandığını. Bilgisayara yüklenen yazılım, ekran değişimlerini saniyesi saniyesine kaydediyor.</p>
+
+  <p>2004'te ortalama dikkat süresi tek bir ekranda <strong>2.5 dakika</strong>ydı.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a> 2012'de <strong>75 saniye</strong>ye düştü. 2016'da yapılan ölçümde rakam <strong>47 saniye</strong>ydi. Medyan ise daha düşük, <strong>40 saniye</strong>. Yani yarısından fazla zaman insanlar 40 saniyeden az süreyle bir ekranda kalıyor.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a> 2014-2020 arasında yapılan beş farklı bağımsız çalışma 44 ile 50 saniye arasında benzer sonuçlar buldu.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a></p>
+
+  <p>Mark'ın en şaşırtıcı bulgusu bu kısalmanın kaynağı değil. Kendi kendini bölme. İnsanlar başkalarının böldüğü kadar kendilerini de bölüyor. Telefon hiç ping atmasa bile, beyin kendiliğinden başka bir şeye geçmeye eğilimli hale gelmiş.</p>
+
+  <p>Bir kesinti yaşadıktan sonra ana göreve tam olarak geri dönmek ne kadar sürüyor? Mark'ın araştırmasına göre ortalama <strong>23 dakika 15 saniye</strong>.<a href="#ref-24" class="ref" onclick="savePos(this)">24</a> Yani saniyelik bir bildirim 23 dakikalık bir maliyet yaratıyor. Günde onlarca, yüzlerce kez tekrarlandığında saatlerce kaybedilmiş odak demek.</p>
+
+  <h3 class="sub-heading" id="s02-ekonomi">Dikkat ekonomisi: dikkat artık bir ürün<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Peki bu kısalmanın arkasında ne var? Tek bir cevap yok, ama belirgin bir tasarım gerçeği var.</p>
+
+  <p>Tristan Harris eski bir Google tasarım etikçisi. 2014'te bir sunum yapıyor, başlığı "Doğru olan tek şey". Sunumun ana mesajı şu: teknoloji şirketleri dikkat çekmek için en zeki insanları işe alıyor, milyarlarca dolar harcıyor. Sonuç olarak sen "şu uygulamaya gireyim" diye bilinçli bir karar verdiğini sanıyorsun. Ama o uygulamadaki her detay, ekranda kalman için optimize edilmiş binlerce tasarım kararının ürünü. Senin kararın hissi, aslında onların kararlarının üzerine kuruluyor.</p>
+
+  <p>Şu an okuduğun bir telefondaysa, o telefon binlerce mühendisin yıllarca yaptığı A/B testlerinin sonucu. Push bildirim renkleri (kırmızı, dikkat çeker), titreşim örüntüleri, ses tonları, sonsuz scroll (durmazsan biter hissi olmasın diye), "for you" sayfaları (algoritma seninle senden daha çok ilgileniyor), otomatik video oynatma, hepsi senin tam orada kalman için tasarlandı.<a href="#ref-25" class="ref" onclick="savePos(this)">25</a></p>
+
+  <details class="collapsible">
+    <summary>Bildirimlerle yaşamak: rakamlar</summary>
+    <div class="collapsible-body">
+      <ul>
+        <li>2023 Common Sense Media araştırması (200 ergen, Android cihaz yazılımıyla takip): ergenlerin telefonuna günde medyan 237 bildirim geliyor. %20'si günde 500'den fazla bildirim alıyor. Bildirimlerin yaklaşık dörtte biri okul saatlerinde geliyor. Ergenler telefonlarını günde medyan 72 kez açıyor.<a href="#ref-26" class="ref" onclick="savePos(this)">26</a></li>
+        <li>2026 verisi: bilgi işçileri 8 saatlik bir iş gününde ortalama 566 kez görev değiştiriyor.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
+        <li>Bir kişinin günde maruz kaldığı içerik parçası sayısı 2012'de 1.400, bugün 5.000'den fazla.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
+        <li>Akıllı telefonu yoğun kullananların %78'i "hayalet bildirim" yaşıyor, yani telefon hiç titremediği halde titrediğini sanıyor.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <p>Ve bu kaybın bir de ekonomik karşılığı var. Carnegie Mellon Üniversitesi'nin 2026'da yayımladığı bir analize göre dijital kesintilerin ABD'ye yıllık verimlilik kaybı yaklaşık <strong>1.2 trilyon dolar</strong>.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a> Hesabın mantığı şu: bilgi işçileri bir kesintiden sonra eski göreve dönmek için ortalama 23 dakika harcıyor, kesintiler günde onlarca kez tekrarlanıyor, çalışan başına saatlik kayıp birikiyor, milyonlarca çalışanla çarpıldığında ortaya bu rakam çıkıyor. Yani dikkat sömürüsünün maliyeti soyut bir his değil, doğrudan üretilemeyen mal ve hizmet.</p>
+
+  <p>Ve bu bildirimlerin etkisi sadece dikkati bölmek değil. Her bildirim küçük bir tehdit/ödül belirsizliği yaratıyor. Beyin "yeni bir şey, bilmem gerek" tepkisini veriyor. Bu tepkinin altında, önceki bölümde gördüğümüz aynı stres mekanizması var, kortizol seviyesinde küçük yükselişler, sempatik sinir sistemi aktivasyonu. Yani her bildirim minik bir aslan görüntüsü gibi çalışıyor.</p>
+
+  <h3 class="sub-heading" id="s02-multitasking">Multitasking, mit ve istisnalar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Modern iş kültürü <i>multitasking</i>'i (çoklu görev) bir beceri olarak yüceltir. "Aynı anda 5 işe bakabilirim" diyen birinin yöneticilik gücünden bahsedilir. Bilişsel psikoloji ise konuya daha temkinli yaklaşıyor.</p>
+
+  <p>Beyin gerçekten iki bilişsel görevi aynı anda yapmıyor. Hızla aralarında geçiş yapıyor. Her geçişte bir "yükleme zamanı" var. Önceki görevin kurallarını, hedeflerini, bağlamını boşalt, yeni göreve geç, onunkileri yükle. Bu çift maliyet hem zamansal hem de bilişsel. American Psychological Association'ın verilerine göre multitasking üretkenliği <strong>%20-40</strong> düşürüyor.<a href="#ref-28" class="ref" onclick="savePos(this)">28</a> 8 saatlik bir iş günü gerçek anlamda yaklaşık <strong>5 saat</strong> çıktıya dönüşüyor.</p>
+
+  <p>Burada önemli bir nüans var. Bazı insanlar multitasking'de gerçekten daha başarılı. Utah Üniversitesi'nden <strong>Watson ve Strayer</strong> 2010'da bunu ölçtü: katılımcılara simüle edilmiş bir araba sürme görevi ile zihinden matematik problemleri çözmeyi aynı anda verdiler.</p>
+
+  <div class="stat-callout">
+    <span class="stat-tag">İstisna</span>
+    <div class="stat-number">%2.5</div>
+    <div class="stat-label">Gerçek <i>supertasker</i> oranı</div>
+    <div class="stat-source">Yüzlerce katılımcının yalnızca yaklaşık 3'ü iki görevi aynı anda yaptığında performans düşüşü yaşamadı.<a href="#ref-29" class="ref" onclick="savePos(this)">29</a></div>
+  </div>
+
+  <p>Sonraki çalışmalar bu süpergörev yapanların daha yüksek çalışan bellek kapasitesine ve daha güçlü yönetici işlev becerilerine sahip olduğunu gösterdi.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a> Ama burada akılda kalması gereken bir paradoks var.</p>
+
+  <aside class="pull-quote-strong">
+    <span class="pull-quote-tag">Paradoks</span>
+    <p>Kendini "çok iyi multitasking yapıyorum" sananlar, gerçek testlerde <em>en kötü</em> performansı gösteriyor.</p>
+  </aside>
+
+  <p>Yetkinlik ile algılanan yetkinlik tam ters yönde gidiyor.<a href="#ref-31" class="ref" onclick="savePos(this)">31</a> Yani "bir kulağımla podcast dinler, bir gözümle e-posta okur, bir yandan da rapor yazarım" diyorsan, büyük olasılıkla bu üç işin her birini ayrı ayrı yapsaydın hepsinde daha iyi sonuç alacaktın. Beyin bu kadar iş yükünü taşımaya çalışırken hata oranı yükseliyor, hız düşüyor, kalite eriyor, ama sen bunu fark etmiyorsun çünkü "her şeyi hallediyorum" hissi rahatlatıcı.</p>
+
+  <p>Sürekli ekranlar arası dolaşan, aynı anda birden fazla medya tüketen kişiler, sıralı odaklanmış çalışanlara kıyasla dikkat kontrolü ve çalışan bellek testlerinde daha düşük performans gösteriyor.<a href="#ref-32" class="ref" onclick="savePos(this)">32</a> Yani sürekli görev değiştirme alışkanlığı, zamanla odaklanma becerisinin kendisini aşındırıyor.</p>
+
+  <h3 class="sub-heading" id="s02-telefon">Telefonun varlığı bile yetiyor<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>İlginç bir başka bulgu daha var, ama bu sefer multitasking'le değil sadece telefonun bulunmasıyla ilgili.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Ward ve ark., 2017 — Journal of the Association for Consumer Research</div>
+    <p>800 üniversite öğrencisine zorlu bilişsel testler yapıldı. Üç grup vardı: telefonu masada yüzü aşağı, telefonu cepte veya çantada, telefonu başka odada. Tüm telefonlar sessizdi. Sonuç çarpıcıydı: telefonu başka odada olan grup çalışan bellek ve akışkan zeka testlerinde en yüksek performansı gösterdi. Cepte olanlar ortada kaldı. Masada olanlar en kötü performansı gösterdi.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a></p>
+  </div>
+
+  <p>Üstelik telefon bağımlılığı yüksek olanlarda bu etki daha güçlüydü. Beyin "bu telefonu kontrol etmeli miyim?" sorusuyla sürekli ilgileniyor, bu da ana göreve ayrılan bilişsel kaynakları azaltıyor.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a> Çalışma ilk yapıldığında dikkat çekti, sonraki yıllarda yapılan replikasyon denemelerinde aynı etki bazen bulunamadı.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a> Yani bulgu tartışmalı, ama bağımlılığı yüksek kullanıcılarda telefonun varlığının bilişsel maliyet yaratma ihtimali ciddi bir araştırma sorusu olmaya devam ediyor.</p>
+
+  <h3 class="sub-heading" id="s02-avci">Avcı zihin, çiftçi dünyada<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Bu noktada dikkatin kendisinin bir uyumsuzluk olup olmadığını sormak gerekiyor. Tüm insanlık aynı dikkat sistemini mi taşıyor, yoksa içimizde bazıları modern dünyaya daha mı az uyumlu?</p>
+
+  <p>Psikiyatrist <strong>Tom Hartmann</strong> 1990'larda ilginç bir tez ortaya attı: ADHD belki de bir hastalık değil, modern dünyaya uymayan bir bilişsel stildir.<a href="#ref-34" class="ref" onclick="savePos(this)">34</a> Hartmann'ın <i>hunter-farmer</i> (avcı-çiftçi) hipotezine göre atalarımız iki farklı zihin profili taşıyordu.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-label">Tip 01</div>
+      <div class="mode-name">Avcı Zihin</div>
+      <p>Hızlı tarama, hızlı tepki, yenilik arayışı. Kısa süreli odak ama yoğun hyperfocus yetisi. Çevredeki her sinyale duyarlı.</p>
+    </div>
+    <div class="mode-card">
+      <div class="mode-label">Tip 02</div>
+      <div class="mode-name">Çiftçi Zihin</div>
+      <p>Uzun süreli sabırla aynı şey üzerinde çalışma. Rutin görevleri tolere etme, sabit kalabilme. Tekrar eden döngülere uyum.</p>
+    </div>
+  </div>
+
+  <p>İkisi de evrimde işe yarıyordu, çünkü farklı görevler farklı zihinler gerektiriyordu. <strong>Tarım devrimi yaklaşık 10.000 yıl önce, sanayi devrimi ise sadece 250 yıl önce başladı.</strong> Bu kısa süre içinde ortam dramatik şekilde değişti. Ve sanayi devrimi sonrası kurulan modern eğitim ve iş ortamı tamamen <i>çiftçi zihnine</i> göre tasarlandı.</p>
+
+  <p>Modern okul sistemini ele alalım. 19. yüzyılda Prusya'da geliştirilen bu sistemin amacı yaratıcılığı ya da bireysel güçlü yanları beslemek değildi. Amaç, fabrikalarda çalışabilecek itaatkâr işçiler ve disiplinli askerler yetiştirmekti.</p>
+
+  <div class="drill-list">
+    <div class="drill-list-label">19. yüzyıl Prusya tasarımı</div>
+    <ol>
+      <li>Sabit otur.</li>
+      <li>Sıraya gir.</li>
+      <li>Zili duyunca kalk. Diğer zili duyunca otur.</li>
+      <li>Aynı yaştaki çocuklar aynı odada, aynı şeyleri, aynı hızda öğrensin.</li>
+      <li>Bilgi yukarıdan aşağıya tek yönlü aksın, sorgulanmasın.</li>
+      <li>Önceden belirlenmiş müfredatı ezberle, sınavda geri ver.</li>
+      <li>6 saat boyunca floresan ışık altında bir sandalyede otur.</li>
+    </ol>
+  </div>
+
+  <p>Bu sistem çiftçi zihinli bir çocuk için zorlu ama yapılabilir. Avcı zihinli bir çocuk içinse evrimsel olarak yanlış sinyaller geliyor. Beyin sürekli <i>"ne oluyor, bir tehlike mi var, hareket etmem mi gerekiyor?"</i> diye soruyor. Yerinde duramama, dağılma, hızlı geçiş, hepsi atalarımız için işe yarayan örüntüler. Modern sınıfta ise <strong>"bozukluk"</strong> olarak adlandırılıyor.</p>
+
+  <p>İş yerleri için de aynı şey geçerli.</p>
+
+  <div class="def-list">
+    <div class="def-item">
+      <span class="def-label">Açık ofis</span>
+      <p class="def-text">Avcı zihni için sürekli görsel ve işitsel uyaranın geldiği, hiç dinmeyen bir alarm ortamı.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Sabit masa</span>
+      <p class="def-text">Kendi doğal hareket ritmini bastırmak.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Toplantı kültürü</span>
+      <p class="def-text">Saatler toplantıyla geçtiği için derin bir göreve dalmaya zaman kalmıyor, ama arada kalan zamanlar da gerçek bir iş çıkarmaya yetecek kadar uzun değil.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Şirket hiyerarşisi</span>
+      <p class="def-text">Hızlı karar verme dürtüsü ile bürokratik süreç arasında sürekli çatışma.</p>
+    </div>
+  </div>
+
+  <p>2025'te <strong>Cambridge Üniversitesi</strong>'nin Kongo'daki BaYaka avcı-toplayıcı topluluğunda yaptığı bir araştırma bu hipoteze somut destek verdi. BaYaka, Orta Afrika yağmur ormanlarında yaşayan bir topluluğun adı. Araştırmacılar dikkat profillerini ölçtüğünde, <strong>WEIRD</strong> toplumlarda (Batılı, Eğitimli, Sanayileşmiş, Zengin, Demokratik) patolojik sayılan bazı dikkat örüntülerinin BaYaka'da işlevsel ve uyum sağlayıcı olduğunu gördü.<a href="#ref-35" class="ref" onclick="savePos(this)">35</a></p>
+
+  <aside class="pull-quote-strong">
+    <span class="pull-quote-tag">Bulgu</span>
+    <p>Aynı bilişsel özellik bir ortamda "bozukluk", başka bir ortamda <em>avantaj</em>.</p>
+  </aside>
+
+  <p>Bu hipotez ADHD'nin tamamen kültürel olduğunu söylemiyor. ADHD'nin gerçek biyolojik temelleri var ve modern dünyada gerçek bir işlev kaybına yol açabiliyor. Söylediği şu: <strong>dikkatin "doğru" çalışma biçimi diye tek bir şey yok.</strong> Dikkat, ortama göre kalibre olan esnek bir sistem. Modern ortam çok dar bir kalibrasyonu zorunlu kılıyor, diğer kalibrasyonları olanlar bu sistemde dezavantajlı, çünkü doğal işleyişleri patolojikleştiriliyor.</p>
+
+  <h3 class="sub-heading" id="s02-flow">Flow: kayıp atalarımızdan bir miras<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Dikkat dağılmasının yanında bir de kaybettiğimiz bir kapasite var. Atalarımızın çok daha kolay ulaştığı bir zihin durumu.</p>
+
+  <p>Macar psikolog Mihály Csíkszentmihályi 1970'lerden beri en mutlu, en üretken zihinsel durumu inceliyor. Ona <i>flow</i> (akış) adını verdi. Sanatçıların, sporcuların, cerrahların, satranç oyuncularının zorlu görevlere tamamen daldıkları durum. Zaman duygusu kayboluyor, kişi tamamen orada.</p>
+
+  <p>Flow'a girmek için belirli koşullar gerekiyor. Csíkszentmihályi'nin 40 yılı aşkın araştırmasına göre üç temel koşul var: <strong>net hedefler</strong>, <strong>anlık geri bildirim</strong> ve <strong>yetenek-zorluk dengesi</strong>.<a href="#ref-36" class="ref" onclick="savePos(this)">36</a> Bu son madde kritik. Görev çok kolaysa sıkılırsın, çok zorsa kaygıya kapılırsın. İkisinin de yüksek ve dengeli olduğu o dar bölgede flow oluşuyor. Csíkszentmihályi buna <i>flow channel</i> (akış kanalı) diyor.</p>
+
+  <figure class="flow-figure">
+    <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" class="flow-diagram" role="img" aria-labelledby="flow-title flow-desc">
+      <title id="flow-title">Flow modeli — sekiz duygu durumu</title>
+      <desc id="flow-desc">Csíkszentmihályi'nin genişletilmiş flow modeli: yetenek ve zorluk seviyelerinin oluşturduğu sekiz duygu durumu.</desc>
+
+      <!-- Row 1 — Yüksek zorluk -->
+      <rect x="80" y="40" width="100" height="67" class="cell cell-negative" />
+      <rect x="180" y="40" width="100" height="67" class="cell cell-mid-warm" />
+      <rect x="280" y="40" width="100" height="67" class="cell cell-flow" />
+
+      <!-- Row 2 — Orta zorluk -->
+      <rect x="80" y="107" width="100" height="66" class="cell cell-negative" />
+      <rect x="180" y="107" width="100" height="66" class="cell cell-neutral" />
+      <rect x="280" y="107" width="100" height="66" class="cell cell-positive" />
+
+      <!-- Row 3 — Düşük zorluk -->
+      <rect x="80" y="173" width="100" height="67" class="cell cell-negative" />
+      <rect x="180" y="173" width="100" height="67" class="cell cell-mid-cool" />
+      <rect x="280" y="173" width="100" height="67" class="cell cell-positive" />
+
+      <!-- Diagonal — flow doğrultusu -->
+      <line x1="80" y1="240" x2="380" y2="40" class="flow-diagonal" />
+
+      <!-- Grid lines -->
+      <line x1="180" y1="40" x2="180" y2="240" class="grid-line" />
+      <line x1="280" y1="40" x2="280" y2="240" class="grid-line" />
+      <line x1="80" y1="107" x2="380" y2="107" class="grid-line" />
+      <line x1="80" y1="173" x2="380" y2="173" class="grid-line" />
+
+      <!-- Chart border -->
+      <rect x="80" y="40" width="300" height="200" class="chart-border" />
+
+      <!-- Cell labels -->
+      <text x="130" y="78" class="cell-label">Anksiyete</text>
+      <text x="230" y="78" class="cell-label">Heyecan</text>
+      <text x="330" y="78" class="cell-label cell-label-flow">FLOW</text>
+
+      <text x="130" y="144" class="cell-label">Endişe</text>
+      <text x="330" y="144" class="cell-label cell-label-positive">Kontrol</text>
+
+      <text x="130" y="212" class="cell-label">İlgisizlik</text>
+      <text x="230" y="212" class="cell-label">Sıkılma</text>
+      <text x="330" y="212" class="cell-label cell-label-positive">Rahatlama</text>
+
+      <!-- Axis labels -->
+      <text x="230" y="272" class="axis-label" text-anchor="middle">YETENEK →</text>
+      <text x="40" y="140" class="axis-label" text-anchor="middle" transform="rotate(-90 40 140)">ZORLUK →</text>
+    </svg>
+    <figcaption>Yetenek ile zorluk birlikte yükseldikçe duygu durumu değişiyor. İkisi de düşükse <i>ilgisizlik</i>, sadece yetenek yüksekse <i>rahatlama</i>, sadece zorluk yüksekse <i>anksiyete</i>. Flow, ikisinin de yüksek olduğu sağ-üst köşede.</figcaption>
+  </figure>
+
+  <p>Ve son bir koşul: <strong>kesintisiz odak süresi, en az 15-20 dakika</strong>. Bu süre olmadan ne kadar yetenekli olursan ol, görev ne kadar uygun olursa olsun, flow'a giremezsin.</p>
+
+  <p>Bugün insanların büyük çoğunluğu günde tek bir kez bile flow'a girmiyor. Çünkü ortalama 47 saniye odaklanıp dağılan bir beyin, 15 dakikalık derin bir göreve giremiyor. Atalarımız bu durumu rutin olarak yaşıyordu. Av takibi, alet yapımı, hikaye anlatımı, hepsi flow'un doğal bağlamlarıydı, çünkü hem zorluk-yetenek dengesi vardı (yıllarca pratik gerektiren işler), hem de kesintisiz odak (telefon yoktu).</p>
+
+  <p>Bilgisayar bilimcisi ve yazar Cal Newport buna <i>deep work</i> (derin çalışma) diyor. Newport'un tezi şu: bilişsel olarak zorlayıcı görevler üzerinde kesintisiz, dikkati tam veren çalışma yetisi, modern ekonominin en değerli ama en az bulunan kaynaklarından biri haline geldi.<a href="#ref-37" class="ref" onclick="savePos(this)">37</a> Çoğu çalışan günün önemli bir kısmını e-posta, anlık mesaj, toplantı, bildirim ve sürekli sığ görevler arasında geçiriyor. Derin çalışma yapabilen kişilerin ürettiği iş ise hem nicelik hem nitelik olarak diğerlerinden ayrılıyor. Newport buna <i>scarcity premium</i> diyor: bir şey nadir hale geldikçe değerleniyor. Derin çalışma da öyle.</p>
+
+  <aside class="pull-quote-strong">
+    <span class="pull-quote-tag">İroni</span>
+    <p>Dikkat sömürüsünü en iyi yapan teknoloji şirketleri, çalışanlarından <em>derin çalışma</em> bekliyor.</p>
+  </aside>
+
+  <h3 class="sub-heading" id="s02-ne-yapabilirsin">Ne yapabilirsin?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Dikkat sömürüsünün karşısında çaresiz değilsin, ama kontrolü geri alman için bilinçli adımlar atmak gerek. Önceki bölümde Sapolsky'nin <a href="illusion-of-control.html" class="inline-link">kontrol algısı</a> dersini görmüştük. Burada da geçerli: sömürülen değil, sömürüyü yöneten taraf olmak için bazı pratik adımlar var.</p>
+
+  <p><strong>Bildirimleri azalt.</strong> En etkili adım belki de bu. Acil olmayan her uygulamanın bildirimi kapanmalı. Common Sense Media araştırmasında ergenlerin bildirimlerin sadece %19'unu açtığı bulundu, yani aslında onların bile bildirimlerle başa çıkma yöntemi "görmezden gelmek". Doğrudan kaynağı kapatmak çok daha az enerji harcatıyor.<a href="#ref-26" class="ref" onclick="savePos(this)">26</a></p>
+
+  <p><strong>Telefonu görüş alanından çıkar.</strong> Çalışırken telefonu başka odada bırak veya en azından gözünden uzak bir yere koy. Sadece varlığı bile bilişsel kaynaklarını tüketebiliyor, özellikle telefon bağımlılığı yüksekse.</p>
+
+  <p><strong>Tek görev bloklarına gir.</strong> 25 ila 90 dakika arası kesintisiz çalışma bloklarıyla başlayabilirsin. Pomodoro tekniği (25 dakika odak + 5 dakika ara) bunun popüler bir versiyonu. Önemli olan süre değil, kesintisizlik. Flow'a girmek için en az 15-20 dakika lazım, ondan sonrası katlanarak değerli.</p>
+
+  <p><strong>Aynı anda birden fazla şey yapma.</strong> İş yaparken müzik dinlemek (sözsüz fon müziği hariç) bilişsel yük yaratıyor. Toplantıda e-posta yazmak, yürürken sosyal medya, hepsi görünmez bir maliyet getiriyor. Multitasking yapanların büyük çoğunluğunda her bir görevin kalitesi düşüyor, üstelik bunun farkında bile olmuyoruz.</p>
+
+  <p><strong>Sıkılmaya izin ver.</strong> Bu sıradaki bölümün ana fikri, ama burada da başlıyor. Her boş anı ekranla doldurursan, beynin "boş alan" diye bir şey olduğunu unutuyor. Tarama modu ve hyperfocus arasında geçiş yapacak alanı kalmıyor.</p>
+
+  <p>Atalarımızın dikkat sistemi bugün ölçtüğümüzden çok daha esnek ve güçlüydü. Modern dünya bu sistemi tüketmiyor, sömürüyor. Sosyal medya, video platformları, oyunlar, sonsuz scroll uygulamaları, çoğu görünürde bedava. Ama bir ücret ödüyorsun. O ücret, dikkatin. Algoritmaların seninle ne kadar uzun süre kaldığı, reklam gösterimi, kullanıcı verisi, hepsi senin dikkat saatlerine dönüşüyor.</p>
+
+  <p class="punch">Dikkatin bir kaynak. Kontrolü kimin elinde olduğunu sen seçiyorsun.</p>
+</div>
+
+<div class="section-divider"></div>
+
 <!-- KAYNAKLAR -->
 <div class="conclusion" id="kaynaklar">
   <h2 id="h99">Kaynaklar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
     <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; list-style: none;">
-    <li id="ref-1"><strong>1.</strong> Ipsos. (2024). <i>World Mental Health Day 2024 — Global Report</i>. 31 ülkede 23.000+ katılımcı. <a href="https://www.ipsos.com/en/world-mental-health-day-2024" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-2"><strong>2.</strong> Gallup. (2025). <i>Global Emotions Report 2025</i>. 144 ülkede yetişkin örneklemi. <a href="https://www.gallup.com/analytics/349280/gallup-global-emotions-report.aspx" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-3"><strong>3.</strong> World Health Organization. (2022). <i>Mental Health and COVID-19: Early evidence of the pandemic's impact</i>. WHO Scientific Brief. <a href="https://www.who.int/teams/mental-health-and-substance-use/world-mental-health-report" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-4"><strong>4.</strong> Mental Health UK. (2025). <i>The Burnout Report 2025</i>. + Deloitte. (2024). <i>Women @ Work 2024: A Global Outlook</i>. <a href="https://mentalhealth-uk.org/burnout/" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-5"><strong>5.</strong> Denver, R. J. (2009). Structural and functional evolution of vertebrate neuroendocrine stress systems. <i>Annals of the New York Academy of Sciences</i>, 1163, 1-16. <a href="https://doi.org/10.1111/j.1749-6632.2009.04433.x" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-6"><strong>6.</strong> Sapolsky, R. M. (2004). <i>Why Zebras Don't Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</i> (3rd ed.). Holt Paperbacks. <a href="https://www.goodreads.com/book/show/327.Why_Zebras_Don_t_Get_Ulcers" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-7"><strong>7.</strong> Steptoe, A. & Kivimäki, M. (2012). Stress and cardiovascular disease. <i>Nature Reviews Cardiology</i>, 9(6), 360-370. <a href="https://doi.org/10.1038/nrcardio.2012.45" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-8"><strong>8.</strong> Sheline, Y. I., Wang, P. W., Gado, M. H., Csernansky, J. G., & Vannier, M. W. (1996). Hippocampal atrophy in recurrent major depression. <i>PNAS</i>, 93(9), 3908-3913. <a href="https://doi.org/10.1073/pnas.93.9.3908" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-9"><strong>9.</strong> Epel, E. S., Blackburn, E. H., Lin, J., Dhabhar, F. S., Adler, N. E., Morrow, J. D., & Cawthon, R. M. (2004). Accelerated telomere shortening in response to life stress. <i>PNAS</i>, 101(49), 17312-17315. <a href="https://doi.org/10.1073/pnas.0407162101" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-10"><strong>10.</strong> Furman, D., Campisi, J., Verdin, E., et al. (2019). Chronic inflammation in the etiology of disease across the life span. <i>Nature Medicine</i>, 25(12), 1822-1832. <a href="https://doi.org/10.1038/s41591-019-0675-0" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-11"><strong>11.</strong> Kalmbach, D. A., Anderson, J. R., & Drake, C. L. (2018). The impact of stress on sleep: Pathogenic sleep reactivity as a vulnerability to insomnia and circadian disorders. <i>Journal of Sleep Research</i>, 27(6), e12710. <a href="https://doi.org/10.1111/jsr.12710" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-12"><strong>12.</strong> Geronimus, A. T., Hicken, M., Keene, D., & Bound, J. (2006). "Weathering" and age patterns of allostatic load scores among blacks and whites in the United States. <i>American Journal of Public Health</i>, 96(5), 826-833. <a href="https://doi.org/10.2105/AJPH.2004.060749" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-13"><strong>13.</strong> Sapolsky, R. M. (2005). The influence of social hierarchy on primate health. <i>Science</i>, 308(5722), 648-652. <a href="https://doi.org/10.1126/science.1106477" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-14"><strong>14.</strong> Marlowe, F. W. (2010). <i>The Hadza: Hunter-Gatherers of Tanzania</i>. University of California Press. <a href="https://www.ucpress.edu/book/9780520253421/the-hadza" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-15"><strong>15.</strong> Albalawi, H., et al. (2023). The effect of aerobic exercise combined with slow deep breathing and mindfulness meditation on serum cortisol levels in adult women. <i>Frontiers in Physiology</i>, 14. <a href="https://doi.org/10.3389/fphys.2023.1265898" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-16"><strong>16.</strong> Antonelli, M., Barbieri, G., & Donelli, D. (2019). Effects of forest bathing (shinrin-yoku) on levels of cortisol as a stress biomarker: A systematic review and meta-analysis. <i>International Journal of Biometeorology</i>, 63(8), 1117-1134. <a href="https://doi.org/10.1007/s00484-019-01717-x" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-17"><strong>17.</strong> Park, B. J., Tsunetsugu, Y., Kasetani, T., Kagawa, T., & Miyazaki, Y. (2010). The physiological effects of Shinrin-yoku (taking in the forest atmosphere or forest bathing). <i>Environmental Health and Preventive Medicine</i>, 15(1), 18-26. <a href="https://doi.org/10.1007/s12199-009-0086-9" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-18"><strong>18.</strong> Mandlik, G. V., et al. (2024). Effects of single sessions of yoga, breath work, and meditation on stress markers: A systematic review. <i>Stress and Health</i>, 40(2). <a href="https://doi.org/10.1002/smi.3392" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-19"><strong>19.</strong> White, M. P., Alcock, I., Grellier, J., et al. (2019). Spending at least 120 minutes a week in nature is associated with good health and wellbeing. <i>Scientific Reports</i>, 9, 7730. <a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-20"><strong>20.</strong> Heinrichs, M., Baumgartner, T., Kirschbaum, C., & Ehlert, U. (2003). Social support and oxytocin interact to suppress cortisol and subjective responses to psychosocial stress. <i>Biological Psychiatry</i>, 54(12), 1389-1398. <a href="https://doi.org/10.1016/S0006-3223(03)00465-7" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-1"><strong>1.</strong> Sapolsky, R.M. (2004). <i>Why Zebras Don't Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</i> (3rd ed.). Holt Paperbacks. <a href="https://www.goodreads.com/book/show/327.Why_Zebras_Don_t_Get_Ulcers" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-2"><strong>2.</strong> Ipsos. (2024). <i>World Mental Health Day Survey 2024</i>. <a href="https://www.ipsos.com/en/world-mental-health-day-2024" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-3"><strong>3.</strong> Gallup. (2025). <i>Global Emotions Report 2025</i>. <a href="https://www.gallup.com/analytics/global-emotions-report.aspx" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-4"><strong>4.</strong> World Health Organization. (2022). <i>Mental Disorders Fact Sheet</i>. <a href="https://www.who.int/news-room/fact-sheets/detail/mental-disorders" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-5"><strong>5.</strong> World Health Organization. (2022). <i>Mental health at work</i>. <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-6"><strong>6.</strong> McKinsey Health Institute. (2024). Employee mental health and burnout in Asia: A time to act. <a href="https://www.mckinsey.com/mhi/our-insights" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-7"><strong>7.</strong> American Medical Association. (2024). Physician burnout survey results. <a href="https://www.ama-assn.org/practice-management/physician-health/physician-burnout" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-8"><strong>8.</strong> Chrousos, G.P. (2009). Stress and disorders of the stress system. <i>Nature Reviews Endocrinology</i>, 5(7), 374-381. <a href="https://doi.org/10.1038/nrendo.2009.106" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-9"><strong>9.</strong> Sapolsky, R.M. (2007). Stress, stress-related disease, and emotional regulation. In <i>Handbook of Emotion Regulation</i>. Guilford Press. <a href="https://psycnet.apa.org/record/2007-01392-029" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-10"><strong>10.</strong> Steptoe, A. &amp; Kivimäki, M. (2012). Stress and cardiovascular disease. <i>Nature Reviews Cardiology</i>, 9(6), 360-370. <a href="https://doi.org/10.1038/nrcardio.2012.45" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-11"><strong>11.</strong> Sapolsky, R.M. (2000). Glucocorticoids and hippocampal atrophy in neuropsychiatric disorders. <i>Archives of General Psychiatry</i>, 57(10), 925-935. <a href="https://doi.org/10.1001/archpsyc.57.10.925" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-12"><strong>12.</strong> Epel, E.S., et al. (2004). Accelerated telomere shortening in response to life stress. <i>PNAS</i>, 101(49), 17312-17315. <a href="https://doi.org/10.1073/pnas.0407162101" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-13"><strong>13.</strong> Furman, D., et al. (2019). Chronic inflammation in the etiology of disease across the life span. <i>Nature Medicine</i>, 25(12), 1822-1832. <a href="https://doi.org/10.1038/s41591-019-0675-0" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-14"><strong>14.</strong> Kalmbach, D.A., et al. (2018). The impact of stress on sleep: Pathogenic sleep reactivity as a vulnerability to insomnia and circadian disorders. <i>Journal of Sleep Research</i>, 27(6), e12710. <a href="https://doi.org/10.1111/jsr.12710" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-15"><strong>15.</strong> Geronimus, A.T., et al. (2006). "Weathering" and age patterns of allostatic load scores among blacks and whites in the United States. <i>American Journal of Public Health</i>, 96(5), 826-833. <a href="https://doi.org/10.2105/AJPH.2004.060749" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-16"><strong>16.</strong> Sapolsky, R.M. (2005). The influence of social hierarchy on primate health. <i>Science</i>, 308(5722), 648-652. <a href="https://doi.org/10.1126/science.1106477" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-17"><strong>17.</strong> Hagen, E.H., et al. (2024). Hair cortisol concentrations among Hadza hunter-gatherers. <i>Evolution and Human Behavior</i>. <a href="https://doi.org/10.1016/j.evolhumbehav.2024.106583" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-18"><strong>18.</strong> Albalawi, H., et al. (2023). Aerobic exercise combined with mindfulness meditation reduces cortisol levels. <i>Frontiers in Physiology</i>, 14, 1219019. <a href="https://doi.org/10.3389/fphys.2023.1219019" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-19"><strong>19.</strong> Antonelli, M., et al. (2019). Effects of forest bathing (shinrin-yoku) on levels of cortisol as a stress biomarker: A systematic review and meta-analysis. <i>International Journal of Biometeorology</i>, 63, 1117-1134. <a href="https://doi.org/10.1007/s00484-019-01717-x" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-20"><strong>20.</strong> Mandlik, G.V., et al. (2024). Acute effects of a single session of yoga, meditation, and breathing exercises on stress: A systematic review. <i>Stress and Health</i>, 40(5), e3447. <a href="https://doi.org/10.1002/smi.3447" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-21"><strong>21.</strong> White, M.P., et al. (2019). Spending at least 120 minutes a week in nature is associated with good health and wellbeing. <i>Scientific Reports</i>, 9, 7730. <a href="https://doi.org/10.1038/s41598-019-44097-3" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-22"><strong>22.</strong> Heinrichs, M., et al. (2003). Social support and oxytocin interact to suppress cortisol and subjective responses to psychosocial stress. <i>Biological Psychiatry</i>, 54(12), 1389-1398. <a href="https://doi.org/10.1016/S0006-3223(03)00465-7" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-23"><strong>23.</strong> Mark, G. (2023). <i>Attention Span: A Groundbreaking Way to Restore Balance, Happiness and Productivity</i>. Hanover Square Press. <a href="https://gloriamark.com/attention-span/" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-24"><strong>24.</strong> Mark, G., et al. (2008). The cost of interrupted work: More speed and stress. <i>Proceedings of CHI 2008</i>. <a href="https://doi.org/10.1145/1357054.1357072" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-25"><strong>25.</strong> Harris, T. (2014). A call to minimize distraction &amp; respect users' attention. <a href="https://www.minimizedistraction.com" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-26"><strong>26.</strong> Common Sense Media. (2023). <i>Constant Companion: A Week in the Life of a Young Person's Smartphone Use</i>. <a href="https://www.commonsensemedia.org/research/constant-companion-a-week-in-the-life-of-a-young-persons-smartphone-use" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-27"><strong>27.</strong> Global Digital Attention Research Institute. (2026). <i>Cross-platform Attention Tracking Study</i>. <a href="https://www.amraandelma.com/user-attention-span-statistics/" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-28"><strong>28.</strong> American Psychological Association. (2006). Multitasking: Switching costs. <a href="https://www.apa.org/topics/research/multitasking" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-29"><strong>29.</strong> Watson, J.M. &amp; Strayer, D.L. (2010). Supertaskers: Profiles in extraordinary multitasking ability. <i>Psychonomic Bulletin &amp; Review</i>, 17(4), 479-485. <a href="https://doi.org/10.3758/PBR.17.4.479" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-30"><strong>30.</strong> Medeiros-Ward, N., Watson, J.M., Strayer, D.L. (2015). On supertaskers and the neural basis of efficient multitasking. <i>Psychonomic Bulletin &amp; Review</i>, 22(3), 876-883. <a href="https://doi.org/10.3758/s13423-014-0713-3" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-31"><strong>31.</strong> Sanbonmatsu, D.M., et al. (2013). Who multi-tasks and why? Multi-tasking ability, perceived multi-tasking ability, impulsivity, and sensation seeking. <i>PLOS ONE</i>, 8(1), e54402. <a href="https://doi.org/10.1371/journal.pone.0054402" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-32"><strong>32.</strong> Ophir, E., Nass, C., Wagner, A.D. (2009). Cognitive control in media multitaskers. <i>PNAS</i>, 106(37), 15583-15587. <a href="https://doi.org/10.1073/pnas.0903620106" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-33"><strong>33.</strong> Ward, A.F., Duke, K., Gneezy, A., Bos, M.W. (2017). Brain drain: The mere presence of one's own smartphone reduces available cognitive capacity. <i>Journal of the Association for Consumer Research</i>, 2(2), 140-154. <a href="https://doi.org/10.1086/691462" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-34"><strong>34.</strong> Hartmann, T. (2019). <i>ADHD: A Hunter in a Farmer's World</i>. Park Street Press. <a href="https://www.goodreads.com/book/show/43723475" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-35"><strong>35.</strong> University of Cambridge. (2025). Attention Profiles in Hunter-Gatherer Societies (BaYaka project). <a href="https://www.arch.cam.ac.uk/research/projects/current-projects/attention-profiles-hunter-gatherer-societies" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-36"><strong>36.</strong> Csíkszentmihályi, M. (1990). <i>Flow: The Psychology of Optimal Experience</i>. Harper &amp; Row. <a href="https://www.goodreads.com/book/show/66354.Flow" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-37"><strong>37.</strong> Newport, C. (2016). <i>Deep Work: Rules for Focused Success in a Distracted World</i>. Grand Central Publishing. <a href="https://www.calnewport.com/books/deep-work/" target="_blank" style="color: var(--accent);">link</a></li>
   </ol>
 </div>
 
