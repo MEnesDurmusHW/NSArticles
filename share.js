@@ -12,7 +12,15 @@
 
   function $(sel, root) { return (root || document).querySelector(sel); }
 
+  function isLocal() {
+    var h = location.hostname;
+    return location.protocol === 'file:' || !h ||
+           h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' ||
+           /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2\d|3[01])\./.test(h);
+  }
+
   function trackEvent(path) {
+    if (isLocal()) return;
     if (window.goatcounter && window.goatcounter.count) {
       window.goatcounter.count({ path: path, event: true });
     }
