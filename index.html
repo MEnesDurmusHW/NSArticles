@@ -200,6 +200,31 @@
     letter-spacing: -0.4px;
     color: var(--text);
     margin: 0 0 12px;
+    /* Balance line lengths so an appended time span never becomes an
+       orphan on its own line — wraps title text earlier so the time
+       sits naturally at the end of the last line. */
+    text-wrap: balance;
+  }
+
+  /* Reading time — flows inline at the end of the title text. Sits in the
+     final line, vertically centered against the title's x-height. */
+  .entry-title .entry-time {
+    display: inline-block;
+    margin-left: 14px;
+    vertical-align: middle;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+  }
+
+  .entry:hover .entry-title .entry-time {
+    color: var(--cat);
   }
 
   .entry-desc {
@@ -316,6 +341,10 @@
     }
     .entry-tag .cat,
     .entry-tag .dot { display: inline; }
+    .entry-title .entry-time {
+      font-size: 10px;
+      letter-spacing: 1.2px;
+    }
     .entry-series {
       grid-row: 1;
       grid-column: 2;
@@ -375,7 +404,7 @@
           <span class="entry-number">01</span>
           <span class="entry-tag"><span class="cat">Beyin</span><span class="dot"> · </span><span class="cat">Kişisel Gelişim</span></span>
         </div>
-        <h2 class="entry-title">Hiçbir Şey Yapmamanın Bilimi</h2>
+        <h2 class="entry-title">Hiçbir Şey Yapmamanın Bilimi<span class="entry-time">12 dk</span></h2>
         <p class="entry-desc">Dinlenmenin ve "hiçbir şey yapmamanın" arkasındaki bilimsel gerçekler.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -387,7 +416,7 @@
           <span class="entry-number">02</span>
           <span class="entry-tag">İlişki</span>
         </div>
-        <h2 class="entry-title">İlişkilerde Neye Bakmalı</h2>
+        <h2 class="entry-title">İlişkilerde Neye Bakmalı<span class="entry-time">8 dk</span></h2>
         <p class="entry-desc">15 dakikalık bir tartışma kaydından çiftin geleceğini bilen 40 yıllık Gottman araştırmasından: ilişkileri öldüren 4 kalıp ve ayakta tutan faktörler.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -399,7 +428,7 @@
           <span class="entry-number">03</span>
           <span class="entry-tag">Beyin</span>
         </div>
-        <h2 class="entry-title">Beyin, Hafıza ve Hikâye Makinesi</h2>
+        <h2 class="entry-title">Beyin, Hafıza ve Hikâye Makinesi<span class="entry-time">12 dk</span></h2>
         <p class="entry-desc">Beyniniz bir kamera değil, bir romancı. Her anıyı yeniden yazıyor, her duyguya bir neden uyduruyor.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -411,7 +440,7 @@
           <span class="entry-number">04</span>
           <span class="entry-tag"><span class="cat">Duygu</span><span class="dot"> · </span><span class="cat">Kişisel Gelişim</span></span>
         </div>
-        <h2 class="entry-title">Hayatı Yönetmek Değil, Tepkilerini Yönetmek</h2>
+        <h2 class="entry-title">Hayatı Yönetmek Değil, Tepkilerini Yönetmek<span class="entry-time">17 dk</span></h2>
         <p class="entry-desc">Duygusal sürüklenmeyi azaltan 4 psikolojik kapasite.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -424,7 +453,7 @@
           <span class="entry-tag">Evrim</span>
         </div>
         <p class="entry-series">Evrimsel Uyumsuzluk <span class="series-word">Serisi </span>· 1</p>
-        <h2 class="entry-title">Bedenin Sana Karşı Değil, Seni Savanada Sanıyor</h2>
+        <h2 class="entry-title">Bedenin Sana Karşı Değil, Seni Savanada Sanıyor<span class="entry-time">23 dk</span></h2>
         <p class="entry-desc">Şeker isteğinden uykusuzluğa, bel ağrısından alerjiye: bedenin neden bu çağa uymuyor.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -436,7 +465,7 @@
           <span class="entry-number">06</span>
           <span class="entry-tag">İlişki</span>
         </div>
-        <h2 class="entry-title">Dijital Çağda Breadcrumbing</h2>
+        <h2 class="entry-title">Dijital Çağda Breadcrumbing<span class="entry-time">7 dk</span></h2>
         <p class="entry-desc">Flörtöz sinyallerle karşı tarafı oltada tutan manipülasyonun tanımı, döngüsü ve psikolojik etkileri.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -449,7 +478,7 @@
           <span class="entry-tag"><span class="cat">Karar</span><span class="dot"> · </span><span class="cat">Sezgi</span></span>
         </div>
         <p class="entry-series">Davranışsal Ekonomi <span class="series-word">Serisi </span>· 1</p>
-        <h2 class="entry-title">Homo Economicus: Ekonominin Hayal Ettiği İnsan</h2>
+        <h2 class="entry-title">Homo Economicus: Ekonominin Hayal Ettiği İnsan<span class="entry-time">31 dk</span></h2>
         <p class="entry-desc">Klasik ekonominin "rasyonel insan" varsayımından Simon, Kahneman, Tversky ve Thaler'e; teoriden günlük hayata.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
@@ -461,7 +490,7 @@
           <span class="entry-number">08</span>
           <span class="entry-tag">Kişisel Gelişim</span>
         </div>
-        <h2 class="entry-title">İrade Bir Erdem Değil, Bir Tasarım Hatası</h2>
+        <h2 class="entry-title">İrade Bir Erdem Değil, Bir Tasarım Hatası<span class="entry-time">36 dk</span></h2>
         <p class="entry-desc">İradeye güvenmek neden başarısız bir strateji ve araştırmaların gösterdiği alternatif.</p>
         <span class="entry-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>

@@ -102,7 +102,8 @@ Open any `.html` file directly in a browser — no server or build step required
 3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<script src="toc.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
 4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
-6. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
+6. For full articles only: compute word count + reading time and add `<meta name="word-count">` / `<meta name="reading-time">` to the article's `<head>`, plus the visible `~X dk` element on its listing card(s) (see *Reading Time*)
+7. **Open the new file in the browser** (`open <file>.html`) so the user can immediately review it
 
 ## Table of Contents
 
@@ -170,6 +171,35 @@ The site uses [GoatCounter](https://www.goatcounter.com/) — privacy-friendly, 
 - Per-device flag: visit `https://menesdurmushw.github.io/NSArticles/?skipgc=t` once on each browser. `all.html` exposes a discreet "İzlemeyi kapat" link near the home logo for this purpose
 
 **Skip `analytics.js`** on `index.html`, `all.html`, `404.html`, and tooling pages (`article-carousel.html`, `carousel-generator.html`). The GoatCounter pageview tracker must still be present on all of them.
+
+## Reading Time
+
+Every **full** article (not preview / not utility page) carries two metadata tags in its `<head>`, inserted right after `<meta name="description">`:
+
+```html
+<meta name="word-count" content="2653">
+<meta name="reading-time" content="12">
+```
+
+`reading-time` is in whole minutes, computed at **220 words per minute** (Turkish reader pace) and rounded to nearest, floored at 1. Word counting excludes `<head>`, scripts, styles, comments, and the standard chrome blocks (`toc-rail`, `share-toggle`, `theme-toggle`, `home-toggle`, `home-logo`, `grain`, `back-fab`, `references`, `feedback`, `track-optout`). The values are not user-visible on the article page itself — they're just baked-in source-of-truth data that `view-source` reveals.
+
+**Listing pages** surface the reading time on cards:
+
+- `all.html` cards use `<span class="read-time">12 dk</span>`, inserted after `<p class="desc">` and before `<span class="arrow">`. Style: 12px, `var(--text-muted)`, `margin-top: 14px`. Only cards that link directly to a full article get this — preview and utility cards on `all.html` do **not** show reading time
+- `index.html` entries use `<span class="entry-time">12 dk</span>` placed as the **last child of `<h2 class="entry-title">`**, immediately after the title text. It flows inline at the end of the title, vertically centered against the title's x-height (small, uppercase, dim). **Every** entry on `index.html` shows a reading time, including cards that link to a `*-preview.html` page — in those cases display the **full article's** time, not the preview's. The index is curated and signals what the reader is committing to when they go past the preview
+
+Reading times are only ever **computed from full articles**, never from preview pages.
+
+**Display format** (no leading `~` symbol):
+- Under 60 minutes: `X dk` (e.g. `12 dk`)
+- 60 minutes or more: `X sa Y dk` (e.g. `1 sa 23 dk`), or `X sa` if remainder is zero
+
+**When adding a new full article**, after the content is finalized, compute its word count and update three places:
+1. Insert `<meta name="word-count">` and `<meta name="reading-time">` into the article's `<head>`
+2. Add `<span class="read-time">X dk</span>` to its card in `all.html` (only if the card links to the full article, not the preview)
+3. If curated to `index.html`, append `<span class="entry-time">X dk</span>` as the last child of the card's `<h2 class="entry-title">` — even if the card links to the preview, use the **full article's** time
+
+The counting logic and bulk updater live as ad-hoc scripts; re-run the counter when an article's body changes substantially (>5%).
 
 ## Git
 
