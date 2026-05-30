@@ -9,6 +9,7 @@
   var modal = null;
   var qrRendered = false;
   var activeInfo = null;
+  var refCode = '';
 
   function $(sel, root) { return (root || document).querySelector(sel); }
 
@@ -34,6 +35,43 @@
 
   function currentInfo() {
     return activeInfo || pageInfo();
+  }
+
+  function sanitizeRef(code) {
+    if (!code) return '';
+    return String(code).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 64);
+  }
+
+  function applyRef(rawUrl, code) {
+    if (!code) return rawUrl;
+    try {
+      var u = new URL(rawUrl);
+      u.searchParams.set('ref', code);
+      return u.toString();
+    } catch (e) {
+      var sep = rawUrl.indexOf('?') === -1 ? '?' : '&';
+      return rawUrl + sep + 'ref=' + encodeURIComponent(code);
+    }
+  }
+
+  function applyShareState() {
+    if (!modal) return;
+    var info = currentInfo();
+    var url = applyRef(info.url, refCode);
+    var urlInput = $('.share-url', modal);
+    if (urlInput) urlInput.value = url;
+    var x = $('[data-action="x"]', modal);
+    if (x) x.href = 'https://twitter.com/intent/tweet?text=' +
+                    encodeURIComponent(info.title) + '&url=' + encodeURIComponent(url);
+    var wa = $('[data-action="whatsapp"]', modal);
+    if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent(info.title + ' — ' + url);
+    var qrBox = $('.share-qr', modal);
+    if (qrBox && !qrBox.hidden) {
+      qrRendered = false;
+      renderQR();
+    } else {
+      qrRendered = false;
+    }
   }
 
   function copyToClipboard(text) {
@@ -75,6 +113,9 @@
         '<div class="share-url-row">' +
           '<input type="text" class="share-url" readonly>' +
           '<button type="button" class="share-copy">Kopyala</button>' +
+        '</div>' +
+        '<div class="share-ref-row">' +
+          '<input type="text" class="share-ref" placeholder="takip kodu (opsiyonel)" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Takip kodu">' +
         '</div>' +
         '<div class="share-actions">' +
           '<button type="button" class="share-action" data-action="native" hidden>' +
@@ -121,8 +162,9 @@
 
     $('[data-action="native"]', modal).addEventListener('click', function () {
       var info = currentInfo();
+      var url = applyRef(info.url, refCode);
       if (navigator.share) {
-        navigator.share({ title: info.title, url: info.url }).catch(function () {});
+        navigator.share({ title: info.title, url: url }).catch(function () {});
       }
     });
 
@@ -130,6 +172,18 @@
       var qrBox = $('.share-qr', modal);
       qrBox.hidden = !qrBox.hidden;
       if (!qrBox.hidden && !qrRendered) renderQR();
+    });
+
+    var refInput = $('.share-ref', modal);
+    refInput.addEventListener('input', function (e) {
+      var sanitized = sanitizeRef(e.target.value);
+      if (sanitized !== e.target.value) {
+        var pos = e.target.selectionStart;
+        e.target.value = sanitized;
+        try { e.target.setSelectionRange(pos, pos); } catch (err) {}
+      }
+      refCode = sanitized;
+      applyShareState();
     });
 
     return modal;
@@ -145,10 +199,11 @@
 
   function renderQR() {
     if (!window.QRCode) return;
-    var info = currentInfo();
+    var urlInput = $('.share-url', modal);
+    var url = (urlInput && urlInput.value) || applyRef(currentInfo().url, refCode);
     var frame = $('.share-qr-frame', modal);
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    var svg = window.QRCode.toSVG(info.url, {
+    var svg = window.QRCode.toSVG(url, {
       ecLevel: 'M',
       quietZone: 2,
       color: isDark ? '#e8e6e1' : '#1A1A1E',
@@ -162,16 +217,12 @@
     var info = currentInfo();
     ensureModal();
     $('.share-page-title', modal).textContent = info.title;
-    $('.share-url', modal).value = info.url;
     var nativeBtn = $('[data-action="native"]', modal);
     nativeBtn.hidden = !navigator.share;
-    var x = $('[data-action="x"]', modal);
-    x.href = 'https://twitter.com/intent/tweet?text=' +
-             encodeURIComponent(info.title) + '&url=' + encodeURIComponent(info.url);
-    var wa = $('[data-action="whatsapp"]', modal);
-    wa.href = 'https://wa.me/?text=' + encodeURIComponent(info.title + ' — ' + info.url);
+    $('.share-ref', modal).value = refCode;
     $('.share-qr', modal).hidden = true;
     qrRendered = false;
+    applyShareState();
     $('.share-status', modal).textContent = '';
     modal.hidden = false;
     document.documentElement.classList.add('share-open');

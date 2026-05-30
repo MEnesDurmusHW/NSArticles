@@ -23,6 +23,9 @@
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
 <script src="analytics.js" defer></script>
+<script src="progress.js" defer></script>
+<script src="resume.js" defer></script>
+<script src="references.js" defer></script>
 <script src="toc.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -215,6 +218,7 @@
   }
   @media (max-width: 360px) { .summary-grid { grid-template-columns: 1fr; } }
 </style>
+  <script src="ref.js" defer></script>
   <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -675,6 +679,30 @@
     </div>
 
     <!-- 10 Kaynaklar -->
+
+  <section class="continue" aria-label="Sıradaki okuma">
+    <a class="continue-toc" href="guide-intermittent-16-8.html">
+      <span class="continue-toc-label">Bir rehber</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">16:8 Aralıklı Oruç Rehberi</h3>
+        <p class="continue-toc-meta">Rehber · 13 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+    <a class="continue-toc" href="guide-intermittent-4-3.html">
+      <span class="continue-toc-label">Bir rehber</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">4:3 Aralıklı Oruç Rehberi</h3>
+        <p class="continue-toc-meta">Rehber · 8 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+
+
+  </section>
+
     <div class="references" id="kaynaklar">
       <h2 id="h11">Kaynaklar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
       <ol>
@@ -689,7 +717,6 @@
   </article>
 
   <div class="divider"></div>
-
   <a href="index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
 
   <script>

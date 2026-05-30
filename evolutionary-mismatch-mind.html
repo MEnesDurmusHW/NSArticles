@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paleolitik Zihin, Dijital Dünya</title>
-<meta name="description" content="Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.">
+<meta name="description" content="Stres tepkisinden dikkat dağınıklığına, oradan bağımlılığa: zihnin neden bu çağa uymuyor.">
 <meta name="word-count" content="4586">
 <meta name="reading-time" content="21">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="NS Articles">
 <meta property="og:locale" content="tr_TR">
 <meta property="og:title" content="Paleolitik Zihin, Dijital Dünya">
-<meta property="og:description" content="Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.">
+<meta property="og:description" content="Stres tepkisinden dikkat dağınıklığına, oradan bağımlılığa: zihnin neden bu çağa uymuyor.">
 <meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/evolutionary-mismatch-mind.html">
 <meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
 <meta property="og:image:width" content="1200">
@@ -23,6 +23,9 @@
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
 <script src="analytics.js" defer></script>
+<script src="progress.js" defer></script>
+<script src="resume.js" defer></script>
+<script src="references.js" defer></script>
 <script src="toc.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -1037,7 +1040,86 @@
     .section h2 { font-size: 1.25rem; }
     .section p { font-size: 0.95rem; }
   }
+
+  /* Continuation card — link to next article in series */
+  .continuation-card {
+    margin: 3.5rem 0 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    background: var(--accent-glow);
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .continuation-card:hover { background: rgba(150, 98, 47, 0.10); }
+  [data-theme="dark"] .continuation-card:hover { background: rgba(196, 149, 106, 0.16); }
+
+  .continuation-link {
+    display: block;
+    padding: 1.7rem 3.2rem 1.7rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+  }
+
+  .continuation-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .continuation-title {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .continuation-desc {
+    display: block;
+    font-size: 0.98rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  .continuation-arrow {
+    position: absolute;
+    right: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+  }
+
+  .continuation-link:hover .continuation-arrow {
+    transform: translateY(-50%) translateX(5px);
+  }
+
+  /* Section placeholder (content TBD) */
+  .section-placeholder {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-dim);
+    opacity: 0.6;
+    padding: 1.5rem 0;
+  }
+
+  @media (max-width: 480px) {
+    .continuation-link { padding: 1.4rem 2.6rem 1.4rem 1.4rem; }
+    .continuation-title { font-size: 1.25rem; }
+    .continuation-arrow { right: 1rem; }
+  }
 </style>
+  <script src="ref.js" defer></script>
   <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -1073,6 +1155,16 @@
         <span class="toc-num">02</span>
         <span class="toc-title">Dikkat</span>
       </a>
+      <a href="#s03" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">03</span>
+        <span class="toc-title">Bağımlılık</span>
+      </a>
+      <a href="#sonsoz" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">·</span>
+        <span class="toc-title">Son Söz</span>
+      </a>
       <a href="#kaynaklar" class="toc-row toc-level-1">
         <span class="toc-marker"></span>
         <span class="toc-num">·</span>
@@ -1087,7 +1179,7 @@
       <span class="hero-line"><em>Paleolitik</em> Zihin</span>
       <span class="hero-line"><em>Dijital</em> Dünya</span>
     </h1>
-    <p class="hero-sub">Stres tepkisinden bağımlılığa, dikkat dağınıklığından korkuya: zihninin neden bu çağa uymuyor.</p>
+    <p class="hero-sub">Stres tepkisinden dikkat dağınıklığına, oradan bağımlılığa: zihnin neden bu çağa uymuyor.</p>
     <div class="scroll-hint">
       <div class="line"></div>
     </div>
@@ -1565,7 +1657,52 @@
 
 <div class="section-divider"></div>
 
+<!-- 03 BAĞIMLILIK -->
+<div class="section" id="s03">
+  <div class="section-num">03</div>
+  <h2 id="h04">Bir bildirim, bir like, bir <i>daha</i><button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+  <p class="section-placeholder">[Bağımlılık bölümünün içeriği yakında eklenecek.]</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- SON SÖZ -->
+<div class="section" id="sonsoz">
+  <h2 id="h05">Son Söz<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button><em>Üç sistem, tek bir uyumsuzluk</em></h2>
+
+  <p>Bu makalede zihninin üç içsel mekanizmasını gördük: hiç inmeyen bir stres sistemi, ortalama 47 saniyede dağılan bir dikkat, dakikalık dopamin patlamalarına kurulu bir ödül sistemi. Üçü de paleolitik dünya için kalibre edilmişti, üçü de bu çağ tarafından sömürülüyor.</p>
+
+  <p>Sırada zihnin başka bir uyumsuzluk türü var: bedenle değil, gerçeklikle. Korku haberleri seni neden bu kadar kolay ele geçiriyor? Karar verirken neden bu kadar sistematik şekilde yanılıyorsun? Beynin bilgi işlerken kullandığı kısayollar binyıllarca avantajdı, bugün ise manipülasyona açık noktalara dönüştü.</p>
+</div>
+
+<aside class="continuation-card">
+  <a href="evolutionary-mismatch-reality.html" class="continuation-link">
+    <span class="continuation-label">Bu hikâyenin devamı</span>
+    <span class="continuation-title">Yanılan Zihin, Yanıltan Dünya</span>
+    <span class="continuation-desc">Korku haberlerinden bilişsel tuzaklara: gerçekliği neden olduğundan daha çarpık gördüğümüz.</span>
+    <span class="continuation-arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</aside>
+
+<div class="section-divider"></div>
+
 <!-- KAYNAKLAR -->
+
+  <section class="continue" aria-label="Sıradaki okuma">
+    <a class="continue-toc" href="evolutionary-mismatch-reality.html">
+      <span class="continue-toc-label">Bölüm 3</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">Yanılan Zihin, Yanıltan Dünya</h3>
+        <p class="continue-toc-meta">Evrim · 21 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+
+
+  </section>
+
 <div class="conclusion" id="kaynaklar">
   <h2 id="h99">Kaynaklar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
     <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; list-style: none;">
@@ -1616,7 +1753,6 @@
   <section class="closing">
     <p class="closing-sub">Mayıs 2026</p>
   </section>
-
   <div class="feedback">
     <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gonder</a>

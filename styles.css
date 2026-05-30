@@ -70,6 +70,343 @@ body {
   opacity: 0.4;
 }
 
+/* --- Reading Progress Bar (auto-injected by progress.js) --- */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  z-index: 200;
+  transition: width 0.12s ease-out;
+  pointer-events: none;
+}
+
+/* --- Resume-reading pill (auto-injected by resume.js when a saved
+       scroll position is found for the current URL). Bottom-right
+       floating button; click scrolls to the saved position, × dismisses. --- */
+.resume-pill {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px 11px 14px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  z-index: 180;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+}
+
+[data-theme="dark"] .resume-pill {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+.resume-pill:hover {
+  border-color: var(--text);
+}
+
+.resume-pill-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.resume-pill-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.resume-pill-text {
+  white-space: nowrap;
+}
+
+.resume-pill-close {
+  margin-left: 4px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.resume-pill-close:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+@media (max-width: 600px) {
+  .resume-pill {
+    right: 14px;
+    bottom: 14px;
+    font-size: 12px;
+    padding: 10px 14px 10px 12px;
+  }
+  .resume-pill-text {
+    max-width: 180px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+/* --- Collapsable references (auto-converted by references.js).
+       Minimal collapsed state: inline nav row, chevron + label + count.
+       Borders only when open (subtle divider above the list). --- */
+details.references-collapse {
+  margin: 12px 0;
+  padding: 0;
+}
+
+/* Absorb wrapper's own top spacing when refs-collapse is inside a
+   .conclusion / .references / .ref-section container. */
+.conclusion:has(> details.references-collapse),
+.references:has(> details.references-collapse),
+.ref-section:has(> details.references-collapse) {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+details.references-collapse > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  font-family: var(--sans);
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+details.references-collapse > summary::-webkit-details-marker { display: none; }
+details.references-collapse > summary::marker { content: ''; }
+
+details.references-collapse > summary:hover {
+  color: var(--text);
+}
+details.references-collapse > summary:hover .ref-summary-chevron {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.ref-summary-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.3s ease;
+}
+
+.ref-summary-chevron svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+details.references-collapse[open] > summary > .ref-summary-chevron {
+  transform: rotate(90deg);
+}
+
+.ref-summary-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  font-size: 12px;
+  color: var(--accent);
+  flex: 1;
+}
+
+.ref-count {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ref-summary-share {
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+details.references-collapse > summary:hover .ref-summary-share {
+  opacity: 0.6;
+}
+
+details.references-collapse[open] > summary {
+  color: var(--text);
+}
+
+details.references-collapse > ol {
+  margin: 18px 0 0;
+}
+
+/* --- End-of-article continuation block (TOC-entry pattern).
+       Mobile-first grid: label top-left, arrow right (spans both rows),
+       title + meta block bottom-left. Whole entry is one <a>.
+       No card chrome — chrome-free typographic navigation element.
+       Selection logic lives in CLAUDE.md; link is static per article. --- */
+
+/* Some articles add a global `section { padding/border }` rule that would
+   otherwise leak into our continue section. Reset explicitly. */
+.continue {
+  margin: 32px 0 20px;
+  padding: 0;
+  border: 0;
+}
+
+/* Small typographic ornament after the continue block: three accent
+   dots (book section-break dingbat). Quieter than a line. */
+.continue::after {
+  content: '·\00A0\00A0·\00A0\00A0·';
+  display: block;
+  text-align: center;
+  color: var(--accent);
+  opacity: 0.85;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  margin: 28px 0 0;
+}
+
+/* The TOC entry. Single grid layout for all viewports. */
+.continue-toc {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  row-gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 18px 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.continue-toc-label {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Legacy leader-dot slot (kept for markup-stability; visually hidden) */
+.continue-toc-leader { display: none; }
+
+.continue-toc-end {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+}
+
+.continue-toc-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(20px, 4.4vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.continue-toc-meta {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.continue-toc-arrow {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--accent);
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Hover/active: title shifts to accent, arrow translates right */
+.continue-toc:hover .continue-toc-title,
+.continue-toc:active .continue-toc-title,
+.continue-toc:focus .continue-toc-title {
+  color: var(--accent);
+}
+.continue-toc:hover .continue-toc-arrow,
+.continue-toc:active .continue-toc-arrow,
+.continue-toc:focus .continue-toc-arrow {
+  transform: translateX(5px);
+}
+.continue-toc:focus { outline: none; }
+
+/* Multi-card stack: thin divider between adjacent entries.
+   First card has no top border, so it doesn't add chrome by itself. */
+.continue-toc + .continue-toc {
+  border-top: 1px solid var(--divider);
+}
+
+/* Coming-soon variant: muted title, arrow becomes inert "Yakında" text */
+.continue-toc-pending {
+  cursor: default;
+}
+.continue-toc-pending .continue-toc-title { color: var(--text-dim); }
+.continue-toc-pending .continue-toc-arrow {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-weight: 600;
+}
+.continue-toc-pending:hover .continue-toc-title,
+.continue-toc-pending:active .continue-toc-title { color: var(--text-dim); }
+.continue-toc-pending:hover .continue-toc-arrow,
+.continue-toc-pending:active .continue-toc-arrow { transform: none; }
+
+@media (max-width: 600px) {
+  .continue-toc { padding: 16px 0; }
+  .continue-toc-title { font-size: clamp(18px, 5vw, 22px); }
+}
+
 /* --- Sticky toolbar buttons (home, theme, share) --- */
 .theme-toggle,
 .share-toggle,
@@ -546,6 +883,38 @@ body {
 }
 
 .share-url:focus { border-color: var(--accent); }
+
+.share-ref-row {
+  margin: -10px 0 18px;
+}
+
+.share-ref {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  outline: none;
+  letter-spacing: 0.02em;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.share-ref::placeholder {
+  color: var(--text-muted);
+  opacity: 0.55;
+  font-size: 11.5px;
+}
+
+.share-ref:focus,
+.share-ref:not(:placeholder-shown) {
+  color: var(--text);
+  border-color: var(--accent);
+  border-style: solid;
+}
 
 .share-copy {
   padding: 10px 16px;

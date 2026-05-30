@@ -8,8 +8,8 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 
 ## Architecture
 
-- **`index.html`** — Curated landing page (previews + key articles only)
-- **`all.html`** — Full listing of all articles
+- **`index.html`** — Public-facing curated landing page (the only listing external readers should see)
+- **`all.html`** — Private archive for the site owner and close friends only; lists every article including previews
 - **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, share toggle, share modal, divider, home logo
 - **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
 - **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code. Also fires GoatCounter events: `share-page` for the top-right button, `share-section-{id}` for per-heading buttons
@@ -37,7 +37,7 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **Responsive breakpoints**: 768px (tablet), 480px (mobile), 360px (very small)
 - **Grain overlay**: `.grain` div is on every page, auto-visible only in dark mode
 - **Feedback**: Articles end with a feedback section linking to a Google Form
-- **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`
+- **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`. The references list at the end of the article is **auto-collapsed** by `references.js` — see *Collapsable References*
 - **Per-section share**: Each `<h2>` in an article body must end with `<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)">…three-dot share SVG…</button>` and have an `id` (so `openShareSection` can build the anchor URL). The button is hidden on desktop and revealed on heading hover; on touch devices it stays visible at low opacity. Skip on listing pages and tooling pages (`index.html`, `all.html`, `404.html`, carousel pages)
 - **No em dashes**: Never use the em dash character (—) in article content or any user-facing text. Restructure the sentence, use a comma, or use a period instead
 - **One body font per article**: Pick a single body font (`var(--sans)` or one explicit serif) and use it consistently across ALL body content of that article: hero subtitle, intro paragraphs, sections, sidebars, quiz/interactive blocks, callouts, post-quiz continuation, footer text. Headings can use `var(--serif)` (Playfair) and small UI labels can use a mono font, but body copy must not switch fonts mid-article. If you load a font in the `<link>` tag, every place it appears must follow the same rule
@@ -92,8 +92,9 @@ Open any `.html` file directly in a browser — no server or build step required
 
 ## Listing Pages
 
-- **`all.html`**: Lists every article. Preview pages use "— Preview" suffix in the card title and the "Önizleme" tag
-- **`index.html`**: Curated landing page — only selected articles appear here. Do NOT use "Preview" suffix in card titles on this page
+- **`index.html`** is the only public-facing landing page. All external readers, social shares, in-article navigation, and the home toggle (`NS` mark, top-left) must point here. Curated; only selected articles appear; no "Preview" suffix in card titles
+- **`all.html`** is a private/internal archive for the site owner and close friends. It lists every article including previews and tooling pages. **Do NOT direct external readers here** — no in-article links, continuation cards, footer logos, or share suggestions should point to `all.html`. Use it as a personal index only
+- Both pages: still receive new article entries when adding articles, but `all.html` is the master archive while `index.html` is the curated public face
 
 ## Adding a New Article
 
@@ -186,7 +187,7 @@ Every **full** article (not preview / not utility page) carries two metadata tag
 **Listing pages** surface the reading time on cards:
 
 - `all.html` cards use `<span class="read-time">12 dk</span>`, inserted after `<p class="desc">` and before `<span class="arrow">`. Style: 12px, `var(--text-muted)`, `margin-top: 14px`. Only cards that link directly to a full article get this — preview and utility cards on `all.html` do **not** show reading time
-- `index.html` entries use `<span class="entry-time">12 dk</span>` placed as the **last child of `<h2 class="entry-title">`**, immediately after the title text. It flows inline at the end of the title, vertically centered against the title's x-height (small, uppercase, dim). **Every** entry on `index.html` shows a reading time, including cards that link to a `*-preview.html` page — in those cases display the **full article's** time, not the preview's. The index is curated and signals what the reader is committing to when they go past the preview
+- `index.html` entries use `<span class="entry-time">12 dk</span>` placed as the **last child of `<h2 class="entry-title">`**, immediately after the title text. It flows inline at the end of the title, vertically centered against the title's x-height (small, uppercase, dim). Every entry on `index.html` shows a reading time. **Index cards link directly to the full article** (not to a preview), so the time is just the full article's reading time.
 
 Reading times are only ever **computed from full articles**, never from preview pages.
 
@@ -197,9 +198,112 @@ Reading times are only ever **computed from full articles**, never from preview 
 **When adding a new full article**, after the content is finalized, compute its word count and update three places:
 1. Insert `<meta name="word-count">` and `<meta name="reading-time">` into the article's `<head>`
 2. Add `<span class="read-time">X dk</span>` to its card in `all.html` (only if the card links to the full article, not the preview)
-3. If curated to `index.html`, append `<span class="entry-time">X dk</span>` as the last child of the card's `<h2 class="entry-title">` — even if the card links to the preview, use the **full article's** time
+3. If curated to `index.html`, append `<span class="entry-time">X dk</span>` as the last child of the card's `<h2 class="entry-title">`. Index cards always link to the full article (`href="article-name.html"`, not `*-preview.html`)
 
 The counting logic and bulk updater live as ad-hoc scripts; re-run the counter when an article's body changes substantially (>5%).
+
+## Reading Progress Bar
+
+A thin accent-colored bar fixed across the top of every article page that fills left-to-right as the reader scrolls. Provides a physical sense of "how much is left".
+
+- **File**: `progress.js` — IIFE that auto-injects `<div class="read-progress">` at the start of `<body>` on `DOMContentLoaded`, then listens for `scroll` (rAF-throttled, passive) and `resize` to update `width` as a percent of `scrollHeight - clientHeight`. Re-entry safe (skips if a `.read-progress` element already exists).
+- **CSS**: `.read-progress` lives in `styles.css` — `position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; transition: width 0.12s ease-out`
+- **Load on**: every article page (full + preview) via `<script src="progress.js" defer></script>` in `<head>`
+- **Skip on**: `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
+
+The bar element is auto-created — articles do not need any markup. Just including the script is enough.
+
+## Resume Reading
+
+When a reader leaves a long page partway through and returns, a pill appears at the bottom-right offering to scroll them back to where they left off. Reduces the "I lost my place" friction.
+
+- **File**: `resume.js` — IIFE that throttle-saves the current `scrollTop` to `localStorage` under `ns-pos-<pathname>` as `{y, savedAt}`. On load, reads the value: if `Date.now() - savedAt < 7 days` and the saved position is past 15% of total scroll, injects a floating pill `<button class="resume-pill">`. Click → smooth-scrolls to saved y; × → clears entry and hides pill. Auto-hides after 12 s.
+- **Storage hygiene**: positions below 5% or above 95% of total scroll clear the entry (treats "at the top" and "near the end" as no-resume-needed). 7-day TTL prunes lazily on access.
+- **Page-too-short guard**: skips activation when `scrollHeight - clientHeight < 1200px` (short pages don't need resume).
+- **CSS**: `.resume-pill`, `.resume-pill-show`, `.resume-pill-icon`, `.resume-pill-text`, `.resume-pill-close` in `styles.css`
+- **GoatCounter events**: `resume-click` when the pill is used; `resume-dismiss` when explicitly closed via ×
+- **Load on**: every article page (same scope as `progress.js`) via `<script src="resume.js" defer></script>` in `<head>`
+
+## Referral Codes
+
+When sharing a link 1-to-1 (a friend, a specific group), append `?ref=CODE` to the URL. On arrival the site fires a custom GoatCounter event `ref-CODE` so the owner can see in the dashboard whether that specific person opened the link. The code is owner-generated (any short string like `alice`, `kerem-x`, `mar26-ali`) — `ref.js` does not generate anything.
+
+- **File**: `ref.js` — reads `?ref=CODE` from `location.search`, sanitises it (`[A-Za-z0-9_-]`, max 64 chars), and fires `goatcounter.count({ path: 'ref-<code>', event: true })`. Stores the code in `localStorage` under `ns-ref-seen` (JSON array of all codes ever seen on this browser) so each code fires **at most once per browser** — refreshing or revisiting the same `?ref=alice` link does not re-fire. The first code ever seen is also stored under `ns-ref-first` as a flat string. After read, the `ref` param is stripped from the URL via `history.replaceState` so visitors don't carry the code along when re-sharing.
+- **GoatCounter retry**: because the GoatCounter snippet is `async`, `window.goatcounter.count` may not yet exist on `DOMContentLoaded`. The script retries up to 10 times at 500 ms intervals.
+- **Localhost guard**: same `isLocal()` check as `analytics.js` / `share.js` — `file://`, `localhost`, `127.x`, private RFC1918 ranges all skip the event (storage still records the code so a later production visit doesn't re-fire).
+- **Load on**: every article page (same scope as `progress.js` / `resume.js` / `references.js`) via `<script src="ref.js" defer></script>` in `<head>`. Also safe to load on listing pages (`index.html`, `all.html`) if you want to share a code-tagged link to the landing page
+
+**Usage**:
+1. Pick a code per recipient: e.g. `alice`, `ahmet42`, `mar26-grup`
+2. Send `https://menesdurmushw.github.io/NSArticles/argument.html?ref=alice` (any page works)
+3. In the GoatCounter dashboard, the event `ref-alice` appears under *Events* on first open
+4. To reset tracking on your own browser during testing: `localStorage.removeItem('ns-ref-seen')` in DevTools
+
+## Collapsable References
+
+The references list at the end of every article is auto-wrapped in a `<details>` element and presented collapsed by default. The summary shows the heading (e.g. "Kaynaklar") and the count of references (e.g. "32"). Clicking the summary toggles open/closed. Clicking any inline ref link (`<a class="ref" href="#ref-N">`) anywhere in the article auto-expands the collapsed details before the browser jumps to the citation — the reader never lands on a hidden anchor.
+
+- **File**: `references.js` — runs on `DOMContentLoaded`, scans the document for `<ol>` elements that either (a) have at least one `<li id="ref-*">` child, or (b) carry the `references` class. For each candidate it walks backward to find the nearest preceding heading (`h2`/`h3`/`h4`) whose text matches `/Kaynak/i`, then wraps the (heading + ol) pair into a `<details class="references-collapse" data-refs>` with a generated `<summary>` containing chevron + label + count
+- **Heading preservation**: the original heading's `id` (used by TOC anchors) is moved to the `<details>` element, so TOC links continue to scroll to the right place. Any `.heading-share` button inside the heading is moved into the summary (hover-revealed)
+- **Auto-expand triggers**:
+  1. **Initial load with `#ref-N` hash** — opens all refs details then re-scrolls to the anchor
+  2. **Click on `<a href="#ref-*">`** — capture-phase handler opens details before browser anchor jump, so layout is correct when the jump happens
+  3. **`hashchange` to `#ref-*`** — also re-opens
+- **CSS**: `details.references-collapse`, `.ref-summary`, `.ref-summary-chevron`, `.ref-summary-label`, `.ref-count`, `.ref-summary-share` in `styles.css`. Chevron rotates 90° via `[open]` selector
+- **Skip thresholds**: lists with fewer than 3 items aren't wrapped (probably not a real bibliography)
+- **Load on**: every article page (same scope as `progress.js` / `resume.js`) via `<script src="references.js" defer></script>` in `<head>`
+
+The conversion is dynamic — articles' HTML markup is **not** touched. The original `<h2>Kaynakça</h2>` + `<ol>` (or `<div class="references">` wrapper) markup stays as-is in source; the script reshapes it at runtime. This means new articles don't need any special markup for the collapse behavior — just write the references the same way (any heading containing "Kaynak" followed by an `<ol>`) and the script handles the rest.
+
+## End-of-Article Continuation
+
+Every full article ends with a hand-picked "next read" entry pointing at one specific other article. The selection is **static markup** — there is no JS that picks the next article. This file documents the rule; the actual link in code is hard-coded per article so adds/renames are explicit.
+
+The continuation is presented as a **TOC-entry pattern**, not a card: chrome-free typographic navigation row with a small uppercase label, the next article's serif title, a one-line meta footer (category · reading time), and an accent arrow on the right. The entire row is one `<a>`. A small three-dot dingbat (`· · ·`) section break is rendered after the block via `.continue::after`.
+
+**Selection rule** (apply in order, first match wins):
+
+1. **Series article**: link to the next chapter of the same series. Label reads `Bölüm N`. If the next chapter doesn't exist yet, use the **coming-soon** variant (`<div class="continue-toc continue-toc-pending">`, no `href`, arrow becomes inert "Yakında" text, meta becomes `Hazırlanıyor`).
+2. **Same category**: link to another article that shares the closest tag/category (`data-cat` from `index.html`). Label reads `Sıradaki yazı`.
+3. **Closest topical match**: if no same-category sibling exists, link to the topically nearest article. Label still `Sıradaki yazı`.
+4. **Skip entirely**: some articles don't get a continue block when no good match exists (currently `illusion-of-control.html` and `argument.html`). The decision is editorial — quality of the recommendation outranks completeness.
+
+**Guide pages** (`guide-ketogenic.html`, `guide-intermittent-16-8.html`, `guide-intermittent-4-3.html`) are a special case: each cross-links to **both** other guides as stacked TOC entries inside one `<section class="continue">`. Each entry uses label `Bir rehber`. The `.continue-toc + .continue-toc` rule adds a thin divider between adjacent entries.
+
+**No "Diğer makaleler" link inside the continue block.** That secondary nav belongs in footer chrome, not paired with the primary next-read action (the two are not peers).
+
+**Markup template** (single next entry):
+
+```html
+<section class="continue" aria-label="Sıradaki okuma">
+  <a class="continue-toc" href="next-article.html">
+    <span class="continue-toc-label">Sıradaki yazı</span>
+    <span class="continue-toc-leader" aria-hidden="true"></span>
+    <span class="continue-toc-end">
+      <h3 class="continue-toc-title">Next article title</h3>
+      <p class="continue-toc-meta">Kategori · X dk</p>
+    </span>
+    <span class="continue-toc-arrow" aria-hidden="true">→</span>
+  </a>
+</section>
+```
+
+The `.continue-toc-leader` span is a legacy slot for an earlier horizontal-leader-dot layout; it's currently `display: none` and can stay as a no-op for markup stability (or be omitted).
+
+**Markup variants**:
+- **Coming-soon**: replace the `<a class="continue-toc">` with `<div class="continue-toc continue-toc-pending">` (no `href`). The arrow span content becomes `Yakında` (rendered as muted caps via the pending CSS) and the meta becomes `Hazırlanıyor`.
+- **Multi-card** (guides): stack multiple `<a class="continue-toc">` siblings directly inside `<section class="continue">`. The `.continue-toc + .continue-toc` selector adds the inter-entry divider.
+
+**Insertion point** — the continue block sits between the article body and the references, **above** the (collapsed) references list:
+
+- For articles with a `<!-- Kaynakça -->` comment, `<div class="references">`, `<div class="conclusion" id="kaynak*">`, or a `<h2>Kaynak…</h2>`-style heading: insert the section **immediately before** the first such anchor.
+- For articles with no references at all (`illusion-of-control.html`, guides with empty `references` divs): insert before `<div class="feedback">` if present, else before the bottom `<a class="home-logo">` / `<div class="home-logo">` chrome.
+- Final source order: article body → **continue** → references (auto-collapsed) → feedback → home chrome.
+
+**When adding a new full article**:
+1. Pick its "next" using the selection rule above.
+2. Insert the appropriate `<section class="continue">` markup using the TOC-entry template.
+3. If this new article makes sense as someone else's "next", consider updating the source article's continue block to point here (optional — only when the new pick is clearly better).
 
 ## Git
 
