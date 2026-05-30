@@ -711,6 +711,7 @@
 
 
 </style>
+  <script src="highlight.js" defer></script>
   <script src="ref.js" defer></script>
   <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -1427,28 +1428,6 @@
         });
       });
     });
-
-    // ToC scroll-spy: highlight active section in floating rail
-    (function() {
-      var rail = document.querySelector('.toc-rail');
-      if (!rail || !('IntersectionObserver' in window)) return;
-      var links = rail.querySelectorAll('a');
-      var targets = [];
-      links.forEach(function(a) {
-        var el = document.querySelector(a.getAttribute('href'));
-        if (el) targets.push({ el: el, link: a });
-      });
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            links.forEach(function(l) { l.classList.remove('active'); });
-            var match = targets.find(function(t) { return t.el === e.target; });
-            if (match) match.link.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
-      targets.forEach(function(t) { io.observe(t.el); });
-    })();
   </script>
   <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
 

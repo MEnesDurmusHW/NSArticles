@@ -255,6 +255,25 @@ The references list at the end of every article is auto-wrapped in a `<details>`
 
 The conversion is dynamic — articles' HTML markup is **not** touched. The original `<h2>Kaynakça</h2>` + `<ol>` (or `<div class="references">` wrapper) markup stays as-is in source; the script reshapes it at runtime. This means new articles don't need any special markup for the collapse behavior — just write the references the same way (any heading containing "Kaynak" followed by an `<ol>`) and the script handles the rest.
 
+## Highlights, Notes, and Quote Sharing
+
+Readers can highlight any prose passage, attach a private note, copy or share it. Highlights persist per-article in `localStorage` and re-render on revisit. Sharing produces a URL with a `#:~:text=` fragment so the recipient lands on the exact quoted passage; the share modal also gains a quoted-excerpt blockquote and uses the quote in X/WhatsApp share text.
+
+- **File**: `highlight.js` — IIFE that on `DOMContentLoaded`:
+  1. Builds a paragraph index of the article body (`p, blockquote, li`) excluding chrome (`.toc-rail, .references-collapse, .continue, .feedback, .home-logo, footer, ...` etc.)
+  2. Reads saved marks from `localStorage` under `ns-marks-<pathname>` (JSON array of `{id, paraIdx, before, text, after, note, ts}`) and re-renders them by walking text content
+  3. Listens for `mouseup` / `touchend` and shows a floating popover above the selection with `[Vurgula] [Not] [Kopyala] [Paylaş]`. Existing-highlight clicks add a `[Kaldır]` button
+  4. Maintains a bottom-left `.hl-pill` (`N vurgu · M not`) that opens a `.hl-panel` listing every highlight on the page with paragraph context + note; clicking an entry smooth-scrolls to it and pulses the highlight twice
+- **Persistence strategy**: marks store the highlighted text + 24 chars of context before/after + paragraph index. Re-rendering tries `before+text+after` first, then partial matches, then bare text. This survives small edits to the article body. If a mark cannot be re-located, it stays in storage but doesn't render (won't lose data on a transient script bug)
+- **Same-paragraph only**: v1 ignores selections that span multiple paragraphs (the popover doesn't appear). Selections that overlap an existing `mark.ns-hl` are also ignored — the reader has to remove the old one first
+- **Quote URL format**: `<page>.html#:~:text=<encoded>` for selections ≤ 80 chars, or `#:~:text=<first 4 words>,<last 4 words>` for longer ones (text fragment directive, native in Chromium/Safari 16.4+; non-supporting browsers just open the page without scrolling)
+- **share.js handoff**: the popover's `[Paylaş]` action calls `window.openShare({ url, title, quote })`. `share.js` accepts a `quote` field, shows it as a `<blockquote class="share-quote">` in the modal, swaps the title to "Bu alıntıyı paylaş", and includes the quote in X/WhatsApp text as `"…" — title`. QR re-renders to the fragment URL
+- **GoatCounter events**: `highlight-add`, `highlight-remove`, `highlight-copy`, `highlight-share`, `note-add`, `note-edit`
+- **CSS**: `mark.ns-hl`, `.hl-popover`, `.hl-note-editor`, `.hl-pill`, `.hl-panel`, `.share-quote` in `styles.css`. Highlight uses an accent-tinted gradient under the text baseline; notes add an inset accent border under the highlight. Pulse keyframe `ns-hl-pulse` fires on scroll-to-mark from the panel
+- **Load on**: every article page (full + preview) via `<script src="highlight.js" defer></script>` in `<head>`. The script no-ops on pages where `findParagraphs()` returns empty, so loading on a listing/utility page is harmless but unnecessary. Skip on `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
+
+The script is purely additive — articles don't need any new markup. Just include the script tag (same scope as `analytics.js` / `progress.js` etc.).
+
 ## End-of-Article Continuation
 
 Every full article ends with a hand-picked "next read" entry pointing at one specific other article. The selection is **static markup** — there is no JS that picks the next article. This file documents the rule; the actual link in code is hard-coded per article so adds/renames are explicit.

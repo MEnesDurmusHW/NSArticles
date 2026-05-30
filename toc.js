@@ -64,8 +64,6 @@
       if (e.key === 'Escape') close();
     });
 
-    if (!('IntersectionObserver' in window)) return;
-
     var topLinks = rail.querySelectorAll('.toc-level-1[href^="#"]');
     var subLinks = rail.querySelectorAll('.toc-level-2[href^="#"]');
 
@@ -80,9 +78,17 @@
       if (el) subTargets.push({ el: el, link: a });
     });
 
+    if (!topTargets.length && !subTargets.length) return;
+
+    var activeTopLink = null;
+    var activeSubLink = null;
+
     function setActiveTop(link, key) {
-      topLinks.forEach(function (l) { l.classList.remove('active'); });
-      if (link) link.classList.add('active');
+      if (link !== activeTopLink) {
+        topLinks.forEach(function (l) { l.classList.remove('active'); });
+        if (link) link.classList.add('active');
+        activeTopLink = link;
+      }
       document.querySelectorAll('.toc-children').forEach(function (c) {
         c.classList.toggle('expanded', c.dataset.parent === key);
       });
@@ -92,28 +98,50 @@
     }
 
     function setActiveSub(link) {
+      if (link === activeSubLink) return;
       subLinks.forEach(function (l) { l.classList.remove('active'); });
       if (link) link.classList.add('active');
+      activeSubLink = link;
     }
 
-    var topIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          var match = topTargets.find(function (t) { return t.el === e.target; });
-          if (match) setActiveTop(match.link, match.key);
-        }
-      });
-    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
-    topTargets.forEach(function (t) { topIo.observe(t.el); });
+    // Scroll-position based spy: the active heading is the last one whose top
+    // has scrolled above an activation line near the top of the viewport.
+    // Unlike a thin intersection band, this always resolves exactly one active
+    // entry and updates correctly after click-jumps (which skip the band).
+    function currentActive(targets) {
+      if (!targets.length) return null;
+      var line = window.innerHeight * 0.3;
+      var chosen = targets[0];
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i].el.getBoundingClientRect().top <= line) chosen = targets[i];
+        else break;
+      }
+      return chosen;
+    }
 
-    var subIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          var match = subTargets.find(function (t) { return t.el === e.target; });
-          if (match) setActiveSub(match.link);
-        }
+    function update() {
+      var top = currentActive(topTargets);
+      if (top) setActiveTop(top.link, top.key);
+      var sub = currentActive(subTargets);
+      setActiveSub(sub ? sub.link : null);
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        update();
+        ticking = false;
       });
-    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-    subTargets.forEach(function (t) { subIo.observe(t.el); });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('hashchange', function () { setTimeout(update, 60); });
+    rail.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function () { setTimeout(update, 60); });
+    });
+    update();
   });
 })();
