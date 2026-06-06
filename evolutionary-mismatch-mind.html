@@ -1104,6 +1104,30 @@
     transform: translateY(-50%) translateX(5px);
   }
 
+  /* Pending — next article not published yet */
+  .continuation-card.is-pending { border-color: var(--divider); cursor: default; }
+  .continuation-card.is-pending:hover { background: var(--accent-glow); }
+  [data-theme="dark"] .continuation-card.is-pending:hover { background: var(--accent-glow); }
+  .continuation-card.is-pending .continuation-label { color: var(--text-dim); }
+  .continuation-card.is-pending .continuation-title { color: var(--text-dim); }
+  .continuation-card.is-pending .continuation-link { padding-right: 7rem; }
+  .continuation-soon {
+    position: absolute;
+    right: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--divider);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    white-space: nowrap;
+  }
+
   /* Section placeholder (content TBD) */
   .section-placeholder {
     text-align: center;
@@ -1600,14 +1624,12 @@
     <div class="collapsible-body">
       <ul>
         <li>2023 Common Sense Media araştırması (200 ergen, Android cihaz yazılımıyla takip): ergenlerin telefonuna günde medyan 237 bildirim geliyor. %20'si günde 500'den fazla bildirim alıyor. Bildirimlerin yaklaşık dörtte biri okul saatlerinde geliyor. Ergenler telefonlarını günde medyan 72 kez açıyor.<a href="#ref-26" class="ref" onclick="savePos(this)">26</a></li>
-        <li>2026 verisi: bilgi işçileri 8 saatlik bir iş gününde ortalama 566 kez görev değiştiriyor.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
-        <li>Bir kişinin günde maruz kaldığı içerik parçası sayısı 2012'de 1.400, bugün 5.000'den fazla.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
-        <li>Akıllı telefonu yoğun kullananların %78'i "hayalet bildirim" yaşıyor, yani telefon hiç titremediği halde titrediğini sanıyor.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a></li>
+        <li>Drouin ve arkadaşlarının 290 üniversite öğrencisiyle yaptığı çalışmada katılımcıların %89'u "hayalet titreşim" yaşadığını, yani telefon titremediği halde titrediğini hissettiğini bildirdi. Çoğu bunu rahatsız edici bulmuyor; beyin, sık gelen bir sinyali beklemeye o kadar alışıyor ki yokluğunda bile onu üretiyor.<a href="#ref-46" class="ref" onclick="savePos(this)">46</a></li>
       </ul>
     </div>
   </details>
 
-  <p>Ve bu kaybın bir de ekonomik karşılığı var. Carnegie Mellon Üniversitesi'nin 2026'da yayımladığı bir analize göre dijital kesintilerin ABD'ye yıllık verimlilik kaybı yaklaşık <strong>1.2 trilyon dolar</strong>.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a> Hesabın mantığı şu: bilgi işçileri bir kesintiden sonra eski göreve dönmek için ortalama 23 dakika harcıyor, kesintiler günde onlarca kez tekrarlanıyor, çalışan başına saatlik kayıp birikiyor, milyonlarca çalışanla çarpıldığında ortaya bu rakam çıkıyor. Yani dikkat sömürüsünün maliyeti soyut bir his değil, doğrudan üretilemeyen mal ve hizmet.</p>
+  <p>Ve bu kaybın bir de ekonomik karşılığı var. İş dünyası araştırma firması Basex'in sık alıntılanan 2005 tahminine göre, gereksiz kesinti ve bölünmelerin ABD ekonomisine yıllık maliyeti yaklaşık <strong>588 milyar dolar</strong>.<a href="#ref-27" class="ref" onclick="savePos(this)">27</a> Hesabın mantığı şu: bilgi işçileri bir kesintiden sonra eski göreve dönmek için ortalama 23 dakika harcıyor, kesintiler günde onlarca kez tekrarlanıyor, çalışan başına saatlik kayıp birikiyor, milyonlarca çalışanla çarpıldığında ortaya bu rakam çıkıyor. Yani dikkat sömürüsünün maliyeti soyut bir his değil, doğrudan üretilemeyen mal ve hizmet.</p>
 
   <p>Ve bu bildirimlerin etkisi sadece dikkati bölmek değil. Her bildirim küçük bir tehdit/ödül belirsizliği yaratıyor. Beyin "yeni bir şey, bilmem gerek" tepkisini veriyor. Bu tepkinin altında, önceki bölümde gördüğümüz aynı stres mekanizması var, kortizol seviyesinde küçük yükselişler, sempatik sinir sistemi aktivasyonu. Yani her bildirim minik bir aslan görüntüsü gibi çalışıyor.</p>
 
@@ -1964,13 +1986,13 @@
   <p>Ama hikâye burada bitmiyor. Çünkü beynin sadece dürtüleri sömürülmüyor. Aynı zamanda gerçekliği nasıl gördüğün de çarpıtılıyor. Olumsuz haberlere neden bu kadar takılıyoruz, ve aslında olduğundan çok daha tehlikeli bir dünyada yaşadığımızı neden sanıyoruz? Zihnimizin aldığı kestirme kararlar bizi nasıl yanıltıyor? Bu serinin üçüncü yazısı, <i>Yanılan Zihin, Yanıltan Dünya</i>, tam olarak buna bakıyor.</p>
 </div>
 
-<aside class="continuation-card">
-  <a href="evolutionary-mismatch-reality.html" class="continuation-link">
+<aside class="continuation-card is-pending">
+  <div class="continuation-link">
     <span class="continuation-label">Bu hikâyenin devamı</span>
     <span class="continuation-title">Yanılan Zihin, Yanıltan Dünya</span>
     <span class="continuation-desc">Korku haberlerinden bilişsel tuzaklara: gerçekliği neden olduğundan daha çarpık gördüğümüz.</span>
-    <span class="continuation-arrow" aria-hidden="true">&rarr;</span>
-  </a>
+    <span class="continuation-soon" aria-label="Yakında yayımlanacak">Yakında</span>
+  </div>
 </aside>
 
 <div class="section-divider"></div>
@@ -2006,7 +2028,7 @@
     <li id="ref-24"><strong>24.</strong> Mark, G., et al. (2008). The cost of interrupted work: More speed and stress. <i>Proceedings of CHI 2008</i>. <a href="https://doi.org/10.1145/1357054.1357072" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-25"><strong>25.</strong> Harris, T. (2014). A call to minimize distraction &amp; respect users' attention. <a href="https://www.minimizedistraction.com" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-26"><strong>26.</strong> Common Sense Media. (2023). <i>Constant Companion: A Week in the Life of a Young Person's Smartphone Use</i>. <a href="https://www.commonsensemedia.org/research/constant-companion-a-week-in-the-life-of-a-young-persons-smartphone-use" target="_blank" style="color: var(--accent);">link</a></li>
-    <li id="ref-27"><strong>27.</strong> Global Digital Attention Research Institute. (2026). <i>Cross-platform Attention Tracking Study</i>. <a href="https://www.amraandelma.com/user-attention-span-statistics/" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-27"><strong>27.</strong> Spira, J.B. &amp; Feintuch, J.B. (2005). <i>The Cost of Not Paying Attention: How Interruptions Impact Knowledge Worker Productivity</i>. Basex. <a href="https://iorgforum.org/wp-content/uploads/2011/06/CostOfNotPayingAttention.BasexReport.pdf" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-28"><strong>28.</strong> American Psychological Association. (2006). Multitasking: Switching costs. <a href="https://www.apa.org/topics/research/multitasking" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-29"><strong>29.</strong> Watson, J.M. &amp; Strayer, D.L. (2010). Supertaskers: Profiles in extraordinary multitasking ability. <i>Psychonomic Bulletin &amp; Review</i>, 17(4), 479-485. <a href="https://doi.org/10.3758/PBR.17.4.479" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-30"><strong>30.</strong> Medeiros-Ward, N., Watson, J.M., Strayer, D.L. (2015). On supertaskers and the neural basis of efficient multitasking. <i>Psychonomic Bulletin &amp; Review</i>, 22(3), 876-883. <a href="https://doi.org/10.3758/s13423-014-0713-3" target="_blank" style="color: var(--accent);">link</a></li>
@@ -2025,6 +2047,7 @@
     <li id="ref-43"><strong>43.</strong> Telefon kullanım ve kontrol sıklığı istatistikleri, çeşitli kaynaklar (DataReportal, eMarketer; kontrol sıklığı için 144-205 aralığı farklı raporlardan derlenmiştir). <a href="https://datareportal.com/reports/digital-2025-deep-dive-how-much-time-we-spend-on-our-phones" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-44"><strong>44.</strong> Common Sense Media. (2021). <i>The Common Sense Census: Media Use by Tweens and Teens</i>. <a href="https://www.commonsensemedia.org/research/the-common-sense-census-media-use-by-tweens-and-teens-2021" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-45"><strong>45.</strong> Mann, S. &amp; Cadman, R. (2014). Does being bored make us more creative? <i>Creativity Research Journal</i>, 26(2), 165-173. <a href="https://doi.org/10.1080/10400419.2014.901073" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-46"><strong>46.</strong> Drouin, M., Kaiser, D.H., &amp; Miller, D.A. (2012). Phantom vibrations among undergraduates: Prevalence and associated psychological characteristics. <i>Computers in Human Behavior</i>, 28(4), 1490-1496. <a href="https://doi.org/10.1016/j.chb.2012.03.013" target="_blank" style="color: var(--accent);">link</a></li>
   </ol>
 </div>
 
