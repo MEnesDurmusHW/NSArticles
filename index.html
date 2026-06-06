@@ -59,13 +59,45 @@
 
   .masthead-intro {
     font-family: var(--serif);
-    font-style: italic;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 400;
-    line-height: 1.55;
-    color: var(--text-dim);
-    max-width: 480px;
+    line-height: 1.62;
+    color: #4A443C;
+    max-width: 500px;
     margin: 0 auto;
+  }
+
+  [data-theme="dark"] .masthead-intro { color: #c2bfb8; }
+
+  /* Topic umbrellas — three labels under the intro, dot-separated.
+     Forward-compatible seed for future category filtering. */
+  .masthead-topics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .masthead-topics span {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .masthead-topics span:not(:last-child)::after {
+    content: '\00B7';
+    display: inline-block;
+    margin: 0 16px;
+    font-size: 17px;
+    line-height: 0;
+    vertical-align: middle;
+    color: var(--accent);
+    opacity: 0.85;
+    font-weight: 700;
   }
 
   /* ----- Signature ----- */
@@ -294,7 +326,10 @@
     .masthead { margin-bottom: 64px; }
     .masthead h1 { font-size: 42px; letter-spacing: -0.8px; }
     .masthead-rule { margin: 20px auto 18px; }
-    .masthead-intro { font-size: 15px; line-height: 1.5; max-width: 360px; }
+    .masthead-intro { font-size: 16px; line-height: 1.55; max-width: 380px; }
+    .masthead-topics { margin-top: 24px; }
+    .masthead-topics span { font-size: 10px; letter-spacing: 1.5px; }
+    .masthead-topics span:not(:last-child)::after { margin: 0 11px; font-size: 15px; }
 
     .signature { margin-top: 56px; font-size: 12px; }
 
@@ -397,6 +432,9 @@
       <h1>NS Articles</h1>
       <span class="masthead-rule" aria-hidden="true"></span>
       <p class="masthead-intro">Araştırmaların gösterdiği, çoğumuzun hâlâ atladığı meseleler üzerine kısa denemeler.</p>
+      <div class="masthead-topics">
+        <span>Evrim</span><span>Beyin</span><span>Kişisel Gelişim</span>
+      </div>
     </header>
 
     <div class="entries">

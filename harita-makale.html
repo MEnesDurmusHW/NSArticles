@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makale Haritası — NS Articles</title>
+<meta name="description" content="NS Articles yazılarının düşünce iskeleti, her dala düşen makalelerle birlikte.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { font-family: var(--sans); }
+  .container { max-width: 920px; margin: 0 auto; padding: 110px 28px 100px; }
+
+  /* ----- Head ----- */
+  .map-head { text-align: center; margin-bottom: 8px; }
+  .map-head .eyebrow {
+    display: block; font-size: 11px; font-weight: 600; letter-spacing: 2.6px;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px;
+  }
+  .map-head h1 {
+    font-family: var(--serif); font-size: clamp(32px, 6vw, 50px); font-weight: 400;
+    letter-spacing: -1px; line-height: 1.04; margin: 0;
+  }
+  .map-head .lede {
+    font-family: var(--serif); font-size: 17px; line-height: 1.6; color: #4A443C;
+    max-width: 580px; margin: 20px auto 0;
+  }
+  [data-theme="dark"] .map-head .lede { color: #c2bfb8; }
+  .map-switch {
+    display: inline-flex; gap: 2px; margin-top: 26px; padding: 3px;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
+  }
+  .map-switch a, .map-switch span {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.4px; padding: 7px 18px;
+    border-radius: 999px; text-decoration: none; color: var(--text-dim);
+  }
+  .map-switch .active { background: var(--accent); color: #fff; }
+  [data-theme="dark"] .map-switch .active { color: #0f1117; }
+
+  /* ----- Flow ----- */
+  .flow { max-width: 840px; margin: 56px auto 0; position: relative; --line: var(--divider); }
+
+  /* Centered stage node */
+  .snode {
+    max-width: 480px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+    border: 1.5px solid var(--nb, var(--border)); border-radius: 16px;
+    background: var(--surface); padding: 18px 24px 20px;
+  }
+  .snode .t-k {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--nc, var(--text-muted));
+  }
+  .snode .t-t { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.15; color: var(--text); margin-top: 3px; }
+  .snode .t-s { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+  .snode.bare { padding: 15px 24px 16px; }
+
+  /* Article links (centered, inside snode / col.out) */
+  .arts { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .art { font-family: var(--sans); font-size: 13px; line-height: 1.35; color: var(--text-dim); text-decoration: none; transition: color 0.2s ease; }
+  .art:hover { color: var(--nc, var(--accent)); }
+  .art em { font-style: normal; color: var(--text-muted); font-size: 11px; letter-spacing: 0.3px; }
+
+  /* Straight connector with transition phrase */
+  .link { position: relative; height: 60px; display: flex; align-items: center; justify-content: center; }
+  .link::before {
+    content: ''; position: absolute; left: 50%; top: 1px; bottom: 1px;
+    border-left: 1.5px solid var(--line); transform: translateX(-50%);
+  }
+  .link span {
+    position: relative; background: var(--bg); padding: 5px 16px; max-width: 380px; text-align: center;
+    font-family: var(--serif); font-style: italic; font-size: 13.5px; color: var(--text-dim);
+  }
+
+  /* Fork into two columns */
+  .fork { position: relative; display: flex; gap: 26px; margin-top: 48px; align-items: stretch; }
+  .fork::after {
+    content: ''; position: absolute; top: -49px; left: 50%; height: 27px;
+    border-left: 1.5px solid var(--line); transform: translateX(-50%);
+  }
+  .fork::before {
+    content: ''; position: absolute; top: -23px; left: calc(25% - 6.5px); right: calc(25% - 6.5px);
+    border-top: 1.5px solid var(--line);
+  }
+  .col {
+    position: relative; flex: 1; border: 1.5px solid var(--nb, var(--border));
+    border-radius: 16px; background: var(--surface);
+  }
+  .col::before {
+    content: ''; position: absolute; top: -24px; left: 50%; height: 23px;
+    border-left: 1.5px solid var(--line); transform: translateX(-50%);
+  }
+  .col::after {
+    content: ''; position: absolute; top: calc(100% + 1px); left: 50%; height: 25px;
+    border-left: 1.5px solid var(--line); transform: translateX(-50%);
+  }
+  .col-head { text-align: center; padding: 16px 16px 12px; }
+  .col-head .t-t { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--text); }
+  .col-head .t-s { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .col-head::after {
+    content: ''; display: block; width: 34px; height: 3px; border-radius: 2px;
+    background: var(--nc); margin: 11px auto 0;
+  }
+  .citem { padding: 11px 20px; border-top: 1px solid var(--divider); text-align: left; }
+  /* Article rows inside Beden/Beyin columns */
+  .citem-link { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; text-decoration: none; transition: color 0.2s ease; }
+  .citem-link b { font-family: var(--serif); font-weight: 500; font-size: 14.5px; color: var(--text); line-height: 1.3; }
+  .citem-link span { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .citem-link:hover b { color: var(--nc); }
+
+  /* Merge back to center */
+  .merge { position: relative; height: 50px; }
+  .merge::before {
+    content: ''; position: absolute; top: 24px; left: calc(25% - 6.5px); right: calc(25% - 6.5px);
+    border-top: 1.5px solid var(--line);
+  }
+  .merge::after {
+    content: ''; position: absolute; top: 23px; left: 50%; height: 28px;
+    border-left: 1.5px solid var(--line); transform: translateX(-50%);
+  }
+
+  /* Two parallel outputs (same level) */
+  .col.out { padding: 18px 22px 20px; text-align: center; }
+  .col.out .t-k { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--nc, var(--text-muted)); }
+  .col.out .t-t { display: block; font-family: var(--serif); font-size: 20px; font-weight: 500; line-height: 1.15; color: var(--text); margin-top: 3px; }
+  .col.out .t-s { display: block; font-family: var(--serif); font-style: italic; font-size: 13.5px; color: var(--text-dim); margin-top: 4px; }
+  .col.out .arts { margin-top: 14px; }
+  .fork.outputs .col::after { display: none; }
+
+  /* ----- Palette ----- */
+  .n-root, .n-lens, .n-bridge { --nc: #84B24B; --nb: color-mix(in srgb, #84B24B 50%, var(--border)); }
+  .b-body  { --nc: #E07349; --nb: color-mix(in srgb, #E07349 50%, var(--border)); }
+  .b-brain { --nc: #6E8AE6; --nb: color-mix(in srgb, #6E8AE6 50%, var(--border)); }
+  .n-behavior { --nc: #D39A3B; --nb: color-mix(in srgb, #D39A3B 52%, var(--border)); }
+  .n-social { --nc: #E66491; --nb: color-mix(in srgb, #E66491 55%, var(--border)); }
+
+  [data-theme="dark"] .n-root,
+  [data-theme="dark"] .n-lens,
+  [data-theme="dark"] .n-bridge   { --nc: #AFD778; }
+  [data-theme="dark"] .b-body     { --nc: #F0A56E; }
+  [data-theme="dark"] .b-brain    { --nc: #91A8F0; }
+  [data-theme="dark"] .n-behavior { --nc: #F0C873; }
+  [data-theme="dark"] .n-social   { --nc: #F091B9; }
+
+  /* ----- Outlier ----- */
+  .outlier {
+    margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--divider);
+    text-align: center; font-size: 13px; color: var(--text-dim); line-height: 1.6;
+  }
+  .outlier a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+  .outlier em { font-style: normal; color: var(--text-muted); }
+
+  /* ----- Mobile ----- */
+  @media (max-width: 720px) {
+    .container { padding: 92px 18px 76px; }
+    .fork { flex-direction: column; gap: 26px; }
+    .fork::before { display: none; }
+    .col::after { display: none; }
+    .col:last-child::before { display: none; }
+    .merge::before { display: none; }
+    .snode { max-width: 100%; }
+  }
+</style>
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <div class="grain"></div>
+  <a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön">NS</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+
+  <div class="container">
+    <header class="map-head">
+      <span class="eyebrow">Makale Haritası · İç Kullanım</span>
+      <h1>Neden Böyleyiz?</h1>
+      <p class="lede">Aynı düşünce iskeleti, bu kez her dala düşen yazılarla. Bir konuyu nereden okumaya başlayacağını gösteren rota.</p>
+      <div class="map-switch">
+        <a href="harita.html">Kavramlar</a>
+        <span class="active">Makaleler</span>
+      </div>
+    </header>
+
+    <div class="flow">
+
+      <div class="snode n-root bare">
+        <span class="t-k">Kök sebep</span>
+        <span class="t-t">Evrim</span>
+        <span class="t-s">neden bir donanımımız var?</span>
+      </div>
+
+      <div class="link"><span>Bu donanımı insan zihninde okumaya çalışınca</span></div>
+
+      <div class="snode n-lens bare">
+        <span class="t-k">Mercek</span>
+        <span class="t-t">Evrimsel Psikoloji</span>
+        <span class="t-s">donanımı nasıl okuruz?</span>
+      </div>
+
+      <div class="link"><span>Eski donanım, kendi yarattığı yeni dünyaya çarpınca</span></div>
+
+      <div class="snode n-bridge">
+        <span class="t-k">Temel gerilim · Seri</span>
+        <span class="t-t">Evrimsel Uyumsuzluk</span>
+        <div class="arts">
+          <a class="art" href="evolutionary-mismatch-body.html">Bedenin Seni Savanada Sanıyor <em>· 23 dk</em></a>
+          <a class="art" href="evolutionary-mismatch-mind.html">Paleolitik Zihin, Dijital Dünya <em>· 24 dk</em></a>
+        </div>
+      </div>
+
+      <!-- fork: two hardware substrates -->
+      <div class="fork">
+        <div class="col b-body">
+          <div class="col-head">
+            <span class="t-t">Beden &amp; Metabolizma</span>
+            <span class="t-s">enerji &amp; kimya</span>
+          </div>
+          <a class="citem citem-link" href="guide-ketogenic.html"><b>Ketojenik Diyet Rehberi</b><span>6 dk</span></a>
+          <a class="citem citem-link" href="guide-intermittent-16-8.html"><b>16:8 Aralıklı Oruç</b><span>13 dk</span></a>
+          <a class="citem citem-link" href="guide-intermittent-4-3.html"><b>4:3 Aralıklı Oruç</b><span>8 dk</span></a>
+        </div>
+        <div class="col b-brain">
+          <div class="col-head">
+            <span class="t-t">Nörobilim &amp; Beyin</span>
+            <span class="t-s">zihnin donanımı</span>
+          </div>
+          <a class="citem citem-link" href="brain-memory-story-machine.html"><b>Beyin, Hafıza ve Hikâye Makinesi</b><span>12 dk</span></a>
+          <a class="citem citem-link" href="the-science-of-doing-nothing.html"><b>Hiçbir Şey Yapmamanın Bilimi</b><span>12 dk</span></a>
+        </div>
+      </div>
+
+      <div class="merge" aria-hidden="true"></div>
+
+      <!-- two parallel outputs, same level -->
+      <div class="fork outputs">
+        <div class="col out n-behavior">
+          <span class="t-k">Bireysel çıktı</span>
+          <span class="t-t">Davranış &amp; Karar</span>
+          <div class="arts">
+            <a class="art" href="behavioral-economics-01.html">Homo Economicus <em>· 23 dk</em></a>
+            <a class="art" href="illusion-of-control.html">Kontrol Yanılgısı <em>· 1 dk</em></a>
+            <a class="art" href="emotional-skills.html">Tepkilerini Yönetmek <em>· 17 dk</em></a>
+            <a class="art" href="willpower-design-flaw.html">İrade: Bir Tasarım Hatası <em>· 36 dk</em></a>
+          </div>
+        </div>
+        <div class="col out n-social">
+          <span class="t-k">Sosyal çıktı</span>
+          <span class="t-t">İlişkiler</span>
+          <div class="arts">
+            <a class="art" href="relationships.html">İlişkilerde Neye Bakmalı <em>· 8 dk</em></a>
+            <a class="art" href="breadcrumbing.html">Dijital Çağda Breadcrumbing <em>· 7 dk</em></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+</body>
+</html>
