@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paleolitik Zihin, Dijital Dünya</title>
 <meta name="description" content="Stres tepkisinden dikkat dağınıklığına, oradan bağımlılığa: zihnin neden bu çağa uymuyor.">
-<meta name="word-count" content="4586">
-<meta name="reading-time" content="21">
+<meta name="word-count" content="5263">
+<meta name="reading-time" content="24">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="NS Articles">
 <meta property="og:locale" content="tr_TR">
@@ -1118,6 +1118,155 @@
     .continuation-title { font-size: 1.25rem; }
     .continuation-arrow { right: 1rem; }
   }
+
+  /* ── Interactive demos (Bağımlılık) ── */
+  .demo {
+    margin: 2.6rem 0;
+    padding: 1.8rem 1.6rem 1.6rem;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .demo-tag {
+    font-family: var(--sans);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  .demo-title {
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+  .demo-btn {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 0.7rem 1.7rem;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease;
+  }
+  .demo-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(150,98,47,0.28); }
+  .demo-btn:active { transform: translateY(1px) scale(0.97); }
+
+  /* Balance scale */
+  .balance-svg { width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto; }
+  .balance-beam { stroke: var(--accent); stroke-width: 4; stroke-linecap: round; }
+  .balance-fulcrum { fill: var(--text-dim); opacity: 0.5; }
+  .balance-cord { stroke: var(--text-dim); stroke-width: 1.2; opacity: 0.55; }
+  .balance-pan { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+  .balance-pan-label { font-family: var(--sans); font-size: 12px; fill: var(--text-dim); text-anchor: middle; letter-spacing: 1.5px; }
+  .balance-weight { fill: var(--accent); }
+  .balance-weight-pain { fill: #a13929; }
+  [data-theme="dark"] .balance-weight-pain { fill: #d35b46; }
+  .balance-controls { display: flex; gap: 0.7rem; justify-content: center; align-items: center; }
+  .balance-spacer { flex: 0 0 5.4rem; }
+  .demo-reset {
+    flex: 0 0 5.4rem; width: 5.4rem;
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+    color: var(--text-dim); background: transparent;
+    border: 1px solid var(--divider); border-radius: 999px;
+    padding: 0.5rem 1.1rem; cursor: pointer;
+    visibility: hidden;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .demo-reset.show { visibility: visible; }
+  .demo-reset:hover { color: var(--accent); border-color: var(--accent); }
+  .balance-steps {
+    list-style: none; padding: 0; margin: 1.4rem auto 0; max-width: 430px;
+    text-align: left; display: flex; flex-direction: column; gap: 0.55rem;
+  }
+  .balance-step {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    font-family: var(--sans); font-size: 0.9rem; line-height: 1.45;
+    color: var(--text-dim); opacity: 0.45;
+    transition: opacity 0.35s ease, color 0.35s ease;
+  }
+  .balance-step-k {
+    flex-shrink: 0; min-width: 72px;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: inherit; padding-top: 0.1rem;
+  }
+  .balance-step.is-active { opacity: 1; color: var(--text); }
+  .balance-step.is-active .balance-step-k { color: var(--accent); }
+  .balance-step.is-tol { opacity: 1; color: var(--text); }
+  .balance-step.is-tol .balance-step-k { color: #a13929; }
+  [data-theme="dark"] .balance-step.is-tol .balance-step-k { color: #d35b46; }
+
+  /* Variable-reward demo */
+  .reward-stage {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+    height: 140px;
+    margin: 0.3rem auto 1.3rem;
+    border-radius: 14px;
+    border: 1.5px solid var(--divider);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+  .reward-stage.is-reward { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow), inset 0 0 28px rgba(150,98,47,0.30); }
+  [data-theme="dark"] .reward-stage.is-reward { box-shadow: 0 0 0 4px var(--accent-glow), inset 0 0 32px rgba(196,149,106,0.30); }
+  .reward-face { font-family: var(--serif); font-size: 1rem; color: var(--text-dim); display: flex; align-items: center; justify-content: center; }
+  .reward-stage.is-reward .reward-face { color: var(--accent); animation: reward-pop 0.4s ease; }
+  @keyframes reward-pop { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.18); } 100% { transform: scale(1); opacity: 1; } }
+  .reward-trigger {
+    display: none;
+    margin: 1.4rem auto 0.2rem;
+    padding: 1.1rem 1.2rem;
+    max-width: 470px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg);
+    border-radius: 0 6px 6px 0;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text);
+    text-align: left;
+  }
+  .reward-trigger.show { display: block; animation: reward-reveal 0.5s ease; }
+  @keyframes reward-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* Boredom counter (collapsed) */
+  details.collapsible.demo-collapsible > summary {
+    text-transform: none;
+    letter-spacing: normal;
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .boredom-stage {
+    margin-top: 0.4rem;
+    padding: 1.7rem 1.1rem;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px dashed var(--divider);
+    text-align: center;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .boredom-stage.is-running { border-style: solid; border-color: var(--accent); cursor: pointer; }
+  .boredom-instr { font-family: var(--sans); font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; max-width: 360px; margin: 0; }
+  .boredom-result { font-family: var(--sans); font-size: 0.95rem; color: var(--text); line-height: 1.65; max-width: 380px; margin: 0; }
+  .boredom-secs { font-family: var(--serif); color: var(--accent); font-size: 1.5rem; display: inline-block; margin-bottom: 0.2rem; }
 </style>
   <script src="highlight.js" defer></script>
   <script src="ref.js" defer></script>
@@ -1169,7 +1318,7 @@
       <a href="#kaynaklar" class="toc-row toc-level-1">
         <span class="toc-marker"></span>
         <span class="toc-num">·</span>
-        <span class="toc-title">Kaynaklar</span>
+        <span class="toc-title">Kaynakça</span>
       </a>
     </div>
   </nav>
@@ -1663,18 +1812,156 @@
   <div class="section-num">03</div>
   <h2 id="h04">Bir bildirim, bir like, bir <i>daha</i><button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-  <p class="section-placeholder">[Bağımlılık bölümünün içeriği yakında eklenecek.]</p>
+  <p>Beynin, ödülü nadir bulduğun bir dünyaya göre ayarlandı. Bal, tatlı meyve, yağlı et kıttı; bulduğunda peşini bırakmaman gerekiyordu.</p>
+
+  <p class="punch">Bu kural on binlerce yıl işe yaradı.<br>Sonra bolluk geldi, beynin haberi olmadı.</p>
+
+  <p>"Dopamin detoksu" bir Silikon Vadisi trendi oldu. Telefon bağımlılığı için klinikler açılıyor. Kısa video platformları, bir insanın saatlerce durmadan kaydırabileceği şekilde tasarlanıyor. Bunların hepsi aynı şeyi işaret ediyor: kıtlık için kurulmuş bir ödül sistemi, bolluk çağında çalışmaya zorlanıyor. Ve koca bir endüstri, tam olarak bu uyumsuzluğu sömürmek üzerine kurulu.</p>
+
+  <h3 class="sub-heading" id="s03-terazi">Haz ve acı aynı terazide<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Bu mekanizmayı en iyi açıklayan kişi, Stanford Bağımlılık Tıbbı'nın direktörü psikiyatr <strong>Anna Lembke</strong>. 2021'de yayımladığı <i>Dopamine Nation</i> (Dopamin Ulusu) kitabında basit ama güçlü bir model sunuyor.</p>
+
+  <p>Beyinde haz ve acı, aynı bölgede ve birbirine bağlı işleniyor. Lembke bunu bir teraziye benzetiyor. Bir tarafa haz, diğer tarafa acı. Bu terazinin değişmez bir kuralı var: dengede kalmak istiyor. Haz tarafına bastığında, beyin terazinin diğer ucunu, yani acıyı ağırlaştırarak dengeyi geri kurmaya çalışıyor.<a href="#ref-38" class="ref" onclick="savePos(this)">38</a></p>
+
+  <p>Sonuç ikili. Birincisi, hazzın bittiği anda terazi acı tarafına devriliyor. O küçük çöküntü, video bittikten sonraki boşluk hissi, telefonu bırakınca gelen huzursuzluk, işte bu. İkincisi, aynı terazi tekrar tekrar haz tarafına bastırılırsa, beyin kalıcı olarak acı tarafına ağırlık ekliyor. Artık aynı hazzı almak için daha fazlası gerekiyor, ve dahası, hiçbir şey yapmadığın anlarda bile kendini biraz çökmüş hissediyorsun. Bağımlılık biliminde bunların adı <strong>tolerans</strong> ve <strong>yoksunluk</strong>.</p>
+
+  <div class="demo" id="balance-demo">
+    <div class="demo-tag">Etkileşimli · Haz-Acı Terazisi</div>
+    <svg id="balance-svg" class="balance-svg" viewBox="0 0 360 200" role="img" aria-label="Haz ve acı dengesini gösteren terazi">
+      <polygon class="balance-fulcrum" points="180,74 166,182 194,182"/>
+      <line class="balance-cord" id="bl-cord-l" x1="60" y1="74" x2="60" y2="120"/>
+      <line class="balance-cord" id="bl-cord-r" x1="300" y1="74" x2="300" y2="120"/>
+      <line class="balance-beam" id="bl-beam" x1="60" y1="74" x2="300" y2="74"/>
+      <g id="bl-pan-l" transform="translate(60,120)">
+        <path class="balance-pan" d="M -28 0 Q 0 24 28 0"/>
+        <circle id="bl-haz-pip" class="balance-weight" r="6" cx="0" cy="-9" style="opacity:0;transition:opacity .25s ease"/>
+        <text class="balance-pan-label" y="40">HAZ</text>
+      </g>
+      <g id="bl-pan-r" transform="translate(300,120)">
+        <path class="balance-pan" d="M -28 0 Q 0 24 28 0"/>
+        <g id="bl-pain-stack"></g>
+        <text class="balance-pan-label" y="40">ACI</text>
+      </g>
+    </svg>
+    <div class="balance-controls">
+      <span class="balance-spacer" aria-hidden="true"></span>
+      <button class="demo-btn" id="bl-btn" type="button">Haz</button>
+      <button class="demo-reset" id="bl-reset" type="button">Sıfırla</button>
+    </div>
+    <ol class="balance-steps" id="bl-steps">
+      <li class="balance-step" data-step="1"><span class="balance-step-k">Haz</span><span class="balance-step-t">Bastın, terazi haz tarafına yattı.</span></li>
+      <li class="balance-step" data-step="2"><span class="balance-step-k">Denge</span><span class="balance-step-t">Beyin acıyı ağırlaştırıp dengeyi geri kuruyor.</span></li>
+      <li class="balance-step" data-step="3"><span class="balance-step-k">Tolerans</span><span class="balance-step-t">Yeterince tekrarlanınca nötrde bile acı tarafı ağır kalıyor.</span></li>
+    </ol>
+  </div>
+
+  <p>Lembke'nin en çarpıcı benzetmesi şu: akıllı telefon, modern çağın şırıngası. 7 gün 24 saat, parmağının ucunda, sınırsız dijital dopamin veriyor.<a href="#ref-38" class="ref" onclick="savePos(this)">38</a> Ve mesele sadece telefon değil. Madde, kumar, alışveriş, pornografi, abur cubur, hepsi aynı dopamin sistemini sömürüyor. Lembke'nin kliniğinde gördüğü hastaların ortak noktası bu: bolluk çağında, beyin kıtlığa göre ayarlı kaldığı için sürekli bir tatminsizlik içindeler.</p>
+
+  <h3 class="sub-heading" id="s03-degisken">Neden bırakamıyorsun: değişken ödül<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Beynin neden hep "bir kere daha" dediğini anlamak için 1950'lere, <strong>B.F. Skinner</strong>'ın laboratuvarına gitmek gerekiyor.</p>
+
+  <p>Skinner kutularına koyduğu farelerin ve güvercinlerin bir kola bastığında yiyecek alacağı bir düzenek kurmuştu. Sonra bir şeyi değiştirdi. Ödülü her seferinde değil, rastgele vermeye başladı. Bazen kola basınca yiyecek geliyordu, bazen gelmiyordu, ne zaman geleceği belli değildi. Sonuç şaşırtıcıydı. Hayvanlar, ödülü düzenli aldıkları duruma kıyasla kola çok daha sık ve çok daha ısrarla basıyordu. Ödül kesildiğinde bile basmaya devam ediyorlardı.<a href="#ref-39" class="ref" onclick="savePos(this)">39</a></p>
+
+  <p>Buna <strong>değişken ödül çizelgesi</strong> (variable reward schedule) deniyor, ve bilinen en güçlü, sönmeye en dirençli davranış pekiştirme örüntüsü. Kumar makineleri tam olarak bu prensiple çalışıyor. Her çekişte kazanmazsın, ama belki bu sefer kazanırsın, ve o "belki" seni orada tutuyor.</p>
+
+  <p>Şimdi telefonunu eline al ve akışı (feed) aşağı kaydır. Bazen sıkıcı bir gönderi, bazen güldüren bir video, bazen bir bildirim, bazen hiçbir şey. Ne zaman ne geleceğini bilmiyorsun. Bu tesadüf değil. Sosyal medya akışları tam olarak değişken ödül çizelgesi olarak tasarlandı. Her kaydırma, kumar makinesinin kolunu çekmekle aynı şey.</p>
+
+  <div class="demo" id="reward-demo">
+    <div class="demo-tag">Etkileşimli · Değişken Ödül</div>
+    <div class="demo-title">Bas. Bak bakalım ne çıkacak.</div>
+    <div class="reward-stage" id="rw-stage">
+      <div class="reward-face" id="rw-face">&#9711;</div>
+    </div>
+    <button class="demo-btn" id="rw-btn" type="button">Bas</button>
+    <p class="reward-trigger" id="rw-trigger"></p>
+  </div>
+
+  <p>Bu demoyu neden tam %50 ihtimalle ayarladık? Çünkü dopamin sisteminin en çok tetiklendiği nokta tam orası. <strong>Fiorillo, Tobler ve Schultz</strong>'un 2003'te <i>Science</i>'ta yayımladığı çalışmada, dopamin nöronlarının ateşlenmesinin belirsizliğin en yüksek olduğu anda, yani ödülün gelme ihtimalinin %50 olduğu durumda zirve yaptığı bulundu. İhtimal %100'e (kesin ödül) ya da %0'a (kesin ödülsüz) yaklaştıkça dopamin tepkisi düşüyor. Beyni en çok meşgul eden şey ödülün kendisi değil, geleceği gelmeyeceği belirsizliği.<a href="#ref-40" class="ref" onclick="savePos(this)">40</a> Fiorillo ekibinin kendi ifadesiyle, bu belirsizlik kaynaklı dopamin artışı kumarın bağımlılık yapıcı özelliğine katkıda bulunuyor olabilir.</p>
+
+  <p>Ve bu, kimsenin tahmin etmediği bir kaza değil. Facebook'un kurucu başkanı <strong>Sean Parker</strong> yıllar sonra şunu itiraf etti: platformu tasarlarken kendilerine sordukları soru, kullanıcıya ne kadar sıklıkla küçük bir dopamin atışı verebilecekleriydi. Amaç en baştan, insan psikolojisindeki bir açığı sömürmekti.<a href="#ref-41" class="ref" onclick="savePos(this)">41</a> Bir önceki bölümde gördüğümüz dikkat ekonomisinin diğer yüzü bu. Dikkatini çekiyorlar, sonra değişken ödülle orada tutuyorlar.</p>
+
+  <details class="collapsible">
+    <summary>Ekran karşısında geçen zaman: rakamlar</summary>
+    <div class="collapsible-body">
+      <ul>
+        <li>DataReportal Global Digital Report'a göre ortalama akıllı telefon kullanıcısı günde yaklaşık <strong>4 saat 37 dakikasını</strong> telefonda geçiriyor. Günde 8 saat uyuyan biri için bu, uyanık geçirdiğin zamanın yaklaşık üçte biri demek. Yıla vurursak, sadece uyanık saatlerden yaklaşık <strong>105 tam gün</strong> telefonda geçiyor.<a href="#ref-42" class="ref" onclick="savePos(this)">42</a></li>
+        <li>ABD'li yetişkinlerde tüm cihazlar dahil günlük ekran süresi yaklaşık <strong>7 saat</strong>.<a href="#ref-42" class="ref" onclick="savePos(this)">42</a></li>
+        <li>Gen Z (1997-2012 doğumlular) ve Millennial kuşağı (1981-1996) günde ortalama 6 saat telefonda; Baby Boomer kuşağı (1946-1964) ise yaklaşık 2 saat.<a href="#ref-43" class="ref" onclick="savePos(this)">43</a></li>
+        <li>Common Sense Media verilerine göre 13-18 yaş arası ergenler günde ortalama <strong>8 saat 39 dakikasını</strong> ekran medyasıyla geçiriyor (okul kullanımı hariç).<a href="#ref-44" class="ref" onclick="savePos(this)">44</a></li>
+        <li>Telefon kontrol sıklığı için kaynaklar günde 144 ile 205 arasında değişen rakamlar veriyor. Düşük tahminle bile bu, uyanık olduğun her 6-7 dakikada bir telefona bakmak demek.<a href="#ref-43" class="ref" onclick="savePos(this)">43</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <h3 class="sub-heading" id="s03-sikinti">Sıkıntı bir kusur değil, bir sinyaldi<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Şimdi en sinsi kayba geliyoruz. Çünkü kaybettiğimiz şey sadece zaman değil.</p>
+
+  <p>Atalarımız için sıkıntı (can sıkıntısı) bir sinyaldi. "Burada değer üretemiyorsun, durumu değiştir" demekti. Ve bu sinyali bastıracak sınırsız bir uyaran yoktu. Av araları, uzun yürüyüşler, hava şartları yüzünden mağarada beklenen günler, bunların hepsi zihnin boşta kaldığı anlardı.</p>
+
+  <details class="collapsible demo-collapsible">
+    <summary>Bir dene: hiçbir şey yapmadan ne kadar durabilirsin?</summary>
+    <div class="collapsible-body">
+      <div class="boredom-stage" id="bd-stage">
+        <p class="boredom-instr" id="bd-instr">Başla'ya bas, sonra hiçbir şey yapma. Sıkıldığın an bu kutuya tıkla.</p>
+        <button class="demo-btn boredom-btn" id="bd-start" type="button">Başla</button>
+        <p class="boredom-result" id="bd-result" style="display:none"></p>
+      </div>
+    </div>
+  </details>
+
+  <p>O boş anlar boşa gitmiyordu. Beyin dışarıdaki bir göreve odaklanmadığında, içeride bir ağ devreye giriyor: <strong>Varsayılan Mod Ağı</strong> (Default Mode Network, kısaca DMN). Bu ağ aktifken zihin geziniyor, geçmişi sindiriyor, geleceği planlıyor, dağınık fikirleri birbirine bağlıyor. Yaratıcılığın ve o ani "buldum" anlarının çoğu bu durumda doğuyor. 2013'te <i>Creativity Research Journal</i>'da yayımlanan bir çalışmada, sıkıcı bir görev yapan katılımcıların ardından yaratıcılık testlerinde daha iyi performans gösterdiği bulundu. Sıkıntı, zihni yaratıcı düşünceye hazırlıyordu.<a href="#ref-45" class="ref" onclick="savePos(this)">45</a></p>
+
+  <p>Modern insan ise her boş anı ekranla dolduruyor. Kuyrukta, asansörde, tuvalette, yatakta. Beyin artık hiç boşta kalmıyor, dolayısıyla DMN hiç tam devreye giremiyor. Kısa vadede bir dopamin atışı kazanıyorsun. Uzun vadede ise zihnin kendi kendine düşünme, sindirme ve yaratma alanını kaybediyorsun.</p>
+
+  <div class="experiment">
+    <div class="experiment-title">Daha derine</div>
+    <p>Bu boşluğun beyne tam olarak ne yaptığını, DMN'in nasıl çalıştığını ve neden "hiçbir şey yapmamanın" aslında zihnin en üretken hâli olabileceğini ayrı bir yazıda derinlemesine ele almıştık: <a href="the-science-of-doing-nothing.html" class="inline-link">Hiçbir Şey Yapmamanın Bilimi</a>.</p>
+  </div>
+
+  <h3 class="sub-heading" id="s03-ne-yapabilirsin">Ne yapabilirsin?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <p>Önceki iki bölümde olduğu gibi, çözüm yine Sapolsky'nin <a href="illusion-of-control.html" class="inline-link">kontrol algısı</a> dersinden başlıyor. Mesele iradenle daha fazla direnmek değil, sistemi kendi lehine yeniden kurmak.</p>
+
+  <div class="def-list">
+    <div class="def-item">
+      <span class="def-label">Sıkıntıya izin ver</span>
+      <p class="def-text">Bu kulağa basit geliyor ama en zoru. Bir sonraki boş anında, kuyrukta ya da asansörde, telefonu cebinde bırak. Hiçbir şey yapma. Zihnin gezinsin. İlk birkaç dakika rahatsız edici olacak, çünkü beynin kolay dopamine alışmış durumda. Ama o rahatsızlık tam olarak terazinin yeniden dengeye gelme süreci.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Kolay dopamini zorlaştır</span>
+      <p class="def-text">Lembke buna <i>self-binding</i> (kendini bağlama) diyor. Yani kendinle uyaran arasına engel koymak. Telefonu başka odada şarj etmek, dikkat dağıtan uygulamaları ana ekrandan kaldırmak, hatta tamamen silmek. İrade her seferinde "hayır" demek zorunda kalmasın diye, kararı bir kez verip uygulamak.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Dopamin orucu dene</span>
+      <p class="def-text">Lembke kliniğinde hastalarına genellikle 30 günlük bir perhiz öneriyor. Bağımlı olunan uyarandan yaklaşık bir ay tamamen uzak durmak, beynin haz-acı terazisinin yeniden dengelenmesi için gereken süre. İlk iki hafta zor, sonrası belirgin şekilde kolaylaşıyor.</p>
+    </div>
+    <div class="def-item">
+      <span class="def-label">Yavaş ödüllere yönel</span>
+      <p class="def-text">Egzersiz, doğada vakit, yaratıcı bir uğraş, yüz yüze sohbet. Bunlar dopamini yavaş ve sürdürülebilir şekilde veriyor, ani pik ve ardından çöküş yaratmıyor. Atalarımızın ödülleri zaten bu türdendi.</p>
+    </div>
+  </div>
+
+  <p>Beynin bozuk değil. Sadece, ödülün nadir olduğu bir dünya için tasarlanmış bir sistem, ödülün sonsuz olduğu bir dünyada çalışmaya zorlanıyor. Farkı bilmek, kontrolü geri almanın ilk adımı.</p>
+
+  <p class="punch">Beynin daha fazlasını istemiyor. Sadece eski bir dünyanın kıtlığını arıyor.</p>
 </div>
 
 <div class="section-divider"></div>
 
 <!-- SON SÖZ -->
 <div class="section" id="sonsoz">
-  <h2 id="h05">Son Söz<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button><em>Üç sistem, tek bir uyumsuzluk</em></h2>
+  <h2 id="h05">Son Söz<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button><em>Sömürülen bir beyin</em></h2>
 
-  <p>Bu makalede zihninin üç içsel mekanizmasını gördük: hiç inmeyen bir stres sistemi, ortalama 47 saniyede dağılan bir dikkat, dakikalık dopamin patlamalarına kurulu bir ödül sistemi. Üçü de paleolitik dünya için kalibre edilmişti, üçü de bu çağ tarafından sömürülüyor.</p>
+  <p>Bu yazıda üç şeye baktık: stres, dikkat ve ödül. Üçü de farklı sistemler ama aynı hikâyeyi anlatıyor.</p>
 
-  <p>Sırada zihnin başka bir uyumsuzluk türü var: bedenle değil, gerçeklikle. Korku haberleri seni neden bu kadar kolay ele geçiriyor? Karar verirken neden bu kadar sistematik şekilde yanılıyorsun? Beynin bilgi işlerken kullandığı kısayollar binyıllarca avantajdı, bugün ise manipülasyona açık noktalara dönüştü.</p>
+  <p>Stres tepkin, seni bir yırtıcıdan kurtarmak için tasarlanmış kısa ve keskin bir alarmdı. Dikkatin, bir avı saatlerce takip edip bir yandan tehlikeyi tarayabilmek için kalibre olmuştu. Ödül sistemin, kıt ve değerli kalorileri bulduğunda peşini bırakmaman için kurulmuştu. Üçü de bir zamanlar hayatta kalmanı sağlayan, kusursuz çalışan mekanizmalardı.</p>
+
+  <p>Ortak noktaları şu: üçü de bugün sömürülüyor. Korku haberleri stres tepkini, bildirimler dikkatini, değişken ödüller de ödül sistemini tetiklemek için tasarlanmış durumda. Suç senin iradende değil. Bu sistemler, senin beyninin tam olarak nasıl çalıştığını bilen insanlar tarafından, o çalışma biçimini istismar etmek için kuruldu.</p>
+
+  <p>Ama hikâye burada bitmiyor. Çünkü beynin sadece dürtüleri sömürülmüyor. Aynı zamanda gerçekliği nasıl gördüğün de çarpıtılıyor. Olumsuz haberlere neden bu kadar takılıyoruz, ve aslında olduğundan çok daha tehlikeli bir dünyada yaşadığımızı neden sanıyoruz? Zihnimizin aldığı kestirme kararlar bizi nasıl yanıltıyor? Bu serinin üçüncü yazısı, <i>Yanılan Zihin, Yanıltan Dünya</i>, tam olarak buna bakıyor.</p>
 </div>
 
 <aside class="continuation-card">
@@ -1690,22 +1977,8 @@
 
 <!-- KAYNAKLAR -->
 
-  <section class="continue" aria-label="Sıradaki okuma">
-    <a class="continue-toc" href="evolutionary-mismatch-reality.html">
-      <span class="continue-toc-label">Bölüm 3</span>
-      <span class="continue-toc-leader" aria-hidden="true"></span>
-      <span class="continue-toc-end">
-        <h3 class="continue-toc-title">Yanılan Zihin, Yanıltan Dünya</h3>
-        <p class="continue-toc-meta">Evrim · 21 dk</p>
-      </span>
-      <span class="continue-toc-arrow" aria-hidden="true">→</span>
-    </a>
-
-
-  </section>
-
 <div class="conclusion" id="kaynaklar">
-  <h2 id="h99">Kaynaklar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+  <h2 id="h99">Kaynakça<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
     <ol style="font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; list-style: none;">
     <li id="ref-1"><strong>1.</strong> Sapolsky, R.M. (2004). <i>Why Zebras Don't Get Ulcers: The Acclaimed Guide to Stress, Stress-Related Diseases, and Coping</i> (3rd ed.). Holt Paperbacks. <a href="https://www.goodreads.com/book/show/327.Why_Zebras_Don_t_Get_Ulcers" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-2"><strong>2.</strong> Ipsos. (2024). <i>World Mental Health Day Survey 2024</i>. <a href="https://www.ipsos.com/en/world-mental-health-day-2024" target="_blank" style="color: var(--accent);">link</a></li>
@@ -1744,6 +2017,14 @@
     <li id="ref-35"><strong>35.</strong> University of Cambridge. (2025). Attention Profiles in Hunter-Gatherer Societies (BaYaka project). <a href="https://www.arch.cam.ac.uk/research/projects/current-projects/attention-profiles-hunter-gatherer-societies" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-36"><strong>36.</strong> Csíkszentmihályi, M. (1990). <i>Flow: The Psychology of Optimal Experience</i>. Harper &amp; Row. <a href="https://www.goodreads.com/book/show/66354.Flow" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-37"><strong>37.</strong> Newport, C. (2016). <i>Deep Work: Rules for Focused Success in a Distracted World</i>. Grand Central Publishing. <a href="https://www.calnewport.com/books/deep-work/" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-38"><strong>38.</strong> Lembke, A. (2021). <i>Dopamine Nation: Finding Balance in the Age of Indulgence</i>. Dutton. <a href="https://www.goodreads.com/book/show/55723020-dopamine-nation" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-39"><strong>39.</strong> Skinner, B.F. (1953). <i>Science and Human Behavior</i>. Macmillan. (Değişken oranlı pekiştirme / variable ratio schedule) <a href="https://www.goodreads.com/book/show/179969.Science_and_Human_Behavior" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-40"><strong>40.</strong> Fiorillo, C.D., Tobler, P.N., &amp; Schultz, W. (2003). Discrete coding of reward probability and uncertainty by dopamine neurons. <i>Science</i>, 299(5614), 1898-1902. <a href="https://doi.org/10.1126/science.1077349" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-41"><strong>41.</strong> Parker, S. (2017). Axios röportajı: Facebook tasarımı ve "dopamin döngüsü" itirafı. <a href="https://www.axios.com/2017/12/15/sean-parker-unloads-on-facebook-2508036343" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-42"><strong>42.</strong> DataReportal. (2025). <i>Digital 2025 Global Overview Report</i> (We Are Social &amp; Meltwater). <a href="https://datareportal.com/reports/digital-2025-global-overview-report" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-43"><strong>43.</strong> Telefon kullanım ve kontrol sıklığı istatistikleri, çeşitli kaynaklar (DataReportal, eMarketer; kontrol sıklığı için 144-205 aralığı farklı raporlardan derlenmiştir). <a href="https://datareportal.com/reports/digital-2025-deep-dive-how-much-time-we-spend-on-our-phones" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-44"><strong>44.</strong> Common Sense Media. (2021). <i>The Common Sense Census: Media Use by Tweens and Teens</i>. <a href="https://www.commonsensemedia.org/research/the-common-sense-census-media-use-by-tweens-and-teens-2021" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-45"><strong>45.</strong> Mann, S. &amp; Cadman, R. (2014). Does being bored make us more creative? <i>Creativity Research Journal</i>, 26(2), 165-173. <a href="https://doi.org/10.1080/10400419.2014.901073" target="_blank" style="color: var(--accent);">link</a></li>
   </ol>
 </div>
 
@@ -1784,6 +2065,214 @@
         }, 600);
       }
     }
+  </script>
+
+  <script>
+    /* ── İnteraktif 1: Haz-acı terazisi ── */
+    (function () {
+      var svg = document.getElementById('balance-svg');
+      if (!svg) return;
+      var beam = document.getElementById('bl-beam');
+      var cordL = document.getElementById('bl-cord-l');
+      var cordR = document.getElementById('bl-cord-r');
+      var panL = document.getElementById('bl-pan-l');
+      var panR = document.getElementById('bl-pan-r');
+      var stack = document.getElementById('bl-pain-stack');
+      var hazPip = document.getElementById('bl-haz-pip');
+      var btn = document.getElementById('bl-btn');
+      var resetBtn = document.getElementById('bl-reset');
+      var steps = {
+        1: svg.parentNode.querySelector('.balance-step[data-step="1"]'),
+        2: svg.parentNode.querySelector('.balance-step[data-step="2"]'),
+        3: svg.parentNode.querySelector('.balance-step[data-step="3"]')
+      };
+
+      var PX = 180, PY = 74, ARM = 120, DROP = 46;
+      var painBase = 0, MAXBASE = 15, raf = null, idleT = null, seq = 0;
+      var NS = 'http://www.w3.org/2000/svg';
+
+      function setActive(n) {
+        steps[1].classList.toggle('is-active', n === 1);
+        steps[2].classList.toggle('is-active', n === 2);
+      }
+      function syncTol() {
+        steps[3].classList.toggle('is-tol', painBase >= 9);
+      }
+
+      var cur = 0;
+      function place(angleDeg) {
+        cur = angleDeg;
+        var a = angleDeg * Math.PI / 180;
+        var lx = PX - ARM * Math.cos(a), ly = PY - ARM * Math.sin(a);
+        var rx = PX + ARM * Math.cos(a), ry = PY + ARM * Math.sin(a);
+        beam.setAttribute('x1', lx); beam.setAttribute('y1', ly);
+        beam.setAttribute('x2', rx); beam.setAttribute('y2', ry);
+        cordL.setAttribute('x1', lx); cordL.setAttribute('y1', ly);
+        cordL.setAttribute('x2', lx); cordL.setAttribute('y2', ly + DROP);
+        cordR.setAttribute('x1', rx); cordR.setAttribute('y1', ry);
+        cordR.setAttribute('x2', rx); cordR.setAttribute('y2', ry + DROP);
+        panL.setAttribute('transform', 'translate(' + lx + ',' + (ly + DROP) + ')');
+        panR.setAttribute('transform', 'translate(' + rx + ',' + (ry + DROP) + ')');
+      }
+      place(0);
+
+      function animate(from, to, dur, cb) {
+        var start = null;
+        cancelAnimationFrame(raf);
+        function step(now) {
+          if (start === null) start = now;
+          var t = Math.min(1, (now - start) / dur);
+          var e = 1 - Math.pow(1 - t, 3);
+          place(from + (to - from) * e);
+          if (t < 1) raf = requestAnimationFrame(step); else if (cb) cb();
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      function paintStack() {
+        var n = Math.round(painBase / 3);
+        while (stack.firstChild) stack.removeChild(stack.firstChild);
+        for (var i = 0; i < n; i++) {
+          var c = document.createElementNS(NS, 'circle');
+          c.setAttribute('r', '5'); c.setAttribute('cx', '0');
+          c.setAttribute('cy', -9 - i * 11);
+          c.setAttribute('class', 'balance-weight-pain');
+          stack.appendChild(c);
+        }
+      }
+
+      function scheduleRecovery() {
+        clearTimeout(idleT);
+        idleT = setTimeout(recoverStep, 9000);
+      }
+      function recoverStep() {
+        if (painBase <= 0) return;
+        var my = ++seq;
+        var from = painBase;
+        painBase = Math.max(0, painBase - 3);
+        paintStack();
+        setActive(2);
+        animate(from, painBase, 2200, function () {
+          if (my !== seq) return;
+          syncTol();
+          if (painBase > 0) { idleT = setTimeout(recoverStep, 700); }
+          else { setActive(0); resetBtn.classList.remove('show'); }
+        });
+      }
+
+      function reset() {
+        clearTimeout(idleT);
+        var my = ++seq;
+        painBase = 0;
+        paintStack();
+        hazPip.style.opacity = '0';
+        setActive(2);
+        syncTol();
+        animate(cur, 0, 700, function () {
+          if (my !== seq) return;
+          setActive(0);
+          resetBtn.classList.remove('show');
+        });
+      }
+      resetBtn.addEventListener('click', reset);
+
+      btn.addEventListener('click', function () {
+        var my = ++seq;
+        clearTimeout(idleT);
+        resetBtn.classList.add('show');
+        painBase = Math.min(MAXBASE, painBase + 3);
+        paintStack();
+        hazPip.style.opacity = '1';
+        setActive(1);
+        animate(cur, -24, 300, function () {
+          if (my !== seq) return;
+          hazPip.style.opacity = '0';
+          setActive(2);
+          animate(-24, painBase, 2400, function () {
+            if (my !== seq) return;
+            syncTol();
+            scheduleRecovery();
+          });
+        });
+      });
+    })();
+
+    /* ── İnteraktif 2: Değişken ödül demosu ── */
+    (function () {
+      var btn = document.getElementById('rw-btn');
+      if (!btn) return;
+      var stage = document.getElementById('rw-stage');
+      var face = document.getElementById('rw-face');
+      var trig = document.getElementById('rw-trigger');
+      var total = 0, rewards = 0, started = false, fired = false, clearT = null, firstPair = null;
+      var CHECK = '<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+      function reveal() {
+        if (fired) return; fired = true;
+        trig.innerHTML = '<strong>' + total + '</strong> kez bastın, <strong>' + rewards + '</strong> kez ödül aldın. Ama ödül almadığın seferler bile seni durdurmadı, basmaya devam ettin. Skinner\'ın fareleri de tam olarak bunu yaptı. Ve dikkat et: bu butonun sana hiçbir gerçek faydası yok.';
+        trig.classList.add('show');
+      }
+
+      btn.addEventListener('click', function () {
+        if (!started) {
+          started = true;
+          firstPair = Math.random() < 0.5 ? [true, false] : [false, true];
+          setTimeout(reveal, 94000);
+        }
+        var win = total < 2 ? firstPair[total] : (Math.random() < 0.5);
+        total++;
+        clearTimeout(clearT);
+        if (win) {
+          rewards++;
+          stage.className = 'reward-stage is-reward';
+          face.innerHTML = CHECK;
+        } else {
+          stage.className = 'reward-stage is-empty';
+          face.textContent = 'Yok';
+        }
+        clearT = setTimeout(function () {
+          stage.className = 'reward-stage';
+          face.innerHTML = '&#9711;';
+        }, 650);
+      });
+    })();
+
+    /* ── İnteraktif 3: Sıkıntı sayacı ── */
+    (function () {
+      var stage = document.getElementById('bd-stage');
+      if (!stage) return;
+      var startBtn = document.getElementById('bd-start');
+      var instr = document.getElementById('bd-instr');
+      var result = document.getElementById('bd-result');
+      var running = false, t0 = 0;
+
+      function stop() {
+        if (!running) return; running = false;
+        stage.classList.remove('is-running');
+        stage.removeEventListener('click', stop);
+        var s = Math.round((performance.now() - t0) / 1000);
+        var msg;
+        if (s < 20) msg = '<span class="boredom-secs">' + s + ' saniye</span><br>Beynin boşluğu küçük bir tehdit gibi algılayıp seni hemen bir uyaran aramaya itti. Sürekli ekranla beslenen bir dikkatin tipik refleksi: boşluğu doldurulması gereken bir açık sayıyor.';
+        else if (s <= 60) msg = '<span class="boredom-secs">' + s + ' saniye</span><br>Bu eşikten sonra dış uyaran kesilince zihnin içine dönmeye başlıyor. Varsayılan Mod Ağı (DMN) yavaş yavaş devreye giriyor: hafızanı sindiren, fikirleri birbirine bağlayan ağ.';
+        else msg = '<span class="boredom-secs">' + s + ' saniye</span><br>Beynin tam olarak Varsayılan Mod Ağı\'na geçti. Dışarıya odaklanmadığı bu anlarda zihin geziniyor, dağınık fikirleri bağlıyor, geleceği planlıyor. Yaratıcılığın ve o ani "buldum" anlarının çoğu işte bu "boş" zamanlarda doğuyor.';
+        result.innerHTML = msg;
+        result.style.display = 'block';
+        instr.style.display = 'none';
+        startBtn.textContent = 'Tekrar dene';
+        startBtn.style.display = 'inline-block';
+      }
+
+      startBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        running = true; t0 = performance.now();
+        result.style.display = 'none';
+        startBtn.style.display = 'none';
+        instr.style.display = 'block';
+        instr.textContent = 'Okumayı bırak. Sadece buraya bak ve hiçbir şey yapma. Sıkıldığın an bu kutuya tıkla.';
+        stage.classList.add('is-running');
+        setTimeout(function () { stage.addEventListener('click', stop); }, 60);
+      });
+    })();
   </script>
 
 </body>
