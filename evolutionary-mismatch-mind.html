@@ -22,6 +22,7 @@
 <script src="theme.js"></script>
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
 <script src="analytics.js" defer></script>
 <script src="progress.js" defer></script>
 <script src="resume.js" defer></script>
@@ -1291,6 +1292,44 @@
   .boredom-instr { font-family: var(--sans); font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; max-width: 360px; margin: 0; }
   .boredom-result { font-family: var(--sans); font-size: 0.95rem; color: var(--text); line-height: 1.65; max-width: 380px; margin: 0; }
   .boredom-secs { font-family: var(--serif); color: var(--accent); font-size: 1.5rem; display: inline-block; margin-bottom: 0.2rem; }
+
+  /* Shared demo hint */
+  .demo-hint {
+    font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim);
+    line-height: 1.55; max-width: 460px; margin: 0 auto 1.2rem;
+  }
+
+  /* Perceived Stress Scale (PSS-4) */
+  .pss-q { margin: 1.3rem 0; text-align: left; }
+  .pss-q-text { font-family: var(--sans); font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; line-height: 1.45; }
+  .pss-options { display: flex; gap: 0.4rem; }
+  .pss-opt {
+    flex: 1 1 0; min-width: 0;
+    font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+    color: var(--text-dim); background: var(--bg);
+    border: 1px solid var(--divider); border-radius: 8px;
+    padding: 0.55rem 0.3rem; cursor: pointer; text-align: center;
+    line-height: 1.25;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .pss-opt:hover { border-color: var(--accent); color: var(--accent); }
+  .pss-opt.sel { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .pss-result { display: none; margin-top: 1.7rem; }
+  .pss-result.show { display: block; }
+  .pss-score { font-family: var(--serif); font-size: 2.2rem; color: var(--accent); line-height: 1; }
+  .pss-score small { font-size: 1rem; color: var(--text-dim); }
+  .pss-bar { height: 10px; border-radius: 999px; background: var(--divider); overflow: hidden; margin: 0.9rem auto 0.6rem; max-width: 420px; }
+  .pss-bar-fill { height: 100%; width: 0; border-radius: 999px; background: var(--accent); transition: width 0.6s ease; }
+  .pss-bar-fill.lvl-high { background: #a13929; }
+  [data-theme="dark"] .pss-bar-fill.lvl-high { background: #d35b46; }
+  .pss-verdict { font-family: var(--sans); font-size: 0.95rem; font-weight: 600; color: var(--text); }
+  .pss-context { font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; max-width: 470px; margin: 1.1rem auto 0; text-align: left; }
+
+  /* 47-second focus counter */
+  .focus-count { font-family: var(--serif); font-size: 1.25rem; color: var(--text); line-height: 1.4; max-width: 460px; margin: 0.3rem auto 0; }
+  .focus-count .focus-num { color: var(--accent); }
+  .focus-msg { font-family: var(--sans); font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; max-width: 460px; margin: 0.95rem auto 0; min-height: 1.2em; transition: opacity 0.3s ease; }
+  .focus-context { font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; max-width: 470px; margin: 1.1rem auto 0; }
 </style>
   <script src="highlight.js" defer></script>
   <script src="ref.js" defer></script>
@@ -1377,7 +1416,7 @@
 
   <p>Bir zebra aslandan kaçar. Dakikalar sonra aslan vazgeçer ya da zebra kurtulur. Olay biter. Zebra otlamaya geri döner. Stres tepkisi açıldı, işini gördü, kapandı.</p>
 
-  <p>Sen sabah trafikte kaldın. Kortizol seviyen yükseldi. İşe geç kaldın. Düştü mü? Hayır, yükselmeye devam etti, çünkü patronun seni göreceği toplantıya yetişemiyorsun. Toplantı bitti, kortizol düştü mü? Hayır, çünkü öğleden sonra için bir deadline var. Akşam eve geldin, gevşedin mi? Hayır, çünkü kira son ödeme tarihine yaklaşıyor. Uyumaya çalışıyorsun, ama yarın aynı şey baştan başlayacak. Kira olmayabilir, toplantı olmayabilir, ama çoğumuz gün boyunca bir stres kaynağından diğerine geçiyoruz.</p>
+  <p>Sen sabah trafikte kaldın. Kortizol (stres hormonu) seviyen yükseldi. İşe geç kaldın. Düştü mü? Hayır, yükselmeye devam etti, çünkü patronun seni göreceği toplantıya yetişemiyorsun. Toplantı bitti, kortizol düştü mü? Hayır, çünkü öğleden sonra için bir deadline var. Akşam eve geldin, gevşedin mi? Hayır, çünkü kira son ödeme tarihine yaklaşıyor. Uyumaya çalışıyorsun, ama yarın aynı şey baştan başlayacak. Kira olmayabilir, toplantı olmayabilir, ama çoğumuz gün boyunca bir stres kaynağından diğerine geçiyoruz.</p>
 
   <p>Bu aslında bir kitabın adı: Robert Sapolsky'nin 30 yıl önce yazdığı <i>Why Zebras Don't Get Ulcers</i><a href="#ref-1" class="ref" onclick="savePos(this)">1</a> (Zebralar Neden Ülser Olmaz). Sapolsky 30 yıldır Stanford'da stres biyolojisi çalışıyor ve uzun yıllar Kenya'da vahşi babunların kan örneklerini inceledi. Kitabın özeti tek cümle: hayvanlar akut stres yaşar, biz kronik. Onlar aslan görür, kaçar, biter. Biz hayatımızın tamamı boyunca <i>hayali</i> aslanlardan kaçıyoruz.</p>
 
@@ -1420,6 +1459,59 @@
 
   <p>Yüzdeler bir tarafa, asıl mesele şu: stres, atalarımızın çoğunlukla saatler veya günler boyunca yaşadığı bir şeydi. Modern insan onu yıllarca, hatta hayatı boyunca taşıyor.</p>
 
+  <div class="demo" id="pss-demo">
+    <div class="demo-tag">Etkileşimli · Ne kadar stresli hissediyorsun?</div>
+    <p class="demo-hint">Aşağıdaki dört soru, psikolog Sheldon Cohen'in 1983'te geliştirdiği Algılanan Stres Ölçeği'nin kısa versiyonu. Dünyada en çok kullanılan stres testi. Son bir ayını düşünerek yanıtla.<a href="#ref-47" class="ref" onclick="savePos(this)">47</a></p>
+    <div class="pss-form" id="pss-form">
+      <div class="pss-q" data-reverse="0">
+        <div class="pss-q-text">1. Son bir ayda, hayatındaki önemli şeyleri kontrol edemediğini ne sıklıkta hissettin?</div>
+        <div class="pss-options">
+          <button class="pss-opt" type="button" data-val="0">Hiçbir zaman</button>
+          <button class="pss-opt" type="button" data-val="1">Neredeyse hiç</button>
+          <button class="pss-opt" type="button" data-val="2">Bazen</button>
+          <button class="pss-opt" type="button" data-val="3">Oldukça sık</button>
+          <button class="pss-opt" type="button" data-val="4">Çok sık</button>
+        </div>
+      </div>
+      <div class="pss-q" data-reverse="1">
+        <div class="pss-q-text">2. Son bir ayda, kişisel sorunlarınla başa çıkma becerine ne sıklıkta güvendin?</div>
+        <div class="pss-options">
+          <button class="pss-opt" type="button" data-val="0">Hiçbir zaman</button>
+          <button class="pss-opt" type="button" data-val="1">Neredeyse hiç</button>
+          <button class="pss-opt" type="button" data-val="2">Bazen</button>
+          <button class="pss-opt" type="button" data-val="3">Oldukça sık</button>
+          <button class="pss-opt" type="button" data-val="4">Çok sık</button>
+        </div>
+      </div>
+      <div class="pss-q" data-reverse="1">
+        <div class="pss-q-text">3. Son bir ayda, işlerin yolunda gittiğini ne sıklıkta hissettin?</div>
+        <div class="pss-options">
+          <button class="pss-opt" type="button" data-val="0">Hiçbir zaman</button>
+          <button class="pss-opt" type="button" data-val="1">Neredeyse hiç</button>
+          <button class="pss-opt" type="button" data-val="2">Bazen</button>
+          <button class="pss-opt" type="button" data-val="3">Oldukça sık</button>
+          <button class="pss-opt" type="button" data-val="4">Çok sık</button>
+        </div>
+      </div>
+      <div class="pss-q" data-reverse="0">
+        <div class="pss-q-text">4. Son bir ayda, zorlukların üstesinden gelemeyeceğin kadar biriktiğini ne sıklıkta hissettin?</div>
+        <div class="pss-options">
+          <button class="pss-opt" type="button" data-val="0">Hiçbir zaman</button>
+          <button class="pss-opt" type="button" data-val="1">Neredeyse hiç</button>
+          <button class="pss-opt" type="button" data-val="2">Bazen</button>
+          <button class="pss-opt" type="button" data-val="3">Oldukça sık</button>
+          <button class="pss-opt" type="button" data-val="4">Çok sık</button>
+        </div>
+      </div>
+    </div>
+    <div class="pss-result" id="pss-result">
+      <div class="pss-score" id="pss-score"></div>
+      <div class="pss-bar"><div class="pss-bar-fill" id="pss-fill"></div></div>
+      <div class="pss-verdict" id="pss-verdict"></div>
+      <p class="pss-context">Bu testin ölçtüğü şeye dikkat et. Dört sorunun üçü doğrudan kontrol, öngörülebilirlik ve baş edebilme hissiyle ilgili. Çünkü stresi belirleyen, olayların kendisi değil, onları ne kadar kontrol edebildiğini hissettiğin. Bu bölümün ilerleyen kısmında göreceğin gibi, Sapolsky'nin yıllarca süren araştırmasının vardığı sonuç da tam olarak bu.</p>
+    </div>
+  </div>
+
   <h3 class="sub-heading" id="s01-neden-var">Stres tepkisi neden var?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
   <p>Stres aslında seni öldürmek için değil, <i>kurtarmak için</i> var. Yaklaşık 550 milyon yıldır omurgalılarda bulunan bu sistem hayatta kalmanın temel mekanizmalarından biri.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
@@ -1458,13 +1550,13 @@
     </div>
   </div>
 
-  <p>Sapolsky depresyonun yalnızca bir kimyasal dengesizlik anlatısıyla açıklanamayacağını savunuyor. Ona göre kronik strese maruz kalan HPA ekseninin disregülasyonu, depresyonun biyolojik temelinde merkezi bir rol oynuyor.</p>
+  <p>Sapolsky depresyonun yalnızca bir kimyasal dengesizlik anlatısıyla açıklanamayacağını savunuyor. Ona göre kronik strese maruz kalan HPA ekseninin <span class="term">disregülasyonu<span class="term-tip">Bir sistemin normal düzeninin bozulması, dengesinin kaybolması.</span></span>, depresyonun biyolojik temelinde merkezi bir rol oynuyor.</p>
 
   <p>Tüm bu mekanizmalar birikince sonuç toplumsal seviyede de görünüyor. ABD'de yaşam beklentisi son 20 yılın en düşük seviyesinde, <strong>76.4 yıl</strong>. Halk sağlığı uzmanları kronik stresi bu düşüşün ana faktörlerinden biri olarak tanımlıyor. <i>Weathering</i> (aşınma) hipotezi şunu söylüyor: kronik stres yaşlanmayı hızlandırıyor ve erken ölüme yol açıyor.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
 
   <h3 class="sub-heading" id="s01-zebra">Peki neden insan zebra gibi olamıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
-  <p>Çünkü bizde başka hiçbir hayvanda olmayan bir şey var: gelişmiş bir prefrontal korteks. Gelecek planlama, soyut düşünme, başkalarının ne düşündüğünü hesaplama, geçmişi tekrar tekrar yaşama. Bu beceriler insanı insan yapan şeyler.</p>
+  <p>Çünkü bizde başka hiçbir hayvanda olmayan bir şey var: gelişmiş bir <span class="term">prefrontal korteks<span class="term-tip">Beynin ön bölgesi. Planlama, karar verme, dürtü kontrolü ve soyut düşünmeden sorumludur.</span></span>. Gelecek planlama, soyut düşünme, başkalarının ne düşündüğünü hesaplama, geçmişi tekrar tekrar yaşama. Bu beceriler insanı insan yapan şeyler.</p>
 
   <p>Aynı zamanda kronik stresimizin de kaynağı. Zebra aslan yokken aslan düşünmez. Sen yokken bile düşünebilirsin. Bir ay sonrasını, bir yıl sonrasını, hatta hiç olmayacak şeyleri.</p>
 
@@ -1473,7 +1565,7 @@
     <p class="attribution">Robert Sapolsky</p>
   </div>
 
-  <p>Bu gelişmiş beyin atalarımıza muazzam bir avantaj verdi (alet yapma, planlama, işbirliği), ama beraberinde <i>psikososyal stres</i> dediğimiz bir maliyet getirdi. Fight-or-flight (kaç ya da savaş) sistemini fiziksel tehdit olmadan da tetikleyebilen ilk ve tek tür biziz.</p>
+  <p>Bu gelişmiş beyin atalarımıza muazzam bir avantaj verdi (alet yapma, planlama, işbirliği), ama beraberinde <span class="term"><i>psikososyal stres</i><span class="term-tip">Fiziksel bir tehlikeden değil, sosyal ve zihinsel kaynaklardan (kaygı, ilişkiler, statü, gelecek korkusu) doğan stres.</span></span> dediğimiz bir maliyet getirdi. Fight-or-flight (kaç ya da savaş) sistemini fiziksel tehdit olmadan da tetikleyebilen ilk ve tek tür biziz.</p>
 
   <p>Sosyal hiyerarşilerde yaşayan diğer primatlarda da benzer örüntüler görülüyor. Sapolsky'nin Kenya'daki uzun yıllar süren babun çalışmasında düşük statülü babunlarda kronik sosyal stres ve depresyona benzer biyolojik hasar örüntüleri bulundu.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Sapolsky'nin bu çalışmalardan çıkardığı önemli bir bulgu var: stresin biyolojik etkisini belirleyen şey, tehdidin büyüklüğü değil, <a href="illusion-of-control.html" class="inline-link">kontrol algısıdır</a>. Babunlar arasında en kötü kronik strese giren, en alttaki, durumu üzerinde kontrolü en az olan bireylerdi. Aynı tehditle karşılaşan iki birey, kontrol algıları farklıysa farklı biyolojik tepki veriyor. Kontrol edebileceğini hisseden kişide kortizol daha az yükseliyor, daha hızlı düşüyor.</p>
 
@@ -1549,7 +1641,7 @@
 
   <div class="experiment">
     <div class="experiment-title">Heinrichs ve ark., 2003 — Biological Psychiatry</div>
-    <p>Katılımcılara stres testi (Trier Social Stress Test) öncesinde dört farklı koşul uygulandı: sosyal destek yok, sadece sosyal destek, sadece intranasal oksitosin ya da ikisi birden. Sosyal destek tek başına kortizol tepkisini azalttı. Ama en düşük kortizol yanıtı sosyal destek ve oksitosin birlikte verildiğinde görüldü.<a href="#ref-22" class="ref" onclick="savePos(this)">22</a></p>
+    <p>Katılımcılara stres testi (Trier Social Stress Test) öncesinde dört farklı koşul uygulandı: sosyal destek yok, sadece sosyal destek, sadece intranasal <span class="term">oksitosin<span class="term-tip">Güven, bağlanma ve sosyal yakınlıkla ilişkili bir hormon. Stresi yatıştırıcı etkisi vardır.</span></span> ya da ikisi birden. Sosyal destek tek başına kortizol tepkisini azalttı. Ama en düşük kortizol yanıtı sosyal destek ve oksitosin birlikte verildiğinde görüldü.<a href="#ref-22" class="ref" onclick="savePos(this)">22</a></p>
   </div>
 
   <p>Yanında güvendiğin biri olduğunda, vücudun stresi farklı işliyor. Atalarımız stresi grupla birlikte yaşıyordu, modern insan çoğu zaman tek başına.</p>
@@ -1595,11 +1687,18 @@
     </div>
   </div>
 
-  <p>İki mod arasında geçiş, <strong>ortam tarafından</strong> tetikleniyordu. Tarama modu sırasında bir şey dikkatini çekerse hyperfocus'a geçerdin. Sonra iş bittiğinde tarama moduna dönerdin. Geçişler ortamın doğal ritmiyle gerçekleşiyordu.</p>
+  <p>İki mod arasında geçiş, <strong>ortam tarafından</strong> tetikleniyordu. Tarama modu sırasında bir şey dikkatini çekerse <span class="term">hyperfocus<span class="term-tip">Tek bir göreve uzun süre, derin ve kesintisiz biçimde kilitlenme hali.</span></span>'a geçerdin. Sonra iş bittiğinde tarama moduna dönerdin. Geçişler ortamın doğal ritmiyle gerçekleşiyordu.</p>
 
   <p>Şimdi geçişler senin ritminle değil, <strong>dış kaynaklarla</strong> gerçekleşiyor. Bildirim, push uyarı, sonsuz scroll, otomatik oynayan video, ekran köşesindeki kırmızı nokta, kapı zili, açık ofiste birinin yüksek sesli konuşması, e-posta sesi, masada titreyen telefon. Bir kısmı kaçınılmaz, bir kısmı tasarım kararı.</p>
 
   <h3 class="sub-heading" id="s02-kisaldi-mi">Dikkat süremiz gerçekten kısaldı mı?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+  <div class="demo" id="focus-demo">
+    <div class="demo-tag">Etkileşimli · Sen ne kadar odaklanabiliyorsun?</div>
+    <div class="focus-count" id="focus-count">Bu öğe görününce sayaç başlayacak.</div>
+    <div class="focus-msg" id="focus-msg"></div>
+    <p class="focus-context">Bu küçük deney, birazdan okuyacağın araştırmanın konusu. Dikkatini kesintisiz tutmak, atalarımız için doğaldı. Bugün, bir yazının ortasında bile başka bir sekmeye geçme dürtüsüyle yarışıyorsun.</p>
+  </div>
 
   <p>Bu sorunun cevabını veren bir kişi var, hem de 20 yılı aşkın süredir aynı şeyi ölçen biri.</p>
 
@@ -1648,7 +1747,7 @@
     <div class="stat-source">Yüzlerce katılımcının yalnızca yaklaşık 3'ü iki görevi aynı anda yaptığında performans düşüşü yaşamadı.<a href="#ref-29" class="ref" onclick="savePos(this)">29</a></div>
   </div>
 
-  <p>Sonraki çalışmalar bu süpergörev yapanların daha yüksek çalışan bellek kapasitesine ve daha güçlü yönetici işlev becerilerine sahip olduğunu gösterdi.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a> Ama burada akılda kalması gereken bir paradoks var.</p>
+  <p>Sonraki çalışmalar bu süpergörev yapanların daha yüksek <span class="term">çalışan bellek<span class="term-tip">Bir bilgiyi aklında kısa süre tutup üzerinde işlem yapmanı sağlayan zihinsel not defteri.</span></span> kapasitesine ve daha güçlü <span class="term">yönetici işlev<span class="term-tip">Plan yapma, dikkati yönlendirme, dürtüleri frenleme gibi davranışı yöneten üst düzey zihinsel beceriler.</span></span> becerilerine sahip olduğunu gösterdi.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a> Ama burada akılda kalması gereken bir paradoks var.</p>
 
   <aside class="pull-quote-strong">
     <span class="pull-quote-tag">Paradoks</span>
@@ -1818,7 +1917,7 @@
 
   <p><strong>Tek görev bloklarına gir.</strong> 25 ila 90 dakika arası kesintisiz çalışma bloklarıyla başlayabilirsin. Pomodoro tekniği (25 dakika odak + 5 dakika ara) bunun popüler bir versiyonu. Önemli olan süre değil, kesintisizlik. Flow'a girmek için en az 15-20 dakika lazım, ondan sonrası katlanarak değerli.</p>
 
-  <p><strong>Aynı anda birden fazla şey yapma.</strong> İş yaparken müzik dinlemek (sözsüz fon müziği hariç) bilişsel yük yaratıyor. Toplantıda e-posta yazmak, yürürken sosyal medya, hepsi görünmez bir maliyet getiriyor. Multitasking yapanların büyük çoğunluğunda her bir görevin kalitesi düşüyor, üstelik bunun farkında bile olmuyoruz.</p>
+  <p><strong>Aynı anda birden fazla şey yapma.</strong> İş yaparken müzik dinlemek (sözsüz fon müziği hariç) <span class="term">bilişsel yük<span class="term-tip">Zihnin aynı anda taşımak zorunda kaldığı işlem miktarı. Yük arttıkça odaklanma ve performans düşer.</span></span> yaratıyor. Toplantıda e-posta yazmak, yürürken sosyal medya, hepsi görünmez bir maliyet getiriyor. Multitasking yapanların büyük çoğunluğunda her bir görevin kalitesi düşüyor, üstelik bunun farkında bile olmuyoruz.</p>
 
   <p><strong>Sıkılmaya izin ver.</strong> Bu sıradaki bölümün ana fikri, ama burada da başlıyor. Her boş anı ekranla doldurursan, beynin "boş alan" diye bir şey olduğunu unutuyor. Tarama modu ve hyperfocus arasında geçiş yapacak alanı kalmıyor.</p>
 
@@ -2048,6 +2147,7 @@
     <li id="ref-44"><strong>44.</strong> Common Sense Media. (2021). <i>The Common Sense Census: Media Use by Tweens and Teens</i>. <a href="https://www.commonsensemedia.org/research/the-common-sense-census-media-use-by-tweens-and-teens-2021" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-45"><strong>45.</strong> Mann, S. &amp; Cadman, R. (2014). Does being bored make us more creative? <i>Creativity Research Journal</i>, 26(2), 165-173. <a href="https://doi.org/10.1080/10400419.2014.901073" target="_blank" style="color: var(--accent);">link</a></li>
     <li id="ref-46"><strong>46.</strong> Drouin, M., Kaiser, D.H., &amp; Miller, D.A. (2012). Phantom vibrations among undergraduates: Prevalence and associated psychological characteristics. <i>Computers in Human Behavior</i>, 28(4), 1490-1496. <a href="https://doi.org/10.1016/j.chb.2012.03.013" target="_blank" style="color: var(--accent);">link</a></li>
+    <li id="ref-47"><strong>47.</strong> Cohen, S., Kamarck, T., &amp; Mermelstein, R. (1983). A global measure of perceived stress. <i>Journal of Health and Social Behavior</i>, 24(4), 385-396. <a href="https://doi.org/10.2307/2136404" target="_blank" style="color: var(--accent);">link</a></li>
   </ol>
 </div>
 
@@ -2295,6 +2395,105 @@
         stage.classList.add('is-running');
         setTimeout(function () { stage.addEventListener('click', stop); }, 60);
       });
+    })();
+
+    /* ── İnteraktif A: Algılanan Stres Ölçeği (PSS-4) ── */
+    (function () {
+      var form = document.getElementById('pss-form');
+      if (!form) return;
+      var qs = form.querySelectorAll('.pss-q');
+      var answers = [];
+      for (var k = 0; k < qs.length; k++) answers.push(null);
+      var resultEl = document.getElementById('pss-result');
+      var scoreEl = document.getElementById('pss-score');
+      var fillEl = document.getElementById('pss-fill');
+      var verdictEl = document.getElementById('pss-verdict');
+
+      function bind(q, i) {
+        var reverse = q.getAttribute('data-reverse') === '1';
+        var opts = q.querySelectorAll('.pss-opt');
+        opts.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            opts.forEach(function (b) { b.classList.remove('sel'); });
+            btn.classList.add('sel');
+            var v = parseInt(btn.getAttribute('data-val'), 10);
+            answers[i] = reverse ? (4 - v) : v;
+            update();
+          });
+        });
+      }
+      qs.forEach(function (q, i) { bind(q, i); });
+
+      function update() {
+        if (answers.indexOf(null) !== -1) return;
+        var total = answers.reduce(function (a, b) { return a + b; }, 0);
+        scoreEl.innerHTML = total + ' <small>/ 16</small>';
+        fillEl.style.width = (total / 16 * 100) + '%';
+        var v, cls;
+        if (total <= 5) { v = 'Düşük algılanan stres.'; cls = 'lvl-low'; }
+        else if (total <= 10) { v = 'Orta düzey algılanan stres.'; cls = 'lvl-mid'; }
+        else { v = 'Yüksek algılanan stres.'; cls = 'lvl-high'; }
+        verdictEl.textContent = v;
+        fillEl.className = 'pss-bar-fill ' + cls;
+        resultEl.classList.add('show');
+      }
+    })();
+
+    /* ── İnteraktif B: 47 saniye dikkat sayacı ── */
+    (function () {
+      var demo = document.getElementById('focus-demo');
+      if (!demo) return;
+      var countEl = document.getElementById('focus-count');
+      var msgEl = document.getElementById('focus-msg');
+      var seconds = 0, timer = null, started = false, hit47 = false, hit94 = false;
+
+      function render() {
+        countEl.innerHTML = 'Bu yazıya <span class="focus-num">' + seconds + ' saniyedir</span> kesintisiz odaklanıyorsun.';
+      }
+      function tick() {
+        seconds++;
+        render();
+        if (seconds >= 94 && !hit94) { hit94 = true; msgEl.textContent = '94 saniye. Ortalamanın iki katı. Beynin hâlâ burada.'; }
+        else if (seconds >= 47 && !hit47) { hit47 = true; msgEl.textContent = '47 saniyeyi geçtin. Çoğu insanın ortalama dikkat süresinin üstündesin.'; }
+      }
+      function start() {
+        if (timer || !started) return;
+        if (seconds === 0) render();
+        timer = setInterval(tick, 1000);
+      }
+      function pause() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+      function resetCounter() {
+        pause();
+        if (!started || seconds === 0) return;
+        seconds = 0; hit47 = false; hit94 = false;
+        render();
+        msgEl.textContent = 'Demin başka bir yere geçtin ve geri döndün. Sayaç sıfırlandı. Gloria Mark\'ın araştırmasına göre ortalama bir insan ekran başında her 47 saniyede bir tam olarak bunu yapıyor.';
+      }
+      function visible() {
+        var r = demo.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom > 0;
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) resetCounter();
+        else if (visible()) start();
+      });
+      window.addEventListener('blur', resetCounter);
+      window.addEventListener('focus', function () { if (visible()) start(); });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { started = true; start(); }
+            else { pause(); }
+          });
+        }, { threshold: 0.5 });
+        io.observe(demo);
+      } else {
+        started = true; start();
+      }
     })();
   </script>
 

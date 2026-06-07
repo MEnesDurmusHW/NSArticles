@@ -22,6 +22,7 @@
 <script src="theme.js"></script>
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
 <script src="analytics.js" defer></script>
 <script src="progress.js" defer></script>
 <script src="resume.js" defer></script>
@@ -804,7 +805,7 @@
 
   <p>Yani beyin fazladan kalori almıyordu sadece, o kalorilerin <i>türünü</i> öğrenip daha fazlasını istemeye başlıyordu. 8 haftada.</p>
 
-  <p>2023'te PNAS'ta yayımlanan bir başka çalışma bu tabloya evrimsel bir derinlik ekliyor. Raghanti ve arkadaşları insan beynini diğer primatlarla karşılaştırdığında, nucleus accumbens bölgesinde (beynin ödül merkezi) çok daha yoğun nöropeptid Y buldu.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Bu molekül hedonik yeme dürtüsünü artırıyor. Evrimde bu bir avantajdı, çünkü kalori bulmak zordu ve bulduğunda olabildiğince yemeni sağlayan bir mekanizma hayatta kalma şansını artırıyordu. Ama süpermarket çağında, kalorinin her köşe başında beklediği bir dünyada, aynı mekanizma tam tersine çalışıyor.</p>
+  <p>2023'te PNAS'ta yayımlanan bir başka çalışma bu tabloya evrimsel bir derinlik ekliyor. Raghanti ve arkadaşları insan beynini diğer primatlarla karşılaştırdığında, nucleus accumbens bölgesinde (beynin ödül merkezi) çok daha yoğun <span class="term">nöropeptid Y<span class="term-tip">Beyinde iştahı ve yeme isteğini artıran bir sinyal molekülü.</span></span> buldu.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Bu molekül hedonik yeme dürtüsünü artırıyor. Evrimde bu bir avantajdı, çünkü kalori bulmak zordu ve bulduğunda olabildiğince yemeni sağlayan bir mekanizma hayatta kalma şansını artırıyordu. Ama süpermarket çağında, kalorinin her köşe başında beklediği bir dünyada, aynı mekanizma tam tersine çalışıyor.</p>
 
   <p>Peki buna ne yapabilirsin? İlk adım, "iradesizim" çerçevesini bırakmak. Beynin 300.000 yıllık bir programla çalışıyor ve ultra-işlenmiş gıdalar bu programı istismar etmek üzere tasarlanmış.</p>
 
@@ -823,7 +824,7 @@
 
   <p>Bunun bir sebebi var. Yaklaşık 16 saatten uzun açlık dönemlerinde beden otofaji (autophagy) denen bir süreci başlatıyor: hücreler hasarlı bileşenlerini, bozulmuş proteinlerini temizleyip geri dönüştürüyor. Bir nevi hücresel bakım modu. Sürekli beslendiğinde bu temizlik hiç yapılamıyor, çünkü beden sürekli "inşaat" modunda kalıyor.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Yoshinori Ohsumi bu mekanizmayı keşfettiği için 2016 Nobel Tıp Ödülü'nü aldı.</p>
 
-  <p>Açlık ayrıca beynin BDNF (brain-derived neurotrophic factor) üretimini artırıyor; hafıza ve bilişsel fonksiyon için kritik bir protein.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Ve açlık sırasında üretilen ketonlar inflamasyonu baskılıyor, yani bedenin kronik iltihap seviyesini düşürüyor.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a></p>
+  <p>Açlık ayrıca beynin BDNF (brain-derived neurotrophic factor) üretimini artırıyor; hafıza ve bilişsel fonksiyon için kritik bir protein.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Ve açlık sırasında üretilen ketonlar (yağdan üretilen alternatif yakıt molekülleri) inflamasyonu baskılıyor, yani bedenin kronik iltihap seviyesini düşürüyor.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a></p>
 
   <p>Kilo kaybı açısından da sonuçlar güçlü.</p>
 
@@ -891,7 +892,7 @@
 
   <div class="experiment">
     <div class="experiment-title">Ajufo ve ark., 2024 — JACC</div>
-    <p>UK Biobank verisiyle 89.530 kişi, ortalama 8 yıl takip edildi. Katılımcıların bileklerine takılan akselerometrelerle günlük hareketsizlik süreleri ölçüldü. Günde 10.6 saatten fazla hareketsiz kalan katılımcılarda kalp yetmezliği riski %45, kardiyovasküler ölüm riski %62 artıyordu. Ve kritik detay: bu risk haftada 150 dakika düzenli spor yapanlarda bile geçerliydi.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+    <p>UK Biobank verisiyle 89.530 kişi, ortalama 8 yıl takip edildi. Katılımcıların bileklerine takılan akselerometrelerle (hareketi ölçen cihazlar) günlük hareketsizlik süreleri ölçüldü. Günde 10.6 saatten fazla hareketsiz kalan katılımcılarda kalp yetmezliği riski %45, kardiyovasküler ölüm riski %62 artıyordu. Ve kritik detay: bu risk haftada 150 dakika düzenli spor yapanlarda bile geçerliydi.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
   </div>
 
   <p>Yani akşam spor salonuna gitmek, gün boyu sandalyede geçen saatlerin hasarını tamamen telafi etmiyor.</p>
@@ -902,13 +903,13 @@
 
   <p>Rakamlar korkutucu. Ama hikayenin tamamı bu değil.</p>
 
-  <p>2020'de PNAS'ta yayımlanan bir araştırmada Raichlen ve arkadaşları, Tanzanya'daki Hadza avcı-toplayıcılarına akselerometre taktı.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a> Sonuç herkesin beklentisini alt üst etti: Hadza yetişkinleri günde ortalama 9.9 saat hareketsiz. Bu rakam modern ofis çalışanlarıyla neredeyse aynı. Ama Hadza'da kalp-damar hastalığı risk belirteçleri (trigliserit, kolesterol) çok düşük. Aynı süre hareketsizlik, tamamen farklı sağlık sonuçları. Neden?</p>
+  <p>2020'de PNAS'ta yayımlanan bir araştırmada Raichlen ve arkadaşları, Tanzanya'daki Hadza avcı-toplayıcılarına akselerometre taktı.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a> Sonuç herkesin beklentisini alt üst etti: Hadza yetişkinleri günde ortalama 9.9 saat hareketsiz. Bu rakam modern ofis çalışanlarıyla neredeyse aynı. Ama Hadza'da kalp-damar hastalığı risk belirteçleri (trigliserit yani kandaki yağ, kolesterol) çok düşük. Aynı süre hareketsizlik, tamamen farklı sağlık sonuçları. Neden?</p>
 
   <p>Çünkü Hadza sandalyede oturmuyor. Çömeliyor, diz çöküyor, yere oturuyor. Araştırmacılar EMG (kas aktivitesi ölçümü) ile baktığında, bu "aktif dinlenme" pozisyonlarının bacak kaslarında sandalyeye kıyasla çok daha yüksek aktivite yarattığını gördü. Sandalyede oturduğunda kasların neredeyse tamamen kapanıyor. Çömeldiğinde ise denge ve destek için sürekli çalışmak zorunda. Raichlen ve ekibi buna "Inactivity Mismatch Hypothesis" (hareketsizlik uyumsuzluğu hipotezi) adını verdi: sorun ne kadar oturduğumuz değil, <i>nasıl</i> oturduğumuz.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
 
   <p>Peki neden kas aktivitesi bu kadar önemli? Kaslar çalışmadığında, yağları enerji olarak parçalayan enzimler (lipoprotein lipaz gibi) üretilmiyor. Bu da kanda trigliserit ve kolesterol birikmesine yol açıyor.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a> Hadza çömelirken bu enzimler çalışmaya devam ediyor. Modern ofis çalışanı sandalyede otururken durma noktasına geliyor.</p>
 
-  <p>Bir de hareketin kendisi var. Avcı-toplayıcı ve çiftçi topluluklarda erkekler ve kadınlar günde 1-2 saat orta-yüksek yoğunlukta fiziksel aktivite yapıyor ve günlük 12.000'den fazla adım atıyor.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Modern ofis çalışanı? Ortalama 22 dakika ve 4.000-5.000 adım. Evrimsel biyolog John Speakman'ın açıkladığı gibi, sedanter davranış aslında evrimsel olarak seçilmiş bir strateji.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Enerji tasarrufu hayatta kalmak için kritikti. Ama atalarımızın bir alt sınırı vardı: yiyecek bulmak için hareket etmek <i>zorundalardı</i>. Modern dünyada bu zorunluluk kalktı ve doğal fren ortadan kayboldu.</p>
+  <p>Bir de hareketin kendisi var. Avcı-toplayıcı ve çiftçi topluluklarda erkekler ve kadınlar günde 1-2 saat orta-yüksek yoğunlukta fiziksel aktivite yapıyor ve günlük 12.000'den fazla adım atıyor.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Modern ofis çalışanı? Ortalama 22 dakika ve 4.000-5.000 adım. Evrimsel biyolog John Speakman'ın açıkladığı gibi, sedanter davranış (hareketsiz, oturarak geçen yaşam) aslında evrimsel olarak seçilmiş bir strateji.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Enerji tasarrufu hayatta kalmak için kritikti. Ama atalarımızın bir alt sınırı vardı: yiyecek bulmak için hareket etmek <i>zorundalardı</i>. Modern dünyada bu zorunluluk kalktı ve doğal fren ortadan kayboldu.</p>
 
   <p>Sandalyenin kendisi de evrimsel bir yenilik. Kitlesel sandalye kullanımı sanayileşmeyle geldi. Öncesinde sıradan insanlar yere oturuyordu, çömeliyordu, diz çöküyordu. Sandalye bir statü sembolüydü.</p>
 
@@ -928,9 +929,9 @@
   <div class="section-num">03</div>
   <h2 id="h04">Bedenin hâlâ güneşe göre <i>çalışıyor</i><button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-  <p>300.000 yıl boyunca, güneş battıktan sonra tek ışık kaynağı ateşti. Bedenin bu düzene göre kalibre oldu: karanlık gelince melatonin yükselir, uyku başlar. Güneş doğunca melatonin düşer, uyanırsın. Bu kadar basit.</p>
+  <p>300.000 yıl boyunca, güneş battıktan sonra tek ışık kaynağı ateşti. Bedenin bu düzene göre kalibre oldu: karanlık gelince melatonin (uyku hormonu) yükselir, uyku başlar. Güneş doğunca melatonin düşer, uyanırsın. Bu kadar basit.</p>
 
-  <p>Sonra elektriği icat ettik. Sonra ekranları. Ve şimdi gece 11'de yüzümüze mavi ışık vuruyor. Beyin "hâlâ gündüz" sanıyor.</p>
+  <p>Sonra elektriği icat ettik. Sonra ekranları. Ve şimdi gece 11'de yüzümüze mavi ışık (ekranların yaydığı, gündüzü taklit eden ışık) vuruyor. Beyin "hâlâ gündüz" sanıyor.</p>
 
   <p>Bunun ne kadar güçlü bir etki olduğunu görmek için bir deneye bakmak yeterli.</p>
 
@@ -956,7 +957,7 @@
     <p>Gece 7 saatten az uyuyanların tüm nedenlerden ölüm riski %14 daha yüksek. Erkeklerde risk daha da belirgin: kadınlara kıyasla ek %13 artış.<a href="#ref-22" class="ref" onclick="savePos(this)">22</a></p>
   </div>
 
-  <p>Harvard'ın üç büyük epidemiyolojik çalışmaya dayanan verisi daha da çarpıcı: gece 5 saat veya altında uyuyanlarda ölüm riski yaklaşık %15 artıyor.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a></p>
+  <p>Harvard'ın üç büyük <span class="term">epidemiyolojik çalışmaya<span class="term-tip">Büyük insan gruplarını izleyerek hastalıkların nedenlerini ve yayılımını araştıran çalışma.</span></span> dayanan verisi daha da çarpıcı: gece 5 saat veya altında uyuyanlarda ölüm riski yaklaşık %15 artıyor.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a></p>
 
   <p>Kronik sirkadiyen bozulma, yani bedenin iç saatinin sürekli olarak gün ışığı döngüsüyle uyumsuz çalışması, sadece uyku kalitesini değil, hastalık risklerini de doğrudan etkiliyor. 2019'da Dünya Sağlık Örgütü'nün kanser araştırma ajansı IARC, gece vardiyası çalışmasını "muhtemel kanserojen" (Grup 2A) olarak sınıflandırdı.<a href="#ref-24" class="ref" onclick="savePos(this)">24</a></p>
 
@@ -986,7 +987,7 @@
 
   <div class="experiment">
     <div class="experiment-title">Phillips ve ark., 2017 — Scientific Reports</div>
-    <p>Matematiksel model durumu net ortaya koyuyor: yapay ışık olmadan insan gün doğumuyla uyanıyor.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a> Yapay ışık sirkadiyen ritmi geciktiriyor. Sosyal zorunluluklar (iş, okul) erken uyanmayı gerektirince, uyku zamanlaması ile sirkadiyen ritim arasında bir uyumsuzluk oluşuyor. Buna "social jet-lag" (sosyal jet-lag) deniyor ve ergenler özellikle hassas.</p>
+    <p>Matematiksel model durumu net ortaya koyuyor: yapay ışık olmadan insan gün doğumuyla uyanıyor.<a href="#ref-30" class="ref" onclick="savePos(this)">30</a> Yapay ışık sirkadiyen ritmi geciktiriyor. Sosyal zorunluluklar (iş, okul) erken uyanmayı gerektirince, uyku zamanlaması ile sirkadiyen ritim arasında bir uyumsuzluk oluşuyor. Buna "social jet-lag" (iç saatin ile sosyal saatin arasındaki uyumsuzluk) deniyor ve ergenler özellikle hassas.</p>
   </div>
 
   <p>Hafta içi alarm saatinle hafta sonu doğal uyanma saatin arasındaki farkı düşün. O fark, bedeninin güneşe göre çalışmak istediği ama çalışamadığının kanıtı.</p>
@@ -1009,7 +1010,7 @@
   <div class="section-num">04</div>
   <h2 id="h05">Çok temiz bir dünya, <i>hasta</i> bir bağışıklık sistemi<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-  <p>1989'da epidemiyolog David Strachan garip bir örüntü fark etti: kalabalık ailelerde, yani daha fazla kardeşle büyüyen çocuklarda alerji daha azdı.<a href="#ref-31" class="ref" onclick="savePos(this)">31</a> Daha fazla çocuk, daha fazla mikrop paylaşımı, daha az alerji. Bu gözlem, "hijyen hipotezi"nin doğuşuydu.</p>
+  <p>1989'da epidemiyolog David Strachan garip bir örüntü fark etti: kalabalık ailelerde, yani daha fazla kardeşle büyüyen çocuklarda alerji daha azdı.<a href="#ref-31" class="ref" onclick="savePos(this)">31</a> Daha fazla çocuk, daha fazla mikrop paylaşımı, daha az alerji. Bu gözlem, <span class="term">"hijyen hipotezi"nin<span class="term-tip">Aşırı temiz ortamlarda mikroplarla az karşılaşmanın bağışıklığı zayıflattığı ve alerjiyi artırdığı fikri.</span></span> doğuşuydu.</p>
 
   <p>Ama hikaye burada bitmedi.</p>
 
@@ -1024,7 +1025,7 @@
 
   <h3 class="sub-heading" id="s04-eski-dostlar">Eski dostlar hipotezi<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
-  <p>İmmünolog Graham Rook bunu "Old Friends Hypothesis" (eski dostlar hipotezi) olarak yeniden formüle etti.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a> Fikir şu: sorun hijyen değil, birlikte evrimleştiğimiz organizmaların kaybı. Bağışıklık sistemimiz milyonlarca yıl boyunca helmintler (parazit solucanlar), çevresel mikobakteriler ve çeşitli bağırsak bakterileriyle birlikte evrimleşti. Bu organizmalar sadece "düşman" değildi. Bir kısmı bağışıklık sisteminin eğitmeniydi. Neye saldırılacağını ve daha da önemlisi neye saldırılmayacağını öğretiyordu. Düzenleyici T hücrelerinin (Treg) gelişimini tetikliyor, bağışıklık tepkisini kalibre ediyordu.</p>
+  <p>İmmünolog Graham Rook bunu "Old Friends Hypothesis" (eski dostlar hipotezi) olarak yeniden formüle etti.<a href="#ref-33" class="ref" onclick="savePos(this)">33</a> Fikir şu: sorun hijyen değil, birlikte evrimleştiğimiz organizmaların kaybı. Bağışıklık sistemimiz milyonlarca yıl boyunca helmintler (parazit solucanlar), çevresel <span class="term">mikobakteriler<span class="term-tip">Toprakta ve suda bulunan, bağışıklık sistemini eğiten bir bakteri grubu.</span></span> ve çeşitli bağırsak bakterileriyle birlikte evrimleşti. Bu organizmalar sadece "düşman" değildi. Bir kısmı bağışıklık sisteminin eğitmeniydi. Neye saldırılacağını ve daha da önemlisi neye saldırılmayacağını öğretiyordu. <span class="term">Düzenleyici T hücrelerinin (Treg)<span class="term-tip">Bağışıklık tepkisini frenleyip dengeleyen, gereksiz saldırıları önleyen savunma hücreleri.</span></span> gelişimini tetikliyor, bağışıklık tepkisini kalibre ediyordu.</p>
 
   <p>Modern şehir hayatı, antibiyotikler, steril ortamlar, sezaryen doğumlar, bu "eski dostları" hayatımızdan çıkardı.</p>
 
@@ -1036,10 +1037,10 @@
 
   <div class="experiment">
     <div class="experiment-title">Laursen ve ark., 2021 — Nature Microbiology</div>
-    <p>Araştırmacılar anne sütüyle beslenen bebeklerin bağırsaklarındaki Bifidobacterium türlerini inceledi. Bu bakterilerin triptofan ve fenilalanin gibi amino asitleri alıp, bağışıklık sistemini doğrudan etkileyen özel metabolitlere dönüştürdüğünü keşfettiler. Yani anne sütü sadece bakteri taşımıyor, o bakteriler bebeğin bağırsaklarında aktif olarak bağışıklık sistemini şekillendiren kimyasal sinyaller üretiyor.<a href="#ref-36" class="ref" onclick="savePos(this)">36</a></p>
+    <p>Araştırmacılar anne sütüyle beslenen bebeklerin bağırsaklarındaki Bifidobacterium türlerini inceledi. Bu bakterilerin triptofan ve fenilalanin gibi amino asitleri (proteinlerin yapı taşları) alıp, bağışıklık sistemini doğrudan etkileyen özel metabolitlere (vücutta kimyasal işlemler sonucu oluşan ara ürünler) dönüştürdüğünü keşfettiler. Yani anne sütü sadece bakteri taşımıyor, o bakteriler bebeğin bağırsaklarında aktif olarak bağışıklık sistemini şekillendiren kimyasal sinyaller üretiyor.<a href="#ref-36" class="ref" onclick="savePos(this)">36</a></p>
   </div>
 
-  <p>Bakterilerin yanı sıra anne sütü IgA antikorları, bağışıklık hücreleri ve oligosakkaritler de taşıyor. Victora ve arkadaşlarının meta-analizi, ilk 6 ay anne sütüyle beslenmenin enfeksiyon hastalıklarına karşı güçlü koruma sağladığını, ayrıca astım, egzama ve Tip 1 diyabet riskini azalttığını gösterdi.<a href="#ref-37" class="ref" onclick="savePos(this)">37</a></p>
+  <p>Bakterilerin yanı sıra anne sütü <span class="term">IgA antikorları<span class="term-tip">Bağırsak ve solunum yollarını mikroplara karşı koruyan bir savunma proteini türü.</span></span>, bağışıklık hücreleri ve <span class="term">oligosakkaritler<span class="term-tip">Bebeğin sindiremediği, ama faydalı bağırsak bakterilerini besleyen şeker zincirleri.</span></span> de taşıyor. Victora ve arkadaşlarının <span class="term">meta-analizi<span class="term-tip">Aynı konudaki birçok çalışmanın sonuçlarını birleştirip ortak bir sonuca varan inceleme.</span></span>, ilk 6 ay anne sütüyle beslenmenin enfeksiyon hastalıklarına karşı güçlü koruma sağladığını, ayrıca astım, egzama ve Tip 1 diyabet riskini azalttığını gösterdi.<a href="#ref-37" class="ref" onclick="savePos(this)">37</a></p>
 
   <p>Modern dünya bu doğal aktarımı birden fazla noktada kesiyor. Sezaryen doğum kanalını atlıyor. Erken antibiyotik kullanımı bağırsak çeşitliliğini azaltıyor. Formüla ile beslenme anne sütünün bakteri ve bağışıklık bileşenlerini devre dışı bırakıyor. Her biri bağışıklık eğitiminden bir parçayı eksik bırakıyor.</p>
 
@@ -1063,7 +1064,7 @@
   <div class="section-num">05</div>
   <h2 id="h06">Beton ve ekran arasında kaybolmuş bir <i>hayvan</i><button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-  <p>1984'te biyolog Edward O. Wilson bir hipotez öne sürdü: insanların doğaya yönelimi evrimsel bir eğilim, öğrenilmiş bir tercih değil. Buna "biophilia" (doğa sevgisi) adını verdi.<a href="#ref-39" class="ref" onclick="savePos(this)">39</a> Atalarımız doğadaki ipuçlarını okuyarak hayatta kaldı: hangi bitki yenilebilir, hangi su kaynağı güvenli, hangi ortam tehlikeli. Yüksek biyoçeşitlilik "verimli ve güvenli bir ortam" sinyali veriyordu. Bu okuma yeteneği beyinlerimize işlendi.</p>
+  <p>1984'te biyolog Edward O. Wilson bir hipotez öne sürdü: insanların doğaya yönelimi evrimsel bir eğilim, öğrenilmiş bir tercih değil. Buna "biophilia" (doğa sevgisi) adını verdi.<a href="#ref-39" class="ref" onclick="savePos(this)">39</a> Atalarımız doğadaki ipuçlarını okuyarak hayatta kaldı: hangi bitki yenilebilir, hangi su kaynağı güvenli, hangi ortam tehlikeli. Yüksek biyoçeşitlilik (bir ortamdaki canlı tür zenginliği) "verimli ve güvenli bir ortam" sinyali veriyordu. Bu okuma yeteneği beyinlerimize işlendi.</p>
 
   <p>İnsanların çiçeklere olan ilgisi de bu evrimsel köke dayanıyor olabilir. Orians ve Heerwagen'in (1992) hipotezine göre çiçekler atalarımız için gelecekteki meyve ve yiyecek kaynağının sinyaliydi: çiçek gördüğünde, yakında yenilebilir bir şey olacağını biliyordun.<a href="#ref-40" class="ref" onclick="savePos(this)">40</a> 5.000 yılı aşkın süredir insanlar çiçek yetiştiriyor, ama bunun bilinen bir maddi ödülü yok.</p>
 
@@ -1096,7 +1097,7 @@
 
   <div class="experiment">
     <div class="experiment-title">Taylor ve Kuo, 2009 — ADHD ve doğa yürüyüşü</div>
-    <p>ADHD tanılı çocuklar üç farklı ortamda 20 dakikalık yürüyüşe çıkarıldı: bir park, bir yerleşim bölgesi ve bir şehir merkezi. Yürüyüş sonrası standart bir konsantrasyon testi uygulandı. Parkta yürüyen çocuklar, diğer iki ortamda yürüyenlere kıyasla belirgin şekilde daha iyi performans gösterdi.<a href="#ref-46" class="ref" onclick="savePos(this)">46</a></p>
+    <p>ADHD (dikkat eksikliği ve hiperaktivite bozukluğu) tanılı çocuklar üç farklı ortamda 20 dakikalık yürüyüşe çıkarıldı: bir park, bir yerleşim bölgesi ve bir şehir merkezi. Yürüyüş sonrası standart bir konsantrasyon testi uygulandı. Parkta yürüyen çocuklar, diğer iki ortamda yürüyenlere kıyasla belirgin şekilde daha iyi performans gösterdi.<a href="#ref-46" class="ref" onclick="savePos(this)">46</a></p>
   </div>
 
   <p>Yazar Richard Louv bu tür bulguları bir araya getirerek "Nature-Deficit Disorder" (doğa eksikliği bozukluğu) kavramını ortaya attı. Klinik bir tanı değil, ama çocukların doğadan artan kopuşunun dikkat, ruh hali ve fiziksel sağlık üzerindeki etkilerini tanımlıyor.</p>

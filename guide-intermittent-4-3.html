@@ -22,6 +22,7 @@
 <script src="theme.js"></script>
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
 <script src="analytics.js" defer></script>
 <script src="progress.js" defer></script>
 <script src="resume.js" defer></script>
@@ -525,7 +526,7 @@
       <div class="section-num">01</div>
       <h2 id="h02">Nedir?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-      <p>4:3 aralıklı oruç, haftanın 3 gününde kalori alımınızı ciddi şekilde kısıtlamanız (~500 kcal kadınlar, ~600 kcal erkekler), kalan 4 günde normal yemeniz üzerine kurulu bir protokol. Bazı kaynaklarda "alternate day fasting" (gün aşırı oruç) varyasyonu olarak da geçer.</p>
+      <p>4:3 aralıklı oruç, haftanın 3 gününde kalori alımınızı ciddi şekilde kısıtlamanız (~500 kcal kadınlar, ~600 kcal erkekler), kalan 4 günde normal yemeniz üzerine kurulu bir protokol (uygulama düzeni). Bazı kaynaklarda "alternate day fasting" (gün aşırı oruç) varyasyonu olarak da geçer.</p>
 
       <p>16:8'den farklı olarak burada her gün uygulanmıyor. Kısıtlama günlerinde tamamen aç kalmak yerine çok düşük kalorili besleniyorsun. Bu, tamamen aç kalmaya göre daha sürdürülebilir ve sosyal hayatla daha uyumlu.</p>
 
@@ -542,18 +543,18 @@
       <div class="section-num">02</div>
       <h2 id="h03">Nasıl çalışır?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-      <p>4:3'ün metabolik etkisi 16:8'e benzer ama daha yoğundur. Kısıtlama günlerinde beden glikojen depolarını tamamen boşaltır ve uzun süreli yağ yakımı moduna girer. Normal günlerde ise beden toparlanır, kaslar beslenir ve enerji depoları yenilenir.</p>
+      <p>4:3'ün metabolik etkisi 16:8'e benzer ama daha yoğundur. Kısıtlama günlerinde beden glikojen (karaciğer ve kaslarda depolanan şeker) depolarını tamamen boşaltır ve uzun süreli yağ yakımı moduna girer. Normal günlerde ise beden toparlanır, kaslar beslenir ve enerji depoları yenilenir.</p>
 
-      <p>Bu "dalgalı" yaklaşım bedenin metabolik esnekliğini arttırır: yani bedenin ihtiyaca göre glikoz ve yağ arasında geçiş yapma becerisini güçlendirir. Metabolik esneklik sağlıklı metabolizmanın temel göstergelerinden biri.</p>
+      <p>Bu "dalgalı" yaklaşım bedenin metabolik esnekliğini arttırır: yani bedenin ihtiyaca göre glikoz (kandaki şeker) ve yağ arasında geçiş yapma becerisini güçlendirir. Metabolik esneklik sağlıklı metabolizmanın temel göstergelerinden biri.</p>
 
       <h3 class="sub-heading" id="h11">Kısıtlama gününde ne oluyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
-      <p>500 kcal civarında beslendiğinizde beden hızla glikojen depolarını boşaltır. Gerçek açlık olmadığı için stres tepkisi minimaldır, ama yağ yakımı ve otofaji süreçleri aktif şekilde çalışır. Ertesi gün normal yediğinizde beden bu süreçleri durdurur ve yeniden inşaat moduna geçer.</p>
+      <p>500 kcal civarında beslendiğinizde beden hızla glikojen depolarını boşaltır. Gerçek açlık olmadığı için stres tepkisi (bedenin zorlanmaya verdiği alarm yanıtı) minimaldır, ama yağ yakımı ve <span class="term">otofaji<span class="term-tip">Hücrelerin eskimiş ya da hasarlı parçalarını ayrıştırıp geri dönüştürdüğü doğal temizlik süreci. Açlık sırasında hızlanır.</span></span> süreçleri aktif şekilde çalışır. Ertesi gün normal yediğinizde beden bu süreçleri durdurur ve yeniden inşaat moduna geçer.</p>
 
       <div class="info-box tip">
         <div class="info-box-title">4:3'ün kritik avantajı: metabolizma korunuyor</div>
         <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az kalori yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 4:3'te bu olmuyor. Kısıtlama gününün hemen ardından normal beslenme geliyor. Beden açlık moduna geçmeye fırsat bulamıyor.</p>
-        <p>Heilbronn ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> bunu doğrudan ölçmüş: 22 gün boyunca gün aşırı oruç uygulayan katılımcılarda bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmemiş. Buna karşılık açlık insülini %57 azalmış (P&lt;0.001). Yani beden metabolizmayı yavaşlatmadan yağ yakım moduna geçiyor.</p>
+        <p>Heilbronn ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> bunu doğrudan ölçmüş: 22 gün boyunca gün aşırı oruç uygulayan katılımcılarda bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmemiş. Buna karşılık <span class="term">açlık insülini<span class="term-tip">Aç karnına ölçülen kandaki insülin düzeyi. Yüksek olması bedenin şekeri işlemekte zorlandığına, yani insülin direncine işaret eder.</span></span> %57 azalmış (P&lt;0.001). Yani beden metabolizmayı yavaşlatmadan yağ yakım moduna geçiyor.</p>
         <p>Catenacci ve ark.'nın 12 aylık çalışması<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> da bunu destekliyor: 4:3 grubu aynı kalori açığı hedefiyle günlük kısıtlama grubundan %50 daha fazla kilo kaybetmiş (%7.6'ya karşı %5, P=0.040). Bu farkın büyük kısmı metabolizmanın korunmasıyla açıklanıyor.</p>
       </div>
     </div>
@@ -576,7 +577,7 @@
         </div>
         <div class="benefit-card">
           <div class="benefit-title">İnsülin direncinde 6 kat fark</div>
-          <div class="benefit-desc">HOMA-IR'de %24 düşüş. Günlük kısıtlamada sadece %4. <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
+          <div class="benefit-desc"><span class="term">HOMA-IR<span class="term-tip">Açlık kan şekeri ve açlık insülininden hesaplanan, insülin direncini gösteren bir ölçüt. Düşmesi, bedenin şekeri daha sağlıklı işlediği anlamına gelir.</span></span>'de %24 düşüş. Günlük kısıtlamada sadece %4. <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
         </div>
         <div class="benefit-card">
           <div class="benefit-title">%37 daha az bırakma</div>
@@ -614,15 +615,15 @@
 
       <div class="experiment">
         <div class="experiment-title">Heilbronn ve ark., 2005 — American Journal of Clinical Nutrition <a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
-        <p>16 katılımcı, 22 gün, gün aşırı oruç. Kritik bulgu: bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmedi. Sürekli kalori kısıtlamasında metabolizmanın yavaşlaması en büyük sorunken, aralıklı oruçta bu sorun ortaya çıkmıyor. Açlık insülini %57 düştü (P&lt;0.001). Yağ oksidasyonu günde 15 gramın üzerinde arttı.</p>
+        <p>16 katılımcı, 22 gün, gün aşırı oruç. Kritik bulgu: bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmedi. Sürekli kalori kısıtlamasında metabolizmanın yavaşlaması en büyük sorunken, aralıklı oruçta bu sorun ortaya çıkmıyor. Açlık insülini %57 düştü (P&lt;0.001). Yağ oksidasyonu (depolanan yağın yakılması) günde 15 gramın üzerinde arttı.</p>
       </div>
 
       <div class="experiment">
         <div class="experiment-title">Varady ve ark., 2013 — Nutrition Journal <a href="#ref-4" class="ref" onclick="savePos(this)">4</a></div>
-        <p>32 kişi, 12 hafta, gün aşırı oruç. 5.2 kg kilo kaybı (%6.5). Önemli ayrıntı: kaybedilen 3.6 kg saf yağ kütlesiydi, yağsız kütle (kas) korundu. Trigliserit %20 düştü (P&lt;0.05). LDL partikül boyutu büyüdü (P&lt;0.01), bu kalp-damar sağlığı için olumlu bir gösterge.</p>
+        <p>32 kişi, 12 hafta, gün aşırı oruç. 5.2 kg kilo kaybı (%6.5). Önemli ayrıntı: kaybedilen 3.6 kg saf yağ kütlesiydi, yağsız kütle (kas) korundu. Trigliserit (kandaki yağ) %20 düştü (P&lt;0.05). <span class="term">LDL<span class="term-tip">Halk arasında "kötü kolesterol" olarak bilinen kolesterol türü. Damar duvarlarında birikerek kalp-damar hastalığı riskini artırabilir.</span></span> partikül boyutu büyüdü (P&lt;0.01), bu kalp-damar sağlığı için olumlu bir gösterge.</p>
       </div>
 
-      <p>Beş farklı araştırma grubunun sonuçları aynı tabloya işaret ediyor: aralıklı kısıtlama, günlük kısıtlamayla aynı kalori açığında daha iyi sonuç veriyor. İki temel mekanizma var. Birincisi metabolik: beden sürekli kıtlık yerine dalgalı bir sinyal alıyor, bu yüzden metabolizmayı yavaşlatmıyor. İkincisi davranışsal: "her gün biraz az ye" sürekli irade gerektiriyor, her öğünde bir karar veriyorsun. "3 gün kısıtla, 4 gün normal ye" ise kararı bir kere verip devam etmek. Karar yorgunluğu düşüyor, uyum artıyor.</p>
+      <p>Beş farklı araştırma grubunun sonuçları aynı tabloya işaret ediyor: aralıklı kısıtlama, günlük kısıtlamayla aynı kalori açığında daha iyi sonuç veriyor. İki temel mekanizma var. Birincisi metabolik: beden sürekli kıtlık yerine dalgalı bir sinyal alıyor, bu yüzden metabolizmayı yavaşlatmıyor. İkincisi davranışsal: "her gün biraz az ye" sürekli irade gerektiriyor, her öğünde bir karar veriyorsun. "3 gün kısıtla, 4 gün normal ye" ise kararı bir kere verip devam etmek. Karar yorgunluğu (gün boyu tekrar tekrar karar vermenin yıprattığı zihinsel hâl) düşüyor, uyum artıyor.</p>
     </div>
 
     <div class="section-divider"></div>
@@ -707,7 +708,7 @@
 
       <div class="info-box note">
         <div class="info-box-title">Hangisini seçmeliyim?</div>
-        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. 16:8'e alıştıktan sonra 5:2'ye, ardından 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori. Ketojenik diyet ise tamamen farklı bir yaklaşım; besin grubu kısıtlaması istemiyorsan aralıklı oruç modelleri daha esnek bir alternatif.</p>
+        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. 16:8'e alıştıktan sonra 5:2'ye, ardından 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori. <span class="term">Ketojenik diyet<span class="term-tip">Karbonhidratı çok düşük tutup yağı artıran beslenme biçimi. Beden şeker yerine yağı yakacak şekilde ketoz adı verilen bir moda geçer.</span></span> ise tamamen farklı bir yaklaşım; besin grubu kısıtlaması istemiyorsan aralıklı oruç modelleri daha esnek bir alternatif.</p>
       </div>
     </div>
 
@@ -792,10 +793,10 @@
       <ul class="checklist">
         <li class="caution"><strong>Yoğun egzersiz yapma.</strong> Kısıtlama günlerinde ağır antrenman yerine hafif yürüyüş veya yoga tercih et.</li>
         <li class="caution"><strong>Proteini ihmal etme.</strong> 500 kcal'in önemli bir kısmını proteinden al. Kas kaybını önler ve tok tutar.</li>
-        <li class="caution"><strong>Bol su iç.</strong> Kısıtlama günlerinde dehidrasyon riski daha yüksek. Günde en az 2-3 litre su.</li>
+        <li class="caution"><strong>Bol su iç.</strong> Kısıtlama günlerinde dehidrasyon (su kaybı) riski daha yüksek. Günde en az 2-3 litre su.</li>
         <li class="caution"><strong>Art arda 2 kısıtlama günü koyma.</strong> Araya mutlaka normal gün koy.</li>
         <li><strong>Uykuna dikkat et.</strong> Çok aç yatmak uyku kalitesini bozabilir. Akşam öğününü yatmadan 2-3 saat önce ye.</li>
-        <li><strong>Kan değerlerini takip et.</strong> 4:3'e başladıktan 2-3 ay sonra kan tahlili yaptır. Özellikle açlık şekeri, insülin, trigliserit ve LDL kolesterol değerlerini kontrol ettir. Bir araştırmada<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> uzun süreli aralıklı oruç uygulayanlarda LDL kolesterolde hafif yükselme gözlenmiş. Doktorunla birlikte takip et.</li>
+        <li><strong>Kan değerlerini takip et.</strong> 4:3'e başladıktan 2-3 ay sonra kan tahlili yaptır. Özellikle açlık şekeri (aç karnına ölçülen kan şekeri), insülin, trigliserit ve LDL kolesterol değerlerini kontrol ettir. Bir araştırmada<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> uzun süreli aralıklı oruç uygulayanlarda LDL kolesterolde hafif yükselme gözlenmiş. Doktorunla birlikte takip et.</li>
       </ul>
     </div>
 

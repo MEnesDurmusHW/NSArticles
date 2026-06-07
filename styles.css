@@ -1477,3 +1477,57 @@ mark.ns-hl.is-pulse {
 [data-theme="dark"] .share-quote {
   background: rgba(196, 149, 106, 0.07);
 }
+
+/* ============================================
+   Term Tooltips (glossary inline)
+   <span class="term">TERM<span class="term-tip">açıklama.</span></span>
+   Hover on desktop, tap-to-toggle on mobile (tooltip.js)
+   ============================================ */
+.term {
+  border-bottom: 1px dotted var(--text-dim);
+  cursor: help;
+  position: relative;
+  white-space: nowrap;
+}
+.term .term-tip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-dim);
+  white-space: normal;
+  width: max-content;
+  max-width: 260px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 100;
+  pointer-events: none;
+}
+.term .term-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--border);
+}
+.term:hover .term-tip,
+.term.active .term-tip { display: block; }
+
+/* Prevent tooltip from going off-screen on left/right edges */
+.term-left .term-tip { left: 0; transform: none; }
+.term-left .term-tip::after { left: 16px; transform: none; }
+.term-right .term-tip { left: auto; right: 0; transform: none; }
+.term-right .term-tip::after { left: auto; right: 16px; transform: none; }
+
+@media (max-width: 480px) {
+  .term .term-tip { max-width: 220px; font-size: 0.75rem; }
+}

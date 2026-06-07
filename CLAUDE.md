@@ -17,6 +17,7 @@ NSArticles is a static HTML article site. No build tools, no frameworks, no pack
 - **`toc.js`** — Table of Contents behavior. Mobile drawer toggle, scroll-spy active state for level-1 and level-2 entries, auto expand/collapse of nested children, Esc-to-close. Silently no-ops on pages without a `#toc-rail`. CSS for the rail/drawer lives in `styles.css`
 - **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
 - **`og-default.png`** — 1200×630 Open Graph image used as the social-share preview for every page. Branded NS Articles cover. Source design lives in `og-default.svg`; the PNG is what social platforms fetch (WhatsApp does not render SVG)
+- **`tooltip.js`** — Term glossary tooltips. Hover-on-desktop / tap-to-toggle-on-mobile behavior for inline `<span class="term">` glossary terms. CSS for `.term`/`.term-tip` lives in `styles.css`. Silently no-ops on pages without `.term` spans (see *Term Glossary Tooltips*)
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
 
 ## Theme System
@@ -102,7 +103,7 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<script src="toc.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
+3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<script src="toc.js" defer></script>`, `<script src="tooltip.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
 4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. For full articles only: compute word count + reading time and add `<meta name="word-count">` / `<meta name="reading-time">` to the article's `<head>`, plus the visible `~X dk` element on its listing card(s) (see *Reading Time*)
@@ -275,6 +276,31 @@ Readers can highlight any prose passage, attach a private note, copy or share it
 - **Load on**: every article page (full + preview) via `<script src="highlight.js" defer></script>` in `<head>`. The script no-ops on pages where `findParagraphs()` returns empty, so loading on a listing/utility page is harmless but unnecessary. Skip on `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
 
 The script is purely additive — articles don't need any new markup. Just include the script tag (same scope as `analytics.js` / `progress.js` etc.).
+
+## Term Glossary Tooltips
+
+Hard or specialist terms in article body prose get a brief explanation **at their first use** so a general reader is never stranded. Two formats, chosen by length:
+
+- **Short/simple terms** → inline parenthetical in plain Turkish, e.g. `glikoz (kandaki şeker)`. Keep it 2-6 words.
+- **Longer/technical terms** → a hover (desktop) / tap (mobile) tooltip using the shared pattern:
+
+```html
+<span class="term">TERM<span class="term-tip">Kısa açıklama cümlesi.</span></span>
+```
+
+Rules:
+- Explain only the **first** occurrence of each term in the body; leave later mentions untouched.
+- Never explain inside headings, the Kaynakça/references list, or page chrome. Explain where the term first appears in prose.
+- Tooltip text uses normal punctuation (it lives in element text, not an attribute), so quotes/parentheses are safe. Prefer this over `<abbr title="">` for anything non-trivial.
+- Use `.term-left` / `.term-right` modifier classes on the outer span when a tooltip would clip off the left/right screen edge (mostly inside tables).
+- **No em dashes** in the explanation text (site-wide rule).
+
+Infra:
+- **CSS**: `.term`, `.term .term-tip`, `.term-left`, `.term-right` live in `styles.css` (global, so every page that links `styles.css` gets it).
+- **JS**: `tooltip.js` wires tap-to-toggle on mobile (desktop uses pure CSS `:hover`). Load via `<script src="tooltip.js" defer></script>` in `<head>`, same scope as the other article scripts. No-ops when no `.term` spans exist.
+- **Exception**: `guide-intermittent-16-8.html` predates the shared infra and still carries its own inline `.term` CSS + inline tooltip JS. Do NOT add `tooltip.js` there (it would double-bind click handlers). New articles should always use the shared `tooltip.js` instead of inlining.
+
+When adding a new article, gloss its hard terms at first use following this pattern and include `tooltip.js`.
 
 ## End-of-Article Continuation
 

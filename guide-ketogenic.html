@@ -22,6 +22,7 @@
 <script src="theme.js"></script>
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
 <script src="analytics.js" defer></script>
 <script src="progress.js" defer></script>
 <script src="resume.js" defer></script>
@@ -370,9 +371,9 @@
       <div class="section-num">01</div>
       <h2 id="h02">Nedir?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
 
-      <p>Ketojenik diyet, karbonhidrat alımınızı ciddi şekilde kısıtlayıp (günlük kalorinizin %5-10'u) yağın çok arttırdığı (günlük kalorinizin %70-75'i) bir beslenme biçimi. Amaç: bedeninizi birincil yakıt olarak glikoz yerine yağ ve ketonları kullanmaya geçirmek.</p>
+      <p>Ketojenik diyet, karbonhidrat alımınızı ciddi şekilde kısıtlayıp (günlük kalorinizin %5-10'u) yağın çok arttırdığı (günlük kalorinizin %70-75'i) bir beslenme biçimi. Amaç: bedeninizi birincil yakıt olarak glikoz (kandaki şeker) yerine yağ ve ketonları kullanmaya geçirmek.</p>
 
-      <p>Bu durum "ketozis" olarak adlandırılır. Ketoziste karaciğer yağ asitlerini parçalayarak keton cisimcikleri üretir. Bu ketonlar glikoz yerine beyin dahil tüm vücut tarafından enerji kaynağı olarak kullanılır.</p>
+      <p>Bu durum <span class="term">"ketozis"<span class="term-tip">Bedenin enerji için karbonhidrat yerine yağ yaktığı, karaciğerin keton ürettiği metabolik durum.</span></span> olarak adlandırılır. Ketoziste karaciğer <span class="term">yağ asitlerini<span class="term-tip">Yağların temel yapı taşları. Vücut bunları parçalayarak enerji ve keton üretir.</span></span> parçalayarak <span class="term">keton cisimcikleri<span class="term-tip">Karaciğerin yağdan ürettiği, beynin ve kasların glikoz yerine yakıt olarak kullanabildiği küçük moleküller.</span></span> üretir. Bu ketonlar glikoz yerine beyin dahil tüm vücut tarafından enerji kaynağı olarak kullanılır.</p>
 
       <div class="info-box note">
         <div class="info-box-title">Evrimsel perspektif</div>
@@ -392,13 +393,13 @@
       <h3 class="sub-heading" id="h12">Ketozise geçiş süreci<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
       <ul class="checklist">
-        <li><strong>Gün 1-2:</strong> Glikojen depoları boşalır. Yorgunluk ve baş ağrısı başlayabilir.</li>
+        <li><strong>Gün 1-2:</strong> Glikojen depoları (kasta ve karaciğerde depolanan şeker) boşalır. Yorgunluk ve baş ağrısı başlayabilir.</li>
         <li><strong>Gün 2-4:</strong> Beden keton üretmeye başlar. "Keto gribi" belirtileri görülebilir.</li>
         <li><strong>Gün 4-7:</strong> Keton seviyeleri yükselir. Enerji geri gelmeye başlar.</li>
         <li><strong>Hafta 2-4:</strong> Beden ketoza adapte olur. Zihinsel berraklık ve istikrarlı enerji bildiren kişiler çok.</li>
       </ul>
 
-      <p>Ketozda olduğunuzu anlamanın en güvenilir yolu keton ölçüm stripleri (idrar veya kan). Kan keton seviyesi 0.5-3.0 mmol/L arası "beslenme ketozu" olarak kabul edilir.</p>
+      <p>Ketozda olduğunuzu anlamanın en güvenilir yolu keton ölçüm stripleri (idrar veya kan). Kan keton seviyesi 0.5-3.0 mmol/L arası <span class="term">"beslenme ketozu"<span class="term-tip">Diyetle ulaşılan güvenli ketoz düzeyi. Vücudun yağ yaktığını gösteren, kontrollü ve sağlıklı keton aralığı.</span></span> olarak kabul edilir.</p>
 
       <div class="info-box tip">
         <div class="info-box-title">Ketojenik diyetin kritik avantajı</div>
@@ -428,18 +429,18 @@
         <div class="benefit-card">
 
           <div class="benefit-title">İnflamasyon azalması</div>
-          <div class="benefit-desc">Ketonlar NLRP3 inflamazomunu baskılar, kronik iltihabı azaltır.</div>
+          <div class="benefit-desc">Ketonlar <span class="term">NLRP3 inflamazomunu<span class="term-tip">Bağışıklık hücrelerinde iltihap tepkisini başlatan bir protein topluluğu. Aşırı çalıştığında kronik iltihaba yol açar.</span></span> baskılar, kronik iltihabı azaltır.</div>
         </div>
         <div class="benefit-card">
 
           <div class="benefit-title">Kan şekeri kontrolü</div>
-          <div class="benefit-desc">İnsülin direnci azalır, Tip 2 diyabet yönetiminde etkili.</div>
+          <div class="benefit-desc"><span class="term">İnsülin direnci<span class="term-tip">Hücrelerin insülin hormonuna yeterince yanıt vermemesi. Kan şekerinin yükselmesine ve Tip 2 diyabete zemin hazırlar.</span></span> azalır, Tip 2 diyabet yönetiminde etkili.</div>
         </div>
       </div>
 
       <div class="experiment">
         <div class="experiment-title">Youm ve ark., 2015 — Nature Medicine</div>
-        <p>Keton metaboliti beta-hidroksibütirat (BHB), NLRP3 inflamazom kompleksini bloke ediyor. Bu kompleks kronik inflamasyonun ana sürücülerinden biri. Yani ketoziste üretilen ketonlar sadece enerji kaynağı değil, aynı zamanda anti-inflamatuar moleküller.</p>
+        <p>Keton metaboliti <span class="term">beta-hidroksibütirat (BHB)<span class="term-tip">Vücudun yağdan ürettiği en yaygın keton türü. Hücrelerde temiz bir enerji yakıtı olarak kullanılır.</span></span>, NLRP3 inflamazom kompleksini bloke ediyor. Bu kompleks kronik inflamasyonun ana sürücülerinden biri. Yani ketoziste üretilen ketonlar sadece enerji kaynağı değil, aynı zamanda anti-inflamatuar moleküller.</p>
       </div>
 
       <div class="experiment">
@@ -504,9 +505,9 @@
       <ol class="step-list">
         <li><span><strong>Mutfağını temizle.</strong> Ekmek, makarna, şeker, tahıllar ve şekerli yiyecekleri kaldır. Görünmeyen karbonhidrat kaynaklarını (sos, ketçap, hazır gıdalar) kontrol et.</span></li>
         <li><span><strong>İlk hafta: 50g karb ile başla.</strong> Direkt 20g'a inmek zor olabilir. İlk hafta 50g net karbonhidrat hedefle, sonra kademeli olarak 20-30g'a düşür.</span></li>
-        <li><span><strong>Yağ kaynağını seç.</strong> Zeytinyağı, avokado, tereyağı, hindistancevizi yağı, ceviz. Kaliteli yağ kaynakları kullan, trans yağlardan kaçın.</span></li>
-        <li><span><strong>Protein dengesini kur.</strong> Çok az protein kas kaybına yol açar, çok fazla protein ketozdan çıkarabilir (glikoneogenez). Vücut kilon başına 1.2-1.7g protein hedefle.</span></li>
-        <li><span><strong>Elektrolitleri ihmal etme.</strong> Keto başlangıçta su ve elektrolit kaybı olur. Tuz, magnezyum ve potasyum alımını artır.</span></li>
+        <li><span><strong>Yağ kaynağını seç.</strong> Zeytinyağı, avokado, tereyağı, hindistancevizi yağı, ceviz. Kaliteli yağ kaynakları kullan, <span class="term">trans yağlardan<span class="term-tip">İşlenmiş gıdalarda bulunan, sağlığa zararlı yapay yağ türü. Kalp hastalığı riskini artırır.</span></span> kaçın.</span></li>
+        <li><span><strong>Protein dengesini kur.</strong> Çok az protein kas kaybına yol açar, çok fazla protein ketozdan çıkarabilir (<span class="term">glikoneogenez<span class="term-tip">Vücudun proteinden ve diğer kaynaklardan kendi şekerini (glikozu) üretmesi. Aşırı protein bu yolu tetikleyip ketozu bozabilir.</span></span>). Vücut kilon başına 1.2-1.7g protein hedefle.</span></li>
+        <li><span><strong>Elektrolitleri ihmal etme.</strong> Keto başlangıçta su ve elektrolit (sodyum, potasyum, magnezyum gibi mineraller) kaybı olur. Tuz, magnezyum ve potasyum alımını artır.</span></li>
         <li><span><strong>İlk 2 haftayı atla.</strong> En zor kısım bu. Keto gribi belirtileri geçici. 2 hafta sonra çoğu kişi belirgin şekilde daha iyi hissediyor.</span></li>
       </ol>
     </div>
@@ -605,14 +606,14 @@
 
       <div class="info-box warning">
         <div class="info-box-title">Kimler uygulamamalı?</div>
-        <p>Tip 1 diyabet hastaları (ketoasidoz riski). Pankreatit geçmişi olanlar. Karaciğer veya böbrek hastalığı olanlar. Hamile veya emziren kadınlar. Yeme bozukluğu geçmişi olanlar. Safra kesesi çıkarılmış olan kişiler dikkatli olmalı (yağ sindirimi etkilenir). Herhangi bir kronik hastalığın varsa mutlaka doktoruna danış.</p>
+        <p>Tip 1 diyabet hastaları (<span class="term">ketoasidoz<span class="term-tip">Kandaki keton düzeyinin tehlikeli derecede yükseldiği, hayatı tehdit eden acil tıbbi durum. Sağlıklı beslenme ketozundan farklıdır.</span></span> riski). <span class="term">Pankreatit<span class="term-tip">Pankreas bezinin iltihaplanması. Yağ sindirimini etkilediği için yüksek yağlı diyetlerde risk oluşturabilir.</span></span> geçmişi olanlar. Karaciğer veya böbrek hastalığı olanlar. Hamile veya emziren kadınlar. Yeme bozukluğu geçmişi olanlar. Safra kesesi çıkarılmış olan kişiler dikkatli olmalı (yağ sindirimi etkilenir). Herhangi bir kronik hastalığın varsa mutlaka doktoruna danış.</p>
       </div>
 
       <h3 class="sub-heading" id="h15">Uzun vadeli dikkat edilecekler<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
 
       <ul class="checklist">
         <li class="caution"><strong>Lif alımı:</strong> Düşük karbonhidrat, düşük lif anlamına gelebilir. Yeşil yapraklı sebzelere önem ver.</li>
-        <li class="caution"><strong>Kolesterol:</strong> Bazı kişilerde LDL kolesterol artabilir. Düzenli kan testi yaptır.</li>
+        <li class="caution"><strong>Kolesterol:</strong> Bazı kişilerde <span class="term">LDL kolesterol<span class="term-tip">Halk arasında "kötü kolesterol" denen tür. Yüksek seviyeleri damar tıkanıklığı ve kalp hastalığı riskiyle ilişkilendirilir.</span></span> artabilir. Düzenli kan testi yaptır.</li>
         <li class="caution"><strong>Sosyal zorluklar:</strong> Karbonhidrat ağırlıklı Türk mutfağı (ekmek, pilav, börek) ile ketojenik diyet uyumsuz. Sosyal ortamlarda zorluk yaşayabilirsin.</li>
         <li class="caution"><strong>Sürdürülebilirlik:</strong> Ketojenik diyet uzun vadede herkes için sürdürülebilir değil. Bazı kişiler dönemsel olarak (birkaç ay keto, sonra normal beslenme) uyguluyor.</li>
         <li><strong>Besin çeşitliliği:</strong> Kısıtlı gıda grupları yüzünden vitamin/mineral eksikliği olabilir. Gerekirse multivitamin kullan.</li>
@@ -643,7 +644,7 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Evet, ama adaptasyon süreci gerekiyor. İlk 2-4 haftada performans düşebilir. Beden ketoza adapte olduktan sonra dayanıklılık sporları için mükemmel bir yakıt sistemi oluşturduğunu bildiren sporcular var. Yoğun anaerobik aktivite (sprint, ağır squat) için glikoz daha verimli olabilir; bazı sporcular "hedefli keto" (antrenman öncesi 15-30g karb) uyguluyor.</div>
+            <div class="faq-answer-inner">Evet, ama adaptasyon süreci gerekiyor. İlk 2-4 haftada performans düşebilir. Beden ketoza adapte olduktan sonra dayanıklılık sporları için mükemmel bir yakıt sistemi oluşturduğunu bildiren sporcular var. Yoğun <span class="term">anaerobik aktivite<span class="term-tip">Kısa süreli, yüksek şiddetli, oksijensiz enerjiyle yapılan egzersiz. Sprint ve ağır kaldırma gibi patlayıcı hareketler bu gruba girer.</span></span> (sprint, ağır squat) için glikoz daha verimli olabilir; bazı sporcular "hedefli keto" (antrenman öncesi 15-30g karb) uyguluyor.</div>
           </div>
         </div>
 
@@ -673,7 +674,7 @@
             <span class="faq-arrow">&#9654;</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Evet, çoğu kişi bu ikisini birlikte uyguladıkları için sinerjik etki görüldüğünü bildiriyor. Keto zaten açlık hissini azaltıyor (ketonlar iştah baskılar), bu da aralıklı orucu kolaylaştırıyor. 16:8 + keto popüler bir kombinasyon. Ama ikisine de aynı anda başlamak zor olabilir. Önce birine alış, sonra diğerini ekle.</div>
+            <div class="faq-answer-inner">Evet, çoğu kişi bu ikisini birlikte uyguladıkları için sinerjik etki (birlikte daha güçlü etki) görüldüğünü bildiriyor. Keto zaten açlık hissini azaltıyor (ketonlar iştah baskılar), bu da aralıklı orucu kolaylaştırıyor. 16:8 + keto popüler bir kombinasyon. Ama ikisine de aynı anda başlamak zor olabilir. Önce birine alış, sonra diğerini ekle.</div>
           </div>
         </div>
       </div>

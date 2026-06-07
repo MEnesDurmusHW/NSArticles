@@ -22,6 +22,7 @@
 <script src="theme.js"></script>
 <script src="qrcode.js" defer></script>
 <script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
 <script src="analytics.js" defer></script>
 <script src="progress.js" defer></script>
 <script src="resume.js" defer></script>
@@ -650,7 +651,7 @@
   <section class="intro">
     <p>İlişkiler hakkında neredeyse herkesin söyleyecek bir sözü, bir teorisi vardır. Bir çiftin neden ayrıldığı, bir arkadaşlığın neden bittiği, bir evliliğin neden hâlâ ayakta olduğu sorulduğunda kimsenin veriye ihtiyacı yokmuş gibi konuşuruz. Verilen cevaplar genellikle görüneni anlatır: aldatma, para, "uyumsuzluk." Asıl tahmin edici olan şeyleri çoğu zaman ıskalarlar.</p>
 
-    <p>1986'da John Gottman, Washington Üniversitesi'nde sonradan "Love Lab" adıyla anılacak küçük bir gözlem odası açtı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Çiftleri 24 saatliğine apart-stüdyo gibi tasarlanmış bu odaya aldı, kalp atış monitörleri taktı, her konuşmayı kamerayla kaydetti. 40+ yıl boyunca 3.000'i aşkın çift üzerinde benzer çalışmalar yürüttü. Her 6 saniyelik etkileşimi belirli duygu kategorilerine puanlayan bir sistem geliştirdi: <strong>SPAFF</strong> (Specific Affect Coding System). Küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke yalnızca <strong>-1</strong>.</p>
+    <p>1986'da John Gottman, Washington Üniversitesi'nde sonradan "Love Lab" adıyla anılacak küçük bir gözlem odası açtı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Çiftleri 24 saatliğine apart-stüdyo gibi tasarlanmış bu odaya aldı, kalp atış monitörleri taktı, her konuşmayı kamerayla kaydetti. 40+ yıl boyunca 3.000'i aşkın çift üzerinde benzer çalışmalar yürüttü. Her 6 saniyelik etkileşimi belirli duygu kategorilerine puanlayan bir sistem geliştirdi: <strong>SPAFF</strong> (Specific Affect Coding System, çiftlerin her küçük tepkisini olumlu ya da olumsuz duygulara göre puanlayan bir gözlem yöntemi). Küçümseme <strong>-4</strong>, mizah <strong>+4</strong>, öfke yalnızca <strong>-1</strong>.</p>
 
     <div class="stat-row">
       <div class="stat-box">
@@ -667,7 +668,7 @@
       </div>
     </div>
 
-    <p>1992'de Buehlman, Gottman ve Katz, 15 dakikalık bir tartışma kaydından hangi çiftin 3 yıl içinde boşanacağını <strong>%93,6 doğrulukla</strong> bildi.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Sonraki altı prospektif çalışmada bu oran %83 ile %94 arasında değişti; örneklem, takip süresi ve neyin tahmin edildiği farklıydı, oran da onunla birlikte değişti.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Bağımsız araştırmacılar, modelin yeni çiftlere uygulandığında doğruluğun belirgin biçimde düştüğünü gösterdi; tek bir veri setine "aşırı uydurma" riski gerçekti.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Ama bir şey değişmedi: hangi örneklem alınırsa alınsın aynı küçük davranış kalıpları tahmin gücünü korudu.</p>
+    <p>1992'de Buehlman, Gottman ve Katz, 15 dakikalık bir tartışma kaydından hangi çiftin 3 yıl içinde boşanacağını <strong>%93,6 doğrulukla</strong> bildi.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Sonraki altı <span class="term">prospektif çalışma<span class="term-tip">Kişileri baştan belirleyip zaman içinde ileriye doğru izleyen, sonucu beklemeden veri toplayan araştırma türü.</span></span>da bu oran %83 ile %94 arasında değişti; örneklem, takip süresi ve neyin tahmin edildiği farklıydı, oran da onunla birlikte değişti.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Bağımsız araştırmacılar, modelin yeni çiftlere uygulandığında doğruluğun belirgin biçimde düştüğünü gösterdi; tek bir veri setine "aşırı uydurma" (modelin yalnızca eldeki örneğe çok iyi uyup yeni verilerde tutmaması) riski gerçekti.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Ama bir şey değişmedi: hangi örneklem alınırsa alınsın aynı küçük davranış kalıpları tahmin gücünü korudu.</p>
 
     <p>Bu makale ilişkilerde nasıl hissedeceğini söylemiyor. Gottman'ın ve sonraki araştırmaların ortaya koyduğu şeyi haritalıyor: ilişkileri öldüren 4 örüntü, ayakta tutan faktörler, sayıların söyledikleri ve her ilişkide sorulabilecek iki soru.</p>
   </section>
@@ -717,7 +718,7 @@
     <div class="horseman-card">
       <div class="card-number">4</div>
       <h4 id="h09">Duvar Örme: Sessizliğe Çekilmek<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h4>
-      <p>Tamamen kapanmak, göz temasını kesmek. Erkeklerde çok daha yaygın çünkü çatışma sırasında fizyolojik stres tepkisi daha yoğun (kalp 100+ BPM).<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Partnerin gözünden: "Sen benim için önemli değilsin" mesajı.</p>
+      <p>Tamamen kapanmak, göz temasını kesmek. Erkeklerde çok daha yaygın çünkü çatışma sırasında <span class="term">fizyolojik stres tepkisi<span class="term-tip">Bedenin tehdit algısıyla verdiği otomatik tepki: kalp hızlanır, nefes sıklaşır, vücut savaş ya da kaç moduna geçer.</span></span> daha yoğun (kalp 100+ BPM).<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> Partnerin gözünden: "Sen benim için önemli değilsin" mesajı.</p>
       <div class="antidote"><strong>Panzehir:</strong> "Biraz ara verelim, sakinleşince devam edelim" diyebilmek. Bu bir kaçış değil, bir düzenleme.</div>
     </div>
 
@@ -856,7 +857,7 @@
     </div>
 
     <h3 id="h16">İki Boşanma Paterni<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
-    <p style="color: var(--text-dim); font-size: 15px;">Gottman'ın 14 yıllık boylamsal verileri iki farklı boşanma paterni ortaya koydu:<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></p>
+    <p style="color: var(--text-dim); font-size: 15px;">Gottman'ın 14 yıllık boylamsal verileri (aynı çiftleri uzun yıllar boyunca izleyerek toplanan veriler) iki farklı boşanma paterni ortaya koydu:<a href="#ref-5" class="ref" onclick="savePos(this)">5</a></p>
     <div class="stat-row">
       <div class="stat-box">
         <div class="number" style="font-size: 22px;">5.6 yıl</div>
