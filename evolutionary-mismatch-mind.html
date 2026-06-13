@@ -1293,11 +1293,16 @@
   .boredom-result { font-family: var(--sans); font-size: 0.95rem; color: var(--text); line-height: 1.65; max-width: 380px; margin: 0; }
   .boredom-secs { font-family: var(--serif); color: var(--accent); font-size: 1.5rem; display: inline-block; margin-bottom: 0.2rem; }
 
-  /* Shared demo hint */
+  /* Shared demo hint — distinct left-aligned intro zone inside the centered card */
   .demo-hint {
     font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim);
-    line-height: 1.55; max-width: 460px; margin: 0 auto 1.2rem;
+    line-height: 1.6; margin: 0 0 1.4rem;
+    text-align: left;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--divider);
   }
+  .section .demo-hint { text-align: left; }
+  .demo-hint-ref { white-space: nowrap; margin-left: 0.15em; }
 
   /* Perceived Stress Scale (PSS-4) */
   .pss-q { margin: 1.3rem 0; text-align: left; }
@@ -1314,7 +1319,7 @@
   }
   .pss-opt:hover { border-color: var(--accent); color: var(--accent); }
   .pss-opt.sel { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .pss-result { display: none; margin-top: 1.7rem; }
+  .pss-result { display: none; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px solid var(--divider); }
   .pss-result.show { display: block; }
   .pss-score { font-family: var(--serif); font-size: 2.2rem; color: var(--accent); line-height: 1; }
   .pss-score small { font-size: 1rem; color: var(--text-dim); }
@@ -1322,8 +1327,36 @@
   .pss-bar-fill { height: 100%; width: 0; border-radius: 999px; background: var(--accent); transition: width 0.6s ease; }
   .pss-bar-fill.lvl-high { background: #a13929; }
   [data-theme="dark"] .pss-bar-fill.lvl-high { background: #d35b46; }
-  .pss-verdict { font-family: var(--sans); font-size: 0.95rem; font-weight: 600; color: var(--text); }
-  .pss-context { font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim); line-height: 1.6; max-width: 470px; margin: 1.1rem auto 0; text-align: left; }
+  .pss-verdict { font-family: var(--sans); font-size: 1rem; font-weight: 500; color: var(--text); line-height: 1.5; max-width: 430px; margin: 0 auto; }
+  .pss-verdict .pss-em { color: var(--accent); font-weight: 700; }
+  .pss-context {
+    margin: 1.5rem 0 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--divider);
+  }
+  .pss-lead {
+    font-family: var(--sans); font-size: 0.88rem; color: var(--text-dim);
+    line-height: 1.6; margin: 0; text-align: left;
+  }
+  .section .pss-context p { text-align: left; }
+  .pss-rec-box {
+    margin-top: 1.2rem;
+    padding: 0.95rem 1.1rem;
+    background: var(--bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+  }
+  .pss-rec-label {
+    display: block;
+    font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .pss-rec {
+    font-family: var(--sans); font-size: 0.92rem; line-height: 1.55;
+    color: var(--text); margin: 0;
+  }
 
   /* 47-second focus counter */
   .focus-count { font-family: var(--serif); font-size: 1.25rem; color: var(--text); line-height: 1.4; max-width: 460px; margin: 0.3rem auto 0; }
@@ -1461,7 +1494,7 @@
 
   <div class="demo" id="pss-demo">
     <div class="demo-tag">Etkileşimli · Ne kadar stresli hissediyorsun?</div>
-    <p class="demo-hint">Aşağıdaki dört soru, psikolog Sheldon Cohen'in 1983'te geliştirdiği Algılanan Stres Ölçeği'nin kısa versiyonu. Dünyada en çok kullanılan stres testi. Son bir ayını düşünerek yanıtla.<a href="#ref-47" class="ref" onclick="savePos(this)">47</a></p>
+    <p class="demo-hint">Aşağıdaki dört soru, psikolog Sheldon Cohen'in 1983'te geliştirdiği Algılanan Stres Ölçeği'nin kısa versiyonu. Dünyada en çok kullanılan stres testi. Son bir ayını düşünerek yanıtla.<a href="#ref-47" class="ref demo-hint-ref" onclick="savePos(this)">47</a></p>
     <div class="pss-form" id="pss-form">
       <div class="pss-q" data-reverse="0">
         <div class="pss-q-text">1. Son bir ayda, hayatındaki önemli şeyleri kontrol edemediğini ne sıklıkta hissettin?</div>
@@ -1508,7 +1541,13 @@
       <div class="pss-score" id="pss-score"></div>
       <div class="pss-bar"><div class="pss-bar-fill" id="pss-fill"></div></div>
       <div class="pss-verdict" id="pss-verdict"></div>
-      <p class="pss-context">Bu testin ölçtüğü şeye dikkat et. Dört sorunun üçü doğrudan kontrol, öngörülebilirlik ve baş edebilme hissiyle ilgili. Çünkü stresi belirleyen, olayların kendisi değil, onları ne kadar kontrol edebildiğini hissettiğin. Bu bölümün ilerleyen kısmında göreceğin gibi, Sapolsky'nin yıllarca süren araştırmasının vardığı sonuç da tam olarak bu.</p>
+      <div class="pss-context">
+        <p class="pss-lead">Bu testin ölçtüğü şeye dikkat et. Dört sorunun üçü doğrudan kontrol, öngörülebilirlik ve baş edebilme hissiyle ilgili. Çünkü stresi belirleyen, olayların kendisi değil, onları ne kadar kontrol edebildiğini hissettiğin. Bölümün ilerleyen kısmında, Sapolsky'nin araştırmasına dayanan somut yolları tek tek göreceğiz.</p>
+        <div class="pss-rec-box">
+          <span class="pss-rec-label">Öneri</span>
+          <p class="pss-rec" id="pss-rec"></p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2408,6 +2447,7 @@
       var scoreEl = document.getElementById('pss-score');
       var fillEl = document.getElementById('pss-fill');
       var verdictEl = document.getElementById('pss-verdict');
+      var recEl = document.getElementById('pss-rec');
 
       function bind(q, i) {
         var reverse = q.getAttribute('data-reverse') === '1';
@@ -2429,11 +2469,22 @@
         var total = answers.reduce(function (a, b) { return a + b; }, 0);
         scoreEl.innerHTML = total + ' <small>/ 16</small>';
         fillEl.style.width = (total / 16 * 100) + '%';
-        var v, cls;
-        if (total <= 5) { v = 'Düşük algılanan stres.'; cls = 'lvl-low'; }
-        else if (total <= 10) { v = 'Orta düzey algılanan stres.'; cls = 'lvl-mid'; }
-        else { v = 'Yüksek algılanan stres.'; cls = 'lvl-high'; }
-        verdictEl.textContent = v;
+        var v, cls, rec;
+        if (total <= 5) {
+          v = 'Algılanan stresin <span class="pss-em">düşük</span>. Son bir ayı büyük ölçüde kontrol edebildiğini hissediyorsun.';
+          rec = 'Kontrol hissini besleyen küçük rutinlerini koru; o his zayıfladıkça stres geri geliyor.';
+          cls = 'lvl-low';
+        } else if (total <= 10) {
+          v = 'Algılanan stresin <span class="pss-em">orta düzeyde</span>. Bazı şeyleri kontrol edebiliyor, bazılarında zorlanıyorsun.';
+          rec = 'Seni en çok zorlayan tek bir konuyu seç ve sadece onun üstünde küçük bir adım at.';
+          cls = 'lvl-mid';
+        } else {
+          v = 'Algılanan stresin <span class="pss-em">yüksek</span>. Son bir ayda işlerin kontrolden çıktığını sık sık hissetmişsin.';
+          rec = 'Her şeyi birden düzeltmeye çalışma. Yalnızca kontrol edebileceğin tek bir şeye odaklan, gerisini şimdilik bırak.';
+          cls = 'lvl-high';
+        }
+        verdictEl.innerHTML = v;
+        recEl.textContent = rec;
         fillEl.className = 'pss-bar-fill ' + cls;
         resultEl.classList.add('show');
       }
