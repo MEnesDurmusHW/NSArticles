@@ -50,11 +50,12 @@
     background: var(--surface); padding: 18px 24px 20px;
   }
   .snode .t-k {
+    display: block;
     font-size: 10px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase;
     color: var(--nc, var(--text-muted));
   }
-  .snode .t-t { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.15; color: var(--text); margin-top: 3px; }
-  .snode .t-s { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+  .snode .t-t { display: block; font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.15; color: var(--text); margin-top: 3px; }
+  .snode .t-s { display: block; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-dim); margin-top: 4px; }
   .snode.bare { padding: 15px 24px 16px; }
 
   /* Article links (centered, inside snode / col.out) */
@@ -97,8 +98,8 @@
     border-left: 1.5px solid var(--line); transform: translateX(-50%);
   }
   .col-head { text-align: center; padding: 16px 16px 12px; }
-  .col-head .t-t { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--text); }
-  .col-head .t-s { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+  .col-head .t-t { display: block; font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--text); }
+  .col-head .t-s { display: block; font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--text-dim); margin-top: 2px; }
   .col-head::after {
     content: ''; display: block; width: 34px; height: 3px; border-radius: 2px;
     background: var(--nc); margin: 11px auto 0;
@@ -143,14 +144,6 @@
   [data-theme="dark"] .b-brain    { --nc: #91A8F0; }
   [data-theme="dark"] .n-behavior { --nc: #F0C873; }
   [data-theme="dark"] .n-social   { --nc: #F091B9; }
-
-  /* ----- Outlier ----- */
-  .outlier {
-    margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--divider);
-    text-align: center; font-size: 13px; color: var(--text-dim); line-height: 1.6;
-  }
-  .outlier a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
-  .outlier em { font-style: normal; color: var(--text-muted); }
 
   /* ----- Mobile ----- */
   @media (max-width: 720px) {
