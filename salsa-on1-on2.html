@@ -134,8 +134,15 @@
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     padding:6px 2px;text-align:center;transition:transform .09s,box-shadow .14s,background .14s;
   }
-  .cell .arrow{font-size:1.2rem;line-height:1}
-  .cell .lbl{font-size:.6rem;letter-spacing:.05em;color:var(--text-dim);margin-top:4px}
+  .cell .arrow{font-size:1.15rem;line-height:1}
+  .foot{
+    font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 7px;border-radius:999px;line-height:1;display:inline-block;
+  }
+  .cell .foot{margin-top:6px}
+  .foot-l{color:var(--text);background:var(--surface);box-shadow:inset 0 0 0 1px var(--border)}
+  .foot-r{color:#fff;background:var(--text);opacity:.82}
+  [data-theme="dark"] .foot-r{color:var(--bg);background:var(--text);opacity:.9}
   .cell.pause{opacity:.45;border-style:dashed;background:transparent}
   .cell.pause .arrow{color:var(--text-muted);font-size:.9rem}
   .cell.forward{border-color:rgba(168,81,46,.4);background:var(--fwd-soft)}
@@ -207,6 +214,7 @@
     <p class="kicker">Önce ölçü</p>
     <h2>Bir ölçü, sekiz vuruş</h2>
     <p>Salsada bir ölçü <span class="num">8</span> vuruştan oluşur. <span class="num">1-2-3</span> ve <span class="num">5-6-7</span>'de adım atarsın; <span class="num">4</span> ve <span class="num">8</span> boş kalır (duraklama). Bu boşluklar her iki stilde de aynı yerde durur.</p>
+    <p>Hangi ayak? <strong>İleri adımlar sol, geri adımlar sağ</strong> ayakla atılır. Aradaki yerinde adımlar sırayı korur: soldan sonra sağ, sağdan sonra sol. Aşağıdaki her hücrede atılacak ayak yazılıdır.</p>
     <div class="measure" id="measure"></div>
   </section>
 
@@ -246,6 +254,7 @@
         <span><i class="dot b"></i> Geri adım</span>
         <span><i class="dot s"></i> Yerinde adım</span>
         <span><i class="dot p"></i> Boş vuruş</span>
+        <span><span class="foot foot-l">sol</span> <span class="foot foot-r">sağ</span> ayak</span>
       </div>
     </div>
   </section>
@@ -287,6 +296,7 @@
         <span><i class="dot b"></i> Geri adım</span>
         <span><i class="dot s"></i> Yerinde adım</span>
         <span><i class="dot p"></i> Boş vuruş</span>
+        <span><span class="foot foot-l">sol</span> <span class="foot foot-r">sağ</span> ayak</span>
       </div>
     </div>
   </section>
@@ -358,8 +368,29 @@
     o.start(t); o.stop(t+.12);
   }
 
+  // ayaklar dönüşümlü: ileri=sol, geri=sağ; aralardaki yerinde adımlar sırayı korur
+  function assignFeet(seq){
+    const stepIdx=[];
+    seq.forEach((s,i)=>{ if(s.dir!=='pause') stepIdx.push(i); });
+    let anchor=-1, foot0=null;
+    for(let k=0;k<stepIdx.length;k++){
+      const d=seq[stepIdx[k]].dir;
+      if(d==='forward'){anchor=k;foot0='sol';break;}
+      if(d==='back'){anchor=k;foot0='sağ';break;}
+    }
+    const feet={};
+    if(anchor>=0){
+      for(let k=0;k<stepIdx.length;k++){
+        const same=((k-anchor)%2===0);
+        feet[stepIdx[k]]=same?foot0:(foot0==='sol'?'sağ':'sol');
+      }
+    }
+    return feet;
+  }
+
   function fillRow(row,label,seq){
     row.innerHTML='<div class="rowlabel">'+label+'</div>';
+    const feet=assignFeet(seq);
     seq.forEach((s,i)=>{
       const c=document.createElement('div');
       c.className='cell '+s.cls;
@@ -367,7 +398,8 @@
       if(s.dir==='pause'){
         c.innerHTML='<span class="arrow">·</span>';
       }else{
-        c.innerHTML='<span class="arrow">'+s.arrow+'</span><span class="lbl">'+s.lbl+'</span>';
+        const f=feet[i];
+        c.innerHTML='<span class="arrow">'+s.arrow+'</span><span class="foot foot-'+(f==='sol'?'l':'r')+'">'+f+'</span>';
       }
       row.appendChild(c);
     });
