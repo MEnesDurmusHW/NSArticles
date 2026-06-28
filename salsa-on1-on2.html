@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On1'den On2'ye — NS Articles</title>
+<meta name="description" content="Salsada On1 ve On2 farkı: adımlar aynı vuruşlarda kalır, değişen tek şey ileri ve geri basışın hangi vuruşa denk geldiğidir. Dinleyerek ve izleyerek hisset.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="On1'den On2'ye">
+<meta property="og:description" content="Salsada On1 ve On2 farkını dinleyerek ve izleyerek hisset.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/salsa-on1-on2.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fwd:#A8512E;        /* ileri  */
+    --bak:#2E7D72;        /* geri   */
+    --mid:#B0832E;        /* yerinde*/
+    --fwd-soft:rgba(168,81,46,.14);
+    --bak-soft:rgba(46,125,114,.14);
+    --paper:#FBF9F5;
+    --mono:"Space Grotesk",ui-monospace,monospace;
+  }
+  [data-theme="dark"]{
+    --fwd:#E08158;
+    --bak:#5BC6B5;
+    --mid:#D8AC5C;
+    --fwd-soft:rgba(224,129,88,.16);
+    --bak-soft:rgba(91,198,181,.16);
+    --paper:#191c23;
+  }
+
+  body{font-family:var(--sans);line-height:1.6}
+  .wrap{max-width:880px;margin:0 auto;padding:108px clamp(18px,5vw,40px) 90px}
+
+  /* ---- başlık ---- */
+  header{margin-bottom:8px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.32em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 16px;
+  }
+  h1{
+    font-family:var(--serif);font-weight:600;
+    font-size:clamp(2.7rem,9vw,4.8rem);line-height:.98;letter-spacing:-.015em;
+    margin:0 0 22px;color:var(--text);
+  }
+  h1 em{font-style:italic;font-weight:600;color:var(--accent)}
+  .lede{
+    font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.22rem);
+    line-height:1.6;color:#4A443C;max-width:54ch;margin:0;
+  }
+  [data-theme="dark"] .lede{color:#c2bfb8}
+
+  section{margin-top:clamp(46px,7vw,72px)}
+  .kicker{
+    font-family:var(--mono);font-size:11px;font-weight:500;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--text-muted);margin:0 0 12px;
+  }
+  h2{
+    font-family:var(--serif);font-weight:500;
+    font-size:clamp(1.55rem,4vw,2.05rem);margin:0 0 14px;letter-spacing:-.01em;color:var(--text);
+  }
+  section > p{color:var(--text-dim);margin:0 0 12px;max-width:60ch}
+  .num{font-family:var(--mono);color:var(--text);font-weight:700}
+
+  /* ---- ölçü şeridi ---- */
+  .measure{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:22px}
+  .mb{
+    border:1px solid var(--border);border-radius:12px;background:var(--surface);
+    text-align:center;padding:16px 0 13px;
+  }
+  .mb .n{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--text)}
+  .mb .t{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-top:4px}
+  .mb.rest{opacity:.5;border-style:dashed;background:transparent}
+
+  /* ---- oynatıcı ---- */
+  .player{
+    margin-top:24px;border:1px solid var(--border);border-radius:18px;
+    background:var(--paper);padding:clamp(16px,3vw,28px);
+  }
+  .seg{
+    display:inline-flex;background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;padding:4px;
+  }
+  .seg button{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    color:var(--text-dim);font-family:var(--sans);font-weight:600;
+    font-size:.88rem;padding:8px 22px;border-radius:999px;transition:.18s;letter-spacing:.01em;
+  }
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+
+  .phrase{
+    font-family:var(--mono);font-weight:700;
+    font-size:clamp(1.05rem,3vw,1.4rem);letter-spacing:.14em;
+    margin:18px 0 4px;color:var(--text);
+  }
+  .phrase .b{color:var(--fwd)}
+  .phrase .bk{color:var(--bak)}
+  .phrase .sep{color:var(--text-muted);margin:0 .35em}
+  .phrase small{
+    display:block;font-family:var(--sans);font-weight:400;
+    letter-spacing:normal;font-size:.82rem;color:var(--text-dim);margin-top:7px;
+  }
+
+  .ladder{margin-top:20px;overflow-x:auto;overflow-y:visible}
+  .grid{min-width:520px;padding:8px 12px}
+  .row{display:grid;grid-template-columns:84px repeat(8,1fr);gap:8px;align-items:stretch}
+  .row + .row{margin-top:8px}
+  .rowlabel{
+    display:flex;align-items:center;font-weight:600;font-size:.82rem;
+    color:var(--text-dim);padding-right:6px;
+  }
+  .head .num-cell{
+    text-align:center;font-family:var(--mono);font-weight:700;
+    font-size:1rem;color:var(--text-muted);padding:4px 0;transition:.12s;
+  }
+  .head .num-cell.beat{color:var(--text-dim)}
+  .cell{
+    position:relative;border:1px solid var(--border);border-radius:12px;
+    background:var(--surface);min-height:62px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:6px 2px;text-align:center;transition:transform .09s,box-shadow .14s,background .14s;
+  }
+  .cell .arrow{font-size:1.2rem;line-height:1}
+  .cell .lbl{font-size:.6rem;letter-spacing:.05em;color:var(--text-dim);margin-top:4px}
+  .cell.pause{opacity:.45;border-style:dashed;background:transparent}
+  .cell.pause .arrow{color:var(--text-muted);font-size:.9rem}
+  .cell.forward{border-color:rgba(168,81,46,.4);background:var(--fwd-soft)}
+  .cell.forward .arrow{color:var(--fwd)}
+  .cell.back{border-color:rgba(46,125,114,.4);background:var(--bak-soft)}
+  .cell.back .arrow{color:var(--bak)}
+  .cell.replace .arrow,.cell.close .arrow{color:var(--mid)}
+  .cell.is-on{
+    transform:translateY(-3px);
+    box-shadow:0 0 0 2px var(--accent),0 8px 22px rgba(0,0,0,.14);
+  }
+  .cell.is-on.forward{box-shadow:0 0 0 2px var(--fwd),0 8px 22px rgba(0,0,0,.14)}
+  .cell.is-on.back{box-shadow:0 0 0 2px var(--bak),0 8px 22px rgba(0,0,0,.14)}
+  .head .num-cell.is-on{color:var(--accent);transform:scale(1.18)}
+
+  .controls{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px}
+  .play{
+    appearance:none;border:0;cursor:pointer;font-family:var(--sans);font-weight:600;
+    background:var(--accent);color:#fff;border-radius:999px;
+    padding:12px 28px;font-size:.95rem;display:inline-flex;align-items:center;gap:9px;transition:.15s;
+  }
+  .play:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  .play .ico{font-size:.85rem}
+  .tempo{display:flex;align-items:center;gap:10px;color:var(--text-dim);font-size:.85rem}
+  .tempo input{accent-color:var(--accent);width:130px}
+  .tempo .bpm{font-family:var(--mono);font-weight:700;color:var(--text);min-width:64px}
+
+  .legend{display:flex;gap:14px 24px;flex-wrap:wrap;margin-top:20px;font-size:.78rem;color:var(--text-dim)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot.f{background:var(--fwd)} .dot.b{background:var(--bak)}
+  .dot.s{background:var(--mid)} .dot.p{background:var(--text-muted)}
+
+  footer.note{
+    margin-top:64px;border-top:1px solid var(--border);padding-top:18px;
+    color:var(--text-muted);font-size:.8rem;
+  }
+  footer.note i{font-style:normal}
+  footer.note i.f{color:var(--fwd)} footer.note i.b{color:var(--bak)} footer.note i.s{color:var(--mid)}
+
+  @media (max-width:560px){
+    .measure{grid-template-columns:repeat(4,1fr)}
+    .row{grid-template-columns:64px repeat(8,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cell,.play{transition:none}
+    .cell.is-on{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön">NS</a>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Salsa · Ritim</p>
+    <h1>On1'den<br><em>On2'ye</em></h1>
+    <p class="lede">Adımlar aynı vuruşlarda kalır. Tek değişen şey, ileri ve geri basışın hangi vuruşa denk geldiğidir. Aşağıdan dinleyerek ve izleyerek hissedebilirsin.</p>
+  </header>
+
+  <section>
+    <p class="kicker">Önce ölçü</p>
+    <h2>Bir ölçü, sekiz vuruş</h2>
+    <p>Salsada bir ölçü <span class="num">8</span> vuruştan oluşur. <span class="num">1-2-3</span> ve <span class="num">5-6-7</span>'de adım atarsın; <span class="num">4</span> ve <span class="num">8</span> boş kalır (duraklama). Bu boşluklar her iki stilde de aynı yerde durur.</p>
+    <div class="measure" id="measure"></div>
+  </section>
+
+  <section>
+    <p class="kicker">Adım 1</p>
+    <h2>Solo</h2>
+    <p>Tek başınayken lider de takipçi de aynısını yapar, ikisi de ileri basar. Stili ve tempoyu seç, oynat tuşuna bas.</p>
+
+    <div class="player" id="soloPlayer">
+      <div class="modes">
+        <div class="seg" role="group" aria-label="Stil">
+          <button class="j-on1" aria-pressed="true">On1</button>
+          <button class="j-on2" aria-pressed="false">On2</button>
+        </div>
+      </div>
+
+      <div class="phrase j-phrase"></div>
+
+      <div class="ladder">
+        <div class="grid">
+          <div class="row head j-head"></div>
+          <div class="row j-row1"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="play j-play"><span class="ico j-play-ico">▶</span><span class="j-play-txt">Oynat</span></button>
+        <div class="tempo">
+          <span>Tempo</span>
+          <input type="range" class="j-bpm" min="60" max="180" value="100" step="2">
+          <span class="bpm"><span class="j-bpm-val">100</span> BPM</span>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot f"></i> İleri adım</span>
+        <span><i class="dot b"></i> Geri adım</span>
+        <span><i class="dot s"></i> Yerinde adım</span>
+        <span><i class="dot p"></i> Boş vuruş</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">Adım 2</p>
+    <h2>Partnerli</h2>
+    <p>Karşı karşıya geçince biri ileri basarken diğeri onu aynalar, yani geri basar. Lider ve takipçi satırları birbirinin aynasıdır.</p>
+
+    <div class="player" id="partnerPlayer">
+      <div class="modes">
+        <div class="seg" role="group" aria-label="Stil">
+          <button class="j-on1" aria-pressed="true">On1</button>
+          <button class="j-on2" aria-pressed="false">On2</button>
+        </div>
+      </div>
+
+      <div class="phrase j-phrase"></div>
+
+      <div class="ladder">
+        <div class="grid">
+          <div class="row head j-head"></div>
+          <div class="row j-row1"></div>
+          <div class="row j-row2"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="play j-play"><span class="ico j-play-ico">▶</span><span class="j-play-txt">Oynat</span></button>
+        <div class="tempo">
+          <span>Tempo</span>
+          <input type="range" class="j-bpm" min="60" max="180" value="100" step="2">
+          <span class="bpm"><span class="j-bpm-val">100</span> BPM</span>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><i class="dot f"></i> İleri adım</span>
+        <span><i class="dot b"></i> Geri adım</span>
+        <span><i class="dot s"></i> Yerinde adım</span>
+        <span><i class="dot p"></i> Boş vuruş</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="note">
+    Renk: <i class="f">ileri</i> · <i class="b">geri</i> · <i class="s">yerinde</i>. Tempoyu düşürerek başla, oturunca hızlandır.
+  </footer>
+
+</div>
+
+<div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+<script>
+(function(){
+  // --- adım dizileri ---
+  // dir: forward | back | replace | close | pause
+  const F={dir:'forward',arrow:'↑',lbl:'ileri',cls:'forward'};
+  const B={dir:'back',arrow:'↓',lbl:'geri',cls:'back'};
+  const R={dir:'replace',arrow:'•',lbl:'yerinde',cls:'replace'};
+  const C={dir:'close',arrow:'•',lbl:'yerinde',cls:'close'};
+  const P={dir:'pause',arrow:'·',lbl:'boş',cls:'pause'};
+
+  // beat index 0..7 = vuruş 1..8
+  const data={
+    solo:{
+      on1:[F,R,C,P,B,R,C,P], // ileri 1, geri 5
+      on2:[C,F,R,P,C,B,R,P]  // ileri 2, geri 6
+    },
+    partner:{
+      on1:{ leader:[F,R,C,P,B,R,C,P], follower:[B,R,C,P,F,R,C,P] },
+      on2:{ leader:[C,B,R,P,C,F,R,P], follower:[C,F,R,P,C,B,R,P] } // lider 2'de geri
+    }
+  };
+
+  const D='<span class="sep">·</span>', SL='<span class="sep">/</span>';
+  const phrases={
+    solo:{
+      on1:'<span class="b">1</span>'+D+'2'+D+'3 '+SL+' <span class="bk">5</span>'+D+'6'+D+'7<small>İleri 1, geri 5 - lider ve takipçi aynı</small>',
+      on2:'<span class="b">2</span>'+D+'3'+D+'5 '+SL+' <span class="bk">6</span>'+D+'7'+D+'1<small>İleri 2, geri 6 - lider ve takipçi aynı</small>'
+    },
+    partner:{
+      on1:'<span class="b">1</span>'+D+'2'+D+'3 '+SL+' <span class="bk">5</span>'+D+'6'+D+'7<small>Lider 1. vuruşta ileri; takipçi aynası</small>',
+      on2:'<span class="bk">2</span>'+D+'3'+D+'5 '+SL+' <span class="b">6</span>'+D+'7'+D+'1<small>Lider 2. vuruşta geri, 6. vuruşta ileri; takipçi aynası</small>'
+    }
+  };
+
+  const STEP=[true,true,true,false,true,true,true,false]; // hangi vuruşta adım var
+
+  let audio=null;
+  function ensureAudio(){
+    if(!audio){ try{ audio=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+    if(audio && audio.state==='suspended') audio.resume();
+  }
+  function click(seq,i){
+    if(!audio) return;
+    const s=seq[i];
+    let freq=520,gain=.28;
+    if(s.dir==='forward'){freq=900;gain=.5}
+    else if(s.dir==='back'){freq=680;gain=.5}
+    else if(s.dir==='pause'){freq=200;gain=.12}
+    const t=audio.currentTime;
+    const o=audio.createOscillator(), g=audio.createGain();
+    o.frequency.value=freq;
+    o.type=(s.dir==='forward'||s.dir==='back')?'triangle':'sine';
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(gain,t+.004);
+    g.gain.exponentialRampToValueAtTime(.0001,t+.10);
+    o.connect(g).connect(audio.destination);
+    o.start(t); o.stop(t+.12);
+  }
+
+  function fillRow(row,label,seq){
+    row.innerHTML='<div class="rowlabel">'+label+'</div>';
+    seq.forEach((s,i)=>{
+      const c=document.createElement('div');
+      c.className='cell '+s.cls;
+      c.dataset.beat=i;
+      if(s.dir==='pause'){
+        c.innerHTML='<span class="arrow">·</span>';
+      }else{
+        c.innerHTML='<span class="arrow">'+s.arrow+'</span><span class="lbl">'+s.lbl+'</span>';
+      }
+      row.appendChild(c);
+    });
+  }
+
+  // ölçü açıklaması (tek sefer)
+  const measure=document.getElementById('measure');
+  for(let i=0;i<8;i++){
+    const rest=!STEP[i];
+    const d=document.createElement('div');
+    d.className='mb'+(rest?' rest':'');
+    d.innerHTML='<div class="n">'+(i+1)+'</div><div class="t">'+(rest?'boş':'adım')+'</div>';
+    measure.appendChild(d);
+  }
+
+  // her player kendi durumunu (stil, tempo, oynatma) bağımsız tutar
+  function makePlayer(root,kind){
+    const headRow=root.querySelector('.j-head');
+    const row1=root.querySelector('.j-row1');
+    const row2=root.querySelector('.j-row2');
+    const phraseEl=root.querySelector('.j-phrase');
+    const on1Btn=root.querySelector('.j-on1');
+    const on2Btn=root.querySelector('.j-on2');
+    const playBtn=root.querySelector('.j-play');
+    const playIco=root.querySelector('.j-play-ico');
+    const playTxt=root.querySelector('.j-play-txt');
+    const bpmInput=root.querySelector('.j-bpm');
+    const bpmVal=root.querySelector('.j-bpm-val');
+
+    let mode='on1', playing=false, beat=-1, timer=null, bpm=+bpmInput.value;
+
+    function seqFor(){ return kind==='solo'?data.solo[mode]:data.partner[mode].leader; }
+
+    function build(){
+      headRow.innerHTML='<div class="rowlabel"></div>';
+      for(let i=0;i<8;i++){
+        const c=document.createElement('div');
+        c.className='num-cell'+(STEP[i]?' beat':'');
+        c.dataset.beat=i;
+        c.textContent=i+1;
+        headRow.appendChild(c);
+      }
+      if(kind==='solo'){
+        fillRow(row1,'Solo',data.solo[mode]);
+      }else{
+        fillRow(row1,'Lider',data.partner[mode].leader);
+        fillRow(row2,'Takipçi',data.partner[mode].follower);
+      }
+      phraseEl.innerHTML=phrases[kind][mode];
+    }
+
+    function paint(b){
+      root.querySelectorAll('.cell.is-on,.num-cell.is-on').forEach(e=>e.classList.remove('is-on'));
+      if(b<0) return;
+      root.querySelectorAll('[data-beat="'+b+'"]').forEach(e=>e.classList.add('is-on'));
+    }
+
+    function tick(){ beat=(beat+1)%8; paint(beat); click(seqFor(),beat); }
+    function start(){ ensureAudio(); playing=true; playIco.textContent='⏸'; playTxt.textContent='Durdur'; tick(); timer=setInterval(tick,60000/bpm); }
+    function stop(){ playing=false; clearInterval(timer); timer=null; playIco.textContent='▶'; playTxt.textContent='Oynat'; }
+
+    function setMode(m){
+      mode=m;
+      on1Btn.setAttribute('aria-pressed',m==='on1');
+      on2Btn.setAttribute('aria-pressed',m==='on2');
+      build();
+      if(beat>=0) paint(beat);
+    }
+
+    playBtn.addEventListener('click',()=>{ playing?stop():start(); });
+    on1Btn.addEventListener('click',()=>setMode('on1'));
+    on2Btn.addEventListener('click',()=>setMode('on2'));
+    bpmInput.addEventListener('input',()=>{
+      bpm=+bpmInput.value;
+      bpmVal.textContent=bpm;
+      if(playing){ clearInterval(timer); timer=setInterval(tick,60000/bpm); }
+    });
+
+    build();
+  }
+
+  makePlayer(document.getElementById('soloPlayer'),'solo');
+  makePlayer(document.getElementById('partnerPlayer'),'partner');
+})();
+</script>
+
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
