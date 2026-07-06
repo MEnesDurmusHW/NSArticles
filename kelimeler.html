@@ -426,8 +426,19 @@ function wireHeads(){
       const entry = btn.parentElement;
       const open = entry.classList.toggle('open');
       btn.setAttribute('aria-expanded', open ? 'true':'false');
+      if(open) scrollEntryToTop(entry);
     });
     btn.addEventListener('focus', ()=>markFocused(i));
+  });
+}
+function scrollEntryToTop(entry){
+  // açılan kartın başlığını sabit sekme çubuğunun hemen altına getir,
+  // böylece içeriğin tamamı elle kaydırmadan okunabilir olsun
+  requestAnimationFrame(()=>{
+    const tabs = document.querySelector('.tabs');
+    const offset = (tabs ? tabs.offsetHeight : 0) + 16;
+    const y = entry.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({top: Math.max(0, y), behavior:'smooth'});
   });
 }
 function markFocused(i){
