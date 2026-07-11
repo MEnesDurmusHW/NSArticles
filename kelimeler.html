@@ -328,6 +328,16 @@
   .rd-en + .rd-en{margin-top:12px}
   mark.rd-hl{background:var(--accent-soft);color:var(--accent);font-weight:600;padding:0 3px;border-radius:4px}
   .reading-view.hide-tr .rd-tr{display:none}
+  /* okuma hikâyeleri */
+  .art{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:18px clamp(16px,3vw,22px);margin-bottom:16px}
+  .art-title{font-family:var(--serif);font-weight:600;font-size:1.25rem;color:var(--text);margin:0 0 12px;letter-spacing:-.01em}
+  .art-en p{color:var(--text);line-height:1.75;margin:0 0 10px}
+  .art-en p:last-child{margin-bottom:0}
+  .art-tr{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+  .art-tr p{color:var(--text-dim);line-height:1.7;margin:0 0 8px}
+  .art-tr p:last-child{margin-bottom:0}
+  .artword{color:var(--accent);font-weight:600}
+  .reading-view.hide-tr .art-tr{display:none}
 
   /* istatistik */
   .stat-bar{display:flex;height:16px;border-radius:999px;overflow:hidden;border:1px solid var(--border);margin:16px 0}
@@ -352,18 +362,37 @@
   .assess-btn.flag.on{background:var(--accent);border-color:var(--accent);color:#fff}
 
   .sent-wrap,.sent-intro{max-width:620px;margin-left:auto;margin-right:auto}
-  .sent-intro{margin-top:0;margin-bottom:20px;color:var(--text-dim);font-size:.92rem;line-height:1.6;text-align:justify}
-  .sent-item{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:16px clamp(14px,3vw,20px);margin-bottom:14px}
+  .sent-intro{margin-top:0;margin-bottom:16px;color:var(--text-dim);font-size:.9rem;line-height:1.55}
+  .sent-item{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:12px 14px;margin-bottom:10px}
   .sent-head{display:flex;align-items:center;gap:8px}
-  .sent-remove{margin-left:auto;appearance:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:.72rem;border:1px solid var(--border);background:transparent;color:var(--text-dim);border-radius:999px;padding:5px 12px;transition:.15s}
+  .sent-word{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--accent);line-height:1.2}
+  .sent-type{font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+  .sent-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
+  .sent-detail,.sent-remove{appearance:none;cursor:pointer;width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text-dim);display:flex;align-items:center;justify-content:center;padding:0;transition:.15s;font-size:1.15rem;line-height:1}
+  .sent-detail svg{width:15px;height:15px}
+  .sent-detail:hover{border-color:var(--accent);color:var(--accent)}
   .sent-remove:hover{border-color:var(--bad);color:var(--bad)}
-  .sent-ipa{margin-top:8px;font-family:var(--mono);font-size:.8rem;color:var(--text-dim)}
-  .sent-mean{margin-top:8px;color:var(--text);font-weight:500}
-  .sent-models{margin-top:14px}
-  .sent-models .lbl{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
-  .sent-label{display:block;margin-top:16px;margin-bottom:6px;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
-  .sent-input{width:100%;box-sizing:border-box;font-family:var(--sans);font-size:1rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;resize:vertical;line-height:1.5}
-  .sent-input:focus{outline:none;border-color:var(--accent)}
+  .sent-ex{margin:7px 0 0;color:var(--text);font-style:italic;line-height:1.5;font-size:.95rem}
+  .sent-ex + .sent-ex{margin-top:4px}
+
+  /* tıklanabilir İngilizce kelimeler + popover + modal */
+  .wordref{cursor:help;text-decoration:underline;text-decoration-style:dotted;text-decoration-thickness:1px;text-underline-offset:2px}
+  .wordref:hover{text-decoration-style:solid}
+  .wordpop{position:fixed;z-index:300;min-width:150px;max-width:230px;background:var(--paper);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 34px rgba(0,0,0,.18);padding:10px;display:flex;flex-direction:column;gap:8px}
+  .wordpop[hidden]{display:none}
+  .wp-title{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--text);line-height:1.15}
+  .wp-btn{appearance:none;cursor:pointer;text-decoration:none;text-align:center;font-family:var(--sans);font-weight:600;font-size:.82rem;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:9px;padding:8px 10px;transition:.15s;display:block}
+  .wp-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .wp-detail{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .wp-detail:hover{background:var(--accent);color:#fff;opacity:.9}
+  .wp-note{font-size:.72rem;color:var(--text-muted);text-align:center}
+
+  .wordmodal-backdrop{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto}
+  .wordmodal-backdrop[hidden]{display:none}
+  .wordmodal{position:relative;width:100%;max-width:560px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px clamp(16px,4vw,26px);box-shadow:0 24px 60px rgba(0,0,0,.32)}
+  .wordmodal .cd-word{padding-right:40px}
+  .wordmodal-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text-dim);font-size:1.3rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+  .wordmodal-close:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -461,7 +490,7 @@
     <div class="card-details" id="cardDetails"></div>
 
     <p class="kbd-hint">
-      <kbd>Boşluk</kbd> çevir · <kbd>←</kbd> <kbd>→</kbd> gez · <kbd>N</kbd> bilemedim · <kbd>M</kbd> bildim · <kbd>B</kbd> açıklama · <kbd>C</kbd> cümle listesi · <kbd>S</kbd> karıştır
+      <kbd>Boşluk</kbd> çevir · <kbd>←</kbd> <kbd>→</kbd> gez · <kbd>N</kbd> bilemedim · <kbd>M</kbd> bildim · <kbd>B</kbd> açıklama · <kbd>L</kbd> cümle listesi · <kbd>S</kbd> karıştır
     </p>
   </div>
 
@@ -510,7 +539,7 @@
 
   <!-- CÜMLE PRATİĞİ -->
   <div class="mode-view" id="view-sentence" role="tabpanel" aria-labelledby="tab-sentence">
-    <p class="sent-intro">Anlamını bildiğin ama cümlede kullanmakta zorlandığın kelimeleri buraya ekle. Örnek modellere bakıp kendi cümleni yaz; yazdıkların kaydedilir, sonra üstüne düşebilirsin.</p>
+    <p class="sent-intro">Cümlede zorlandığın kelimeler ve örnek cümleleri. Tam içerik için sağ üstteki düğmeye bas.</p>
     <div class="sent-wrap" id="sentenceList"></div>
   </div>
 
@@ -519,6 +548,14 @@
     <div class="stats-wrap" id="statsWrap"></div>
   </div>
 
+</div>
+
+<div class="wordpop" id="wordpop" role="menu" hidden></div>
+<div class="wordmodal-backdrop" id="wordModalBack" hidden>
+  <div class="wordmodal" role="dialog" aria-modal="true">
+    <button class="wordmodal-close" id="wordModalClose" type="button" aria-label="Kapat">&times;</button>
+    <div class="wordmodal-body" id="wordModalBody"></div>
+  </div>
 </div>
 
 <div class="list-nav" id="listNav">
@@ -633,6 +670,31 @@ const WORDS = [
 /* ============ KURULUM ============ */
 WORDS.forEach((w,i)=>{ w._i = i; });
 
+// kelime arama tablosu: her İngilizce biçim -> kelime kaydı
+const LOOKUP = {};
+WORDS.forEach(w=>{ w.en.split('/').map(x=>x.trim()).filter(Boolean).forEach(f=>{ LOOKUP[f.toLowerCase()] = w; }); });
+
+// İngilizce sözcükleri (parantez dışı) tıklanabilir yap
+function linkifyWords(str){
+  let out='', word='', depth=0;
+  function flush(){
+    if(!word) return;
+    if(depth===0 && word.length>1 && /^[A-Za-z][A-Za-z'-]*$/.test(word))
+      out += '<span class="wordref" data-w="'+word.toLowerCase()+'">'+word+'</span>';
+    else out += word;
+    word='';
+  }
+  for(const ch of str){
+    if(/[A-Za-z'-]/.test(ch)){ word+=ch; continue; }
+    flush();
+    if(ch==='(') depth++;
+    else if(ch===')') depth=Math.max(0,depth-1);
+    out += ch;
+  }
+  flush();
+  return out;
+}
+
 const TYPE_EN = {'kelime':'Word','sıfat':'Adjective','kalıp':'Phrase','deyim':'Idiom','phrasal fiil':'Phrasal verb','cümle':'Sentence'};
 function typeLabel(t){ return TYPE_EN[t] || t; }
 function ipaBlock(w){
@@ -647,10 +709,10 @@ function detailFields(w){
   h += '<div class="field tr-main"><span class="lbl">Meaning</span><p>'+w.tr+'</p></div>';
   if(w.similar){
     const m = w.similar.split(/\.\s*Fark:\s*/);
-    const sh = m.length>1 ? '<b class="syn">'+m[0]+'.</b><span class="diff">'+m[1]+'</span>' : '<b class="syn">'+w.similar+'</b>';
+    const sh = m.length>1 ? '<b class="syn">'+linkifyWords(m[0])+'.</b><span class="diff">'+m[1]+'</span>' : '<b class="syn">'+linkifyWords(w.similar)+'</b>';
     h += '<div class="field"><span class="lbl">Benzer kelimeler</span><p>'+sh+'</p></div>';
   }
-  if(w.opposite) h += '<div class="field antonyms"><span class="lbl">Zıt kelimeler</span><p><b class="ant">'+w.opposite+'</b></p></div>';
+  if(w.opposite) h += '<div class="field antonyms"><span class="lbl">Zıt kelimeler</span><p><b class="ant">'+linkifyWords(w.opposite)+'</b></p></div>';
   let ex = '<p class="en-ex">'+w.ex+'</p><p class="tr-ex">'+w.exTr+'</p>';
   if(w.ex2) ex += '<p class="en-ex">'+w.ex2+'</p><p class="tr-ex">'+w.exTr2+'</p>';
   h += '<div class="field"><span class="lbl">Examples</span>'+ex+'</div>';
@@ -711,7 +773,11 @@ function paintEntryStripe(i){
 
 /* ============ FİLTRE ============ */
 let filterVal = 'all';
-function matchesFilter(w){ return filterVal==='all' ? true : statusOf(w.en)===filterVal; }
+function matchesFilter(w){
+  if(filterVal==='all') return true;
+  if(filterVal==='shaky') return statusOf(w.en)!=='known';  // Sağlam değil = sağlam olmayan her şey (zayıf dahil)
+  return statusOf(w.en)===filterVal;
+}
 function activeWords(){ return WORDS.filter(matchesFilter); }
 
 /* ============ LİSTE ============ */
@@ -793,6 +859,7 @@ function updateCount(){
   else if(currentTab==='quiz') countEl.textContent = 'Doğru '+quiz.correct+' / '+quiz.total;
   else if(currentTab==='fill') countEl.textContent = 'Doğru '+fill.correct+' / '+fill.total;
   else if(currentTab==='sentence') countEl.textContent = WORDS.filter(w=>isFlagged(w.en)).length+' kelime';
+  else if(currentTab==='reading') countEl.textContent = ARTICLES.length+' hikâye';
   else countEl.textContent = activeWords().length+' kelime';
 }
 function selectTab(t){
@@ -977,21 +1044,101 @@ fReveal.addEventListener('click', revealFill);
 fNext.addEventListener('click', newFill);
 fInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); if(fill.answered) newFill(); else checkFill(); } });
 
-/* ============ OKUMA ============ */
+/* ============ OKUMA (hikâyeler) ============ */
 const rdList=document.getElementById('rdList'), rdToggle=document.getElementById('rdToggle');
-function highlightWord(w, sent){
-  let out=sent;
-  coreForms(w.en).forEach(f=>{ out=out.replace(wordRegex(f), m=>'<mark class="rd-hl">'+m+'</mark>'); });
-  return out;
+const ARTICLES = [
+{ title:`The Takeover`,
+  en:`Nadia ran the company with a {{ruthless}} focus on profit. She was {{blunt}} in every meeting: "Cut costs or leave." Last year a single {{blunder}} nearly sank the firm, so now she held every manager {{accountable}}.
+
+Then a scandal broke. A rival claimed the last contract was {{rigged}}, won through bribes and {{fake claims}}. Nadia said the numbers were clean, but the two reports kept {{contradicting}} each other. The board was {{on the fence}}: some wanted her gone, others said she had the {{moral fibre and merits}} to survive.
+
+"We can't ignore {{the elephant in the room}}," a director said. "If we {{cut corners}} on safety, someone gets hurt." Nadia refused to {{hoodwink}} anyone. "We barely {{break even}} as it is," she snapped. "Hiding a fault would make me a {{hypocrite}}. So we tell the truth and {{deal with it}}."`,
+  tr:`Nadia şirketi kâra acımasız bir odakla yönetiyordu. Her toplantıda dobraydı: "Ya masrafları kısın ya da gidin." Geçen yıl tek bir gaf firmayı neredeyse batırmıştı, bu yüzden artık her yöneticiyi sorumlu tutuyordu.
+
+Derken bir skandal patladı. Bir rakip, son ihalenin hileli olduğunu, rüşvet ve sahte iddialarla kazanıldığını öne sürdü. Nadia rakamların temiz olduğunu söyledi ama iki rapor sürekli birbiriyle çelişiyordu. Yönetim kurulu kararsızdı: kimisi onun gitmesini istiyor, kimisi ayakta kalacak ahlaki değerler ve erdemlere sahip olduğunu söylüyordu.
+
+"Şu herkesin gördüğü ama konuşmadığı sorunu görmezden gelemeyiz," dedi bir üye. "Güvenlikte işi baştan savarsak biri zarar görür." Nadia kimseyi kandırmaya yanaşmadı. "Zaten zar zor başa baş noktasındayız," diye çıkıştı. "Bir kusuru gizlemek beni ikiyüzlü yapar. O yüzden gerçeği söyler ve idare ederiz."`
+},
+{ title:`The Fire on Elm Street`,
+  en:`The blaze started just after midnight. {{By all accounts|by all accounts}} it was no accident: an {{arsonist}} had poured fuel down the stairwell, and the flames spread in an {{indiscriminate}} rush, sparing nothing.
+
+Neighbours fled to the {{curbside}} in an {{eerie}} silence. An old, damp {{bunker}} from the war filled with families. Firefighters worked to {{suck out}} the smoke and {{stir}} the trapped air.
+
+By dawn the {{death toll}} stood at four, with dozens more among the {{casualties}}. The fire had {{crippled}} half the district; shops that were already {{stagnant}} would never reopen. As {{the cost of living continued to soar}}, few could rebuild. Police suspected a {{clandestine}} feud. It seemed almost {{cruel}} that one match could undo so many lives.`,
+  tr:`Yangın gece yarısını biraz geçe başladı. Herkesin dediğine göre kaza değildi: bir kundakçı merdiven boşluğuna yakıt dökmüştü ve alevler ayrım gözetmeyen bir hızla yayıldı, hiçbir şeyi esirgemedi.
+
+Komşular tekinsiz bir sessizlik içinde yol kenarına kaçtı. Savaştan kalma nemli, eski bir sığınak ailelerle doldu. İtfaiyeciler dumanı emerek çekmeye ve sıkışan havayı karıştırmaya çalıştı.
+
+Şafakta ölü sayısı dörde ulaştı, onlarca kişi de yaralılar arasındaydı. Yangın ilçenin yarısını felç etmişti; zaten durgun olan dükkânlar bir daha açılmayacaktı. Hayat pahalılığı fırlamaya devam ederken çok azı yeniden inşa edebildi. Polis gizli bir husumetten şüphelendi. Tek bir kibritin bunca hayatı yıkması neredeyse zalimceydi.`
+},
+{ title:`Mara and the Clip`,
+  en:`The show followed the {{tangled love lives}} of five roommates, and the public loved it. Its star, Mara, adored the {{limelight}} but rarely agreed to {{share the limelight}} with the cast.
+
+When an old clip surfaced, {{cancel culture}} came for her overnight. Fans were {{exasperated}}; one co-star grew {{agitated}}, another {{perturbed}}. On camera Mara did not {{bat an eyelid|not bat an eyelid}}, though inside she was afraid. Her friends spent nights {{commiserating}} with her.
+
+Instead of trying to {{get someone back|get someone back for something}} or {{start a vendetta against}} her critics, she {{came across|come across}} as humble. A {{greedy}} agent urged a lawsuit, but attacking a teenager online would be {{way below the belt}}. "I should {{take a leaf out of|take a leaf out of someone's book}} my grandmother," she said. In the end the two sides found {{common ground}}, and a quiet {{indulgence}} replaced the noise. Mara slowly learned to {{blend in}} again.`,
+  tr:`Dizi, beş ev arkadaşının karmakarışık aşk hayatlarını anlatıyordu ve halk buna bayılıyordu. Yıldızı Mara ilgi odağı olmaya bayılırdı ama parlayan anı oyuncularla paylaşmaya pek yanaşmazdı.
+
+Eski bir video ortaya çıkınca dışlama kültürü bir gecede peşine düştü. Hayranlar bezmişti; bir oyuncu arkadaşı telaşlandı, bir diğeri huzursuz oldu. Mara kamera önünde gözünü bile kırpmadı, içten içe korksa da. Arkadaşları geceleri onunla dertleşerek geçirdi.
+
+Eleştirenlerden acısını çıkarmaya ya da onlara karşı husumet başlatmaya çalışmak yerine alçakgönüllü göründü. Açgözlü bir menajer dava açmaya itti ama internette bir gence saldırmak çok ayıp olurdu. "Büyükannemi örnek almalıyım," dedi. Sonunda iki taraf ortak bir zemin buldu; gürültünün yerini sakin bir keyif aldı. Mara yavaş yavaş yeniden ortama karışmayı öğrendi.`
+},
+{ title:`Dinner Scare`,
+  en:`At the family dinner, Grandpa suddenly went pale and could not breathe. A fish bone had lodged in his throat. Aunt Lena, a nurse, rushed over and performed the {{Heimlich maneuver|heimlich maneuver}}, thrusting hard until the bone shot out.
+
+Grandpa's {{pacemaker}} kept his heart steady through the shock. Once he could speak, he gave a weak {{nod}}. His {{eyelids|eyelid}} were heavy, and a loud {{hiccough}} made everyone laugh with relief.
+
+"That was no small thing," Mum said, cutting the rest of the fish along a clean {{slit}}. Earlier that day Grandpa had pulled a muscle, a painful {{charley horse}}, and joked that old age was a {{burden}}. But moments like this reminded us how {{valuable}}, even {{irreplaceable}}, his presence was. In the tank nearby, a goldfish opened its {{gills|gill}}, calm as ever.`,
+  tr:`Aile yemeğinde dede birden bembeyaz oldu ve nefes alamadı. Boğazına bir kılçık takılmıştı. Hemşire olan Lena teyze koşup Heimlich manevrasını uyguladı; kılçık fırlayana dek sert sert bastırdı.
+
+Dedenin kalp pili, şok boyunca kalbini düzenli tuttu. Konuşabilince hafifçe başını salladı. Göz kapakları ağırlaşmıştı ve yüksek bir hıçkırık herkesi rahatlamayla güldürdü.
+
+"Az buz iş değildi," dedi annem, kalan balığı düzgün bir yarık boyunca keserken. O gün erken saatte dede bir kasını incitmiş, acı veren bir kramp yaşamış ve yaşlılığın bir yük olduğuna şaka yapmıştı. Ama böyle anlar bize onun varlığının ne kadar değerli, hatta yeri doldurulamaz olduğunu hatırlattı. Yanındaki akvaryumda bir japon balığı, her zamanki kadar sakin, solungaçlarını açıp kapadı.`
+},
+{ title:`Launch Week`,
+  en:`Our team had a week to {{carry out}} the new launch, and nobody could {{figure out}} where to start. After a short {{preamble}}, the manager began to {{narrow down}} the tasks. The new system also had to stay {{backward compatible}} with the old one.
+
+"Let me {{point out}} one risk," said Omar. "If the server fails, what do we {{fall back on}}?" Someone had forgotten to {{back up}} the files, a job we kept meaning to {{get around to}}. We could not {{put off}} the launch again.
+
+I had {{come across}} a similar plan online and, {{by all accounts|by all accounts}}, it had {{turned out|turn out}} well. "Before we decide, let's {{think it through}}," Omar said. "I {{reckon}} we can recover our costs in a month." It took a while to {{get the hang of}} the tools, but if we {{bring up}} problems early, the project might not {{wind up}} a disaster.`,
+  tr:`Ekibimizin yeni lansmanı gerçekleştirmek için bir haftası vardı ve kimse nereden başlayacağını çözemiyordu. Kısa bir girişin ardından yönetici görevleri daraltmaya başladı. Yeni sistemin ayrıca eskisiyle geriye dönük uyumlu kalması gerekiyordu.
+
+"Bir riske dikkat çekeyim," dedi Omar. "Sunucu çökerse neye başvuracağız?" Biri dosyaları yedeklemeyi unutmuştu; sürekli "sıra gelince yaparız" dediğimiz bir işti. Lansmanı yine erteleyemezdik.
+
+İnternette benzer bir plana rastlamıştım ve herkesin dediğine göre iyi sonuç vermişti. "Karar vermeden önce iyice düşünelim," dedi Omar. "Bence bir ayda masrafımızı çıkarırız." Araçların tekniğini kapmak biraz sürdü ama sorunları erken açarsak proje bir felakete dönüşmeyebilir.`
+},
+{ title:`On Advice and Fame`,
+  en:`Good advice is often {{subtle}}, and its worth only shows {{in the long run}}. A single tip can be {{crucial}}, yet we ignore what is quietly {{considerable}} and chase what is loud.
+
+Fame is {{a double-edged sword}}: it opens doors but invites judgement. When a critic said success is mostly luck, he {{hit the nail on the head}}, though that was only {{the tip of the iceberg}}. Treat bold promises with care; {{take them with a grain of salt|take something with a grain of salt}}. A {{compelling}} argument can still be false. It helps to {{play devil's advocate}} and raise the opposite view in a {{deliberate}} test of your own idea.
+
+Ambition has a {{tendency}} to blind us, so burnout feels almost {{inevitable}} and is {{detrimental}} to work and health. In a quiet {{detached house}} far from the city, a novelist known only by her {{pen name}} understood this. Her {{absence}} from the spotlight was chosen on purpose. "A star envies a newer star. {{How is that news|how is that news}}?" she wrote.`,
+  tr:`İyi tavsiye çoğu zaman inceliklidir ve değeri ancak uzun vadede belli olur. Tek bir öneri hayati olabilir; oysa sessizce hatırı sayılır olanı görmezden gelip gürültülü olanın peşine düşeriz.
+
+Şöhret iki ucu keskin bir kılıçtır: kapılar açar ama yargılanmayı davet eder. Bir eleştirmen başarının çoğunlukla şans olduğunu söylediğinde tam üstüne bastı, ama bu buzdağının yalnızca görünen ucuydu. İddialı vaatlere temkinli yaklaş; onları şüpheyle karşıla. İkna edici bir argüman bile yanlış olabilir. Kendi fikrini sınamak için bilerek karşı tarafı savunmak ve zıt görüşü ortaya atmak işe yarar.
+
+Hırsın gözümüzü karartma eğilimi vardır; bu yüzden tükenmişlik neredeyse kaçınılmazdır ve hem işe hem sağlığa zararlıdır. Şehirden uzak, sessiz bir müstakil evde, yalnızca takma adıyla tanınan bir romancı bunu anlamıştı. Onun ilgi odağından uzak kalışı bilinçliydi. "Bir yıldız daha yeni bir yıldızı kıskanıyor. Bunun neresi haber?" diye yazdı.`
+}
+];
+function renderArticleEN(text){
+  return text.trim().split(/\n\s*\n/).map(p=>
+    '<p>'+p.trim().replace(/\{\{([^}|]+)(?:\|([^}]+))?\}\}/g,(m,a,b)=>{
+      const base=(b||a).trim().toLowerCase();
+      return '<b class="artword wordref" data-w="'+base+'">'+a.trim()+'</b>';
+    })+'</p>'
+  ).join('');
+}
+function renderArticleTR(text){
+  return text.trim().split(/\n\s*\n/).map(p=>'<p>'+p.trim()+'</p>').join('');
 }
 function renderReading(){
-  const aw=shuffle(activeWords());
-  if(!aw.length){ rdList.innerHTML='<div class="empty">Bu filtrede kelime yok.</div>'; return; }
-  rdList.innerHTML=aw.map(w=>{
-    let en='<p class="rd-en">'+highlightWord(w,w.ex)+'</p><p class="rd-tr">'+w.exTr+'</p>';
-    if(w.ex2) en+='<p class="rd-en">'+highlightWord(w,w.ex2)+'</p><p class="rd-tr">'+w.exTr2+'</p>';
-    return '<div class="rd-item"><span class="rd-word">'+w.en+'</span><span class="rd-type">'+typeLabel(w.type)+'</span>'+en+'</div>';
-  }).join('');
+  rdList.innerHTML = ARTICLES.map(a=>
+    '<article class="art">'+
+      '<h3 class="art-title">'+a.title+'</h3>'+
+      '<div class="art-en">'+renderArticleEN(a.en)+'</div>'+
+      '<div class="art-tr">'+renderArticleTR(a.tr)+'</div>'+
+    '</article>'
+  ).join('');
 }
 rdToggle.addEventListener('click', ()=>{
   const hidden=view.reading.classList.toggle('hide-tr');
@@ -1003,24 +1150,28 @@ rdToggle.addEventListener('click', ()=>{
 const sentenceList=document.getElementById('sentenceList');
 function renderSentence(){
   const flagged=WORDS.filter(w=>isFlagged(w.en));
-  if(!flagged.length){ sentenceList.innerHTML='<div class="empty">Cümle pratiği listen boş. Karttaki yer imi düğmesiyle (klavyede C) ya da listedeki "Cümle" düğmesiyle kelime ekle.</div>'; return; }
+  if(!flagged.length){ sentenceList.innerHTML='<div class="empty">Cümle listen boş. Karttaki yer imi düğmesiyle (klavyede L) ya da listedeki "Cümle" düğmesiyle kelime ekle.</div>'; return; }
   sentenceList.innerHTML=flagged.map(w=>{
-    const ipa=[w.uk&&'UK '+w.uk,w.us&&'US '+w.us].filter(Boolean).join('   ');
-    let models='<p class="rd-en">'+w.ex+'</p><p class="rd-tr">'+w.exTr+'</p>';
-    if(w.ex2) models+='<p class="rd-en">'+w.ex2+'</p><p class="rd-tr">'+w.exTr2+'</p>';
+    let ex='<p class="sent-ex">'+w.ex+'</p>';
+    if(w.ex2) ex+='<p class="sent-ex">'+w.ex2+'</p>';
     return '<div class="sent-item" data-i="'+w._i+'">'+
-      '<div class="sent-head"><span class="rd-word">'+w.en+'</span><span class="rd-type">'+typeLabel(w.type)+'</span>'+
-        '<button type="button" class="sent-remove" aria-label="Listeden çıkar">Çıkar</button></div>'+
-      (ipa?'<div class="sent-ipa">'+ipa+'</div>':'')+
-      '<div class="sent-mean">'+w.tr+'</div>'+
-      '<div class="sent-models"><span class="lbl">Örnek modeller</span>'+models+'</div>'+
-      '<label class="sent-label">Kendi cümlen</label>'+
-      '<textarea class="sent-input" data-i="'+w._i+'" rows="2" placeholder="Bu kelimeyle kendi cümleni yaz...">'+escapeHTML(getSent(w.en))+'</textarea>'+
+      '<div class="sent-head">'+
+        '<span class="sent-word">'+w.en+'</span>'+
+        '<span class="sent-type">'+typeLabel(w.type)+'</span>'+
+        '<span class="sent-actions">'+
+          '<button type="button" class="sent-detail" aria-label="Detayı aç" title="Detay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></button>'+
+          '<button type="button" class="sent-remove" aria-label="Listeden çıkar" title="Çıkar">&times;</button>'+
+        '</span>'+
+      '</div>'+ex+
     '</div>';
   }).join('');
 }
-sentenceList.addEventListener('input', e=>{ const ta=e.target.closest('.sent-input'); if(!ta) return; setSent(WORDS[+ta.dataset.i].en, ta.value); });
-sentenceList.addEventListener('click', e=>{ const b=e.target.closest('.sent-remove'); if(!b) return; const item=b.closest('.sent-item'); toggleFlag(WORDS[+item.dataset.i].en); renderSentence(); updateCount(); });
+sentenceList.addEventListener('click', e=>{
+  const item=e.target.closest('.sent-item'); if(!item) return;
+  const i=+item.dataset.i;
+  if(e.target.closest('.sent-detail')){ openWordModal(WORDS[i]); return; }
+  if(e.target.closest('.sent-remove')){ toggleFlag(WORDS[i].en); renderSentence(); updateCount(); }
+});
 
 /* ============ İSTATİSTİK ============ */
 const statsWrap=document.getElementById('statsWrap');
@@ -1057,7 +1208,7 @@ document.addEventListener('keydown', e=>{
     else if(e.key.toLowerCase()==='n'){ e.preventDefault(); rate(-1); }
     else if(e.key.toLowerCase()==='m'){ e.preventDefault(); rate(1); }
     else if(e.key.toLowerCase()==='b'){ e.preventDefault(); toggleCardDetails(); }
-    else if(e.key.toLowerCase()==='c'){ e.preventDefault(); toggleCardFlag(); }
+    else if(e.key.toLowerCase()==='l'){ e.preventDefault(); toggleCardFlag(); }
     else if(e.key.toLowerCase()==='s'){ e.preventDefault(); shuffleCards(); }
   } else if(currentTab==='quiz'){
     if(['1','2','3','4'].indexOf(e.key)>=0){ const b=qOptions.children[+e.key-1]; if(b && !b.disabled) b.click(); }
@@ -1068,6 +1219,47 @@ document.addEventListener('keydown', e=>{
 /* mobil yukarı/aşağı */
 document.getElementById('navUp').addEventListener('click', ()=>moveFocus(-1));
 document.getElementById('navDown').addEventListener('click', ()=>moveFocus(1));
+
+/* ============ KELİME POPOVER + MODAL ============ */
+const wordpop=document.getElementById('wordpop');
+const modalBack=document.getElementById('wordModalBack'), modalBody=document.getElementById('wordModalBody'), modalClose=document.getElementById('wordModalClose');
+let popTimer=null;
+function cambridgeURL(w){ return 'https://dictionary.cambridge.org/dictionary/english/'+encodeURIComponent(w.trim().toLowerCase().replace(/\s+/g,'-')); }
+function showWordPop(target){
+  const wtext=target.dataset.w; if(!wtext) return;
+  const entry=LOOKUP[wtext.toLowerCase()];
+  let html='<div class="wp-title">'+wtext+'</div>';
+  html+='<a class="wp-btn" href="'+cambridgeURL(wtext)+'" target="_blank" rel="noopener">Cambridge <span aria-hidden="true">&#8599;</span></a>';
+  if(entry) html+='<button class="wp-btn wp-detail" type="button" data-en="'+entry._i+'">İçeriği göster</button>';
+  else html+='<div class="wp-note">Kelime listesinde yok</div>';
+  wordpop.innerHTML=html; wordpop.hidden=false;
+  const r=target.getBoundingClientRect(), pw=wordpop.offsetWidth, ph=wordpop.offsetHeight;
+  const vw=document.documentElement.clientWidth, vh=document.documentElement.clientHeight;
+  let left=r.left, top=r.bottom+6;
+  if(left+pw>vw-8) left=vw-pw-8;
+  if(left<8) left=8;
+  if(top+ph>vh-8) top=r.top-ph-6;
+  wordpop.style.left=left+'px'; wordpop.style.top=Math.max(8,top)+'px';
+}
+function hideWordPop(){ wordpop.hidden=true; }
+function scheduleHide(){ clearTimeout(popTimer); popTimer=setTimeout(hideWordPop, 260); }
+function cancelHide(){ clearTimeout(popTimer); }
+document.addEventListener('mouseover', e=>{ const t=e.target.closest('.wordref'); if(t){ cancelHide(); showWordPop(t); } });
+document.addEventListener('mouseout', e=>{ if(e.target.closest('.wordref')) scheduleHide(); });
+wordpop.addEventListener('mouseenter', cancelHide);
+wordpop.addEventListener('mouseleave', scheduleHide);
+document.addEventListener('click', e=>{
+  const t=e.target.closest('.wordref');
+  if(t){ e.preventDefault(); cancelHide(); showWordPop(t); return; }
+  const d=e.target.closest('.wp-detail');
+  if(d){ openWordModal(WORDS[+d.dataset.en]); hideWordPop(); return; }
+  if(!e.target.closest('#wordpop') && !e.target.closest('.wp-btn')) hideWordPop();
+});
+function openWordModal(w){ modalBody.innerHTML=cardDetailFields(w); modalBack.hidden=false; document.body.style.overflow='hidden'; }
+function closeWordModal(){ modalBack.hidden=true; document.body.style.overflow=''; }
+modalClose.addEventListener('click', closeWordModal);
+modalBack.addEventListener('click', e=>{ if(e.target===modalBack) closeWordModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ if(!modalBack.hidden) closeWordModal(); hideWordPop(); } });
 
 /* ============ BAŞLAT ============ */
 document.body.classList.add('list-active');
