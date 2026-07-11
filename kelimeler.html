@@ -119,17 +119,25 @@
   .ipa .uk b{color:var(--uk)}
   .ipa .us b{color:var(--us)}
 
-  .field{margin:0 0 12px}
+  .field{margin:0 0 16px}
   .field:last-child{margin-bottom:0}
   .field .lbl{
-    display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;
+    display:block;font-family:var(--mono);font-size:.66rem;font-weight:600;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:5px;
   }
-  .field p{margin:0;color:var(--text-dim);text-align:justify}
-  .field .en-ex{color:var(--text);font-style:italic}
-  .field .tr-ex{color:var(--text-dim);margin-top:3px}
-  .field .tr-ex + .en-ex{margin-top:13px}
-  .field.tr-main p{color:var(--text);font-weight:500;font-style:normal}
+  .field p{margin:0;color:var(--text-dim);text-align:left;line-height:1.62;max-width:60ch;text-wrap:pretty}
+  .field.tr-main p{color:var(--text);font-weight:500;font-style:normal;line-height:1.5}
+  .field .en-ex{color:var(--text);font-style:italic;line-height:1.55}
+  .field .tr-ex{color:var(--text-dim);margin-top:3px;line-height:1.55}
+  .field .tr-ex + .en-ex{margin-top:14px}
+  /* öğrenilecek asıl yük: İngilizce eş/zıt kelimeler öne çıksın */
+  .field .syn,.field .ant{color:var(--accent);font-weight:600}
+  .field.antonyms p{letter-spacing:.005em}
+  /* Benzer kelimeler: liste + "Fark" açıklamasını ayır */
+  .field .diff{display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);color:var(--text-dim);line-height:1.62}
+  .field .diff::before{content:"Fark";display:block;font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);opacity:.9;margin-bottom:3px}
+  /* çekirdek alanlar ile meta (açıklama/köken) arasına ince ayraç */
+  .field.explanation{margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
 
   /* ---- flash kart ---- */
   .cards-view{display:none;flex-direction:column;align-items:center}
@@ -637,12 +645,16 @@ function ipaBlock(w){
 function detailFields(w){
   let h = ipaBlock(w);
   h += '<div class="field tr-main"><span class="lbl">Meaning</span><p>'+w.tr+'</p></div>';
-  if(w.similar) h += '<div class="field"><span class="lbl">Benzer kelimeler</span><p>'+w.similar+'</p></div>';
-  if(w.opposite) h += '<div class="field"><span class="lbl">Zıt kelimeler</span><p>'+w.opposite+'</p></div>';
+  if(w.similar){
+    const m = w.similar.split(/\.\s*Fark:\s*/);
+    const sh = m.length>1 ? '<b class="syn">'+m[0]+'.</b><span class="diff">'+m[1]+'</span>' : '<b class="syn">'+w.similar+'</b>';
+    h += '<div class="field"><span class="lbl">Benzer kelimeler</span><p>'+sh+'</p></div>';
+  }
+  if(w.opposite) h += '<div class="field antonyms"><span class="lbl">Zıt kelimeler</span><p><b class="ant">'+w.opposite+'</b></p></div>';
   let ex = '<p class="en-ex">'+w.ex+'</p><p class="tr-ex">'+w.exTr+'</p>';
   if(w.ex2) ex += '<p class="en-ex">'+w.ex2+'</p><p class="tr-ex">'+w.exTr2+'</p>';
   h += '<div class="field"><span class="lbl">Examples</span>'+ex+'</div>';
-  if(w.detail) h += '<div class="field"><span class="lbl">Explanation</span><p>'+w.detail+'</p></div>';
+  if(w.detail) h += '<div class="field explanation"><span class="lbl">Explanation</span><p>'+w.detail+'</p></div>';
   if(w.note)   h += '<div class="field"><span class="lbl">Origin</span><p>'+w.note+'</p></div>';
   if(w.extra)  h += '<div class="field"><span class="lbl">Good to know</span><p>'+w.extra+'</p></div>';
   return h;
