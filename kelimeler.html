@@ -151,6 +151,44 @@
   .coll-chip{display:inline-block;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:6px 11px;font-size:.92rem;color:var(--text-dim);line-height:1.45}
   .coll-chip .cw-key{color:var(--accent);font-weight:700}
 
+  /* ---- collocation sekmesi ---- */
+  .coll-view{max-width:600px;margin:0 auto}
+  .coll-progress{margin:2px 0 20px}
+  .coll-progress .cp-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+  .coll-progress .cp-label{font-size:.85rem;color:var(--text-dim)}
+  .coll-progress .cp-num{font-family:var(--mono);font-size:.8rem;color:var(--text-muted);white-space:nowrap}
+  .coll-progress .stat-bar{margin:0}
+  .coll-progress .cp-note{font-size:.78rem;color:var(--text-muted);margin-top:8px}
+  .coll-sub{display:flex;justify-content:center;margin-bottom:20px}
+
+  /* çalış: kelime kartı */
+  .coll-card{border:1px solid var(--border);border-radius:18px;background:var(--surface);padding:20px clamp(16px,3.5vw,24px)}
+  .coll-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin-bottom:4px}
+  .coll-w-term{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;color:var(--accent);line-height:1.15}
+  .coll-w-type{font-family:var(--mono);font-size:.56rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+  .coll-w-tr{width:100%;font-size:.92rem;color:var(--text-dim);line-height:1.4}
+  .coll-items{margin-top:16px;display:flex;flex-direction:column;gap:14px}
+  .coll-item{padding-top:14px;border-top:1px solid var(--border)}
+  .coll-item:first-child{padding-top:0;border-top:0}
+  .coll-phrase{font-size:1rem;color:var(--text-dim);line-height:1.5;margin-bottom:8px}
+  .coll-phrase .cw-key{color:var(--accent);font-weight:700}
+  .coll-mine{
+    width:100%;box-sizing:border-box;resize:none;overflow:hidden;
+    font-family:var(--sans);font-size:.92rem;line-height:1.5;color:var(--text);
+    background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:9px 12px;transition:border-color .15s;
+  }
+  .coll-mine:focus{outline:none;border-color:var(--accent)}
+  .coll-mine.saved{border-color:var(--ok)}
+  .coll-controls{margin-top:20px}
+  .coll-controls .done-btn.is-done{background:var(--ok);border-color:var(--ok);color:#fff}
+  .coll-controls .done-btn.is-done:hover{opacity:.9;color:#fff}
+  .coll-nav-idx{text-align:center;font-family:var(--mono);font-size:.72rem;color:var(--text-muted);margin-top:12px}
+
+  /* alıştırma */
+  .coll-q-prompt{word-break:break-word}
+  #cexBody .f-sentence .cw-key,#cexBody .q-prompt .cw-key{color:var(--accent);font-weight:700}
+  .cex-blank{color:var(--accent);font-weight:700;letter-spacing:.04em}
+
   /* ---- flash kart ---- */
   .cards-view{display:none;flex-direction:column;align-items:center}
   .cards-view.active{display:flex}
@@ -436,6 +474,7 @@
       <button id="tab-fill" role="tab" aria-selected="false">Boşluk</button>
       <button id="tab-reading" role="tab" aria-selected="false">Okuma</button>
       <button id="tab-sentence" role="tab" aria-selected="false">Cümle</button>
+      <button id="tab-coll" role="tab" aria-selected="false">Collocation</button>
       <button id="tab-stats" role="tab" aria-selected="false">İstatistik</button>
     </div>
     <select class="filter-sel" id="filterSel" aria-label="Kelimeleri filtrele">
@@ -558,6 +597,35 @@
   <div class="mode-view" id="view-sentence" role="tabpanel" aria-labelledby="tab-sentence">
     <p class="sent-intro">Cümlede zorlandığın kelimeler ve örnek cümleleri. Tam içerik için sağ üstteki düğmeye bas.</p>
     <div class="sent-wrap" id="sentenceList"></div>
+  </div>
+
+  <!-- COLLOCATION -->
+  <div class="mode-view" id="view-coll" role="tabpanel" aria-labelledby="tab-coll">
+    <div class="coll-view">
+      <div class="coll-progress" id="collProgress"></div>
+      <div class="coll-sub">
+        <div class="seg" role="group" aria-label="Collocation mode">
+          <button id="coll-study" aria-selected="true">Study</button>
+          <button id="coll-ex" aria-selected="false">Practice</button>
+        </div>
+      </div>
+
+      <!-- ÇALIŞ: tek kelime navigatörü -->
+      <div id="collStudy"></div>
+
+      <!-- ALIŞTIRMA -->
+      <div id="collEx" hidden>
+        <div class="dir-row">
+          <div class="seg" role="group" aria-label="Practice type">
+            <button id="cex-match" aria-selected="true">Match</button>
+            <button id="cex-fill" aria-selected="false">Fill</button>
+          </div>
+        </div>
+        <div class="q-score" id="cexScore"></div>
+        <div id="cexBody"></div>
+        <p class="kbd-hint" id="cexHint"></p>
+      </div>
+    </div>
   </div>
 
   <!-- İSTATİSTİK -->
@@ -894,7 +962,7 @@ function moveFocus(delta){
 }
 
 /* ============ SEKME SİSTEMİ ============ */
-const TABS = ['list','cards','quiz','fill','reading','sentence','stats'];
+const TABS = ['list','cards','quiz','fill','reading','sentence','coll','stats'];
 const tabBtn = {}, view = {};
 TABS.forEach(t=>{ tabBtn[t]=document.getElementById('tab-'+t); view[t]=document.getElementById('view-'+t); });
 let currentTab = 'list';
@@ -904,6 +972,7 @@ function updateCount(){
   else if(currentTab==='quiz') countEl.textContent = 'Doğru '+quiz.correct+' / '+quiz.total;
   else if(currentTab==='fill') countEl.textContent = 'Doğru '+fill.correct+' / '+fill.total;
   else if(currentTab==='sentence') countEl.textContent = WORDS.filter(w=>isFlagged(w.en)).length+' kelime';
+  else if(currentTab==='coll') countEl.textContent = WORDS.filter(w=>isHidden(w.en)).length+' / '+WORDS.length+' solid';
   else if(currentTab==='reading') countEl.textContent = ARTICLES.length+' hikâye';
   else countEl.textContent = activeWords().length+' kelime';
 }
@@ -921,6 +990,7 @@ function selectTab(t){
   else if(t==='fill') startFill();
   else if(t==='reading') renderReading();
   else if(t==='sentence') renderSentence();
+  else if(t==='coll') renderColl();
   else if(t==='stats') renderStats();
   updateCount();
 }
@@ -935,6 +1005,7 @@ function refreshCurrent(){
   else if(currentTab==='fill') startFill();
   else if(currentTab==='reading') renderReading();
   else if(currentTab==='sentence') renderSentence();
+  else if(currentTab==='coll') renderColl();
   else if(currentTab==='stats') renderStats();
   updateCount();
 }
@@ -1220,6 +1291,220 @@ sentenceList.addEventListener('click', e=>{
   if(e.target.closest('.sent-detail')){ openWordModal(WORDS[i]); return; }
   if(e.target.closest('.sent-remove')){ toggleFlag(WORDS[i].en); renderSentence(); updateCount(); }
 });
+
+/* ============ COLLOCATION ============ */
+const COLL_SENT_KEY='ns-vocab-coll-sent';
+let COLL_SENTS={};
+try{ COLL_SENTS=JSON.parse(localStorage.getItem(COLL_SENT_KEY))||{}; }catch(e){ COLL_SENTS={}; }
+function saveCollSents(){ try{ localStorage.setItem(COLL_SENT_KEY,JSON.stringify(COLL_SENTS)); }catch(e){} }
+function getCollSent(en,idx){ return (COLL_SENTS[en]&&COLL_SENTS[en][idx])||''; }
+function setCollSent(en,idx,txt){
+  txt=(txt||'').trim();
+  if(txt){ if(!COLL_SENTS[en]) COLL_SENTS[en]={}; COLL_SENTS[en][idx]=txt; }
+  else if(COLL_SENTS[en]){ delete COLL_SENTS[en][idx]; if(!Object.keys(COLL_SENTS[en]).length) delete COLL_SENTS[en]; }
+  saveCollSents();
+}
+
+const UPPER_RE=/\b[A-Z][A-Z\/'\-]*(?:\s+[A-Z][A-Z\/'\-]*)*\b/;
+function collList(w){ return (w.coll||'').split(' · ').map(s=>s.trim()).filter(Boolean); }
+function collPhraseHTML(p){ return escapeHTML(p).replace(new RegExp(UPPER_RE.source,'g'), function(m){ return '<b class="cw-key">'+m.toLowerCase()+'</b>'; }); }
+function blankAt(phrase,start,len){ return phrase.slice(0,start)+'____'+phrase.slice(start+len); }
+function collBlankHTML(phrase,start,len){ return escapeHTML(phrase.slice(0,start))+'<span class="cex-blank">____</span>'+collPhraseHTML(phrase.slice(start+len)); }
+function findHeadword(w,phrase){
+  const low=phrase.toLowerCase();
+  const forms=coreForms(w.en);
+  for(const f of forms){ const fl=f.toLowerCase(); const i=low.indexOf(fl); if(i>=0) return {start:i,len:f.length}; }
+  return null;
+}
+
+/* ---- ilerleme ---- */
+const collProgress=document.getElementById('collProgress');
+function renderCollProgress(){
+  const total=WORDS.length;
+  const done=WORDS.filter(w=>isHidden(w.en)).length;
+  const withSent=WORDS.filter(w=>COLL_SENTS[w.en]&&Object.keys(COLL_SENTS[w.en]).length).length;
+  const pct=total?Math.round(done/total*100):0;
+  collProgress.innerHTML=
+    '<div class="cp-top"><span class="cp-label">Words consolidated</span><span class="cp-num">'+done+' / '+total+' · '+pct+'%</span></div>'+
+    '<div class="stat-bar"><i class="s-known" style="width:'+(total?done/total*100:0)+'%"></i></div>'+
+    '<div class="cp-note">Your own example in '+withSent+' word'+(withSent===1?'':'s')+'.</div>';
+}
+
+/* ---- çalış: tek kelime navigatörü ---- */
+let collMode='study', collOrder=[], collPos=0;
+function buildCollOrder(){ collOrder=activeWords().map(w=>w._i); if(collPos>=collOrder.length) collPos=Math.max(0,collOrder.length-1); }
+function curColl(){ return WORDS[collOrder[collPos]]; }
+const collStudyEl=document.getElementById('collStudy');
+function autosize(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
+function renderCollStudy(){
+  if(!collOrder.length){ collStudyEl.innerHTML='<div class="empty">No words to show in this filter. Change the filter above.</div>'; return; }
+  const w=curColl(), done=isHidden(w.en);
+  const rows=collList(w).map(function(p,idx){
+    const val=getCollSent(w.en,idx);
+    return '<div class="coll-item">'+
+      '<div class="coll-phrase">'+collPhraseHTML(p)+'</div>'+
+      '<textarea class="coll-mine'+(val?' saved':'')+'" data-idx="'+idx+'" rows="1" placeholder="Write your own sentence with this…">'+escapeHTML(val)+'</textarea>'+
+    '</div>';
+  }).join('');
+  collStudyEl.innerHTML=
+    '<div class="coll-card">'+
+      '<div class="coll-head"><span class="coll-w-term">'+w.en+'</span><span class="coll-w-type">'+typeLabel(w.type)+'</span><span class="coll-w-tr">'+w.tr+'</span></div>'+
+      '<div class="coll-items">'+rows+'</div>'+
+    '</div>'+
+    '<div class="card-controls coll-controls">'+
+      '<button data-act="prev" aria-label="Previous">← Prev</button>'+
+      '<button data-act="done" class="done-btn'+(done?' is-done':'')+'">'+(done?'Solid ✓':'Consolidate')+'</button>'+
+      '<button data-act="shuffle" aria-label="Shuffle">Shuffle</button>'+
+      '<button data-act="next" aria-label="Next">Next →</button>'+
+    '</div>'+
+    '<div class="coll-nav-idx">'+(collPos+1)+' / '+collOrder.length+'</div>';
+  collStudyEl.querySelectorAll('.coll-mine').forEach(autosize);
+}
+function collNext(){ if(!collOrder.length) return; collPos=(collPos+1)%collOrder.length; renderCollStudy(); }
+function collPrev(){ if(!collOrder.length) return; collPos=(collPos-1+collOrder.length)%collOrder.length; renderCollStudy(); }
+function collShuffle(){ collOrder=shuffle(collOrder); collPos=0; renderCollStudy(); }
+function collMarkDone(){
+  if(!collOrder.length) return;
+  toggleHidden(curColl().en);
+  buildCollOrder();
+  renderCollStudy(); renderCollProgress(); updateCount();
+}
+collStudyEl.addEventListener('input', function(e){
+  const ta=e.target.closest('.coll-mine'); if(!ta) return;
+  setCollSent(curColl().en, +ta.dataset.idx, ta.value);
+  ta.classList.toggle('saved', !!ta.value.trim());
+  autosize(ta);
+});
+collStudyEl.addEventListener('click', function(e){
+  const b=e.target.closest('button[data-act]'); if(!b) return;
+  const a=b.dataset.act;
+  if(a==='next') collNext();
+  else if(a==='prev') collPrev();
+  else if(a==='shuffle') collShuffle();
+  else if(a==='done'){ collMarkDone(); renderCollProgress(); }
+});
+
+/* ---- alıştırma ---- */
+let collEx={type:'match', correct:0, total:0, answer:null, done:false};
+const cexScore=document.getElementById('cexScore'), cexBody=document.getElementById('cexBody'), cexHint=document.getElementById('cexHint');
+function setCexSel(){
+  document.getElementById('cex-match').setAttribute('aria-selected', collEx.type==='match'?'true':'false');
+  document.getElementById('cex-fill').setAttribute('aria-selected', collEx.type==='fill'?'true':'false');
+}
+function cexScoreText(){ cexScore.textContent = collEx.total ? ('Correct '+collEx.correct+' / '+collEx.total) : ''; }
+function collMatchPool(){
+  const pool=[];
+  activeWords().forEach(function(w){ collList(w).forEach(function(p){ const h=findHeadword(w,p); if(h && p.length-h.len>3) pool.push({w:w,phrase:p,h:h}); }); });
+  return pool;
+}
+function collFillPool(){
+  const pool=[];
+  activeWords().forEach(function(w){ collList(w).forEach(function(p){ const m=p.match(UPPER_RE); if(m) pool.push({w:w,phrase:p,m:m}); }); });
+  return pool;
+}
+function startCollEx(){
+  setCexSel();
+  collEx.correct=0; collEx.total=0;
+  if(collEx.type==='match'){ cexHint.innerHTML='<kbd>1</kbd>–<kbd>4</kbd> select · <kbd>Enter</kbd> next'; newCollMatch(); }
+  else{ cexHint.innerHTML='<kbd>Enter</kbd> check / next'; newCollFill(); }
+}
+function newCollMatch(){
+  collEx.done=false;
+  const pool=collMatchPool();
+  if(pool.length<1 || WORDS.length<4){ cexBody.innerHTML='<div class="empty">Not enough collocations in this filter.</div>'; cexScoreText(); return; }
+  const q=pool[Math.floor(Math.random()*pool.length)];
+  collEx.answer=q.w.en;
+  const others=shuffle(WORDS.filter(function(w){ return w.en!==q.w.en; })).slice(0,3).map(function(w){ return w.en; });
+  const opts=shuffle([q.w.en].concat(others));
+  cexBody.innerHTML=
+    '<div class="q-sub">Which word fills the blank?</div>'+
+    '<div class="q-prompt coll-q-prompt">'+collBlankHTML(q.phrase,q.h.start,q.h.len)+'</div>'+
+    '<div class="q-options" id="cexOptions"></div>'+
+    '<div class="q-next"><button class="btn primary" id="cexNext" disabled>Next →</button></div>';
+  const wrap=document.getElementById('cexOptions');
+  opts.forEach(function(o,i){
+    const b=document.createElement('button'); b.className='q-opt';
+    b.innerHTML='<span class="q-key">'+(i+1)+'</span><span>'+escapeHTML(o)+'</span>';
+    b.addEventListener('click', function(){ answerCollMatch(b,o); });
+    wrap.appendChild(b);
+  });
+  document.getElementById('cexNext').addEventListener('click', newCollMatch);
+  cexScoreText();
+}
+function answerCollMatch(btn,opt){
+  if(collEx.done) return;
+  collEx.done=true; collEx.total++;
+  const wrap=document.getElementById('cexOptions');
+  Array.prototype.forEach.call(wrap.children, function(b){
+    b.disabled=true;
+    const label=b.querySelector('span:last-child').textContent;
+    if(label===collEx.answer) b.classList.add('correct');
+  });
+  if(opt===collEx.answer) collEx.correct++;
+  else btn.classList.add('wrong');
+  const nb=document.getElementById('cexNext'); nb.disabled=false; nb.focus();
+  cexScoreText();
+}
+function newCollFill(){
+  collEx.done=false;
+  const pool=collFillPool();
+  if(!pool.length){ cexBody.innerHTML='<div class="empty">No fill-in collocations in this filter.</div>'; cexScoreText(); return; }
+  const q=pool[Math.floor(Math.random()*pool.length)];
+  const raw=q.m[0];
+  collEx.answer=raw.toLowerCase().split('/').map(function(s){ return s.trim(); }).filter(Boolean);
+  cexBody.innerHTML=
+    '<div class="q-sub">'+escapeHTML(q.w.en)+' · fill the blank</div>'+
+    '<div class="f-sentence">'+collBlankHTML(q.phrase,q.m.index,raw.length)+'</div>'+
+    '<div class="f-hint">'+escapeHTML(q.w.tr)+'</div>'+
+    '<input class="f-input" id="cexInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type the missing word…">'+
+    '<div class="f-feedback" id="cexFb"></div>'+
+    '<div class="f-row">'+
+      '<button class="btn" id="cexReveal">Reveal</button>'+
+      '<button class="btn primary" id="cexCheck">Check</button>'+
+      '<button class="btn" id="cexFillNext">Next →</button>'+
+    '</div>';
+  const inp=document.getElementById('cexInput');
+  document.getElementById('cexCheck').addEventListener('click', checkCollFill);
+  document.getElementById('cexReveal').addEventListener('click', revealCollFill);
+  document.getElementById('cexFillNext').addEventListener('click', newCollFill);
+  inp.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); if(collEx.done) newCollFill(); else checkCollFill(); } });
+  inp.focus();
+  cexScoreText();
+}
+function checkCollFill(){
+  if(collEx.done) return;
+  const inp=document.getElementById('cexInput'), fb=document.getElementById('cexFb');
+  const val=normalize(inp.value); if(!val) return;
+  collEx.done=true; collEx.total++;
+  const ok=collEx.answer.indexOf(val)>=0;
+  if(ok){ collEx.correct++; fb.textContent='Correct'; fb.className='f-feedback ok'; }
+  else{ fb.textContent='Answer: '+collEx.answer.join(' / '); fb.className='f-feedback no'; }
+  inp.disabled=true;
+  cexScoreText();
+}
+function revealCollFill(){
+  if(collEx.done) return;
+  const fb=document.getElementById('cexFb');
+  fb.textContent='Answer: '+collEx.answer.join(' / '); fb.className='f-feedback';
+  collEx.done=true; collEx.total++;
+  document.getElementById('cexInput').disabled=true;
+  cexScoreText();
+}
+document.getElementById('cex-match').addEventListener('click', function(){ collEx.type='match'; startCollEx(); });
+document.getElementById('cex-fill').addEventListener('click', function(){ collEx.type='fill'; startCollEx(); });
+
+/* ---- mod anahtarı ---- */
+function showCollMode(){
+  const study=collMode==='study';
+  document.getElementById('coll-study').setAttribute('aria-selected', study?'true':'false');
+  document.getElementById('coll-ex').setAttribute('aria-selected', study?'false':'true');
+  collStudyEl.hidden=!study;
+  document.getElementById('collEx').hidden=study;
+  if(study) renderCollStudy(); else startCollEx();
+}
+document.getElementById('coll-study').addEventListener('click', function(){ collMode='study'; showCollMode(); });
+document.getElementById('coll-ex').addEventListener('click', function(){ collMode='exercise'; showCollMode(); });
+function renderColl(){ renderCollProgress(); buildCollOrder(); showCollMode(); }
 
 /* ============ İSTATİSTİK ============ */
 const statsWrap=document.getElementById('statsWrap');
