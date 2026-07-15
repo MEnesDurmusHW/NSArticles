@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPSS Genel Kültür Kartları — NS Articles</title>
+<meta name="description" content="KPSS Genel Kültür çalışma kartları: Tarih, Coğrafya, Vatandaşlık ve Güncel Bilgiler. Bilgi kartı, quiz, yanlış kutusu ve konu bazlı istatistik.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="KPSS Genel Kültür Kartları">
+<meta property="og:description" content="KPSS Genel Kültür: Tarih, Coğrafya, Vatandaşlık, Güncel. Bilgi kartı, quiz, yanlış kutusu, istatistik.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/kpss.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<script src="theme.js"></script>
+<script src="share.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mono:"Space Grotesk",ui-monospace,monospace;
+    --paper:#FBF9F5;
+    --accent-soft:rgba(150,98,47,.10);
+    --ok:#3f8f5f; --mid:#b8892e; --bad:#b4472e;
+    /* konu renkleri */
+    --c-tarih:#a8512e; --c-cografya:#3f8f5f; --c-vatandaslik:#3A6EA5; --c-guncel:#8a5a9e;
+  }
+  [data-theme="dark"]{
+    --paper:#191c23;
+    --accent-soft:rgba(196,149,106,.14);
+    --ok:#5bbd83; --mid:#d8ac5c; --bad:#e0765a;
+    --c-tarih:#e08158; --c-cografya:#5bbd83; --c-vatandaslik:#7FB0DE; --c-guncel:#c39bd6;
+  }
+
+  body{font-family:var(--sans);line-height:1.6}
+  .wrap{max-width:820px;margin:0 auto;padding:44px clamp(16px,5vw,40px) 96px}
+  @media (max-width:900px){ .wrap{padding-top:64px} }
+
+  header{margin-bottom:10px}
+  .eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,4vw,2rem);line-height:1.05;letter-spacing:-.01em;margin:0;color:var(--text)}
+  .sub{margin:8px 0 0;color:var(--text-dim);font-size:.9rem;line-height:1.6;max-width:60ch}
+
+  /* sekmeler */
+  .tabs{position:sticky;top:0;z-index:30;margin:16px -8px 6px;padding:12px 8px;background:linear-gradient(var(--bg) 72%,transparent);display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .seg{display:inline-flex;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{appearance:none;border:0;background:transparent;cursor:pointer;color:var(--text-dim);font-family:var(--sans);font-weight:600;font-size:.9rem;padding:9px 16px;border-radius:999px;transition:.18s;white-space:nowrap}
+  .seg button[aria-selected="true"]{background:var(--accent);color:#fff}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .filter-sel{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--text-dim);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:8px 14px;cursor:pointer}
+  .filter-sel:focus-visible{outline:2px solid var(--accent)}
+  .count{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--text-muted);margin-left:auto}
+
+  .btn{appearance:none;font-family:var(--sans);font-weight:600;font-size:.9rem;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:12px;padding:11px 18px;transition:.16s}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.primary:hover{opacity:.9;color:#fff}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* konu rozeti */
+  .konu-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;border-radius:999px;padding:4px 10px;color:#fff}
+  .k-tarih{background:var(--c-tarih)} .k-cografya{background:var(--c-cografya)} .k-vatandaslik{background:var(--c-vatandaslik)} .k-guncel{background:var(--c-guncel)}
+
+  .mode-view{display:none}
+  .mode-view.active{display:block}
+  .empty{text-align:center;color:var(--text-muted);padding:50px 0;font-size:.95rem}
+
+  /* ---- KART ---- */
+  #view-cards{flex-direction:column;align-items:center}
+  #view-cards.active{display:flex}
+  .card-topbar{width:100%;max-width:600px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:4px 0 18px}
+  .assess-badge{font-family:var(--sans);font-weight:600;font-size:.72rem;white-space:nowrap;border:1px solid var(--border);border-radius:999px;padding:5px 11px;color:var(--text-dim)}
+  .assess-badge.st-known{background:var(--ok);border-color:var(--ok);color:#fff}
+  .assess-badge.st-shaky{background:var(--mid);border-color:var(--mid);color:#fff}
+  .assess-badge.st-weak{background:var(--bad);border-color:var(--bad);color:#fff}
+
+  .card{width:100%;max-width:600px;min-height:210px;border:1px solid var(--border);border-radius:18px;background:var(--paper);cursor:pointer;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 24px 40px;box-sizing:border-box;text-align:center;transition:border-color .2s}
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .card .side-tag{position:absolute;top:14px;left:16px}
+  .card .idx-tag{position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:.68rem;color:var(--text-muted)}
+  .faces{display:grid;width:100%}
+  .faces > .face{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .16s ease}
+  .face-back{opacity:0;visibility:hidden}
+  .card.flipped .face-front{opacity:0;visibility:hidden}
+  .card.flipped .face-back{opacity:1;visibility:visible}
+  .card.flipped .flip-hint{display:none}
+  .q-text{font-family:var(--serif);font-weight:600;font-size:clamp(1.25rem,4.2vw,1.75rem);line-height:1.25;color:var(--text);letter-spacing:-.01em;max-width:32ch}
+  .a-text{font-family:var(--serif);font-weight:700;font-size:clamp(1.4rem,4.8vw,2rem);line-height:1.2;color:var(--accent);letter-spacing:-.01em}
+  .a-bilgi{margin-top:14px;max-width:44ch;font-size:.92rem;line-height:1.6;color:var(--text-dim);text-align:center;text-wrap:pretty}
+  .flip-hint{position:absolute;bottom:13px;font-size:.68rem;color:var(--text-muted)}
+
+  .faces.enter-right{animation:cE .24s cubic-bezier(.22,.61,.36,1)}
+  .faces.enter-left{animation:cL .24s cubic-bezier(.22,.61,.36,1)}
+  @keyframes cE{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes cL{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+  .card.flip-anim{animation:cF .3s ease}
+  @keyframes cF{0%{transform:perspective(700px) rotateX(0)}45%{transform:perspective(700px) rotateX(11deg)}100%{transform:perspective(700px) rotateX(0)}}
+  @media (prefers-reduced-motion:reduce){ .faces.enter-right,.faces.enter-left,.card.flip-anim{animation:none} }
+
+  .assess-actions{display:flex;gap:12px;justify-content:center;margin-top:18px}
+  .assess-actions .btn{min-width:150px}
+  .btn.assess-hit{border-color:var(--ok);color:var(--ok)}
+  .btn.assess-hit:hover{background:var(--ok);border-color:var(--ok);color:#fff}
+  .btn.assess-miss{border-color:var(--bad);color:var(--bad)}
+  .btn.assess-miss:hover{background:var(--bad);border-color:var(--bad);color:#fff}
+  .card-controls{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center}
+  .kbd-hint{margin-top:16px;font-size:.76rem;color:var(--text-muted);text-align:center;line-height:1.7}
+  .kbd-hint kbd{font-family:var(--mono);font-size:.7rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--text-dim)}
+  @media (hover:hover) and (pointer:fine){ #view-cards .assess-actions,#view-cards .card-controls{display:none} }
+  @media (pointer:coarse){ #view-cards .kbd-hint{display:none} }
+
+  /* ---- LİSTE ---- */
+  .list{display:flex;flex-direction:column;gap:10px}
+  .entry{border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden}
+  .entry[data-st="known"]{box-shadow:inset 4px 0 0 var(--ok)}
+  .entry[data-st="weak"]{box-shadow:inset 4px 0 0 var(--bad)}
+  .entry-head{width:100%;box-sizing:border-box;display:flex;align-items:center;gap:12px;background:transparent;border:0;cursor:pointer;text-align:left;padding:16px clamp(14px,3vw,18px);font-family:inherit;color:var(--text)}
+  .entry-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:16px}
+  .eh-q{flex:1 1 auto;min-width:0;font-family:var(--serif);font-weight:600;font-size:1.08rem;line-height:1.3;color:var(--text)}
+  .eh-chev{flex:0 0 auto;width:18px;height:18px;color:var(--text-muted);transition:transform .22s ease}
+  .entry.open .eh-chev{transform:rotate(90deg)}
+  .panel{display:none;padding:0 clamp(14px,3vw,18px) 18px;border-top:1px solid var(--border)}
+  .entry.open .panel{display:block}
+  .panel-a{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--accent);margin:14px 0 0;line-height:1.25}
+  .panel-b{margin:8px 0 0;color:var(--text-dim);line-height:1.62;text-align:left;max-width:64ch}
+  .assess-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+  .assess-score{font-size:.82rem;color:var(--text-dim)}
+  .assess-score b{color:var(--text)}
+  .assess-btns{display:flex;gap:8px}
+  .assess-btn{appearance:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:.74rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:7px 13px;transition:.15s;color:var(--text-dim)}
+  .assess-btn.hit{color:var(--ok)} .assess-btn.hit:hover{background:var(--ok);border-color:var(--ok);color:#fff}
+  .assess-btn.miss{color:var(--bad)} .assess-btn.miss:hover{background:var(--bad);border-color:var(--bad);color:#fff}
+
+  /* ---- QUIZ ---- */
+  .q-wrap{max-width:600px;margin:0 auto}
+  .q-score{font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;color:var(--text-muted);text-align:center;margin-bottom:8px}
+  .q-sub{text-align:center;margin-bottom:14px}
+  .q-prompt{font-family:var(--serif);font-weight:600;font-size:clamp(1.3rem,4.5vw,1.9rem);line-height:1.25;text-align:center;color:var(--text);margin:4px 0 22px;letter-spacing:-.01em}
+  .q-options{display:flex;flex-direction:column;gap:10px}
+  .q-opt{appearance:none;text-align:left;cursor:pointer;font-family:var(--sans);font-size:1rem;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;transition:.14s;display:flex;gap:12px;align-items:center}
+  .q-opt:hover:not(:disabled){border-color:var(--accent)}
+  .q-opt:disabled{cursor:default;opacity:.9}
+  .q-opt .q-key{font-family:var(--mono);font-size:.72rem;color:var(--text-muted);border:1px solid var(--border);border-radius:6px;padding:2px 8px;flex:0 0 auto}
+  .q-opt.correct{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+  .q-opt.correct .q-key{border-color:var(--ok);color:var(--ok)}
+  .q-opt.wrong{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
+  .q-expl{margin:16px 0 0;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;color:var(--text-dim);line-height:1.6;font-size:.92rem;display:none}
+  .q-expl.show{display:block}
+  .q-next{text-align:center;margin-top:18px}
+
+  /* ---- İSTATİSTİK ---- */
+  .stats-wrap{max-width:600px;margin:0 auto}
+  .stat-bar{display:flex;height:16px;border-radius:999px;overflow:hidden;border:1px solid var(--border);margin:14px 0 6px}
+  .stat-bar i{display:block;height:100%}
+  .stat-bar .s-known{background:var(--ok)} .stat-bar .s-shaky{background:var(--mid)} .stat-bar .s-weak{background:var(--bad)} .stat-bar .s-none{background:var(--surface)}
+  .stat-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--text-dim);margin-bottom:20px}
+  .stat-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:8px 0 22px}
+  .stat-cell{border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--surface)}
+  .stat-num{font-family:var(--serif);font-weight:600;font-size:1.8rem;color:var(--text);line-height:1}
+  .stat-cap{font-size:.82rem;color:var(--text-dim);margin-top:6px}
+  .konu-stat{border:1px solid var(--border);border-radius:14px;padding:14px 16px;background:var(--surface);margin-bottom:10px}
+  .konu-stat-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .konu-stat-name{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--text)}
+  .konu-stat-count{font-family:var(--mono);font-size:.72rem;color:var(--text-muted)}
+  .stat-note{font-size:.82rem;color:var(--text-dim);line-height:1.6;margin:16px 0 0}
+  .stat-reset{margin-top:20px}
+</style>
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön">NS</a>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+  <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+</button>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">KPSS · Genel Kültür</p>
+    <h1>Genel Kültür Kartları</h1>
+    <p class="sub">Tarih, Coğrafya, Vatandaşlık ve Güncel Bilgiler. Kartı çevir, bildim/bilemedim işaretle; sistem zayıf konularını takip etsin. Tüm ilerleme cihazında saklanır.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Görünüm">
+    <div class="seg" id="tabSeg">
+      <button id="tab-cards" role="tab" aria-selected="true">Kartlar</button>
+      <button id="tab-list" role="tab" aria-selected="false">Liste</button>
+      <button id="tab-quiz" role="tab" aria-selected="false">Quiz</button>
+      <button id="tab-wrong" role="tab" aria-selected="false">Yanlış Kutusu</button>
+      <button id="tab-stats" role="tab" aria-selected="false">İstatistik</button>
+    </div>
+    <select class="filter-sel" id="konuSel" aria-label="Konuya göre süz">
+      <option value="all">Tüm konular</option>
+      <option value="tarih">Tarih</option>
+      <option value="cografya">Coğrafya</option>
+      <option value="vatandaslik">Vatandaşlık</option>
+      <option value="guncel">Güncel</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <!-- KARTLAR -->
+  <div class="mode-view active" id="view-cards" role="tabpanel">
+    <div class="card-topbar">
+      <span class="konu-tag" id="cardKonu">Tarih</span>
+      <span class="assess-badge" id="cardBadge"></span>
+    </div>
+    <div class="card" id="card" tabindex="0" role="button" aria-label="Kartı çevir">
+      <span class="side-tag"><span class="konu-tag" id="sideKonu"></span></span>
+      <span class="idx-tag" id="idxTag"></span>
+      <div class="faces" id="faces">
+        <div class="face face-front"><div class="q-text" id="qText"></div></div>
+        <div class="face face-back">
+          <div class="a-text" id="aText"></div>
+          <div class="a-bilgi" id="aBilgi"></div>
+        </div>
+      </div>
+      <span class="flip-hint">cevabı görmek için dokun</span>
+    </div>
+    <div class="assess-actions">
+      <button class="btn assess-miss" id="missBtn" type="button">Bilemedim</button>
+      <button class="btn assess-hit" id="hitBtn" type="button">Bildim</button>
+    </div>
+    <div class="card-controls">
+      <button class="btn" id="prevBtn" type="button">← Önceki</button>
+      <button class="btn" id="shuffleBtn" type="button">Karıştır</button>
+      <button class="btn" id="nextBtn" type="button">Sonraki →</button>
+    </div>
+    <p class="kbd-hint"><kbd>Boşluk</kbd> çevir · <kbd>←</kbd> <kbd>→</kbd> gez · <kbd>N</kbd> bilemedim · <kbd>M</kbd> bildim · <kbd>S</kbd> karıştır</p>
+  </div>
+
+  <!-- LİSTE -->
+  <div class="mode-view" id="view-list" role="tabpanel">
+    <div class="list" id="list"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="mode-view" id="view-quiz" role="tabpanel">
+    <div class="q-wrap">
+      <div class="q-score" id="qScore"></div>
+      <div class="q-sub"><span class="konu-tag" id="qKonu"></span></div>
+      <div class="q-prompt" id="qPrompt"></div>
+      <div class="q-options" id="qOptions"></div>
+      <div class="q-expl" id="qExpl"></div>
+      <div class="q-next"><button class="btn primary" id="qNext" disabled>Sonraki →</button></div>
+      <p class="kbd-hint"><kbd>1</kbd>–<kbd>4</kbd> seç · <kbd>Enter</kbd> sonraki soru</p>
+    </div>
+  </div>
+
+  <!-- YANLIŞ KUTUSU -->
+  <div class="mode-view" id="view-wrong" role="tabpanel">
+    <div class="list" id="wrongList"></div>
+  </div>
+
+  <!-- İSTATİSTİK -->
+  <div class="mode-view" id="view-stats" role="tabpanel">
+    <div class="stats-wrap" id="statsWrap"></div>
+  </div>
+</div>
+
+<div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+<script>
+/* ============ VERİ ============ */
+/* konu: tarih | cografya | vatandaslik | guncel */
+const DATA = [
+  /* ---------- TARİH ---------- */
+  {konu:`tarih`, q:`Tarihte bilinen ilk Türk devleti hangisidir?`, a:`Asya (Büyük) Hun Devleti`, bilgi:`Bilinen ilk teşkilatlı Türk devletidir. En güçlü dönemini Mete Han (Mao-tun) zamanında yaşadı; ilk düzenli orduyu (onluk sistem) kurduğu kabul edilir.`},
+  {konu:`tarih`, q:`Orhun (Göktürk) Yazıtları hangi Türk devletine aittir?`, a:`II. Göktürk (Kutluk) Devleti`, bilgi:`Türk adının geçtiği ilk yazılı Türkçe belgelerdir. Bilge Kağan, Kül Tigin ve Vezir Tonyukuk adına dikilmiştir. Danimarkalı Vilhelm Thomsen 1893'te çözmüştür.`},
+  {konu:`tarih`, q:`751 Talas Savaşı kimler arasında yapıldı ve en önemli sonucu nedir?`, a:`Araplar (Abbasiler) - Çinliler`, bilgi:`Karlukların Araplar yanında yer almasıyla savaşı Çin kaybetti. Türklerin İslamiyet'e yönelmesinin başlangıcı sayılır; ayrıca kâğıt, matbaa ve barut Çin dışına yayıldı.`},
+  {konu:`tarih`, q:`İlk Müslüman Türk devleti hangisidir?`, a:`Karahanlılar`, bilgi:`İslamiyet'i kabul eden ilk Türk devletidir. Türkçeyi resmî dil yaptı. Bu dönemde Kutadgu Bilig (Yusuf Has Hacip) ve Divanü Lügati't-Türk (Kaşgarlı Mahmut) yazıldı.`},
+  {konu:`tarih`, q:`1071 Malazgirt Savaşı'nın önemi nedir?`, a:`Anadolu'nun kapıları Türklere açıldı`, bilgi:`Büyük Selçuklu hükümdarı Alparslan, Bizans İmparatoru Romen Diyojen'i yendi. Bu zaferden sonra Türkler Anadolu'ya kitleler hâlinde yerleşmeye başladı.`},
+  {konu:`tarih`, q:`1176 Miryokefalon Savaşı'nın sonucu nedir?`, a:`Anadolu kesin Türk yurdu oldu`, bilgi:`Anadolu Selçuklu Sultanı II. Kılıç Arslan, Bizans'ı yendi. Bizans'ın Türkleri Anadolu'dan atma umudu bitti; Anadolu'nun Türkleşmesi kesinleşti.`},
+  {konu:`tarih`, q:`Osmanlı Devleti'nin kurucusu ve kuruluş yılı nedir?`, a:`Osman Bey, 1299`, bilgi:`Söğüt merkezli bir uç beyliği olarak kuruldu. Adını kurucusu Osman Gazi'den alır.`},
+  {konu:`tarih`, q:`İstanbul'un fethi hangi yılda ve kim tarafından gerçekleşti?`, a:`1453, Fatih Sultan Mehmet`, bilgi:`Bizans (Doğu Roma) İmparatorluğu sona erdi. Bu olay Orta Çağ'ın bitip Yeni Çağ'ın başlangıcı olarak kabul edilir.`},
+  {konu:`tarih`, q:`Osmanlı'ya matbaayı getiren kişi kimdir?`, a:`İbrahim Müteferrika`, bilgi:`1727'de Sait Efendi ile birlikte ilk Türk matbaasını kurdu. İlk basılan kitap Vankulu Lügati'dir.`},
+  {konu:`tarih`, q:`1839 Tanzimat Fermanı hangi padişah döneminde ilan edildi?`, a:`Abdülmecit`, bilgi:`Mustafa Reşit Paşa okudu. Kanun üstünlüğü ve can-mal güvenliği ilkesiyle Osmanlı'da hukuk devletine geçişin ilk adımı sayılır.`},
+  {konu:`tarih`, q:`İlk Osmanlı anayasası (Kanun-i Esasi) hangi yıl ilan edildi?`, a:`1876`, bilgi:`I. Meşrutiyet'in ilanıyla II. Abdülhamit döneminde yürürlüğe girdi. Osmanlı'nın ilk yazılı anayasasıdır; meclis (Meclis-i Mebusan) açıldı.`},
+  {konu:`tarih`, q:`Mondros Ateşkes Antlaşması hangi tarihte imzalandı?`, a:`30 Ekim 1918`, bilgi:`Osmanlı'nın I. Dünya Savaşı'ndan çekildiği ateşkestir. Fiilen işgallerin ve Kurtuluş Savaşı sürecinin önünü açtı.`},
+  {konu:`tarih`, q:`Mustafa Kemal hangi tarihte Samsun'a çıktı?`, a:`19 Mayıs 1919`, bilgi:`Kurtuluş Savaşı'nın ve Millî Mücadele'nin fiilî başlangıcı kabul edilir.`},
+  {konu:`tarih`, q:`"Milletin istiklalini yine milletin azim ve kararı kurtaracaktır" sözü hangi genelgede yer alır?`, a:`Amasya Genelgesi (22 Haziran 1919)`, bilgi:`Kurtuluş Savaşı'nın gerekçesi, amacı ve yöntemi ilk kez burada açıklandı. Vatanın bütünlüğünün tehlikede olduğu duyuruldu.`},
+  {konu:`tarih`, q:`Manda ve himayenin kesin olarak reddedildiği kongre hangisidir?`, a:`Sivas Kongresi (4 Eylül 1919)`, bilgi:`Millî cemiyetler tek çatı altında birleştirildi. Erzurum Kongresi'nden farklı olarak kararları tüm ülkeyi kapsar (ulusal niteliktedir).`},
+  {konu:`tarih`, q:`Misak-ı Millî hangi mecliste kabul edildi?`, a:`Son Osmanlı Mebusan Meclisi (28 Ocak 1920)`, bilgi:`Millî sınırları ve tam bağımsızlığı belirleyen ilkelerdir. Kabulü, İstanbul'un işgaline ve meclisin kapatılmasına yol açtı.`},
+  {konu:`tarih`, q:`TBMM hangi tarihte açıldı?`, a:`23 Nisan 1920`, bilgi:`Ankara'da açıldı. "Egemenlik kayıtsız şartsız milletindir" ilkesiyle yeni Türk devletinin temeli atıldı.`},
+  {konu:`tarih`, q:`Sakarya Meydan Muharebesi'nin (1921) önemi nedir?`, a:`1683'ten beri süren geri çekilme sona erdi`, bilgi:`Mustafa Kemal'e "Gazi" unvanı ve mareşal rütbesi verildi. "Hattı müdafaa yoktur, sathı müdafaa vardır" sözü bu savaşa aittir.`},
+  {konu:`tarih`, q:`Kurtuluş Savaşı'nı sona erdiren, düşmanı yurttan atan taarruz hangisidir?`, a:`Büyük Taarruz / Başkomutanlık Meydan Muharebesi (26-30 Ağustos 1922)`, bilgi:`Zaferle Yunan ordusu Anadolu'dan atıldı ve askerî mücadele fiilen kazanıldı.`},
+  {konu:`tarih`, q:`Kurtuluş Savaşı'nı bitiren ateşkes antlaşması hangisidir?`, a:`Mudanya Ateşkes Antlaşması (11 Ekim 1922)`, bilgi:`Savaş yapılmadan Doğu Trakya ve İstanbul'un kurtarılmasını sağladı. Ardından saltanat kaldırıldı.`},
+  {konu:`tarih`, q:`Yeni Türk devletinin uluslararası alanda tanındığı, tapusu sayılan antlaşma hangisidir?`, a:`Lozan Antlaşması (24 Temmuz 1923)`, bilgi:`Türkiye'nin bağımsızlığı ve sınırları büyük ölçüde bu antlaşmayla kabul gördü. Boğazlar ve Musul gibi bazı konular sonraya kaldı.`},
+  {konu:`tarih`, q:`Cumhuriyet hangi tarihte ilan edildi?`, a:`29 Ekim 1923`, bilgi:`Devletin yönetim biçimi cumhuriyet oldu ve Mustafa Kemal ilk Cumhurbaşkanı seçildi.`},
+  {konu:`tarih`, q:`Halifelik hangi tarihte kaldırıldı?`, a:`3 Mart 1924`, bilgi:`Aynı gün Tevhid-i Tedrisat Kanunu kabul edildi ve Şeriye ve Evkaf Vekâleti kaldırıldı. Laikliğe geçişin önemli adımlarıdır.`},
+  {konu:`tarih`, q:`Harf İnkılabı (yeni Türk harflerinin kabulü) hangi yıl yapıldı?`, a:`1928`, bilgi:`Arap alfabesi yerine Latin kökenli Türk alfabesi kabul edildi. Okuma yazma seferberliği (Millet Mektepleri) başlatıldı.`},
+  {konu:`tarih`, q:`Kadınlara milletvekili seçme ve seçilme hakkı hangi yıl verildi?`, a:`1934`, bilgi:`Belediye seçimlerinde oy hakkı 1930'da, muhtarlık seçimlerinde 1933'te verilmişti. Türkiye bu hakta pek çok Avrupa ülkesinden önde geldi.`},
+  {konu:`tarih`, q:`Atatürk ilkeleri (temel ilkeler) nelerdir?`, a:`Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık`, bilgi:`Bu altı ilke 1937'de anayasaya girmiştir. Bütünleyici ilkeler ise millî egemenlik, bağımsızlık, çağdaşlık, bilimsellik, insan sevgisi, akılcılık gibi ilkelerdir.`},
+  {konu:`tarih`, q:`Çok partili hayata geçiş için kurulan ilk muhalefet partisi hangisidir?`, a:`Terakkiperver Cumhuriyet Fırkası (1924)`, bilgi:`Türkiye'nin ilk muhalefet partisidir. 1930'da ise Serbest Cumhuriyet Fırkası kuruldu; ikisi de kapatıldı, çok partili düzen 1946'da yerleşti.`},
+
+  /* ---------- COĞRAFYA ---------- */
+  {konu:`cografya`, q:`Türkiye'nin en yüksek dağı hangisidir?`, a:`Ağrı Dağı (5137 m)`, bilgi:`Doğu Anadolu'da yer alan volkanik bir dağdır. Türkiye'nin çatısı sayılan Doğu Anadolu, ortalama yüksekliği en fazla olan bölgemizdir.`},
+  {konu:`cografya`, q:`Türkiye'nin en uzun akarsuyu hangisidir?`, a:`Kızılırmak`, bilgi:`Tamamı Türkiye sınırları içinde olan en uzun akarsudur; İç Anadolu'dan doğar ve Karadeniz'e dökülür.`},
+  {konu:`cografya`, q:`Türkiye'nin en büyük gölü hangisidir?`, a:`Van Gölü`, bilgi:`Sodalı (tuzlu) bir kapalı havza gölüdür ve aynı zamanda Türkiye'nin en derin gölüdür. Volkanik set (Nemrut lavları) ile oluşmuştur.`},
+  {konu:`cografya`, q:`Türkiye kaç coğrafi bölgeye ayrılır ve bu ayrım hangi yıl yapıldı?`, a:`7 bölge, 1941 (I. Coğrafya Kongresi)`, bilgi:`Bölgeler: Marmara, Ege, Akdeniz, Karadeniz, İç Anadolu, Doğu Anadolu, Güneydoğu Anadolu. Ayrım büyük ölçüde iklim ve yer şekillerine dayanır.`},
+  {konu:`cografya`, q:`Yüzölçümü en büyük ve en küçük coğrafi bölgelerimiz hangileridir?`, a:`En büyük Doğu Anadolu, en küçük Güneydoğu Anadolu`, bilgi:`Nüfusu en fazla bölge Marmara, en az bölge ise Doğu Anadolu'dur.`},
+  {konu:`cografya`, q:`Her mevsim yağışlı olan iklim tipi ve görüldüğü kıyı hangisidir?`, a:`Karadeniz iklimi`, bilgi:`Yazlar serin, kışlar ılık geçer ve her mevsim yağışlıdır. En çok yağış Doğu Karadeniz'de (Rize çevresi) düşer.`},
+  {konu:`cografya`, q:`Yazları sıcak-kurak, kışları ılık-yağışlı olan iklim tipi hangisidir?`, a:`Akdeniz iklimi`, bilgi:`Akdeniz ve Ege kıyılarında görülür. Doğal bitki örtüsü makidir (kızılçam, defne, zeytin gibi kısa boylu bodur çalılar).`},
+  {konu:`cografya`, q:`Türkiye'nin en az yağış alan yöresi neresidir?`, a:`Tuz Gölü çevresi (İç Anadolu)`, bilgi:`Etrafı dağlarla çevrili olduğundan denizden gelen nemli havanın ulaşamadığı bir "yağış gölgesi" alanıdır; karasal iklim hâkimdir.`},
+  {konu:`cografya`, q:`Türkiye'yi çevreleyen denizler hangileridir?`, a:`Karadeniz, Marmara, Ege ve Akdeniz`, bilgi:`Marmara Denizi tamamen Türkiye kıyılarıyla çevrili tek denizdir (iç deniz).`},
+  {konu:`cografya`, q:`Karadeniz'i Marmara'ya, Marmara'yı Ege'ye bağlayan boğazlar hangileridir?`, a:`İstanbul ve Çanakkale Boğazları`, bilgi:`İstanbul Boğazı Karadeniz ile Marmara'yı, Çanakkale Boğazı Marmara ile Ege'yi birbirine bağlar. İkisi arasında Marmara Denizi yer alır.`},
+  {konu:`cografya`, q:`Türkiye'nin nüfusu en fazla ve yüzölçümü en büyük illeri hangileridir?`, a:`Nüfusça İstanbul, yüzölçümünce Konya`, bilgi:`İstanbul aynı zamanda Türkiye'nin en kalabalık ilidir; Konya ise en geniş yüzölçümüne sahip ildir.`},
+  {konu:`cografya`, q:`GAP (Güneydoğu Anadolu Projesi) hangi akarsular üzerine kuruludur?`, a:`Fırat ve Dicle`, bilgi:`Sulama ve enerji amaçlı entegre bir kalkınma projesidir. Fırat üzerindeki Atatürk Barajı bu projenin en büyük barajıdır.`},
+  {konu:`cografya`, q:`Kıyıları en girintili çıkıntılı ve en uzun olan denizimiz hangisidir?`, a:`Ege Denizi`, bilgi:`Dağların denize dik (enine) uzanması nedeniyle koy, körfez ve yarımadalar çoktur; bu yüzden kıyı çizgisi çok uzundur.`},
+  {konu:`cografya`, q:`Türkiye'nin en büyük adası hangisidir?`, a:`Gökçeada (İmroz)`, bilgi:`Çanakkale'ye bağlıdır ve Ege Denizi'ndedir. İkinci büyük ada ise yine Ege'deki Bozcaada'dır.`},
+  {konu:`cografya`, q:`Türkiye'de en büyük deprem riski taşıyan fay hattı hangisidir?`, a:`Kuzey Anadolu Fay Hattı (KAF)`, bilgi:`Marmara'dan Doğu Anadolu'ya uzanır. Türkiye topraklarının büyük bölümü deprem kuşağı üzerindedir.`},
+  {konu:`cografya`, q:`Türkiye'nin matematik konumu (enlem-boylam aralığı) nedir?`, a:`36-42 kuzey paralelleri, 26-45 doğu meridyenleri`, bilgi:`Orta kuşakta (ılıman kuşak) yer alır; bu yüzden dört mevsim belirgin yaşanır. Boylam farkı yerel saat farkı yaratır.`},
+
+  /* ---------- VATANDAŞLIK ---------- */
+  {konu:`vatandaslik`, q:`Türkiye'de hâlen yürürlükte olan anayasa hangi yıla aittir?`, a:`1982 Anayasası`, bilgi:`12 Eylül 1980 askerî müdahalesinin ardından halkoyuyla kabul edildi. Bugüne dek birçok kez değiştirilmiştir.`},
+  {konu:`vatandaslik`, q:`Anayasa'nın 2. maddesine göre Türkiye Cumhuriyeti'nin nitelikleri nelerdir?`, a:`Demokratik, laik ve sosyal bir hukuk devleti`, bilgi:`Ayrıca Atatürk milliyetçiliğine bağlı, insan haklarına saygılı, başlangıçtaki temel ilkelere dayanan bir devlet olarak tanımlanır. Bu nitelikler değiştirilemez (md. 4).`},
+  {konu:`vatandaslik`, q:`Türkiye 2017 anayasa değişikliğiyle hangi hükümet sistemine geçti?`, a:`Cumhurbaşkanlığı Hükümet Sistemi`, bilgi:`Başbakanlık kaldırıldı; yürütme yetkisi Cumhurbaşkanı'nda toplandı. Sistem 2018 seçimleriyle fiilen uygulanmaya başladı.`},
+  {konu:`vatandaslik`, q:`Egemenlik kime aittir?`, a:`Kayıtsız şartsız millete`, bilgi:`Anayasa'nın 6. maddesine göre millet, egemenliğini anayasanın koyduğu esaslara göre yetkili organlar eliyle kullanır. Hiçbir kişi ya da organ kaynağını anayasadan almayan bir yetki kullanamaz.`},
+  {konu:`vatandaslik`, q:`Yasama yetkisi hangi organa aittir?`, a:`Türkiye Büyük Millet Meclisi (TBMM)`, bilgi:`600 milletvekilinden oluşur. Bu yetki millet adına kullanılır ve devredilemez.`},
+  {konu:`vatandaslik`, q:`Milletvekili seçilebilmek için gereken en küçük yaş kaçtır?`, a:`18`, bilgi:`2017 değişikliğiyle 25'ten 18'e indirildi. Seçme yaşı da 18'dir.`},
+  {konu:`vatandaslik`, q:`Yürütme yetkisi kime aittir?`, a:`Cumhurbaşkanı`, bilgi:`Cumhurbaşkanı hem devletin hem yürütmenin başıdır. Halk tarafından 5 yıllığına seçilir ve bir kişi en fazla iki dönem seçilebilir.`},
+  {konu:`vatandaslik`, q:`Kanunların anayasaya uygunluğunu hangi mahkeme denetler?`, a:`Anayasa Mahkemesi`, bilgi:`15 üyeden oluşur. Ayrıca bireysel başvuruları karara bağlar ve Yüce Divan sıfatıyla üst düzey görevlileri yargılar.`},
+  {konu:`vatandaslik`, q:`İdari yargıda en yüksek (temyiz) mahkemesi hangisidir?`, a:`Danıştay`, bilgi:`İdari uyuşmazlıklara bakar ve idarenin en yüksek danışma organıdır. Adli yargıda ise en yüksek temyiz mercii Yargıtay'dır.`},
+  {konu:`vatandaslik`, q:`Adli ve idari yargı arasındaki görev-hüküm uyuşmazlıklarını hangi mahkeme çözer?`, a:`Uyuşmazlık Mahkemesi`, bilgi:`İki ayrı yargı kolu arasında çıkan görev ya da hüküm uyuşmazlıklarını kesin olarak karara bağlar.`},
+  {konu:`vatandaslik`, q:`Merkezî yönetimin gelir ve giderlerini TBMM adına denetleyen kurum hangisidir?`, a:`Sayıştay`, bilgi:`Kamu kaynaklarının hukuka uygun kullanılıp kullanılmadığını denetler. Anayasal bir denetim kurumudur ve TBMM adına görev yapar.`},
+  {konu:`vatandaslik`, q:`Seçimlerin genel yönetimi ve denetimi hangi kuruma aittir?`, a:`Yüksek Seçim Kurulu (YSK)`, bilgi:`Kararları kesindir, aleyhine başka mercie başvurulamaz. Seçim sürecindeki tüm işlemleri yürütür ve denetler.`},
+  {konu:`vatandaslik`, q:`Temel hak ve hürriyetler kural olarak neyle sınırlanabilir?`, a:`Yalnızca kanunla`, bilgi:`Sınırlama, anayasanın sözüne ve ruhuna, ölçülülük ilkesine aykırı olamaz ve hakkın özüne dokunamaz.`},
+  {konu:`vatandaslik`, q:`Seçimlerin temel ilkeleri nelerdir?`, a:`Serbest, eşit, gizli, genel oy, açık sayım ve tek dereceli seçim`, bilgi:`Oy verme gizli, sayım ve döküm ise açık (aleni) yapılır. Bu ilkeler seçimin dürüstlüğünü güvence altına alır.`},
+
+  /* ---------- GÜNCEL ---------- */
+  {konu:`guncel`, q:`Birleşmiş Milletler'in (BM) merkezi hangi şehirdedir?`, a:`New York (ABD)`, bilgi:`1945'te kuruldu. Güvenlik Konseyi'nin 5 daimî üyesi ABD, Rusya, Çin, İngiltere ve Fransa'dır; bu üyeler veto hakkına sahiptir.`},
+  {konu:`guncel`, q:`NATO'nun merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, bilgi:`Türkiye NATO'ya 1952'de üye oldu. Askerî ittifak niteliğindedir ve 4 Nisan 1949'da kurulmuştur.`},
+  {konu:`guncel`, q:`Avrupa Birliği'nin (AB) merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, bilgi:`Türkiye 1999 Helsinki Zirvesi'nde adaylık statüsü aldı, tam üyelik müzakerelerine 2005'te başladı. Ortak para birimi Euro'dur.`},
+  {konu:`guncel`, q:`Interpol'ün (Uluslararası Polis Teşkilatı) merkezi hangi şehirdedir?`, a:`Lyon (Fransa)`, bilgi:`Uluslararası suçlarla mücadelede polis iş birliğini sağlar.`},
+  {konu:`guncel`, q:`Uluslararası Adalet Divanı ve OPCW'nin bulunduğu şehir hangisidir?`, a:`Lahey (Hollanda)`, bilgi:`Lahey uluslararası hukuk kurumlarının merkezidir; Uluslararası Ceza Mahkemesi (UCM) de buradadır. OPCW, Kimyasal Silahların Yasaklanması Örgütü'dür.`},
+  {konu:`guncel`, q:`Dünya Sağlık Örgütü'nün (WHO/DSÖ) merkezi hangi şehirdedir?`, a:`Cenevre (İsviçre)`, bilgi:`BM'nin sağlık alanındaki uzman kuruluşudur. Cenevre ayrıca Dünya Ticaret Örgütü ve Kızılhaç'a da ev sahipliği yapar.`},
+  {konu:`guncel`, q:`UNESCO'nun merkezi hangi şehirdedir?`, a:`Paris (Fransa)`, bilgi:`BM'nin eğitim, bilim ve kültür örgütüdür. Dünya Mirası Listesi'ni bu kuruluş belirler.`},
+  {konu:`guncel`, q:`İslam İşbirliği Teşkilatı'nın (İİT) merkezi hangi şehirdedir?`, a:`Cidde (Suudi Arabistan)`, bilgi:`İslam ülkeleri arasında dayanışmayı amaçlar ve BM'den sonra en büyük hükümetler arası örgüttür.`},
+  {konu:`guncel`, q:`Nobel Barış Ödülü hangi şehirde takdim edilir?`, a:`Oslo (Norveç)`, bilgi:`Diğer tüm Nobel ödülleri İsveç'in başkenti Stockholm'de verilir; yalnızca Barış Ödülü Norveç'in başkenti Oslo'da takdim edilir.`},
+  {konu:`guncel`, q:`2025 BM İklim Değişikliği Konferansı (COP30) hangi ülkede düzenlendi?`, a:`Brezilya (Belém)`, bilgi:`Kasım 2025'te Amazon bölgesindeki Belém kentinde yapıldı. COP zirveleri iklim değişikliğiyle mücadele için düzenlenen küresel toplantılardır.`},
+  {konu:`guncel`, q:`2026 G20 Liderler Zirvesi'ne hangi ülke ev sahipliği yapacaktır?`, a:`ABD (Miami)`, bilgi:`G20, dünyanın en büyük 20 ekonomisini bir araya getiren platformdur; Türkiye de üyedir ve 2015 zirvesine Antalya'da ev sahipliği yapmıştı.`}
+];
+
+/* ============ KONU ETİKETLERİ ============ */
+const KONU_AD = {tarih:`Tarih`, cografya:`Coğrafya`, vatandaslik:`Vatandaşlık`, guncel:`Güncel`};
+
+/* ============ SKOR (localStorage) ============ */
+const SCORE_KEY = `ns-kpss-scores`;
+const KNOWN_AT = 2;
+let SCORES = {};
+try{ SCORES = JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; }catch(e){ SCORES = {}; }
+function saveScores(){ try{ localStorage.setItem(SCORE_KEY, JSON.stringify(SCORES)); }catch(e){} }
+function keyOf(rec){ return rec.konu + `::` + rec.q; }
+function getScore(rec){ return SCORES[keyOf(rec)] || 0; }
+function addScore(rec, d){ let v=(SCORES[keyOf(rec)]||0)+d; v=Math.max(-3, Math.min(5, v)); SCORES[keyOf(rec)]=v; saveScores(); }
+function statusOf(rec){ const s=getScore(rec); if(s>=KNOWN_AT) return `known`; if(s<0) return `weak`; return `shaky`; }
+function statusText(st){ return st===`known` ? `Biliyorum` : st===`weak` ? `Zayıf` : `Çalışılıyor`; }
+
+/* ============ DURUM ============ */
+let konuFilter = `all`;
+let cardOrder = [];
+let cardIdx = 0;
+let flipped = false;
+
+function activeDeck(){
+  return DATA.filter(r => konuFilter===`all` || r.konu===konuFilter);
+}
+
+/* ============ SEKME YÖNETİMİ ============ */
+const TABS = [`cards`,`list`,`quiz`,`wrong`,`stats`];
+let activeTab = `cards`;
+function selectTab(name){
+  activeTab = name;
+  TABS.forEach(t=>{
+    document.getElementById(`tab-`+t).setAttribute(`aria-selected`, t===name ? `true` : `false`);
+    document.getElementById(`view-`+t).classList.toggle(`active`, t===name);
+  });
+  document.getElementById(`konuSel`).style.display = (name===`wrong`||name===`stats`) ? `none` : ``;
+  if(name===`cards`) buildCards();
+  else if(name===`list`) buildList();
+  else if(name===`quiz`) nextQuiz();
+  else if(name===`wrong`) buildWrong();
+  else if(name===`stats`) buildStats();
+  updateCount();
+}
+TABS.forEach(t=> document.getElementById(`tab-`+t).addEventListener(`click`, ()=>selectTab(t)));
+
+document.getElementById(`konuSel`).addEventListener(`change`, e=>{
+  konuFilter = e.target.value;
+  if(activeTab===`cards`) buildCards();
+  else if(activeTab===`list`) buildList();
+  else if(activeTab===`quiz`) nextQuiz();
+  updateCount();
+});
+
+function updateCount(){
+  const el = document.getElementById(`count`);
+  if(activeTab===`wrong`){ el.textContent = wrongDeck().length + ` kart`; return; }
+  if(activeTab===`stats`){ el.textContent = DATA.length + ` kart`; return; }
+  el.textContent = activeDeck().length + ` kart`;
+}
+
+/* ============ KART GÖRÜNÜMÜ ============ */
+function konuChip(el, konu){
+  el.className = `konu-tag k-`+konu;
+  el.textContent = KONU_AD[konu];
+}
+function buildCards(){
+  cardOrder = activeDeck().map((_,i)=>i);
+  cardIdx = 0;
+  renderCard(0);
+}
+function renderCard(dir){
+  const deck = activeDeck();
+  const card = document.getElementById(`card`);
+  if(!deck.length){
+    document.getElementById(`qText`).textContent = `Bu konuda kart yok.`;
+    return;
+  }
+  const rec = deck[cardOrder[cardIdx]];
+  flipped = false;
+  card.classList.remove(`flipped`);
+  document.getElementById(`qText`).textContent = rec.q;
+  document.getElementById(`aText`).textContent = rec.a;
+  document.getElementById(`aBilgi`).textContent = rec.bilgi || ``;
+  konuChip(document.getElementById(`cardKonu`), rec.konu);
+  konuChip(document.getElementById(`sideKonu`), rec.konu);
+  document.getElementById(`idxTag`).textContent = (cardIdx+1)+` / `+deck.length;
+  const st = statusOf(rec);
+  const badge = document.getElementById(`cardBadge`);
+  badge.className = `assess-badge st-`+st;
+  badge.textContent = statusText(st);
+  if(dir){
+    const faces = document.getElementById(`faces`);
+    faces.classList.remove(`enter-right`,`enter-left`);
+    void faces.offsetWidth;
+    faces.classList.add(dir>0 ? `enter-right` : `enter-left`);
+  }
+}
+function flipCard(){
+  const card = document.getElementById(`card`);
+  flipped = !flipped;
+  card.classList.toggle(`flipped`, flipped);
+  if(flipped){
+    card.classList.remove(`flip-anim`); void card.offsetWidth; card.classList.add(`flip-anim`);
+  }
+}
+function moveCard(step){
+  const deck = activeDeck();
+  if(!deck.length) return;
+  cardIdx = (cardIdx + step + deck.length) % deck.length;
+  renderCard(step);
+}
+function assessCurrent(hit){
+  const deck = activeDeck();
+  if(!deck.length) return;
+  const rec = deck[cardOrder[cardIdx]];
+  addScore(rec, hit ? 1 : -1);
+  if(window.goatcounter && window.goatcounter.count){
+    try{ goatcounter.count({path:`kpss-`+(hit?`hit`:`miss`), event:true}); }catch(e){}
+  }
+  moveCard(1);
+}
+function shuffleCards(){
+  for(let i=cardOrder.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [cardOrder[i],cardOrder[j]]=[cardOrder[j],cardOrder[i]]; }
+  cardIdx=0; renderCard(1);
+}
+document.getElementById(`card`).addEventListener(`click`, flipCard);
+document.getElementById(`hitBtn`).addEventListener(`click`, ()=>assessCurrent(true));
+document.getElementById(`missBtn`).addEventListener(`click`, ()=>assessCurrent(false));
+document.getElementById(`prevBtn`).addEventListener(`click`, ()=>moveCard(-1));
+document.getElementById(`nextBtn`).addEventListener(`click`, ()=>moveCard(1));
+document.getElementById(`shuffleBtn`).addEventListener(`click`, shuffleCards);
+
+document.addEventListener(`keydown`, e=>{
+  if(activeTab!==`cards`) return;
+  const tag=(e.target.tagName||``).toLowerCase();
+  if(tag===`input`||tag===`select`||tag===`textarea`) return;
+  if(e.key===` `){ e.preventDefault(); flipCard(); }
+  else if(e.key===`ArrowRight`){ moveCard(1); }
+  else if(e.key===`ArrowLeft`){ moveCard(-1); }
+  else if(e.key===`n`||e.key===`N`){ assessCurrent(false); }
+  else if(e.key===`m`||e.key===`M`){ assessCurrent(true); }
+  else if(e.key===`s`||e.key===`S`){ shuffleCards(); }
+});
+
+/* ============ LİSTE ============ */
+function renderEntryList(container, deck){
+  container.innerHTML = ``;
+  if(!deck.length){ container.innerHTML = `<div class="empty">Kart yok.</div>`; return; }
+  deck.forEach(rec=>{
+    const st = statusOf(rec);
+    const el = document.createElement(`div`);
+    el.className = `entry`;
+    el.setAttribute(`data-st`, st);
+    el.innerHTML = `
+      <button class="entry-head" type="button" aria-expanded="false">
+        <span class="konu-tag k-${rec.konu}">${KONU_AD[rec.konu]}</span>
+        <span class="eh-q">${rec.q}</span>
+        <svg class="eh-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+      <div class="panel">
+        <p class="panel-a">${rec.a}</p>
+        <p class="panel-b">${rec.bilgi||``}</p>
+        <div class="assess-row">
+          <span class="assess-score">Skor: <b>${getScore(rec)>0?`+`:``}${getScore(rec)}</b> · ${statusText(st)}</span>
+          <span class="assess-btns">
+            <button class="assess-btn miss" type="button">Bilemedim</button>
+            <button class="assess-btn hit" type="button">Bildim</button>
+          </span>
+        </div>
+      </div>`;
+    const head = el.querySelector(`.entry-head`);
+    head.addEventListener(`click`, ()=>{
+      const open = el.classList.toggle(`open`);
+      head.setAttribute(`aria-expanded`, open?`true`:`false`);
+    });
+    el.querySelector(`.assess-btn.hit`).addEventListener(`click`, e=>{ e.stopPropagation(); addScore(rec,1); refreshEntry(el,rec); });
+    el.querySelector(`.assess-btn.miss`).addEventListener(`click`, e=>{ e.stopPropagation(); addScore(rec,-1); refreshEntry(el,rec); });
+    container.appendChild(el);
+  });
+}
+function refreshEntry(el, rec){
+  const st = statusOf(rec);
+  el.setAttribute(`data-st`, st);
+  el.querySelector(`.assess-score`).innerHTML = `Skor: <b>${getScore(rec)>0?`+`:``}${getScore(rec)}</b> · ${statusText(st)}`;
+}
+function buildList(){ renderEntryList(document.getElementById(`list`), activeDeck()); }
+
+/* ============ YANLIŞ KUTUSU ============ */
+function wrongDeck(){ return DATA.filter(r=> getScore(r) < 0); }
+function buildWrong(){
+  const c = document.getElementById(`wrongList`);
+  const deck = wrongDeck();
+  if(!deck.length){
+    c.innerHTML = `<div class="empty">Yanlış kutusu boş. Bilemediğin kartlar burada birikir.</div>`;
+    return;
+  }
+  renderEntryList(c, deck);
+}
+
+/* ============ QUIZ ============ */
+let quizRec = null, quizAnswered = false, qRight = 0, qTotal = 0;
+function nextQuiz(){
+  const deck = activeDeck();
+  document.getElementById(`qExpl`).classList.remove(`show`);
+  document.getElementById(`qNext`).disabled = true;
+  if(deck.length < 4){
+    document.getElementById(`qPrompt`).textContent = `Quiz için bu konuda en az 4 kart gerekiyor.`;
+    document.getElementById(`qOptions`).innerHTML = ``;
+    document.getElementById(`qKonu`).textContent = ``;
+    return;
+  }
+  quizAnswered = false;
+  quizRec = deck[Math.floor(Math.random()*deck.length)];
+  // aynı konudan 3 çeldirici
+  const pool = DATA.filter(r=> r.konu===quizRec.konu && r.a!==quizRec.a);
+  const distract = [];
+  const used = new Set();
+  while(distract.length<3 && pool.length){
+    const p = pool[Math.floor(Math.random()*pool.length)];
+    if(!used.has(p.a)){ used.add(p.a); distract.push(p.a); }
+    if(used.size>=pool.length) break;
+  }
+  let opts = [quizRec.a, ...distract];
+  for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]]; }
+
+  konuChip(document.getElementById(`qKonu`), quizRec.konu);
+  document.getElementById(`qPrompt`).textContent = quizRec.q;
+  document.getElementById(`qScore`).textContent = qTotal ? `Doğru: `+qRight+` / `+qTotal : ``;
+  const box = document.getElementById(`qOptions`);
+  box.innerHTML = ``;
+  opts.forEach((opt,i)=>{
+    const b = document.createElement(`button`);
+    b.className = `q-opt`;
+    b.innerHTML = `<span class="q-key">${i+1}</span><span>${opt}</span>`;
+    b.addEventListener(`click`, ()=>answerQuiz(b, opt));
+    box.appendChild(b);
+  });
+}
+function answerQuiz(btn, opt){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  qTotal++;
+  const correct = opt===quizRec.a;
+  if(correct){ qRight++; addScore(quizRec,1); } else { addScore(quizRec,-1); }
+  document.querySelectorAll(`#qOptions .q-opt`).forEach(b=>{
+    b.disabled = true;
+    const txt = b.querySelector(`span:last-child`).textContent;
+    if(txt===quizRec.a) b.classList.add(`correct`);
+    else if(b===btn) b.classList.add(`wrong`);
+  });
+  const expl = document.getElementById(`qExpl`);
+  expl.innerHTML = `<b>${quizRec.a}.</b> ${quizRec.bilgi||``}`;
+  expl.classList.add(`show`);
+  document.getElementById(`qScore`).textContent = `Doğru: `+qRight+` / `+qTotal;
+  document.getElementById(`qNext`).disabled = false;
+  if(window.goatcounter && window.goatcounter.count){
+    try{ goatcounter.count({path:`kpss-quiz-`+(correct?`right`:`wrong`), event:true}); }catch(e){}
+  }
+}
+document.getElementById(`qNext`).addEventListener(`click`, nextQuiz);
+document.addEventListener(`keydown`, e=>{
+  if(activeTab!==`quiz`) return;
+  const tag=(e.target.tagName||``).toLowerCase();
+  if(tag===`input`||tag===`select`) return;
+  if([`1`,`2`,`3`,`4`].includes(e.key)){
+    const b = document.querySelectorAll(`#qOptions .q-opt`)[+e.key-1];
+    if(b && !quizAnswered){ b.click(); }
+  } else if(e.key===`Enter` && quizAnswered){ nextQuiz(); }
+});
+
+/* ============ İSTATİSTİK ============ */
+function buildStats(){
+  const wrap = document.getElementById(`statsWrap`);
+  const total = DATA.length;
+  let known=0, shaky=0, weak=0, seen=0;
+  DATA.forEach(r=>{ const sc=getScore(r); if(sc!==0) seen++; const st=statusOf(r); if(st===`known`)known++; else if(st===`weak`)weak++; else if(sc!==0) shaky++; });
+  const untouched = total - known - weak - shaky;
+  const pct = n => (n/total*100).toFixed(1)+`%`;
+
+  let konuHtml = ``;
+  Object.keys(KONU_AD).forEach(k=>{
+    const recs = DATA.filter(r=>r.konu===k);
+    const kk = recs.filter(r=>statusOf(r)===`known`).length;
+    const kw = recs.filter(r=>statusOf(r)===`weak`).length;
+    const kn = recs.length;
+    konuHtml += `
+      <div class="konu-stat">
+        <div class="konu-stat-head">
+          <span class="konu-stat-name"><span class="stat-dot" style="background:var(--c-${k})"></span>${KONU_AD[k]}</span>
+          <span class="konu-stat-count">${kk}/${kn} biliniyor</span>
+        </div>
+        <div class="stat-bar">
+          <i class="s-known" style="width:${kk/kn*100}%"></i>
+          <i class="s-weak" style="width:${kw/kn*100}%"></i>
+          <i class="s-none" style="width:${(kn-kk-kw)/kn*100}%"></i>
+        </div>
+      </div>`;
+  });
+
+  wrap.innerHTML = `
+    <div class="stat-bar" style="height:20px">
+      <i class="s-known" style="width:${known/total*100}%"></i>
+      <i class="s-shaky" style="width:${shaky/total*100}%"></i>
+      <i class="s-weak" style="width:${weak/total*100}%"></i>
+      <i class="s-none" style="width:${untouched/total*100}%"></i>
+    </div>
+    <div class="stat-legend">
+      <span><span class="stat-dot" style="background:var(--ok)"></span>Biliyorum ${pct(known)}</span>
+      <span><span class="stat-dot" style="background:var(--mid)"></span>Çalışılıyor ${pct(shaky)}</span>
+      <span><span class="stat-dot" style="background:var(--bad)"></span>Zayıf ${pct(weak)}</span>
+      <span><span class="stat-dot" style="background:var(--text-muted)"></span>Görülmedi ${pct(untouched)}</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-num">${known}</div><div class="stat-cap">bildiğin kart</div></div>
+      <div class="stat-cell"><div class="stat-num">${weak}</div><div class="stat-cap">zayıf kart</div></div>
+      <div class="stat-cell"><div class="stat-num">${seen}</div><div class="stat-cap">çalıştığın kart</div></div>
+      <div class="stat-cell"><div class="stat-num">${total}</div><div class="stat-cap">toplam kart</div></div>
+    </div>
+    <h2 style="font-family:var(--serif);font-weight:600;font-size:1.15rem;margin:6px 0 12px;color:var(--text)">Konulara göre</h2>
+    ${konuHtml}
+    <p class="stat-note">Bir kartı üst üste "Bildim" işaretledikçe yeşile, "Bilemedim" dedikçe kırmızıya (zayıf) döner. Zayıf kartlar <b>Yanlış Kutusu</b> sekmesinde toplanır.</p>
+    <div class="stat-reset"><button class="btn" id="resetBtn" type="button">İlerlemeyi sıfırla</button></div>`;
+  document.getElementById(`resetBtn`).addEventListener(`click`, ()=>{
+    if(confirm(`Tüm skorlar ve ilerleme silinsin mi?`)){ SCORES={}; saveScores(); buildStats(); updateCount(); }
+  });
+}
+
+/* ============ BAŞLAT ============ */
+buildCards();
+updateCount();
+</script>
+</body>
+</html>
