@@ -121,6 +121,14 @@
   /* ---- LİSTE ---- */
   .list{display:flex;flex-direction:column;gap:10px}
   .entry{border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden}
+  .entry.focused{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+  /* mobil gezinme okları (Liste) */
+  .list-nav{position:fixed;right:14px;bottom:96px;z-index:40;display:none;flex-direction:column;gap:12px}
+  .list-nav button{width:50px;height:50px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);transition:.16s}
+  .list-nav button:active{transform:scale(.92)}
+  .list-nav button:disabled{opacity:.4;cursor:default}
+  .list-nav button svg{width:24px;height:24px}
+  @media (max-width:768px){ body.list-tab.list-has-nav .list-nav{display:flex} }
   .entry[data-st="known"]{box-shadow:inset 4px 0 0 var(--ok)}
   .entry[data-st="weak"]{box-shadow:inset 4px 0 0 var(--bad)}
   .entry-head{width:100%;box-sizing:border-box;display:flex;align-items:center;gap:12px;background:transparent;border:0;cursor:pointer;text-align:left;padding:16px clamp(14px,3vw,18px);font-family:inherit;color:var(--text)}
@@ -273,6 +281,15 @@
   </div>
 </div>
 
+<div class="list-nav" id="listNav">
+  <button id="navUp" type="button" aria-label="Önceki karta git">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <button id="navDown" type="button" aria-label="Sonraki karta git">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+</div>
+
 <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
 
 <script>
@@ -307,6 +324,20 @@ const DATA = [
   {konu:`tarih`, q:`Kadınlara milletvekili seçme ve seçilme hakkı hangi yıl verildi?`, a:`1934`, bilgi:`Belediye seçimlerinde oy hakkı 1930'da, muhtarlık seçimlerinde 1933'te verilmişti. Türkiye bu hakta pek çok Avrupa ülkesinden önde geldi.`},
   {konu:`tarih`, q:`Atatürk ilkeleri (temel ilkeler) nelerdir?`, a:`Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık`, bilgi:`Bu altı ilke 1937'de anayasaya girmiştir. Bütünleyici ilkeler ise millî egemenlik, bağımsızlık, çağdaşlık, bilimsellik, insan sevgisi, akılcılık gibi ilkelerdir.`},
   {konu:`tarih`, q:`Çok partili hayata geçiş için kurulan ilk muhalefet partisi hangisidir?`, a:`Terakkiperver Cumhuriyet Fırkası (1924)`, bilgi:`Türkiye'nin ilk muhalefet partisidir. 1930'da ise Serbest Cumhuriyet Fırkası kuruldu; ikisi de kapatıldı, çok partili düzen 1946'da yerleşti.`},
+  {konu:`tarih`, q:`İlk İslami Türk edebiyatı eseri ve yazarı kimdir?`, a:`Kutadgu Bilig, Yusuf Has Hacip`, bilgi:`Karahanlılar döneminde yazıldı. "Mutluluk veren bilgi" anlamına gelir; ideal devlet ve toplum düzenini anlatan bir siyasetnamedir.`},
+  {konu:`tarih`, q:`İlk Türkçe sözlük ve ansiklopedik eser hangisidir?`, a:`Divanü Lügati't-Türk, Kaşgarlı Mahmut`, bilgi:`Araplara Türkçeyi öğretmek ve Türkçenin zenginliğini göstermek için yazıldı. Dönemin Türk boyları hakkında harita ve kültür bilgisi de içerir.`},
+  {konu:`tarih`, q:`Türklerin kullandığı ilk millî alfabe hangisidir?`, a:`Göktürk (Orhun) alfabesi`, bilgi:`38 harften oluşur. Türklerin kullandığı ikinci alfabe ise Uygur alfabesidir.`},
+  {konu:`tarih`, q:`Yerleşik hayata geçen, matbaa ve kâğıdı kullanan ilk Türk topluluğu hangisidir?`, a:`Uygurlar`, bilgi:`Mani ve Buda dinlerini benimsediler. Yerleşik yaşama geçtikleri için tapınak, minyatür ve yazılı kültürde ileri gittiler.`},
+  {konu:`tarih`, q:`İlk Türk denizcisi ve ilk Türk donanmasının kurucusu kimdir?`, a:`Çaka Bey`, bilgi:`İzmir merkezli bir beylik kurdu ve Ege'de ilk Türk denizciliğini başlattı.`},
+  {konu:`tarih`, q:`1402 Ankara Savaşı kimler arasında yapıldı ve sonucu ne oldu?`, a:`Timur - Yıldırım Bayezid`, bilgi:`Osmanlı yenildi, Yıldırım Bayezid esir düştü. Ardından şehzadeler arası taht kavgasıyla 11 yıl süren Fetret Devri başladı.`},
+  {konu:`tarih`, q:`Yeniçeri Ocağı ve devşirme sistemi hangi padişah döneminde kuruldu?`, a:`I. Murat`, bilgi:`Yeniçeriler Osmanlı'nın ilk daimî piyade ordusudur. Devşirme, Hristiyan ailelerin çocuklarının devlet ve ordu için yetiştirilmesi sistemidir.`},
+  {konu:`tarih`, q:`Osmanlı'nın en geniş sınırlara ulaştığı, gücünün zirvesindeki padişah kimdir?`, a:`Kanuni Sultan Süleyman`, bilgi:`46 yıl (1520-1566) hüküm sürdü. Döneminde yaptığı hukuk düzenlemeleri nedeniyle "Kanuni", Avrupa'da "Muhteşem Süleyman" olarak anılır.`},
+  {konu:`tarih`, q:`Osmanlı'nın ilk kez büyük ölçüde toprak kaybettiği, Gerileme Dönemi'ni başlatan antlaşma hangisidir?`, a:`Karlofça Antlaşması (1699)`, bilgi:`II. Viyana Kuşatması'nın (1683) başarısızlığının ardından imzalandı. Osmanlı Orta Avrupa'daki topraklarının çoğunu kaybetti.`},
+  {konu:`tarih`, q:`III. Ahmet döneminde yaşanan, ilk Türk matbaasının kurulduğu kültürel yenilik dönemi hangisidir?`, a:`Lale Devri (1718-1730)`, bilgi:`Sadrazam Nevşehirli Damat İbrahim Paşa öncülüğünde Avrupa'ya ilk kez yöneliş yaşandı. Dönem Patrona Halil İsyanı ile sona erdi.`},
+  {konu:`tarih`, q:`II. Meşrutiyet'in (1908) ilanında etkili olan siyasi örgüt hangisidir?`, a:`İttihat ve Terakki Cemiyeti`, bilgi:`II. Abdülhamit meşrutiyeti yeniden ilan etmek zorunda kaldı. Bir yıl sonra 31 Mart Olayı yaşandı ve Abdülhamit tahttan indirildi.`},
+  {konu:`tarih`, q:`Mustafa Kemal'in Anafartalar'daki başarısıyla öne çıktığı, "geçilmez" denilen cephe hangisidir?`, a:`Çanakkale Cephesi (1915)`, bilgi:`İtilaf Devletleri boğazı geçemedi. Mustafa Kemal'in askerî dehası ilk kez burada ulusal ve uluslararası düzeyde tanındı.`},
+  {konu:`tarih`, q:`Boğazlar üzerinde Türkiye'nin egemenliğini tam olarak sağlayan sözleşme hangisidir?`, a:`Montrö Boğazlar Sözleşmesi (1936)`, bilgi:`Lozan'da uluslararası bir komisyona bırakılan Boğazların yönetimi tümüyle Türkiye'ye geçti. Türk dış politikasının büyük başarısıdır.`},
+  {konu:`tarih`, q:`Hatay hangi yıl anavatana (Türkiye'ye) katıldı?`, a:`1939`, bilgi:`Önce bağımsız Hatay Devleti kuruldu, ardından halkın kararıyla Türkiye'ye bağlandı. Atatürk'ün son dönem dış politika hedeflerindendi.`},
 
   /* ---------- COĞRAFYA ---------- */
   {konu:`cografya`, q:`Türkiye'nin en yüksek dağı hangisidir?`, a:`Ağrı Dağı (5137 m)`, bilgi:`Doğu Anadolu'da yer alan volkanik bir dağdır. Türkiye'nin çatısı sayılan Doğu Anadolu, ortalama yüksekliği en fazla olan bölgemizdir.`},
@@ -325,6 +356,17 @@ const DATA = [
   {konu:`cografya`, q:`Türkiye'nin en büyük adası hangisidir?`, a:`Gökçeada (İmroz)`, bilgi:`Çanakkale'ye bağlıdır ve Ege Denizi'ndedir. İkinci büyük ada ise yine Ege'deki Bozcaada'dır.`},
   {konu:`cografya`, q:`Türkiye'de en büyük deprem riski taşıyan fay hattı hangisidir?`, a:`Kuzey Anadolu Fay Hattı (KAF)`, bilgi:`Marmara'dan Doğu Anadolu'ya uzanır. Türkiye topraklarının büyük bölümü deprem kuşağı üzerindedir.`},
   {konu:`cografya`, q:`Türkiye'nin matematik konumu (enlem-boylam aralığı) nedir?`, a:`36-42 kuzey paralelleri, 26-45 doğu meridyenleri`, bilgi:`Orta kuşakta (ılıman kuşak) yer alır; bu yüzden dört mevsim belirgin yaşanır. Boylam farkı yerel saat farkı yaratır.`},
+  {konu:`cografya`, q:`Türkiye'nin nüfusça en kalabalık ikinci ili hangisidir?`, a:`Ankara`, bilgi:`İstanbul'dan sonra gelir; başkent olmasının etkisiyle hızlı büyümüştür. Üçüncü sırada genellikle İzmir yer alır.`},
+  {konu:`cografya`, q:`Türkiye'nin en büyük ovası hangisidir?`, a:`Konya Ovası`, bilgi:`İç Anadolu'da yer alan bir tektonik ovadır. Tahıl (buğday) üretiminde Türkiye'nin en önemli alanlarındandır; "Türkiye'nin tahıl ambarı" denir.`},
+  {konu:`cografya`, q:`Çukurova hangi ovadır ve hangi ürünüyle ünlüdür?`, a:`Delta ovası, pamuk`, bilgi:`Adana çevresinde, Seyhan ve Ceyhan nehirlerinin oluşturduğu verimli bir delta ovasıdır. Pamuk ve narenciye üretiminde öndedir.`},
+  {konu:`cografya`, q:`Türkiye'nin dünya rezervinde ilk sırada olduğu maden hangisidir?`, a:`Bor`, bilgi:`Dünya bor rezervlerinin büyük bölümü Türkiye'dedir. Başlıca çıkarıldığı iller Eskişehir, Kütahya ve Balıkesir'dir.`},
+  {konu:`cografya`, q:`Türkiye'de en çok çıkarılan enerji hammaddesi (kömür türü) hangisidir?`, a:`Linyit`, bilgi:`Düşük kaliteli bir kömürdür ve termik santrallerde kullanılır. Afşin-Elbistan (Kahramanmaraş) en büyük linyit havzasıdır.`},
+  {konu:`cografya`, q:`Fındık üretiminin merkezi olan ve Türkiye'yi dünyada ilk sıraya taşıyan bölge hangisidir?`, a:`Doğu Karadeniz`, bilgi:`Giresun ve Ordu başta olmak üzere Karadeniz kıyısında yetişir. Türkiye dünya fındık üretiminin büyük kısmını karşılar.`},
+  {konu:`cografya`, q:`Türkiye'de çay tarımının yapıldığı başlıca yöre neresidir?`, a:`Rize (Doğu Karadeniz)`, bilgi:`Her mevsim yağışlı ve nemli iklim çay için idealdir. Üretim Rize çevresinde yoğunlaşmıştır.`},
+  {konu:`cografya`, q:`Türkiye'nin en büyük baraj gölü hangisidir?`, a:`Atatürk Barajı`, bilgi:`Fırat Nehri üzerinde, GAP kapsamında kuruldu. Sulama ve hidroelektrik enerji üretiminde Türkiye'nin en büyük barajıdır.`},
+  {konu:`cografya`, q:`Kapadokya'daki peribacaları hangi süreçle oluşmuştur?`, a:`Volkanik tüflerin aşınması`, bilgi:`Nevşehir çevresindeki yumuşak volkanik tüfler rüzgar ve suyla aşınarak bu şekilleri oluşturmuştur. Ürgüp-Göreme yöresi UNESCO Dünya Mirası'ndadır.`},
+  {konu:`cografya`, q:`Obruk, dolin, mağara ve traverten gibi şekiller hangi kayaç türünün erimesiyle oluşur?`, a:`Kireçtaşı (karstik şekiller)`, bilgi:`Suda kolay çözünen kireçtaşının bulunduğu Akdeniz Bölgesi'nde yaygındır. Pamukkale travertenleri bu oluşuma örnektir.`},
+  {konu:`cografya`, q:`Türkiye'de nüfusun en yoğun ve sanayinin en gelişmiş olduğu bölge hangisidir?`, a:`Marmara Bölgesi`, bilgi:`İstanbul'un konumu, ulaşım kolaylığı ve limanları sayesinde sanayi, ticaret ve nüfus burada yoğunlaşmıştır.`},
 
   /* ---------- VATANDAŞLIK ---------- */
   {konu:`vatandaslik`, q:`Türkiye'de hâlen yürürlükte olan anayasa hangi yıla aittir?`, a:`1982 Anayasası`, bilgi:`12 Eylül 1980 askerî müdahalesinin ardından halkoyuyla kabul edildi. Bugüne dek birçok kez değiştirilmiştir.`},
@@ -341,19 +383,33 @@ const DATA = [
   {konu:`vatandaslik`, q:`Seçimlerin genel yönetimi ve denetimi hangi kuruma aittir?`, a:`Yüksek Seçim Kurulu (YSK)`, bilgi:`Kararları kesindir, aleyhine başka mercie başvurulamaz. Seçim sürecindeki tüm işlemleri yürütür ve denetler.`},
   {konu:`vatandaslik`, q:`Temel hak ve hürriyetler kural olarak neyle sınırlanabilir?`, a:`Yalnızca kanunla`, bilgi:`Sınırlama, anayasanın sözüne ve ruhuna, ölçülülük ilkesine aykırı olamaz ve hakkın özüne dokunamaz.`},
   {konu:`vatandaslik`, q:`Seçimlerin temel ilkeleri nelerdir?`, a:`Serbest, eşit, gizli, genel oy, açık sayım ve tek dereceli seçim`, bilgi:`Oy verme gizli, sayım ve döküm ise açık (aleni) yapılır. Bu ilkeler seçimin dürüstlüğünü güvence altına alır.`},
+  {konu:`vatandaslik`, q:`Normlar hiyerarşisinde en üstte hangi kural bulunur?`, a:`Anayasa`, bilgi:`Alt basamaktaki her kural, üstündekine aykırı olamaz. Sıralama: Anayasa, sonra kanun ve Cumhurbaşkanlığı kararnamesi, ardından yönetmelikler gelir.`},
+  {konu:`vatandaslik`, q:`Devlet ile bireyler arasındaki ilişkileri düzenleyen hukuk dalı hangisidir?`, a:`Kamu hukuku`, bilgi:`Anayasa, idare, ceza ve vergi hukuku kamu hukuku dallarıdır. Bireyler arası ilişkileri düzenleyen medeni, borçlar ve ticaret hukuku ise özel hukuktur.`},
+  {konu:`vatandaslik`, q:`Türk hukukunda kişinin ergin (reşit) sayıldığı yaş kaçtır?`, a:`18`, bilgi:`Kişi 18 yaşını doldurunca kendi başına hukuki işlem yapabilir. Evlenme ya da mahkeme kararıyla erken erginlik de mümkündür.`},
+  {konu:`vatandaslik`, q:`Kanunlar kim tarafından yapılır ve kim tarafından yayımlanır?`, a:`TBMM yapar, Cumhurbaşkanı yayımlar`, bilgi:`Cumhurbaşkanı kanunu 15 gün içinde yayımlar ya da bir daha görüşülmek üzere TBMM'ye geri gönderir (veto). Meclis aynen kabul ederse kanun yayımlanır.`},
+  {konu:`vatandaslik`, q:`Anayasa değişikliği teklifi TBMM üye tam sayısının en az kaçta kaçıyla verilebilir?`, a:`Üçte biri (en az 200 milletvekili)`, bilgi:`Kabul için beşte üç (360) çoğunluk gerekir. Bazı durumlarda değişiklik halkoyuna (referandum) sunulur.`},
+  {konu:`vatandaslik`, q:`1982 Anayasası'nın değiştirilmesi dahi teklif edilemeyen maddeleri hangileridir?`, a:`İlk dört madde`, bilgi:`Devletin şekli (cumhuriyet), nitelikleri, dili, bayrağı, başkenti ve millî marşı gibi ilk üç maddedeki hükümler değiştirilemez; dördüncü madde bunu güvence altına alır.`},
+  {konu:`vatandaslik`, q:`Yeni hükümet sisteminde Cumhurbaşkanı'nın çıkardığı, yürütmeye ilişkin düzenleyici işleme ne ad verilir?`, a:`Cumhurbaşkanlığı kararnamesi`, bilgi:`2017 değişikliğiyle geldi. Temel haklar, kişi hakları ve kanunda açıkça düzenlenen konularda kararname çıkarılamaz; kanun her zaman üstündür.`},
+  {konu:`vatandaslik`, q:`Merkezi idarenin taşradaki (ildeki) en üst temsilcisi kimdir?`, a:`Vali`, bilgi:`Vali ilde devleti ve hükümeti temsil eder, Cumhurbaşkanı kararıyla atanır. Yerinden yönetim kuruluşları ise belediye, il özel idaresi ve köydür.`},
 
   /* ---------- GÜNCEL ---------- */
-  {konu:`guncel`, q:`Birleşmiş Milletler'in (BM) merkezi hangi şehirdedir?`, a:`New York (ABD)`, bilgi:`1945'te kuruldu. Güvenlik Konseyi'nin 5 daimî üyesi ABD, Rusya, Çin, İngiltere ve Fransa'dır; bu üyeler veto hakkına sahiptir.`},
-  {konu:`guncel`, q:`NATO'nun merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, bilgi:`Türkiye NATO'ya 1952'de üye oldu. Askerî ittifak niteliğindedir ve 4 Nisan 1949'da kurulmuştur.`},
-  {konu:`guncel`, q:`Avrupa Birliği'nin (AB) merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, bilgi:`Türkiye 1999 Helsinki Zirvesi'nde adaylık statüsü aldı, tam üyelik müzakerelerine 2005'te başladı. Ortak para birimi Euro'dur.`},
-  {konu:`guncel`, q:`Interpol'ün (Uluslararası Polis Teşkilatı) merkezi hangi şehirdedir?`, a:`Lyon (Fransa)`, bilgi:`Uluslararası suçlarla mücadelede polis iş birliğini sağlar.`},
-  {konu:`guncel`, q:`Uluslararası Adalet Divanı ve OPCW'nin bulunduğu şehir hangisidir?`, a:`Lahey (Hollanda)`, bilgi:`Lahey uluslararası hukuk kurumlarının merkezidir; Uluslararası Ceza Mahkemesi (UCM) de buradadır. OPCW, Kimyasal Silahların Yasaklanması Örgütü'dür.`},
-  {konu:`guncel`, q:`Dünya Sağlık Örgütü'nün (WHO/DSÖ) merkezi hangi şehirdedir?`, a:`Cenevre (İsviçre)`, bilgi:`BM'nin sağlık alanındaki uzman kuruluşudur. Cenevre ayrıca Dünya Ticaret Örgütü ve Kızılhaç'a da ev sahipliği yapar.`},
-  {konu:`guncel`, q:`UNESCO'nun merkezi hangi şehirdedir?`, a:`Paris (Fransa)`, bilgi:`BM'nin eğitim, bilim ve kültür örgütüdür. Dünya Mirası Listesi'ni bu kuruluş belirler.`},
-  {konu:`guncel`, q:`İslam İşbirliği Teşkilatı'nın (İİT) merkezi hangi şehirdedir?`, a:`Cidde (Suudi Arabistan)`, bilgi:`İslam ülkeleri arasında dayanışmayı amaçlar ve BM'den sonra en büyük hükümetler arası örgüttür.`},
-  {konu:`guncel`, q:`Nobel Barış Ödülü hangi şehirde takdim edilir?`, a:`Oslo (Norveç)`, bilgi:`Diğer tüm Nobel ödülleri İsveç'in başkenti Stockholm'de verilir; yalnızca Barış Ödülü Norveç'in başkenti Oslo'da takdim edilir.`},
-  {konu:`guncel`, q:`2025 BM İklim Değişikliği Konferansı (COP30) hangi ülkede düzenlendi?`, a:`Brezilya (Belém)`, bilgi:`Kasım 2025'te Amazon bölgesindeki Belém kentinde yapıldı. COP zirveleri iklim değişikliğiyle mücadele için düzenlenen küresel toplantılardır.`},
-  {konu:`guncel`, q:`2026 G20 Liderler Zirvesi'ne hangi ülke ev sahipliği yapacaktır?`, a:`ABD (Miami)`, bilgi:`G20, dünyanın en büyük 20 ekonomisini bir araya getiren platformdur; Türkiye de üyedir ve 2015 zirvesine Antalya'da ev sahipliği yapmıştı.`}
+  {konu:`guncel`, q:`Birleşmiş Milletler'in (BM) merkezi hangi şehirdedir?`, a:`New York (ABD)`, celp:[`Cenevre (İsviçre)`,`Washington (ABD)`,`Viyana (Avusturya)`], bilgi:`1945'te kuruldu. Güvenlik Konseyi'nin 5 daimî üyesi ABD, Rusya, Çin, İngiltere ve Fransa'dır; bu üyeler veto hakkına sahiptir.`},
+  {konu:`guncel`, q:`NATO'nun merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, celp:[`Strazburg (Fransa)`,`Lahey (Hollanda)`,`Cenevre (İsviçre)`], bilgi:`Türkiye NATO'ya 1952'de üye oldu. Askerî ittifak niteliğindedir ve 4 Nisan 1949'da kurulmuştur.`},
+  {konu:`guncel`, q:`Avrupa Birliği'nin (AB) merkezi hangi şehirdedir?`, a:`Brüksel (Belçika)`, celp:[`Strazburg (Fransa)`,`Frankfurt (Almanya)`,`Lüksemburg`], bilgi:`Türkiye 1999 Helsinki Zirvesi'nde adaylık statüsü aldı, tam üyelik müzakerelerine 2005'te başladı. Ortak para birimi Euro'dur.`},
+  {konu:`guncel`, q:`Interpol'ün (Uluslararası Polis Teşkilatı) merkezi hangi şehirdedir?`, a:`Lyon (Fransa)`, celp:[`Paris (Fransa)`,`Lahey (Hollanda)`,`Brüksel (Belçika)`], bilgi:`Uluslararası suçlarla mücadelede polis iş birliğini sağlar.`},
+  {konu:`guncel`, q:`Uluslararası Adalet Divanı ve OPCW'nin bulunduğu şehir hangisidir?`, a:`Lahey (Hollanda)`, celp:[`Cenevre (İsviçre)`,`Strazburg (Fransa)`,`New York (ABD)`], bilgi:`Lahey uluslararası hukuk kurumlarının merkezidir; Uluslararası Ceza Mahkemesi (UCM) de buradadır. OPCW, Kimyasal Silahların Yasaklanması Örgütü'dür.`},
+  {konu:`guncel`, q:`Dünya Sağlık Örgütü'nün (WHO/DSÖ) merkezi hangi şehirdedir?`, a:`Cenevre (İsviçre)`, celp:[`New York (ABD)`,`Paris (Fransa)`,`Viyana (Avusturya)`], bilgi:`BM'nin sağlık alanındaki uzman kuruluşudur. Cenevre ayrıca Dünya Ticaret Örgütü ve Kızılhaç'a da ev sahipliği yapar.`},
+  {konu:`guncel`, q:`UNESCO'nun merkezi hangi şehirdedir?`, a:`Paris (Fransa)`, celp:[`Cenevre (İsviçre)`,`Roma (İtalya)`,`New York (ABD)`], bilgi:`BM'nin eğitim, bilim ve kültür örgütüdür. Dünya Mirası Listesi'ni bu kuruluş belirler.`},
+  {konu:`guncel`, q:`İslam İşbirliği Teşkilatı'nın (İİT) merkezi hangi şehirdedir?`, a:`Cidde (Suudi Arabistan)`, celp:[`Riyad (Suudi Arabistan)`,`Kahire (Mısır)`,`İstanbul (Türkiye)`], bilgi:`İslam ülkeleri arasında dayanışmayı amaçlar ve BM'den sonra en büyük hükümetler arası örgüttür.`},
+  {konu:`guncel`, q:`Nobel Barış Ödülü hangi şehirde takdim edilir?`, a:`Oslo (Norveç)`, celp:[`Stockholm (İsveç)`,`Kopenhag (Danimarka)`,`Helsinki (Finlandiya)`], bilgi:`Diğer tüm Nobel ödülleri İsveç'in başkenti Stockholm'de verilir; yalnızca Barış Ödülü Norveç'in başkenti Oslo'da takdim edilir.`},
+  {konu:`guncel`, q:`2025 BM İklim Değişikliği Konferansı (COP30) hangi ülkede düzenlendi?`, a:`Brezilya (Belém)`, celp:[`Birleşik Arap Emirlikleri (Dubai)`,`Azerbaycan (Bakü)`,`Mısır (Şarm El-Şeyh)`], bilgi:`Kasım 2025'te Amazon bölgesindeki Belém kentinde yapıldı. COP zirveleri iklim değişikliğiyle mücadele için düzenlenen küresel toplantılardır.`},
+  {konu:`guncel`, q:`2026 G20 Liderler Zirvesi'ne hangi ülke ev sahipliği yapacaktır?`, a:`ABD (Miami)`, celp:[`Brezilya (Rio de Janeiro)`,`Güney Afrika (Johannesburg)`,`Hindistan (Yeni Delhi)`], bilgi:`G20, dünyanın en büyük 20 ekonomisini bir araya getiren platformdur; Türkiye de üyedir ve 2015 zirvesine Antalya'da ev sahipliği yapmıştı.`},
+  {konu:`guncel`, q:`IMF ve Dünya Bankası'nın merkezi hangi şehirdedir?`, a:`Washington (ABD)`, celp:[`New York (ABD)`,`Cenevre (İsviçre)`,`Londra (İngiltere)`], bilgi:`İkisi de 1944 Bretton Woods Konferansı'nda kuruldu. IMF ödemeler dengesi, Dünya Bankası ise kalkınma finansmanıyla ilgilenir.`},
+  {konu:`guncel`, q:`Avrupa Konseyi ve Avrupa İnsan Hakları Mahkemesi (AİHM) hangi şehirdedir?`, a:`Strazburg (Fransa)`, celp:[`Brüksel (Belçika)`,`Lahey (Hollanda)`,`Cenevre (İsviçre)`], bilgi:`Avrupa Konseyi, AB'den ayrı bir kuruluştur ve insan hakları alanında çalışır. Türkiye kurucu üyelerdendir. AİHM buna bağlı çalışır.`},
+  {konu:`guncel`, q:`Uluslararası Futbol Federasyonu FIFA'nın merkezi hangi şehirdedir?`, a:`Zürih (İsviçre)`, celp:[`Nyon (İsviçre)`,`Paris (Fransa)`,`Londra (İngiltere)`], bilgi:`Avrupa futbolunu yöneten UEFA'nın merkezi ise İsviçre'nin Nyon kentindedir.`},
+  {konu:`guncel`, q:`D-8 (Gelişen Sekiz Ülke) örgütü hangi ülkenin öncülüğünde ve nerede kuruldu?`, a:`Türkiye, İstanbul (1997)`, celp:[`Mısır, Kahire (1997)`,`İran, Tahran (1995)`,`Türkiye, Ankara (2000)`], bilgi:`Türkiye öncülüğünde kuruldu. Üyeleri Türkiye, İran, Pakistan, Bangladeş, Malezya, Endonezya, Mısır ve Nijerya'dır.`},
+  {konu:`guncel`, q:`Nobel Edebiyat Ödülü kazanan tek Türk yazar kimdir?`, a:`Orhan Pamuk (2006)`, celp:[`Yaşar Kemal`,`Nazım Hikmet`,`Aziz Nesin`], bilgi:`"Kar", "Benim Adım Kırmızı" ve "Masumiyet Müzesi" gibi eserleriyle tanınır. Ödülü 2006'da aldı.`},
+  {konu:`guncel`, q:`Dünyanın bilinen en eski tapınağı sayılan, UNESCO Dünya Mirası Listesi'ndeki yer neresidir?`, a:`Göbeklitepe (Şanlıurfa)`, celp:[`Çatalhöyük (Konya)`,`Hattuşa (Çorum)`,`Nemrut Dağı (Adıyaman)`], bilgi:`Yaklaşık 12.000 yıl öncesine tarihlenir ve tarım öncesi dönemde inşa edilmiştir. "Sıfır Noktası" olarak anılır.`}
 ];
 
 /* ============ KONU ETİKETLERİ ============ */
@@ -391,6 +447,8 @@ function selectTab(name){
     document.getElementById(`view-`+t).classList.toggle(`active`, t===name);
   });
   document.getElementById(`konuSel`).style.display = (name===`wrong`||name===`stats`) ? `none` : ``;
+  document.body.classList.toggle(`list-tab`, name===`list`);
+  if(name!==`list`) document.body.classList.remove(`list-has-nav`);
   if(name===`cards`) buildCards();
   else if(name===`list`) buildList();
   else if(name===`quiz`) nextQuiz();
@@ -540,7 +598,41 @@ function refreshEntry(el, rec){
   el.setAttribute(`data-st`, st);
   el.querySelector(`.assess-score`).innerHTML = `Skor: <b>${getScore(rec)>0?`+`:``}${getScore(rec)}</b> · ${statusText(st)}`;
 }
-function buildList(){ renderEntryList(document.getElementById(`list`), activeDeck()); }
+function buildList(){
+  renderEntryList(document.getElementById(`list`), activeDeck());
+  listFocus = -1;
+  updateListNav();
+}
+
+/* ---- Liste mobil gezinme ---- */
+let listFocus = -1;
+function updateListNav(){
+  const entries = document.querySelectorAll(`#list .entry`);
+  document.body.classList.toggle(`list-has-nav`, activeTab===`list` && entries.length>0);
+  document.getElementById(`navUp`).disabled = listFocus<=0;
+  document.getElementById(`navDown`).disabled = listFocus>=entries.length-1;
+}
+function focusListEntry(idx){
+  const entries = [...document.querySelectorAll(`#list .entry`)];
+  if(!entries.length) return;
+  idx = Math.max(0, Math.min(entries.length-1, idx));
+  listFocus = idx;
+  entries.forEach((el,i)=>{
+    const on = i===idx;
+    el.classList.toggle(`focused`, on);
+    el.classList.toggle(`open`, on);
+    el.querySelector(`.entry-head`).setAttribute(`aria-expanded`, on?`true`:`false`);
+  });
+  entries[idx].scrollIntoView({behavior:`smooth`, block:`center`});
+  updateListNav();
+}
+function moveListFocus(step){
+  const entries = document.querySelectorAll(`#list .entry`);
+  if(!entries.length) return;
+  focusListEntry(listFocus<0 ? 0 : listFocus+step);
+}
+document.getElementById(`navUp`).addEventListener(`click`, ()=>moveListFocus(-1));
+document.getElementById(`navDown`).addEventListener(`click`, ()=>moveListFocus(1));
 
 /* ============ YANLIŞ KUTUSU ============ */
 function wrongDeck(){ return DATA.filter(r=> getScore(r) < 0); }
@@ -556,6 +648,23 @@ function buildWrong(){
 
 /* ============ QUIZ ============ */
 let quizRec = null, quizAnswered = false, qRight = 0, qTotal = 0;
+function hasYear(s){ return /\b\d{3,4}\b/.test(s); }
+function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+/* çeldiriciler: önce elle seçilmiş celp, eksik kalırsa cevabın tipine (yıl/metin) uyan aynı konudan */
+function buildDistractors(rec){
+  const out = [];
+  const used = new Set([rec.a]);
+  if(Array.isArray(rec.celp)){
+    shuffle(rec.celp.slice()).forEach(c=>{ if(out.length<3 && !used.has(c)){ used.add(c); out.push(c); } });
+  }
+  if(out.length<3){
+    const yr = hasYear(rec.a);
+    let pool = DATA.filter(r=> r.konu===rec.konu && !used.has(r.a) && hasYear(r.a)===yr).map(r=>r.a);
+    if(pool.length < 3-out.length) pool = pool.concat(DATA.filter(r=> r.konu===rec.konu && !used.has(r.a)).map(r=>r.a));
+    shuffle(pool).forEach(a=>{ if(out.length<3 && !used.has(a)){ used.add(a); out.push(a); } });
+  }
+  return shuffle(out);
+}
 function nextQuiz(){
   const deck = activeDeck();
   document.getElementById(`qExpl`).classList.remove(`show`);
@@ -568,16 +677,7 @@ function nextQuiz(){
   }
   quizAnswered = false;
   quizRec = deck[Math.floor(Math.random()*deck.length)];
-  // aynı konudan 3 çeldirici
-  const pool = DATA.filter(r=> r.konu===quizRec.konu && r.a!==quizRec.a);
-  const distract = [];
-  const used = new Set();
-  while(distract.length<3 && pool.length){
-    const p = pool[Math.floor(Math.random()*pool.length)];
-    if(!used.has(p.a)){ used.add(p.a); distract.push(p.a); }
-    if(used.size>=pool.length) break;
-  }
-  let opts = [quizRec.a, ...distract];
+  let opts = [quizRec.a, ...buildDistractors(quizRec)];
   for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]]; }
 
   konuChip(document.getElementById(`qKonu`), quizRec.konu);
