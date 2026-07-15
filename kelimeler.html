@@ -71,9 +71,39 @@
   .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .count{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--text-muted);margin-left:auto}
 
-  /* ---- ipucu ---- */
+  /* ---- sağdaki dropdown: Cümle / Öğrendiklerim / Genel ---- */
+  .tabs .count{margin-left:0}
+  .more-menu{position:relative;margin-left:auto}
+  .mm-caret{width:13px !important;height:13px !important;color:var(--text-muted);transition:transform .18s}
+  .more-btn[aria-expanded="true"] .mm-caret{transform:rotate(180deg)}
+  .more-btn{display:inline-flex;align-items:center;gap:7px;appearance:none;cursor:pointer;background:var(--surface);border:1px solid var(--border);color:var(--text-dim);font-family:var(--sans);font-weight:600;font-size:.82rem;padding:8px 13px;border-radius:999px;transition:.15s}
+  .more-btn:hover,.more-btn[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+  .more-btn svg{width:16px;height:16px;flex:0 0 auto}
+  .more-pop{position:absolute;top:calc(100% + 8px);right:0;z-index:60;min-width:196px;background:var(--paper);border:1px solid var(--border);border-radius:13px;box-shadow:0 14px 36px rgba(0,0,0,.17);padding:6px;display:flex;flex-direction:column;gap:2px}
+  .more-pop[hidden]{display:none}
+  .more-item{display:flex;align-items:center;gap:11px;width:100%;box-sizing:border-box;text-align:left;appearance:none;cursor:pointer;background:transparent;border:0;color:var(--text);font-family:var(--sans);font-weight:600;font-size:.92rem;padding:11px 12px;border-radius:9px;transition:.12s}
+  .more-item:hover{background:var(--surface);color:var(--accent)}
+  .more-item svg{width:17px;height:17px;color:var(--text-muted);flex:0 0 auto}
+  .more-item:hover svg{color:var(--accent)}
+  .more-item[aria-selected="true"]{color:var(--accent)}
+  .more-item[aria-selected="true"] svg{color:var(--accent)}
+  @media (max-width:560px){ .more-btn span{display:none} }
+
+  /* ---- ipucu + filtre çubuğu ---- */
   .list-hint{margin:2px 0 18px;font-size:.82rem;color:var(--text-muted);line-height:1.7}
   .list-hint kbd{font-family:var(--mono);font-size:.7rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--text-dim)}
+  .ctlbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:2px 0 18px}
+  .ctlbar-hint{flex:1 1 auto;min-width:0;margin:0;font-size:.82rem;color:var(--text-muted);line-height:1.7}
+  .ctlbar-hint:empty{display:none}
+  .ctlbar-hint kbd{font-family:var(--mono);font-size:.7rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--text-dim)}
+  .ctlbar-right{margin-left:auto;display:inline-flex;align-items:center;gap:12px;flex:0 0 auto}
+  .ctlbar-right .count{margin-left:0}
+  .ctlbar-right .filter-sel{margin-left:0}
+  /* kart/quiz içinde satır içi filtre */
+  .card-topbar #filterHost,#view-quiz .dir-row #filterHost{margin-left:0}
+  .card-topbar #filterHost .count{display:none}
+  #view-quiz .dir-row{justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap}
+  #view-quiz .dir-row #filterHost{margin-left:auto}
 
   /* ---- mobil kaydırma butonları ---- */
   .list-nav{position:fixed;right:14px;bottom:92px;z-index:40;display:none;flex-direction:column;gap:12px}
@@ -162,6 +192,17 @@
   .coll-sub{display:flex;justify-content:center;margin-bottom:20px}
 
   /* çalış: kelime kartı */
+  /* collocation liste görünümü */
+  .cb-list{display:flex;flex-direction:column;gap:12px}
+  .cb-row{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:16px clamp(14px,3vw,20px)}
+  .cb-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 11px;margin-bottom:12px}
+  .cb-w{font-family:var(--serif);font-weight:600;font-size:1.22rem;letter-spacing:-.01em;color:var(--accent);line-height:1.15}
+  .cb-type{font-family:var(--mono);font-size:.54rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+  .cb-tr{font-size:.9rem;color:var(--text-dim);line-height:1.4}
+  .cb-detail{margin-left:auto;appearance:none;cursor:pointer;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);display:flex;align-items:center;justify-content:center;padding:0;transition:.15s;align-self:center}
+  .cb-detail:hover{border-color:var(--accent);color:var(--accent)}
+  .cb-detail svg{width:16px;height:16px}
+  .cb-coll{display:flex;flex-wrap:wrap;gap:8px;text-align:left}
   .coll-card{border:1px solid var(--border);border-radius:18px;background:var(--surface);padding:20px clamp(16px,3.5vw,24px)}
   .coll-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin-bottom:4px}
   .coll-w-term{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;color:var(--accent);line-height:1.15}
@@ -473,23 +514,44 @@
       <button id="tab-quiz" role="tab" aria-selected="false">Quiz</button>
       <button id="tab-fill" role="tab" aria-selected="false">Boşluk</button>
       <button id="tab-reading" role="tab" aria-selected="false">Okuma</button>
-      <button id="tab-sentence" role="tab" aria-selected="false">Cümle</button>
       <button id="tab-coll" role="tab" aria-selected="false">Collocation</button>
-      <button id="tab-stats" role="tab" aria-selected="false">İstatistik</button>
     </div>
-    <select class="filter-sel" id="filterSel" aria-label="Kelimeleri filtrele">
-      <option value="all">Tümü</option>
-      <option value="weak">Zayıf</option>
-      <option value="shaky">Sağlam değil</option>
-      <option value="known">Biliyorum</option>
-      <option value="hidden">Öğrendiklerim</option>
-    </select>
-    <span class="count" id="count"></span>
+    <div class="more-menu">
+      <button class="more-btn" id="moreBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="İstatistik: Cümle, Öğrendiklerim, Genel" title="Cümle · Öğrendiklerim · Genel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>İstatistik</span>
+        <svg class="mm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="more-pop" id="morePop" role="menu" hidden>
+        <button id="tab-sentence" class="more-item" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Cümle</span>
+        </button>
+        <button id="go-mastered" class="more-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Öğrendiklerim</span>
+        </button>
+        <button id="tab-stats" class="more-item" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Genel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctlbar">
+    <p class="ctlbar-hint" id="ctlHint"></p>
+    <div class="ctlbar-right" id="filterHost">
+      <select class="filter-sel" id="filterSel" aria-label="Kelimeleri filtrele">
+        <option value="all">Tümü</option>
+        <option value="weak">Zayıf</option>
+        <option value="shaky">Sağlam değil</option>
+        <option value="known">Biliyorum</option>
+        <option value="hidden">Öğrendiklerim</option>
+      </select>
+      <span class="count" id="count"></span>
+    </div>
   </div>
 
   <!-- LİSTE -->
   <div class="list-view" id="view-list" role="tabpanel" aria-labelledby="tab-list">
-    <p class="list-hint"><kbd>↑</kbd> <kbd>↓</kbd> ile gez, <kbd>Enter</kbd> ile aç. Mobilde sağdaki oklarla ilerle.</p>
     <div class="list" id="list"></div>
   </div>
 
@@ -605,13 +667,17 @@
       <div class="coll-progress" id="collProgress"></div>
       <div class="coll-sub">
         <div class="seg" role="group" aria-label="Collocation mode">
-          <button id="coll-study" aria-selected="true">Study</button>
+          <button id="coll-list" aria-selected="true">Liste</button>
+          <button id="coll-study" aria-selected="false">Study</button>
           <button id="coll-ex" aria-selected="false">Practice</button>
         </div>
       </div>
 
+      <!-- LİSTE: tüm kelimeler + collocation'ları -->
+      <div id="collBrowse"></div>
+
       <!-- ÇALIŞ: tek kelime navigatörü -->
-      <div id="collStudy"></div>
+      <div id="collStudy" hidden></div>
 
       <!-- ALIŞTIRMA -->
       <div id="collEx" hidden>
@@ -966,6 +1032,10 @@ const TABS = ['list','cards','quiz','fill','reading','sentence','coll','stats'];
 const tabBtn = {}, view = {};
 TABS.forEach(t=>{ tabBtn[t]=document.getElementById('tab-'+t); view[t]=document.getElementById('view-'+t); });
 let currentTab = 'list';
+const ctlHint = document.getElementById('ctlHint');
+const CTL_HINTS = {
+  list: '<kbd>↑</kbd> <kbd>↓</kbd> ile gez, <kbd>Enter</kbd> ile aç. Mobilde sağdaki oklarla ilerle.'
+};
 
 function updateCount(){
   if(currentTab==='cards') countEl.textContent = (order.length ? (cardPos+1) : 0)+' / '+order.length;
@@ -984,6 +1054,8 @@ function selectTab(t){
     view[k].style.display = (k===t) ? (k==='cards' ? 'flex' : 'block') : 'none';
   });
   document.body.classList.toggle('list-active', t==='list');
+  if(ctlHint) ctlHint.innerHTML = CTL_HINTS[t] || '';
+  placeFilter(t);
   if(t==='list') renderList();
   else if(t==='cards'){ buildOrder(); renderCard(); }
   else if(t==='quiz') startQuiz();
@@ -996,8 +1068,40 @@ function selectTab(t){
 }
 TABS.forEach(t=> tabBtn[t].addEventListener('click', ()=>selectTab(t)));
 
+/* sağdaki dropdown: Cümle / Öğrendiklerim / İstatistik */
+(function(){
+  const moreBtn=document.getElementById('moreBtn'), morePop=document.getElementById('morePop');
+  if(!moreBtn||!morePop) return;
+  function closeMore(){ morePop.hidden=true; moreBtn.setAttribute('aria-expanded','false'); }
+  function openMore(){ morePop.hidden=false; moreBtn.setAttribute('aria-expanded','true'); }
+  moreBtn.addEventListener('click', function(e){ e.stopPropagation(); morePop.hidden ? openMore() : closeMore(); });
+  morePop.addEventListener('click', closeMore);
+  document.addEventListener('click', function(e){ if(!e.target.closest('.more-menu')) closeMore(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMore(); });
+  const gm=document.getElementById('go-mastered');
+  if(gm) gm.addEventListener('click', function(){ filterVal='hidden'; if(filterSel) filterSel.value='hidden'; selectTab('list'); });
+})();
+
 const filterSel = document.getElementById('filterSel');
 filterSel.addEventListener('change', ()=>{ filterVal = filterSel.value; refreshCurrent(); });
+
+/* filtre dropdown'ını sekmeye göre yerleştir: kart/quiz'de üst satıra, diğerlerinde çubuğa */
+const filterHost = document.getElementById('filterHost');
+const ctlbarEl = document.querySelector('.ctlbar');
+function placeFilter(t){
+  if(t==='cards'){
+    const tr = document.querySelector('#view-cards .topbar-right');
+    if(tr && filterHost.parentNode!==tr) tr.insertBefore(filterHost, tr.firstChild);
+    ctlbarEl.style.display='none';
+  } else if(t==='quiz'){
+    const dr = document.querySelector('#view-quiz .dir-row');
+    if(dr && filterHost.parentNode!==dr) dr.appendChild(filterHost);
+    ctlbarEl.style.display='none';
+  } else {
+    if(filterHost.parentNode!==ctlbarEl) ctlbarEl.appendChild(filterHost);
+    ctlbarEl.style.display='';
+  }
+}
 function refreshCurrent(){
   if(currentTab==='list') renderList();
   else if(currentTab==='cards'){ buildOrder(); renderCard(); }
@@ -1331,7 +1435,7 @@ function renderCollProgress(){
 }
 
 /* ---- çalış: tek kelime navigatörü ---- */
-let collMode='study', collOrder=[], collPos=0;
+let collMode='list', collOrder=[], collPos=0;
 function buildCollOrder(){ collOrder=activeWords().map(w=>w._i); if(collPos>=collOrder.length) collPos=Math.max(0,collOrder.length-1); }
 function curColl(){ return WORDS[collOrder[collPos]]; }
 const collStudyEl=document.getElementById('collStudy');
@@ -1493,15 +1597,45 @@ function revealCollFill(){
 document.getElementById('cex-match').addEventListener('click', function(){ collEx.type='match'; startCollEx(); });
 document.getElementById('cex-fill').addEventListener('click', function(){ collEx.type='fill'; startCollEx(); });
 
+/* ---- liste: tüm kelimeler + collocation'ları ---- */
+const collBrowseEl=document.getElementById('collBrowse');
+function renderCollBrowse(){
+  const list=activeWords().filter(w=>w.coll);
+  if(!list.length){ collBrowseEl.innerHTML='<div class="empty">Bu filtrede collocation yok. Filtreyi değiştir.</div>'; return; }
+  collBrowseEl.innerHTML='<div class="cb-list">'+list.map(function(w){
+    return '<div class="cb-row" data-i="'+w._i+'">'+
+      '<div class="cb-head">'+
+        '<span class="cb-w">'+escapeHTML(w.en)+'</span>'+
+        '<span class="cb-type">'+typeLabel(w.type)+'</span>'+
+        '<span class="cb-tr">'+escapeHTML(w.tr)+'</span>'+
+        '<button class="cb-detail" type="button" aria-label="Detay">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'+
+        '</button>'+
+      '</div>'+
+      '<div class="coll cb-coll">'+collFormat(w.coll)+'</div>'+
+    '</div>';
+  }).join('')+'</div>';
+}
+collBrowseEl.addEventListener('click', function(e){
+  const btn=e.target.closest('.cb-detail'); if(!btn) return;
+  const row=e.target.closest('.cb-row'); if(!row) return;
+  openWordModal(WORDS[+row.dataset.i]);
+});
+
 /* ---- mod anahtarı ---- */
 function showCollMode(){
-  const study=collMode==='study';
-  document.getElementById('coll-study').setAttribute('aria-selected', study?'true':'false');
-  document.getElementById('coll-ex').setAttribute('aria-selected', study?'false':'true');
-  collStudyEl.hidden=!study;
-  document.getElementById('collEx').hidden=study;
-  if(study) renderCollStudy(); else startCollEx();
+  const isList=collMode==='list', isStudy=collMode==='study', isEx=collMode==='exercise';
+  document.getElementById('coll-list').setAttribute('aria-selected', isList?'true':'false');
+  document.getElementById('coll-study').setAttribute('aria-selected', isStudy?'true':'false');
+  document.getElementById('coll-ex').setAttribute('aria-selected', isEx?'true':'false');
+  collBrowseEl.hidden=!isList;
+  collStudyEl.hidden=!isStudy;
+  document.getElementById('collEx').hidden=!isEx;
+  if(isList) renderCollBrowse();
+  else if(isStudy) renderCollStudy();
+  else startCollEx();
 }
+document.getElementById('coll-list').addEventListener('click', function(){ collMode='list'; showCollMode(); });
 document.getElementById('coll-study').addEventListener('click', function(){ collMode='study'; showCollMode(); });
 document.getElementById('coll-ex').addEventListener('click', function(){ collMode='exercise'; showCollMode(); });
 function renderColl(){ renderCollProgress(); buildCollOrder(); showCollMode(); }
