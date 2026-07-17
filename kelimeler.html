@@ -667,9 +667,10 @@
       <div class="coll-progress" id="collProgress"></div>
       <div class="coll-sub">
         <div class="seg" role="group" aria-label="Collocation mode">
-          <button id="coll-list" aria-selected="true">Liste</button>
-          <button id="coll-study" aria-selected="false">Study</button>
-          <button id="coll-ex" aria-selected="false">Practice</button>
+          <button id="coll-list" aria-selected="true">List</button>
+          <button id="coll-study" aria-selected="false">Write</button>
+          <button id="coll-match" aria-selected="false">Match</button>
+          <button id="coll-fill" aria-selected="false">Fill</button>
         </div>
       </div>
 
@@ -681,12 +682,6 @@
 
       <!-- ALIŞTIRMA -->
       <div id="collEx" hidden>
-        <div class="dir-row">
-          <div class="seg" role="group" aria-label="Practice type">
-            <button id="cex-match" aria-selected="true">Match</button>
-            <button id="cex-fill" aria-selected="false">Fill</button>
-          </div>
-        </div>
         <div class="q-score" id="cexScore"></div>
         <div id="cexBody"></div>
         <p class="kbd-hint" id="cexHint"></p>
@@ -1491,10 +1486,6 @@ collStudyEl.addEventListener('click', function(e){
 /* ---- alıştırma ---- */
 let collEx={type:'match', correct:0, total:0, answer:null, done:false};
 const cexScore=document.getElementById('cexScore'), cexBody=document.getElementById('cexBody'), cexHint=document.getElementById('cexHint');
-function setCexSel(){
-  document.getElementById('cex-match').setAttribute('aria-selected', collEx.type==='match'?'true':'false');
-  document.getElementById('cex-fill').setAttribute('aria-selected', collEx.type==='fill'?'true':'false');
-}
 function cexScoreText(){ cexScore.textContent = collEx.total ? ('Correct '+collEx.correct+' / '+collEx.total) : ''; }
 function collMatchPool(){
   const pool=[];
@@ -1507,7 +1498,6 @@ function collFillPool(){
   return pool;
 }
 function startCollEx(){
-  setCexSel();
   collEx.correct=0; collEx.total=0;
   if(collEx.type==='match'){ cexHint.innerHTML='<kbd>1</kbd>–<kbd>4</kbd> select · <kbd>Enter</kbd> next'; newCollMatch(); }
   else{ cexHint.innerHTML='<kbd>Enter</kbd> check / next'; newCollFill(); }
@@ -1594,8 +1584,6 @@ function revealCollFill(){
   document.getElementById('cexInput').disabled=true;
   cexScoreText();
 }
-document.getElementById('cex-match').addEventListener('click', function(){ collEx.type='match'; startCollEx(); });
-document.getElementById('cex-fill').addEventListener('click', function(){ collEx.type='fill'; startCollEx(); });
 
 /* ---- liste: tüm kelimeler + collocation'ları ---- */
 const collBrowseEl=document.getElementById('collBrowse');
@@ -1622,22 +1610,25 @@ collBrowseEl.addEventListener('click', function(e){
   openWordModal(WORDS[+row.dataset.i]);
 });
 
-/* ---- mod anahtarı ---- */
+/* ---- mod anahtarı (tek seviye: List / Write / Match / Fill) ---- */
+const COLL_MODES=['list','study','match','fill'];
 function showCollMode(){
-  const isList=collMode==='list', isStudy=collMode==='study', isEx=collMode==='exercise';
-  document.getElementById('coll-list').setAttribute('aria-selected', isList?'true':'false');
-  document.getElementById('coll-study').setAttribute('aria-selected', isStudy?'true':'false');
-  document.getElementById('coll-ex').setAttribute('aria-selected', isEx?'true':'false');
-  collBrowseEl.hidden=!isList;
-  collStudyEl.hidden=!isStudy;
-  document.getElementById('collEx').hidden=!isEx;
-  if(isList) renderCollBrowse();
-  else if(isStudy) renderCollStudy();
-  else startCollEx();
+  const isEx = collMode==='match' || collMode==='fill';
+  document.getElementById('coll-list').setAttribute('aria-selected', collMode==='list'?'true':'false');
+  document.getElementById('coll-study').setAttribute('aria-selected', collMode==='study'?'true':'false');
+  document.getElementById('coll-match').setAttribute('aria-selected', collMode==='match'?'true':'false');
+  document.getElementById('coll-fill').setAttribute('aria-selected', collMode==='fill'?'true':'false');
+  collBrowseEl.hidden = collMode!=='list';
+  collStudyEl.hidden  = collMode!=='study';
+  document.getElementById('collEx').hidden = !isEx;
+  if(collMode==='list') renderCollBrowse();
+  else if(collMode==='study') renderCollStudy();
+  else { collEx.type=collMode; startCollEx(); }
 }
 document.getElementById('coll-list').addEventListener('click', function(){ collMode='list'; showCollMode(); });
 document.getElementById('coll-study').addEventListener('click', function(){ collMode='study'; showCollMode(); });
-document.getElementById('coll-ex').addEventListener('click', function(){ collMode='exercise'; showCollMode(); });
+document.getElementById('coll-match').addEventListener('click', function(){ collMode='match'; showCollMode(); });
+document.getElementById('coll-fill').addEventListener('click', function(){ collMode='fill'; showCollMode(); });
 function renderColl(){ renderCollProgress(); buildCollOrder(); showCollMode(); }
 
 /* ============ İSTATİSTİK ============ */
