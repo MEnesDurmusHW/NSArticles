@@ -114,7 +114,7 @@
   }
   .list-nav button:active{transform:scale(.92)}
   .list-nav button svg{width:22px;height:22px}
-  @media (max-width:768px){ body.list-active .list-nav{display:flex} }
+  @media (max-width:768px){ body.list-active .list-nav,body.browse-active .list-nav{display:flex} }
 
   /* ---- liste / akordeon ---- */
   .entry.focused{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
@@ -192,17 +192,22 @@
   .coll-sub{display:flex;justify-content:center;margin-bottom:20px}
 
   /* çalış: kelime kartı */
-  /* collocation liste görünümü */
+  /* collocation liste görünümü (açılır/kapanır) */
   .cb-list{display:flex;flex-direction:column;gap:12px}
   .cb-row{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:16px clamp(14px,3vw,20px)}
-  .cb-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 11px;margin-bottom:12px}
+  .cb-row.focused{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+  .cb-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 11px;width:100%;background:none;border:0;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;margin-bottom:12px}
+  .cb-head:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
   .cb-w{font-family:var(--serif);font-weight:600;font-size:1.22rem;letter-spacing:-.01em;color:var(--accent);line-height:1.15}
   .cb-type{font-family:var(--mono);font-size:.54rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
   .cb-tr{font-size:.9rem;color:var(--text-dim);line-height:1.4}
-  .cb-detail{margin-left:auto;appearance:none;cursor:pointer;width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text-muted);display:flex;align-items:center;justify-content:center;padding:0;transition:.15s;align-self:center}
-  .cb-detail:hover{border-color:var(--accent);color:var(--accent)}
-  .cb-detail svg{width:16px;height:16px}
+  .cb-chev{width:18px;height:18px;flex:0 0 auto;margin-left:auto;color:var(--text-muted);transition:transform .18s;align-self:center}
+  .cb-row.cb-open .cb-chev{transform:rotate(90deg)}
   .cb-coll{display:flex;flex-wrap:wrap;gap:8px;text-align:left}
+  .cb-panel{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+  .cb-row.cb-open .cb-panel{display:block}
+  .cb-panel .field{margin-top:0}
+  .cb-panel .field+.field{margin-top:14px}
   .coll-card{border:1px solid var(--border);border-radius:18px;background:var(--surface);padding:20px clamp(16px,3.5vw,24px)}
   .coll-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin-bottom:4px}
   .coll-w-term{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;color:var(--accent);line-height:1.15}
@@ -1014,13 +1019,20 @@ function markFocused(i){
   const all = heads();
   all.forEach((b,j)=>{ b.tabIndex = j===i ? 0 : -1; b.closest('.entry').classList.toggle('focused', j===i); });
 }
+function currentHeads(){
+  if(currentTab==='coll' && typeof collMode!=='undefined' && collMode==='list') return collHeads();
+  return heads();
+}
 function moveFocus(delta){
-  const all = heads(); if(!all.length) return;
+  const all = currentHeads(); if(!all.length) return;
   let cur = all.indexOf(document.activeElement);
-  if(cur<0) all.forEach((b,j)=>{ if(b.closest('.entry').classList.contains('focused')) cur=j; });
+  if(cur<0) all.forEach((b,j)=>{ if(b.closest('.entry,.cb-row').classList.contains('focused')) cur=j; });
   let ni = cur<0 ? (delta>0?0:all.length-1) : Math.min(Math.max(cur+delta,0), all.length-1);
   all[ni].focus();
   all[ni].scrollIntoView({block:'center', behavior:'smooth'});
+}
+function updateBrowseActive(){
+  document.body.classList.toggle('browse-active', currentTab==='coll' && collMode==='list');
 }
 
 /* ============ SEKME SİSTEMİ ============ */
@@ -1061,6 +1073,7 @@ function selectTab(t){
   else if(t==='coll') renderColl();
   else if(t==='stats') renderStats();
   updateCount();
+  updateBrowseActive();
 }
 TABS.forEach(t=> tabBtn[t].addEventListener('click', ()=>selectTab(t)));
 
@@ -1586,30 +1599,47 @@ function revealCollFill(){
   cexScoreText();
 }
 
-/* ---- liste: tüm kelimeler + collocation'ları ---- */
+/* ---- liste: tüm kelimeler + collocation'ları (açılınca örnek cümle + nüans) ---- */
 const collBrowseEl=document.getElementById('collBrowse');
+function collPanelHTML(w){
+  let ex='<p class="en-ex">'+w.ex+'</p><p class="tr-ex">'+w.exTr+'</p>';
+  if(w.ex2) ex+='<p class="en-ex">'+w.ex2+'</p><p class="tr-ex">'+w.exTr2+'</p>';
+  let h='<div class="field"><span class="lbl">Examples</span>'+ex+'</div>';
+  if(w.hint) h+='<div class="field"><span class="lbl">Nuance</span><p>'+w.hint+'</p></div>';
+  return h;
+}
 function renderCollBrowse(){
   const list=activeWords().filter(w=>w.coll);
   if(!list.length){ collBrowseEl.innerHTML='<div class="empty">Bu filtrede collocation yok. Filtreyi değiştir.</div>'; return; }
   collBrowseEl.innerHTML='<div class="cb-list">'+list.map(function(w){
     return '<div class="cb-row" data-i="'+w._i+'">'+
-      '<div class="cb-head">'+
+      '<button class="cb-head" type="button" aria-expanded="false" tabindex="-1">'+
         '<span class="cb-w">'+escapeHTML(w.en)+'</span>'+
         '<span class="cb-type">'+typeLabel(w.type)+'</span>'+
         '<span class="cb-tr">'+escapeHTML(w.tr)+'</span>'+
-        '<button class="cb-detail" type="button" aria-label="Detay">'+
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'+
-        '</button>'+
-      '</div>'+
+        '<svg class="cb-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>'+
+      '</button>'+
       '<div class="coll cb-coll">'+collFormat(w.coll)+'</div>'+
+      '<div class="cb-panel"><div class="cb-panel-inner">'+collPanelHTML(w)+'</div></div>'+
     '</div>';
   }).join('')+'</div>';
+  wireCollBrowse();
 }
-collBrowseEl.addEventListener('click', function(e){
-  const btn=e.target.closest('.cb-detail'); if(!btn) return;
-  const row=e.target.closest('.cb-row'); if(!row) return;
-  openWordModal(WORDS[+row.dataset.i]);
-});
+function collHeads(){ return Array.from(collBrowseEl.querySelectorAll('.cb-head')); }
+function wireCollBrowse(){
+  const hs=collHeads();
+  hs.forEach(function(btn,i){
+    btn.tabIndex=i===0?0:-1;
+    btn.addEventListener('click', function(){
+      const row=btn.closest('.cb-row');
+      const open=row.classList.toggle('cb-open');
+      btn.setAttribute('aria-expanded', open?'true':'false');
+    });
+    btn.addEventListener('focus', function(){
+      hs.forEach(function(b,j){ b.tabIndex=j===i?0:-1; b.closest('.cb-row').classList.toggle('focused', j===i); });
+    });
+  });
+}
 
 /* ---- mod anahtarı (tek seviye: List / Write / Match / Fill) ---- */
 const COLL_MODES=['list','study','match','fill'];
@@ -1625,6 +1655,7 @@ function showCollMode(){
   if(collMode==='list') renderCollBrowse();
   else if(collMode==='study') renderCollStudy();
   else { collEx.type=collMode; startCollEx(); }
+  updateBrowseActive();
 }
 document.getElementById('coll-list').addEventListener('click', function(){ collMode='list'; showCollMode(); });
 document.getElementById('coll-study').addEventListener('click', function(){ collMode='study'; showCollMode(); });
@@ -1661,6 +1692,9 @@ document.addEventListener('keydown', e=>{
     else if(e.key==='ArrowUp'){ e.preventDefault(); moveFocus(-1); }
     else if(e.key==='Home'){ e.preventDefault(); const h=heads(); if(h.length){ h[0].focus(); h[0].scrollIntoView({block:'center',behavior:'smooth'}); } }
     else if(e.key==='End'){ e.preventDefault(); const h=heads(); if(h.length){ h[h.length-1].focus(); h[h.length-1].scrollIntoView({block:'center',behavior:'smooth'}); } }
+  } else if(currentTab==='coll' && collMode==='list'){
+    if(e.key==='ArrowDown'){ e.preventDefault(); moveFocus(1); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); moveFocus(-1); }
   } else if(currentTab==='cards'){
     if(e.key==='ArrowRight'){ e.preventDefault(); nextCard(); }
     else if(e.key==='ArrowLeft'){ e.preventDefault(); prevCard(); }
