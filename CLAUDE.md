@@ -4,20 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-NSArticles is a static HTML article site. No build tools, no frameworks, no package manager — just standalone `.html` files served directly. Each article has inline `<style>` and (where needed) inline `<script>`, but shares common styles via `styles.css` and theme logic via `theme.js`.
+NSArticles is a static HTML article site. No build tools, no frameworks, no package manager — just standalone `.html` files served directly. Each article has inline `<style>` and (where needed) inline `<script>`, but shares common styles via `styles.css` and theme logic via `assets/js/theme.js`.
 
 ## Architecture
 
 - **`index.html`** — Public-facing curated landing page (the only listing external readers should see)
 - **`all.html`** — Private archive for the site owner and close friends only; lists every article including previews
 - **`styles.css`** — Shared CSS: theme variables (light/dark), reset, grain overlay, theme toggle, share toggle, share modal, divider, home logo
-- **`theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
-- **`share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code. Also fires GoatCounter events: `share-page` for the top-right button, `share-section-{id}` for per-heading buttons
-- **`analytics.js`** — Scroll-depth tracker. Fires GoatCounter events at 25/50/75/100% page scroll thresholds (`scroll-25`, `scroll-50`, etc.). Loaded only on article pages (not on `index.html`, `all.html`, `404.html`, or carousel utility pages)
-- **`toc.js`** — Table of Contents behavior. Mobile drawer toggle, scroll-spy active state for level-1 and level-2 entries, auto expand/collapse of nested children, Esc-to-close. Silently no-ops on pages without a `#toc-rail`. CSS for the rail/drawer lives in `styles.css`
+- **`assets/js/theme.js`** — Dark/light mode toggle with localStorage persistence and system preference detection
+- **`assets/js/share.js`** — Share button + modal (Web Share API, copy link, X, WhatsApp, QR code fallback). `openShare()` shares the page; `openShare({url, title})` or `openShareSection(btn)` shares a specific section. Modal handlers read from the active info, so per-section shares populate the correct URL, X/WhatsApp links, and QR code. Also fires GoatCounter events: `share-page` for the top-right button, `share-section-{id}` for per-heading buttons
+- **`assets/js/analytics.js`** — Scroll-depth tracker. Fires GoatCounter events at 25/50/75/100% page scroll thresholds (`scroll-25`, `scroll-50`, etc.). Loaded only on article pages (not on `index.html`, `all.html`, `404.html`, or carousel utility pages)
+- **`assets/js/toc.js`** — Table of Contents behavior. Mobile drawer toggle, scroll-spy active state for level-1 and level-2 entries, auto expand/collapse of nested children, Esc-to-close. Silently no-ops on pages without a `#toc-rail`. CSS for the rail/drawer lives in `styles.css`
 - **`favicon.svg`** — Single SVG favicon at the repo root, accent-colored rounded square with "NS" mark. Uses `prefers-color-scheme` inside the SVG so it adapts to the browser's tab theme
 - **`og-default.png`** — 1200×630 Open Graph image used as the social-share preview for every page. Branded NS Articles cover. Source design lives in `og-default.svg`; the PNG is what social platforms fetch (WhatsApp does not render SVG)
-- **`tooltip.js`** — Term glossary tooltips. Hover-on-desktop / tap-to-toggle-on-mobile behavior for inline `<span class="term">` glossary terms. CSS for `.term`/`.term-tip` lives in `styles.css`. Silently no-ops on pages without `.term` spans (see *Term Glossary Tooltips*)
+- **`assets/js/tooltip.js`** — Term glossary tooltips. Hover-on-desktop / tap-to-toggle-on-mobile behavior for inline `<span class="term">` glossary terms. CSS for `.term`/`.term-tip` lives in `styles.css`. Silently no-ops on pages without `.term` spans (see *Term Glossary Tooltips*)
 - **Article pages** — Each article is one HTML file at the repo root with page-specific inline styles that use CSS variables from `styles.css`
 
 ## Theme System
@@ -38,7 +38,7 @@ Fonts (both modes): `--serif`: Playfair Display, `--sans`: DM Sans. Some pages o
 - **Responsive breakpoints**: 768px (tablet), 480px (mobile), 360px (very small)
 - **Grain overlay**: `.grain` div is on every page, auto-visible only in dark mode
 - **Feedback**: Articles end with a feedback section linking to a Google Form
-- **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`. The references list at the end of the article is **auto-collapsed** by `references.js` — see *Collapsable References*
+- **References**: Articles use `<a class="ref">` footnote links with a JS-powered back-navigation FAB button (`savePos`/`goBack`). Inline reference numbers must NOT have square brackets — use `1` not `[1]`. The references list at the end of the article is **auto-collapsed** by `assets/js/references.js` — see *Collapsable References*
 - **References heading wording**: The visible heading for the reference list is **always "Kaynakça"**, never "Kaynaklar". The site uses numbered inline citations (`1`, `2`, …) each mapped to a matching entry in the list, and the standard Turkish heading for that pattern is "Kaynakça". Applies to the `<h2>`/`<h3>` heading text and the matching TOC `toc-title`. (The section's `id` may stay `kaynaklar` — it is an invisible anchor, not displayed text.)
 - **Per-section share**: Each `<h2>` in an article body must end with `<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)">…three-dot share SVG…</button>` and have an `id` (so `openShareSection` can build the anchor URL). The button is hidden on desktop and revealed on heading hover; on touch devices it stays visible at low opacity. Skip on listing pages and tooling pages (`index.html`, `all.html`, `404.html`, carousel pages)
 - **No em dashes**: Never use the em dash character (—) in article content or any user-facing text. Restructure the sentence, use a comma, or use a period instead
@@ -56,8 +56,8 @@ Every page (article, gallery, preview) must include the same top-right toolbar a
 
 **Top-right toolbar** (fixed, right-to-left in this order):
 
-1. **Theme toggle**: `<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">` with moon + sun SVGs. Requires `<script src="theme.js"></script>` in `<head>`.
-2. **Share toggle**: `<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">` with the three-dot share SVG (placed immediately after `theme-toggle`). Requires `<script src="share.js" defer></script>` in `<head>`. Styles already live in `styles.css`; `share.js` auto-creates the modal on first open.
+1. **Theme toggle**: `<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">` with moon + sun SVGs. Requires `<script src="assets/js/theme.js"></script>` in `<head>`.
+2. **Share toggle**: `<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">` with the three-dot share SVG (placed immediately after `theme-toggle`). Requires `<script src="assets/js/share.js" defer></script>` in `<head>`. Styles already live in `styles.css`; `assets/js/share.js` auto-creates the modal on first open.
 
 **Favicon** (in `<head>` of every page): `<link rel="icon" type="image/svg+xml" href="favicon.svg">` (use `../favicon.svg` from subdirectories).
 
@@ -85,7 +85,7 @@ Rules: `og:url` and `og:image` must be absolute (full `https://...`). WhatsApp i
 1. **Home logo**: `<a href="index.html" class="home-logo"><span>NS Articles</span></a>` — navigates back to the landing page
 2. **Author credit**: `by M. Enes Durmuş` — displayed below or alongside the home logo
 
-Pages in subdirectories (e.g. `templates/`) use `../theme.js`, `../share.js`, `../styles.css`, `../index.html` for the home logo.
+Pages in subdirectories (e.g. `templates/`) use `../assets/js/theme.js`, `../assets/js/share.js`, `../assets/css/styles.css`, `../index.html` for the home logo.
 
 Utility/tooling pages (e.g. `article-carousel.html`, `carousel-generator.html`) do not need the share button.
 
@@ -103,7 +103,7 @@ Open any `.html` file directly in a browser — no server or build step required
 
 1. Create a new `.html` file at the repo root
 2. Use one of the existing articles as a template
-3. In `<head>`: load `<script src="theme.js"></script>`, `<script src="share.js" defer></script>`, `<script src="analytics.js" defer></script>`, `<script src="toc.js" defer></script>`, `<script src="tooltip.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
+3. In `<head>`: load `<script src="assets/js/theme.js"></script>`, `<script src="assets/js/share.js" defer></script>`, `<script src="assets/js/analytics.js" defer></script>`, `<script src="assets/js/toc.js" defer></script>`, `<script src="assets/js/tooltip.js" defer></script>`, `<link rel="icon" type="image/svg+xml" href="favicon.svg">`, the Open Graph block (see Page Chrome), `<link rel="stylesheet" href="assets/css/styles.css">`, and the GoatCounter snippet right before `</head>` (see Analytics)
 4. In `<body>`: add the grain overlay, home toggle (top-left), theme toggle and share toggle (top-right), and home logo + author credit at the bottom
 5. Add a card entry in `all.html` (and `index.html` if curated) inside the `.articles` div — do NOT append "Preview" to the card title in `all.html`
 6. For full articles only: compute word count + reading time and add `<meta name="word-count">` / `<meta name="reading-time">` to the article's `<head>`, plus the visible `~X dk` element on its listing card(s) (see *Reading Time*)
@@ -115,7 +115,7 @@ Every article with `<h2>` sections gets a sticky TOC. On desktop (≥1200px) it 
 
 **Required pieces on each TOC-enabled article**:
 
-1. `<script src="toc.js" defer></script>` in `<head>` (already part of the standard chrome listed in *Adding a New Article*)
+1. `<script src="assets/js/toc.js" defer></script>` in `<head>` (already part of the standard chrome listed in *Adding a New Article*)
 2. The toggle button + backdrop + nav rail markup, inserted right after the `share-toggle` button:
 
 ```html
@@ -153,7 +153,7 @@ Every article with `<h2>` sections gets a sticky TOC. On desktop (≥1200px) it 
 - Utility pages: `404.html`, `article-carousel.html`, `carousel-generator.html`
 - Preview pages and any article without `<h2>` sections (nothing meaningful to point at)
 
-`toc.js` silently no-ops when `#toc-rail` is absent, so loading the script on a non-TOC page is harmless but unnecessary.
+`assets/js/toc.js` silently no-ops when `#toc-rail` is absent, so loading the script on a non-TOC page is harmless but unnecessary.
 
 ## Analytics
 
@@ -174,7 +174,7 @@ The site uses [GoatCounter](https://www.goatcounter.com/) — privacy-friendly, 
 - IP filter: GoatCounter dashboard → Settings → Ignore IPs
 - Per-device flag: visit `https://menesdurmushw.github.io/NSArticles/?skipgc=t` once on each browser. `all.html` exposes a discreet "İzlemeyi kapat" link near the home logo for this purpose
 
-**Skip `analytics.js`** on `index.html`, `all.html`, `404.html`, and tooling pages (`article-carousel.html`, `carousel-generator.html`). The GoatCounter pageview tracker must still be present on all of them.
+**Skip `assets/js/analytics.js`** on `index.html`, `all.html`, `404.html`, and tooling pages (`article-carousel.html`, `carousel-generator.html`). The GoatCounter pageview tracker must still be present on all of them.
 
 ## Reading Time
 
@@ -209,9 +209,9 @@ The counting logic and bulk updater live as ad-hoc scripts; re-run the counter w
 
 A thin accent-colored bar fixed across the top of every article page that fills left-to-right as the reader scrolls. Provides a physical sense of "how much is left".
 
-- **File**: `progress.js` — IIFE that auto-injects `<div class="read-progress">` at the start of `<body>` on `DOMContentLoaded`, then listens for `scroll` (rAF-throttled, passive) and `resize` to update `width` as a percent of `scrollHeight - clientHeight`. Re-entry safe (skips if a `.read-progress` element already exists).
+- **File**: `assets/js/progress.js` — IIFE that auto-injects `<div class="read-progress">` at the start of `<body>` on `DOMContentLoaded`, then listens for `scroll` (rAF-throttled, passive) and `resize` to update `width` as a percent of `scrollHeight - clientHeight`. Re-entry safe (skips if a `.read-progress` element already exists).
 - **CSS**: `.read-progress` lives in `styles.css` — `position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; transition: width 0.12s ease-out`
-- **Load on**: every article page (full + preview) via `<script src="progress.js" defer></script>` in `<head>`
+- **Load on**: every article page (full + preview) via `<script src="assets/js/progress.js" defer></script>` in `<head>`
 - **Skip on**: `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
 
 The bar element is auto-created — articles do not need any markup. Just including the script is enough.
@@ -220,21 +220,21 @@ The bar element is auto-created — articles do not need any markup. Just includ
 
 When a reader leaves a long page partway through and returns, a pill appears at the bottom-right offering to scroll them back to where they left off. Reduces the "I lost my place" friction.
 
-- **File**: `resume.js` — IIFE that throttle-saves the current `scrollTop` to `localStorage` under `ns-pos-<pathname>` as `{y, savedAt}`. On load, reads the value: if `Date.now() - savedAt < 7 days` and the saved position is past 15% of total scroll, injects a floating pill `<button class="resume-pill">`. Click → smooth-scrolls to saved y; × → clears entry and hides pill. Auto-hides after 12 s.
+- **File**: `assets/js/resume.js` — IIFE that throttle-saves the current `scrollTop` to `localStorage` under `ns-pos-<pathname>` as `{y, savedAt}`. On load, reads the value: if `Date.now() - savedAt < 7 days` and the saved position is past 15% of total scroll, injects a floating pill `<button class="resume-pill">`. Click → smooth-scrolls to saved y; × → clears entry and hides pill. Auto-hides after 12 s.
 - **Storage hygiene**: positions below 5% or above 95% of total scroll clear the entry (treats "at the top" and "near the end" as no-resume-needed). 7-day TTL prunes lazily on access.
 - **Page-too-short guard**: skips activation when `scrollHeight - clientHeight < 1200px` (short pages don't need resume).
 - **CSS**: `.resume-pill`, `.resume-pill-show`, `.resume-pill-icon`, `.resume-pill-text`, `.resume-pill-close` in `styles.css`
 - **GoatCounter events**: `resume-click` when the pill is used; `resume-dismiss` when explicitly closed via ×
-- **Load on**: every article page (same scope as `progress.js`) via `<script src="resume.js" defer></script>` in `<head>`
+- **Load on**: every article page (same scope as `assets/js/progress.js`) via `<script src="assets/js/resume.js" defer></script>` in `<head>`
 
 ## Referral Codes
 
-When sharing a link 1-to-1 (a friend, a specific group), append `?ref=CODE` to the URL. On arrival the site fires a custom GoatCounter event `ref-CODE` so the owner can see in the dashboard whether that specific person opened the link. The code is owner-generated (any short string like `alice`, `kerem-x`, `mar26-ali`) — `ref.js` does not generate anything.
+When sharing a link 1-to-1 (a friend, a specific group), append `?ref=CODE` to the URL. On arrival the site fires a custom GoatCounter event `ref-CODE` so the owner can see in the dashboard whether that specific person opened the link. The code is owner-generated (any short string like `alice`, `kerem-x`, `mar26-ali`) — `assets/js/ref.js` does not generate anything.
 
-- **File**: `ref.js` — reads `?ref=CODE` from `location.search`, sanitises it (`[A-Za-z0-9_-]`, max 64 chars), and fires `goatcounter.count({ path: 'ref-<code>', event: true })`. Stores the code in `localStorage` under `ns-ref-seen` (JSON array of all codes ever seen on this browser) so each code fires **at most once per browser** — refreshing or revisiting the same `?ref=alice` link does not re-fire. The first code ever seen is also stored under `ns-ref-first` as a flat string. After read, the `ref` param is stripped from the URL via `history.replaceState` so visitors don't carry the code along when re-sharing.
+- **File**: `assets/js/ref.js` — reads `?ref=CODE` from `location.search`, sanitises it (`[A-Za-z0-9_-]`, max 64 chars), and fires `goatcounter.count({ path: 'ref-<code>', event: true })`. Stores the code in `localStorage` under `ns-ref-seen` (JSON array of all codes ever seen on this browser) so each code fires **at most once per browser** — refreshing or revisiting the same `?ref=alice` link does not re-fire. The first code ever seen is also stored under `ns-ref-first` as a flat string. After read, the `ref` param is stripped from the URL via `history.replaceState` so visitors don't carry the code along when re-sharing.
 - **GoatCounter retry**: because the GoatCounter snippet is `async`, `window.goatcounter.count` may not yet exist on `DOMContentLoaded`. The script retries up to 10 times at 500 ms intervals.
-- **Localhost guard**: same `isLocal()` check as `analytics.js` / `share.js` — `file://`, `localhost`, `127.x`, private RFC1918 ranges all skip the event (storage still records the code so a later production visit doesn't re-fire).
-- **Load on**: every article page (same scope as `progress.js` / `resume.js` / `references.js`) via `<script src="ref.js" defer></script>` in `<head>`. Also safe to load on listing pages (`index.html`, `all.html`) if you want to share a code-tagged link to the landing page
+- **Localhost guard**: same `isLocal()` check as `assets/js/analytics.js` / `assets/js/share.js` — `file://`, `localhost`, `127.x`, private RFC1918 ranges all skip the event (storage still records the code so a later production visit doesn't re-fire).
+- **Load on**: every article page (same scope as `assets/js/progress.js` / `assets/js/resume.js` / `assets/js/references.js`) via `<script src="assets/js/ref.js" defer></script>` in `<head>`. Also safe to load on listing pages (`index.html`, `all.html`) if you want to share a code-tagged link to the landing page
 
 **Usage**:
 1. Pick a code per recipient: e.g. `alice`, `ahmet42`, `mar26-grup`
@@ -246,7 +246,7 @@ When sharing a link 1-to-1 (a friend, a specific group), append `?ref=CODE` to t
 
 The references list at the end of every article is auto-wrapped in a `<details>` element and presented collapsed by default. The summary shows the heading (e.g. "Kaynaklar") and the count of references (e.g. "32"). Clicking the summary toggles open/closed. Clicking any inline ref link (`<a class="ref" href="#ref-N">`) anywhere in the article auto-expands the collapsed details before the browser jumps to the citation — the reader never lands on a hidden anchor.
 
-- **File**: `references.js` — runs on `DOMContentLoaded`, scans the document for `<ol>` elements that either (a) have at least one `<li id="ref-*">` child, or (b) carry the `references` class. For each candidate it walks backward to find the nearest preceding heading (`h2`/`h3`/`h4`) whose text matches `/Kaynak/i`, then wraps the (heading + ol) pair into a `<details class="references-collapse" data-refs>` with a generated `<summary>` containing chevron + label + count
+- **File**: `assets/js/references.js` — runs on `DOMContentLoaded`, scans the document for `<ol>` elements that either (a) have at least one `<li id="ref-*">` child, or (b) carry the `references` class. For each candidate it walks backward to find the nearest preceding heading (`h2`/`h3`/`h4`) whose text matches `/Kaynak/i`, then wraps the (heading + ol) pair into a `<details class="references-collapse" data-refs>` with a generated `<summary>` containing chevron + label + count
 - **Heading preservation**: the original heading's `id` (used by TOC anchors) is moved to the `<details>` element, so TOC links continue to scroll to the right place. Any `.heading-share` button inside the heading is moved into the summary (hover-revealed)
 - **Auto-expand triggers**:
   1. **Initial load with `#ref-N` hash** — opens all refs details then re-scrolls to the anchor
@@ -254,7 +254,7 @@ The references list at the end of every article is auto-wrapped in a `<details>`
   3. **`hashchange` to `#ref-*`** — also re-opens
 - **CSS**: `details.references-collapse`, `.ref-summary`, `.ref-summary-chevron`, `.ref-summary-label`, `.ref-count`, `.ref-summary-share` in `styles.css`. Chevron rotates 90° via `[open]` selector
 - **Skip thresholds**: lists with fewer than 3 items aren't wrapped (probably not a real bibliography)
-- **Load on**: every article page (same scope as `progress.js` / `resume.js`) via `<script src="references.js" defer></script>` in `<head>`
+- **Load on**: every article page (same scope as `assets/js/progress.js` / `assets/js/resume.js`) via `<script src="assets/js/references.js" defer></script>` in `<head>`
 
 The conversion is dynamic — articles' HTML markup is **not** touched. The original `<h2>Kaynakça</h2>` + `<ol>` (or `<div class="references">` wrapper) markup stays as-is in source; the script reshapes it at runtime. This means new articles don't need any special markup for the collapse behavior — just write the references the same way (any heading containing "Kaynak" followed by an `<ol>`) and the script handles the rest.
 
@@ -262,7 +262,7 @@ The conversion is dynamic — articles' HTML markup is **not** touched. The orig
 
 Readers can highlight any prose passage, attach a private note, copy or share it. Highlights persist per-article in `localStorage` and re-render on revisit. Sharing produces a URL with a `#:~:text=` fragment so the recipient lands on the exact quoted passage; the share modal also gains a quoted-excerpt blockquote and uses the quote in X/WhatsApp share text.
 
-- **File**: `highlight.js` — IIFE that on `DOMContentLoaded`:
+- **File**: `assets/js/highlight.js` — IIFE that on `DOMContentLoaded`:
   1. Builds a paragraph index of the article body (`p, blockquote, li`) excluding chrome (`.toc-rail, .references-collapse, .continue, .feedback, .home-logo, footer, ...` etc.)
   2. Reads saved marks from `localStorage` under `ns-marks-<pathname>` (JSON array of `{id, paraIdx, before, text, after, note, ts}`) and re-renders them by walking text content
   3. Listens for `mouseup` / `touchend` and shows a floating popover above the selection with `[Vurgula] [Not] [Kopyala] [Paylaş]`. Existing-highlight clicks add a `[Kaldır]` button
@@ -270,12 +270,12 @@ Readers can highlight any prose passage, attach a private note, copy or share it
 - **Persistence strategy**: marks store the highlighted text + 24 chars of context before/after + paragraph index. Re-rendering tries `before+text+after` first, then partial matches, then bare text. This survives small edits to the article body. If a mark cannot be re-located, it stays in storage but doesn't render (won't lose data on a transient script bug)
 - **Same-paragraph only**: v1 ignores selections that span multiple paragraphs (the popover doesn't appear). Selections that overlap an existing `mark.ns-hl` are also ignored — the reader has to remove the old one first
 - **Quote URL format**: `<page>.html#:~:text=<encoded>` for selections ≤ 80 chars, or `#:~:text=<first 4 words>,<last 4 words>` for longer ones (text fragment directive, native in Chromium/Safari 16.4+; non-supporting browsers just open the page without scrolling)
-- **share.js handoff**: the popover's `[Paylaş]` action calls `window.openShare({ url, title, quote })`. `share.js` accepts a `quote` field, shows it as a `<blockquote class="share-quote">` in the modal, swaps the title to "Bu alıntıyı paylaş", and includes the quote in X/WhatsApp text as `"…" — title`. QR re-renders to the fragment URL
+- **share.js handoff**: the popover's `[Paylaş]` action calls `window.openShare({ url, title, quote })`. `assets/js/share.js` accepts a `quote` field, shows it as a `<blockquote class="share-quote">` in the modal, swaps the title to "Bu alıntıyı paylaş", and includes the quote in X/WhatsApp text as `"…" — title`. QR re-renders to the fragment URL
 - **GoatCounter events**: `highlight-add`, `highlight-remove`, `highlight-copy`, `highlight-share`, `note-add`, `note-edit`
 - **CSS**: `mark.ns-hl`, `.hl-popover`, `.hl-note-editor`, `.hl-pill`, `.hl-panel`, `.share-quote` in `styles.css`. Highlight uses an accent-tinted gradient under the text baseline; notes add an inset accent border under the highlight. Pulse keyframe `ns-hl-pulse` fires on scroll-to-mark from the panel
-- **Load on**: every article page (full + preview) via `<script src="highlight.js" defer></script>` in `<head>`. The script no-ops on pages where `findParagraphs()` returns empty, so loading on a listing/utility page is harmless but unnecessary. Skip on `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
+- **Load on**: every article page (full + preview) via `<script src="assets/js/highlight.js" defer></script>` in `<head>`. The script no-ops on pages where `findParagraphs()` returns empty, so loading on a listing/utility page is harmless but unnecessary. Skip on `index.html`, `all.html`, `404.html`, `article-carousel.html`, `carousel-generator.html`
 
-The script is purely additive — articles don't need any new markup. Just include the script tag (same scope as `analytics.js` / `progress.js` etc.).
+The script is purely additive — articles don't need any new markup. Just include the script tag (same scope as `assets/js/analytics.js` / `assets/js/progress.js` etc.).
 
 ## Spoiler Blur (Interactive Experiment Answers)
 
@@ -320,10 +320,10 @@ Rules:
 
 Infra:
 - **CSS**: `.term`, `.term .term-tip`, `.term-left`, `.term-right` live in `styles.css` (global, so every page that links `styles.css` gets it).
-- **JS**: `tooltip.js` wires tap-to-toggle on mobile (desktop uses pure CSS `:hover`). Load via `<script src="tooltip.js" defer></script>` in `<head>`, same scope as the other article scripts. No-ops when no `.term` spans exist.
-- **Exception**: `guide-intermittent-16-8.html` predates the shared infra and still carries its own inline `.term` CSS + inline tooltip JS. Do NOT add `tooltip.js` there (it would double-bind click handlers). New articles should always use the shared `tooltip.js` instead of inlining.
+- **JS**: `assets/js/tooltip.js` wires tap-to-toggle on mobile (desktop uses pure CSS `:hover`). Load via `<script src="assets/js/tooltip.js" defer></script>` in `<head>`, same scope as the other article scripts. No-ops when no `.term` spans exist.
+- **Exception**: `guide-intermittent-16-8.html` predates the shared infra and still carries its own inline `.term` CSS + inline tooltip JS. Do NOT add `assets/js/tooltip.js` there (it would double-bind click handlers). New articles should always use the shared `assets/js/tooltip.js` instead of inlining.
 
-When adding a new article, gloss its hard terms at first use following this pattern and include `tooltip.js`.
+When adding a new article, gloss its hard terms at first use following this pattern and include `assets/js/tooltip.js`.
 
 ## End-of-Article Continuation
 
