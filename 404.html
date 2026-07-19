@@ -28,6 +28,114 @@ if (location.protocol !== 'file:') {
 <script src="assets/js/theme.js"></script>
 <script src="assets/js/qrcode.js" defer></script>
 <script src="assets/js/share.js" defer></script>
+<style>
+/* Kritik chrome stilleri styles.css'ten kopya: 404 sayfası, harici CSS'e ve
+   base scriptine erişemediği durumda bile (derin URL + JS kapalı) stilli kalsın.
+   styles.css bu bloktan sonra yüklenir ve aynı kuralları geçersiz kılabilir. */
+:root {
+  color-scheme: light;
+  --bg: #FAF7F2;
+  --surface: #F0EDE7;
+  --text: #1A1A1E;
+  --text-dim: #6B665E;
+  --text-muted: #9E9A92;
+  --accent: #96622F;
+  --accent-glow: rgba(150, 98, 47, 0.1);
+  --divider: #DDD8D0;
+  --border: rgba(0, 0, 0, 0.08);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1117;
+  --surface: #161920;
+  --text: #e8e6e1;
+  --text-dim: #8a8a8a;
+  --text-muted: #555a66;
+  --accent: #c4956a;
+  --accent-glow: rgba(196, 149, 106, 0.08);
+  --divider: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.06);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.grain {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+}
+[data-theme="dark"] .grain { opacity: 1; }
+.theme-toggle,
+.share-toggle,
+.home-toggle {
+  position: fixed;
+  top: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.theme-toggle { right: 20px; }
+.share-toggle { right: 70px; }
+.home-toggle {
+  left: 20px;
+  text-decoration: none;
+  color: var(--accent);
+}
+.home-toggle svg { width: 28px; height: 28px; display: block; }
+.theme-toggle:hover,
+.share-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.home-toggle:hover { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+.theme-toggle svg,
+.share-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+.home-logo {
+  text-align: center;
+  padding: 24px 0 40px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.home-logo .logo-text {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: -0.3px;
+  transition: color 0.3s ease;
+}
+.home-logo .logo-author {
+  display: block;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  opacity: 0.6;
+}
+.home-logo:hover .logo-text { color: var(--accent); }
+</style>
 <link rel="stylesheet" href="assets/css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
