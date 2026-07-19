@@ -98,6 +98,7 @@ Open any `.html` file directly in a browser — no server or build step required
 - **`index.html`** is the only public-facing landing page. All external readers, social shares, in-article navigation, and the home toggle (`NS` mark, top-left) must point here. Curated; only selected articles appear; no "Preview" suffix in card titles
 - **`all.html`** is a private/internal archive for the site owner and close friends. It lists every article including previews and tooling pages. **Do NOT direct external readers here** — no in-article links, continuation cards, footer logos, or share suggestions should point to `all.html`. Use it as a personal index only
 - Both pages: still receive new article entries when adding articles, but `all.html` is the master archive while `index.html` is the curated public face
+- **`index.html` entry order & numbering**: entries are listed in **creation (publication) order**. A new article is always appended to the END of the `.entries` list and takes the next sequential `entry-number`. Never insert a new entry mid-list and never renumber existing entries, not even to group series chapters next to each other (series membership is already shown by the `entry-series` line)
 
 ## Adding a New Article
 
