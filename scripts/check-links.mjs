@@ -25,6 +25,7 @@ for (const file of htmlFiles(ROOT)) {
   const refs = [...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(m => m[1]);
   for (const ref of refs) {
     if (SKIP.test(ref)) continue;
+    if (/['+\s]/.test(ref)) continue; // JS içinde dinamik kurulan URL parçaları
     const clean = ref.split('#')[0].split('?')[0];
     if (!clean) continue;
     const target = resolve(dirname(file), clean);
