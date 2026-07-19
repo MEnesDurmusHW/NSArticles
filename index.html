@@ -100,6 +100,40 @@
     font-weight: 700;
   }
 
+  /* ----- Map link ----- */
+  .map-link {
+    display: block;
+    text-align: center;
+    margin-top: 64px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .map-link .map-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    color: var(--accent);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .map-link:hover {
+    color: var(--accent);
+  }
+
+  .map-link:hover .map-arrow {
+    transform: translateX(4px);
+  }
+
+  .map-link + .signature {
+    margin-top: 44px;
+  }
+
   /* ----- Signature ----- */
   .signature {
     text-align: center;
@@ -331,6 +365,8 @@
     .masthead-topics span { font-size: 10px; letter-spacing: 1.5px; }
     .masthead-topics span:not(:last-child)::after { margin: 0 11px; font-size: 15px; }
 
+    .map-link { margin-top: 48px; font-size: 10px; letter-spacing: 1.5px; }
+    .map-link + .signature { margin-top: 32px; }
     .signature { margin-top: 56px; font-size: 12px; }
 
     /* Mobile: grid layout — meta and series share row 1 (horizontal),
@@ -549,6 +585,8 @@
         </span>
       </a>
     </div>
+
+    <a href="others/harita-makale.html" class="map-link">Makale Haritası<span class="map-arrow" aria-hidden="true">→</span></a>
 
     <p class="signature">M. Enes Durmuş</p>
   </div>
