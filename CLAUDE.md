@@ -277,6 +277,29 @@ Readers can highlight any prose passage, attach a private note, copy or share it
 
 The script is purely additive — articles don't need any new markup. Just include the script tag (same scope as `analytics.js` / `progress.js` etc.).
 
+## Spoiler Blur (Interactive Experiment Answers)
+
+When an article contains an interactive quiz/experiment and the surrounding prose reveals its answer (e.g. the paragraph right after a "guess the number" card states the correct value), that prose starts **blurred** so the reader isn't spoiled before playing. A pill button sits on top of the blur so the reader can still opt out and read immediately.
+
+**Markup** (per-article, wraps the spoiling paragraph(s)):
+
+```html
+<div class="spoiler" data-spoiler-for="{experiment-card-id}">
+  <button class="spoiler-btn" type="button">Deneyin cevabı içinde · yine de göster</button>
+  <div class="spoiler-content">
+    <p>…paragraph that reveals the answer…</p>
+  </div>
+</div>
+```
+
+**Behavior**:
+- `.spoiler-content` is blurred (`filter: blur(7px)`, reduced opacity, `user-select: none`, `pointer-events: none`)
+- Clicking `.spoiler-btn` adds `.revealed` to the wrapper → blur transitions away, button disappears
+- Completing the linked interactive (matched via `data-spoiler-for` = the experiment card's `id`) auto-reveals the spoiler from the experiment's completion handler
+- First used in `behavioral-economics-02.html`; CSS + JS live inline in that article (not shared files yet). If a third article needs it, consider extracting to a shared script
+
+**When to use**: only when body text genuinely gives away an interactive's answer. Don't blur content that merely discusses the same topic.
+
 ## Term Glossary Tooltips
 
 Hard or specialist terms in article body prose get a brief explanation **at their first use** so a general reader is never stranded. Two formats, chosen by length:

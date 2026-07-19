@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pahalı mı? Neye Göre?</title>
+<meta name="description" content="Gördüğün ilk fiyat, yanındaki seçenekler ve o harcama için ayırdığın bütçe. Pahalıyı ucuzdan ayıran çoğu zaman sen değilsin, bu üçü.">
+<meta name="word-count" content="1581">
+<meta name="reading-time" content="7">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Pahalı mı? Neye Göre?">
+<meta property="og:description" content="Gördüğün ilk fiyat, yanındaki seçenekler ve o harcama için ayırdığın bütçe. Pahalıyı ucuzdan ayıran çoğu zaman sen değilsin, bu üçü.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/behavioral-economics-02.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="theme.js"></script>
+<script src="share.js" defer></script>
+<script src="tooltip.js" defer></script>
+<script src="analytics.js" defer></script>
+<script src="progress.js" defer></script>
+<script src="resume.js" defer></script>
+<script src="references.js" defer></script>
+<script src="toc.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 35%, var(--accent-glow) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+    font-weight: 400;
+    line-height: 1.12;
+    max-width: 880px;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-top: 1.6rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.85s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ARTICLE */
+  .article {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5rem 2rem 0.5rem;
+  }
+
+  .section { margin-bottom: 3.5rem; }
+  .article > .section:last-child { margin-bottom: 0; }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3.5vw, 2.05rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.005em;
+  }
+
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: -1rem 0 1.6rem;
+  }
+  .section-meta .dot {
+    color: var(--accent);
+    margin: 0 0.55rem;
+    opacity: 0.7;
+  }
+
+  .article p {
+    margin-bottom: 1.4rem;
+    font-size: 1.06rem;
+    color: var(--text);
+    text-align: justify;
+  }
+  .article p em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .article a.inline-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-glow);
+  }
+  .article a.inline-link:hover { border-bottom-color: var(--accent); }
+
+  .lede {
+    font-size: 1.15rem !important;
+    line-height: 1.7;
+  }
+
+  .drop::first-letter {
+    font-family: var(--serif);
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.85;
+    margin: 0.4rem 0.7rem -0.1rem 0;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .pullquote {
+    position: relative;
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    color: var(--text);
+    text-align: left !important;
+    max-width: 100%;
+    margin: 2.6rem 0;
+    padding: 0.1rem 0 0.1rem 3.4rem;
+  }
+  .pullquote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.35rem;
+    left: 0;
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.4rem;
+    margin: 2rem 0 2.2rem;
+    padding: 1.4rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .stat-row .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .stat-row .stat-num {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .stat-row .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* Side-note callout */
+  .side-note {
+    margin: 1.8rem 0 2rem;
+    padding: 1.2rem 1.4rem 1.1rem;
+    background: var(--accent-glow);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+  .side-note .note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.55rem;
+  }
+  .side-note p {
+    margin: 0 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.7;
+    color: var(--text);
+    text-align: left !important;
+  }
+  .side-note p + p { margin-top: 0.7rem !important; }
+
+  /* PROMPT — small inline command-line vibe */
+  .prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+    padding: 0.9rem 1.2rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+  }
+
+  /* INTERACTIVE ANCHOR EXPERIMENT */
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem 2rem 1.8rem;
+    margin: 2.2rem 0 2.6rem;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .exp-card.answered {
+    border-color: var(--accent);
+    box-shadow: 0 1px 0 var(--accent-glow), 0 8px 32px -16px var(--accent-glow);
+  }
+  .exp-card .quiz-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .exp-card .quiz-q {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+  .exp-card .quiz-q strong { color: var(--accent); }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    width: 100%;
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .option-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .option-btn .opt-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .option-btn.selected {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .option-btn.selected .opt-letter { font-weight: 600; }
+
+  .reveal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    margin-top: 0;
+  }
+  .reveal.show {
+    max-height: 1200px;
+    opacity: 1;
+    margin-top: 1.4rem;
+  }
+  .reveal-inner {
+    border-top: 1px solid var(--divider);
+    padding-top: 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .reveal-inner strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .reveal-inner p { margin: 0 0 1rem; }
+  .reveal-inner p:last-child { margin-bottom: 0; }
+
+  .exp-input-row {
+    display: flex;
+    gap: 0.7rem;
+    align-items: stretch;
+    margin-top: 0.2rem;
+  }
+  .exp-input-row input {
+    flex: 1;
+    max-width: 200px;
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .exp-input-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .exp-input-row input:disabled { opacity: 0.6; }
+  .exp-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.3rem;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .exp-submit:hover { transform: translateY(-1px); }
+  .exp-submit:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+  .exp-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.2rem;
+    margin: 1.2rem 0;
+    padding: 1.2rem 1.3rem;
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+  }
+  .exp-stats .stat { display: flex; flex-direction: column; gap: 0.3rem; }
+  .exp-stats .stat-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  /* Spoiler blur — hides text that reveals an experiment's answer */
+  .spoiler { position: relative; }
+  .spoiler-content {
+    filter: blur(7px);
+    opacity: 0.7;
+    user-select: none;
+    pointer-events: none;
+    transition: filter 0.5s ease, opacity 0.5s ease;
+  }
+  .spoiler.revealed .spoiler-content {
+    filter: none;
+    opacity: 1;
+    user-select: auto;
+    pointer-events: auto;
+  }
+  .spoiler-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    padding: 0.55rem 1.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .spoiler-btn:hover { background: var(--accent); color: var(--bg); }
+  .spoiler.revealed .spoiler-btn { display: none; }
+  @media (max-width: 480px) {
+    .spoiler-btn { white-space: normal; text-align: center; width: max-content; max-width: 90%; }
+  }
+
+  .exp-stats .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.45;
+  }
+
+  /* SUMMARY TABLE */
+  .sum-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 2.6rem 0 0.9rem;
+  }
+  .sum-table-wrap {
+    overflow-x: auto;
+    margin: 0 0 2.2rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  table.sum-table {
+    width: 100%;
+    min-width: 540px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+  table.sum-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 500;
+    text-align: left;
+    padding: 0.9rem 1.1rem 0.7rem;
+    border-bottom: 1px solid var(--divider);
+  }
+  table.sum-table td {
+    padding: 0.7rem 1.1rem;
+    border-bottom: 1px dashed var(--divider);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  table.sum-table tr.sum-sub td,
+  table.sum-table td.sum-exp { border-bottom: 1px solid var(--divider); }
+  table.sum-table tr:last-child td { border-bottom: none; }
+  table.sum-table .sum-exp {
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  table.sum-table .sum-exp span {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 0.15rem;
+  }
+  table.sum-table .sum-anchor {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  table.sum-table .sum-result { white-space: nowrap; }
+  table.sum-table .sum-result .arr { color: var(--accent); margin-right: 0.4rem; }
+  table.sum-table .sum-result strong { color: var(--accent); font-weight: 600; }
+  table.sum-table .sum-note td {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: italic;
+    padding: 0.75rem 1.1rem;
+    background: var(--bg);
+  }
+
+  .section-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--divider);
+    margin: 3.5rem auto;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '§';
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 0.6rem;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+
+  .wip-banner {
+    max-width: 560px;
+    margin: 2.5rem auto 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px dashed var(--divider);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .wip-banner strong {
+    color: var(--accent);
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* References — inline */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+
+  /* REFERENCES */
+  .ref-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references li em { font-style: italic; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+  ol.references li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* FAB back-to-text */
+  #fab-back {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+  #fab-back svg { transition: transform 0.25s ease; }
+  #fab-back.flip svg { transform: rotate(180deg); }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+  }
+  .closing-sub {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; min-height: 88vh; }
+    .article { padding: 3.5rem 1.5rem 2rem; }
+    .exp-card { padding: 1.6rem 1.4rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
+    .hero-sub { font-size: 0.98rem; }
+    .article p { font-size: 1rem; }
+    .lede { font-size: 1.05rem !important; }
+    .exp-card .quiz-q { font-size: 1.05rem; }
+    .option-btn { font-size: 0.92rem; padding: 0.75rem 0.9rem; }
+    .exp-input-row { flex-direction: column; }
+    .exp-input-row input { max-width: none; }
+    .pullquote { padding-left: 2.5rem; font-size: 1.2rem; }
+    .pullquote::before { font-size: 2.5rem; }
+  }
+</style>
+  <script src="highlight.js" defer></script>
+  <script src="ref.js" defer></script>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <a class="home-toggle" href="index.html" aria-label="Ana sayfaya dön"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+  <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+  <button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="14" y2="17"/>
+    </svg>
+  </button>
+
+  <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+  <nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+    <div class="toc-list">
+      <a href="#h01" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">01</span>
+        <span class="toc-title">Giriş</span>
+      </a>
+      <a href="#h02" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">02</span>
+        <span class="toc-title">Çıpalama</span>
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Davranışsal Ekonomi · Bölüm 2 · Sayı ve Değer Algısı</div>
+    <h1>Pahalı mı? <em>Neye göre?</em></h1>
+    <p class="hero-sub">Gördüğün ilk fiyat, yanındaki seçenekler ve o harcama için ayırdığın bütçe. Pahalıyı ucuzdan ayıran çoğu zaman sen değilsin, bu üçü.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <article class="article">
+
+    <div class="section" id="s01">
+      <div class="section-num">01 · Giriş</div>
+      <h2 id="h01">Değeri kim belirliyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <p class="lede">Bir şeye "pahalı" ya da "ucuz" demek için neye bakarsın? Çoğu kişi bu soruya benzer biçimde cevap verir: bakarım, düşünürüm, kendi kararımı veririm. Değer biçmek, içeriden gelen, tümüyle bize ait bir karar gibi hissettirir. O kararı veren ses, kendi sesin gibidir. Oysa o sesin ne diyeceği çoğu zaman daha sen düşünmeye başlamadan, dışarıdaki birkaç ayrıntıyla belirlenmiştir.</p>
+
+      <p class="pullquote">Kararı sen verirsin, ama o kararın yönünü çoğu zaman o ayrıntılar senin yerine çizer.</p>
+
+      <p>Bu yazı, değerin nereden geldiğine dair üç soruyu sırayla ele alıyor. Üçünün de cevabı aynı yere çıkıyor. Bir şeyin pahalı mı ucuz mu olduğu, çoğu zaman onun kendisinde değil, ona eşlik eden başka ayrıntılarda gizli. <strong>Gördüğün ilk sayıda, yanına konan seçenekte ve parayı kafanda hangi bütçeye yazdığında.</strong></p>
+
+      <p><a href="behavioral-economics-01.html" class="inline-link">Önceki yazıda</a>, klasik ekonominin hayal ettiği o soğukkanlı ve tutarlı "rasyonel insan"ın gerçek insandan ne kadar uzak olduğunu konuşmuştuk. Bu yazı, o tablonun en somut köşesi. Çünkü para söz konusu olduğunda, yani her değerin bir rakama döküldüğü o alanda, zihnin aldığı kestirme yollar en net biçimde görünür hale geliyor. İlk soru da bu kestirmelerin en sağlamına bakıyor.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="section" id="s02">
+      <div class="section-num">02 · Çıpalama (Anchoring)</div>
+      <h2 id="h02">Rastgele bir sayı, sonraki tahminlerini nasıl belirler?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+      <div class="section-meta">1974 <span class="dot">·</span> Science <span class="dot">·</span> Anchoring</div>
+
+      <p class="drop">Bilmediğin bir sayıyı tahmin etmen gerektiğinde zihnin bir yerden başlamak ister ve önüne çıkan ilk rakama tutunur. O rakamın doğru cevapla ilgisi olmasa bile zihin ondan tam kopamaz, yolun yarısında durur. Bu eğilimin adı <em>çıpalama</em>. İngilizcesi <em>anchoring</em>, yani demir atmak. Aklına ilk düşen sayı, bir gemi demiri gibi seni bulunduğun yere bağlar.</p>
+
+      <p>İlk sağlam kanıt 1974'te geldi. Daniel Kahneman ve Amos Tversky, katılımcıların önünde üzerinde 0'dan 100'e kadar sayılar yazan bir talih çarkı çeviriyordu. Çark aslında hileliydi: yalnızca <strong>10</strong>'da ya da <strong>65</strong>'te duracak biçimde ayarlanmıştı. Katılımcılar bunu bilmiyor, çarkın tamamen rastgele döndüğünü düşünüyordu. Önce, Afrika ülkelerinin Birleşmiş Milletler'deki oranının çarkta çıkan sayıdan yüksek mi düşük mü olduğunu soruyorlardı. Hemen ardından asıl soruyu ekliyorlardı, "peki sence tam olarak yüzde kaç?". İlk soru yalnızca dikkati o rakama çekmek içindi, iş ikinci soruya verilen cevaptaydı. Çark 10'da durduğunda ikinci soruya verilen ortalama tahmin <strong>yüzde 25</strong>, 65'te durduğunda <strong>yüzde 45</strong> çıktı <a href="#ref-1" class="ref" onclick="savePos(this)">1</a>. Aynı soru, aynı insanlar. Tek fark, az önce gördükleri ve rastgele sandıkları bir sayı. <em>O sayı, tahmini neredeyse ikiye katladı.</em></p>
+
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">10 → %25</div><div class="stat-label">çark 10'da durunca ortalama tahmin</div></div>
+        <div class="stat"><div class="stat-num">65 → %45</div><div class="stat-label">çark 65'te durunca ortalama tahmin</div></div>
+      </div>
+
+      <p>Buna hemen bir itiraz gelir: belki o rakam insanlara makul bir aralık sezdirmiştir. İtirazı kapatan deney 1997'de yapıldı. Ama önce sıra sende; o deneyin bu sayfaya uyarlanmış halini kendin yaşayabilirsin:</p>
+
+      <!-- DENEY 01 · GANDHI -->
+      <div class="exp-card" id="exp-gandhi" data-low="9" data-high="140" data-low-avg="50" data-high-avg="67">
+        <div class="quiz-num">DENEY 01 · KENDİ ÇIPANI GÖR</div>
+        <div class="quiz-q">Mahatma Gandhi öldüğünde <strong class="exp-anchor"></strong> yaşından büyük müydü, küçük müydü?</div>
+        <div class="options exp-opts">
+          <button class="option-btn" type="button"><span class="opt-letter">A</span><span>Büyük</span></button>
+          <button class="option-btn" type="button"><span class="opt-letter">B</span><span>Küçük</span></button>
+        </div>
+        <div class="reveal exp-step2">
+          <div class="reveal-inner">
+            <p>Peki sence tam olarak kaç yaşında öldü?</p>
+            <div class="exp-input-row">
+              <input type="number" class="exp-guess" inputmode="numeric" min="0" max="200" placeholder="yaş" aria-label="Yaş tahmini">
+              <button class="exp-submit" type="button">Tahminimi gönder</button>
+            </div>
+          </div>
+        </div>
+        <div class="reveal exp-step3">
+          <div class="reveal-inner">
+            <p>Sana rastgele <strong><span class="exp-your-anchor"></span></strong> sayısını gösterdik; okuyucuların diğer yarısı aynı soruyu <strong><span class="exp-other-anchor"></span></strong> sayısıyla görüyor. Strack ve Mussweiler'in deneyinde yüksek rakamı görenler ortalama <strong>67</strong>, düşük rakamı görenler ortalama <strong>50</strong> yaş tahmin etti <a href="#ref-2" class="ref" onclick="savePos(this)">2</a>.</p>
+            <div class="exp-stats">
+              <div class="stat"><div class="stat-num"><span class="exp-your-guess"></span></div><div class="stat-label">senin tahminin</div></div>
+              <div class="stat"><div class="stat-num"><span class="exp-group-avg"></span></div><div class="stat-label">senin çıpanı görenlerin ortalaması</div></div>
+              <div class="stat"><div class="stat-num">78</div><div class="stat-label">doğru cevap</div></div>
+            </div>
+            <p>Gandhi 78 yaşında öldürüldü. Az önce gördüğün o rastgele sayı, senin tahminini de kendine doğru çekmiş olabilir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spoiler" data-spoiler-for="exp-gandhi">
+        <button class="spoiler-btn" type="button">Deneyin cevabı içinde · yine de göster</button>
+        <div class="spoiler-content">
+          <p>Deneyin aslı şöyleydi: Fritz Strack ve Thomas Mussweiler, 60 kişiye Mahatma Gandhi'nin kaç yaşında öldüğünü sordu. Önce yarısına "<strong>9</strong> yaşından küçük müydü", diğer yarısına "<strong>140</strong> yaşından büyük müydü" diye soruldu <a href="#ref-2" class="ref" onclick="savePos(this)">2</a>. İki sayı da apaçık saçma. Yine de düşük rakamı görenler ortalama <strong>50</strong>, yüksek rakamı görenler ortalama <strong>67</strong> yaş tahmin etti <a href="#ref-2" class="ref" onclick="savePos(this)">2</a>. Kimse Gandhi'nin 9 ya da 140 yıl yaşadığını düşünmüyordu, ama o anlamsız sayılar bile tahmini kendine çekti. "Makul aralık sezdirme" itirazı burada çöküyor; <em>çıpanın işe yaraması için inandırıcı olması bile gerekmiyor</em>.</p>
+        </div>
+      </div>
+
+      <p>Mekanizma artık ortada. Peki onu görmüş olmak, etkisinden koruyor mu? Bir de bilerek dene:</p>
+
+      <!-- DENEY 02 · KIZILAĞAÇ -->
+      <div class="exp-card" id="exp-redwood" data-low="55" data-high="366" data-low-avg="86" data-high-avg="257">
+        <div class="quiz-num">DENEY 02 · KENDİ ÇIPANI GÖR</div>
+        <div class="quiz-q">Dünyanın en yüksek ağacı <strong class="exp-anchor"></strong> metreden uzun mu?</div>
+        <div class="options exp-opts">
+          <button class="option-btn" type="button"><span class="opt-letter">A</span><span>Evet, daha uzun</span></button>
+          <button class="option-btn" type="button"><span class="opt-letter">B</span><span>Hayır, daha kısa</span></button>
+        </div>
+        <div class="reveal exp-step2">
+          <div class="reveal-inner">
+            <p>Peki sence tam olarak kaç metre?</p>
+            <div class="exp-input-row">
+              <input type="number" class="exp-guess" inputmode="numeric" min="0" max="2000" placeholder="metre" aria-label="Yükseklik tahmini">
+              <button class="exp-submit" type="button">Tahminimi gönder</button>
+            </div>
+          </div>
+        </div>
+        <div class="reveal exp-step3">
+          <div class="reveal-inner">
+            <p>Sana rastgele <strong><span class="exp-your-anchor"></span> metreyi</strong> gösterdik; okuyucuların diğer yarısı aynı soruyu <strong><span class="exp-other-anchor"></span> metreyle</strong> görüyor. Bu klasik paradigmada yüksek çıpayı görenler ortalama <strong>257 metre</strong>, düşük çıpayı görenler ortalama <strong>86 metre</strong> tahmin etti <a href="#ref-7" class="ref" onclick="savePos(this)">7</a>.</p>
+            <div class="exp-stats">
+              <div class="stat"><div class="stat-num"><span class="exp-your-guess"></span></div><div class="stat-label">senin tahminin (m)</div></div>
+              <div class="stat"><div class="stat-num"><span class="exp-group-avg"></span></div><div class="stat-label">senin çıpanı görenlerin ortalaması (m)</div></div>
+              <div class="stat"><div class="stat-num">~116</div><div class="stat-label">doğru cevap (m)</div></div>
+            </div>
+            <p>Doğru cevap yaklaşık 116 metre: Kaliforniya'daki Hyperion adlı bir sahil kızılağacı. Çıpa etkisi en çok böyle sorularda güçlü; zihin tutunacak başka bir şey bulamayınca, önüne konan sayıya demir atıyor.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>İkinci itiraz daha güçlü: belki bu, konuyu bilmeyen sıradan insanların tuzağıdır, işini bilen uzmanlar bu kadar kolay kanmaz. Veriler bunu desteklemiyor. 1987'de Gregory Northcraft ve Margaret Neale, deneyimli emlakçıları tek tek gerçek bir evi gezmeye götürdü. Herkese evin bütün bilgilerini içeren aynı dosya verildi, değişen tek şey dosyadaki ilan fiyatıydı. İlan fiyatı <strong>65.900 dolar</strong> olan evi gezen uzmanlar ona ortalama <strong>67.800 dolar</strong> değer biçti; ilan fiyatı <strong>83.900 dolar</strong> olanı gezenler ise aynı eve <strong>75.200 dolar</strong>. Yani sırf ilan fiyatı yüzünden, aynı evin değeri uzmanların gözünde 7 bin doları aşkın oynadı <a href="#ref-3" class="ref" onclick="savePos(this)">3</a>. En çarpıcısı da şu: değerlemede neyi dikkate aldıkları sorulduğunda emlakçıların yalnızca <strong>yüzde 24</strong>'ü ilan fiyatını andı <a href="#ref-3" class="ref" onclick="savePos(this)">3</a>. Geri kalanı, <em>etkilendiğinin farkında bile değildi</em>.</p>
+
+      <p>Peki ya kararları doğrudan hayat değiştiren insanlar? 2006'da Birte Englich, Thomas Mussweiler ve Fritz Strack, ortalama on yıldan fazla deneyimli gerçek hâkimlere aynı ceza dosyasını verdi. Bir gruba savcının <strong>3 yıl</strong>, diğerine <strong>1 yıl</strong> ceza istediği söylendi. Yalnızca bu tek sayı yüzünden, yüksek talebi görenlerin verdiği ceza ortalama <strong>8 ay daha uzun</strong> çıktı <a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Bir sonraki denemede savcının talep ettiği ceza süresini, hâkimlerin kendi elleriyle attığı bir çift zar belirledi. Yani hâkimler o sayının rastgele olduğunu gayet iyi biliyordu. Buna rağmen verdikleri ceza yine o zarın gösterdiği sayıya doğru kaydı <a href="#ref-4" class="ref" onclick="savePos(this)">4</a>. Araştırmanın adı bile buradan geliyor, <em>"Ceza Davalarıyla Zar Atmak"</em>.</p>
+
+      <p class="pullquote">Hâkimler o sayının rastgele olduğunu gayet iyi biliyordu. Verdikleri ceza yine de zara doğru kaydı.</p>
+
+      <p>Buraya kadarki örnekler tahmin etmekle ilgiliydi. Asıl sarsıcı olan, bir şeye değer biçmenin de aynı biçimde çıpalanabilmesi. 2003'te Dan Ariely, George Loewenstein ve Drazen Prelec, katılımcılardan önce <span class="term">sosyal güvenlik numaralarının<span class="term-tip">ABD'de her bireye verilen dokuz haneli resmi kimlik numarası. Türkiye'deki TC kimlik numarasının karşılığı sayılabilir.</span></span> son iki hanesini yazmalarını, ardından kablosuz klavye, şarap, çikolata gibi ürünlere ödeyecekleri en yüksek tutarı söylemelerini istedi <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>. İki sayının birbiriyle mantıken hiçbir ilgisi yok. Yine de numarasının son iki hanesi en yüksek dilime düşenler, en düşük dilimdekilere göre çok daha fazla ödedi. Kablosuz klavyede düşük grup ortalama <strong>16 dolar</strong> verirken yüksek grup <strong>56 dolar</strong> verdi, yani üç kattan fazla <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>. Ürünler genelinde fark <strong>yüzde 346</strong>'ya kadar çıkıyordu <a href="#ref-5" class="ref" onclick="savePos(this)">5</a>. "Bu benim için ne kadar değerli?" sorusunun cevabı bile, içeride duran sabit bir tercihten değil, <em>az önce yazılan rastgele bir sayıdan</em> besleniyordu.</p>
+
+      <div class="side-note">
+        <div class="note-label">Günlük Hayatta</div>
+        <p>Menüdeki kimsenin almadığı en pahalı şişe, etiketteki üstü çizilmiş "eski fiyat", pazarlıkta ilk söylenen rakam, ilanlardaki "liste fiyatı". Hepsi aynı işi yapıyor: değerlendirmen başlamadan önce zihnine bir demir atmak. <em>Çıpayı koyan taraf, pazarlığın merkezini de belirlemiş oluyor.</em></p>
+      </div>
+
+      <p>Bütün bunlar, tek tük ilginç deneyler mi? Hayır. Çıpalama, davranış bilimlerinin en sağlam bulgularından biri. 2025'te Dan Schley ve Evan Weingarten, elli yıllık araştırmayı tarayıp 2.603 <span class="term">etki büyüklüğünü<span class="term-tip">Bir deneyde bulunan farkın ne kadar güçlü olduğunu ölçen istatistik değeri. Sıfıra yakınsa etki zayıftır; 0,8 ve üzeri genellikle "büyük" kabul edilir.</span></span> tek bir analizde birleştirdi. Ortaya çıkan etki istatistikte "büyük" sayılan bir düzeydeydi (d = 0,824) ve <span class="term">yayın yanlılığı<span class="term-tip">Etki bulan çalışmaların, etki bulamayanlara göre daha kolay yayımlanması. Düzeltilmezse literatürdeki ortalama etkiyi olduğundan büyük gösterebilir.</span></span> düzeltmeleri bu sonucu neredeyse hiç sarsmadı <a href="#ref-6" class="ref" onclick="savePos(this)">6</a>. Etkinin zayıfladığı yerler de var. Çıpa alakasız sıradan bir sayı gibi geçiştirildiğinde, kişi konuya gerçekten hâkim olduğunda ya da doğru cevaba somut bir ödül bağlandığında etki küçülüyor <a href="#ref-6" class="ref" onclick="savePos(this)">6</a>. Ama tümüyle kaybolmuyor.</p>
+
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">50 yıl</div><div class="stat-label">taranan araştırma dönemi</div></div>
+        <div class="stat"><div class="stat-num">2.603</div><div class="stat-label">birleştirilen etki büyüklüğü</div></div>
+        <div class="stat"><div class="stat-num">d = 0,824</div><div class="stat-label">"büyük" düzeyde ortalama etki</div></div>
+      </div>
+
+      <div class="sum-label">Özet · Beş Deney, Tek Örüntü</div>
+      <div class="sum-table-wrap">
+        <table class="sum-table">
+          <thead>
+            <tr>
+              <th>Deney</th>
+              <th>Söylenen sayı</th>
+              <th>Tahmin nereye kaydı?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sum-exp" rowspan="2">Talih çarkı<span>1974 · BM tahmini</span></td>
+              <td class="sum-anchor">Çark: 10</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>%25</strong></td>
+            </tr>
+            <tr class="sum-sub">
+              <td class="sum-anchor">Çark: 65</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>%45</strong></td>
+            </tr>
+            <tr>
+              <td class="sum-exp" rowspan="2">Gandhi<span>1997 · ölüm yaşı</span></td>
+              <td class="sum-anchor">9 yaş</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>50</strong></td>
+            </tr>
+            <tr class="sum-sub">
+              <td class="sum-anchor">140 yaş</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>67</strong></td>
+            </tr>
+            <tr>
+              <td class="sum-exp" rowspan="2">Emlakçılar<span>1987 · ev değerlemesi</span></td>
+              <td class="sum-anchor">İlan: 65.900 $</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>67.800 $</strong></td>
+            </tr>
+            <tr class="sum-sub">
+              <td class="sum-anchor">İlan: 83.900 $</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>75.200 $</strong></td>
+            </tr>
+            <tr>
+              <td class="sum-exp" rowspan="2">Hâkimler<span>2006 · ceza süresi</span></td>
+              <td class="sum-anchor">Talep: 1 yıl</td>
+              <td class="sum-result"><span class="arr">→</span>daha kısa ceza</td>
+            </tr>
+            <tr class="sum-sub">
+              <td class="sum-anchor">Talep: 3 yıl</td>
+              <td class="sum-result"><span class="arr">→</span><strong>8 ay</strong> daha uzun</td>
+            </tr>
+            <tr>
+              <td class="sum-exp" rowspan="2">Kimlik numarası<span>2003 · klavye teklifi</span></td>
+              <td class="sum-anchor">Haneler düşük</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>16 $</strong></td>
+            </tr>
+            <tr class="sum-sub">
+              <td class="sum-anchor">Haneler yüksek</td>
+              <td class="sum-result"><span class="arr">→</span>ortalama <strong>56 $</strong></td>
+            </tr>
+            <tr class="sum-note">
+              <td colspan="3">Meta-analiz (2025): 50 yılda 2.603 etki büyüklüğü birleştirildi; ortalama etki "büyük" düzeyde, d = 0,824.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Sonuç rahatsız edici biçimde basit. Aklına ilk düşen sayı, ona inanmasan, hatta saçma bulsan bile, bir sonraki kararını kendine doğru eğiyor. Peki bir sayı bunu tek başına yapabiliyorsa, yanına özenle yerleştirilmiş bir seçenek neler yapabilir?</p>
+
+      <div class="wip-banner">
+        <strong>Devamı Hazırlanıyor</strong>
+        Bu makale parça parça yayımlanıyor. Sıradaki bölümler: yanına konan seçeneğin oyunu ve paranın kafandaki cüzdanları.
+      </div>
+    </div>
+
+  </article>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+
+  <section class="continue" aria-label="Sıradaki okuma">
+    <div class="continue-toc continue-toc-pending">
+      <span class="continue-toc-label">Bölüm 3</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">Davranışsal Ekonomi · Bölüm 3</h3>
+        <p class="continue-toc-meta">Hazırlanıyor</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">Yakında</span>
+    </div>
+  </section>
+
+    <h3>Kaynakça</h3>
+    <ol class="references">
+      <li id="ref-1">Tversky, A., &amp; Kahneman, D. (1974). Judgment under Uncertainty: Heuristics and Biases. <em>Science</em>, 185(4157), 1124-1131. <a href="https://doi.org/10.1126/science.185.4157.1124" target="_blank" rel="noopener">doi</a> · <a href="https://www.cs.tufts.edu/comp/150AIH/pdf/TverskyKa74.pdf" target="_blank" rel="noopener">pdf</a></li>
+      <li id="ref-2">Strack, F., &amp; Mussweiler, T. (1997). Explaining the Enigmatic Anchoring Effect: Mechanisms of Selective Accessibility. <em>Journal of Personality and Social Psychology</em>, 73(3), 437-446. <a href="https://doi.org/10.1037/0022-3514.73.3.437" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-3">Northcraft, G. B., &amp; Neale, M. A. (1987). Experts, Amateurs, and Real Estate: An Anchoring-and-Adjustment Perspective on Property Pricing Decisions. <em>Organizational Behavior and Human Decision Processes</em>, 39(1), 84-97. <a href="https://doi.org/10.1016/0749-5978(87)90046-X" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-4">Englich, B., Mussweiler, T., &amp; Strack, F. (2006). Playing Dice with Criminal Sentences: The Influence of Irrelevant Anchors on Experts' Judicial Decision Making. <em>Personality and Social Psychology Bulletin</em>, 32(2), 188-200. <a href="https://doi.org/10.1177/0146167205282152" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-5">Ariely, D., Loewenstein, G., &amp; Prelec, D. (2003). "Coherent Arbitrariness": Stable Demand Curves Without Stable Preferences. <em>The Quarterly Journal of Economics</em>, 118(1), 73-106. <a href="https://doi.org/10.1162/00335530360535153" target="_blank" rel="noopener">doi</a></li>
+      <li id="ref-6">Schley, D. R., &amp; Weingarten, E. (2025). 50 Years of Anchoring: A Meta-Analysis and Meta-Study of Anchoring Effects. SSRN çalışma metni.</li>
+      <li id="ref-7">Jacowitz, K. E., &amp; Kahneman, D. (1995). Measures of Anchoring in Estimation Tasks. <em>Personality and Social Psychology Bulletin</em>, 21(11), 1161-1166. (Kızılağaç / genel bilgi çıpalama paradigması.) <a href="https://doi.org/10.1177/01461672952111004" target="_blank" rel="noopener">doi</a></li>
+    </ol>
+  </div>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön" aria-label="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <div class="divider"></div>
+
+  <section class="closing">
+    <p class="closing-sub">Temmuz 2026 · Davranışsal Ekonomi Serisi · Bölüm 2</p>
+  </section>
+
+  <script>
+    // Reference back-navigation
+    let savedPosition = null;
+    function savePos(el) {
+      savedPosition = window.scrollY;
+      setTimeout(() => {
+        const fab = document.getElementById('fab-back');
+        // If we landed above saved position, "back" means going down → flip arrow
+        fab.classList.toggle('flip', window.scrollY < savedPosition);
+        fab.style.display = 'flex';
+      }, 300);
+    }
+    function goBack() {
+      if (savedPosition !== null) {
+        window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+        setTimeout(() => {
+          const fab = document.getElementById('fab-back');
+          fab.style.display = 'none';
+          fab.classList.remove('flip');
+          savedPosition = null;
+        }, 600);
+      }
+    }
+
+    // Anchor experiments — random A/B anchor, guess, reveal
+    (function () {
+      function isLocal() {
+        var h = location.hostname;
+        return location.protocol === 'file:' || !h ||
+               h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' ||
+               /^192\.168\./.test(h) || /^10\./.test(h) || /^172\.(1[6-9]|2\d|3[01])\./.test(h);
+      }
+      function track(name) {
+        if (isLocal()) return;
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({ path: name, event: true });
+        }
+      }
+
+      document.querySelectorAll('.exp-card').forEach(function (card) {
+        var low = card.dataset.low, high = card.dataset.high;
+        var isHigh = Math.random() < 0.5;
+        var anchor = isHigh ? high : low;
+        var other = isHigh ? low : high;
+        var avg = isHigh ? card.dataset.highAvg : card.dataset.lowAvg;
+
+        card.querySelector('.exp-anchor').textContent = anchor;
+        card.querySelector('.exp-your-anchor').textContent = anchor;
+        card.querySelector('.exp-other-anchor').textContent = other;
+        card.querySelector('.exp-group-avg').textContent = avg;
+
+        var opts = card.querySelectorAll('.exp-opts .option-btn');
+        var step2 = card.querySelector('.exp-step2');
+        var step3 = card.querySelector('.exp-step3');
+        var input = card.querySelector('.exp-guess');
+        var submit = card.querySelector('.exp-submit');
+
+        opts.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            opts.forEach(function (b) { b.classList.remove('selected'); });
+            btn.classList.add('selected');
+            if (!step2.classList.contains('show')) {
+              step2.classList.add('show');
+              input.focus();
+            }
+          });
+        });
+
+        function finish() {
+          var guess = parseFloat(input.value);
+          if (isNaN(guess) || step3.classList.contains('show')) { input.focus(); return; }
+          card.querySelector('.exp-your-guess').textContent = input.value;
+          input.disabled = true;
+          submit.disabled = true;
+          step3.classList.add('show');
+          card.classList.add('answered');
+          document.querySelectorAll('.spoiler[data-spoiler-for="' + card.id + '"]').forEach(function (sp) {
+            sp.classList.add('revealed');
+          });
+          track(card.id + '-done');
+        }
+        submit.addEventListener('click', finish);
+        input.addEventListener('keydown', function (e) { if (e.key === 'Enter') finish(); });
+      });
+
+      // Spoiler manual reveal
+      document.querySelectorAll('.spoiler .spoiler-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btn.closest('.spoiler').classList.add('revealed');
+        });
+      });
+    })();
+  </script>
+  <div class="home-logo" onclick="location.href='index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+</body>
+</html>
