@@ -119,6 +119,68 @@
     .line{grid-template-columns:1fr;gap:2px;margin-bottom:17px}
     .who{text-align:left;padding-top:0}
   }
+
+  /* ---- kişi seçimi ---- */
+  .cast-hint{
+    font-size:.82rem;color:var(--text-dim);text-align:center;
+    margin:0 0 16px;line-height:1.4;
+  }
+  .cast li{
+    cursor:pointer;border-radius:10px;padding:7px 11px;margin:-6px -6px;
+    transition:background .16s ease, box-shadow .16s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .cast li:hover{background:var(--surface)}
+  .cast li:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .cast li.sel{background:var(--accent);box-shadow:0 4px 14px rgba(0,0,0,.14)}
+  .cast li.sel .nm{color:#fff}
+  .cast li.sel .rl{color:rgba(255,255,255,.82)}
+
+  /* seçim aktifken sahne */
+  .wrap.filtering .line:not(.hit){opacity:.32;transition:opacity .2s ease}
+  .wrap.filtering .stage{opacity:.42;transition:opacity .2s ease}
+  .line.hit{
+    position:relative;
+    border-left:2px solid var(--accent);
+    padding-left:14px;margin-left:-16px;
+  }
+  @media(max-width:600px){ .line.hit{margin-left:-8px;padding-left:8px} }
+  .line.hit .who{color:var(--accent)}
+  .line.flash{animation:hitflash 1.1s ease}
+  @keyframes hitflash{
+    0%,100%{background:transparent}
+    18%{background:var(--accent-soft,rgba(150,98,47,.16))}
+  }
+
+  /* ---- gezinme çubuğu ---- */
+  .charnav{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(140%);
+    z-index:120;display:flex;align-items:center;gap:4px;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:999px;padding:6px 8px;
+    box-shadow:0 8px 30px rgba(0,0,0,.18);
+    opacity:0;pointer-events:none;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .22s ease;
+    font-family:var(--script);max-width:calc(100vw - 24px);
+  }
+  .charnav.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+  .charnav .cn-name{
+    font-family:var(--mono);font-weight:600;font-size:.74rem;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--accent);padding:0 8px 0 10px;white-space:nowrap;
+    max-width:38vw;overflow:hidden;text-overflow:ellipsis;
+  }
+  .charnav .cn-count{
+    font-family:var(--mono);font-size:.74rem;color:var(--text-dim);
+    min-width:52px;text-align:center;font-variant-numeric:tabular-nums;
+  }
+  .charnav button{
+    appearance:none;border:0;cursor:pointer;background:transparent;color:var(--text);
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    transition:background .14s ease;
+  }
+  .charnav button:hover{background:var(--paper)}
+  .charnav button svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .charnav .cn-close{color:var(--text-dim);margin-left:2px}
+  .charnav .cn-close:hover{color:var(--text)}
 </style>
 <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -145,17 +207,18 @@
 
   <div class="cast">
     <h2>Kişiler</h2>
+    <p class="cast-hint">Bir kişiye dokun: repliklerini vurgular, aralarında gezinmeni sağlar.</p>
     <ul>
-      <li><span class="nm">Lionel Toop</span><span class="rl">rahip</span></li>
-      <li><span class="nm">Penelope Toop</span><span class="rl">karısı, eski aktris</span></li>
-      <li><span class="nm">Ida</span><span class="rl">hizmetçi</span></li>
-      <li><span class="nm">Miss Skillon</span><span class="rl">komşu</span></li>
-      <li><span class="nm">Clive Winton</span><span class="rl">onbaşı</span></li>
-      <li><span class="nm">Lax Piskoposu</span><span class="rl">Dudley amca</span></li>
-      <li><span class="nm">Arthur Humphrey</span><span class="rl">misafir rahip</span></li>
-      <li><span class="nm">Yabancı / Adam</span><span class="rl">Alman esiri</span></li>
-      <li><span class="nm">Çavuş</span><span class="rl">&nbsp;</span></li>
-      <li><span class="nm">Willie Briggs</span><span class="rl">&nbsp;</span></li>
+      <li data-char="LIONEL" role="button" tabindex="0" aria-pressed="false"><span class="nm">Lionel Toop</span><span class="rl">rahip</span></li>
+      <li data-char="PENELOPE" role="button" tabindex="0" aria-pressed="false"><span class="nm">Penelope Toop</span><span class="rl">karısı, eski aktris</span></li>
+      <li data-char="IDA" role="button" tabindex="0" aria-pressed="false"><span class="nm">Ida</span><span class="rl">hizmetçi</span></li>
+      <li data-char="SKILLON" role="button" tabindex="0" aria-pressed="false"><span class="nm">Miss Skillon</span><span class="rl">komşu</span></li>
+      <li data-char="CLIVE" role="button" tabindex="0" aria-pressed="false"><span class="nm">Clive Winton</span><span class="rl">onbaşı</span></li>
+      <li data-char="PISKOPOS" role="button" tabindex="0" aria-pressed="false"><span class="nm">Lax Piskoposu</span><span class="rl">Dudley amca</span></li>
+      <li data-char="HUMPHREY" role="button" tabindex="0" aria-pressed="false"><span class="nm">Arthur Humphrey</span><span class="rl">misafir rahip</span></li>
+      <li data-char="ADAM" role="button" tabindex="0" aria-pressed="false"><span class="nm">Yabancı / Adam</span><span class="rl">Alman esiri</span></li>
+      <li data-char="CAVUS" role="button" tabindex="0" aria-pressed="false"><span class="nm">Çavuş</span><span class="rl">&nbsp;</span></li>
+      <li data-char="WILLIE" role="button" tabindex="0" aria-pressed="false"><span class="nm">Willie Briggs</span><span class="rl">&nbsp;</span></li>
     </ul>
   </div>
 
@@ -1806,6 +1869,135 @@
 </div>
 
 <div class="home-logo" onclick="location.href='../index.html'" role="link" tabindex="0"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></div>
+
+<div class="charnav" id="charnav" role="toolbar" aria-label="Kişi replikleri arası gezinme">
+  <button type="button" class="cn-prev" aria-label="Önceki replik"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <span class="cn-name" id="cnName"></span>
+  <span class="cn-count" id="cnCount"></span>
+  <button type="button" class="cn-next" aria-label="Sonraki replik"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <button type="button" class="cn-close" aria-label="Seçimi kapat"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
+<script>
+(function(){
+  var wrap = document.querySelector('.wrap');
+  var nav  = document.getElementById('charnav');
+  var cnName = document.getElementById('cnName');
+  var cnCount = document.getElementById('cnCount');
+
+  // Türkçe harfleri sadeleştirip karşılaştırma anahtarı üret
+  function norm(s){
+    return s.toUpperCase()
+      .replace(/İ/g,'I').replace(/I/g,'I').replace(/Ç/g,'C').replace(/Ş/g,'S')
+      .replace(/Ö/g,'O').replace(/Ü/g,'U').replace(/Ğ/g,'G').replace(/Â/g,'A');
+  }
+
+  // her repliğe konuşmacı anahtar kümesini işle
+  var lines = Array.prototype.slice.call(document.querySelectorAll('.line'));
+  lines.forEach(function(li){
+    var who = li.querySelector('.who');
+    var tokens = norm(who ? who.textContent : '')
+      .split(/,| VE | & /).map(function(t){return t.trim();}).filter(Boolean);
+    li._keys = tokens;
+  });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.cast li[data-char]'));
+  var active = null;   // seçili data-char
+  var hits = [];       // eşleşen replikler
+  var idx = -1;
+
+  function matches(li, key){
+    for(var i=0;i<li._keys.length;i++){ if(li._keys[i].indexOf(key)!==-1) return true; }
+    return false;
+  }
+
+  function clear(){
+    active = null; hits = []; idx = -1;
+    wrap.classList.remove('filtering');
+    lines.forEach(function(l){ l.classList.remove('hit','flash'); });
+    chips.forEach(function(c){ c.classList.remove('sel'); c.setAttribute('aria-pressed','false'); });
+    nav.classList.remove('show');
+  }
+
+  function select(key, chip){
+    if(active === key){ clear(); return; }
+    clear();
+    active = key;
+    chip.classList.add('sel'); chip.setAttribute('aria-pressed','true');
+    hits = lines.filter(function(l){ return matches(l, key); });
+    wrap.classList.add('filtering');
+    hits.forEach(function(l){ l.classList.add('hit'); });
+    cnName.textContent = chip.querySelector('.nm').textContent;
+    if(!hits.length){
+      cnCount.textContent = '0 replik';
+      nav.classList.add('show');
+      return;
+    }
+    nav.classList.add('show');
+    // ekranda görünen ilk eşleşmeyi başlangıç kabul et
+    idx = firstVisibleHit();
+    updateCount();
+    goTo(idx, false);
+  }
+
+  function firstVisibleHit(){
+    var mid = window.innerHeight/2, best = 0, bestD = Infinity;
+    for(var i=0;i<hits.length;i++){
+      var r = hits[i].getBoundingClientRect();
+      var d = Math.abs((r.top+r.bottom)/2 - mid);
+      if(r.bottom > 0 && d < bestD){ bestD = d; best = i; }
+    }
+    return best;
+  }
+
+  function updateCount(){ cnCount.textContent = (idx+1) + ' / ' + hits.length; }
+
+  function goTo(i, flash){
+    if(!hits.length) return;
+    idx = (i + hits.length) % hits.length;
+    var el = hits[idx];
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    if(flash!==false){
+      el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+    }
+    updateCount();
+  }
+
+  chips.forEach(function(chip){
+    function act(){ select(chip.getAttribute('data-char'), chip); }
+    chip.addEventListener('click', act);
+    chip.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); act(); }
+    });
+  });
+
+  nav.querySelector('.cn-prev').addEventListener('click', function(){ goTo(idx-1, true); });
+  nav.querySelector('.cn-next').addEventListener('click', function(){ goTo(idx+1, true); });
+  nav.querySelector('.cn-close').addEventListener('click', clear);
+
+  // seçim aktifken ok tuşları / j-k ile gez
+  document.addEventListener('keydown', function(e){
+    if(!active || !hits.length) return;
+    var t = e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='ArrowDown' || e.key==='ArrowRight' || e.key==='j'){ e.preventDefault(); goTo(idx+1, true); }
+    else if(e.key==='ArrowUp' || e.key==='ArrowLeft' || e.key==='k'){ e.preventDefault(); goTo(idx-1, true); }
+    else if(e.key==='Escape'){ clear(); }
+  });
+
+  // kullanıcı elle kaydırınca sayaç güncel kalsın
+  var tick;
+  window.addEventListener('scroll', function(){
+    if(!active || !hits.length) return;
+    if(tick) return;
+    tick = requestAnimationFrame(function(){
+      tick = null;
+      var v = firstVisibleHit();
+      if(v !== idx){ idx = v; updateCount(); }
+    });
+  }, {passive:true});
+})();
+</script>
 
 </body>
 </html>
