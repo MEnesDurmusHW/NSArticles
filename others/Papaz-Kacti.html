@@ -181,6 +181,19 @@
   .charnav button svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .charnav .cn-close{color:var(--text-dim);margin-left:2px}
   .charnav .cn-close:hover{color:var(--text)}
+
+  /* ---- başa dön ---- */
+  .totop{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(150%);
+    z-index:121;display:inline-flex;align-items:center;gap:7px;
+    background:var(--surface);border:1px solid var(--border);border-radius:999px;
+    padding:9px 17px 9px 13px;box-shadow:0 8px 30px rgba(0,0,0,.18);
+    font-family:var(--script);font-size:.82rem;font-weight:500;color:var(--text);
+    cursor:pointer;opacity:0;pointer-events:none;
+    transition:transform .32s cubic-bezier(.2,.8,.2,1),opacity .32s ease;
+  }
+  .totop.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+  .totop svg{width:16px;height:16px;stroke:var(--accent);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
 </style>
 <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -1878,6 +1891,10 @@
   <button type="button" class="cn-close" aria-label="Seçimi kapat"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
 </div>
 
+<button type="button" class="totop" id="totop" aria-label="Başa dön">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Başa dön
+</button>
+
 <script>
 (function(){
   var wrap = document.querySelector('.wrap');
@@ -1919,8 +1936,24 @@
     nav.classList.remove('show');
   }
 
+  var toTop = document.getElementById('totop');
+  var toTopTimer;
+  function showToTop(){
+    clearTimeout(toTopTimer);
+    toTop.classList.add('show');
+    toTopTimer = setTimeout(function(){ toTop.classList.remove('show'); }, 3500);
+  }
+  function hideToTop(){ clearTimeout(toTopTimer); toTop.classList.remove('show'); }
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+    hideToTop();
+  });
+
+  function cancel(){ var was = !!active; clear(); if(was) showToTop(); }
+
   function select(key, chip){
-    if(active === key){ clear(); return; }
+    if(active === key){ cancel(); return; }
+    hideToTop();
     clear();
     active = key;
     chip.classList.add('sel'); chip.setAttribute('aria-pressed','true');
@@ -1973,7 +2006,7 @@
 
   nav.querySelector('.cn-prev').addEventListener('click', function(){ goTo(idx-1, true); });
   nav.querySelector('.cn-next').addEventListener('click', function(){ goTo(idx+1, true); });
-  nav.querySelector('.cn-close').addEventListener('click', clear);
+  nav.querySelector('.cn-close').addEventListener('click', cancel);
 
   // seçim aktifken ok tuşları / j-k ile gez
   document.addEventListener('keydown', function(e){
@@ -1982,7 +2015,7 @@
     if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
     if(e.key==='ArrowDown' || e.key==='ArrowRight' || e.key==='j'){ e.preventDefault(); goTo(idx+1, true); }
     else if(e.key==='ArrowUp' || e.key==='ArrowLeft' || e.key==='k'){ e.preventDefault(); goTo(idx-1, true); }
-    else if(e.key==='Escape'){ clear(); }
+    else if(e.key==='Escape'){ cancel(); }
   });
 
   // kullanıcı elle kaydırınca sayaç güncel kalsın
