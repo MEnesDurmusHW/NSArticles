@@ -295,6 +295,8 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 **LIONEL** — Peki, şimdi söyle, bu hareket tarzı bir rahip karısına yakışır mı?
 
+**PENELOPE** — Affedersin sevgilim, bazen rahip karısı olduğumu unutuyorum da kendimi insan sanıyorum.
+
 **LIONEL** — Haksızlık ediyorsun Penelope. Ben hiçbir zaman…
 &nbsp;&nbsp;`‹reji: Peşinden gelir›`
 
@@ -582,7 +584,7 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 **CLIVE** — Hayatım…
 
-**PENELOPE** — Canikom. *(Koşarak merdivenleri inip Clive'in kollarına atılır. Miss Skillon dehşetlere garkolmuş seyreder. Penelope hala Clive'in kollarında konuşur.)*
+**PENELOPE** — Canikom. *(Koşarak merdivenleri inip Clive'in kollarına atılır. Miss Skillon dehşetlere garkolmuş seyreder. Penelope hala Clive'in kollarında konuşur.)* Burada ne arıyorsun?
 
 **CLIVE** — Seni…
 
@@ -1499,6 +1501,8 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 **PİSKOPOS** — Demir çubukla üstüme saldırdı…
 
+**IDA** — *(Önce piskoposun elindeki konyağa bakar, sonra manalı.)* Size biraz soda getireyim. *(Soldaki kapıya gider.)*
+
 **PİSKOPOS** — *(Hiddetle.)* Soda moda istemem. Benim üstüme saldıran kimdir, onu söyle sen.
 
 **IDA** — *(Kapıda.)* Siz serap görmüşsünüz. *(Soldaki masaya giderek sıcak su şişelerini bırakır, ortaya gelir, piskoposun solunda durur.)*
@@ -2203,6 +2207,10 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 **HUMPHREY** — *(Bir müddet ev sahibine tuhaf tuhaf baktıktan sonra kanepenin arkasına geçer.)* Arzı şükran ederim hanımefendi…
 
+**PENELOPE** — Pardon, şapkanızla paltonuzu almayı unuttum. *(Önce şapkasını alır, sonra adamcağızı boğacak gibi ederek boynundan eşarbını çıkarır, eşyaları masanın üstüne koyar.)* Kuzum, hatunu nereye soktun İda? *(İda dolabı işaret eder.)* Aferin İda, bu akşam sahiden işe yaradın.
+
+**IDA** — İyi becerdim değil mi? *(Sırıtarak mutfağa gider.)*
+
 **PENELOPE** — Affedersiniz efendim, bugün ben… *(Yanına gelir.)*
 &nbsp;&nbsp;`‹reji: yanına gelir›`
 
@@ -2240,7 +2248,7 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 *(Piskopos soldaki kapıdan fırlar. Humphrey başı dönmüş gibi şakaklarını sıkarak hafifçe sallanır, sonra kendini toplar.)*
 
-**HUMPHREY** — Şey, müsait değildi de… tren saati, yani sabah gelseydim vaaz için vaktinde yetişemeyecektim… onun için *(pencereden atlayan Adam'a)* bu tarafa. *(Adam yoldan çıkar.)*
+**HUMPHREY** — Şey, müsait değildi de… tren saati, yani sabah gelseydim vaaz için vaktinde yetişemeyecektim… onun için *(pencereden atlayan Adam'a)* bu tarafa. *(Adam yoldan çıkar.)* Onun için akşam geldim…
 &nbsp;&nbsp;`‹reji: B.'den gelir, iner›`
 
 **PENELOPE** — *(Soldaki kapıya doğru bakarak)* Bunu tanıyamadım gitti.
@@ -2459,7 +2467,7 @@ LIONEL TOOP (rahip) · PENELOPE TOOP (karısı, eski aktris) · IDA (hizmetçi) 
 
 **HUMPHREY, CLIVE** — *(Beraber)* Benim adım Humphrey.
 
-**CLIVE** — *(Kendi kendine)* Şimdi oldu. Bir asker üniforması gördünüz mü?
+**CLIVE** — Hay Allah, siz sahici Humphrey'siniz. *(Kendi kendine)* Şimdi oldu. Bir asker üniforması gördünüz mü?
 
 **HUMPHREY** — Asker üniforması mı? *(Ortaya gelir, parmaklarıyla sayar gibi yapar.)* Kaç etti, azizim, biraz dinlenseniz nasıl olur? O kadar hoplamadan sonra kim bilir ne kadar yorgunsunuz. *(Soldan Penelope girer.)*
 &nbsp;&nbsp;`‹reji: B.'ye gider›`
