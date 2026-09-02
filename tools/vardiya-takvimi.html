@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vardiya Takvimi — NS Articles</title>
+<meta name="description" content="15 günlük vardiya döngüsü: Eylül ve Ekim 2026 takvimi.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Vardiya Takvimi">
+<meta property="og:description" content="15 günlük vardiya döngüsü: Eylül ve Ekim 2026 takvimi.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/tools/vardiya-takvimi.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F2EF; --panel:#FAFAF8; --text:#1A1A1A; --subtle:#8A8A80;
+    --border:#E0E0DB; --emph:#96622F;
+
+    --gunduz-bg:#FBEAE6; --gunduz-ink:#A93226; --gunduz-cizgi:#C0392B;
+    --gece-bg:#E7EDF8;   --gece-ink:#23538E;   --gece-cizgi:#2C5AA0;
+    --bos-bg:#F0F0ED;    --bos-ink:#8A8A80;    --bos-cizgi:#CFCFC8;
+
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'DM Sans','Helvetica Neue',sans-serif;
+  }
+
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+  }
+
+  .app{max-width:1080px;margin:0 auto;padding:34px clamp(14px,3vw,28px) 60px}
+
+  /* ---- üst çubuk ---- */
+  header.bar{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+    gap:16px 24px;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:26px;
+  }
+  header.bar h1{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4.5vw,2.3rem);letter-spacing:-.02em}
+  header.bar .alt{font-size:.86rem;color:var(--subtle);margin-top:5px}
+  header.bar .alt b{color:var(--emph);font-weight:600}
+
+  .arac{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .yazdir{
+    font-family:var(--sans);font-size:.82rem;font-weight:600;cursor:pointer;
+    background:var(--panel);color:var(--text);border:1px solid var(--border);
+    border-radius:999px;padding:9px 16px;display:inline-flex;align-items:center;gap:7px;line-height:1;
+  }
+  .yazdir:hover{background:#fff;border-color:var(--subtle)}
+  .yazdir svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---- açıklama ---- */
+  .lejant{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .lejant span{
+    font-size:.78rem;font-weight:600;letter-spacing:.04em;border-radius:6px;
+    padding:6px 12px;border-left:3px solid;
+  }
+  .lejant .gunduz,.rozet.gunduz{background:var(--gunduz-bg);color:var(--gunduz-ink);border-left-color:var(--gunduz-cizgi)}
+  .lejant .gece,.rozet.gece{background:var(--gece-bg);color:var(--gece-ink);border-left-color:var(--gece-cizgi)}
+  .lejant .bos,.rozet.bos{background:var(--bos-bg);color:var(--bos-ink);border-left-color:var(--bos-cizgi)}
+
+  /* ---- döngü şeridi ---- */
+  .dongu-serit{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:14px 16px;margin-bottom:28px;
+  }
+  .dongu-serit h2{
+    font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--subtle);margin-bottom:10px;
+  }
+  .serit{display:grid;grid-template-columns:repeat(15,1fr);gap:4px}
+  .serit i{
+    font-style:normal;font-size:.68rem;font-weight:600;text-align:center;
+    padding:7px 0;border-radius:5px;border-left:3px solid;
+  }
+  .serit i.gunduz{background:var(--gunduz-bg);color:var(--gunduz-ink);border-left-color:var(--gunduz-cizgi)}
+  .serit i.gece{background:var(--gece-bg);color:var(--gece-ink);border-left-color:var(--gece-cizgi)}
+  .serit i.bos{background:var(--bos-bg);color:var(--bos-ink);border-left-color:var(--bos-cizgi)}
+  @media(max-width:640px){ .serit{grid-template-columns:repeat(5,1fr)} }
+
+  /* ---- ay ---- */
+  .aylar{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px}
+  .ay{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 18px 20px}
+  .ay-bas{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 14px;margin-bottom:14px}
+  .ay-bas h2{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:-.01em}
+  .ay-sayim{display:flex;gap:6px;flex-wrap:wrap}
+  .rozet{font-size:.68rem;font-weight:600;border-radius:5px;padding:4px 8px;border-left:3px solid}
+
+  /* ---- takvim ---- */
+  table.takvim{width:100%;border-collapse:separate;border-spacing:4px;table-layout:fixed}
+  table.takvim th{
+    font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--subtle);padding:2px 0 6px;text-align:center;
+  }
+  table.takvim th.hs{color:#B4B4AC}
+  td.bos-hucre{background:transparent}
+  td.gun{
+    height:62px;vertical-align:top;border-radius:7px;padding:6px 7px;
+    border-left:3px solid;position:relative;
+  }
+  td.gun .gun-no{display:block;font-size:.95rem;font-weight:700;line-height:1.1}
+  td.gun .vardiya{display:block;font-size:.6rem;font-weight:700;letter-spacing:.08em;margin-top:5px}
+  td.gun .vardiya b{font-weight:700}
+  td.gun .vardiya .kisa{display:none}
+  td.gun .dongu{
+    position:absolute;right:6px;bottom:5px;font-size:.56rem;font-weight:600;
+    letter-spacing:.04em;opacity:.55;
+  }
+  td.gun.gunduz{background:var(--gunduz-bg);color:var(--gunduz-ink);border-left-color:var(--gunduz-cizgi)}
+  td.gun.gece{background:var(--gece-bg);color:var(--gece-ink);border-left-color:var(--gece-cizgi)}
+  td.gun.bos{background:var(--bos-bg);color:var(--bos-ink);border-left-color:var(--bos-cizgi)}
+  td.gun.bugun{box-shadow:0 0 0 2px var(--text)}
+  td.gun.bugun .gun-no::after{
+    content:"bugün";display:inline-block;font-size:.52rem;font-weight:700;letter-spacing:.06em;
+    text-transform:uppercase;margin-left:5px;vertical-align:middle;opacity:.75;
+  }
+
+  @media(max-width:420px){
+    table.takvim{border-spacing:3px}
+    td.gun{height:54px;padding:5px}
+    td.gun .vardiya{font-size:.55rem;letter-spacing:.02em}
+    td.gun .vardiya .uzun{display:none}
+    td.gun .vardiya .kisa{display:inline}
+    td.gun .dongu{display:none}
+    td.gun.bugun .gun-no::after{display:none}
+  }
+
+  /* ---- alt ---- */
+  .kural{
+    margin-top:30px;font-size:.8rem;color:var(--subtle);line-height:1.7;
+    border-top:1px solid var(--border);padding-top:18px;
+  }
+  .kural code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.94em;color:var(--text)}
+  .home-logo{
+    display:block;text-align:center;margin-top:34px;text-decoration:none;
+  }
+  .home-logo .logo-text{font-family:var(--serif);font-size:18px;color:var(--subtle);letter-spacing:-.3px;display:block}
+  .home-logo .logo-author{display:block;font-size:11px;color:var(--subtle);margin-top:4px;letter-spacing:.5px;opacity:.6}
+  .home-logo:hover .logo-text{color:var(--text)}
+
+  /* ---- baskı ---- */
+  @media print{
+    @page{size:A4 portrait;margin:12mm}
+    body{background:#fff}
+    .app{padding:0;max-width:none}
+    .yazdir,.home-logo{display:none}
+    .aylar{grid-template-columns:1fr 1fr;gap:14px}
+    .ay{break-inside:avoid;page-break-inside:avoid;border-radius:8px;padding:12px}
+    td.gun,.rozet,.lejant span,.serit i{
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+    td.gun{height:52px}
+  }
+</style>
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <header class="bar">
+    <div>
+      <h1>Vardiya Takvimi</h1>
+      <p class="alt">15 günlük döngü · Çapa: <b>13 Eylül 2026 = döngünün 1. günü</b></p>
+    </div>
+    <div class="arac">
+      <button type="button" class="yazdir" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Yazdır
+      </button>
+    </div>
+  </header>
+
+  <div class="lejant">
+    <span class="gunduz">GÜNDÜZ · döngünün 1-5. günü</span>
+    <span class="gece">GECE · 6, 8, 10, 12, 14</span>
+    <span class="bos">BOŞ · 7, 9, 11, 13, 15</span>
+  </div>
+
+  <section class="dongu-serit">
+    <h2>Döngü haritası</h2>
+    <div class="serit">
+      <i class="gunduz">D1</i><i class="gunduz">D2</i><i class="gunduz">D3</i><i class="gunduz">D4</i><i class="gunduz">D5</i><i class="gece">D6</i><i class="bos">D7</i><i class="gece">D8</i><i class="bos">D9</i><i class="gece">D10</i><i class="bos">D11</i><i class="gece">D12</i><i class="bos">D13</i><i class="gece">D14</i><i class="bos">D15</i>
+    </div>
+  </section>
+
+  <div class="aylar">
+  <section class="ay">
+    <header class="ay-bas">
+      <h2>Eylül 2026</h2>
+      <div class="ay-sayim">
+        <span class="rozet gunduz">10 gündüz</span>
+        <span class="rozet gece">10 gece</span>
+        <span class="rozet bos">10 boş</span>
+      </div>
+    </header>
+    <table class="takvim">
+      <thead>
+        <tr><th>Pzt</th><th>Sal</th><th>Çar</th><th>Per</th><th>Cum</th><th class="hs">Cmt</th><th class="hs">Paz</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="bos-hucre"></td>
+        <td class="gun gunduz" data-tarih="2026-09-01">
+          <span class="gun-no">1</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D4</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-02">
+          <span class="gun-no">2</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D5</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-03">
+          <span class="gun-no">3</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D6</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-04">
+          <span class="gun-no">4</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D7</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-05">
+          <span class="gun-no">5</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D8</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-06">
+          <span class="gun-no">6</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D9</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun gece" data-tarih="2026-09-07">
+          <span class="gun-no">7</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D10</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-08">
+          <span class="gun-no">8</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D11</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-09">
+          <span class="gun-no">9</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D12</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-10">
+          <span class="gun-no">10</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D13</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-11">
+          <span class="gun-no">11</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D14</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-12">
+          <span class="gun-no">12</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D15</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-13">
+          <span class="gun-no">13</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D1</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun gunduz" data-tarih="2026-09-14">
+          <span class="gun-no">14</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D2</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-15">
+          <span class="gun-no">15</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D3</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-16">
+          <span class="gun-no">16</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D4</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-17">
+          <span class="gun-no">17</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D5</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-18">
+          <span class="gun-no">18</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D6</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-19">
+          <span class="gun-no">19</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D7</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-20">
+          <span class="gun-no">20</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D8</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun bos" data-tarih="2026-09-21">
+          <span class="gun-no">21</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D9</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-22">
+          <span class="gun-no">22</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D10</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-23">
+          <span class="gun-no">23</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D11</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-24">
+          <span class="gun-no">24</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D12</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-25">
+          <span class="gun-no">25</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D13</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-09-26">
+          <span class="gun-no">26</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D14</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-09-27">
+          <span class="gun-no">27</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D15</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun gunduz" data-tarih="2026-09-28">
+          <span class="gun-no">28</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D1</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-29">
+          <span class="gun-no">29</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D2</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-09-30">
+          <span class="gun-no">30</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D3</span>
+        </td>
+        <td class="bos-hucre"></td>
+        <td class="bos-hucre"></td>
+        <td class="bos-hucre"></td>
+        <td class="bos-hucre"></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ay">
+    <header class="ay-bas">
+      <h2>Ekim 2026</h2>
+      <div class="ay-sayim">
+        <span class="rozet gunduz">11 gündüz</span>
+        <span class="rozet gece">10 gece</span>
+        <span class="rozet bos">10 boş</span>
+      </div>
+    </header>
+    <table class="takvim">
+      <thead>
+        <tr><th>Pzt</th><th>Sal</th><th>Çar</th><th>Per</th><th>Cum</th><th class="hs">Cmt</th><th class="hs">Paz</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="bos-hucre"></td>
+        <td class="bos-hucre"></td>
+        <td class="bos-hucre"></td>
+        <td class="gun gunduz" data-tarih="2026-10-01">
+          <span class="gun-no">1</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D4</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-02">
+          <span class="gun-no">2</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D5</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-03">
+          <span class="gun-no">3</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D6</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-04">
+          <span class="gun-no">4</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D7</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun gece" data-tarih="2026-10-05">
+          <span class="gun-no">5</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D8</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-06">
+          <span class="gun-no">6</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D9</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-07">
+          <span class="gun-no">7</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D10</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-08">
+          <span class="gun-no">8</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D11</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-09">
+          <span class="gun-no">9</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D12</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-10">
+          <span class="gun-no">10</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D13</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-11">
+          <span class="gun-no">11</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D14</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun bos" data-tarih="2026-10-12">
+          <span class="gun-no">12</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D15</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-13">
+          <span class="gun-no">13</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D1</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-14">
+          <span class="gun-no">14</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D2</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-15">
+          <span class="gun-no">15</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D3</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-16">
+          <span class="gun-no">16</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D4</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-17">
+          <span class="gun-no">17</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D5</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-18">
+          <span class="gun-no">18</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D6</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun bos" data-tarih="2026-10-19">
+          <span class="gun-no">19</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D7</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-20">
+          <span class="gun-no">20</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D8</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-21">
+          <span class="gun-no">21</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D9</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-22">
+          <span class="gun-no">22</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D10</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-23">
+          <span class="gun-no">23</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D11</span>
+        </td>
+        <td class="gun gece" data-tarih="2026-10-24">
+          <span class="gun-no">24</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D12</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-25">
+          <span class="gun-no">25</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D13</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="gun gece" data-tarih="2026-10-26">
+          <span class="gun-no">26</span>
+          <span class="vardiya"><b class="uzun">GECE</b><b class="kisa">GECE</b></span>
+          <span class="dongu">D14</span>
+        </td>
+        <td class="gun bos" data-tarih="2026-10-27">
+          <span class="gun-no">27</span>
+          <span class="vardiya"><b class="uzun">BOŞ</b><b class="kisa">BOŞ</b></span>
+          <span class="dongu">D15</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-28">
+          <span class="gun-no">28</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D1</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-29">
+          <span class="gun-no">29</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D2</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-30">
+          <span class="gun-no">30</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D3</span>
+        </td>
+        <td class="gun gunduz" data-tarih="2026-10-31">
+          <span class="gun-no">31</span>
+          <span class="vardiya"><b class="uzun">GÜNDÜZ</b><b class="kisa">GÜN</b></span>
+          <span class="dongu">D4</span>
+        </td>
+        <td class="bos-hucre"></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+  </div>
+
+  <p class="kural">
+    Hesap: <code>n = (tarih − 2026-09-13) mod 15</code> (0 tabanlı). <code>n 0-4</code> → gündüz, <code>n 5-14</code> ve tek → gece, <code>n 5-14</code> ve çift → boş.
+    Hücrelerdeki <code>D1…D15</code> o günün döngü sırasıdır. Eylül ayı çapadan önce başladığı için ayın ilk günü döngünün ortasına denk gelir (1 Eylül = D4).
+  </p>
+
+  <a href="../index.html" class="home-logo">
+    <span class="logo-text">NS Articles</span>
+    <span class="logo-author">by M. Enes Durmuş</span>
+  </a>
+
+</div>
+
+<script>
+  // bugünü işaretle (takvim aralığındaysa)
+  (function(){
+    var t = new Date();
+    var iso = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+    var h = document.querySelector('td.gun[data-tarih="' + iso + '"]');
+    if (h) h.classList.add('bugun');
+  })();
+</script>
+
+</body>
+</html>
