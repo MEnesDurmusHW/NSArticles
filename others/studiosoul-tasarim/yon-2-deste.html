@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yön 2 · Deste — Vedans tasarım yönleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ortak.css">
+<style>
+/* ============================================================
+   YÖN 2 — DESTE
+   Her şey tutulabilir bir kart. Oyun hissi KART OYUNUNDAN gelir,
+   çizgi filmden değil: sert gölge, mürekkep çerçeve, köşe indeksi,
+   iç çerçeve, arkada duran deste. Yetişkin bir masa oyunu kutusu.
+   ============================================================ */
+
+.acik {
+  --zemin:#FBF4E9; --yuzey:#FFFFFF; --cukur:#F2E8DA;
+  --cizgi:#2A1512; --cizgi-ince:rgba(42,21,18,.18);
+  --metin:#2A1512; --metin2:#6F5D54; --soluk:#9C8B82;
+  --bordo:#7A1E2E; --bordo-blok:#8E2743; --bordo-blok2:#551224;
+  --kor:#B4551C; --vurgu:#FC8E24; --vurgu2:#7A1E2E;
+  --yesil:#1F6B45; --kirmizi:#A32020;
+  --yumusak1:#FDE9DA; --yumusak2:#F0E4F7; --yumusak3:#DCEEF6; --yumusak4:#FCE3EC;
+  --dugme-zemin:#2A1512; --dugme-yazi:#FFFCF6;
+  --menu-zemin:#FFFFFF; --menu-secili:#2A1512; --menu-pasif:#A2948B;
+  --golge:#2A1512; --krem:#FFFCF6; --altin:#D4A017;
+  --k1:#E8705C; --k2:#B98BDD; --k3:#D9682F; --k4:#D4416E; --k5:#3E8FB4; --k6:#57A98C;
+  --menu-y:58px;
+}
+.koyu {
+  --zemin:#16120F; --yuzey:#221B16; --cukur:#1B1511;
+  --cizgi:#F0E6D8; --cizgi-ince:rgba(240,230,216,.2);
+  --metin:#F3EADC; --metin2:#A99D8F; --soluk:#6E6357;
+  --bordo:#E2788B; --bordo-blok:#8E2743; --bordo-blok2:#451020;
+  --kor:#F0A05A; --vurgu:#FC8E24; --vurgu2:#E2788B;
+  --yesil:#4FB183; --kirmizi:#E06A6A;
+  --yumusak1:#33231C; --yumusak2:#2B2336; --yumusak3:#1E2C34; --yumusak4:#331F28;
+  --dugme-zemin:#F3EADC; --dugme-yazi:#16120F;
+  --menu-zemin:#221B16; --menu-secili:#FC8E24; --menu-pasif:#6E6357;
+  --golge:#070504; --krem:#FFFCF6; --altin:#F5C63C;
+  --k1:#E8705C; --k2:#B98BDD; --k3:#F0954E; --k4:#EE7FAC; --k5:#6BB6DB; --k6:#57C4A2;
+  --menu-y:58px;
+}
+
+.deste .ekran { font-family:"Manrope",sans-serif; }
+.deste .ekran-ic { padding-left:16px; padding-right:16px; }
+
+/* ---------- kart anatomisi ---------- */
+.kart {
+  background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:18px;
+  box-shadow:4px 5px 0 var(--golge); position:relative;
+}
+.kart-ic-cerceve {
+  position:absolute; inset:5px; border-radius:13px;
+  border:1px solid var(--cizgi-ince); pointer-events:none;
+}
+.d-pip {
+  position:absolute; z-index:3;
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:11px;
+  letter-spacing:.16em; color:var(--soluk);
+}
+.d-pip.sol { top:10px; left:14px; }
+.d-pip.sag { bottom:10px; right:14px; transform:rotate(180deg); }
+
+.d-bolum { display:flex; align-items:baseline; justify-content:space-between; margin:30px 2px 14px; }
+.d-bolum h3 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:20px; letter-spacing:-.025em; margin:0; color:var(--metin); }
+.d-bolum span { font-size:11.5px; font-weight:700; color:var(--soluk); }
+
+.d-sayfa-basi { padding:16px 2px 4px; }
+.d-sayfa-basi h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:31px; letter-spacing:-.035em; margin:0; color:var(--metin); }
+.d-sayfa-basi p { margin:9px 0 0; font-size:13px; line-height:1.55; color:var(--metin2); max-width:280px; }
+
+/* kart düğmesi */
+.d-btn {
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  width:100%; min-height:48px; cursor:pointer; border-radius:14px;
+  background:var(--dugme-zemin); color:var(--dugme-yazi);
+  border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge);
+  font-family:"Manrope",sans-serif; font-size:14px; font-weight:800; letter-spacing:.02em;
+}
+.d-btn.ikincil { background:var(--yuzey); color:var(--metin); }
+.d-btn.sessiz { background:transparent; border:0; box-shadow:none; color:var(--metin2); text-decoration:underline; text-underline-offset:4px; }
+
+/* slim kart satırı */
+.d-satir {
+  display:flex; align-items:center; gap:14px; min-height:64px; padding:11px 15px;
+  background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:14px;
+  box-shadow:3px 4px 0 var(--golge); margin-bottom:11px; position:relative;
+}
+.d-satir .ad { flex:1; min-width:0; }
+.d-satir .ad b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:15.5px; letter-spacing:-.015em; color:var(--metin); }
+.d-satir .ad em { display:block; font-style:normal; font-size:11.5px; color:var(--metin2); margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.d-satir .ok { flex:none; color:var(--soluk); font-size:16px; }
+
+/* ---------- ÜST ÇUBUK ---------- */
+.d-ust {
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  margin:0 -16px; padding:0 18px 0 16px;
+  background:var(--yuzey); border-bottom:1.6px solid var(--cizgi);
+}
+.d-marka {
+  display:inline-flex; align-items:center; height:38px; padding:0 13px; border-radius:10px;
+  background:var(--cizgi); color:var(--zemin);
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.02em;
+}
+.koyu .d-marka { background:var(--vurgu); color:#231409; }
+.d-ust-ikon { display:flex; align-items:center; gap:2px; }
+.d-ikon-btn { width:40px; height:40px; display:grid; place-items:center; position:relative; background:none; border:0; color:var(--metin); cursor:pointer; }
+.d-ikon-btn svg { width:21px; height:21px; }
+.d-ikon-btn.kapali { color:var(--soluk); }
+.d-rozet {
+  position:absolute; top:4px; right:4px; min-width:17px; height:17px; padding:0 4px; border-radius:99px;
+  background:var(--bordo-blok); color:var(--krem); border:1.2px solid var(--cizgi);
+  display:grid; place-items:center; font-size:9px; font-weight:800; line-height:1;
+}
+
+/* dalga */
+.d-marka-dalga { display:block; width:calc(100% + 32px); margin:0 -16px; height:76px; color:var(--vurgu); }
+
+/* hero metni */
+.d-hero-metin { padding:22px 2px 4px; }
+.d-hero-metin h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:38px; line-height:.94; letter-spacing:-.04em; margin:0; color:var(--bordo); }
+
+/* ---------- sıradaki ders kartı ---------- */
+.d-ders { position:relative; overflow:hidden; min-height:178px; margin-top:18px; padding:18px 18px 20px; }
+.d-ders .goz { font-size:10px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--kor); }
+.d-ders h2 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:27px; line-height:1.02; letter-spacing:-.035em; margin:12px 0 0; color:var(--metin); max-width:210px; }
+.d-ders-meta { margin:12px 0 0; display:flex; align-items:center; gap:9px; font-size:12.5px; font-weight:700; color:var(--metin2); }
+.d-ders-meta .ayrac { width:3px; height:3px; border-radius:50%; background:var(--soluk); }
+.d-ders-ok {
+  position:absolute; right:16px; bottom:16px; width:50px; height:50px; border-radius:50%;
+  background:var(--vurgu); color:#231409; border:1.6px solid var(--cizgi);
+  box-shadow:2.5px 3px 0 var(--golge); display:grid; place-items:center;
+}
+.d-ders-ok svg { width:19px; height:19px; }
+
+/* ikili kart */
+.d-ikili { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:16px; }
+.d-ikili > * { min-height:196px; padding:15px 14px 16px; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.d-ikili .goz { font-size:9.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--kor); }
+.d-ikili h3 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:19px; line-height:1.04; letter-spacing:-.03em; margin:10px 0 0; color:var(--metin); }
+.d-ikili p { margin:7px 0 0; font-size:11.5px; line-height:1.4; color:var(--metin2); }
+.d-ikili .kuyruk { margin-top:auto; padding-top:10px; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--metin); }
+@media (max-width:340px) { .d-ikili { grid-template-columns:1fr; } }
+
+/* müzik şeridi */
+.d-serit { display:flex; gap:13px; overflow-x:auto; margin:0 -16px; padding:4px 16px 6px; scrollbar-width:none; }
+.d-serit::-webkit-scrollbar { display:none; }
+.d-serit-kart { flex:none; width:152px; }
+.d-serit-kapak {
+  width:152px; height:108px; border-radius:14px; position:relative; overflow:hidden;
+  border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge);
+  background:var(--kapak); display:grid; place-items:center;
+}
+.d-serit-kapak svg { width:34px; height:34px; color:var(--cizgi); opacity:.75; }
+.koyu .d-serit-kapak svg { color:#1A120D; }
+.d-serit-kart b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:13.5px; letter-spacing:-.02em; color:var(--metin); margin-top:10px; }
+.d-serit-kart em { display:block; font-style:normal; font-size:11px; color:var(--metin2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* topluluk kartı */
+.d-afis {
+  position:relative; overflow:hidden; height:146px; margin-top:26px; border-radius:18px;
+  background:var(--bordo-blok); color:var(--krem);
+  border:1.6px solid var(--cizgi); box-shadow:4px 5px 0 var(--golge);
+  display:flex; flex-direction:column; justify-content:center; padding:0 18px;
+}
+.koyu .d-afis { border-color:#F0E6D8; }
+.d-afis h3 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:23px; line-height:1.04; letter-spacing:-.03em; margin:0; position:relative; z-index:2; }
+.d-afis p { margin:8px 0 0; font-size:12.5px; color:rgba(255,252,246,.8); position:relative; z-index:2; }
+.d-afis svg { position:absolute; right:-6px; bottom:0; height:132px; width:162px; z-index:1; }
+.d-afis .d-pip { color:rgba(255,252,246,.45); }
+
+/* ilerleme kartı */
+.d-ilerleme { margin-top:16px; padding:16px 16px 18px; display:flex; align-items:center; gap:16px; }
+.d-halka { position:relative; width:72px; height:72px; flex:none; }
+.d-halka svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.d-halka-ray { fill:none; stroke:var(--cukur); stroke-width:7; }
+.d-halka-dolu { fill:none; stroke:var(--vurgu); stroke-width:7; stroke-linecap:round; }
+.d-halka b { position:absolute; inset:0; display:grid; place-content:center; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:17px; color:var(--metin); }
+.d-ilerleme-yazi { flex:1; min-width:0; }
+.d-ilerleme-yazi b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:16px; color:var(--metin); }
+.d-cubuk { height:9px; border-radius:99px; background:var(--cukur); border:1.2px solid var(--cizgi-ince); margin:9px 0 7px; overflow:hidden; }
+.d-cubuk i { display:block; height:100%; background:var(--bordo-blok); }
+.koyu .d-cubuk i { background:var(--vurgu); }
+.d-ilerleme-yazi em { font-style:normal; font-size:11.5px; font-weight:700; color:var(--metin2); }
+.d-mini-rozet { display:flex; flex:none; }
+.d-mini {
+  width:34px; height:34px; border-radius:50%; margin-left:-9px;
+  border:1.5px solid var(--cizgi); background:var(--rz); color:#241207;
+  display:grid; place-items:center; box-shadow:1.5px 2px 0 var(--golge);
+}
+.d-mini:first-child { margin-left:0; }
+.d-mini svg { width:16px; height:16px; }
+
+/* ---------- hero destesi (quiz) ---------- */
+.d-hero-yuva { position:relative; margin:18px 0 0; padding-bottom:6px; }
+.d-hero-yuva::before, .d-hero-yuva::after { content:""; position:absolute; inset:0; border-radius:18px; border:1.6px solid var(--cizgi); background:var(--cukur); }
+.d-hero-yuva::before { transform:rotate(-3.2deg) translateY(4px); }
+.d-hero-yuva::after  { transform:rotate(2deg) translateY(2px); }
+.d-hero { position:relative; z-index:2; min-height:200px; padding:18px 18px 20px; overflow:hidden; background:linear-gradient(160deg,#FEF5EC 0%, #FCEADA 100%); }
+.koyu .d-hero { background:linear-gradient(160deg,#2C2016 0%, #3A2419 100%); }
+.d-cip { display:inline-flex; align-items:center; gap:7px; padding:6px 12px 6px 9px; border-radius:99px; background:var(--cizgi); color:var(--zemin); font-size:10.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+.koyu .d-cip { background:var(--vurgu); color:#231409; }
+.d-hero h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:39px; line-height:.94; letter-spacing:-.035em; margin:16px 0 0; color:var(--metin); max-width:200px; position:relative; z-index:2; }
+.d-hero h1 .alt { display:block; color:var(--bordo); }
+.koyu .d-hero h1 { color:#F7EFE4; }
+.d-hero p { margin:12px 0 0; font-size:13px; line-height:1.55; color:var(--metin2); max-width:190px; position:relative; z-index:2; }
+.koyu .d-hero p { color:#C0B3A4; }
+.d-kupa { position:absolute; right:6px; bottom:0; width:132px; height:150px; z-index:1; }
+.d-dalga { position:absolute; left:0; right:0; bottom:-2px; height:34px; z-index:0; color:var(--vurgu); opacity:.9; }
+
+/* meydan oku */
+.d-band {
+  display:block; text-decoration:none; position:relative; overflow:hidden; height:158px;
+  margin:26px 0 0; border-radius:19.2px;
+  background:linear-gradient(140deg, var(--bordo-blok) 0%, var(--bordo-blok2) 100%);
+  border:1.6px solid var(--cizgi); box-shadow:4px 5px 0 var(--golge); color:var(--krem);
+}
+.koyu .d-band { border-color:#F0E6D8; }
+.d-band::after { content:""; position:absolute; inset:0; background:radial-gradient(150px 110px at 76% 18%, rgba(255,255,255,.12), transparent 68%); }
+.d-band-ic { position:relative; z-index:3; padding:20px 18px; max-width:200px; }
+.d-band h2 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:26px; line-height:1; letter-spacing:-.03em; margin:0; }
+.d-band-durum { display:flex; align-items:center; gap:7px; margin:8px 0 14px; font-size:12.5px; font-weight:800; color:#F5C63C; }
+.d-band-durum i { width:7px; height:7px; border-radius:50%; background:#F5C63C; flex:none; animation:d-nabiz 2.4s infinite; }
+@keyframes d-nabiz { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.45);opacity:.55;} }
+.d-band-btn { display:inline-flex; align-items:center; gap:8px; min-height:38px; padding:0 16px; border-radius:99px; background:var(--krem); color:#7A1E2E; border:1.6px solid #3A0C16; box-shadow:2.5px 3px 0 #3A0C16; font-size:12.5px; font-weight:800; }
+.d-figur { position:absolute; right:-4px; bottom:-6px; width:176px; height:160px; z-index:2; }
+.d-band .d-pip { color:rgba(255,252,246,.5); }
+
+/* kategori ızgarası */
+.d-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 13px; }
+.d-kat {
+  position:relative; overflow:hidden; min-height:124px; padding:13px 12px 12px;
+  border:1.6px solid var(--cizgi); border-radius:16px; box-shadow:3px 4px 0 var(--golge);
+  background:var(--kat-zemin); display:flex; flex-direction:column;
+}
+.d-kat-no { position:absolute; top:9px; right:11px; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:11px; color:var(--kat-renk); opacity:.75; letter-spacing:.06em; }
+.d-kat-ikon { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:var(--kat-renk); color:#FFFCF6; border:1.4px solid var(--cizgi); margin-bottom:auto; }
+.koyu .d-kat-ikon { color:#15100D; }
+.d-kat-ikon svg { width:19px; height:19px; }
+.d-kat b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:14px; line-height:1.15; letter-spacing:-.015em; color:var(--metin); margin-top:11px; }
+.d-kat em { display:block; font-style:normal; font-size:11px; line-height:1.3; color:var(--metin2); margin-top:4px; }
+.d-kat.pasif { background:var(--cukur); box-shadow:none; border-style:dashed; }
+.d-kat.pasif .d-kat-ikon { background:transparent; color:var(--soluk); border-color:var(--soluk); }
+.d-kat.pasif b, .d-kat.pasif em, .d-kat.pasif .d-kat-no { color:var(--soluk); }
+.d-yakinda { display:inline-block; margin-top:7px; padding:3px 8px; border-radius:6px; border:1px solid var(--soluk); color:var(--soluk); font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+
+/* alt menü */
+.deste .tab-bar { border-top:1.6px solid var(--cizgi); }
+.deste .tab svg { stroke-width:1.8; }
+.deste .tab.secili .ik-dolgu { fill:currentColor; }
+.deste .tab .tab-im { position:absolute; bottom:8px; width:5px; height:5px; border-radius:50%; background:transparent; transition:background-color .2s; }
+.deste .tab.secili .tab-im { background:var(--vurgu); }
+
+/* ============================================================
+   DÜELLO — CANLI
+   ============================================================ */
+.deste .duello-ic { padding-top:53px; }
+.dd-ust { display:flex; align-items:center; justify-content:space-between; margin:6px 0 16px; }
+.dd-cik { display:inline-flex; align-items:center; gap:6px; min-height:34px; padding:0 12px; border-radius:99px; border:1.5px solid var(--cizgi-ince); background:transparent; font-family:"Manrope",sans-serif; font-size:11.5px; font-weight:800; color:var(--metin2); cursor:pointer; }
+.dd-canli { display:inline-flex; align-items:center; gap:7px; padding:6px 12px; border-radius:99px; background:var(--yesil); color:#FFFCF6; font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.koyu .dd-canli { color:#0C1A13; }
+.dd-canli i { width:6px; height:6px; border-radius:50%; background:currentColor; animation:d-yanip 1.6s infinite; }
+@keyframes d-yanip { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+.dd-skor { display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:stretch; }
+.dd-oyuncu { background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:16px; box-shadow:3px 4px 0 var(--golge); padding:12px 12px 11px; text-align:center; position:relative; }
+.dd-oyuncu span { display:block; font-size:11px; font-weight:800; color:var(--metin2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dd-oyuncu b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:40px; line-height:1; letter-spacing:-.04em; color:var(--metin); margin-top:3px; font-variant-numeric:tabular-nums; }
+.dd-oyuncu em { display:block; font-style:normal; font-size:9px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--soluk); margin-top:2px; }
+.dd-oyuncu.ben { border-color:var(--vurgu); }
+.dd-oyuncu.ben b { color:var(--kor); }
+.dd-vs { align-self:center; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:13px; color:var(--soluk); letter-spacing:.06em; display:grid; place-items:center; gap:2px; }
+.dd-vs small { display:block; font-size:16px; color:var(--metin); font-variant-numeric:tabular-nums; }
+
+.dd-sure { margin:16px 0 0; padding:12px 14px; background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:14px; box-shadow:3px 4px 0 var(--golge); display:flex; align-items:center; gap:12px; }
+.dd-sure-ray { flex:1; height:8px; border-radius:99px; background:var(--cukur); overflow:hidden; border:1px solid var(--cizgi-ince); }
+.dd-sure-ray .sure-dolu { display:block; height:100%; background:var(--bordo-blok); border-radius:99px; }
+.dd-sure-yazi { display:inline-flex; align-items:center; gap:6px; flex:none; font-size:12.5px; font-weight:800; color:var(--metin2); font-variant-numeric:tabular-nums; }
+.dd-sure.sure-uyari .sure-dolu { background:var(--vurgu); }
+.dd-sure.sure-uyari .dd-sure-yazi { color:var(--kor); }
+.dd-sure.sure-kritik .sure-dolu { background:var(--kirmizi); }
+.dd-sure.sure-kritik .dd-sure-yazi { color:var(--kirmizi); }
+
+.dd-soru { margin:16px 0 0; padding:20px 18px; background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:18px; box-shadow:4px 5px 0 var(--golge); position:relative; }
+.dd-soru h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:23px; line-height:1.2; letter-spacing:-.025em; margin:0; color:var(--metin); }
+
+.dd-siklar { list-style:none; margin:16px 0 0; padding:0; display:grid; gap:10px; }
+.dd-siklar li {
+  display:flex; align-items:center; gap:12px; min-height:56px; padding:10px 14px;
+  background:var(--yuzey); border:1.6px solid var(--cizgi); border-radius:14px;
+  box-shadow:3px 4px 0 var(--golge); font-size:15px; font-weight:600; color:var(--metin); line-height:1.25;
+  transition:transform .18s, box-shadow .18s;
+}
+.dd-harf { width:26px; height:26px; flex:none; border-radius:8px; display:grid; place-items:center; border:1.4px solid var(--cizgi-ince); background:var(--cukur); font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:12px; color:var(--metin2); }
+.dd-siklar li.secili { background:var(--metin); color:var(--zemin); transform:translate(-2px,-2px) rotate(-.8deg); box-shadow:6px 7px 0 var(--golge); }
+.dd-siklar li.secili .dd-harf { background:transparent; border-color:currentColor; color:inherit; }
+.dd-alindi { margin-left:auto; flex:none; display:inline-flex; align-items:center; gap:5px; padding:5px 9px; border-radius:99px; background:#2FA872; color:#08170F; font-size:9.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+
+.dd-rakip { display:flex; align-items:center; gap:9px; margin:18px 2px 0; font-size:12.5px; font-weight:700; color:var(--metin2); }
+.dd-rakip i { width:8px; height:8px; border-radius:50%; background:var(--soluk); flex:none; transition:background-color .3s; }
+.dd-rakip.cevapladi { color:var(--yesil); }
+.dd-rakip.cevapladi i { background:var(--yesil); }
+
+/* ============================================================
+   DÜELLO — SONUÇ
+   ============================================================ */
+.ds-kazanan {
+  position:relative; overflow:hidden; margin:14px 0 0; padding:26px 18px 24px; text-align:center;
+  border-radius:20px; border:2px solid var(--altin); background:var(--yuzey);
+  box-shadow:4px 5px 0 var(--golge);
+}
+.ds-kazanan::before {
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(160px 110px at 50% 0, rgba(212,160,23,.18), transparent 70%);
+}
+.ds-tik { width:64px; height:64px; margin:0 auto 16px; color:var(--altin); position:relative; z-index:2; }
+.ds-tik path.iz { stroke-dasharray:60; stroke-dashoffset:60; animation:ds-ciz .7s .15s ease-out forwards; }
+@keyframes ds-ciz { to { stroke-dashoffset:0; } }
+.ds-kazanan h1 { position:relative; z-index:2; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:38px; line-height:1; letter-spacing:-.04em; margin:0; color:var(--altin); }
+.ds-kazanan p { position:relative; z-index:2; margin:10px 0 0; font-size:12px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--metin2); }
+
+.ds-skor { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+.ds-skor > div { padding:15px 14px 16px; text-align:center; }
+.ds-skor span { display:block; font-size:11px; font-weight:800; color:var(--metin2); }
+.ds-skor b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:40px; line-height:1; letter-spacing:-.04em; color:var(--metin); margin-top:5px; font-variant-numeric:tabular-nums; }
+.ds-skor em { display:block; font-style:normal; font-size:9px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--soluk); margin-top:3px; }
+.ds-skor i { display:block; font-style:normal; font-size:12.5px; font-weight:700; color:var(--kor); margin-top:9px; }
+.ds-skor .kazanan { border-color:var(--altin); }
+
+.ds-puan {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-top:13px; padding:13px 16px; border-radius:14px;
+  background:var(--yumusak1); border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge);
+}
+.ds-puan span { font-size:12.5px; font-weight:700; color:var(--metin2); }
+.ds-puan b { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:20px; letter-spacing:-.03em; color:var(--kor); }
+
+.ds-sorular { list-style:none; margin:0; padding:0; }
+.ds-sorular li { padding:13px 15px; margin-bottom:10px; border-radius:14px; background:var(--yuzey); border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge); }
+.ds-sorular .q { margin:0; font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:14px; color:var(--metin); line-height:1.25; }
+.ds-sorular .d { margin:6px 0 0; font-size:11.5px; color:var(--metin2); }
+.ds-sorular .r { margin:9px 0 0; display:flex; gap:8px; flex-wrap:wrap; }
+.ds-etiket { padding:3px 8px; border-radius:99px; font-size:10px; font-weight:800; }
+.ds-etiket.ok { background:rgba(47,168,114,.18); color:#2FA872; }
+.ds-etiket.no { background:rgba(224,106,106,.18); color:var(--kirmizi); }
+.ds-dugmeler { margin-top:18px; display:grid; gap:11px; }
+
+/* ============================================================
+   SIRALAMA
+   ============================================================ */
+.dl-sekme { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0 0; }
+.dl-sekme button {
+  min-height:44px; border-radius:13px; cursor:pointer;
+  background:var(--yuzey); border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge);
+  font-family:"Bricolage Grotesque",sans-serif; font-size:14px; font-weight:700; color:var(--metin2);
+}
+.dl-sekme button[aria-pressed="true"] { background:var(--metin); color:var(--zemin); }
+.dl-aciklama { margin:12px 2px 0; font-size:12px; line-height:1.5; color:var(--metin2); }
+
+.dl-podyum { display:grid; grid-template-columns:1fr 1fr 1fr; align-items:end; gap:9px; margin-top:22px; }
+.dl-yer { text-align:center; }
+.dl-avatar {
+  width:52px; height:52px; margin:0 auto 9px; border-radius:50%; position:relative;
+  border:2px solid var(--madalya); background:var(--yuzey); box-shadow:2.5px 3px 0 var(--golge);
+  display:grid; place-items:center;
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:19px; color:var(--metin);
+}
+.dl-yer.bir .dl-avatar { width:60px; height:60px; font-size:22px; }
+.dl-kupa { position:absolute; top:-15px; left:50%; transform:translateX(-50%); color:var(--madalya); }
+.dl-kupa svg { width:18px; height:18px; }
+.dl-ad { font-size:12px; font-weight:700; color:var(--metin); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dl-puan { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:12.5px; color:var(--kor); margin-top:2px; }
+.dl-basamak {
+  margin-top:10px; border-radius:12px 12px 0 0;
+  border:1.6px solid var(--cizgi); border-bottom:0; background:var(--madalya);
+  display:grid; place-items:center; color:#241207;
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:22px;
+}
+.dl-yer.iki .dl-basamak { height:56px; }
+.dl-yer.bir .dl-basamak { height:84px; }
+.dl-yer.uc  .dl-basamak { height:40px; }
+
+.dl-satir { display:flex; align-items:center; gap:14px; min-height:56px; padding:9px 15px; margin-bottom:10px; border-radius:13px; background:var(--yuzey); border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge); font-size:14.5px; color:var(--metin); }
+.dl-sira { width:26px; height:26px; flex:none; border-radius:8px; display:grid; place-items:center; background:var(--cukur); font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:12px; color:var(--metin2); }
+.dl-satir .ad { flex:1; font-weight:600; min-width:0; }
+.dl-satir .ad i { font-style:normal; color:var(--kor); font-weight:800; }
+.dl-satir .p { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:15px; color:var(--metin); font-variant-numeric:tabular-nums; }
+.dl-satir.ben { border-color:var(--vurgu); background:var(--yumusak1); }
+
+/* ============================================================
+   ETKİNLİK
+   ============================================================ */
+.de-kart { position:relative; overflow:hidden; margin-top:16px; }
+.de-kapak { height:140px; position:relative; background:var(--kapak); border-bottom:1.6px solid var(--cizgi); }
+.de-kapak svg { position:absolute; inset:0; width:100%; height:100%; color:var(--cizgi); opacity:.55; }
+.koyu .de-kapak svg { color:#1A120D; opacity:.5; }
+.de-rozet {
+  position:absolute; left:14px; top:13px; z-index:2; padding:5px 11px; border-radius:8px;
+  background:var(--yuzey); color:var(--metin); border:1.5px solid var(--cizgi); box-shadow:2px 2.5px 0 var(--golge);
+  font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+}
+.de-ic { padding:16px 16px 18px; }
+.de-tarih { font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--kor); }
+.de-ic h3 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:23px; line-height:1.04; letter-spacing:-.035em; margin:9px 0 0; color:var(--metin); }
+.de-meta { margin:10px 0 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--metin2); }
+.de-meta .ayrac { width:3px; height:3px; border-radius:50%; background:var(--soluk); }
+.de-katilim { display:flex; align-items:center; gap:11px; margin:15px 0 15px; }
+.de-yuzler { display:flex; }
+.de-yuz { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--cizgi); background:var(--cukur); margin-left:-9px; display:grid; place-items:center; font-size:10.5px; font-weight:800; color:var(--metin2); }
+.de-yuz:first-child { margin-left:0; }
+.de-yuz.arti { background:var(--metin); color:var(--zemin); }
+.de-sayi { font-size:12.5px; font-weight:700; color:var(--metin2); }
+.de-bos { font-size:12.5px; font-weight:800; color:var(--kor); }
+
+/* ============================================================
+   MÜZİK
+   ============================================================ */
+.dm-cipler { display:flex; gap:9px; overflow-x:auto; margin:14px -16px 0; padding:2px 16px 8px; scrollbar-width:none; }
+.dm-cipler::-webkit-scrollbar { display:none; }
+.dm-cip {
+  flex:none; min-height:36px; padding:0 15px; border-radius:99px; cursor:pointer;
+  background:var(--yuzey); border:1.5px solid var(--cizgi); box-shadow:2px 2.5px 0 var(--golge);
+  font-family:"Manrope",sans-serif; font-size:12.5px; font-weight:700; color:var(--metin2);
+}
+.dm-cip[aria-pressed="true"] { background:var(--metin); color:var(--zemin); }
+.dm-oynat { width:38px; height:38px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--cukur); border:1.5px solid var(--cizgi-ince); color:var(--metin); }
+.dm-oynat svg { width:15px; height:15px; }
+.dm-bpm { flex:none; text-align:right; }
+.dm-bpm b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:13px; color:var(--kor); font-variant-numeric:tabular-nums; }
+.dm-bpm span { display:block; font-size:8.5px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--soluk); margin-top:1px; }
+
+/* ============================================================
+   PROFİLİM
+   ============================================================ */
+.dp-basi { margin-top:14px; padding:18px 16px 18px; display:flex; align-items:center; gap:15px; }
+.dp-avatar {
+  width:66px; height:66px; flex:none; border-radius:16px; border:1.6px solid var(--cizgi);
+  box-shadow:2.5px 3px 0 var(--golge); background:var(--yumusak1);
+  display:grid; place-items:center;
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:23px; color:var(--metin);
+}
+.dp-basi-yazi { min-width:0; }
+.dp-basi h1 { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:24px; line-height:1.05; letter-spacing:-.035em; margin:0; color:var(--metin); }
+.dp-rol { display:inline-block; margin-top:8px; padding:4px 10px; border-radius:99px; background:var(--cukur); border:1.2px solid var(--cizgi-ince); font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--metin2); }
+.dp-duzenle { display:block; margin-top:9px; font-size:12.5px; font-weight:700; color:var(--kor); text-decoration:underline; text-underline-offset:3px; }
+
+.dp-sayilar { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:13px; }
+.dp-sayilar > div { padding:13px 6px 14px; text-align:center; }
+.dp-sayilar b { display:block; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:23px; letter-spacing:-.035em; color:var(--metin); font-variant-numeric:tabular-nums; }
+.dp-sayilar span { display:block; font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--soluk); margin-top:5px; }
+
+.dp-duello { display:flex; align-items:center; gap:10px; margin-top:12px; padding:12px 15px; border-radius:13px; background:var(--yumusak2); border:1.6px solid var(--cizgi); box-shadow:3px 4px 0 var(--golge); font-size:12.5px; font-weight:700; color:var(--metin2); }
+.dp-duello b { font-family:"Bricolage Grotesque",sans-serif; font-weight:800; color:var(--metin); }
+
+/* sol pay 15: madalyon kutusunun içindeki 3 px'i telafi eder, bölüm başlığıyla hizalanır */
+.dp-serit { display:flex; gap:12px; overflow-x:auto; margin:0 -16px; padding:4px 16px 8px 15px; scrollbar-width:none; }
+.dp-serit::-webkit-scrollbar { display:none; }
+.dp-rozet { flex:none; width:64px; text-align:center; }
+.dp-madalyon {
+  width:58px; height:58px; border-radius:50%; margin:0 auto 8px; position:relative;
+  border:1.6px solid var(--cizgi); box-shadow:2.5px 3px 0 var(--golge);
+  background:var(--rz); color:#241207; display:grid; place-items:center;
+}
+.dp-madalyon svg { width:24px; height:24px; }
+.dp-rozet.kilitli .dp-madalyon { background:var(--cukur); color:var(--soluk); box-shadow:none; border-style:dashed; }
+.dp-kilit { position:absolute; right:-3px; bottom:-3px; width:20px; height:20px; border-radius:50%; background:var(--zemin); border:1.4px solid var(--cizgi); display:grid; place-items:center; color:var(--soluk); }
+.dp-kilit svg { width:10px; height:10px; }
+.dp-rozet span { display:block; font-size:9.5px; font-weight:700; color:var(--metin2); line-height:1.2; }
+.dp-rozet.kilitli span { color:var(--soluk); }
+</style>
+</head>
+<body class="deste" data-tema="acik">
+
+<div class="pano">
+  <a class="geri" href="index.html">← Beş yön</a>
+
+  <header class="yon-basi">
+    <p class="yon-no">Yön 02</p>
+    <h1 class="yon-ad">Deste</h1>
+    <p class="yon-alt">Bir masa oyunu kutusu, dans okuluna uyarlanmış.</p>
+    <dl class="yon-iddia">
+      <div>
+        <dt>Ayrıştırıcı fikir</dt>
+        <dd>Her öğe <b>tutulabilir bir kart</b>: mürekkep çerçeve, keskin gölge, köşe indeksi, iç çerçeve, arkada duran deste. Oyun hissi kart oyunundan geliyor, çizgi filmden değil. Seçilen şık hafifçe kalkıp dönüyor; podyum basamakları madalya renginde kart blokları.</dd>
+      </div>
+      <div>
+        <dt>Eğlence dozu</dt>
+        <dd><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></dd>
+        <dt style="margin-top:16px">Tipografi</dt>
+        <dd>Bricolage Grotesque + Manrope</dd>
+      </div>
+      <div>
+        <dt>Riski</dt>
+        <dd>Kart metaforu her ekrana oturmayabilir. Ödeme, ders hakkı ve sertifika gibi kuru içerikler "oyun kartı" gibi görününce ciddiyet kaybı olur.</dd>
+      </div>
+    </dl>
+    <div class="palet">
+      <span style="background:#FBF4E9;color:#2A1512">Zemin</span>
+      <span style="background:#2A1512;color:#FBF4E9">Çerçeve</span>
+      <span style="background:#8E2743;color:#FFFCF6">Bordo</span>
+      <span style="background:#FC8E24;color:#2A1512">Turuncu</span>
+      <span style="background:#D4A017;color:#2A1512">Altın</span>
+      <span style="background:#E8705C;color:#2A1512">Salsa</span>
+      <span style="background:#B98BDD;color:#2A1512">Bachata</span>
+      <span style="background:#3E8FB4;color:#FFFCF6">Kulak</span>
+    </div>
+  </header>
+
+  <div class="not">
+    <b>Not:</b> Kategori ızgarası bilerek <b>3 sütundan 2 sütuna</b> indirildi; kart anatomisi (köşe indeksi, iç çerçeve, ikon kutusu)
+    3 sütunda okunmuyordu. Brief'in Meydan Oku ölçüsü (358×158) ve 19,2 px köşe yarıçapı korundu.
+    Sert gölge koyu temada saf siyaha, açık temada mürekkebe döner. Podyum basamak yükseklikleri (56 / 84 / 40 px) aynen uygulandı.
+  </div>
+
+  <section class="sahne-bolum">
+    <div class="kumanda" id="kumanda"></div>
+    <div class="raylar" id="raylar"></div>
+  </section>
+</div>
+
+<!-- ====================== 01 · DERSLERİM ====================== -->
+<template id="t-derslerim">
+<div class="ekran-ic">
+  <div class="d-ust">
+    <span class="d-marka">VEDANS</span>
+    <span class="d-ust-ikon">
+      <button class="d-ikon-btn kapali" type="button" aria-label="Ara (bu sürümde yok)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+      </button>
+      <button class="d-ikon-btn" type="button" aria-label="Bildirimler, 3 okunmamış">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>
+        <span class="d-rozet">3</span>
+      </button>
+      <button class="d-ikon-btn" type="button" aria-label="Profilim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8.2" r="3.7"/><path d="M4.9 20.1c.5-3.6 3.5-5.7 7.1-5.7s6.6 2.1 7.1 5.7"/></svg>
+      </button>
+    </span>
+  </div>
+
+  <svg class="d-marka-dalga" viewBox="0 0 390 76" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 38c52-24 100 18 154 10s98-38 152-28 64 26 84 18v38H0V38Z" fill="currentColor" opacity=".3"/>
+    <path d="M0 52c56-18 98 14 152 8s100-30 152-20 60 18 86 12v24H0V52Z" fill="currentColor"/>
+  </svg>
+
+  <div class="d-hero-metin"><h1>Bugün<br>dans var!</h1></div>
+
+  <section class="d-ders kart">
+    <span class="goz">Sıradaki ders</span>
+    <h2>Salsa Başlangıç</h2>
+    <p class="d-ders-meta"><span>Bugün · 19:00</span><span class="ayrac"></span><span>Salon B</span></p>
+    <span class="d-ders-ok" aria-label="Derse git">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </span>
+    <div class="kart-ic-cerceve"></div>
+  </section>
+
+  <div class="d-ikili">
+    <div class="kart">
+      <span class="goz">Quiz</span>
+      <h3>Bilgini dene!</h3>
+      <p>Dans bilgini test et, rozet kazan.</p>
+      <span class="kuyruk">48 soru</span>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="kart">
+      <span class="goz">Etkinlik</span>
+      <h3>Salsa Gecesi</h3>
+      <p>Cuma · Kadıköy</p>
+      <span class="kuyruk">18 kişi</span>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+  </div>
+
+  <div class="d-bolum"><h3>Müzik</h3><span>Tümünü gör</span></div>
+  <div class="d-serit">
+    <div class="d-serit-kart">
+      <div class="d-serit-kapak" style="--kapak:var(--k1)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/></svg></div>
+      <b>Salsa Klasikleri</b><em>Son: El Cantante</em>
+    </div>
+    <div class="d-serit-kart">
+      <div class="d-serit-kapak" style="--kapak:var(--k2)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.3S3.6 15.1 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 5.7-8.4 10.9-8.4 10.9Z"/></svg></div>
+      <b>Bachata Romantik</b><em>Son: Obsesión</em>
+    </div>
+    <div class="d-serit-kart">
+      <div class="d-serit-kapak" style="--kapak:var(--k5)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 17.5V6l10-2v11a3 3 0 1 1-2-2.8V6.6l-6 1.2v9.7a3 3 0 1 1-2-2.8V17.5Z"/></svg></div>
+      <b>Isınma Seti</b><em>Son: Vivir Mi Vida</em>
+    </div>
+  </div>
+
+  <section class="d-afis">
+    <span class="d-pip sol">VD</span>
+    <h3>Topluluğumuzla<br>güçlüyüz</h3>
+    <p>Dans, daha güzel birlikte.</p>
+    <svg viewBox="0 0 162 132" fill="none" aria-hidden="true">
+      <circle cx="44" cy="40" r="13" fill="#FC8E24"/><circle cx="86" cy="32" r="13" fill="#FFFCF6"/><circle cx="126" cy="44" r="13" fill="#F5C63C"/>
+      <path d="M30 60h28l5 52H25l5-52ZM72 52h28l5 60H67l5-60ZM112 64h28l5 48h-38l5-48Z" fill="#FFFCF6" opacity=".35"/>
+    </svg>
+  </section>
+
+  <section class="d-ilerleme kart">
+    <span class="d-halka">
+      <svg viewBox="0 0 72 72"><circle class="d-halka-ray" cx="36" cy="36" r="30"/><circle class="d-halka-dolu" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="141.4"/></svg>
+      <b>%25</b>
+    </span>
+    <span class="d-ilerleme-yazi">
+      <b>Salsa</b>
+      <span class="d-cubuk"><i style="width:25%"></i></span>
+      <em>3 / 12 ders</em>
+    </span>
+    <span class="d-mini-rozet">
+      <span class="d-mini" style="--rz:var(--k1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M10 9.4v5.2l4.4-2.6z"/></svg></span>
+      <span class="d-mini" style="--rz:var(--k5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6 10 17.5 19.4 7"/></svg></span>
+      <span class="d-mini" style="--rz:#D4A017"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
+    </span>
+    <div class="kart-ic-cerceve"></div>
+  </section>
+</div>
+<nav class="tab-bar" data-secili="derslerim"></nav>
+</template>
+
+<!-- ====================== 02 · QUIZ ====================== -->
+<template id="t-quiz">
+<div class="ekran-ic">
+  <div class="d-hero-yuva">
+    <div class="d-hero kart">
+      <span class="d-cip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-3.3 3.94A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1a5 5 0 0 1-3.7-3.96A4 4 0 0 1 4 8V5h3V3Zm0 4H6v1a2 2 0 0 0 1 1.73V7Zm11 0h-1v2.73A2 2 0 0 0 18 8V7Z"/></svg>
+        Vedans Quiz
+      </span>
+      <h1>Hadi<span class="alt">başlayalım.</span></h1>
+      <p>Kategori seç, oyuna gir. Bilgini test et, rozetler kazan.</p>
+
+      <svg class="d-kupa" viewBox="0 0 132 150" fill="none" aria-hidden="true">
+        <ellipse cx="66" cy="136" rx="40" ry="7" fill="#7C5CC4" opacity=".16"/>
+        <path d="M40 24h52v28a26 26 0 0 1-52 0V24Z" fill="#7C5CC4"/>
+        <path d="M40 24h52v10H40z" fill="#5B3FA0"/>
+        <path d="M40 31H25a15 15 0 0 0 15 15M92 31h15a15 15 0 0 1-15 15" stroke="#7C5CC4" stroke-width="5" stroke-linecap="round"/>
+        <path d="M60 78h12v16H60z" fill="#5B3FA0"/>
+        <path d="M46 112h40l-5-18H51l-5 18Z" fill="#7C5CC4"/>
+        <rect x="38" y="112" width="56" height="13" rx="4" fill="#5B3FA0"/>
+        <path d="m66 38 3.4 7 7.6 1-5.5 5.4 1.3 7.6L66 62.4 59.2 66l1.3-7.6-5.5-5.4 7.6-1L66 38Z" fill="#FBF4E9" opacity=".92"/>
+      </svg>
+      <svg class="d-dalga" viewBox="0 0 390 34" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 16c48-14 96 12 146 6s78-22 126-16 70 20 118 12v16H0V16Z" fill="currentColor" opacity=".38"/>
+        <path d="M0 24c52-12 92 8 142 4s86-18 130-12 68 16 118 10v8H0v-10Z" fill="currentColor"/>
+      </svg>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+  </div>
+
+  <a class="d-band" href="#" aria-label="Meydan Oku, bekleyen 2 maç var">
+    <span class="d-pip sol">MO</span>
+    <span class="d-pip sag">MO</span>
+    <div class="d-band-ic">
+      <h2>Meydan Oku</h2>
+      <p class="d-band-durum"><i></i>Bekleyen 2 maç var</p>
+      <span class="d-band-btn">Meydan Oku →</span>
+    </div>
+    <svg class="d-figur" viewBox="0 0 176 160" fill="none" aria-hidden="true">
+      <path d="M72 18h32l5 11H67l5-11Z" fill="#F5C63C"/>
+      <path d="M74 16 68 4l12 6 8-8 8 8 12-6-6 12H74Z" fill="#F5C63C"/>
+      <circle cx="52" cy="62" r="17" fill="#FFD9C2"/>
+      <circle cx="124" cy="62" r="17" fill="#E9B08C"/>
+      <path d="M52 45a17 17 0 0 1 16 11H36a17 17 0 0 1 16-11Z" fill="#3A2016"/>
+      <path d="M124 45a17 17 0 0 1 16 11h-32a17 17 0 0 1 16-11Z" fill="#2A1512"/>
+      <path d="M36 82h32l6 48H30l6-48Z" fill="#FC8E24"/>
+      <path d="M108 82h32l6 48h-44l6-48Z" fill="#FFFCF6"/>
+      <path d="M68 86 88 68l20 18-8 9-12-11-12 11-8-9Z" fill="#F5C63C"/>
+      <circle cx="88" cy="66" r="9" fill="#FFF3D0"/>
+      <path d="M30 130h44v10H30zM102 130h44v10h-44z" fill="#2A1512" opacity=".28"/>
+    </svg>
+  </a>
+
+  <div class="d-bolum"><h3>Kategoriler</h3><span>Bilgini geliştir</span></div>
+
+  <div class="d-grid">
+    <div class="d-kat" style="--kat-renk:var(--k3);--kat-zemin:var(--yumusak1)">
+      <span class="d-kat-no">01</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg></span>
+      <b>Dans Kültürü</b><em>Tarih, stiller, efsaneler</em>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="d-kat" style="--kat-renk:var(--k5);--kat-zemin:var(--yumusak3)">
+      <span class="d-kat-no">02</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17.5V6l10-2v11"/><circle cx="6.5" cy="17.6" r="2.6"/><circle cx="16.5" cy="15.6" r="2.6"/></svg></span>
+      <b>Müzik &amp; Enstrüman</b><em>Ritim, türler, çalgılar</em>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="d-kat" style="--kat-renk:var(--k1);--kat-zemin:var(--yumusak1)">
+      <span class="d-kat-no">03</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/><path d="M12 19a2.6 2.6 0 0 0 2.6-2.6c0-1.3-.9-2.3-2.6-4-1.7 1.7-2.6 2.7-2.6 4A2.6 2.6 0 0 0 12 19Z"/></svg></span>
+      <b>Salsa</b><em>Figürler, müzik, tarih</em>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="d-kat" style="--kat-renk:var(--k2);--kat-zemin:var(--yumusak2)">
+      <span class="d-kat-no">04</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.3S3.6 15.1 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 5.7-8.4 10.9-8.4 10.9Z"/></svg></span>
+      <b>Bachata</b><em>Figürler, müzik, stil</em>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="d-kat" style="--kat-renk:var(--k6);--kat-zemin:var(--yumusak3)">
+      <span class="d-kat-no">05</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h2.4M8 12h2.4M13 12h2.4M18 12h3"/><path d="M6.2 8v8M11.2 5.5v13M16.2 9.2v5.6"/></svg></span>
+      <b>Müzik Kulağı</b><em>Dinle, tahmin et, kazan</em>
+      <div class="kart-ic-cerceve"></div>
+    </div>
+    <div class="d-kat pasif">
+      <span class="d-kat-no">06</span>
+      <span class="d-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 8v6M12 10 6.5 12.5M12 10l5.5 2.5M12 14l-3.5 6M12 14l3.5 6"/></svg></span>
+      <b>Modern Dans &amp; Bale</b>
+      <span class="d-yakinda">Yakında</span>
+    </div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="quiz"></nav>
+</template>
+
+<!-- ====================== 03 · DÜELLO CANLI ====================== -->
+<template id="t-duello">
+<div class="ekran-ic tam duello-ic">
+  <div class="dd-ust">
+    <button class="dd-cik" type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      Maçtan çık
+    </button>
+    <span class="dd-canli"><i></i>Canlı</span>
+  </div>
+
+  <div class="dd-skor">
+    <div class="dd-oyuncu ben"><span>Sen</span><b>3</b><em>Doğru</em><div class="kart-ic-cerceve"></div></div>
+    <div class="dd-vs"><small>2/6</small>SORU</div>
+    <div class="dd-oyuncu"><span>Elif K.</span><b>2</b><em>Doğru</em><div class="kart-ic-cerceve"></div></div>
+  </div>
+
+  <div class="dd-sure" data-sure="15" data-baslangic="12">
+    <span class="dd-sure-yazi">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.4V12l3 2.2"/></svg>
+      <span class="sure-yazi">12 saniye</span>
+    </span>
+    <span class="dd-sure-ray"><i class="sure-dolu"></i></span>
+  </div>
+
+  <div class="dd-soru">
+    <span class="d-pip sol">2/6</span>
+    <h1>Bachata hangi ülkede doğdu?</h1>
+    <div class="kart-ic-cerceve"></div>
+  </div>
+
+  <ul class="dd-siklar">
+    <li><span class="dd-harf">A</span>Küba</li>
+    <li class="secili"><span class="dd-harf">B</span>Dominik Cumhuriyeti
+      <span class="dd-alindi">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.6 10 17.5 19.4 7"/></svg>
+        Alındı
+      </span>
+    </li>
+    <li><span class="dd-harf">C</span>Kolombiya</li>
+    <li><span class="dd-harf">D</span>Porto Riko</li>
+  </ul>
+
+  <p class="dd-rakip" data-rakip-durum="Elif"><i></i><span class="rakip-yazi">Elif düşünüyor</span></p>
+</div>
+</template>
+
+<!-- ====================== 04 · DÜELLO SONUÇ ====================== -->
+<template id="t-sonuc">
+<div class="ekran-ic tam duello-ic">
+  <div class="ds-kazanan">
+    <svg class="ds-tik" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="32" cy="32" r="29" opacity=".25"/>
+      <path class="iz" d="M18 33 28 43 47 21"/>
+    </svg>
+    <h1>Kazandın!</h1>
+    <p>Tebrikler</p>
+  </div>
+
+  <div class="ds-skor">
+    <div class="kart kazanan"><span>Sen</span><b>5</b><em>Doğru</em><i>82 puan</i><div class="kart-ic-cerceve"></div></div>
+    <div class="kart"><span>Elif K.</span><b>4</b><em>Doğru</em><i>71 puan</i><div class="kart-ic-cerceve"></div></div>
+  </div>
+
+  <div class="ds-puan">
+    <span>Sıralamana</span>
+    <b>+15 puan</b>
+  </div>
+
+  <div class="d-bolum"><h3>Soru soru</h3><span>6 soru</span></div>
+
+  <ol class="ds-sorular">
+    <li>
+      <p class="q">Bachata hangi ülkede doğdu?</p>
+      <p class="d">Doğru cevap: Dominik Cumhuriyeti</p>
+      <p class="r"><span class="ds-etiket ok">Sen · 4,2 sn · 16</span><span class="ds-etiket ok">Elif · 6,1 sn · 14</span></p>
+    </li>
+    <li>
+      <p class="q">Salsa müziğinde clave kaç vuruştur?</p>
+      <p class="d">Doğru cevap: 5</p>
+      <p class="r"><span class="ds-etiket ok">Sen · 3,1 sn · 17</span><span class="ds-etiket no">Elif · 0</span></p>
+    </li>
+    <li>
+      <p class="q">Güiro hangi ailedendir?</p>
+      <p class="d">Doğru cevap: Vurmalı</p>
+      <p class="r"><span class="ds-etiket no">Sen · 0</span><span class="ds-etiket ok">Elif · 5,4 sn · 15</span></p>
+    </li>
+  </ol>
+
+  <div class="ds-dugmeler">
+    <button class="d-btn" type="button">Tekrar oyna</button>
+    <button class="d-btn sessiz" type="button">Kapat</button>
+  </div>
+</div>
+</template>
+
+<!-- ====================== 05 · SIRALAMA ====================== -->
+<template id="t-siralama">
+<div class="ekran-ic">
+  <div class="d-sayfa-basi"><h1>Sıralama</h1></div>
+
+  <div class="dl-sekme">
+    <button type="button" aria-pressed="true">Bu Ay</button>
+    <button type="button" aria-pressed="false">Tüm Zamanlar</button>
+  </div>
+  <p class="dl-aciklama">Bu ay toplanan puana göre. Her ay sıfırdan başlar.</p>
+
+  <div class="dl-podyum">
+    <div class="dl-yer iki" style="--madalya:#C0C4C9">
+      <div class="dl-avatar">M</div>
+      <p class="dl-ad">Mert A.</p>
+      <p class="dl-puan">1.180</p>
+      <div class="dl-basamak">2</div>
+    </div>
+    <div class="dl-yer bir" style="--madalya:#E8B62C">
+      <div class="dl-avatar">
+        <span class="dl-kupa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-3.3 3.94A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1a5 5 0 0 1-3.7-3.96A4 4 0 0 1 4 8V5h3V3Zm0 4H6v1a2 2 0 0 0 1 1.73V7Zm11 0h-1v2.73A2 2 0 0 0 18 8V7Z"/></svg></span>
+        Z
+      </div>
+      <p class="dl-ad">Zeynep K.</p>
+      <p class="dl-puan">1.420</p>
+      <div class="dl-basamak">1</div>
+    </div>
+    <div class="dl-yer uc" style="--madalya:#D28C52">
+      <div class="dl-avatar">S</div>
+      <p class="dl-ad">Sen</p>
+      <p class="dl-puan">1.040</p>
+      <div class="dl-basamak">3</div>
+    </div>
+  </div>
+
+  <div class="d-bolum"><h3>Diğerleri</h3><span>28 dansçı</span></div>
+
+  <div>
+    <div class="dl-satir"><span class="dl-sira">04</span><span class="ad">Ayşe T.</span><span class="p">960</span></div>
+    <div class="dl-satir"><span class="dl-sira">05</span><span class="ad">Kaan B.</span><span class="p">915</span></div>
+    <div class="dl-satir"><span class="dl-sira">06</span><span class="ad">Elif K.</span><span class="p">880</span></div>
+    <div class="dl-satir"><span class="dl-sira">07</span><span class="ad">Derya Ö.</span><span class="p">845</span></div>
+    <div class="dl-satir"><span class="dl-sira">08</span><span class="ad">Burak S.</span><span class="p">790</span></div>
+    <div class="dl-satir"><span class="dl-sira">09</span><span class="ad">Nil A.</span><span class="p">742</span></div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="siralama"></nav>
+</template>
+
+<!-- ====================== 06 · ETKİNLİK ====================== -->
+<template id="t-etkinlik">
+<div class="ekran-ic">
+  <div class="d-sayfa-basi"><h1>Etkinlikler</h1></div>
+
+  <article class="de-kart kart">
+    <div class="de-kapak" style="--kapak:var(--k4)">
+      <span class="de-rozet">Parti</span>
+      <svg viewBox="0 0 358 140" fill="none" aria-hidden="true">
+        <circle cx="118" cy="46" r="14" fill="currentColor"/><circle cx="180" cy="38" r="14" fill="currentColor"/><circle cx="242" cy="48" r="14" fill="currentColor"/>
+        <path d="M102 66h32l6 74H96l6-74ZM164 58h32l6 82h-44l6-82ZM226 68h32l6 72h-44l6-72Z" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="de-ic">
+      <p class="de-tarih">Cuma · 12 Eylül</p>
+      <h3>Salsa Gecesi</h3>
+      <p class="de-meta"><span>21:00</span><span class="ayrac"></span><span>Kadıköy</span><span class="ayrac"></span><span>Mert A.</span></p>
+      <div class="de-katilim">
+        <span class="de-yuzler"><span class="de-yuz">Z</span><span class="de-yuz">M</span><span class="de-yuz">A</span><span class="de-yuz arti">+15</span></span>
+        <span class="de-sayi">18 kişi geliyor</span>
+      </div>
+      <button class="d-btn" type="button">Katılacağım</button>
+    </div>
+  </article>
+
+  <article class="de-kart kart">
+    <div class="de-kapak" style="--kapak:var(--k5)">
+      <span class="de-rozet">Workshop</span>
+      <svg viewBox="0 0 358 140" fill="none" aria-hidden="true">
+        <circle cx="148" cy="44" r="15" fill="currentColor"/><circle cx="216" cy="44" r="15" fill="currentColor"/>
+        <path d="M130 64h36l7 76h-50l7-76ZM198 64h36l7 76h-50l7-76Z" fill="currentColor"/>
+        <path d="M166 70h32v9h-32z" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="de-ic">
+      <p class="de-tarih">Pazar · 14 Eylül</p>
+      <h3>Bachata Workshop</h3>
+      <p class="de-meta"><span>14:00</span><span class="ayrac"></span><span>Stüdyo A</span><span class="ayrac"></span><span>Selin D.</span></p>
+      <div class="de-katilim"><span class="de-bos">İlk katılan sen ol</span></div>
+      <button class="d-btn ikincil" type="button">✓ Katılacağım</button>
+    </div>
+  </article>
+</div>
+<nav class="tab-bar" data-secili="etkinlik"></nav>
+</template>
+
+<!-- ====================== 07 · MÜZİK ====================== -->
+<template id="t-muzik">
+<div class="ekran-ic">
+  <div class="d-sayfa-basi">
+    <h1>Müzik listeleri</h1>
+    <p>Branşına ve tempoya uygun şarkılarla çalış.</p>
+  </div>
+
+  <div class="dm-cipler">
+    <button class="dm-cip" type="button" aria-pressed="true">Hepsi</button>
+    <button class="dm-cip" type="button" aria-pressed="false">Salsa</button>
+    <button class="dm-cip" type="button" aria-pressed="false">Bachata</button>
+    <button class="dm-cip" type="button" aria-pressed="false">Modern</button>
+  </div>
+
+  <div class="d-satir">
+    <span class="dm-oynat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Salsa Klasikleri</b><em>Salsa · Enerjik · 18 şarkı</em></span>
+    <span class="dm-bpm"><b>180–190</b><span>BPM</span></span>
+  </div>
+  <div class="d-satir">
+    <span class="dm-oynat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Bachata Romantik</b><em>Bachata · Romantik · 12 şarkı</em></span>
+    <span class="dm-bpm"><b>120–130</b><span>BPM</span></span>
+  </div>
+  <div class="d-satir">
+    <span class="dm-oynat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Isınma Seti</b><em>Genel · Yumuşak · 9 şarkı</em></span>
+    <span class="dm-bpm"><b>95–110</b><span>BPM</span></span>
+  </div>
+  <div class="d-satir">
+    <span class="dm-oynat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Sosyal Gece</b><em>Salsa · Bachata · 24 şarkı</em></span>
+    <span class="dm-bpm"><b>140–190</b><span>BPM</span></span>
+  </div>
+  <div class="d-satir">
+    <span class="dm-oynat"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Modern Akış</b><em>Modern · Sakin · 11 şarkı</em></span>
+    <span class="dm-bpm"><b>70–90</b><span>BPM</span></span>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="muzik"></nav>
+</template>
+
+<!-- ====================== 08 · PROFİLİM ====================== -->
+<template id="t-profil">
+<div class="ekran-ic">
+  <header class="dp-basi kart">
+    <span class="dp-avatar">DY</span>
+    <span class="dp-basi-yazi">
+      <h1>Deniz Yıldırım</h1>
+      <span class="dp-rol">Öğrenci</span>
+      <a class="dp-duzenle" href="#">Profilimi düzenle</a>
+    </span>
+    <div class="kart-ic-cerceve"></div>
+  </header>
+
+  <div class="dp-sayilar">
+    <div class="kart"><b>1.240</b><span>Puan</span></div>
+    <div class="kart"><b>34</b><span>İzlenen</span></div>
+    <div class="kart"><b>7</b><span>Seri</span></div>
+  </div>
+
+  <p class="dp-duello">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 12.5h6L11 22l8.5-10.5h-6L13 2Z"/></svg>
+    <b>12 maç</b> · <b>7 galibiyet</b>
+  </p>
+
+  <div class="d-bolum"><h3>Rozetler</h3><span>9 / 17 · Tümünü gör</span></div>
+  <div class="dp-serit">
+    <div class="dp-rozet" style="--rz:var(--k1)">
+      <span class="dp-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M10 9.4v5.2l4.4-2.6z"/></svg></span>
+      <span>İlk ders</span>
+    </div>
+    <div class="dp-rozet" style="--rz:var(--k5)">
+      <span class="dp-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6 10 17.5 19.4 7"/></svg></span>
+      <span>Hatasız tur</span>
+    </div>
+    <div class="dp-rozet" style="--rz:var(--k4)">
+      <span class="dp-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
+      <span>100 puan</span>
+    </div>
+    <div class="dp-rozet" style="--rz:#E8B62C">
+      <span class="dp-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/></svg></span>
+      <span>4 hafta</span>
+    </div>
+    <div class="dp-rozet kilitli">
+      <span class="dp-madalyon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.6A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1a5 5 0 0 1-2.4-3.9H8a4 4 0 0 1-4-4V5h3V3Z"/></svg>
+        <span class="dp-kilit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></svg></span>
+      </span>
+      <span>30 hafta</span>
+    </div>
+    <div class="dp-rozet kilitli">
+      <span class="dp-madalyon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v11l-6 4-6-4V3Z"/><path d="M9 21h6"/></svg>
+        <span class="dp-kilit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></svg></span>
+      </span>
+      <span>1 yıl</span>
+    </div>
+  </div>
+
+  <div style="margin-top:22px">
+    <div class="d-satir"><span class="ad"><b>Sertifikalarım</b><em>Salsa · Seviye 1</em></span><span class="ok" aria-hidden="true">→</span></div>
+    <div class="d-satir"><span class="ad"><b>Hesabım</b><em>Ders hakkı, ödemeler, takma ad</em></span><span class="ok" aria-hidden="true">→</span></div>
+    <div class="d-satir"><span class="ad"><b>Ayarlar</b><em>Bildirim, ses, dil</em></span><span class="ok" aria-hidden="true">→</span></div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="profilim"></nav>
+</template>
+
+<script>
+window.EKRANLAR = [
+  ['t-derslerim', 'Derslerim',          'Ana sayfa · yedi bölüm'],
+  ['t-quiz',      'Quiz sekmesi',       'Hero destesi · Meydan Oku · kategoriler'],
+  ['t-duello',    'Düello canlı yarış', 'Skor kartları · süre · şık kartları'],
+  ['t-sonuc',     'Düello sonucu',      'Altın kart · skor · soru soru'],
+  ['t-siralama',  'Sıralama',           'Bu Ay · podyum · diğerleri'],
+  ['t-etkinlik',  'Etkinlik',           'Kapak · katılımcılar · katılım'],
+  ['t-muzik',     'Müzik listeleri',    'Filtre · liste · BPM'],
+  ['t-profil',    'Profilim',           'Sayılar · rozet vitrini · hesap']
+];
+</script>
+<script src="ortak.js"></script>
+</body>
+</html>
