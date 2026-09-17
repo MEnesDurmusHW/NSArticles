@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vedans · Beş tasarım yönü</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ortak.css">
+<style>
+.kapak { padding:44px 0 0; }
+.kapak .ust {
+  display:flex; align-items:center; gap:14px;
+  font-size:11px; font-weight:800; letter-spacing:.3em; text-transform:uppercase; color:#fc8e24;
+}
+.kapak .ust .cizgi { flex:1; height:1px; background:rgba(255,255,255,.14); }
+.kapak .ust span:last-child { color:#6f6a64; letter-spacing:.16em; }
+
+/* ---------- eksen ---------- */
+.eksen { margin:44px 0 0; max-width:940px; }
+.eksen h2 {
+  font-size:11px; font-weight:800; letter-spacing:.26em; text-transform:uppercase;
+  color:#7d776f; margin:0 0 22px;
+}
+.eksen-ray { position:relative; height:76px; }
+.eksen-cizgi {
+  position:absolute; left:0; right:0; top:38px; height:2px;
+  background:linear-gradient(90deg, #3a3730, #7a1e2e 45%, #fc8e24);
+}
+.eksen-uc {
+  position:absolute; top:48px; font-size:11px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:#6f6a64;
+}
+.eksen-uc.sol { left:0; }
+.eksen-uc.sag { right:0; }
+.eksen-nokta {
+  position:absolute; top:38px; transform:translate(-50%,-50%);
+  display:flex; flex-direction:column; align-items:center; gap:9px;
+  text-decoration:none;
+}
+.eksen-nokta i {
+  width:15px; height:15px; border-radius:50%; background:#fc8e24;
+  box-shadow:0 0 0 5px rgba(252,142,36,.16); display:block;
+  transition:transform .2s, box-shadow .2s;
+}
+.eksen-nokta b {
+  font-family:"Archivo",sans-serif; font-size:13px; font-weight:800;
+  letter-spacing:-.01em; color:#d9d2c8; white-space:nowrap;
+  position:absolute; top:-30px;
+}
+.eksen-nokta:hover i { transform:scale(1.35); box-shadow:0 0 0 9px rgba(252,142,36,.2); }
+.eksen-nokta:hover b { color:#fc8e24; }
+
+/* ---------- yön listesi ---------- */
+.liste { margin:64px 0 0; border-top:1px solid rgba(255,255,255,.1); }
+.satir {
+  display:grid; grid-template-columns:76px 1fr 200px 44px;
+  gap:28px; align-items:center;
+  padding:30px 8px; border-bottom:1px solid rgba(255,255,255,.1);
+  text-decoration:none; color:inherit;
+  transition:background-color .22s, padding-left .22s;
+}
+.satir:hover { background:rgba(255,255,255,.03); padding-left:18px; }
+.satir-no {
+  font-family:"Archivo",sans-serif; font-weight:800; font-size:13px;
+  letter-spacing:.14em; color:#fc8e24;
+}
+.satir h3 {
+  font-family:"Archivo",sans-serif; font-weight:800; font-size:31px;
+  letter-spacing:-.035em; margin:0 0 7px; color:#fbf8f3;
+}
+.satir p { margin:0; font-size:14px; line-height:1.55; color:#a49d94; max-width:520px; }
+.satir .meta {
+  display:flex; align-items:center; gap:9px; margin-top:12px;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#6f6a64;
+}
+.satir-palet { display:flex; height:40px; border-radius:6px; overflow:hidden; }
+.satir-palet span { flex:1; }
+.satir-ok {
+  font-size:22px; color:#57524b; justify-self:end; transition:color .22s, transform .22s;
+}
+.satir:hover .satir-ok { color:#fc8e24; transform:translateX(5px); }
+
+@media (max-width:860px) {
+  .satir { grid-template-columns:52px 1fr 34px; }
+  .satir-palet { display:none; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="pano">
+
+  <header class="kapak">
+    <div class="ust"><span>Vedans · Tasarım keşfi</span><span class="cizgi"></span><span>Beş yön · 8 ekran · açık ve koyu</span></div>
+  </header>
+
+  <section class="eksen">
+    <h2>Beş yönün eksendeki yeri</h2>
+    <div class="eksen-ray">
+      <div class="eksen-cizgi"></div>
+      <span class="eksen-uc sol">Sakin · olgun</span>
+      <span class="eksen-uc sag">Oyunbaz</span>
+      <a class="eksen-nokta" href="yon-1-sahne.html" style="left:10%"><b>Sahne</b><i></i></a>
+      <a class="eksen-nokta" href="yon-4-akis.html"  style="left:37%"><b>Akış</b><i></i></a>
+      <a class="eksen-nokta" href="yon-3-salon.html" style="left:61%"><b>Salon</b><i></i></a>
+      <a class="eksen-nokta" href="yon-5-kulis.html" style="left:77%"><b>Kulis</b><i></i></a>
+      <a class="eksen-nokta" href="yon-2-deste.html" style="left:91%"><b>Deste</b><i></i></a>
+    </div>
+  </section>
+
+  <nav class="liste">
+
+    <a class="satir" href="yon-1-sahne.html">
+      <span class="satir-no">01</span>
+      <div>
+        <h3>Sahne</h3>
+        <p>Bir dans gösterisi afişi, telefona sığdırılmış. Kart ve kutu yok; dev tipografi, saç teli çizgiler, geniş boşluk. Kategoriler pastel ızgara değil, bir gösteri programı.</p>
+        <div class="meta"><span>Archivo + Manrope</span><span>·</span><span class="doz"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+      </div>
+      <div class="satir-palet">
+        <span style="background:#FAF6F0"></span><span style="background:#201310"></span>
+        <span style="background:#7A1E2E"></span><span style="background:#FC8E24"></span>
+        <span style="background:#E0A21B"></span>
+      </div>
+      <span class="satir-ok" aria-hidden="true">→</span>
+    </a>
+
+    <a class="satir" href="yon-2-deste.html">
+      <span class="satir-no">02</span>
+      <div>
+        <h3>Deste</h3>
+        <p>Bir masa oyunu kutusu. Her öğe tutulabilir bir kart: mürekkep çerçeve, keskin gölge, köşe indeksi, arkada duran deste. Oyun hissi kart oyunundan geliyor, çizgi filmden değil.</p>
+        <div class="meta"><span>Bricolage Grotesque + Manrope</span><span>·</span><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      </div>
+      <div class="satir-palet">
+        <span style="background:#FBF4E9"></span><span style="background:#2A1512"></span>
+        <span style="background:#8E2743"></span><span style="background:#FC8E24"></span>
+        <span style="background:#B98BDD"></span>
+      </div>
+      <span class="satir-ok" aria-hidden="true">→</span>
+    </a>
+
+    <a class="satir" href="yon-3-salon.html">
+      <span class="satir-no">03</span>
+      <div>
+        <h3>Salon</h3>
+        <p>Işıklar kısıldı, sahne hazır. Enerji renkten değil ışıktan gelir: sahne huzmeleri, kenar parlaması, buzlu cam yüzeyler, yüzen alt menü. Koyu tema ana hâl.</p>
+        <div class="meta"><span>Sora + Manrope</span><span>·</span><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      </div>
+      <div class="satir-palet">
+        <span style="background:#0B0A10"></span><span style="background:#8E2743"></span>
+        <span style="background:#F5C63C"></span><span style="background:#FC8E24"></span>
+        <span style="background:#F0869B"></span>
+      </div>
+      <span class="satir-ok" aria-hidden="true">→</span>
+    </a>
+
+    <a class="satir" href="yon-4-akis.html">
+      <span class="satir-no">04</span>
+      <div>
+        <h3>Akış</h3>
+        <p>Uzun pozlama fotoğrafı, dansçının bıraktığı hareket izi. Dik köşe yok: akan şeritler, üst üste binen yarı saydam katmanlar. Kategoriler ızgara değil slalom, düelloda süre çubuk değil yay.</p>
+        <div class="meta"><span>Fraunces + Figtree</span><span>·</span><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      </div>
+      <div class="satir-palet">
+        <span style="background:#FAF4F1"></span><span style="background:#8E2743"></span>
+        <span style="background:#C25A78"></span><span style="background:#FC8E24"></span>
+        <span style="background:#B98BDD"></span>
+      </div>
+      <span class="satir-ok" aria-hidden="true">→</span>
+    </a>
+
+    <a class="satir" href="yon-5-kulis.html">
+      <span class="satir-no">05</span>
+      <div>
+        <h3>Kulis</h3>
+        <p>Dans okulu bir spor kulübü. Forma numaraları, diyagonal şerit alan, bant etiketler, maç skorbordu. Eğlence rekabetten geliyor, çizgi filmden değil. Düello ve sıralama bu dilde doğal yerine oturuyor.</p>
+        <div class="meta"><span>Saira Condensed + Barlow</span><span>·</span><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      </div>
+      <div class="satir-palet">
+        <span style="background:#F0EDE6"></span><span style="background:#171410"></span>
+        <span style="background:#7A1E2E"></span><span style="background:#FC8E24"></span>
+        <span style="background:#E8B02A"></span>
+      </div>
+      <span class="satir-ok" aria-hidden="true">→</span>
+    </a>
+
+  </nav>
+
+</div>
+
+</body>
+</html>

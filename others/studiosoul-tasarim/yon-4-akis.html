@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yön 4 · Akış — Vedans tasarım yönleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ortak.css">
+<style>
+/* ============================================================
+   YÖN 4 — AKIŞ
+   Uzun pozlama fotoğrafı. Dansçının bıraktığı HAREKET İZİ.
+   Düz çizgi ve dik köşe yok: akan şeritler, üst üste binen
+   yarı saydam katmanlar, diyagonal kompozisyon, eğri yollar.
+   Süre bir çubuk değil, bir YAY.
+   ============================================================ */
+
+.acik {
+  --zemin:#FAF4F1; --yuzey:#FFFFFF; --cukur:#F3E9E5;
+  --cizgi:rgba(35,26,31,.12); --cizgi-kuvvetli:rgba(35,26,31,.26);
+  --metin:#231A1F; --metin2:#6C5A5F; --soluk:#9B8A8E;
+  --bordo:#7A1E2E; --bordo-blok:#8E2743; --bordo-blok2:#551224;
+  --kor:#B4551C; --vurgu:#FC8E24; --vurgu2:#7A1E2E;
+  --yesil:#1F6B45; --kirmizi:#A32020;
+  --yumusak1:rgba(252,142,36,.13); --yumusak2:rgba(185,139,221,.15);
+  --yumusak3:rgba(107,182,219,.16); --yumusak4:rgba(212,112,138,.14);
+  --dugme-zemin:#231A1F; --dugme-yazi:#FAF4F1;
+  --menu-zemin:#FFFFFF; --menu-secili:#7A1E2E; --menu-pasif:#9B8A8E;
+  --gul:#C25A78; --krem:#FFFCF6; --altin:#B8860B;
+  --serit1:rgba(122,30,46,.26); --serit2:rgba(252,142,36,.30); --serit3:rgba(194,90,120,.24);
+  --karis:multiply;
+  --menu-y:60px;
+}
+.koyu {
+  --zemin:#141017; --yuzey:rgba(255,255,255,.055); --cukur:rgba(255,255,255,.04);
+  --cizgi:rgba(243,235,238,.12); --cizgi-kuvvetli:rgba(243,235,238,.28);
+  --metin:#F3EBEE; --metin2:#A79AA0; --soluk:#6D626A;
+  --bordo:#EE93A6; --bordo-blok:#8E2743; --bordo-blok2:#3E0C18;
+  --kor:#F0A05A; --vurgu:#FC8E24; --vurgu2:#EE93A6;
+  --yesil:#4FB183; --kirmizi:#E9736F;
+  --yumusak1:rgba(252,142,36,.16); --yumusak2:rgba(185,139,221,.18);
+  --yumusak3:rgba(107,182,219,.18); --yumusak4:rgba(238,147,166,.16);
+  --dugme-zemin:#F3EBEE; --dugme-yazi:#141017;
+  --gul:#EE93A6; --krem:#FFFCF6; --altin:#F5C63C;
+  --menu-zemin:#1A151D; --menu-secili:#FC8E24; --menu-pasif:#6D626A;
+  --serit1:rgba(238,147,166,.22); --serit2:rgba(252,142,36,.20); --serit3:rgba(176,120,216,.20);
+  --karis:screen;
+  --menu-y:60px;
+}
+
+.akis .ekran { font-family:"Figtree",sans-serif; }
+.akis .ekran-ic { padding-left:20px; padding-right:20px; }
+.akis .ekran-ic > * { position:relative; z-index:2; }
+
+/* ---------- hareket izi katmanları ---------- */
+.a-iz { position:absolute; inset:0; z-index:0; pointer-events:none; mix-blend-mode:var(--karis); }
+.a-iz svg { position:absolute; width:100%; height:100%; }
+.a-iz .s1 { fill:var(--serit1); }
+.a-iz .s2 { fill:var(--serit2); }
+.a-iz .s3 { fill:var(--serit3); }
+
+.a-kupa .c-bordo { stroke:var(--bordo); }
+.a-kupa .c-vurgu { stroke:var(--vurgu); }
+.a-kupa .c-gul   { stroke:var(--gul); }
+.a-kupa .f-gul   { fill:var(--gul); }
+
+/* ---------- ortak Akış parçaları ---------- */
+.a-kunye {
+  display:flex; align-items:center; gap:11px; padding:12px 0 0;
+  font-size:10px; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:var(--soluk);
+}
+.a-kunye .nokta { width:4px; height:4px; border-radius:50%; background:var(--vurgu); }
+
+.a-bolum { display:flex; align-items:baseline; justify-content:space-between; margin:32px 4px 6px; }
+.a-bolum h3 { font-family:"Fraunces",serif; font-weight:600; font-size:22px; letter-spacing:-.02em; margin:0; color:var(--metin); }
+.a-bolum span { font-size:11.5px; font-weight:600; color:var(--soluk); }
+
+.a-sayfa-basi { padding:18px 4px 2px; }
+.a-sayfa-basi h1 { font-family:"Fraunces",serif; font-weight:600; font-size:34px; line-height:1.02; letter-spacing:-.025em; margin:0; color:var(--metin); }
+.a-sayfa-basi h1 em { font-style:italic; color:var(--bordo); }
+.a-sayfa-basi p { margin:10px 0 0; font-size:13.5px; line-height:1.55; color:var(--metin2); max-width:270px; }
+
+.a-btn {
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  width:100%; min-height:50px; border-radius:99px; border:0; cursor:pointer;
+  background:var(--dugme-zemin); color:var(--dugme-yazi);
+  font-family:"Figtree",sans-serif; font-size:14.5px; font-weight:700;
+}
+.a-btn.ikincil { background:transparent; color:var(--metin); border:1.5px solid var(--cizgi-kuvvetli); }
+.a-btn.sessiz { background:transparent; color:var(--metin2); text-decoration:underline; text-underline-offset:4px; }
+
+.a-lozenj {
+  position:relative; background:var(--yuzey); border:1px solid var(--cizgi);
+  backdrop-filter:blur(8px); overflow:hidden;
+  border-radius:26px 64px 26px 64px;
+}
+.a-satir {
+  display:flex; align-items:center; gap:14px; min-height:68px; padding:11px 20px 11px 11px;
+  border-radius:99px; background:var(--yuzey); border:1px solid var(--cizgi);
+  backdrop-filter:blur(6px); margin-bottom:11px;
+}
+.a-satir .ad { flex:1; min-width:0; }
+.a-satir .ad b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:15.5px; letter-spacing:-.015em; color:var(--metin); }
+.a-satir .ad em { display:block; font-style:normal; font-size:11.5px; color:var(--metin2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.a-satir .ok { flex:none; color:var(--soluk); font-size:17px; }
+
+/* ---------- ÜST ÇUBUK ---------- */
+.a-ust { height:72px; display:flex; align-items:center; justify-content:space-between; margin:0 -20px; padding:0 16px 0 20px; }
+.a-marka { font-family:"Fraunces",serif; font-weight:600; font-size:20px; letter-spacing:-.02em; color:var(--metin); }
+.a-marka em { font-style:italic; color:var(--vurgu); }
+.a-ust-ikon { display:flex; align-items:center; gap:4px; }
+.a-ikon-btn { width:40px; height:40px; border-radius:50%; display:grid; place-items:center; position:relative; background:var(--cukur); border:1px solid var(--cizgi); color:var(--metin); cursor:pointer; }
+.a-ikon-btn svg { width:19px; height:19px; }
+.a-ikon-btn.kapali { color:var(--soluk); background:transparent; border-style:dashed; }
+.a-rozet {
+  position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; padding:0 5px; border-radius:99px;
+  background:var(--bordo-blok); color:var(--krem); display:grid; place-items:center;
+  font-size:9px; font-weight:800; line-height:1;
+}
+.koyu .a-rozet { background:var(--vurgu); color:#231409; }
+
+.a-dalga { display:block; width:calc(100% + 40px); margin:0 -20px; height:76px; color:var(--vurgu); }
+
+.a-hero-metin { padding:20px 4px 2px; }
+.a-hero-metin h1 { font-family:"Fraunces",serif; font-weight:600; font-size:38px; line-height:1; letter-spacing:-.025em; margin:0; color:var(--metin); }
+.a-hero-metin h1 em { display:block; font-style:italic; font-weight:500; font-size:46px; color:var(--bordo); margin-left:28px; }
+
+/* ---------- sıradaki ders ---------- */
+.a-ders { min-height:178px; margin-top:20px; padding:22px 22px 24px; display:flex; flex-direction:column; justify-content:center; }
+.a-ders .goz { position:relative; z-index:3; font-size:10px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--kor); }
+.a-ders h2 { position:relative; z-index:3; font-family:"Fraunces",serif; font-weight:600; font-size:28px; line-height:1.04; letter-spacing:-.025em; margin:12px 0 0; color:var(--metin); max-width:200px; }
+.a-ders-meta { position:relative; z-index:3; margin:13px 0 0; display:flex; align-items:center; gap:9px; font-size:12.5px; font-weight:600; color:var(--metin2); }
+.a-ders-meta .ayrac { width:3px; height:3px; border-radius:50%; background:var(--soluk); }
+.a-ders-iz { position:absolute; inset:0; z-index:1; opacity:.9; }
+.a-ders-ok {
+  position:absolute; z-index:4; right:20px; bottom:20px; width:52px; height:52px; border-radius:50%;
+  background:var(--vurgu); color:#231409; display:grid; place-items:center;
+}
+.a-ders-ok svg { width:19px; height:19px; }
+
+.a-ikili { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+.a-ikili > * { min-height:196px; padding:18px 16px 18px; display:flex; flex-direction:column; border-radius:26px 26px 64px 26px; }
+.a-ikili > *:last-child { border-radius:26px 26px 26px 64px; }
+.a-ikili .goz { font-size:9.5px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--kor); }
+.a-ikili h3 { font-family:"Fraunces",serif; font-weight:600; font-size:20px; line-height:1.06; letter-spacing:-.02em; margin:11px 0 0; color:var(--metin); }
+.a-ikili p { margin:8px 0 0; font-size:11.5px; line-height:1.45; color:var(--metin2); }
+.a-ikili .kuyruk { margin-top:auto; padding-top:10px; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--metin); }
+@media (max-width:340px) { .a-ikili { grid-template-columns:1fr; } }
+
+/* müzik şeridi */
+.a-serit { display:flex; gap:13px; overflow-x:auto; margin:0 -20px; padding:6px 20px 8px; scrollbar-width:none; }
+.a-serit::-webkit-scrollbar { display:none; }
+.a-serit-kart { flex:none; width:152px; }
+.a-serit-kapak {
+  width:152px; height:108px; border-radius:22px 44px 22px 44px; position:relative; overflow:hidden;
+  background:var(--kapak-a); display:grid; place-items:center; border:1px solid var(--cizgi);
+}
+.a-serit-kapak::after { content:""; position:absolute; inset:0; background:var(--kapak-b); clip-path:ellipse(70% 58% at 88% 96%); }
+.a-serit-kapak svg { width:32px; height:32px; color:#FFFCF6; position:relative; z-index:2; opacity:.92; }
+.a-serit-kart b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:14px; letter-spacing:-.015em; color:var(--metin); margin-top:10px; }
+.a-serit-kart em { display:block; font-style:normal; font-size:11px; color:var(--metin2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* topluluk */
+.a-afis {
+  position:relative; overflow:hidden; height:146px; margin-top:26px;
+  border-radius:30px 72px 30px 72px;
+  background:var(--bordo-blok); color:var(--krem);
+  display:flex; flex-direction:column; justify-content:center; padding:0 24px;
+}
+.a-afis-iz { position:absolute; inset:0; z-index:1; mix-blend-mode:screen; opacity:.6; }
+.a-afis h3 { position:relative; z-index:3; font-family:"Fraunces",serif; font-weight:600; font-size:24px; line-height:1.08; letter-spacing:-.02em; margin:0; }
+.a-afis p { position:relative; z-index:3; margin:8px 0 0; font-size:12.5px; color:rgba(255,252,246,.82); }
+.a-afis .figur { position:absolute; right:4px; bottom:0; width:150px; height:132px; z-index:2; }
+
+/* ilerleme */
+.a-ilerleme { margin-top:16px; padding:20px; display:flex; align-items:center; gap:18px; border-radius:26px 26px 64px 26px; }
+.a-halka { position:relative; width:76px; height:76px; flex:none; }
+.a-halka svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.a-halka-ray { fill:none; stroke:var(--cukur); stroke-width:6; }
+.acik .a-halka-ray { stroke:var(--cizgi); }
+.a-halka-dolu { fill:none; stroke:var(--vurgu); stroke-width:6; stroke-linecap:round; }
+.a-halka b { position:absolute; inset:0; display:grid; place-content:center; font-family:"Fraunces",serif; font-weight:600; font-size:18px; color:var(--metin); }
+.a-ilerleme-yazi { flex:1; min-width:0; }
+.a-ilerleme-yazi b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:17px; color:var(--metin); }
+.a-cubuk { height:6px; border-radius:99px; background:var(--cukur); margin:11px 0 8px; overflow:hidden; }
+.acik .a-cubuk { background:var(--cizgi); }
+.a-cubuk i { display:block; height:100%; border-radius:99px; background:var(--gul); }
+.a-ilerleme-yazi em { font-style:normal; font-size:11.5px; font-weight:600; color:var(--metin2); }
+.a-mini-rozet { display:flex; flex:none; }
+.a-mini { width:34px; height:34px; border-radius:50%; margin-left:-9px; background:var(--rz); color:var(--krem); display:grid; place-items:center; border:1.5px solid var(--zemin); }
+.koyu .a-mini { color:#181018; }
+.a-mini:first-child { margin-left:0; }
+.a-mini svg { width:16px; height:16px; }
+
+/* ---------- quiz hero ---------- */
+.a-hero { position:relative; padding:30px 0 26px; }
+.a-hero h1 { font-family:"Fraunces",serif; margin:0; color:var(--metin); font-weight:600; font-size:41px; line-height:1.0; letter-spacing:-.025em; }
+.a-hero h1 .alt { display:block; font-style:italic; font-weight:500; font-size:50px; color:var(--bordo); margin-left:34px; margin-top:-2px; letter-spacing:-.03em; }
+.a-hero p { margin:20px 0 0 34px; font-size:14px; line-height:1.6; color:var(--metin2); max-width:208px; }
+.a-kupa { position:absolute; right:-14px; top:6px; width:150px; height:186px; z-index:-1; opacity:.95; }
+
+/* meydan oku */
+.a-band {
+  display:block; text-decoration:none; position:relative; overflow:hidden;
+  height:158px; margin:26px 0 0; border-radius:20px 78px 20px 78px;
+  background:var(--bordo-blok); color:var(--krem);
+}
+.a-band-iz { position:absolute; inset:0; z-index:1; mix-blend-mode:screen; opacity:.55; }
+.a-band-ic { position:relative; z-index:3; padding:22px; max-width:206px; }
+.a-band h2 { font-family:"Fraunces",serif; font-weight:600; font-size:28px; line-height:1; letter-spacing:-.02em; margin:0; }
+.a-band-durum { display:flex; align-items:center; gap:8px; margin:10px 0 16px; font-size:12.5px; font-weight:700; color:#F5C63C; }
+.a-band-durum i { width:7px; height:7px; border-radius:50%; background:#F5C63C; flex:none; animation:a-sol 2.6s ease-in-out infinite; }
+@keyframes a-sol { 0%,100%{opacity:1;transform:translateX(0);} 50%{opacity:.45;transform:translateX(3px);} }
+.a-band-btn { display:inline-flex; align-items:center; gap:9px; min-height:38px; padding:0 19px; border-radius:99px; background:var(--krem); color:#7A1E2E; font-size:12.5px; font-weight:700; }
+.a-figur { position:absolute; right:-6px; bottom:-4px; width:178px; height:156px; z-index:2; }
+
+/* kategoriler: slalom */
+.a-slalom { position:relative; padding:18px 0 4px; }
+.a-yol { position:absolute; left:0; top:0; bottom:0; width:100%; z-index:0; pointer-events:none; color:var(--cizgi-kuvvetli); opacity:.5; }
+.a-kat {
+  position:relative; z-index:2; display:flex; align-items:center; gap:14px;
+  min-height:70px; padding:11px 18px 11px 11px; margin-bottom:12px; border-radius:99px;
+  background:var(--kat-zemin); border:1px solid var(--cizgi); backdrop-filter:blur(6px);
+}
+.a-kat:nth-child(odd)  { margin-right:34px; }
+.a-kat:nth-child(even) { margin-left:34px; }
+.a-kat-ikon { width:46px; height:46px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--kat-renk); color:var(--krem); }
+.koyu .a-kat-ikon { color:#181018; }
+.a-kat-ikon svg { width:22px; height:22px; }
+.a-kat-yazi { min-width:0; flex:1; }
+.a-kat b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:15.5px; line-height:1.15; letter-spacing:-.015em; color:var(--metin); }
+.a-kat em { display:block; font-style:normal; font-size:12px; color:var(--metin2); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.a-kat .ok { flex:none; color:var(--soluk); font-size:17px; }
+.a-kat.pasif { background:var(--cukur); border-style:dashed; }
+.a-kat.pasif .a-kat-ikon { background:transparent; color:var(--soluk); border:1px dashed var(--cizgi-kuvvetli); }
+.a-kat.pasif b, .a-kat.pasif em { color:var(--soluk); }
+.a-yakinda { flex:none; padding:5px 11px; border-radius:99px; border:1px solid var(--cizgi-kuvvetli); color:var(--soluk); font-size:9.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+
+/* alt menü */
+.akis .tab-bar { border-radius:26px 26px 0 0; box-shadow:0 -1px 0 var(--cizgi), 0 -16px 34px -22px rgba(0,0,0,.35); }
+.akis .tab svg { stroke-width:1.65; }
+.akis .tab span { font-size:9px; letter-spacing:.005em; }
+.akis .tab.secili .ik-dolgu { fill:currentColor; }
+.akis .tab .tab-im { position:absolute; top:8px; width:22px; height:9px; border-top:2.5px solid transparent; border-radius:99px 99px 0 0; }
+.akis .tab.secili .tab-im { border-top-color:var(--vurgu); }
+
+/* ============================================================
+   DÜELLO — SÜRE BİR YAY
+   ============================================================ */
+.ad-ust { display:flex; align-items:center; justify-content:space-between; margin:10px 0 6px; }
+.ad-cik { display:inline-flex; align-items:center; gap:7px; min-height:34px; padding:0 14px; border-radius:99px; background:var(--cukur); border:1px solid var(--cizgi); font-family:"Figtree",sans-serif; font-size:11.5px; font-weight:600; color:var(--metin2); cursor:pointer; }
+.ad-canli { display:inline-flex; align-items:center; gap:7px; padding:6px 13px; border-radius:99px; border:1px solid var(--cizgi); color:var(--yesil); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.ad-canli i { width:6px; height:6px; border-radius:50%; background:currentColor; animation:a-sol 1.7s infinite; }
+
+.ad-arena { position:relative; display:flex; align-items:center; justify-content:center; margin:8px 0 0; height:184px; }
+.ad-yay { position:relative; width:172px; height:172px; }
+.ad-yay svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.ad-yay-ray { fill:none; stroke:var(--cukur); stroke-width:7; }
+.acik .ad-yay-ray { stroke:var(--cizgi); }
+.ad-yay .sure-dolu { fill:none; stroke:var(--bordo); stroke-width:7; stroke-linecap:round; transition:stroke .35s; }
+.acik .ad-yay .sure-dolu { stroke:var(--bordo-blok); }
+.ad-arena.sure-uyari .sure-dolu { stroke:var(--vurgu); }
+.ad-arena.sure-kritik .sure-dolu { stroke:var(--kirmizi); }
+.ad-yay-ic { position:absolute; inset:0; display:grid; place-content:center; text-align:center; gap:2px; }
+.ad-yay-ic .sure-yazi { font-family:"Fraunces",serif; font-weight:600; font-size:34px; letter-spacing:-.03em; color:var(--metin); font-variant-numeric:tabular-nums; line-height:1; }
+.ad-arena.sure-uyari .sure-yazi { color:var(--kor); }
+.ad-arena.sure-kritik .sure-yazi { color:var(--kirmizi); }
+.ad-yay-ic em { font-style:normal; font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--soluk); display:block; margin-top:7px; }
+.ad-oyuncu { position:absolute; top:34px; width:88px; text-align:center; }
+.ad-oyuncu.sol { left:0; } .ad-oyuncu.sag { right:0; }
+.ad-oyuncu b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:36px; line-height:1; letter-spacing:-.03em; color:var(--metin); font-variant-numeric:tabular-nums; }
+.ad-oyuncu.sag b { color:var(--bordo); }
+.ad-oyuncu span { display:block; margin-top:5px; font-size:12px; font-weight:600; color:var(--metin2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ad-oyuncu em { display:block; font-style:normal; font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--soluk); margin-top:2px; }
+
+.ad-soru { margin:14px 0 0; }
+.ad-soru span { display:block; font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--kor); margin-bottom:10px; }
+.ad-soru h1 { font-family:"Fraunces",serif; font-weight:600; font-size:27px; line-height:1.16; letter-spacing:-.025em; margin:0; color:var(--metin); }
+
+.ad-siklar { list-style:none; margin:20px 0 0; padding:0; display:grid; gap:10px; }
+.ad-siklar li { display:flex; align-items:center; gap:13px; min-height:58px; padding:9px 18px 9px 9px; border-radius:99px; background:var(--yuzey); border:1px solid var(--cizgi); font-size:15px; font-weight:500; color:var(--metin); line-height:1.25; backdrop-filter:blur(6px); }
+.ad-harf { width:38px; height:38px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--cukur); color:var(--metin2); font-family:"Fraunces",serif; font-weight:600; font-size:14px; }
+.acik .ad-harf { background:var(--cukur); }
+.ad-siklar li.secili { background:var(--metin); color:var(--zemin); border-color:var(--metin); }
+.ad-siklar li.secili .ad-harf { background:rgba(255,255,255,.2); color:inherit; }
+.ad-alindi { margin-left:auto; flex:none; display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#7BD9AA; }
+
+.ad-rakip { display:flex; align-items:center; gap:10px; margin:20px 0 0; font-size:12.5px; font-weight:600; color:var(--metin2); }
+.ad-rakip i { width:8px; height:8px; border-radius:50%; background:var(--soluk); flex:none; transition:background-color .3s; }
+.ad-rakip.cevapladi { color:var(--yesil); }
+.ad-rakip.cevapladi i { background:var(--yesil); }
+
+/* ============================================================
+   DÜELLO — SONUÇ
+   ============================================================ */
+.as-basi { position:relative; padding:34px 4px 26px; text-align:center; }
+.as-yay { position:relative; width:150px; height:150px; margin:0 auto 20px; }
+.as-yay svg { position:absolute; inset:0; transform:rotate(-90deg); }
+.as-yay .ray { fill:none; stroke:var(--cizgi); stroke-width:5; }
+.koyu .as-yay .ray { stroke:var(--cukur); }
+.as-yay .dolu { fill:none; stroke:#E8B62C; stroke-width:5; stroke-linecap:round; stroke-dasharray:439.8; stroke-dashoffset:439.8; animation:as-cember 1s .1s ease-out forwards; }
+@keyframes as-cember { to { stroke-dashoffset:0; } }
+.as-tik { position:absolute; inset:0; display:grid; place-items:center; color:#E8B62C; }
+.as-tik svg { width:54px; height:54px; }
+.as-tik path { stroke-dasharray:60; stroke-dashoffset:60; animation:as-ciz .6s .7s ease-out forwards; }
+@keyframes as-ciz { to { stroke-dashoffset:0; } }
+.as-basi h1 { font-family:"Fraunces",serif; font-weight:600; font-size:44px; line-height:1; letter-spacing:-.03em; margin:0; color:#B8860B; }
+.koyu .as-basi h1 { color:#F5C63C; }
+.as-basi h1 em { font-style:italic; }
+.as-basi p { margin:12px 0 0; font-size:12px; font-weight:800; letter-spacing:.22em; text-transform:uppercase; color:var(--metin2); }
+
+.as-skor { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; padding:0 4px; }
+.as-skor-ayrac { width:1px; height:64px; background:var(--cizgi); }
+.as-oyuncu { text-align:center; }
+.as-oyuncu span { display:block; font-size:12px; font-weight:600; color:var(--metin2); }
+.as-oyuncu b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:46px; line-height:1; letter-spacing:-.035em; color:var(--metin); margin-top:5px; font-variant-numeric:tabular-nums; }
+.as-oyuncu em { display:block; font-style:normal; font-size:9px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--soluk); margin-top:4px; }
+.as-oyuncu i { display:block; font-style:normal; font-size:12.5px; font-weight:700; color:var(--kor); margin-top:9px; }
+.as-oyuncu.kazanan b { color:#B8860B; }
+.koyu .as-oyuncu.kazanan b { color:#F5C63C; }
+
+.as-puan { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:20px; padding:14px 20px; border-radius:99px; background:var(--yumusak1); border:1px solid var(--cizgi); }
+.as-puan span { font-size:12.5px; font-weight:600; color:var(--metin2); }
+.as-puan b { font-family:"Fraunces",serif; font-weight:600; font-size:20px; letter-spacing:-.02em; color:var(--kor); }
+
+.as-sorular { list-style:none; margin:0; padding:0; }
+.as-sorular li { padding:14px 18px; margin-bottom:10px; border-radius:22px; background:var(--yuzey); border:1px solid var(--cizgi); backdrop-filter:blur(6px); }
+.as-sorular .q { margin:0; font-family:"Fraunces",serif; font-weight:600; font-size:14.5px; color:var(--metin); line-height:1.25; }
+.as-sorular .d { margin:6px 0 0; font-size:11.5px; color:var(--metin2); }
+.as-sorular .r { margin:10px 0 0; display:flex; gap:8px; flex-wrap:wrap; }
+.as-etiket { padding:4px 11px; border-radius:99px; font-size:10px; font-weight:800; }
+.as-etiket.ok { background:rgba(79,177,131,.18); color:var(--yesil); }
+.as-etiket.no { background:rgba(233,115,111,.18); color:var(--kirmizi); }
+.as-dugmeler { margin-top:20px; display:grid; gap:11px; }
+
+/* ============================================================
+   SIRALAMA
+   ============================================================ */
+.al-sekme { display:flex; padding:4px; border-radius:99px; background:var(--cukur); border:1px solid var(--cizgi); margin-top:16px; }
+.acik .al-sekme { background:var(--cukur); }
+.al-sekme button { flex:1; min-height:42px; border-radius:99px; border:0; cursor:pointer; background:transparent; font-family:"Fraunces",serif; font-size:14px; font-weight:600; color:var(--metin2); }
+.al-sekme button[aria-pressed="true"] { background:var(--bordo-blok); color:var(--krem); }
+.al-aciklama { margin:13px 6px 0; font-size:12px; line-height:1.5; color:var(--metin2); }
+
+.al-podyum { display:grid; grid-template-columns:1fr 1fr 1fr; align-items:end; gap:10px; margin-top:28px; }
+.al-yer { text-align:center; }
+.al-avatar {
+  width:54px; height:54px; margin:0 auto 10px; border-radius:50%; position:relative;
+  background:var(--cukur); border:2px solid var(--madalya);
+  display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:600; font-size:20px; color:var(--metin);
+}
+.al-yer.bir .al-avatar { width:62px; height:62px; font-size:23px; }
+.al-kupa { position:absolute; top:-16px; left:50%; transform:translateX(-50%); color:var(--madalya); }
+.al-kupa svg { width:18px; height:18px; }
+.al-ad { font-size:12px; font-weight:600; color:var(--metin); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.al-puan { font-family:"Fraunces",serif; font-weight:600; font-size:13px; color:var(--kor); margin-top:2px; }
+.al-basamak {
+  margin-top:11px; border-radius:99px 99px 0 0; display:grid; place-items:center; padding-top:6px;
+  background:var(--madalya); color:#FFFCF6;
+  font-family:"Fraunces",serif; font-weight:600; font-size:22px;
+}
+.al-yer.iki .al-basamak { height:56px; }
+.al-yer.bir .al-basamak { height:84px; }
+.al-yer.uc  .al-basamak { height:40px; }
+
+.al-satir { display:flex; align-items:center; gap:14px; min-height:58px; padding:10px 20px 10px 12px; margin-bottom:10px; border-radius:99px; background:var(--yuzey); border:1px solid var(--cizgi); backdrop-filter:blur(6px); font-size:14.5px; color:var(--metin); }
+.al-sira { width:30px; height:30px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--cukur); font-family:"Fraunces",serif; font-weight:600; font-size:12.5px; color:var(--metin2); }
+.al-satir .ad { flex:1; font-weight:600; min-width:0; }
+.al-satir .ad i { font-style:italic; color:var(--kor); font-weight:700; }
+.al-satir .p { font-family:"Fraunces",serif; font-weight:600; font-size:15px; color:var(--metin); font-variant-numeric:tabular-nums; }
+.al-satir.ben { border-color:var(--vurgu); background:var(--yumusak1); }
+
+/* ============================================================
+   ETKİNLİK
+   ============================================================ */
+.ae-kart { margin-top:18px; border-radius:30px 30px 72px 30px; overflow:hidden; background:var(--yuzey); border:1px solid var(--cizgi); backdrop-filter:blur(8px); }
+.ae-kart:nth-of-type(even) { border-radius:30px 30px 30px 72px; }
+.ae-kapak { height:140px; position:relative; background:var(--k-a); overflow:hidden; }
+.ae-kapak-iz { position:absolute; inset:0; z-index:1; }
+.ae-kapak .figur { position:absolute; inset:0; width:100%; height:100%; z-index:2; color:#FFFCF6; opacity:.5; }
+.ae-rozet {
+  position:absolute; left:18px; top:16px; z-index:3; padding:6px 13px; border-radius:99px;
+  background:rgba(255,252,246,.9); color:#231A1F;
+  font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+}
+.ae-ic { padding:20px 20px 22px; }
+.ae-tarih { font-size:10px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--kor); }
+.ae-ic h3 { font-family:"Fraunces",serif; font-weight:600; font-size:25px; line-height:1.06; letter-spacing:-.025em; margin:10px 0 0; color:var(--metin); }
+.ae-meta { margin:11px 0 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--metin2); }
+.ae-meta .ayrac { width:3px; height:3px; border-radius:50%; background:var(--soluk); }
+.ae-katilim { display:flex; align-items:center; gap:11px; margin:17px 0 17px; }
+.ae-yuzler { display:flex; }
+.ae-yuz { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--zemin); background:var(--cukur); margin-left:-9px; display:grid; place-items:center; font-size:10.5px; font-weight:800; color:var(--metin2); }
+.koyu .ae-yuz { border-color:#141017; background:#241E28; }
+.ae-yuz:first-child { margin-left:0; }
+.ae-yuz.arti { background:var(--gul); color:#FFFCF6; }
+.ae-sayi { font-size:12.5px; font-weight:600; color:var(--metin2); }
+.ae-bos { font-size:12.5px; font-weight:800; color:var(--kor); }
+
+/* ============================================================
+   MÜZİK
+   ============================================================ */
+.am-cipler { display:flex; gap:9px; overflow-x:auto; margin:16px -20px 0; padding:2px 20px 12px; scrollbar-width:none; }
+.am-cipler::-webkit-scrollbar { display:none; }
+.am-cip { flex:none; min-height:38px; padding:0 17px; border-radius:99px; cursor:pointer; background:var(--cukur); border:1px solid var(--cizgi); font-family:"Figtree",sans-serif; font-size:12.5px; font-weight:600; color:var(--metin2); }
+.am-cip[aria-pressed="true"] { background:var(--bordo-blok); color:var(--krem); border-color:transparent; }
+.am-oynat { width:44px; height:44px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--renk); color:#FFFCF6; }
+.koyu .am-oynat { color:#181018; }
+.am-oynat svg { width:16px; height:16px; }
+.am-bpm { flex:none; text-align:right; }
+.am-bpm b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:13.5px; color:var(--kor); font-variant-numeric:tabular-nums; }
+.am-bpm span { display:block; font-size:8.5px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--soluk); margin-top:1px; }
+
+/* ============================================================
+   PROFİLİM
+   ============================================================ */
+.ap-basi { margin-top:16px; padding:24px 20px; display:flex; align-items:center; gap:18px; border-radius:30px 30px 72px 30px; position:relative; overflow:hidden; background:var(--yuzey); border:1px solid var(--cizgi); backdrop-filter:blur(8px); }
+.ap-basi-iz { position:absolute; inset:0; z-index:1; mix-blend-mode:var(--karis); }
+.ap-avatar {
+  position:relative; z-index:3; width:74px; height:74px; flex:none; border-radius:50%;
+  background:var(--cukur); border:2px solid var(--gul);
+  display:grid; place-items:center; font-family:"Fraunces",serif; font-weight:600; font-size:25px; color:var(--metin);
+}
+.ap-basi-yazi { position:relative; z-index:3; min-width:0; }
+.ap-basi h1 { font-family:"Fraunces",serif; font-weight:600; font-size:25px; line-height:1.08; letter-spacing:-.025em; margin:0; color:var(--metin); }
+.ap-rol { display:inline-block; margin-top:8px; padding:4px 12px; border-radius:99px; background:var(--yumusak4); color:var(--gul); font-size:9.5px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.ap-duzenle { display:block; margin-top:9px; font-size:12.5px; font-weight:600; color:var(--metin2); text-decoration:underline; text-underline-offset:3px; }
+
+.ap-sayilar { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:13px; }
+.ap-sayilar > div { padding:15px 6px 16px; text-align:center; border-radius:22px; background:var(--yuzey); border:1px solid var(--cizgi); backdrop-filter:blur(6px); }
+.ap-sayilar b { display:block; font-family:"Fraunces",serif; font-weight:600; font-size:23px; letter-spacing:-.025em; color:var(--metin); font-variant-numeric:tabular-nums; }
+.ap-sayilar span { display:block; font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--soluk); margin-top:6px; }
+
+.ap-duello { display:flex; align-items:center; gap:10px; margin-top:11px; padding:14px 18px; border-radius:99px; background:var(--yumusak2); border:1px solid var(--cizgi); font-size:12.5px; font-weight:600; color:var(--metin2); }
+.ap-duello b { font-family:"Fraunces",serif; font-weight:600; color:var(--metin); }
+
+/* rozet şeridi: madalyon 58, kutu 64 → sol payı 3 px azalt ki başlıkla hizalansın */
+.ap-serit { display:flex; gap:13px; overflow-x:auto; margin:0 -20px; padding:8px 20px 10px 17px; scrollbar-width:none; }
+.ap-serit::-webkit-scrollbar { display:none; }
+.ap-rozet { flex:none; width:64px; text-align:center; }
+.ap-madalyon { width:58px; height:58px; border-radius:50%; margin:0 auto 9px; position:relative; background:var(--rz); color:#FFFCF6; display:grid; place-items:center; }
+.koyu .ap-madalyon { color:#181018; }
+.ap-madalyon svg { width:24px; height:24px; }
+.ap-rozet.kilitli .ap-madalyon { background:var(--cukur); border:1px dashed var(--cizgi-kuvvetli); color:var(--soluk); }
+.ap-kilit { position:absolute; right:-3px; bottom:-3px; width:20px; height:20px; border-radius:50%; background:var(--zemin); border:1px solid var(--cizgi-kuvvetli); display:grid; place-items:center; color:var(--soluk); }
+.ap-kilit svg { width:10px; height:10px; }
+.ap-rozet span { display:block; font-size:9.5px; font-weight:600; color:var(--metin2); line-height:1.2; }
+.ap-rozet.kilitli span { color:var(--soluk); }
+</style>
+</head>
+<body class="akis" data-tema="acik">
+
+<div class="pano">
+  <a class="geri" href="index.html">← Beş yön</a>
+
+  <header class="yon-basi">
+    <p class="yon-no">Yön 04</p>
+    <h1 class="yon-ad">Akış</h1>
+    <p class="yon-alt">Dansçının karanlıkta bıraktığı iz.</p>
+    <dl class="yon-iddia">
+      <div>
+        <dt>Ayrıştırıcı fikir</dt>
+        <dd>Uzun pozlama fotoğrafı. Dik köşe ve düz çizgi yok: akan şeritler, üst üste binen yarı saydam katmanlar, asimetrik köşe yarıçapları. Kategoriler ızgara değil sağa sola savrulan bir <b>slalom</b>; podyum basamakları kavisli; düelloda süre bir çubuk değil, bir <b>yay</b>.</dd>
+      </div>
+      <div>
+        <dt>Eğlence dozu</dt>
+        <dd><span class="doz"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></dd>
+        <dt style="margin-top:16px">Tipografi</dt>
+        <dd>Fraunces (italik vurgu) + Figtree</dd>
+      </div>
+      <div>
+        <dt>Riski</dt>
+        <dd>Zarif ama yumuşak. Düellonun gerilimi ve sıralamanın rekabeti bu dilde sönük kalabilir. Eğri kenarlar uzun listelerde okuma ritmini bozabilir.</dd>
+      </div>
+    </dl>
+    <div class="palet">
+      <span style="background:#FAF4F1;color:#231A1F">Zemin</span>
+      <span style="background:#231A1F;color:#FAF4F1">Mürekkep</span>
+      <span style="background:#8E2743;color:#FFFCF6">Bordo</span>
+      <span style="background:#FC8E24;color:#231A1F">Turuncu</span>
+      <span style="background:#C25A78;color:#FFFCF6">Gül</span>
+      <span style="background:#B98BDD;color:#231A1F">Leylak</span>
+      <span style="background:#6BB6DB;color:#231A1F">Buz</span>
+      <span style="background:#141017;color:#F3EBEE">Gece</span>
+    </div>
+  </header>
+
+  <div class="not">
+    <b>Teknik ayrıntı:</b> renk katmanları degrade değil, üst üste binen <b>yarı saydam düz renkler</b>
+    (açık temada <code>multiply</code>, koyu temada <code>screen</code>). Böylece "degrade yalnızca logoda" kuralı korunuyor,
+    akış hissi yine de elde ediliyor. Meydan Oku afişi 158 px yüksekliğini koruyor ama köşe yarıçapı asimetrik: 20 / 78 px.
+    Düellodaki yay süre çubuğuyla aynı eşiklere uyuyor (7 sn turuncu, 3 sn kırmızı) ve ortasında saniye yazıyor.
+  </div>
+
+  <section class="sahne-bolum">
+    <div class="kumanda" id="kumanda"></div>
+    <div class="raylar" id="raylar"></div>
+  </section>
+</div>
+
+<!-- ====================== 01 · DERSLERİM ====================== -->
+<template id="t-derslerim">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s2" d="M-40 170C70 80 150 270 250 170s90-140 200-80v-180H-40Z"/>
+    <path class="s1" d="M-40 260C60 140 170 310 260 210s110-90 190-30V-40H-40Z"/>
+    <path class="s3" d="M430 520c-90 60-150-40-230 20s-130 10-240-40v160h470Z"/>
+    <path class="s2" d="M-40 740c120-70 180 60 260 10s130-60 210-10v150H-40Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <div class="a-ust">
+    <span class="a-marka">Ve<em>dans</em></span>
+    <span class="a-ust-ikon">
+      <button class="a-ikon-btn kapali" type="button" aria-label="Ara (bu sürümde yok)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+      </button>
+      <button class="a-ikon-btn" type="button" aria-label="Bildirimler, 3 okunmamış">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg>
+        <span class="a-rozet">3</span>
+      </button>
+      <button class="a-ikon-btn" type="button" aria-label="Profilim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8.2" r="3.7"/><path d="M4.9 20.1c.5-3.6 3.5-5.7 7.1-5.7s6.6 2.1 7.1 5.7"/></svg>
+      </button>
+    </span>
+  </div>
+
+  <svg class="a-dalga" viewBox="0 0 390 76" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 36c54-28 104 20 158 12s96-42 150-32 62 28 82 20v40H0V36Z" fill="currentColor" opacity=".26"/>
+    <path d="M0 52c58-22 100 16 156 10s102-34 154-24 58 22 80 16v22H0V52Z" fill="currentColor"/>
+  </svg>
+
+  <div class="a-hero-metin"><h1>Bugün<em>dans var!</em></h1></div>
+
+  <section class="a-ders a-lozenj">
+    <svg class="a-ders-iz" viewBox="0 0 350 178" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M180 200c40-60 100-30 200-90v70H180Z" fill="var(--yumusak1)"/>
+      <path d="M210 200c50-40 90-10 170-60v60H210Z" fill="var(--yumusak4)"/>
+    </svg>
+    <span class="goz">Sıradaki ders</span>
+    <h2>Salsa Başlangıç</h2>
+    <p class="a-ders-meta"><span>Bugün · 19:00</span><span class="ayrac"></span><span>Salon B</span></p>
+    <span class="a-ders-ok" aria-label="Derse git">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </span>
+  </section>
+
+  <div class="a-ikili">
+    <div class="a-lozenj" style="border-radius:26px 26px 64px 26px">
+      <span class="goz">Quiz</span>
+      <h3>Bilgini dene!</h3>
+      <p>Dans bilgini test et, rozet kazan.</p>
+      <span class="kuyruk">48 soru</span>
+    </div>
+    <div class="a-lozenj" style="border-radius:26px 26px 26px 64px">
+      <span class="goz">Etkinlik</span>
+      <h3>Salsa Gecesi</h3>
+      <p>Cuma · Kadıköy</p>
+      <span class="kuyruk">18 kişi</span>
+    </div>
+  </div>
+
+  <div class="a-bolum"><h3>Müzik</h3><span>Tümünü gör</span></div>
+  <div class="a-serit">
+    <div class="a-serit-kart">
+      <div class="a-serit-kapak" style="--kapak-a:#C74B37;--kapak-b:#E89A5C"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/></svg></div>
+      <b>Salsa Klasikleri</b><em>Son: El Cantante</em>
+    </div>
+    <div class="a-serit-kart">
+      <div class="a-serit-kapak" style="--kapak-a:#8B5CC4;--kapak-b:#C58BD8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.3S3.6 15.1 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 5.7-8.4 10.9-8.4 10.9Z"/></svg></div>
+      <b>Bachata Romantik</b><em>Son: Obsesión</em>
+    </div>
+    <div class="a-serit-kart">
+      <div class="a-serit-kapak" style="--kapak-a:#2E9A79;--kapak-b:#6FC7A6"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 17.5V6l10-2v11a3 3 0 1 1-2-2.8V6.6l-6 1.2v9.7a3 3 0 1 1-2-2.8V17.5Z"/></svg></div>
+      <b>Isınma Seti</b><em>Son: Vivir Mi Vida</em>
+    </div>
+  </div>
+
+  <section class="a-afis">
+    <svg class="a-afis-iz" viewBox="0 0 350 146" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-20 110C60 40 130 140 210 70s110-80 180-30V-20H-20Z" fill="rgba(255,190,150,.28)"/>
+      <path d="M-20 140C70 90 120 160 210 110s120-50 180-10v66H-20Z" fill="rgba(245,198,60,.14)"/>
+    </svg>
+    <h3>Topluluğumuzla<br>güçlüyüz</h3>
+    <p>Dans, daha güzel birlikte.</p>
+    <svg class="figur" viewBox="0 0 150 132" fill="none" aria-hidden="true">
+      <g fill="#FFFCF6">
+        <g opacity=".2" transform="translate(-9,4)"><circle cx="38" cy="38" r="12"/><circle cx="76" cy="30" r="12"/><circle cx="112" cy="40" r="12"/><path d="M26 56h24l5 76H21l5-76ZM64 48h24l5 84H59l5-84ZM100 58h24l5 74h-34l5-74Z"/></g>
+        <g opacity=".45" transform="translate(-4,2)"><circle cx="38" cy="38" r="12"/><circle cx="76" cy="30" r="12"/><circle cx="112" cy="40" r="12"/><path d="M26 56h24l5 76H21l5-76ZM64 48h24l5 84H59l5-84ZM100 58h24l5 74h-34l5-74Z"/></g>
+        <g opacity=".85"><circle cx="38" cy="38" r="12"/><circle cx="76" cy="30" r="12"/><circle cx="112" cy="40" r="12"/><path d="M26 56h24l5 76H21l5-76ZM64 48h24l5 84H59l5-84ZM100 58h24l5 74h-34l5-74Z"/></g>
+      </g>
+    </svg>
+  </section>
+
+  <section class="a-ilerleme a-lozenj">
+    <span class="a-halka">
+      <svg viewBox="0 0 76 76"><circle class="a-halka-ray" cx="38" cy="38" r="32"/><circle class="a-halka-dolu" cx="38" cy="38" r="32" stroke-dasharray="201" stroke-dashoffset="150.8"/></svg>
+      <b>%25</b>
+    </span>
+    <span class="a-ilerleme-yazi">
+      <b>Salsa</b>
+      <span class="a-cubuk"><i style="width:25%"></i></span>
+      <em>3 / 12 ders</em>
+    </span>
+    <span class="a-mini-rozet">
+      <span class="a-mini" style="--rz:#C74B37"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M10 9.4v5.2l4.4-2.6z"/></svg></span>
+      <span class="a-mini" style="--rz:#3E8FB4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6 10 17.5 19.4 7"/></svg></span>
+      <span class="a-mini" style="--rz:#C25A78"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
+    </span>
+  </section>
+</div>
+<nav class="tab-bar" data-secili="derslerim"></nav>
+</template>
+
+<!-- ====================== 02 · QUIZ ====================== -->
+<template id="t-quiz">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s2" d="M-40 150C70 60 150 250 250 150s90-140 200-80v-180H-40Z"/>
+    <path class="s1" d="M-40 250C60 130 170 300 260 200s110-90 190-30V-40H-40Z"/>
+    <path class="s3" d="M430 470c-90 60-150-40-230 20s-130 10-240-40v160h470Z"/>
+    <path class="s2" d="M-40 700c120-70 180 60 260 10s130-60 210-10v190H-40Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <div class="a-kunye"><span>Vedans</span><span class="nokta"></span><span>Quiz</span></div>
+
+  <header class="a-hero">
+    <svg class="a-kupa" viewBox="0 0 150 186" fill="none" aria-hidden="true">
+      <path class="c-bordo" d="M38 34c0 44 12 62 37 62s37-18 37-62" stroke-width="9" stroke-linecap="round" opacity=".28"/>
+      <path class="c-vurgu" d="M38 40c0 40 12 56 37 56s37-16 37-56" stroke-width="9" stroke-linecap="round" opacity=".5"/>
+      <path class="c-gul"   d="M38 46c0 36 12 50 37 50s37-14 37-50" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+      <path class="c-bordo" d="M38 34h74" stroke-width="9" stroke-linecap="round" opacity=".55"/>
+      <path class="c-vurgu" d="M38 44H20c0 20 9 30 22 32M112 44h18c0 20-9 30-22 32" stroke-width="6.5" stroke-linecap="round" opacity=".55"/>
+      <path class="c-bordo" d="M75 96v28M52 142h46" stroke-width="9" stroke-linecap="round" opacity=".5"/>
+      <path class="f-gul"   d="M62 124h26l6 18H56l6-18Z" opacity=".55"/>
+    </svg>
+    <h1>Hadi<span class="alt">başlayalım.</span></h1>
+    <p>Kategori seç, oyuna gir. Bilgini test et, rozetler kazan.</p>
+  </header>
+
+  <a class="a-band" href="#" aria-label="Meydan Oku, bekleyen 2 maç var">
+    <svg class="a-band-iz" viewBox="0 0 350 158" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-20 120C60 40 130 150 210 80s110-90 180-40V-20H-20Z" fill="rgba(255,190,150,.30)"/>
+      <path d="M-20 150C70 90 120 170 210 120s120-60 180-20v70H-20Z" fill="rgba(245,198,60,.16)"/>
+    </svg>
+    <div class="a-band-ic">
+      <h2>Meydan Oku</h2>
+      <p class="a-band-durum"><i></i>Bekleyen 2 maç var</p>
+      <span class="a-band-btn">Meydan Oku →</span>
+    </div>
+    <svg class="a-figur" viewBox="0 0 178 156" fill="none" aria-hidden="true">
+      <g fill="#FFFCF6">
+        <g opacity=".14" transform="translate(-15,7)"><circle cx="52" cy="64" r="14"/><circle cx="124" cy="64" r="14"/><path d="M38 84h28l5 48H33l5-48ZM110 84h28l5 48h-38l5-48ZM66 88 88 70l22 18-7 8-15-12-15 12-7-8Z"/></g>
+        <g opacity=".26" transform="translate(-10,4)"><circle cx="52" cy="64" r="14"/><circle cx="124" cy="64" r="14"/><path d="M38 84h28l5 48H33l5-48ZM110 84h28l5 48h-38l5-48ZM66 88 88 70l22 18-7 8-15-12-15 12-7-8Z"/></g>
+        <g opacity=".48" transform="translate(-5,2)"><circle cx="52" cy="64" r="14"/><circle cx="124" cy="64" r="14"/><path d="M38 84h28l5 48H33l5-48ZM110 84h28l5 48h-38l5-48ZM66 88 88 70l22 18-7 8-15-12-15 12-7-8Z"/></g>
+        <g opacity=".95"><circle cx="52" cy="64" r="14"/><circle cx="124" cy="64" r="14"/><path d="M38 84h28l5 48H33l5-48ZM110 84h28l5 48h-38l5-48ZM66 88 88 70l22 18-7 8-15-12-15 12-7-8Z"/></g>
+      </g>
+      <path d="M76 26h24l4 10H72l4-10ZM78 24l-5-12 11 6 7-8 7 8 11-6-5 12H78Z" fill="#F5C63C"/>
+      <circle cx="88" cy="68" r="9" fill="#F5C63C"/>
+    </svg>
+  </a>
+
+  <div class="a-bolum"><h3>Kategoriler</h3><span>Bilgini geliştir</span></div>
+
+  <div class="a-slalom">
+    <svg class="a-yol" viewBox="0 0 350 500" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M60 30C260 60 90 130 60 160s230 70 250 100-240 60-250 100 200 60 250 90"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 7" stroke-linecap="round"/>
+    </svg>
+
+    <div class="a-kat" style="--kat-renk:#D9701F;--kat-zemin:var(--yumusak1)">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg></span>
+      <span class="a-kat-yazi"><b>Dans Kültürü</b><em>Tarih, stiller, efsaneler</em></span>
+      <span class="ok" aria-hidden="true">→</span>
+    </div>
+
+    <div class="a-kat" style="--kat-renk:#3E8FB4;--kat-zemin:var(--yumusak3)">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M9 17.5V6l10-2v11"/><circle cx="6.5" cy="17.6" r="2.6"/><circle cx="16.5" cy="15.6" r="2.6"/></svg></span>
+      <span class="a-kat-yazi"><b>Müzik &amp; Enstrümanlar</b><em>Ritim, türler, enstrümanlar</em></span>
+      <span class="ok" aria-hidden="true">→</span>
+    </div>
+
+    <div class="a-kat" style="--kat-renk:#C74B37;--kat-zemin:var(--yumusak4)">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/></svg></span>
+      <span class="a-kat-yazi"><b>Salsa</b><em>Figürler, müzik, tarih</em></span>
+      <span class="ok" aria-hidden="true">→</span>
+    </div>
+
+    <div class="a-kat" style="--kat-renk:#8B5CC4;--kat-zemin:var(--yumusak2)">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 20.3S3.6 15.1 3.6 9.4A4.6 4.6 0 0 1 12 6.8a4.6 4.6 0 0 1 8.4 2.6c0 5.7-8.4 10.9-8.4 10.9Z"/></svg></span>
+      <span class="a-kat-yazi"><b>Bachata</b><em>Figürler, müzik, stil</em></span>
+      <span class="ok" aria-hidden="true">→</span>
+    </div>
+
+    <div class="a-kat" style="--kat-renk:#2E9A79;--kat-zemin:var(--yumusak3)">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6.2 8v8M11.2 5.5v13M16.2 9.2v5.6M3 12h1M20 12h1"/></svg></span>
+      <span class="a-kat-yazi"><b>Müzik Kulağı</b><em>Dinle, tahmin et, kazan</em></span>
+      <span class="ok" aria-hidden="true">→</span>
+    </div>
+
+    <div class="a-kat pasif">
+      <span class="a-kat-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="5" r="2.4"/><path d="M12 8v6M12 10 6.5 12.5M12 10l5.5 2.5M12 14l-3.5 6M12 14l3.5 6"/></svg></span>
+      <span class="a-kat-yazi"><b>Modern Dans &amp; Bale</b><em>Henüz soru yok</em></span>
+      <span class="a-yakinda">Yakında</span>
+    </div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="quiz"></nav>
+</template>
+
+<!-- ====================== 03 · DÜELLO CANLI ====================== -->
+<template id="t-duello">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s1" d="M-40 190C80 90 160 260 260 170s110-120 210-60V-40H-40Z"/>
+    <path class="s2" d="M430 330c-80 70-160-30-240 30s-140 0-230-50v120h470Z"/>
+    <path class="s3" d="M-40 760c110-60 190 50 270 0s110-40 200 0v124H-40Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic tam">
+  <div class="ad-ust">
+    <button class="ad-cik" type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      Maçtan çık
+    </button>
+    <span class="ad-canli"><i></i>Canlı</span>
+  </div>
+
+  <div class="ad-arena" data-sure="15" data-baslangic="12">
+    <div class="ad-oyuncu sol"><b>3</b><span>Sen</span><em>Doğru</em></div>
+    <div class="ad-yay">
+      <svg viewBox="0 0 172 172" aria-hidden="true">
+        <circle class="ad-yay-ray" cx="86" cy="86" r="74"/>
+        <circle class="sure-dolu" cx="86" cy="86" r="74"/>
+      </svg>
+      <div class="ad-yay-ic">
+        <span class="sure-yazi">12 saniye</span>
+        <em>Soru 2 / 6</em>
+      </div>
+    </div>
+    <div class="ad-oyuncu sag"><b>2</b><span>Elif K.</span><em>Doğru</em></div>
+  </div>
+
+  <div class="ad-soru">
+    <span>Bachata</span>
+    <h1>Bachata hangi ülkede doğdu?</h1>
+  </div>
+
+  <ul class="ad-siklar">
+    <li><span class="ad-harf">A</span>Küba</li>
+    <li class="secili"><span class="ad-harf">B</span>Dominik Cumhuriyeti
+      <span class="ad-alindi">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.6 10 17.5 19.4 7"/></svg>
+        Alındı
+      </span>
+    </li>
+    <li><span class="ad-harf">C</span>Kolombiya</li>
+    <li><span class="ad-harf">D</span>Porto Riko</li>
+  </ul>
+
+  <p class="ad-rakip" data-rakip-durum="Elif"><i></i><span class="rakip-yazi">Elif düşünüyor</span></p>
+</div>
+</template>
+
+<!-- ====================== 04 · DÜELLO SONUÇ ====================== -->
+<template id="t-sonuc">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s2" d="M-40 230C80 110 160 300 270 190s100-130 200-70V-40H-40Z"/>
+    <path class="s3" d="M430 560c-90 60-150-40-240 20s-130 10-230-40v160h470Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic tam">
+  <header class="as-basi">
+    <div class="as-yay">
+      <svg viewBox="0 0 150 150" aria-hidden="true">
+        <circle class="ray" cx="75" cy="75" r="70"/>
+        <circle class="dolu" cx="75" cy="75" r="70"/>
+      </svg>
+      <span class="as-tik">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 10 18 19.6 6.6"/></svg>
+      </span>
+    </div>
+    <h1><em>Kazandın!</em></h1>
+    <p>Tebrikler</p>
+  </header>
+
+  <div class="as-skor">
+    <div class="as-oyuncu kazanan"><span>Sen</span><b>5</b><em>Doğru</em><i>82 puan</i></div>
+    <div class="as-skor-ayrac"></div>
+    <div class="as-oyuncu"><span>Elif K.</span><b>4</b><em>Doğru</em><i>71 puan</i></div>
+  </div>
+
+  <div class="as-puan">
+    <span>Sıralamana</span>
+    <b>+15 puan</b>
+  </div>
+
+  <div class="a-bolum"><h3>Soru soru</h3><span>6 soru</span></div>
+
+  <ol class="as-sorular">
+    <li>
+      <p class="q">Bachata hangi ülkede doğdu?</p>
+      <p class="d">Doğru cevap: Dominik Cumhuriyeti</p>
+      <p class="r"><span class="as-etiket ok">Sen · 4,2 sn · 16</span><span class="as-etiket ok">Elif · 6,1 sn · 14</span></p>
+    </li>
+    <li>
+      <p class="q">Salsa müziğinde clave kaç vuruştur?</p>
+      <p class="d">Doğru cevap: 5</p>
+      <p class="r"><span class="as-etiket ok">Sen · 3,1 sn · 17</span><span class="as-etiket no">Elif · 0</span></p>
+    </li>
+    <li>
+      <p class="q">Güiro hangi ailedendir?</p>
+      <p class="d">Doğru cevap: Vurmalı</p>
+      <p class="r"><span class="as-etiket no">Sen · 0</span><span class="as-etiket ok">Elif · 5,4 sn · 15</span></p>
+    </li>
+  </ol>
+
+  <div class="as-dugmeler">
+    <button class="a-btn" type="button">Tekrar oyna</button>
+    <button class="a-btn sessiz" type="button">Kapat</button>
+  </div>
+</div>
+</template>
+
+<!-- ====================== 05 · SIRALAMA ====================== -->
+<template id="t-siralama">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s2" d="M-40 200C80 100 160 280 270 180s100-120 200-60V-40H-40Z"/>
+    <path class="s1" d="M430 600c-90 60-150-40-240 20s-130 10-230-40v120h470Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <div class="a-sayfa-basi"><h1>Sıralama</h1></div>
+
+  <div class="al-sekme">
+    <button type="button" aria-pressed="true">Bu Ay</button>
+    <button type="button" aria-pressed="false">Tüm Zamanlar</button>
+  </div>
+  <p class="al-aciklama">Bu ay toplanan puana göre. Her ay sıfırdan başlar.</p>
+
+  <div class="al-podyum">
+    <div class="al-yer iki" style="--madalya:#9AA0A6">
+      <div class="al-avatar">M</div>
+      <p class="al-ad">Mert A.</p>
+      <p class="al-puan">1.180</p>
+      <div class="al-basamak">2</div>
+    </div>
+    <div class="al-yer bir" style="--madalya:#D4A017">
+      <div class="al-avatar">
+        <span class="al-kupa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3h10v2h3v3a4 4 0 0 1-3.3 3.94A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1a5 5 0 0 1-3.7-3.96A4 4 0 0 1 4 8V5h3V3Zm0 4H6v1a2 2 0 0 0 1 1.73V7Zm11 0h-1v2.73A2 2 0 0 0 18 8V7Z"/></svg></span>
+        Z
+      </div>
+      <p class="al-ad">Zeynep K.</p>
+      <p class="al-puan">1.420</p>
+      <div class="al-basamak">1</div>
+    </div>
+    <div class="al-yer uc" style="--madalya:#B87333">
+      <div class="al-avatar">S</div>
+      <p class="al-ad">Sen</p>
+      <p class="al-puan">1.040</p>
+      <div class="al-basamak">3</div>
+    </div>
+  </div>
+
+  <div class="a-bolum"><h3>Diğerleri</h3><span>28 dansçı</span></div>
+
+  <div>
+    <div class="al-satir"><span class="al-sira">04</span><span class="ad">Ayşe T.</span><span class="p">960</span></div>
+    <div class="al-satir"><span class="al-sira">05</span><span class="ad">Kaan B.</span><span class="p">915</span></div>
+    <div class="al-satir"><span class="al-sira">06</span><span class="ad">Elif K.</span><span class="p">880</span></div>
+    <div class="al-satir"><span class="al-sira">07</span><span class="ad">Derya Ö.</span><span class="p">845</span></div>
+    <div class="al-satir"><span class="al-sira">08</span><span class="ad">Burak S.</span><span class="p">790</span></div>
+    <div class="al-satir"><span class="al-sira">09</span><span class="ad">Nil A.</span><span class="p">742</span></div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="siralama"></nav>
+</template>
+
+<!-- ====================== 06 · ETKİNLİK ====================== -->
+<template id="t-etkinlik">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s3" d="M-40 180C80 80 160 250 270 160s100-110 200-50V-40H-40Z"/>
+    <path class="s2" d="M430 640c-90 60-150-40-240 20s-130 10-230-40v130h470Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <div class="a-sayfa-basi"><h1>Etkinlikler</h1></div>
+
+  <article class="ae-kart">
+    <div class="ae-kapak" style="--k-a:#8E2743">
+      <svg class="ae-kapak-iz" viewBox="0 0 350 140" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20 100C60 30 130 130 210 60s110-80 180-30V-20H-20Z" fill="rgba(255,190,150,.30)"/>
+        <path d="M-20 132C70 84 120 150 210 104s120-46 180-8v56H-20Z" fill="rgba(194,90,120,.34)"/>
+      </svg>
+      <span class="ae-rozet">Parti</span>
+      <svg class="figur" viewBox="0 0 350 140" fill="none" aria-hidden="true">
+        <g fill="currentColor">
+          <g opacity=".3" transform="translate(-10,4)"><circle cx="118" cy="46" r="13"/><circle cx="180" cy="38" r="13"/><circle cx="242" cy="48" r="13"/><path d="M104 64h28l5 76H99l5-76ZM166 56h28l5 84h-38l5-84ZM228 66h28l5 74h-38l5-74Z"/></g>
+          <g opacity=".9"><circle cx="118" cy="46" r="13"/><circle cx="180" cy="38" r="13"/><circle cx="242" cy="48" r="13"/><path d="M104 64h28l5 76H99l5-76ZM166 56h28l5 84h-38l5-84ZM228 66h28l5 74h-38l5-74Z"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="ae-ic">
+      <p class="ae-tarih">Cuma · 12 Eylül</p>
+      <h3>Salsa Gecesi</h3>
+      <p class="ae-meta"><span>21:00</span><span class="ayrac"></span><span>Kadıköy</span><span class="ayrac"></span><span>Mert A.</span></p>
+      <div class="ae-katilim">
+        <span class="ae-yuzler"><span class="ae-yuz">Z</span><span class="ae-yuz">M</span><span class="ae-yuz">A</span><span class="ae-yuz arti">+15</span></span>
+        <span class="ae-sayi">18 kişi geliyor</span>
+      </div>
+      <button class="a-btn" type="button">Katılacağım</button>
+    </div>
+  </article>
+
+  <article class="ae-kart">
+    <div class="ae-kapak" style="--k-a:#3E8FB4">
+      <svg class="ae-kapak-iz" viewBox="0 0 350 140" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20 110C60 40 130 140 210 70s110-80 180-30V-20H-20Z" fill="rgba(139,92,196,.30)"/>
+        <path d="M-20 134C70 90 120 150 210 110s120-40 180-6v52H-20Z" fill="rgba(46,154,121,.30)"/>
+      </svg>
+      <span class="ae-rozet">Workshop</span>
+      <svg class="figur" viewBox="0 0 350 140" fill="none" aria-hidden="true">
+        <g fill="currentColor">
+          <g opacity=".3" transform="translate(-8,4)"><circle cx="148" cy="44" r="14"/><circle cx="212" cy="44" r="14"/><path d="M132 64h34l6 76h-46l6-76ZM196 64h34l6 76h-46l6-76Z"/></g>
+          <g opacity=".9"><circle cx="148" cy="44" r="14"/><circle cx="212" cy="44" r="14"/><path d="M132 64h34l6 76h-46l6-76ZM196 64h34l6 76h-46l6-76ZM166 70h32v9h-32z"/></g>
+        </g>
+      </svg>
+    </div>
+    <div class="ae-ic">
+      <p class="ae-tarih">Pazar · 14 Eylül</p>
+      <h3>Bachata Workshop</h3>
+      <p class="ae-meta"><span>14:00</span><span class="ayrac"></span><span>Stüdyo A</span><span class="ayrac"></span><span>Selin D.</span></p>
+      <div class="ae-katilim"><span class="ae-bos">İlk katılan sen ol</span></div>
+      <button class="a-btn ikincil" type="button">✓ Katılacağım</button>
+    </div>
+  </article>
+</div>
+<nav class="tab-bar" data-secili="etkinlik"></nav>
+</template>
+
+<!-- ====================== 07 · MÜZİK ====================== -->
+<template id="t-muzik">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s2" d="M-40 170C80 70 160 240 270 150s100-110 200-50V-40H-40Z"/>
+    <path class="s3" d="M430 680c-90 60-150-40-240 20s-130 10-230-40v124h470Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <div class="a-sayfa-basi">
+    <h1>Müzik <em>listeleri</em></h1>
+    <p>Branşına ve tempoya uygun şarkılarla çalış.</p>
+  </div>
+
+  <div class="am-cipler">
+    <button class="am-cip" type="button" aria-pressed="true">Hepsi</button>
+    <button class="am-cip" type="button" aria-pressed="false">Salsa</button>
+    <button class="am-cip" type="button" aria-pressed="false">Bachata</button>
+    <button class="am-cip" type="button" aria-pressed="false">Modern</button>
+  </div>
+
+  <div class="a-satir">
+    <span class="am-oynat" style="--renk:#C74B37"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Salsa Klasikleri</b><em>Salsa · Enerjik · 18 şarkı</em></span>
+    <span class="am-bpm"><b>180–190</b><span>BPM</span></span>
+  </div>
+  <div class="a-satir">
+    <span class="am-oynat" style="--renk:#8B5CC4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Bachata Romantik</b><em>Bachata · Romantik · 12 şarkı</em></span>
+    <span class="am-bpm"><b>120–130</b><span>BPM</span></span>
+  </div>
+  <div class="a-satir">
+    <span class="am-oynat" style="--renk:#2E9A79"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Isınma Seti</b><em>Genel · Yumuşak · 9 şarkı</em></span>
+    <span class="am-bpm"><b>95–110</b><span>BPM</span></span>
+  </div>
+  <div class="a-satir">
+    <span class="am-oynat" style="--renk:#D9701F"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Sosyal Gece</b><em>Salsa · Bachata · 24 şarkı</em></span>
+    <span class="am-bpm"><b>140–190</b><span>BPM</span></span>
+  </div>
+  <div class="a-satir">
+    <span class="am-oynat" style="--renk:#3E8FB4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    <span class="ad"><b>Modern Akış</b><em>Modern · Sakin · 11 şarkı</em></span>
+    <span class="am-bpm"><b>70–90</b><span>BPM</span></span>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="muzik"></nav>
+</template>
+
+<!-- ====================== 08 · PROFİLİM ====================== -->
+<template id="t-profil">
+<div class="a-iz" aria-hidden="true">
+  <svg viewBox="0 0 390 844" preserveAspectRatio="none">
+    <path class="s3" d="M-40 210C80 110 160 280 270 180s100-120 200-60V-40H-40Z"/>
+    <path class="s2" d="M430 620c-90 60-150-40-240 20s-130 10-230-40v130h470Z"/>
+  </svg>
+</div>
+
+<div class="ekran-ic">
+  <header class="ap-basi">
+    <svg class="ap-basi-iz" viewBox="0 0 350 130" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M150 160c50-70 110-30 210-100v100H150Z" fill="var(--yumusak4)"/>
+      <path d="M200 160c40-50 90-20 160-70v70H200Z" fill="var(--yumusak1)"/>
+    </svg>
+    <span class="ap-avatar">DY</span>
+    <span class="ap-basi-yazi">
+      <h1>Deniz Yıldırım</h1>
+      <span class="ap-rol">Öğrenci</span>
+      <a class="ap-duzenle" href="#">Profilimi düzenle</a>
+    </span>
+  </header>
+
+  <div class="ap-sayilar">
+    <div><b>1.240</b><span>Puan</span></div>
+    <div><b>34</b><span>İzlenen</span></div>
+    <div><b>7</b><span>Seri</span></div>
+  </div>
+
+  <p class="ap-duello">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 12.5h6L11 22l8.5-10.5h-6L13 2Z"/></svg>
+    <b>12 maç</b> · <b>7 galibiyet</b>
+  </p>
+
+  <div class="a-bolum"><h3>Rozetler</h3><span>9 / 17 · Tümünü gör</span></div>
+  <div class="ap-serit">
+    <div class="ap-rozet" style="--rz:#C74B37">
+      <span class="ap-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M10 9.4v5.2l4.4-2.6z"/></svg></span>
+      <span>İlk ders</span>
+    </div>
+    <div class="ap-rozet" style="--rz:#3E8FB4">
+      <span class="ap-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6 10 17.5 19.4 7"/></svg></span>
+      <span>Hatasız tur</span>
+    </div>
+    <div class="ap-rozet" style="--rz:#C25A78">
+      <span class="ap-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
+      <span>100 puan</span>
+    </div>
+    <div class="ap-rozet" style="--rz:#D4A017">
+      <span class="ap-madalyon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 4.6 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8 7.6 12 3Z"/></svg></span>
+      <span>4 hafta</span>
+    </div>
+    <div class="ap-rozet kilitli">
+      <span class="ap-madalyon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10v2h3v3a4 4 0 0 1-4 4h-.6A5 5 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1a5 5 0 0 1-2.4-3.9H8a4 4 0 0 1-4-4V5h3V3Z"/></svg>
+        <span class="ap-kilit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></svg></span>
+      </span>
+      <span>30 hafta</span>
+    </div>
+    <div class="ap-rozet kilitli">
+      <span class="ap-madalyon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v11l-6 4-6-4V3Z"/><path d="M9 21h6"/></svg>
+        <span class="ap-kilit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></svg></span>
+      </span>
+      <span>1 yıl</span>
+    </div>
+  </div>
+
+  <div style="margin-top:18px">
+    <div class="a-satir"><span class="ad"><b>Sertifikalarım</b><em>Salsa · Seviye 1</em></span><span class="ok" aria-hidden="true">→</span></div>
+    <div class="a-satir"><span class="ad"><b>Hesabım</b><em>Ders hakkı, ödemeler, takma ad</em></span><span class="ok" aria-hidden="true">→</span></div>
+    <div class="a-satir"><span class="ad"><b>Ayarlar</b><em>Bildirim, ses, dil</em></span><span class="ok" aria-hidden="true">→</span></div>
+  </div>
+</div>
+<nav class="tab-bar" data-secili="profilim"></nav>
+</template>
+
+<script>
+window.EKRANLAR = [
+  ['t-derslerim', 'Derslerim',          'Ana sayfa · yedi bölüm'],
+  ['t-quiz',      'Quiz sekmesi',       'Hareket izi · slalom kategoriler'],
+  ['t-duello',    'Düello canlı yarış', 'Süre bir yay, çubuk değil'],
+  ['t-sonuc',     'Düello sonucu',      'Çizilen altın çember · skor'],
+  ['t-siralama',  'Sıralama',           'Bu Ay · kavisli podyum'],
+  ['t-etkinlik',  'Etkinlik',           'Akan kapak · katılımcılar'],
+  ['t-muzik',     'Müzik listeleri',    'Filtre · lozenj liste · BPM'],
+  ['t-profil',    'Profilim',           'Sayılar · rozet vitrini · hesap']
+];
+</script>
+<script src="ortak.js"></script>
+</body>
+</html>
