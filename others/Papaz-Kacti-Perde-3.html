@@ -99,6 +99,19 @@
     max-width:62ch;margin:20px auto;font-size:.95rem;line-height:1.55;
   }
 
+  /* ---- atlanan bölüm: noktalı çizgi + özet ---- */
+  .skip{
+    display:grid;grid-template-columns:112px 1fr;gap:14px;
+    margin:26px 0;color:var(--dir);font-size:.92rem;line-height:1.5;
+  }
+  .skip-dots{justify-self:end;margin-right:6px;border-left:3px dotted var(--rule);min-height:100%}
+  .skip-head{
+    font-family:var(--label);font-size:.68rem;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--name);margin:0 0 8px;
+  }
+  .skip ul{margin:0;padding-left:1.1em}
+  .skip li{margin:0 0 5px}
+
   /* ---- HUMPHREY: benim repliklerim ---- */
   .line.me{
     border-left:4px solid #000;
@@ -126,6 +139,7 @@
     .line{grid-template-columns:1fr;gap:2px;margin-bottom:16px}
     .who{text-align:left;padding-top:0}
     .line.me{margin-left:-12px;padding-left:10px}
+    .skip{grid-template-columns:18px 1fr;gap:10px}
   }
 
   /* ---- ekran kromu (baskıda gizli) ---- */
@@ -173,6 +187,7 @@
     .line{margin-bottom:9px;gap:10px;grid-template-columns:98px 1fr;
       break-inside:avoid;page-break-inside:avoid}
     .stage{margin:13px auto;font-size:9.6pt;break-inside:avoid;page-break-inside:avoid}
+    .skip{grid-template-columns:98px 1fr;gap:10px;margin:16px 0;font-size:9.4pt;break-inside:avoid;page-break-inside:avoid}
     .who{font-size:8.4pt}
     .line.me{
       margin-left:0;padding-left:10px;margin-bottom:11px;
@@ -238,15 +253,45 @@
   <p class="line"><span class="who">SKILLON</span><span class="say">Piskopos mu? Aman yarabbi, beni bu halde görürse rezil olurum.</span></p>
   <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Miss Skillon'u zorla ayağa kaldırarak)</em> Siz şimdi bunu alıp şuraya girin, bir an için kafa çekip zom olmaya bakın. Sırası gelince ben sizi uyandırırım, bir de güzel sabah kahvesi yaparım… <em class="dir">(Dolaba sokar.)</em></span></p>
   <p class="line"><span class="who">SKILLON</span><span class="say"><em class="dir">(Dolaba girmeden eşikte bir an direnerek)</em> Piskopos yanıma girmeye kalkarsa evde olmadığımı söylersin…</span></p>
+  <p class="stage"><em class="dir">(Penelope tekrar girer, kapıyı arkasından kapatır. Kapı, peşinden gelen Humphrey'in yüzüne çarpar.)</em></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say">Durum nasıl?</span></p>
   <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Sükûnetle)</em> Her şey yolunda hanımcığım…</span></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Nazik ve neşeli olmaya çalışarak)</em> Buyurun efendim, şöyle buyurun rica ederim.</span></p>
   <p class="stage"><em class="dir">(Penelope'yi takiben muhterem rahip Arthur Humphrey; kırk yaşlarında halim selim bir adamdır. Tam o girerken bahçeden zebani feryadı gibi feci bir bağırtı duyulur. Humphrey bunu duyunca sırtından itilmiş gibi apar topar içeri girer. Penelope pencereye koşup perde aralığından dışarısını gözetler.)</em></p>
-  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Teşekkür ederim efendim, çok naziksiniz…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Burnunu tutarak, kapının çarptığını belli eder.)</em> Teşekkür ederim efendim, çok naziksiniz…</span></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Pencereden uzaklaşarak)</em> Estağfurullah, çok beklediniz mi?</span></p>
-  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Yoo, yarım saat bile olmadı…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Dalgın)</em> Ya, mükemmel, mükemmel. Oturmaz mısınız?</span></p>
-  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Bir müddet ev sahibine tuhaf tuhaf baktıktan sonra kanepenin arkasına geçer.)</em> Arzı şükran ederim hanımefendi…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Yoo, bir saat bile olmadı…</span></p>
+  <p class="line"><span class="who">PENELOPE</span><span class="say">Eee, yorgunsunuz, haklısınız.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Anlamayarak)</em> Nasıl?</span></p>
+  <p class="line"><span class="who">PENELOPE</span><span class="say">Evet, evet, haklısınız.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Efendim?</span></p>
+  <p class="line"><span class="who">PENELOPE</span><span class="say">Sıkıldınız mı?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Arka bahçeniz ziyadesiyle kalabalıktı.</span></p>
+  <p class="stage"><em class="dir">(Penelope dalgın dalgın yine pencereye gidip perde aralığından dışarıyı gözetler. Humphrey dolap kapısının önündeki Ida'ya bakar, göz göze gelmeye çalışır.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Siz bu evde mi çalışıyorsunuz?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ben dolap kapısını bekliyorum.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Nasıl?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Benim bugün görevim bu.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Şaşırarak)</em> Dolap kapısını beklemesi için çalışanları mı var?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Evet, bu evde her kapıyı beklemesi için bir çalışan var.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Hayret!</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ben aslında sizi dışarıda gördüm ama sizi de dış kapıyı bekleyen görevli sandım.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Beni mi?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ev o kadar büyük ki birbirimizi tanıyamıyoruz.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Tabii…</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ne dersiniz, yılda bir tanışma pikniği düzenleyelim mi?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Nasıl? <em class="dir">(Bir an durur.)</em> Peki… <em class="dir">(Pencereden bakan Penelope'yi gösterir.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Pencereyi bekleyen çalışan gelmeyince, pencere beklenmemiş olmasın diye…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Hee, anladım.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Affedersiniz, benim yerime dolap kapısını bekler misiniz?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ben nasıl?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Çok kolay bir iş. Gelince canım söyle. Gelin, böyle duracaksınız. <em class="dir">(Humphrey'i dolap kapısının önüne geçirir.)</em> Ben biraz sıkıştım da, hemen gelirim.</span></p>
+  <p class="stage"><em class="dir">(Ida çıkar.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Arkasından seslenir.)</em> Böyle dursam yetiyor mu?</span></p>
+  <p class="stage"><em class="dir">(Cevap gelmez. Humphrey bir süre Penelope'nin kendisini oturtmasını bekler, ama kadın hâlâ dalgın dalgın pencereye bakmaktadır.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">O zaman ben oturuyorum… Oturuyorum… Oturmaktayım… Oturdum. <em class="dir">(Kanepenin arkasına geçip oturur.)</em></span></p>
+  <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Dalgın, hâlâ dönmeden)</em> Ya, mükemmel, mükemmel. Oturmaz mısınız?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Ev sahibine tuhaf tuhaf bakar.)</em> Arzı şükran ederim hanımefendi…</span></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say">Pardon, şapkanızla paltonuzu almayı unuttum. <em class="dir">(Önce şapkasını alır, sonra adamcağızı boğacak gibi ederek boynundan eşarbını çıkarır, eşyaları masanın üstüne koyar.)</em> Kuzum, hatunu nereye soktun İda? <em class="dir">(İda dolabı işaret eder.)</em> Aferin İda, bu akşam sahiden işe yaradın.</span></p>
   <p class="line"><span class="who">IDA</span><span class="say">İyi becerdim değil mi? <em class="dir">(Sırıtarak mutfağa gider.)</em></span></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say">Affedersiniz efendim, bugün ben… <em class="dir">(Yanına gelir.)</em></span></p>
@@ -563,105 +608,20 @@
   <p class="line"><span class="who">CLIVE</span><span class="say">Buraya bak, ben kendime böyle şey yaptırmam.</span></p>
   <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Tabancayı Clive'in kaburgalarına dayar.)</em> Yaptırmaz mısın?</span></p>
   <p class="line"><span class="who">CLIVE</span><span class="say"><em class="dir">(Silaha bakarak)</em> Yaptırırım tabii. <em class="dir">(Humphrey'e)</em> Yer ver babalık. Öteye geç. Bütün yolcular ön tarafa… <em class="dir">(Dolaba girer, Adam kapıyı kapayarak ortaya gelir.)</em></span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Her şeyden evvel para lazım.</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Para mı?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Kaçmak için…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Bir çek vereyim.</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Hayır, nakit isterim. Evde muhakkak bir miktar vardır, nerede?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Yatak odamda var. <em class="dir">(Bir şey akıl eder.)</em> Gidip alayım.</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Gidip alalım. <em class="dir">(Dışarıdan sesler gelir.)</em> Geç kaldık, geldiler. Unutmayın, ben kocanızım. <em class="dir">(Penelope'yi iterek kanepeye oturtur.)</em> Dikkatli olursak gelenleri hemen savarız. İsminiz ne?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Penelope…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Soyadınız?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Toop. Bunu yutacaklarını mı sanıyorsunuz?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Eceliniz gelmemişse yutarlar. <em class="dir">(Dışarıdan yine sesler gelir.)</em></span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say"><em class="dir">(Dışarıdan)</em> Sokak kapısına gitmeye gerek yok. Teras kapısı açık…</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">Anladık. Anladık…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Kim o? <em class="dir">(Telaşlanır.)</em></span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Amcam…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Amcanız mı? Yani kocanızı tanıyan biri. Beni ele verecek, ben de sizi vuracağım…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Aşk olsun, beni vurmak için bahane arıyorsunuz. Sesinizi çıkarmazsanız zannederim canımı kurtarırım.</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Israrla)</em> Benimkini de kurtarmaya bakın…</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say"><em class="dir">(Dışarıdan)</em> Anladık be yahu… Anladık…</span></p>
-  <p class="stage"><em class="dir">(Adam Penelope'nin arkasına geçer, terastan üstü başı darmadağınık bir halde piskoposla Çavuş Towes girerler. Adam kanepeye oturur.)</em></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Heyecanlanma dayı, üzme kendini…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Heyecanlandığım yok; fakat tekrar ediyorum, adamlarınızdan biri tarafından kasten kabaklığa yuvarlandım.</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">Ne yapalım, düşman takip ediyoruz, kutsal ödev. Alaman esiri kaçmış, enselemek bize düştü. Vatan uğruna seferber olduk. Bizim delikanlı seni Alaman sanmış.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Fakat, rica ederim…</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say"><em class="dir">(Neşeyle)</em> Alaman olmadığın da belli değil daha. Hakkım yok mu bey baba?</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Penelope, rica ederim bu adama benim kim olduğumu söyle… <em class="dir">(Masanın yanındaki iskemleye oturur.)</em></span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Söyleyeyim amcacığım. <em class="dir">(Çavuş'a)</em> Çavuş efendi, amcam Lax piskoposudur.</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say"><em class="dir">(Hayretle piskoposa bakar.)</em> Piskopos mu, vay dinine, kusura bakmayın piskopos baba, ağzımdan kaçtı…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ne oldu sana amca?</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say"><em class="dir">(Kendine bir içki koyar.)</em> Bir şey olduğu yok abla. Alamanı kovalıyoruz dedim ya. Herifin birini sizin bahçeye girerken görmüşler. Adam yolladık, bir de bakmış, çalının içinden böyle iki tane sopa gibi bir şey çıkıyor, önce devrilmiş el arabası sanmış. Meğersem bu dayının bacaklarıymış…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Sizi temin ederim, çavuş, amcam aradığınız adam değildir.</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">E napalım canım, can sağlığı olsun. Etrafta dönenen yabancı bir herif görmediniz değil mi?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Maalesef, hayır…</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">E napalım, can sağlığı olsun. <em class="dir">(Gidip pencereden dışarıya bakar.)</em></span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Sepetleyin…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ne?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Sepetleyin bunları.</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Amcacığım, yatsana artık, bu akşam çok yoruldun. Çavuş, siz daha burada mısınız?</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">Herifi buluncaya kadar etrafta dolaşacağız, korkmayın sakın…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Peki, korkmamaya gayret ederim.</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say"><em class="dir">(İçkisini bitirip ortaya gelir.)</em> Eh, ben tüyeyim artık. Eyvallah millet. <em class="dir">(Perdeleri aralar.)</em> Ay'a bak ay'a. <em class="dir">(İç geçirir.)</em> Efkârlandım yine…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Siz evli misiniz çavuş?</span></p>
-  <p class="line"><span class="who">ÇAVUŞ</span><span class="say">Yaramı deşmesene bey baba… <em class="dir">(Terastan çıkar.)</em></span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say"><em class="dir">(Kalkıp ortaya gelir.)</em> Şimdi, Penelope hanım, zannederim bize izahat vermenin sırası geldi. Anladığıma göre zevcin bu zat…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Evet amcacığım, kocamı tanıştırayım sana. <em class="dir">(Acele)</em> Lionelciğim, Dudley amcam <em class="dir">(kekeleyerek)</em> sana her zaman bahsederim…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Kalkar ve Rusya usulü topuklarını vurarak hazır ol vaziyetine geçer.)</em> Şerefyab oldum efendim. <em class="dir">(Penelope Adam'ın ayağına bir tekme atıverir, adam hemen yerine oturur.)</em></span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say"><em class="dir">(Hayretle elini uzatır.)</em> Şeref bana… <em class="dir">(Uzanan elini Adam tutmayınca şaşırır.)</em> Aa, fakat anlamıyorum, Penelope, madem ki kocan burada, o ikide bir kanepenin arkasına saklanan adam kimdi?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Usulca Penelope'ye öğretir.)</em> Almandı…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">O… o… Almandı…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Ne?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Alman canım, bildiğimiz Alman…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Yani askerlerin aradıkları adam mı? Niye daha önce söylemedin?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Beni tabanca ile gizlice tehdit ediyordu, söylesem vuracaktı…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Vah yavrum, tevekkeli değil, halinde bir garabet vardı. Peki, benim deli zannettiğim adam kimdi?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">O sendin değil mi Lionel?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Bendim.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Peki ama o halin neydi, anlat bakalım.</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Ben burada tek başıma oturuyorum. Alman birdenbire içeri girdi, üstüme saldırıp çubuk gibi bir şeyle kafama vurdu. Elbiselerimi aldı…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Zavallı çocuklarım, ne korkunç şeyler gelmiş başınıza. <em class="dir">(Telefona giderek)</em> Acaba polise haber versek mi? Ne dersiniz?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Kalkar.)</em> Bence tavsiye etmem.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Neden? <em class="dir">(Ahizeyi almak üzereyken Adam'la burun buruna gelir, tereddüt eder.)</em></span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Zira eminim ki daha eliniz ahizeye değmeden cansız gövdeniz kanlı bir külçe halinde yere yıkılır.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Toop, rica ederim. O ne feci mülahaza! <em class="dir">(Mırıldanarak)</em> Kanlı külçem. <em class="dir">(Konyak şişesini gösterir.)</em> Müsaadenizle bir şey içeyim… Bir müsekkine ihtiyacım var…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ben vereyim sana. <em class="dir">(Kalkar masaya gider, Adam ense kökünde Penelope'yi takip eder.)</em></span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Karınızı neden öyle takip ediyorsunuz?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Durgun bir sesle)</em> Aşığım…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say"><em class="dir">(Şaşkın)</em> Pek anormal bir sevgi… <em class="dir">(Penelope içkiyi getirir, Adam'la tekrar kanepeye yürüyüp otururlar. Dolabın içinde bir çatırtı olur.)</em> Penelope, dolapta bir gürültü var… <em class="dir">(Dolaba yaklaşır.)</em></span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Deli gibi)</em> Hayır amca, hayır hayır. Kimse değil, kedi.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Kedi mi?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Evet canım. Pamuk uyuyor orada, senelerdir orada uyur.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Uykusunu almıştır artık. <em class="dir">(Dolaba yaklaşır.)</em></span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Açarsa vururum.</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Amca, açma o kapıyı…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Neden?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Tehlikeli olur.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Sebep?</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Tehlikenin sebebi… Ha, doğuracak…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Aman ne iyi, bayılırım yavrulara. Kim bilir kaç tane olur?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Çok yorgunum.</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ya ben? İflahım kesildi…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Hadi yatalım artık.</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Kalkar, hemen oturur.)</em> Daha neler.</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say"><em class="dir">(Yavaş sesle)</em> Para…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ne?</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Para…</span></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Ha, evet, pekala, şimdi bulurum.</span></p>
-  <p class="stage"><em class="dir">(Kalkıp arka arkaya merdivene yürürler, merdiven ayağında dururlar. Penelope amcasına döner. Piskopos anahtar deliğinden dolabın içini gözetlemeye çalışmaktadır. Penelope ona bir öpücük yollar.)</em></p>
-  <p class="line"><span class="who">PENELOPE</span><span class="say">Allah rahatlık versin nonoşum…</span></p>
-  <p class="line"><span class="who">ADAM</span><span class="say">Allah rahatlık versin nonoşum…</span></p>
-  <p class="stage"><em class="dir">(Topuklarını birbirine vurarak Prusya usulü reverans yapar. İkisi beraber yukarı çıkıp giderler. Yalnız kalan piskopos hâlâ anahtar deliğinden bakmaktadır. Soldan Ida girer, elinde Clive'in üniforması vardır. Piskoposu görünce irkilir, sonra üniformayı arkasına saklayarak ortaya gelir.)</em></p>
-  <p class="line"><span class="who">IDA</span><span class="say">O dolapta ne arıyorsunuz, Altes?</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Uyanmış mı diye bakayım dedim.</span></p>
-  <p class="line"><span class="who">IDA</span><span class="say">Bırakın canım, azgın hınzır.</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Doğurdu mu acaba?</span></p>
-  <p class="line"><span class="who">IDA</span><span class="say">Doğur… Biraz erken değil mi Altes? Sizin biraz aklınız karışmış Altes. Tabii az mı konuştunuz, soğuk bir şey yer misiniz?</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Belki birkaç bisküvi…</span></p>
-  <p class="line"><span class="who">IDA</span><span class="say">Bisküviler yemek odasında, getireyim…</span></p>
-  <p class="line"><span class="who">PISKOPOS</span><span class="say">Sen dur. Ben kendim seçerim. <em class="dir">(Yemek odasına girer.)</em></span></p>
-  <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Arkasından seslenir.)</em> Seçecek bir şey yok. Bizim bisküviler iki cins, kırıklar ve bütünler. <em class="dir">(Etrafına bakınır.)</em> Bu adam nereye gitti acaba? Bütün geceyi bu üniforma elimde geçiremem ya. <em class="dir">(Aklına bir şey gelir, üniformayı yine sandığa koyup pencereye giderek seslenir.)</em> Hey onbaşı, hay Allah ismini bile bilmiyorum, hey, bahçede misin?</span></p>
+  <div class="skip" aria-label="Atlanan bölüm">
+    <span class="skip-dots" aria-hidden="true"></span>
+    <div class="skip-body">
+      <p class="skip-head">Humphrey dolapta · 99 satır atlandı</p>
+      <ul>
+        <li>Adam kaçmak için para ister, Penelope'ye kocası rolünü dayatır.</li>
+        <li>Piskopos ile Çavuş terastan girer. Çavuş, Alman esirini aradıklarını anlatıp gider.</li>
+        <li>Penelope, Adam'ı amcasına kocası Lionel diye tanıtır. Adam tabancayla hepsini susturur.</li>
+        <li>Dolaptan çatırtı gelir. Penelope "kedi var, doğuracak" diyerek piskoposu kapıdan uzak tutar.</li>
+        <li>Penelope ile Adam "yatmaya" diye yukarı çıkar.</li>
+        <li>Ida, Clive'in üniformasıyla girer. Piskopos bisküvi almaya yemek odasına geçer, Ida bahçedeki onbaşıya seslenir.</li>
+      </ul>
+    </div>
+  </div>
   <p class="line"><span class="who">CLIVE</span><span class="say"><em class="dir">(Seslenir.)</em> Ida, Ida, buradayım. <em class="dir">(Terasa gider.)</em> Ida nerdesin?</span></p>
   <p class="stage"><em class="dir">(Sağdan piskopos girer, Clive'in sırtını görünce Lionel zanneder.)</em></p>
   <p class="line"><span class="who">PISKOPOS</span><span class="say">A, hani yatacaktınız? <em class="dir">(Clive yüzünü döner.)</em> Eyvah, Alman esiri…</span></p>
