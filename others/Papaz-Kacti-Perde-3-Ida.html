@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papaz Kaçtı, Üçüncü Perde: Humphrey ve Ida</title>
+<meta name="description" content="Papaz Kaçtı üçüncü perde, Arthur Humphrey ile Ida arasındaki sahneler. Humphrey replikleri vurgulu.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Papaz Kaçtı, Üçüncü Perde: Humphrey ve Ida">
+<meta property="og:description" content="Papaz Kaçtı üçüncü perde, Arthur Humphrey ile Ida arasındaki sahneler. Humphrey replikleri vurgulu.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/others/Papaz-Kacti-Perde-3-Ida.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Siyah beyaz baskı sayfası. Tema yok, renk yok: ekranda ne
+     görünüyorsa yazıcıdan o çıkar.
+     ============================================================ */
+  :root{
+    --sheet:"Source Sans 3",-apple-system,Segoe UI,sans-serif;
+    --display:"Playfair Display",Georgia,serif;
+    --label:"Space Grotesk",ui-monospace,monospace;
+    --ink:#141414;        /* düz replik */
+    --ink-me:#000;        /* Humphrey */
+    --name:#5c5c5c;       /* diğer kişi adları */
+    --dir:#6e6e6e;        /* parantez içi sahne yönergesi */
+    --rule:#d5d5d5;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:#fff;color:var(--ink);
+    font-family:var(--sheet);font-size:17px;line-height:1.6;
+  }
+
+  .sheet{max-width:800px;margin:0 auto;padding:76px clamp(20px,5vw,40px) 90px}
+
+  /* ---- başlık bloğu ---- */
+  .head{border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:34px}
+  .head .eyebrow{
+    font-family:var(--label);font-size:10.5px;font-weight:600;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--name);margin:0 0 10px;
+  }
+  .head h1{
+    font-family:var(--display);font-weight:700;color:#000;
+    font-size:clamp(2.2rem,7vw,3.2rem);line-height:1;letter-spacing:-.015em;margin:0 0 10px;
+  }
+  .head .sub{margin:0;font-size:.95rem;color:#4a4a4a}
+
+  /* ---- rol kartı ---- */
+  .rolecard{
+    margin:24px 0 18px;border:2px solid #000;border-radius:4px;
+    padding:13px 16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+  }
+  .rolecard .rc-label{
+    font-family:var(--label);font-size:10px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:#000;
+    border-right:1px solid var(--rule);padding-right:14px;
+  }
+  .rolecard .rc-name{font-family:var(--display);font-weight:700;font-size:1.3rem;color:#000;line-height:1.1}
+  .rolecard .rc-meta{font-size:.85rem;color:#4a4a4a}
+
+  /* ---- kişiler tek satır ---- */
+  .cast-line{margin:0;font-size:.84rem;line-height:1.75;color:#4a4a4a}
+  .cast-line .ct{font-family:var(--label);font-size:9.5px;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--name);display:block;margin-bottom:3px}
+  .cast-line b{color:#000;font-weight:700}
+
+  /* ---- replikler ---- */
+  .line{
+    display:grid;grid-template-columns:112px 1fr;gap:14px;
+    margin:0 0 14px;align-items:baseline;
+  }
+  .who{
+    font-family:var(--label);font-weight:600;font-size:.7rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--name);text-align:right;
+    padding-top:.22em;line-height:1.5;word-break:break-word;
+  }
+  .say{color:var(--ink);text-align:left}
+
+  /* parantez içi: her yerde eğik ve soluk (ton farkı burada) */
+  em.dir{font-style:italic;color:var(--dir);font-weight:400}
+  .say em.dir{font-size:.95em}
+
+  /* ---- sahne yönergesi (tam satır) ---- */
+  .stage{
+    font-style:italic;color:var(--dir);text-align:center;
+    max-width:62ch;margin:20px auto;font-size:.95rem;line-height:1.55;
+  }
+
+  /* ---- atlanan bölüm: noktalı çizgi + özet ---- */
+  .skip{
+    display:grid;grid-template-columns:112px 1fr;gap:14px;
+    margin:26px 0;color:var(--dir);font-size:.92rem;line-height:1.5;
+  }
+  .skip-dots{justify-self:end;margin-right:6px;border-left:3px dotted var(--rule);min-height:100%}
+  .skip-head{
+    font-family:var(--label);font-size:.68rem;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--name);margin:0 0 8px;
+  }
+  .skip ul{margin:0;padding-left:1.1em}
+  .skip li{margin:0 0 5px}
+
+  /* ---- HUMPHREY: benim repliklerim ---- */
+  .line.me{
+    border-left:4px solid #000;
+    margin-left:-20px;padding-left:16px;
+    background:#f0f0f0;
+    padding-top:5px;padding-bottom:5px;margin-bottom:16px;padding-right:8px;
+  }
+  .line.me .who{
+    color:#000;font-weight:700;font-size:.74rem;letter-spacing:.08em;
+  }
+  .line.me .say{
+    color:var(--ink-me);font-weight:500;font-size:1.05em;
+  }
+  .line.me .say em.dir{color:#4f4f4f}
+
+  /* ---- perde sonu ---- */
+  .act-end{
+    font-family:var(--label);font-weight:700;text-align:center;
+    letter-spacing:.32em;text-transform:uppercase;font-size:.8rem;
+    color:#000;margin:44px 0 0;padding-top:22px;border-top:1.5px solid var(--ink);
+  }
+
+  @media(max-width:640px){
+    body{font-size:16px}
+    .line{grid-template-columns:1fr;gap:2px;margin-bottom:16px}
+    .who{text-align:left;padding-top:0}
+    .line.me{margin-left:-12px;padding-left:10px}
+    .skip{grid-template-columns:18px 1fr;gap:10px}
+  }
+
+  /* ---- ekran kromu (baskıda gizli) ---- */
+  .bar{
+    position:fixed;top:14px;right:14px;z-index:50;
+    display:flex;align-items:center;gap:8px;
+  }
+  .bar button,.bar a{
+    font-family:var(--sheet);font-size:.82rem;font-weight:600;
+    background:#fff;color:#000;border:1.5px solid #000;border-radius:999px;
+    padding:8px 15px;cursor:pointer;text-decoration:none;line-height:1;
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .bar button:hover,.bar a:hover{background:#000;color:#fff}
+  .bar svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;
+    stroke-linecap:round;stroke-linejoin:round}
+  .hint{
+    max-width:800px;margin:0 auto;padding:0 clamp(20px,5vw,40px);
+    font-size:.8rem;color:#6e6e6e;line-height:1.5;
+  }
+  .hint p{margin:0 0 6px}
+  .foot{
+    max-width:800px;margin:0 auto;padding:26px clamp(20px,5vw,40px) 46px;
+    border-top:1px solid var(--rule);font-size:.82rem;color:#6e6e6e;
+    display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;
+  }
+  .foot a{color:#000;text-decoration:none;border-bottom:1px solid var(--rule);font-weight:600}
+  .foot a:hover{border-color:#000}
+
+  @media(max-width:640px){
+    .bar{top:auto;bottom:14px;right:14px}
+  }
+
+  /* ---- BASKI ---- */
+  @media print{
+    @page{size:A4;margin:16mm 14mm}
+    html,body{background:#fff}
+    body{font-size:10.4pt;line-height:1.45}
+    .noprint{display:none!important}
+    .sheet{max-width:none;padding:0;margin:0}
+    .head{margin-bottom:20px;padding-bottom:14px;break-after:avoid;page-break-after:avoid}
+    .head h1{font-size:26pt}
+    .rolecard{margin:16px 0 12px;padding:9px 12px}
+    .rolecard .rc-name{font-size:14pt}
+    .line{margin-bottom:9px;gap:10px;grid-template-columns:98px 1fr;
+      break-inside:avoid;page-break-inside:avoid}
+    .stage{margin:13px auto;font-size:9.6pt;break-inside:avoid;page-break-inside:avoid}
+    .skip{grid-template-columns:98px 1fr;gap:10px;margin:16px 0;font-size:9.4pt;break-inside:avoid;page-break-inside:avoid}
+    .who{font-size:8.4pt}
+    .line.me{
+      margin-left:0;padding-left:10px;margin-bottom:11px;
+      border-left:3.5pt solid #000;
+      background:#eee;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+    .line.me .who{font-size:8.8pt}
+    .line.me .say{font-size:1.06em}
+    .act-end{margin-top:26px;padding-top:14px}
+  }
+
+  /* ---- bloklar arası ayraç ---- */
+  .cut{text-align:center;color:var(--dir);letter-spacing:.5em;margin:30px 0;font-size:1.1rem}
+  .intro{max-width:62ch;margin:0 auto 26px;text-align:center;font-size:.9rem;color:#4a4a4a}
+</style>
+<script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="bar noprint">
+  <button type="button" onclick="window.print()" aria-label="Yazdır">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Yazdır
+  </button>
+</div>
+
+<div class="sheet">
+
+  <header class="head">
+    <p class="eyebrow">Papaz Kaçtı · See How They Run</p>
+    <h1>Üçüncü Perde</h1>
+    <p class="sub">Philip King · Çeviren: Leyla Erduran · ONK Ajans</p>
+
+    <div class="rolecard">
+      <span class="rc-label">Sahneler</span>
+      <span class="rc-name">Humphrey ve Ida</span>
+      <span class="rc-meta">yalnızca birlikte olduğumuz kısımlar</span>
+    </div>
+  </header>
+
+  <p class="stage"><em class="dir">(Penelope'yi takiben muhterem rahip Arthur Humphrey; kırk yaşlarında halim selim bir adamdır. Tam o girerken bahçeden zebani feryadı gibi feci bir bağırtı duyulur. Humphrey bunu duyunca sırtından itilmiş gibi apar topar içeri girer. Penelope pencereye koşup perde aralığından dışarısını gözetler.)</em></p>
+  <p class="stage"><em class="dir">(Penelope dalgın dalgın yine pencereye gidip perde aralığından dışarıyı gözetler. Humphrey dolap kapısının önündeki Ida'ya bakar, göz göze gelmeye çalışır.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Siz bu evde mi çalışıyorsunuz?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ben dolap kapısını bekliyorum.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Nasıl?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Benim bugün görevim bu.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Şaşırarak)</em> Dolap kapısını beklemesi için çalışanları mı var?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Evet, bu evde her kapıyı beklemesi için bir çalışan var.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Hayret!</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ben aslında sizi dışarıda gördüm ama sizi de dış kapıyı bekleyen görevli sandım.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Beni mi?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ev o kadar büyük ki birbirimizi tanıyamıyoruz.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Tabii…</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Ne dersiniz, yılda bir tanışma pikniği düzenleyelim mi?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Nasıl? <em class="dir">(Bir an durur.)</em> Peki… <em class="dir">(Pencereden bakan Penelope'yi gösterir.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Pencereyi bekleyen çalışan gelmeyince, pencere beklenmemiş olmasın diye…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Hee, anladım.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Affedersiniz, benim yerime dolap kapısını bekler misiniz?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ben nasıl?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Çok kolay bir iş. Gelince canım söyle. Gelin, böyle duracaksınız. <em class="dir">(Humphrey'i dolap kapısının önüne geçirir.)</em> Ben biraz sıkıştım da, hemen gelirim.</span></p>
+  <p class="stage"><em class="dir">(Ida çıkar.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Arkasından seslenir.)</em> Böyle dursam yetiyor mu?</span></p>
+  <p class="cut" aria-hidden="true">· · ·</p>
+  <p class="line"><span class="who">SKILLON</span><span class="say">Olmasın. Benim kişisel hedefim dört büyük günahtan kaçınmak.</span></p>
+  <p class="stage"><em class="dir">(Karambol olur. Soldan Ida girer.)</em></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Çay isteyen var mı?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Korkarak bağırır.)</em> Deccal!</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Belki daha sonra.</span></p>
+  <p class="line"><span class="who">SKILLON</span><span class="say">Beni buradan götürün, ne olur götürün. <em class="dir">(Humphrey'in boynuna sarılır.)</em></span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Yalvarırım size, bırakın beni hanımefendi, ben evli adamım.</span></p>
+  <p class="line"><span class="who">SKILLON</span><span class="say">Saçların perma mı?</span></p>
+  <p class="stage"><em class="dir">(Yine karambol olur. Lionel Humphrey'in önünden geçerken durur.)</em></p>
+  <p class="line"><span class="who">LIONEL</span><span class="say">Ooo, Bayan Skillon, bugün hızlısınız. İçki bütün kötülüklerin anasıdır. <em class="dir">(Çıkar.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Bayan Skillon'a bakarak)</em> Bu nasıl kaçmış yine?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Kaçmış mı?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Demek size saldırdı bu sefer. Kusuruna bakmayın. <em class="dir">(Manalı bir tavırla şakağına elleyerek)</em> Pek şey değildir… Anlarsınız ya…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ya, ne diyorsunuz? Hay Allah. <em class="dir">(Bayan Skillon'dan süratle uzaklaşır.)</em></span></p>
+  <p class="line"><span class="who">SKILLON</span><span class="say">Seni küstah seni. <em class="dir">(Soldan Lionel girer, Bayan Skillon'u görünce birden kaçıp gider.)</em> İşte… dediğim bu işte. <em class="dir">(Bir çığlık atarak bayılır ve Ida'nın kucağına yığılır.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Hayda, yine başlıyor. <em class="dir">(Bayan Skillon'a)</em> Ha gayret, bu tarafa içeri. <em class="dir">(Bayan Skillon'u dolaba sokar.)</em> Gir bakalım inine. <em class="dir">(Dolap kapısını kapatır.)</em></span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ne diye kadıncağızı dolapta tutuyorsunuz?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Sormayın efendim, zavallının karanlıkta durması lazım… Kimseye zararı dokunmuyor ama, işte böyle… erkek delisi, anlarsınız ya…</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ya, evet, tabii. Peki şimdi içeri dalıp çıkan zat kimdi?</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Bu eve dair sual sormayın. Biraz acayip şeyler oluyor burada.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Biraz mı? Geldim geleli acayiplikten başım döndü.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Kahve filan ister misiniz? Yerinize oturun, size içecek ikram edeyim.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Böyle iyiyim.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Sertçe)</em> Oturun.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Tamam, peki. Ben de zaten tam oturacaktım. <em class="dir">(Oturur.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Çay mı, kahve mi?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Çay.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Su getiriyorum. Sıcak mı olsun, soğuk mu?</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Sıcak.</span></p>
+  <p class="line"><span class="who">IDA</span><span class="say">Soğuk getiriyorum. <em class="dir">(Kapıda durup döner.)</em> Unutmayın, ne görürseniz görün, görmemiş gibi yapın. <em class="dir">(Şeytani bir kahkaha atar.)</em></span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Uyum sağlamaya çalışır gibi, ama korktuğu çok belli)</em> He he he.</span></p>
+  <p class="stage"><em class="dir">(Ida çıkar.)</em></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Ne görürsem göreyim, görmemiş gibi…</span></p>
+  <p class="cut" aria-hidden="true">· · ·</p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Eh, sizi biraz şey… asabınızı gergin gördüm de… <em class="dir">(Soldan elinde bir bardakla Ida girer.)</em></span></p>
+  <p class="line"><span class="who">IDA</span><span class="say"><em class="dir">(Humphrey'e yaklaşır.)</em> Buyurunuz efendim. Süt bulamadım, votka getirdim.</span></p>
+  <p class="line me"><span class="who">HUMPHREY</span><span class="say">Teşekkür ederim ama ben votka içmem ki.</span></p>
+  <p class="stage"><em class="dir">(Dolaptan Bayan Skillon çıkar.)</em></p>
+  <p class="line"><span class="who">SKILLON</span><span class="say">Ben içerim. <em class="dir">(Votkayı alır, çıkar.)</em></span></p>
+
+</div>
+
+<div class="foot noprint">
+  <a href="../index.html">NS Articles</a>
+  <span>by M. Enes Durmuş</span>
+</div>
+
+</body>
+</html>
