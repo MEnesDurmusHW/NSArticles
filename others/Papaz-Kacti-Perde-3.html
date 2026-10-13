@@ -127,6 +127,16 @@
   }
   .line.me .say em.dir{color:#4f4f4f}
 
+  /* ---- günlük ezber çizgisi: Humphrey repliklerini 3 parçaya böler ---- */
+  .part{
+    display:flex;align-items:center;gap:14px;margin:34px 0 26px;
+    font-family:var(--label);font-size:.66rem;font-weight:600;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--name);
+    break-after:avoid;page-break-after:avoid;
+  }
+  .part::before,.part::after{content:"";flex:1;border-top:1px solid #9a9a9a}
+  .part small{font-size:inherit;font-weight:500;letter-spacing:.14em;color:var(--dir)}
+
   /* ---- perde sonu ---- */
   .act-end{
     font-family:var(--label);font-weight:700;text-align:center;
@@ -228,6 +238,8 @@
 
     <p class="cast-line"><span class="ct">Kişiler</span>Lionel Doon (rahip) · Penelope Doon (karısı, eski aktris) · Ida (hizmetçi) · Bayan Skillon (komşu) · Clive Winton (onbaşı) · Lax Piskoposu (Dudley amca) · <b>Arthur Humphrey (misafir rahip)</b> · Yabancı / Adam (Alman esiri) · Çavuş · Willie Briggs</p>
   </header>
+
+  <div class="part"><span>1. Bölüm</span><small>47 replik</small></div>
 
   <p class="stage"><em class="dir">(Sahne aynı yer, zaman birkaç saniye sonra. Penelope yerde perişan yatan Bayan Skillon'u sürüklemeye çalışmaktadır. Bahçeden ürpertici feryatlar gelir. Ön kapının zili de acı acı çalınmaktadır.)</em></p>
   <p class="line"><span class="who">PENELOPE</span><span class="say"><em class="dir">(Avazı çıktığı kadar)</em> Ida, Ida diyorum! <em class="dir">(Olanca kuvvetiyle çalışmaktadır.)</em> Ida, bana yardım et de Bayan Skillon'u buradan çıkaralım.</span></p>
@@ -360,6 +372,8 @@
   <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Şaşalar fakat istifini bozmaz.)</em> Bayan Doon? Herkes şüphe ederken senden…</span></p>
   <p class="line"><span class="who">SKILLON</span><span class="say"><em class="dir">(Dolaptan)</em> Kendine güvenirsen…</span></p>
   <p class="line me"><span class="who">HUMPHREY</span><span class="say">Tanrım? Sen misin? <em class="dir">(Dönüp bakınır.)</em> Aman tanrım, nereye gittiniz Bayan Doon? Sesler duyuyorum. <em class="dir">(Önce pencereye sonra sağdaki kapıya koşar, dolabın kapısı vurulur, içeriden iniltiler gelir.)</em> Aman tanrım, dolapta bir şey inliyor… Belki de bir kötü ruh bu evde bir şeyleri ele geçirmiş. Bütün bu tuhaflıkların açıklaması da bu olabilir. Humphrey korkma, başarabilirsin, bunun için eğitildin. Kutsal su! Bu kutsal suyla bu işi çözebilirim. İn nomina patriss, et filiuss sanktoruss… Bu kutsal suyla sana emrediyorumm. İn nomina patriss, et filiuss sanktoruss… Bu kutsal suyla sana emrediyorumm, o dolaptan çııık!!</span></p>
+  <div class="part"><span>2. Bölüm</span><small>52 replik</small></div>
+
   <p class="stage"><em class="dir">(Dolabın kapısı kendiliğinden açılır, Bayan Skillon sendeleyerek çıkar.)</em></p>
   <p class="line"><span class="who">SKILLON</span><span class="say">Bu kutsal suyla <em class="dir">(votka)</em> kabul ediyorum.</span></p>
   <p class="line me"><span class="who">HUMPHREY</span><span class="say">Aman hanımefendi, ne oldu size?</span></p>
@@ -474,6 +488,8 @@
   <p class="stage"><em class="dir">(Penelope perdelerin arasından çıkıp gitmiştir. Humphrey yerinden fırlayıp kendine bir bardak viski doldurup diker. Sonra kanepenin arkasındaki masaya gidip, paltosunu, kaşkolunu ve çantasını alarak teras kapısından çıkmaya hazırlanır.)</em></p>
   <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Paltosunu ve kaşkolunu alırken, kanepede bıraktığı cüceye)</em> Kusura bakmayın, size sahip çıkamadım. Kendinize iyi bakın, benim kendimi kurtarmam lazım. Ama senin için döneceğim.</span></p>
   <p class="stage"><em class="dir">(Clive girer.)</em></p>
+  <div class="part"><span>3. Bölüm</span><small>48 replik</small></div>
+
   <p class="line me"><span class="who">HUMPHREY, CLIVE</span><span class="say"><em class="dir">(Beraber)</em> Ay, çok korktum, Lionel…</span></p>
   <p class="line me"><span class="who">HUMPHREY</span><span class="say"><em class="dir">(Ortada, Clive'in sağında)</em> Lionel mi? Burası tımarhaneden farksız, Lionel?</span></p>
   <p class="line"><span class="who">CLIVE</span><span class="say">Düzeltmek size düşer, Lionel.</span></p>
