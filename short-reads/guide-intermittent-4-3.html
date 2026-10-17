@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4:3 Aralıklı Oruç Rehberi — NS Articles</title>
+<meta name="description" content="NS Articles · Bilim, psikoloji ve davranış üzerine denemeler.">
+<meta name="word-count" content="1685">
+<meta name="reading-time" content="8">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="4:3 Aralıklı Oruç Rehberi">
+<meta property="og:description" content="NS Articles · Bilim, psikoloji ve davranış üzerine denemeler.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/short-reads/guide-intermittent-4-3.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/qrcode.js" defer></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/tooltip.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/resume.js" defer></script>
+<script src="../assets/js/references.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4a9d5b;
+    --green-dim: rgba(74, 157, 91, 0.1);
+    --orange: #d4862a;
+    --orange-dim: rgba(212, 134, 42, 0.1);
+    --red: #c0392b;
+    --red-dim: rgba(192, 57, 43, 0.08);
+  }
+  [data-theme="dark"] {
+    --green: #6abf7b;
+    --green-dim: rgba(106, 191, 123, 0.12);
+    --orange: #e8a84c;
+    --orange-dim: rgba(232, 168, 76, 0.12);
+    --red: #e74c3c;
+    --red-dim: rgba(231, 76, 60, 0.1);
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80') center/cover no-repeat;
+    opacity: 0.12;
+    z-index: 0;
+  }
+  [data-theme="dark"] .hero::before { opacity: 0.06; }
+
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* Summary Cards */
+  .summary-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); }
+  .stat-card .stat-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .stat-card .stat-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-dim); margin-bottom: 6px; }
+  .stat-card .stat-value { font-family: var(--serif); font-size: 1rem; line-height: 1.4; color: var(--text); }
+
+  /* Week Calendar */
+  .calendar-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .calendar-section h2 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text);
+  }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .day-card {
+    border-radius: 10px;
+    padding: 16px 8px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+
+  .day-card:hover { transform: translateY(-2px); }
+
+  .day-card.normal {
+    background: var(--green-dim);
+    border-color: var(--green);
+  }
+
+  .day-card.fast {
+    background: var(--orange-dim);
+    border-color: var(--orange);
+  }
+
+  .day-name {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .day-card.normal .day-name { color: var(--green); }
+  .day-card.fast .day-name { color: var(--orange); }
+
+  .day-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+
+  .day-icon {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .legend-dot.normal { background: var(--green); }
+  .legend-dot.fast { background: var(--orange); }
+
+  /* Guide Content */
+  .guide {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+  }
+
+  .section { margin-bottom: 3.5rem; }
+  .section-num { font-family: var(--serif); font-size: 0.85rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.5rem; }
+  .section h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400; line-height: 1.3; margin-bottom: 1.5rem; color: var(--text); }
+  .section p { margin-bottom: 1.3rem; font-size: 1.05rem; text-align: justify; }
+  .section-divider { width: 40px; height: 1px; background: var(--divider); margin: 3rem 0; }
+
+  .sub-heading { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text); margin: 2.2rem 0 1rem; }
+
+  /* Info boxes */
+  .info-box { border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .info-box.tip { background: var(--green-dim); border-left: 3px solid var(--green); }
+  .info-box.warning { background: var(--red-dim); border-left: 3px solid var(--red); }
+  .info-box.note { background: var(--accent-glow); border-left: 3px solid var(--accent); }
+  .info-box-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .info-box.tip .info-box-title { color: var(--green); }
+  .info-box.warning .info-box-title { color: var(--red); }
+  .info-box.note .info-box-title { color: var(--accent); }
+  .info-box p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .info-box p:last-child { margin-bottom: 0; }
+
+  /* Experiment boxes */
+  .experiment { background: var(--accent-glow); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.4rem 1.6rem; margin: 1.5rem 0; }
+  .experiment-title { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .experiment p { font-size: 0.95rem; margin-bottom: 0.8rem; text-align: justify; }
+  .experiment p:last-child { margin-bottom: 0; }
+
+  /* Meal Table */
+  .meal-table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 8px; border: 1px solid var(--border); }
+  .meal-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 480px; }
+  .meal-table th { background: var(--accent-glow); font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); padding: 14px 16px; text-align: left; border-bottom: 2px solid var(--border); }
+  .meal-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text); }
+  .meal-table tr:last-child td { border-bottom: none; }
+  .meal-table tr:nth-child(even) td { background: var(--surface); }
+  .meal-table .time-col { font-weight: 600; color: var(--accent); white-space: nowrap; width: 90px; }
+  .meal-table .meal-col { font-weight: 500; width: 120px; }
+
+  /* Step List */
+  .step-list { list-style: none; padding: 0; margin: 1.5rem 0; counter-reset: step-counter; }
+  .step-list li { counter-increment: step-counter; display: flex; gap: 16px; margin-bottom: 1.2rem; align-items: flex-start; }
+  .step-list li::before { content: counter(step-counter); flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-glow); color: var(--accent); font-family: var(--serif); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-list li strong { color: var(--text); font-weight: 600; }
+
+  /* Benefit Cards */
+  .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; }
+  .benefit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; }
+  .benefit-card .benefit-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+  .benefit-card .benefit-title { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .benefit-card .benefit-desc { font-size: 0.82rem; color: var(--text); opacity: 0.75; line-height: 1.5; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; margin: 1rem 0; }
+  .checklist li { padding: 6px 0 6px 28px; position: relative; font-size: 1rem; margin-bottom: 4px; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 12px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--green); background: var(--green-dim); }
+  .checklist li.caution::before { border-color: var(--orange); background: var(--orange-dim); }
+  .checklist li.danger::before { border-color: var(--red); background: var(--red-dim); }
+
+  /* FAQ */
+  .faq-list { margin: 1.5rem 0; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-question { width: 100%; background: none; border: none; padding: 18px 0; font-family: 'Source Sans 3', sans-serif; font-size: 1.02rem; font-weight: 500; color: var(--text); text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s; }
+  .faq-question:hover { color: var(--accent); }
+  .faq-question .faq-arrow { flex-shrink: 0; font-size: 0.7rem; color: var(--accent); transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(90deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .faq-answer-inner { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; }
+  .faq-item.open .faq-answer { max-height: 500px; }
+
+  /* Comparison table */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+  .compare-table th { background: var(--accent-glow); color: var(--accent); font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; padding: 12px 16px; text-align: left; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* References */
+  .references { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--divider); }
+  .references h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 1.2rem; }
+  .references ol { font-size: 0.85rem; color: var(--text-dim); line-height: 2.1; padding-left: 1.2rem; }
+
+  /* Inline ref links */
+  a.ref { font-size: 0.7em; vertical-align: super; color: var(--accent); text-decoration: none; font-weight: 600; margin-left: 1px; }
+  a.ref:hover { text-decoration: underline; }
+
+  /* FAB back button */
+  #fab-back { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; z-index: 90; }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* TOC Sidebar */
+  .toc-sidebar { position: fixed; top: 50%; transform: translateY(-50%); left: max(16px, calc((100vw - 680px) / 2 - 220px)); width: 180px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+  .toc-sidebar.visible { opacity: 1; pointer-events: auto; }
+  .toc-sidebar ul { list-style: none; margin: 0; padding: 0; }
+  .toc-sidebar .toc-link { display: block; padding: 5px 0 5px 12px; font-family: var(--sans); font-size: 0.72rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s, border-color 0.2s; border-left: 2px solid transparent; line-height: 1.4; }
+  .toc-sidebar .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+  .toc-sidebar .toc-link:hover { color: var(--text); }
+  @media (max-width: 1100px) { .toc-sidebar { display: none; } }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 50vh; padding: 3rem 1.5rem; }
+    .guide { padding: 2rem 1.5rem 3rem; }
+    .week-grid { gap: 6px; }
+    .day-card { padding: 12px 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card { padding: 18px 12px; }
+    .hero { min-height: 45vh; padding: 2.5rem 1.2rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .guide { padding: 1.5rem 1.2rem 2.5rem; }
+    .section h2 { font-size: 1.3rem; }
+    .day-card { padding: 10px 2px; }
+    .day-name { font-size: 0.6rem; }
+    .day-icon { font-size: 1.1rem; }
+    .day-label { font-size: 0.65rem; }
+  }
+
+  @media (max-width: 360px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  }
+</style>
+  <script src="../assets/js/highlight.js" defer></script>
+  <script src="../assets/js/ref.js" defer></script>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <a class="home-toggle" href="../index.html" aria-label="Ana sayfaya dön"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+  <button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  </button>
+  <button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="14" y2="17"/>
+    </svg>
+  </button>
+
+  <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+  <nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+    <div class="toc-list">
+      <a href="#h01" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">01</span>
+        <span class="toc-title">Haftalık Takvim</span>
+      </a>
+      <a href="#h02" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">02</span>
+        <span class="toc-title">Nedir</span>
+      </a>
+      <a href="#h03" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">03</span>
+        <span class="toc-title">Nasıl çalışır</span>
+      </a>
+      <a href="#h04" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">04</span>
+        <span class="toc-title">Faydaları</span>
+      </a>
+      <a href="#h05" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">05</span>
+        <span class="toc-title">Karşılaştırma</span>
+      </a>
+      <a href="#h06" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">06</span>
+        <span class="toc-title">Nasıl başlanır</span>
+      </a>
+      <a href="#h07" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">07</span>
+        <span class="toc-title">Haftalık program</span>
+      </a>
+      <a href="#h08" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">08</span>
+        <span class="toc-title">Dikkat edilecekler</span>
+      </a>
+      <a href="#h09" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">09</span>
+        <span class="toc-title">Sık sorulan sorular</span>
+      </a>
+      <a href="#h10" class="toc-row toc-level-1">
+        <span class="toc-marker"></span>
+        <span class="toc-num">10</span>
+        <span class="toc-title">Kaynakça</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-tag">Pratik Rehber</p>
+    <h1>4:3 Aralıklı Oruç <em>Rehberi</em></h1>
+    <p class="hero-desc">Haftada 3 gün kalori kısıtlaması, 4 gün normal beslenme. Daha yoğun ama daha etkili bir aralıklı oruç protokolü.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Summary Cards -->
+  <section class="summary-section">
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="stat-label">Kısıtlama günleri</div>
+        <div class="stat-value">Haftada 3</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Normal günler</div>
+        <div class="stat-value">Haftada 4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Zorluk</div>
+        <div class="stat-value">Orta-ileri</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Kanıt düzeyi</div>
+        <div class="stat-value">Güçlü</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Week Calendar -->
+  <section class="calendar-section">
+    <h2 id="h01">Örnek Haftalık Takvim<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+    <div class="week-grid">
+      <div class="day-card normal">
+
+        <div class="day-name">Pzt</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+
+        <div class="day-name">Sal</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+
+        <div class="day-name">Çar</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+
+        <div class="day-name">Per</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+
+        <div class="day-name">Cum</div>
+        <div class="day-label">Normal</div>
+      </div>
+      <div class="day-card fast">
+
+        <div class="day-name">Cmt</div>
+        <div class="day-label">~500 kcal</div>
+      </div>
+      <div class="day-card normal">
+
+        <div class="day-name">Paz</div>
+        <div class="day-label">Normal</div>
+      </div>
+    </div>
+    <div class="calendar-legend">
+      <span><span class="legend-dot normal"></span>Normal beslenme</span>
+      <span><span class="legend-dot fast"></span>Kısıtlama (~500 kcal)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TOC Sidebar -->
+
+  <!-- Guide Content -->
+  <article class="guide">
+
+    <!-- 01 Nedir -->
+    <div class="section" id="nedir">
+      <div class="section-num">01</div>
+      <h2 id="h02">Nedir?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <p>4:3 aralıklı oruç, haftanın 3 gününde kalori alımınızı ciddi şekilde kısıtlamanız (~500 kcal kadınlar, ~600 kcal erkekler), kalan 4 günde normal yemeniz üzerine kurulu bir protokol (uygulama düzeni). Bazı kaynaklarda "alternate day fasting" (gün aşırı oruç) varyasyonu olarak da geçer.</p>
+
+      <p>16:8'den farklı olarak burada her gün uygulanmıyor. Kısıtlama günlerinde tamamen aç kalmak yerine çok düşük kalorili besleniyorsun. Bu, tamamen aç kalmaya göre daha sürdürülebilir ve sosyal hayatla daha uyumlu.</p>
+
+      <div class="info-box note">
+        <div class="info-box-title">Temel prensip</div>
+        <p>Kısıtlama günlerinde yaklaşık 500 kcal alırsın. Bu genellikle 1-2 küçük öğün demek. Normal günlerde kalori saymana gerek yok, dengeli ve normal porsiyonlarda yersin.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 02 Nasil calisir -->
+    <div class="section" id="nasil-calisir">
+      <div class="section-num">02</div>
+      <h2 id="h03">Nasıl çalışır?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <p>4:3'ün metabolik etkisi 16:8'e benzer ama daha yoğundur. Kısıtlama günlerinde beden glikojen (karaciğer ve kaslarda depolanan şeker) depolarını tamamen boşaltır ve uzun süreli yağ yakımı moduna girer. Normal günlerde ise beden toparlanır, kaslar beslenir ve enerji depoları yenilenir.</p>
+
+      <p>Bu "dalgalı" yaklaşım bedenin metabolik esnekliğini arttırır: yani bedenin ihtiyaca göre glikoz (kandaki şeker) ve yağ arasında geçiş yapma becerisini güçlendirir. Metabolik esneklik sağlıklı metabolizmanın temel göstergelerinden biri.</p>
+
+      <h3 class="sub-heading" id="h11">Kısıtlama gününde ne oluyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+      <p>500 kcal civarında beslendiğinizde beden hızla glikojen depolarını boşaltır. Gerçek açlık olmadığı için stres tepkisi (bedenin zorlanmaya verdiği alarm yanıtı) minimaldır, ama yağ yakımı ve <span class="term">otofaji<span class="term-tip">Hücrelerin eskimiş ya da hasarlı parçalarını ayrıştırıp geri dönüştürdüğü doğal temizlik süreci. Açlık sırasında hızlanır.</span></span> süreçleri aktif şekilde çalışır. Ertesi gün normal yediğinizde beden bu süreçleri durdurur ve yeniden inşaat moduna geçer.</p>
+
+      <div class="info-box tip">
+        <div class="info-box-title">4:3'ün kritik avantajı: metabolizma korunuyor</div>
+        <p>Sürekli kalori kısıtlamasında (her gün az ye) beden birkaç hafta içinde metabolizmayı yavaşlatır. Daha az kalori yakarsın, daha çok aç hissedersin. Beden "kıtlık var" diye tasarruf moduna geçer. 4:3'te bu olmuyor. Kısıtlama gününün hemen ardından normal beslenme geliyor. Beden açlık moduna geçmeye fırsat bulamıyor.</p>
+        <p>Heilbronn ve ark.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a> bunu doğrudan ölçmüş: 22 gün boyunca gün aşırı oruç uygulayan katılımcılarda bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmemiş. Buna karşılık <span class="term">açlık insülini<span class="term-tip">Aç karnına ölçülen kandaki insülin düzeyi. Yüksek olması bedenin şekeri işlemekte zorlandığına, yani insülin direncine işaret eder.</span></span> %57 azalmış (P&lt;0.001). Yani beden metabolizmayı yavaşlatmadan yağ yakım moduna geçiyor.</p>
+        <p>Catenacci ve ark.'nın 12 aylık çalışması<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> da bunu destekliyor: 4:3 grubu aynı kalori açığı hedefiyle günlük kısıtlama grubundan %50 daha fazla kilo kaybetmiş (%7.6'ya karşı %5, P=0.040). Bu farkın büyük kısmı metabolizmanın korunmasıyla açıklanıyor.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 03 Faydalari -->
+    <div class="section" id="faydalari">
+      <div class="section-num">03</div>
+      <h2 id="h04">Araştırma destekli faydaları<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-title">%7.6 kilo kaybı</div>
+          <div class="benefit-desc">12 ayda vücut ağırlığının %7.6'sı. Günlük kısıtlamada bu oran %5. <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">%85 daha fazla yağ kaybı</div>
+          <div class="benefit-desc">3 ayda 3.7 kg saf yağ kaybı. Günlük kısıtlamada 2.0 kg. <a href="#ref-3" class="ref" onclick="savePos(this)">3</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">İnsülin direncinde 6 kat fark</div>
+          <div class="benefit-desc"><span class="term">HOMA-IR<span class="term-tip">Açlık kan şekeri ve açlık insülininden hesaplanan, insülin direncini gösteren bir ölçüt. Düşmesi, bedenin şekeri daha sağlıklı işlediği anlamına gelir.</span></span>'de %24 düşüş. Günlük kısıtlamada sadece %4. <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">%37 daha az bırakma</div>
+          <div class="benefit-desc">Katılımcıların %81'i 12 ayı tamamladı. Günlük kısıtlamada %70. <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Metabolizma hızı korunuyor</div>
+          <div class="benefit-desc">Bazal metabolizma hızında anlamlı düşüş yok. Sürekli diyetlerde metabolizma yavaşlar. <a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-title">Kas kaybı yok</div>
+          <div class="benefit-desc">12 haftada 3.6 kg yağ gitti, kas kütlesi yerinde kaldı. Diyetlerin en büyük sorunu burada yok. <a href="#ref-4" class="ref" onclick="savePos(this)">4</a></div>
+        </div>
+      </div>
+
+      <div class="info-box note">
+        <div class="info-box-title">P değeri nedir?</div>
+        <p>Aşağıdaki çalışmalarda P değerleri göreceksiniz. P değeri bir sonucun tesadüf olma ihtimalini gösterir. P=0.001 demek sonucun şans eseri çıkma olasılığı binde bir. Bilimde P&lt;0.05 (%5'in altı) anlamlı kabul edilir. P ne kadar küçükse sonuç o kadar güvenilir.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Catenacci ve ark., 2025 — Annals of Internal Medicine <a href="#ref-8" class="ref" onclick="savePos(this)">8</a></div>
+        <p>165 yetişkin, 12 ay. İki gruba aynı haftalık kalori açığı hedefi verildi. Bir grup her gün kalori kıstı, diğer grup haftada 3 gün çok düşük kalorili yedi, 4 gün normal. 12 ay sonra: 4:3 grubu vücut ağırlığının ortalama %7.6'sını kaybetti (7.7 kg), günlük kısıtlama grubu %5'ini (4.8 kg). Aradaki fark 2.89 kg (P=0.040). Çalışmayı bırakan katılımcı oranı 4:3'te %19, günlük kısıtlamada %30. Hedef kilo kaybına (%5+) ulaşma oranı: 4:3'te %58, günlük kısıtlamada %47.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Harvie ve ark., 2011 — International Journal of Obesity <a href="#ref-2" class="ref" onclick="savePos(this)">2</a></div>
+        <p>107 kadın, 6 ay. Haftada 2 gün kısıtlama (5:2) ile günlük kalori kısıtlaması karşılaştırıldı. Aynı toplam kalori açığına rağmen insülin direnci (HOMA-IR) sonuçları çarpıcı biçimde farklıydı: aralıklı oruç grubunda %24 düşüş, günlük kısıtlama grubunda sadece %4 (P=0.001). Kilo kaybı benzer (6.4 kg vs 5.6 kg), ama metabolik iyileşme 6 kat daha güçlü.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Harvie ve ark., 2013 — British Journal of Nutrition <a href="#ref-3" class="ref" onclick="savePos(this)">3</a></div>
+        <p>115 kadın, 3 ay. Haftada 2 gün kısıtlama vs günlük kısıtlama. Yağ kaybı: aralıklı oruç grubunda 3.7 kg, günlük kısıtlamada 2.0 kg (P=0.007). Hedef kilo kaybına (%5+) ulaşan katılımcı oranı: aralıklı oruçta %65, günlük kısıtlamada %40. Açlık insülini aralıklı oruçta anlamlı biçimde düştü (43.2'den 34.8 pmol/L'ye, P=0.017), günlük kısıtlamada neredeyse değişmedi.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Heilbronn ve ark., 2005 — American Journal of Clinical Nutrition <a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
+        <p>16 katılımcı, 22 gün, gün aşırı oruç. Kritik bulgu: bazal metabolizma hızında (RMR) anlamlı bir düşüş görülmedi. Sürekli kalori kısıtlamasında metabolizmanın yavaşlaması en büyük sorunken, aralıklı oruçta bu sorun ortaya çıkmıyor. Açlık insülini %57 düştü (P&lt;0.001). Yağ oksidasyonu (depolanan yağın yakılması) günde 15 gramın üzerinde arttı.</p>
+      </div>
+
+      <div class="experiment">
+        <div class="experiment-title">Varady ve ark., 2013 — Nutrition Journal <a href="#ref-4" class="ref" onclick="savePos(this)">4</a></div>
+        <p>32 kişi, 12 hafta, gün aşırı oruç. 5.2 kg kilo kaybı (%6.5). Önemli ayrıntı: kaybedilen 3.6 kg saf yağ kütlesiydi, yağsız kütle (kas) korundu. Trigliserit (kandaki yağ) %20 düştü (P&lt;0.05). <span class="term">LDL<span class="term-tip">Halk arasında "kötü kolesterol" olarak bilinen kolesterol türü. Damar duvarlarında birikerek kalp-damar hastalığı riskini artırabilir.</span></span> partikül boyutu büyüdü (P&lt;0.01), bu kalp-damar sağlığı için olumlu bir gösterge.</p>
+      </div>
+
+      <p>Beş farklı araştırma grubunun sonuçları aynı tabloya işaret ediyor: aralıklı kısıtlama, günlük kısıtlamayla aynı kalori açığında daha iyi sonuç veriyor. İki temel mekanizma var. Birincisi metabolik: beden sürekli kıtlık yerine dalgalı bir sinyal alıyor, bu yüzden metabolizmayı yavaşlatmıyor. İkincisi davranışsal: "her gün biraz az ye" sürekli irade gerektiriyor, her öğünde bir karar veriyorsun. "3 gün kısıtla, 4 gün normal ye" ise kararı bir kere verip devam etmek. Karar yorgunluğu (gün boyu tekrar tekrar karar vermenin yıprattığı zihinsel hâl) düşüyor, uyum artıyor.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 04 Karsilastirma -->
+    <div class="section" id="karsilastirma">
+      <div class="section-num">04</div>
+      <h2 id="h05">Diğer yöntemlerle karşılaştırma<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <p>4:3'ü en çok sorulan diğer yöntemlerle karşılaştıralım. Tablodaki rakamlar doğrudan araştırma sonuçlarından alınmıştır.</p>
+
+      <div style="overflow-x: auto; margin: 1.5rem 0; border-radius: 8px;">
+        <table class="compare-table" style="min-width: 640px; margin: 0;">
+          <thead>
+            <tr>
+              <th></th>
+              <th>4:3</th>
+              <th>5:2</th>
+              <th>16:8</th>
+              <th>Günlük kısıtlama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ne yapıyorsun?</strong></td>
+              <td>Haftada 3 gün ~500 kcal</td>
+              <td>Haftada 2 gün ~500 kcal</td>
+              <td>Her gün 8 saatte ye</td>
+              <td>Her gün daha az ye</td>
+            </tr>
+            <tr>
+              <td><strong>Kilo kaybı</strong></td>
+              <td>%7.6 (12 ay)</td>
+              <td>%5-6 (6 ay)</td>
+              <td>%3-5 (12 hafta)</td>
+              <td>%5 (12 ay)</td>
+            </tr>
+            <tr>
+              <td><strong>Kas korunumu</strong></td>
+              <td>Yüksek</td>
+              <td>Yüksek</td>
+              <td>Orta</td>
+              <td>Düşük</td>
+            </tr>
+            <tr>
+              <td><strong>Metabolizma yavaşlar mı?</strong></td>
+              <td>Hayır</td>
+              <td>Hayır</td>
+              <td>Kısmen</td>
+              <td>Evet</td>
+            </tr>
+            <tr>
+              <td><strong>Bırakma oranı</strong></td>
+              <td>%19</td>
+              <td>~%20</td>
+              <td>~%15</td>
+              <td>%30</td>
+            </tr>
+            <tr>
+              <td><strong>Zorluk</strong></td>
+              <td>Zor</td>
+              <td>Orta</td>
+              <td>Kolay</td>
+              <td>Kolay ama monoton</td>
+            </tr>
+            <tr>
+              <td><strong>Esneklik</strong></td>
+              <td>Normal günler serbest</td>
+              <td>Normal günler serbest</td>
+              <td>Yeme saatleri sabit</td>
+              <td>Her öğün kontrollü</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>4:3 ve 5:2 aynı mantıkla çalışıyor: belirli günlerde kısıtla, diğer günlerde normal ye. 4:3 haftada bir ekstra kısıtlama günü ekleyerek daha güçlü kilo kaybı sağlıyor. 5:2 ise neredeyse aynı metabolik faydaları daha az zorlukla veriyor. Aralarındaki fark büyük değil, asıl fark ikisinin de günlük kısıtlamadan çok daha iyi çalışması.</p>
+
+      <h3 class="sub-heading" id="h12">Peki ya ketojenik diyet?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+      <p>Keto diyetle doğrudan karşılaştırma yapan büyük ölçekli bir çalışma henüz yok. Ancak temel farklar net: keto tüm karbonhidratları kısıtlar, 4:3 ise sadece belirli günlerde kaloriyi kısıtlar. Normal günlerinde ekmek, meyve, pilav yiyebilirsin. Keto'da bunların hiçbiri yok. Uzun vadeli sürdürülebilirlik açısından 4:3'ün avantajı büyük, çünkü hiçbir besin grubunu tamamen yasaklamıyor.</p>
+
+      <div class="info-box note">
+        <div class="info-box-title">Hangisini seçmeliyim?</div>
+        <p>Daha önce aralıklı oruç denemediysen 16:8 ile başla. 16:8'e alıştıktan sonra 5:2'ye, ardından 4:3'e geçebilirsin. İkisini birlikte de uygulayabilirsin: normal günlerde 16:8, kısıtlama günlerinde düşük kalori. <span class="term">Ketojenik diyet<span class="term-tip">Karbonhidratı çok düşük tutup yağı artıran beslenme biçimi. Beden şeker yerine yağı yakacak şekilde ketoz adı verilen bir moda geçer.</span></span> ise tamamen farklı bir yaklaşım; besin grubu kısıtlaması istemiyorsan aralıklı oruç modelleri daha esnek bir alternatif.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 05 Nasil baslanir -->
+    <div class="section" id="nasil-baslanir">
+      <div class="section-num">05</div>
+      <h2 id="h06">Nasıl başlanır?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <ol class="step-list">
+        <li><span><strong>Öncelikle 16:8'i dene.</strong> Eğer 16:8'i hiç denemediysen, önce 2-3 hafta 16:8 uygula. Bu bedenini aralıklı oruca hazırlar.</span></li>
+        <li><span><strong>5:2 ile başla.</strong> Haftada sadece 2 gün kısıtlama yap, 5 gün normal ye. 2-3 hafta sonra rahat hissedersen 4:3'e geç.</span></li>
+        <li><span><strong>Kısıtlama günlerini planla.</strong> Art arda 2 kısıtlama günü koyma. Sal-Per-Cmt veya Pzt-Çar-Cum gibi eşit aralıklı dağıtımlar ideal.</span></li>
+        <li><span><strong>500 kcal'i akıllı kullan.</strong> Protein ağırlıklı, lifli yiyeceklere odaklan. Bunlar tok tutar. Şekeri ve işlenmiş karbonhidratı minimumda tut.</span></li>
+        <li><span><strong>Normal günlerde aşırıya kaçma.</strong> "Dün aç kaldım, bugün telafi edeyim" düşüncesine düşme. Normal porsiyonlarda, dengeli ye.</span></li>
+      </ol>
+
+      <div class="info-box tip">
+        <div class="info-box-title">İpucu</div>
+        <p>Kısıtlama günlerinde öğünlerini mümkün olduğunca geç ye. Örneğin öğleye kadar sadece su/kahve iç, sonra küçük bir öğle öğünü ve küçük bir akşam öğünü ye. Böylece açlık süresini daha kolay yönetirsin.</p>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 06 Ornek program -->
+    <div class="section" id="ornek-program">
+      <div class="section-num">06</div>
+      <h2 id="h07">Örnek haftalık program<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <h3 class="sub-heading" id="h13">Kısıtlama günü (~500 kcal)<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+      <div class="meal-table-wrapper">
+        <table class="meal-table">
+          <thead>
+            <tr>
+              <th>Saat</th>
+              <th>Öğün</th>
+              <th>Örnek (~500 kcal toplam)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time-col">07:00</td>
+              <td class="meal-col">Sabah</td>
+              <td>Su, sade kahve veya yeşil çay</td>
+            </tr>
+            <tr>
+              <td class="time-col">13:00</td>
+              <td class="meal-col">Öğle (~250 kcal)</td>
+              <td>Haşlama yumurta (2 adet), bol yeşil salata, zeytinyağı. Veya tavuk göğsü + buharda sebze.</td>
+            </tr>
+            <tr>
+              <td class="time-col">19:00</td>
+              <td class="meal-col">Akşam (~250 kcal)</td>
+              <td>Izgara balık (150g), buharda brokoli, limon. Veya mercimek çorbası (1 kase) + salata.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub-heading" id="h14">Normal gün<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+      <p>Normal günlerde özel bir kısıtlama yok. Dengeli beslen, yeterli protein al, sebze ve meyve tüket. Kalori saymana gerek yok. Normal porsiyonlarda 2-3 öğün ye.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 07 Dikkat -->
+    <div class="section" id="dikkat">
+      <div class="section-num">07</div>
+      <h2 id="h08">Dikkat edilecekler<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <div class="info-box warning">
+        <div class="info-box-title">Kimler uygulamamalı?</div>
+        <p>Hamile veya emziren kadınlar. 18 yaş altı çocuklar ve ergenler. Yeme bozukluğu geçmişi olan kişiler. Tip 1 diyabet veya insülin kullanan Tip 2 diyabet hastaları. Ciddi kronik hastalığı olanlar mutlaka doktoruna danışmalı.</p>
+      </div>
+
+      <h3 class="sub-heading" id="h15">Kısıtlama günlerinde dikkat<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h3>
+
+      <ul class="checklist">
+        <li class="caution"><strong>Yoğun egzersiz yapma.</strong> Kısıtlama günlerinde ağır antrenman yerine hafif yürüyüş veya yoga tercih et.</li>
+        <li class="caution"><strong>Proteini ihmal etme.</strong> 500 kcal'in önemli bir kısmını proteinden al. Kas kaybını önler ve tok tutar.</li>
+        <li class="caution"><strong>Bol su iç.</strong> Kısıtlama günlerinde dehidrasyon (su kaybı) riski daha yüksek. Günde en az 2-3 litre su.</li>
+        <li class="caution"><strong>Art arda 2 kısıtlama günü koyma.</strong> Araya mutlaka normal gün koy.</li>
+        <li><strong>Uykuna dikkat et.</strong> Çok aç yatmak uyku kalitesini bozabilir. Akşam öğününü yatmadan 2-3 saat önce ye.</li>
+        <li><strong>Kan değerlerini takip et.</strong> 4:3'e başladıktan 2-3 ay sonra kan tahlili yaptır. Özellikle açlık şekeri (aç karnına ölçülen kan şekeri), insülin, trigliserit ve LDL kolesterol değerlerini kontrol ettir. Bir araştırmada<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> uzun süreli aralıklı oruç uygulayanlarda LDL kolesterolde hafif yükselme gözlenmiş. Doktorunla birlikte takip et.</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 08 SSS -->
+    <div class="section" id="sss">
+      <div class="section-num">08</div>
+      <h2 id="h09">Sık sorulan sorular<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            500 kcal'i nasıl hesaplarım?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Protein ağırlıklı basit yiyecekler seç. 2 haşlama yumurta (~140 kcal), 150g tavuk göğsü (~165 kcal), 1 kase sebze çorbası (~100 kcal), bol salata (~50-80 kcal). Paketli gıdalarda besin değeri etiketlerini oku. Kalori takip uygulaması (MyFitnessPal gibi) ilk birkaç gün yardımcı olabilir.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Kısıtlama günlerinde çok aç kalıyorum, ne yapayım?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Önce 5:2 ile başla (haftada 2 kısıtlama günü). Protein ve lif ağırlıklı yiyecekler seç, bunlar daha uzun tok tutar. Bol su ve sade kahve/çay iç. Öğünlerini geç saatlere kaydır (örneğin 13:00 ve 19:00). Birkaç hafta sonra beden adapte olur ve açlık hissi azalır.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Normal günlerde istediğim kadar yiyebilir miyim?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Normal porsiyonlarda, dengeli ye. Kalori saymana gerek yok ama "dün aç kaldım, bugün her şeyi yiyeyim" düşüncesine düşme. Araştırmalar 4:3 uygulayan kişilerin normal günlerde doğal olarak biraz daha az yediğini gösteriyor. Bedenini dinle, aç olduğunda ye, doyduğunda dur.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Hangi günleri kısıtlama günü yapmalıyım?
+            <span class="faq-arrow">&#9654;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Sosyal programına ve iş temposuna göre seç. Kısıtlama günlerinde yoğun sosyal yemekler veya ağır iş günleri olmamasına dikkat et. Eşit aralıklı dağıtım (Sal-Per-Cmt veya Pzt-Çar-Cum gibi) ideal. Her hafta aynı günleri kullanmak rutin oluşturur.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 Kaynaklar -->
+
+  <section class="continue" aria-label="Sıradaki okuma">
+    <a class="continue-toc" href="guide-ketogenic.html">
+      <span class="continue-toc-label">Bir rehber</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">Ketojenik Diyet Rehberi</h3>
+        <p class="continue-toc-meta">Rehber · 6 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+    <a class="continue-toc" href="guide-intermittent-16-8.html">
+      <span class="continue-toc-label">Bir rehber</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">16:8 Aralıklı Oruç Rehberi</h3>
+        <p class="continue-toc-meta">Rehber · 13 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+
+
+  </section>
+
+    <div class="references" id="kaynaklar">
+      <h2 id="h10">Kaynakça<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+      <ol>
+        <li id="ref-1"><strong>Heilbronn, L.K., et al. (2005).</strong> Alternate-day fasting in nonobese subjects: effects on body weight, body composition, and energy metabolism. <em>American Journal of Clinical Nutrition</em>, 81(1), 69-73. <a href="https://pubmed.ncbi.nlm.nih.gov/15640462/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-2"><strong>Harvie, M.N., et al. (2011).</strong> The effects of intermittent or continuous energy restriction on weight loss and metabolic disease risk markers. <em>International Journal of Obesity</em>, 35(5), 714-727. <a href="https://pubmed.ncbi.nlm.nih.gov/20921964/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-3"><strong>Harvie, M., et al. (2013).</strong> The effect of intermittent energy and carbohydrate restriction v. daily energy restriction on weight loss and metabolic disease risk markers in overweight women. <em>British Journal of Nutrition</em>, 110(8), 1534-1547. <a href="https://pubmed.ncbi.nlm.nih.gov/23591120/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-4"><strong>Varady, K.A., et al. (2013).</strong> Alternate day fasting for weight loss in normal weight and overweight subjects: a randomized controlled trial. <em>Nutrition Journal</em>, 12, 146. <a href="https://pubmed.ncbi.nlm.nih.gov/24215592/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-5"><strong>Trepanowski, J.F., et al. (2017).</strong> Effect of alternate-day fasting on weight loss, weight maintenance, and cardioprotection among metabolically healthy obese adults. <em>JAMA Internal Medicine</em>, 177(7), 930-938. <a href="https://pubmed.ncbi.nlm.nih.gov/28459931/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-6"><strong>de Cabo, R. & Mattson, M.P. (2019).</strong> Effects of intermittent fasting on health, aging, and disease. <em>NEJM</em>, 381(26), 2541-2551. <a href="https://pubmed.ncbi.nlm.nih.gov/31881139/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-7"><strong>Varady, K.A., et al. (2022).</strong> Clinical application of intermittent fasting for weight loss. <em>Annual Review of Nutrition</em>, 42, 223-245. <a href="https://pubmed.ncbi.nlm.nih.gov/35584814/" target="_blank" style="color: var(--accent);">Link</a></li>
+        <li id="ref-8"><strong>Catenacci, V.A., et al. (2025).</strong> The effect of 4:3 intermittent fasting on weight loss at 12 months: a randomized clinical trial. <em>Annals of Internal Medicine</em>, 178(5), 634-644. <a href="https://pubmed.ncbi.nlm.nih.gov/40163873/" target="_blank" style="color: var(--accent);">Link</a></li>
+      </ol>
+    </div>
+
+  </article>
+
+  <div class="divider"></div>
+  <a href="../index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
+
+  <button id="fab-back" onclick="goBack()" title="Metne dön">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <script>
+  var savedPosition = null;
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() { document.getElementById('fab-back').style.display = 'flex'; }, 300);
+  }
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() { document.getElementById('fab-back').style.display = 'none'; savedPosition = null; }, 600);
+    }
+  }
+  </script>
+
+  <script>
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  }
+  </script>
+
+</body>
+</html>

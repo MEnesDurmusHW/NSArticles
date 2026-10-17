@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aynı Anda İki İş: Multitasking Gerçekte Ne Yapıyor?</title>
+<meta name="description" content="Zihin iki işi gerçekten aynı anda mı yapıyor, yoksa aralarında mı gidip geliyor? Laboratuvarda, sınıfta, iş yerinde ve trafikte ölçülen bedel: kaybolan saniyeler, akılda kalmayan bilgiler, artan stres ve kaza riski.">
+<meta name="word-count" content="1979">
+<meta name="reading-time" content="9">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Aynı Anda İki İş: Multitasking Gerçekte Ne Yapıyor?">
+<meta property="og:description" content="Zihin iki işi gerçekten aynı anda mı yapıyor, yoksa aralarında mı gidip geliyor? Laboratuvarda, sınıfta, iş yerinde ve trafikte ölçülen bedel: kaybolan saniyeler, akılda kalmayan bilgiler, artan stres ve kaza riski.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/short-reads/multitasking.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/qrcode.js" defer></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/tooltip.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/resume.js" defer></script>
+<script src="../assets/js/references.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 120px 24px 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px;
+    color: #4A443C;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-align: center;
+  }
+  [data-theme="dark"] .hero-sub { color: #c2bfb8; }
+
+  /* SECTIONS */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  p {
+    margin-bottom: 18px;
+    color: var(--text);
+    text-align: justify;
+  }
+  p strong { font-weight: 600; }
+
+  /* MYTHS */
+  .myth {
+    margin: 0 0 24px;
+    padding-left: 18px;
+    border-left: 2px solid var(--divider);
+  }
+  .myth p { margin-bottom: 8px; }
+  .myth p:last-child { margin-bottom: 0; }
+  .myth-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .myth-fact .myth-label { color: var(--accent); }
+
+  /* TAKEAWAYS */
+  ul.takeaways {
+    margin: 0 0 22px;
+    padding-left: 22px;
+  }
+  ul.takeaways li {
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  ul.takeaways li::marker { color: var(--accent); }
+
+  /* FIGURES (inline SVG charts) */
+  .fig {
+    margin: 34px 0 38px;
+  }
+  .fig svg {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+  }
+  .fig text {
+    font-family: var(--sans);
+    font-size: 13px;
+    fill: var(--text);
+  }
+  .fig .t-dim { fill: var(--text-dim); }
+  .fig .t-strong { font-weight: 600; }
+  .fig .t-on { fill: var(--bg); font-weight: 600; }
+  .fig .m-acc { fill: var(--accent); }
+  .fig .m-ctx { fill: var(--surface); stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .ln { fill: none; stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .ln-dash { stroke-dasharray: 4 4; }
+  .fig figcaption {
+    max-width: 520px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .fig .fig-src {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .fig .fig-src a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fig .fig-src a:hover { text-decoration: underline; }
+
+  /* INLINE REFERENCES */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* REFERENCES */
+  .ref-section {
+    padding: 40px 0;
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+
+  /* FAB BACK */
+  #fab-back {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* FEEDBACK */
+  .feedback {
+    padding: 0 0 60px;
+    text-align: center;
+  }
+  .feedback p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  a.home-logo { display: block; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 96px 20px 44px; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .container { padding: 0 18px; }
+    h2 { font-size: 24px; }
+    section { padding: 40px 0; }
+    .fig figcaption { font-size: 14px; }
+  }
+</style>
+  <script src="../assets/js/highlight.js" defer></script>
+  <script src="../assets/js/ref.js" defer></script>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<a class="home-toggle" href="../index.html" aria-label="Ana sayfaya dön"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
+<button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="14" y2="17"/>
+  </svg>
+</button>
+
+<div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+<nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+  <div class="toc-list">
+    <a href="#h01" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">01</span>
+      <span class="toc-title">Aynı anda iki iş</span>
+    </a>
+    <a href="#h02" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">02</span>
+      <span class="toc-title">Geçişin bedeli</span>
+    </a>
+    <a href="#h03" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">03</span>
+      <span class="toc-title">En çok yapanlar</span>
+    </a>
+    <a href="#h04" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">04</span>
+      <span class="toc-title">Direksiyonda</span>
+    </a>
+    <a href="#h05" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">05</span>
+      <span class="toc-title">Derste ve okurken</span>
+    </a>
+    <a href="#h06" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">06</span>
+      <span class="toc-title">Bölünen gün</span>
+    </a>
+    <a href="#h07" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">07</span>
+      <span class="toc-title">Yaygın inanışlar</span>
+    </a>
+    <a href="#sonuc" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">·</span>
+      <span class="toc-title">Sonuç</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Kısa Okuma</div>
+  <h1>Aynı Anda İki İş: <em>Multitasking</em> Gerçekte Ne Yapıyor?</h1>
+  <p class="hero-sub">Zihin iki işi gerçekten aynı anda mı yapıyor, yoksa aralarında mı gidip geliyor? Laboratuvarda, sınıfta, iş yerinde ve trafikte ölçülen bedel: kaybolan saniyeler, akılda kalmayan bilgiler, artan stres ve kaza riski.</p>
+</header>
+
+<div class="container">
+
+  <!-- GİRİŞ -->
+  <section class="intro" aria-label="Giriş">
+    <p>Ekranda yarım kalmış bir rapor var. Köşede yeni bir e-posta bildirimi beliriyor, masadaki telefon titriyor. Rapordan e-postaya, e-postadan telefona, oradan yine rapora. Akşam olunca gün dolu dolu geçmiş gibi görünüyor ama rapor hâlâ bitmemiş.</p>
+    <p>Bunun bir adı var: <em>multitasking</em> (çoklu görev), yani aynı anda birden fazla işle uğraşmak. Ders dinlerken mesajlaşmak, araba kullanırken telefonla konuşmak, toplantıda e-postalara cevap yazmak hep bu türden. Asıl soru şu: Zihin iki işi gerçekten aynı anda yapabiliyor mu, yoksa ikisi arasında hızla mı gidip geliyor? Gidip geliyorsa bunun bedeli ne?</p>
+    <p>Bu yazı sorunun cevabını laboratuvarda, sınıfta, iş yerinde ve trafikte yapılan ölçümlerde arıyor. Yazının sonunda da multitasking hakkında yaygın üç inanış var.</p>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section id="s01">
+    <div class="section-number">Bölüm 01</div>
+    <h2 id="h01">İki İş Aynı Anda Gelince<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Bunu sınamak için yapılan deneylerde katılımcı bir ekranın karşısına oturuyor. Bir ses duyunca bir tuşa, ekranda bir harf görünce başka bir tuşa basması gerekiyor. Ses ile harf arasındaki süre giderek kısalıyor, sonunda ikisi neredeyse aynı anda geliyor. Sesi duymakla harfi görmek aynı anda olabiliyor. Ama zihin "hangi tuşa basayım?" kararını aynı anda yalnızca bir iş için verebiliyor. İkinci iş, birincinin kararı verilene kadar sırada bekliyor; ikinci tuş da bu yüzden gecikiyor.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+    <p>Bunun nedeni, böyle bir tepkinin üç adımdan oluşması: uyarıyı algılamak, ne yapacağına karar vermek ve tuşa basmak. İki işin algılama ve hareket adımları aynı anda ilerleyebiliyor. Karar adımı ise tek şeritli bir yol gibi; oradan aynı anda yalnızca bir iş geçebiliyor. Bu dar geçide darboğaz deniyor.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 156" role="img" aria-label="Şema: iki iş aynı anda algılanıyor. Birinci işin karar adımı sürerken ikinci iş sırada bekliyor; o karar bitince ikinci işin karar ve hareket adımları geliyor.">
+        <text x="0" y="14" class="t-dim">1. iş: ses gelince bir tuşa bas</text>
+        <rect x="0" y="22" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="39" y="41" text-anchor="middle">Algılama</text>
+        <rect x="82" y="22" width="88" height="30" rx="4" class="m-acc"/>
+        <text x="126" y="41" text-anchor="middle" class="t-on">Karar</text>
+        <rect x="174" y="22" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="213" y="41" text-anchor="middle">Hareket</text>
+
+        <text x="0" y="78" class="t-dim">2. iş: harf gelince başka tuşa bas</text>
+        <rect x="0" y="86" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="39" y="105" text-anchor="middle">Algılama</text>
+        <line x1="84" y1="108" x2="168" y2="108" class="ln ln-dash"/>
+        <text x="126" y="100" text-anchor="middle" class="t-dim" style="font-size:12.6px">sırada bekliyor</text>
+        <rect x="174" y="86" width="88" height="30" rx="4" class="m-acc"/>
+        <text x="218" y="105" text-anchor="middle" class="t-on">Karar</text>
+        <rect x="266" y="86" width="74" height="30" rx="4" class="m-ctx"/>
+        <text x="303" y="105" text-anchor="middle">Hareket</text>
+
+        <line x1="0" y1="134" x2="332" y2="134" class="ln"/>
+        <path d="M332 130L340 134L332 138Z" style="fill:var(--text-dim)"/>
+        <text x="340" y="152" text-anchor="end" class="t-dim" style="font-size:12.6px">zaman</text>
+      </svg>
+      <figcaption>Algılama ve hareket iki işte de aynı anda ilerleyebiliyor. Karar adımı ise tek şerit; ikinci iş orada sırasını bekliyor.<span class="fig-src">Şematik çizim. Kaynak <a href="#ref-1" onclick="savePos(this)">1</a></span></figcaption>
+    </figure>
+
+    <p>Yine de bu sınır kesin değil. Bazı kişiler uzun süre alıştırma yaptıktan sonra bu tür iki basit işi neredeyse kusursuz biçimde aynı anda yapabiliyor.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> Yani zihnin sınırları gerçek ama alıştırmayla bir ölçüde esneyebiliyor.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Üzerine düşünmeden yapılan, otomatikleşmiş işler de çoğu zaman başka bir işle sorunsuz birleşiyor: yürürken konuşmak gibi. Zihin iki işi birlikte yapamadığında ise geriye tek yol kalıyor: ikisi arasında gidip gelmek.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s02">
+    <div class="section-number">Bölüm 02</div>
+    <h2 id="h02">Bir İşten Ötekine Geçmenin Bedeli<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Geçişin bedelini ölçmenin en basit yolu, insanlara aynı işi iki farklı kurala göre yaptırmak. 2001'deki bir deneyde katılımcılar bir deste kartı ayırdı. Kartları bazen renge göre (kırmızılar bir yana, maviler öbür yana), bazen de üzerindeki şekle göre (üçgenler bir yana, daireler öbür yana) ayırmaları gerekiyordu. Bazı turlarda baştan sona aynı kural geçerliydi, bazılarında ise kural sık sık değişti. Kuralın değiştiği turlarda her kart ortalama <strong>975 milisaniye</strong>, yani neredeyse <strong>1 saniye</strong> daha geç yerine kondu.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></p>
+    <p>Bu ek süre, zihnin geçiş anında iki ayrı iş yapmak zorunda kalmasından geliyor. Önce hedefini değiştiriyor: "Artık renge değil, şekle bakıyorum." Sonra yeni kuralı devreye sokuyor: "Üçgen sola, daire sağa." Sıradaki işin ne olduğunu önceden haber veren bir ipucu ilk adımı kısaltıyor. Kural karmaşıklaştıkça da ikinci adım uzuyor. Aynı çalışmada aritmetik işlemlerle yapılan başka bir deneyde bu fark açıkça görüldü: İşlemler kolay ve ipucu varken kayıp yalnızca <strong>63 milisaniyeydi</strong>. Çarpma ve bölme gibi zor işlemlerde, üstelik ipucu da yokken <strong>1,3 saniyeye</strong> çıktı.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 192" role="img" aria-label="Yatay çubuk grafik, bir işten ötekine geçmenin getirdiği ek süre: kolay işlem ve sıradaki iş önceden belliyken 63 milisaniye, kart ayırmada renk ve şekil kuralı arasında geçişte 975 milisaniye, zor işlem ve sıradaki iş belli değilken yaklaşık 1,3 saniye.">
+        <text x="0" y="14" class="t-dim">Kolay işlem, sıradaki iş önceden belli</text>
+        <path d="M0 22H9Q13 22 13 26V38Q13 42 9 42H0Z" class="m-acc"/>
+        <text x="21" y="37" class="t-strong">63 ms</text>
+
+        <text x="0" y="72" class="t-dim">Kart ayırma: renk ve şekil arasında geçiş</text>
+        <path d="M0 80H191Q195 80 195 84V96Q195 100 191 100H0Z" class="m-acc"/>
+        <text x="203" y="95" class="t-strong">975 ms</text>
+
+        <text x="0" y="130" class="t-dim">Zor işlem, sıradaki iş belli değil</text>
+        <path d="M0 138H249Q253 138 253 142V154Q253 158 249 158H0Z" class="m-acc"/>
+        <text x="261" y="153" class="t-strong">1,3 sn</text>
+
+        <line x1="0" y1="168" x2="300" y2="168" style="stroke:var(--divider);stroke-width:1"/>
+        <line x1="0.5" y1="168" x2="0.5" y2="173" class="ln" style="stroke-width:1"/>
+        <line x1="100" y1="168" x2="100" y2="173" class="ln" style="stroke-width:1"/>
+        <line x1="200" y1="168" x2="200" y2="173" class="ln" style="stroke-width:1"/>
+        <text x="0" y="188" class="t-dim" style="font-size:12.6px">0</text>
+        <text x="100" y="188" text-anchor="middle" class="t-dim" style="font-size:12.6px">0,5 sn</text>
+        <text x="200" y="188" text-anchor="middle" class="t-dim" style="font-size:12.6px">1 sn</text>
+      </svg>
+      <figcaption>Geçişin bedeli, işin zorluğuna ve sıradaki işin önceden bilinip bilinmediğine göre 63 milisaniyeden 1,3 saniyeye kadar çıkıyor.<span class="fig-src">Her çubuk, kuralın değiştiği turlardaki ek süreyi gösteriyor. Kaynak <a href="#ref-4" onclick="savePos(this)">4</a></span></figcaption>
+    </figure>
+
+    <p>Geçişin bedeli yalnızca zaman da değil: Kural değişince yanlış yere konan kartların sayısı da artıyor. Sıradaki işi önceden bilip ona hazırlanmak işe yarıyor ama bedeli sıfırlamıyor; her geçişte bir miktar kayıp yine de kalıyor.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Bunlar basit işlerde ölçülmüş küçük kayıplar; tek başlarına gün içinde saatlerin boşa gittiğini göstermiyorlar.</p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s03">
+    <div class="section-number">Bölüm 03</div>
+    <h2 id="h03">En Çok Yapanlar, En İyi Yapanlar mı?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Bir çalışmada üniversite öğrencilerine iki işi birden yapmalarını gerektiren bir test verildi: Ekrandaki basit hesapların doğru olup olmadığını kontrol ederken arada gösterilen harfleri de sırasıyla akılda tutacaklardı. Öğrencilere bu konuda kendilerini ne kadar iyi buldukları da soruldu. Yaklaşık <strong>10'da 7'si</strong> kendini ortalamanın üstünde gördü, oysa herkesin ortalamanın üstünde olması mümkün değil. Üstelik testte ölçülen beceri ile kişinin kendine verdiği not neredeyse hiç örtüşmedi (<span class="term stat-info"><strong>r = 0,08</strong><button type="button" class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button><span class="term-tip">r, iki ölçümün ne kadar birlikte değiştiğini gösterir: 0 hiç bağ olmadığı, 1 tam örtüşme olduğu anlamına gelir. 0,08 sıfıra çok yakın; tesadüften ayırt edilemiyor.</span></span>).<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 86" role="img" aria-label="On kişilik simge dizisi. Yedisi vurgulu: on öğrenciden yaklaşık yedisi kendini multitasking'de ortalamanın üstünde gördü.">
+        <text x="119" y="14" text-anchor="middle" class="t-strong">kendini ortalamanın üstünde gördü</text>
+        <path d="M3 30V23H235V30" class="ln"/>
+        <g class="m-acc">
+          <circle cx="17" cy="46" r="7"/><path d="M5 82V72Q5 60 17 60Q29 60 29 72V82Z"/>
+          <circle cx="51" cy="46" r="7"/><path d="M39 82V72Q39 60 51 60Q63 60 63 72V82Z"/>
+          <circle cx="85" cy="46" r="7"/><path d="M73 82V72Q73 60 85 60Q97 60 97 72V82Z"/>
+          <circle cx="119" cy="46" r="7"/><path d="M107 82V72Q107 60 119 60Q131 60 131 72V82Z"/>
+          <circle cx="153" cy="46" r="7"/><path d="M141 82V72Q141 60 153 60Q165 60 165 72V82Z"/>
+          <circle cx="187" cy="46" r="7"/><path d="M175 82V72Q175 60 187 60Q199 60 199 72V82Z"/>
+          <circle cx="221" cy="46" r="7"/><path d="M209 82V72Q209 60 221 60Q233 60 233 72V82Z"/>
+        </g>
+        <g class="m-ctx">
+          <circle cx="255" cy="46" r="7"/><path d="M243 82V72Q243 60 255 60Q267 60 267 72V82Z"/>
+          <circle cx="289" cy="46" r="7"/><path d="M277 82V72Q277 60 289 60Q301 60 301 72V82Z"/>
+          <circle cx="323" cy="46" r="7"/><path d="M311 82V72Q311 60 323 60Q335 60 335 72V82Z"/>
+        </g>
+      </svg>
+      <figcaption>Her 10 öğrenciden yaklaşık 7'si kendini multitasking'de ortalamanın üstünde gördü.<span class="fig-src">Kaynak <a href="#ref-6" onclick="savePos(this)">6</a></span></figcaption>
+    </figure>
+
+    <p>Daha şaşırtıcısı şu: En sık multitasking yapanlar bu testte daha iyi değil, daha kötü sonuç aldı. Kendini bu konuda iyi bulanlar, dizi izlerken mesajlaşmak gibi aynı anda birkaç şeyle birden daha sık uğraşıyor, araba kullanırken de telefonla daha sık konuşuyordu. Aynı kişiler daha dürtüseldi, heyecan arayışları da daha güçlüydü. Yani insanlar bunda iyi oldukları için değil, dikkat dağıtan şeylere direnmekte zorlandıkları için işler arasında gidip geliyor gibi görünüyor.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Ama bu bir ilişki, neden-sonuç bağı değil; üstelik veriler tek bir üniversiteden geliyor.</p>
+
+    <p>Peki gerçekten iki işi birden yapabilen hiç kimse yok mu? 2010'daki bir deneyde <strong>200</strong> kişi sürüş simülatöründe araba kullanırken bir yandan da zor bir hafıza ve aritmetik testi çözdü. Çoğunun hem sürüşü hem de test puanı belirgin biçimde kötüleşti. Ama <strong>5</strong> kişide hiçbir düşüş görülmedi; araştırmacılar bu kişilere "supertasker" adını verdi.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Yalnız bu, tek bir deneyde görülen beş kişi. "İnsanların yüzde 2'si multitasking yapabiliyor" demek için yeterli değil, "laboratuvarda nadir istisnalar görüldü" demek için yeterli. Kendini bu konuda iyi görenlerin <strong>10'da 7</strong> olduğu düşünülünce, bu istisnalardan biri olma ihtimali düşük.</p>
+
+    <p>Gündelik hayatta multitasking'in en yaygın biçimi, aynı anda birkaç şeyi birden izlemek ya da okumak: dizi izlerken telefondan mesajlaşmak, ödev yaparken arkada video açık bırakmak gibi. 2020'deki bir çalışmada <strong>80</strong> genç yetişkine önce bunu ne sıklıkla yaptıkları soruldu. Ardından onlara bazı şeyler gösterildi ve bunları akılda tutmaları istendi. Bu sırada beyin dalgaları ve <span class="term">göz bebeklerinin büyüklüğü<span class="term-tip">Göz bebeği, dikkat ve uyanıklık düzeyine göre büyüyüp küçülür. Bu yüzden dikkatin anlık bir göstergesi sayılır.</span></span> de ölçüldü. Bu iki ölçüm, dikkatin hangi anlarda koptuğunu gösteriyor. Bunu daha sık yapanların dikkati daha sık koptu. Dikkatin koptuğu anlarda gösterilenler de sonradan daha çok unutuldu.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
+
+    <p>Beyin taramaları da benzer bir tablo çiziyor. Bunu sık yapanlarda, dikkati yönlendirmeye yardım eden bir <span class="term">beyin bölgesindeki<span class="term-tip">Adı ön singulat korteks. Beynin ön kısmında, iki yarıkürenin arasında bulunuyor.</span></span> gri madde (sinir hücrelerinin yoğun olduğu doku) daha seyrek görünüyor.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Ama bu son iki bulguda da neyin neye yol açtığı belli değil: Multitasking mi dikkati zayıflatıyor, yoksa dikkati zaten kolay dağılanlar mı buna yöneliyor?</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s04">
+    <div class="section-number">Bölüm 04</div>
+    <h2 id="h04">Direksiyonda Telefon<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Multitasking'in en ağır sonuçlarının görüldüğü yer trafik. Bir deneyde aynı kişiler sürüş simülatöründe iki kez araba kullandı: bir kez telefonla konuşurken, bir kez de kanlarındaki alkol ABD'deki yasal sınırdayken. Telefonla konuşurken frene daha geç bastılar ve daha çok kaza yaptılar; alkollüyken ise daha agresif sürdüler.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a> Yani bozulmanın derecesi benzer, biçimi farklı: Telefon alkolden daha kötü değil ama sürüşü başka bir yoldan bozuyor.</p>
+
+    <p>Telefonu elde tutmamak da sorunu çözmüyor. Kulaklıkla ya da arabanın hoparlöründen, yani eller serbest konuşan sürücü de geç tepki veriyor, tehlikeyi daha zor fark ediyor ve daha çok kaza yapıyor. Bu sonuç <strong>93</strong> deneyi bir araya getiren bir analizden geliyor. Aynı analize göre numara tuşlamak da sürüşü ciddi biçimde bozuyor.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Dikkati bölen, telefonu tutan el değil, konuşmanın kendisi.</p>
+
+    <p>Gerçek trafikte de tablo değişmiyor. Binlerce sürücünün arabasına kamera yerleştirildi ve yolculukları uzun süre kaydedildi. Telefonun elde olduğu anlarda kaza riski yaklaşık <span class="term stat-info"><strong>3,6 kat</strong><button type="button" class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button><span class="term-tip">Bu bir "odds oranı": Telefon eldeyken kaza ihtimali, telefonun kullanılmadığı zamanlardakinin yaklaşık 3,6 katı. Değer 1 olsaydı hiç fark olmadığı anlamına gelirdi.</span></span> daha yüksekti.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a> Bu anlar sürüşün yalnızca küçük bir kısmını tutuyordu: her 100 dakikanın yaklaşık <strong>6</strong>'sı.</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s05">
+    <div class="section-number">Bölüm 05</div>
+    <h2 id="h05">Derste ve Okurken<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Sınıfta yapılan bir deneyde üniversite öğrencileri aynı dersi dinledi, ders bitince de bir test çözdü. Öğrencilerin bir kısmından, ders sırasında bilgisayarlarında dersle ilgisi olmayan küçük işler yapmaları istendi. Bu öğrenciler testteki soruların yaklaşık <strong>%55</strong>'ini doğru cevapladı; yalnızca dersi dinleyenlerde bu oran <strong>%66</strong>'ydı. Yani 100 üzerinden yaklaşık <strong>11 puan</strong> fark.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+
+    <p>Etki yandakilere de yayılıyor. İkinci deneyde bütün öğrenciler yalnızca kâğıda not aldı. Bazılarının görüş alanında, bilgisayarında başka işlerle uğraşan biri oturuyordu; bu kişiler aslında deney için rol yapıyordu. Ekranı gören öğrenciler testte <strong>%56</strong>, görmeyenler <strong>%73</strong> aldı: yaklaşık <strong>17 puan</strong> fark.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a> İki sonuç da küçük gruplardan ve deney için hazırlanmış bir dersten geliyor; bu yüzden temkinle okumak gerekiyor.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 216" role="img" aria-label="Çubuk grafik, ders sonu testinde doğru cevap yüzdesi. Birinci deney: yalnızca dersi dinleyenler yüzde 66, bilgisayarda başka işlerle uğraşanlar yüzde 55. İkinci deney: görüş alanında başkasının ekranı olmayanlar yüzde 73, olanlar yüzde 56.">
+        <text x="0" y="14" class="t-strong">Öğrencinin kendisi başka işle uğraşırsa</text>
+        <text x="0" y="36" class="t-dim">yalnızca dersi dinledi</text>
+        <path d="M0 42H161Q165 42 165 46V56Q165 60 161 60H0Z" class="m-ctx"/>
+        <text x="173" y="56" class="t-strong">%66</text>
+        <text x="0" y="78" class="t-dim">bilgisayarda başka işlerle uğraştı</text>
+        <path d="M0 84H134Q138 84 138 88V98Q138 102 134 102H0Z" class="m-acc"/>
+        <text x="146" y="98" class="t-strong">%55</text>
+
+        <text x="0" y="126" class="t-strong">Yandakinin ekranı görüş alanındaysa</text>
+        <text x="0" y="148" class="t-dim">görüş alanında ekran yok</text>
+        <path d="M0 154H179Q183 154 183 158V168Q183 172 179 172H0Z" class="m-ctx"/>
+        <text x="191" y="168" class="t-strong">%73</text>
+        <text x="0" y="190" class="t-dim">görüş alanında ekran var</text>
+        <path d="M0 196H136Q140 196 140 200V210Q140 214 136 214H0Z" class="m-acc"/>
+        <text x="148" y="210" class="t-strong">%56</text>
+      </svg>
+      <figcaption>Ders sonundaki testte doğru cevap yüzdesi. Bilgisayarda başka işlerle uğraşmak hem uğraşanın hem de ekranı görenin puanını düşürdü.<span class="fig-src">İki ayrı deney, küçük gruplar. Kaynak <a href="#ref-13" onclick="savePos(this)">13</a></span></figcaption>
+    </figure>
+
+    <p>Telefonla ilgili kanıtlar daha güçlü. Bir şey öğrenirken telefonla uğraşmak, örneğin ders dinlerken mesajlaşmak, hemen sonra hatırlananları belirgin biçimde azaltıyor (<span class="term stat-info"><strong>g = −0,65</strong><button type="button" class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button><span class="term-tip">g, iki grup arasındaki farkın büyüklüğünü gösterir. 0,65 orta ile büyük arası bir fark: Telefonla uğraşan ortalama bir kişi, uğraşmayanların yaklaşık dörtte üçünden daha az hatırladı.</span></span>).<a href="#ref-14" class="ref" onclick="savePos(this)">14</a> Bu sonuç <strong>27</strong> deneyi bir araya getiren bir analizden geliyor. Deneylerin hepsinde kimin telefonla uğraşacağına kurayla karar verildi. Kura, iki grubun en baştan birbirinden farklı insanlardan oluşma ihtimalini ortadan kaldırıyor. Bu yüzden aradaki fark telefona bağlanabiliyor.</p>
+
+    <p>Okurken bir yandan başka işle uğraşmak ise iki şeyden birine zarar veriyor: ya anlamaya ya da süreye. Süre sınırlıysa metin daha az anlaşılıyor; kişi kendi hızında okuyabildiğinde ise okuma uzuyor.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="s06">
+    <div class="section-number">Bölüm 06</div>
+    <h2 id="h06">İş Yerinde: Bölünen Gün<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Girişteki türden gidip gelmeler gerçek bir iş yerinde de ölçüldü. Bir şirkette araştırmacılar 24 çalışanın yanında oturdu ve toplam <strong>700 saati</strong> aşkın bir süre boyunca işten işe her geçişi saatiyle not etti. Çalışanlar bir projeyle ortalama <strong>11 dakika</strong> uğraşıp başka bir projeye geçiyordu. Araya bir telefon, bir soru ya da akla gelen başka bir iş giriyordu. Yarım kalan işe çoğunlukla aynı gün dönüyorlardı, ama ortalama <strong>25 dakika</strong> geçtikten ve arada birkaç başka işe baktıktan sonra.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a></p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 162" role="img" aria-label="Şematik zaman çizelgesi, üç proje: çalışan her projeye yaklaşık 11 dakika ayırıp ötekine geçiyor. Yarım kalan A projesine ortalama 25 dakika sonra dönüyor; arada B ve C projeleriyle uğraşıyor.">
+        <text x="158" y="32" text-anchor="middle" class="t-strong" style="font-size:12.6px">25 dk sonra dönüş</text>
+        <text x="0" y="55">Proje A</text>
+        <text x="0" y="89">Proje B</text>
+        <text x="0" y="123">Proje C</text>
+
+        <rect x="65" y="40" width="42" height="22" rx="3" class="m-acc"/>
+        <text x="86" y="55" text-anchor="middle" class="t-on" style="font-size:12.6px">11 dk</text>
+        <line x1="110" y1="51" x2="203" y2="51" class="ln ln-dash"/>
+        <path d="M201 47L207 51L201 55" class="ln"/>
+        <rect x="209" y="40" width="42" height="22" rx="3" class="m-acc"/>
+
+        <rect x="109" y="74" width="46" height="22" rx="3" class="m-ctx"/>
+        <rect x="253" y="74" width="42" height="22" rx="3" class="m-ctx"/>
+        <rect x="157" y="108" width="50" height="22" rx="3" class="m-ctx"/>
+        <rect x="297" y="108" width="30" height="22" rx="3" class="m-ctx"/>
+
+        <line x1="64" y1="140" x2="328" y2="140" style="stroke:var(--divider);stroke-width:1"/>
+        <line x1="64.5" y1="140" x2="64.5" y2="145" class="ln" style="stroke-width:1"/>
+        <line x1="184" y1="140" x2="184" y2="145" class="ln" style="stroke-width:1"/>
+        <line x1="304" y1="140" x2="304" y2="145" class="ln" style="stroke-width:1"/>
+        <text x="64" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">0</text>
+        <text x="184" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">30 dk</text>
+        <text x="304" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">60 dk</text>
+      </svg>
+      <figcaption>Bir saatlik kesit: her projeye ortalama 11 dakika, yarım kalan işe ortalama 25 dakika sonra dönüş.<span class="fig-src">Ortalamalara göre çizilmiş şematik bir örnek; tek tek ölçümleri göstermiyor. Kaynak <a href="#ref-16" onclick="savePos(this)">16</a></span></figcaption>
+    </figure>
+
+    <p>Kişi kimse aramadan işi kendisi bıraktığında, yani kendi kendini böldüğünde, işe geri dönmesi dışarıdan bölündüğü zamankinden daha uzun sürüyor. Yine de ortalamalar yanıltabilir: Bazı dönüşler birkaç dakika içinde, bazıları saatler sonra oluyor.</p>
+
+    <p>Bölünmek işi her zaman yavaşlatmıyor ama stresi artırıyor. Bir deneyde katılımcılar bir dizi e-postayı cevapladı. Bazıları araya giren başka işlerle bölündü, bazıları kesintisiz çalıştı. Bölünenler kaybettikleri zamanı telafi etmek için hızlandı ve işi biraz daha erken bitirdi: yaklaşık <strong>23</strong> yerine <strong>20,5</strong> dakikada. Yazdıklarının kalitesi de düşmedi.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Ama daha fazla stres, zaman baskısı ve hayal kırıklığı yaşadıklarını söylediler: 20 puanlık bir ölçekte yaklaşık <strong>9</strong>'a karşı <strong>7</strong>.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 216" role="img" aria-label="İki ayrı çubuk grafik. İşi bitirme süresi: bölünmeden 22,8 dakika, bölünerek 20,5 dakika. Bildirilen stres, 20 puan üzerinden: bölünmeden 6,9, bölünerek yaklaşık 9.">
+        <text x="0" y="14" class="t-strong">İşi bitirme süresi (dakika)</text>
+        <text x="0" y="36" class="t-dim">bölünmeden</text>
+        <path d="M0 42H178Q182 42 182 46V56Q182 60 178 60H0Z" class="m-ctx"/>
+        <text x="190" y="56" class="t-strong">22,8</text>
+        <text x="0" y="78" class="t-dim">bölünerek</text>
+        <path d="M0 84H160Q164 84 164 88V98Q164 102 160 102H0Z" class="m-acc"/>
+        <text x="172" y="98" class="t-strong">20,5</text>
+
+        <text x="0" y="126" class="t-strong">Bildirilen stres (20 puan üzerinden)</text>
+        <text x="0" y="148" class="t-dim">bölünmeden</text>
+        <path d="M0 154H79Q83 154 83 158V168Q83 172 79 172H0Z" class="m-ctx"/>
+        <text x="91" y="168" class="t-strong">6,9</text>
+        <text x="0" y="190" class="t-dim">bölünerek</text>
+        <path d="M0 196H104Q108 196 108 200V210Q108 214 104 214H0Z" class="m-acc"/>
+        <text x="116" y="210" class="t-strong">9</text>
+      </svg>
+      <figcaption>Bölünen grup işi biraz daha erken bitirdi ama daha fazla stres yaşadığını söyledi: daha hızlı ama daha gergin.<span class="fig-src">Değerler yaklaşık. Kaynak <a href="#ref-17" onclick="savePos(this)">17</a></span></figcaption>
+    </figure>
+
+    <p>Üstelik yarım bırakılan iş zihinde yer tutmaya devam ediyor. Bir deneyde katılımcılar bir kelime bulmacasını bitirmeden bir iş başvurusunu değerlendirmeye geçti. Akıllarının bir kısmı bulmacada kaldı ve yeni işte daha kötü sonuç aldılar. Buna dikkat kalıntısı deniyor: önceki işten zihinde kalan ve yeni işe ayrılabilecek dikkati azaltan pay. Önceki işi bitirip öyle geçmek bu kalıntıyı azaltıyor.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a> Yalnız bu bulgu şimdilik tek bir kaynağa dayanıyor.</p>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="s07">
+    <div class="section-number">Bölüm 07</div>
+    <h2 id="h07">Yaygın İnanışlar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Multitasking ve dikkat hakkında dolaşan bazı bilgiler ölçümlerle örtüşmüyor.</p>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Yaygın inanış</span>İnsanın dikkat süresi <strong>8 saniyeye</strong> indi; artık bir akvaryum balığınınkinden bile kısa.</p>
+      <p class="myth-fact"><span class="myth-label">Gerçekte</span>Bu rakam Microsoft Kanada'nın bir pazarlama raporundan yayıldı. Rapor ise onu kaynağı belirsiz bir siteden alıyor. Rakamın arkasında herhangi bir ölçüm yok.</p>
+    </div>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Yaygın inanış</span>Kadınlar multitasking'de erkeklerden daha iyidir.</p>
+      <p class="myth-fact"><span class="myth-label">Gerçekte</span>Kanıtlar karışık. Bazı ölçümlerde kadınlar iki iş arasında gidip gelirken erkeklerden biraz daha az yavaşlıyor,<a href="#ref-19" class="ref" onclick="savePos(this)">19</a> bazılarında hiç fark çıkmıyor.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
+    </div>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Yaygın inanış</span>Masada duran telefon, ona hiç bakılmasa bile performansı düşürür.</p>
+      <p class="myth-fact"><span class="myth-label">Gerçekte</span>Bu konudaki çalışmaları bir araya getiren üç büyük analiz birbirini tutmuyor: Biri olumsuz bir etki buluyor, biri yalnızca akılda bilgi tutmada küçük bir etki, üçüncüsü ise hiç etki bulmuyor. Yani mesele henüz çözülmüş değil.</p>
+    </div>
+  </section>
+
+  <!-- SONUÇ -->
+  <section id="s08">
+    <div class="section-number">Sonuç</div>
+    <h2 id="sonuc">Sonuç: Zihin Sırayla Çalışıyor<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Bütün bu ölçümler aynı yere çıkıyor. Zihin iki işi gerçekten aynı anda yapmıyor; karar adımında onları sıraya sokuyor ve aralarında gidip geliyor. Her geçişin küçük bir bedeli var: milisaniyelerden bir saniyeye kadar uzanan bir gecikme, biraz daha fazla hata, yarım kalan işten zihinde kalan bir pay. Üstelik insanlar bu bedeli kendilerinde pek fark etmiyor.</p>
+
+    <p>Kanıtlardan birkaç pratik sonuç çıkıyor:</p>
+    <ul class="takeaways">
+      <li>Eldeki işi bitirip öyle geçmek, yeni işe taşınan dikkat kalıntısını azaltıyor.</li>
+      <li>Sıradaki işin ne olduğunu önceden bilmek geçişi kısaltıyor. Bedeli sıfırlamıyor ama küçültüyor.</li>
+      <li>Araba kullanırken telefonla konuşmak, eller serbest olsa bile sürüşü bozuyor. Görüşme, yolculuk bitene kadar bekleyebilir.</li>
+      <li>Bir şey öğrenirken telefonla ya da bilgisayarda başka işlerle uğraşmak akılda kalanı azaltıyor. Bilgisayarda yapılan başka işler, ekranı gören yandakileri de etkiliyor.</li>
+      <li>Bölünen bir iş daha hızlı bitebiliyor ama daha stresli geçiyor.</li>
+    </ul>
+
+    <p>Kanıtların söylediği aslında basit: Zihin her seferinde tek bir karar veriyor ve iki iş arasındaki her gidiş gelişin bir bedeli var.</p>
+  </section>
+
+  <!-- SIRADAKİ OKUMA -->
+  <section class="continue" aria-label="Sıradaki okuma">
+    <a class="continue-toc" href="../the-science-of-doing-nothing.html">
+      <span class="continue-toc-label">Sıradaki yazı</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">Hiçbir Şey Yapmamanın Bilimi</h3>
+        <p class="continue-toc-meta">Beyin · 12 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <h3>Kaynakça</h3>
+    <ol class="references">
+      <li id="ref-1">Pashler, H. (1994). Dual-task interference in simple tasks: Data and theory. <em>Psychological Bulletin</em>, 116(2), 220-244. <a href="https://doi.org/10.1037/0033-2909.116.2.220" target="_blank" rel="noopener">doi:10.1037/0033-2909.116.2.220</a></li>
+      <li id="ref-2">Schumacher, E. H. ve ark. (2001). Virtually perfect time sharing in dual-task performance: Uncorking the central cognitive bottleneck. <em>Psychological Science</em>, 12(2), 101-108. <a href="https://doi.org/10.1111/1467-9280.00318" target="_blank" rel="noopener">doi:10.1111/1467-9280.00318</a></li>
+      <li id="ref-3">Koch, I., Poljac, E., Müller, H. &amp; Kiesel, A. (2018). Cognitive structure, flexibility, and plasticity in human multitasking: An integrative review of dual-task and task-switching research. <em>Psychological Bulletin</em>, 144(6), 557-583. <a href="https://doi.org/10.1037/bul0000144" target="_blank" rel="noopener">doi:10.1037/bul0000144</a></li>
+      <li id="ref-4">Rubinstein, J. S., Meyer, D. E. &amp; Evans, J. E. (2001). Executive control of cognitive processes in task switching. <em>Journal of Experimental Psychology: Human Perception and Performance</em>, 27(4), 763-797. <a href="https://doi.org/10.1037/0096-1523.27.4.763" target="_blank" rel="noopener">doi:10.1037/0096-1523.27.4.763</a></li>
+      <li id="ref-5">Monsell, S. (2003). Task switching. <em>Trends in Cognitive Sciences</em>, 7(3), 134-140. <a href="https://doi.org/10.1016/S1364-6613(03)00028-7" target="_blank" rel="noopener">doi:10.1016/S1364-6613(03)00028-7</a></li>
+      <li id="ref-6">Sanbonmatsu, D. M., Strayer, D. L., Medeiros-Ward, N. &amp; Watson, J. M. (2013). Who multi-tasks and why? Multi-tasking ability, perceived multi-tasking ability, impulsivity, and sensation seeking. <em>PLOS ONE</em>, 8(1), e54402. <a href="https://doi.org/10.1371/journal.pone.0054402" target="_blank" rel="noopener">doi:10.1371/journal.pone.0054402</a></li>
+      <li id="ref-7">Watson, J. M. &amp; Strayer, D. L. (2010). Supertaskers: Profiles in extraordinary multitasking ability. <em>Psychonomic Bulletin &amp; Review</em>, 17(4), 479-485. <a href="https://doi.org/10.3758/PBR.17.4.479" target="_blank" rel="noopener">doi:10.3758/PBR.17.4.479</a></li>
+      <li id="ref-8">Madore, K. P. ve ark. (2020). Memory failure predicted by attention lapsing and media multitasking. <em>Nature</em>, 587, 87-91. <a href="https://doi.org/10.1038/s41586-020-2870-z" target="_blank" rel="noopener">doi:10.1038/s41586-020-2870-z</a></li>
+      <li id="ref-9">Loh, K. K. &amp; Kanai, R. (2014). Higher media multi-tasking activity is associated with smaller gray-matter density in the anterior cingulate cortex. <em>PLOS ONE</em>, 9(9), e106698. <a href="https://doi.org/10.1371/journal.pone.0106698" target="_blank" rel="noopener">doi:10.1371/journal.pone.0106698</a></li>
+      <li id="ref-10">Strayer, D. L., Drews, F. A. &amp; Crouch, D. J. (2006). A comparison of the cell phone driver and the drunk driver. <em>Human Factors</em>, 48(2), 381-391. <a href="https://doi.org/10.1518/001872006777724471" target="_blank" rel="noopener">doi:10.1518/001872006777724471</a></li>
+      <li id="ref-11">Caird, J. K. ve ark. (2018). Does talking on a cell phone, with a passenger, or dialing affect driving performance? An updated systematic review and meta-analysis of experimental studies. <em>Human Factors</em>, 60(1), 101-133. <a href="https://doi.org/10.1177/0018720817748145" target="_blank" rel="noopener">doi:10.1177/0018720817748145</a></li>
+      <li id="ref-12">Dingus, T. A. ve ark. (2016). Driver crash risk factors and prevalence evaluation using naturalistic driving data. <em>Proceedings of the National Academy of Sciences</em>, 113(10), 2636-2641. <a href="https://doi.org/10.1073/pnas.1513271113" target="_blank" rel="noopener">doi:10.1073/pnas.1513271113</a></li>
+      <li id="ref-13">Sana, F., Weston, T. &amp; Cepeda, N. J. (2013). Laptop multitasking hinders classroom learning for both users and nearby peers. <em>Computers &amp; Education</em>, 62, 24-31. <a href="https://doi.org/10.1016/j.compedu.2012.10.003" target="_blank" rel="noopener">doi:10.1016/j.compedu.2012.10.003</a></li>
+      <li id="ref-14">Chen, Q., Yan, Z., Moeyaert, M. &amp; Bangert-Drowns, R. (2025). Mobile multitasking in learning: A meta-analysis of effects of mobile phone distraction on young adults' immediate recall. <em>Computers in Human Behavior</em>, 162, 108432. <a href="https://doi.org/10.1016/j.chb.2024.108432" target="_blank" rel="noopener">doi:10.1016/j.chb.2024.108432</a></li>
+      <li id="ref-15">Clinton-Lisell, V. (2021). Stop multitasking and just read: Meta-analyses of multitasking's effects on reading performance and reading time. <em>Journal of Research in Reading</em>, 44(4), 787-816. <a href="https://doi.org/10.1111/1467-9817.12372" target="_blank" rel="noopener">doi:10.1111/1467-9817.12372</a></li>
+      <li id="ref-16">Mark, G., Gonzalez, V. M. &amp; Harris, J. (2005). No task left behind? Examining the nature of fragmented work. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '05)</em>, 321-330. <a href="https://doi.org/10.1145/1054972.1055017" target="_blank" rel="noopener">doi:10.1145/1054972.1055017</a></li>
+      <li id="ref-17">Mark, G., Gudith, D. &amp; Klocke, U. (2008). The cost of interrupted work: More speed and stress. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '08)</em>, 107-110. <a href="https://doi.org/10.1145/1357054.1357072" target="_blank" rel="noopener">doi:10.1145/1357054.1357072</a></li>
+      <li id="ref-18">Leroy, S. (2009). Why is it so hard to do my work? The challenge of attention residue when switching between work tasks. <em>Organizational Behavior and Human Decision Processes</em>, 109(2), 168-181. <a href="https://doi.org/10.1016/j.obhdp.2009.04.002" target="_blank" rel="noopener">doi:10.1016/j.obhdp.2009.04.002</a></li>
+      <li id="ref-19">Stoet, G., O'Connor, D. B., Conner, M. &amp; Laws, K. R. (2013). Are women better than men at multi-tasking? <em>BMC Psychology</em>, 1, 18. <a href="https://doi.org/10.1186/2050-7283-1-18" target="_blank" rel="noopener">doi:10.1186/2050-7283-1-18</a></li>
+      <li id="ref-20">Hirnstein, M., Larøi, F. &amp; Laloyaux, J. (2019). No sex difference in an everyday multitasking paradigm. <em>Psychological Research</em>, 83(2), 286-296. <a href="https://doi.org/10.1007/s00426-018-1045-0" target="_blank" rel="noopener">doi:10.1007/s00426-018-1045-0</a></li>
+    </ol>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gönder</a>
+  </div>
+
+</div>
+
+<button id="fab-back" onclick="goBack()" title="Metne dön">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<a href="../index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
+
+<script>
+  let savedPosition = null;
+
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() {
+      document.getElementById('fab-back').style.display = 'flex';
+    }, 300);
+  }
+
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'none';
+        savedPosition = null;
+      }, 600);
+    }
+  }
+</script>
+
+</body>
+</html>

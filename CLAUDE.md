@@ -100,6 +100,32 @@ Open any `.html` file directly in a browser — no server or build step required
 - Both pages: still receive new article entries when adding articles, but `all.html` is the master archive while `index.html` is the curated public face
 - **`index.html` entry order & numbering**: entries are listed in **creation (publication) order**. A new article is always appended to the END of the `.entries` list and takes the next sequential `entry-number`. Never insert a new entry mid-list and never renumber existing entries, not even to group series chapters next to each other (series membership is already shown by the `entry-series` line)
 
+## Short Reads (`short-reads/`)
+
+Home for short pieces: mini articles (a few minutes, one focused question) and the practical guides.
+
+- **Paths**: pages live one level down, so every asset and link uses `../` (`../assets/css/styles.css`, `../assets/js/*.js`, `../favicon.svg`, `../index.html` for the home toggle and home logo, `../other-article.html` for continue links). `og:url` is `https://menesdurmushw.github.io/NSArticles/short-reads/<file>.html`
+- **Landing page**: `short-reads/index.html` ("Kısa Okumalar") lists entries in two groups, **Kısa Yazılar** (mini articles) and **Rehberler** (guides), using the same `.entry` markup as `index.html` (`entry-number`, `entry-tag`, `data-cat`, `entry-title` + `entry-time`, `entry-desc`). Numbering is per group, in creation order. A group with no entries is hidden by CSS
+- **Not on the main `index.html`**: mini articles and guides are reached through the "Kısa Okumalar" footer link on `index.html` (`short-reads/index.html`), not as entries on the main list. They still get a card in `all.html` (with `read-time`)
+- **Moved guides**: the guides used to live at the repo root. The root files `guide-ketogenic.html`, `guide-intermittent-16-8.html`, `guide-intermittent-4-3.html` are now redirect stubs (`noindex`, canonical, meta refresh + `location.replace` that keeps query and hash) pointing into `short-reads/`, so old shared links keep working. Do not add content to the stubs
+- **Mini articles** follow every full-article convention (TOC, heading-share, Kaynakça, continue block, reading-time meta, chrome). The hero label reads "Kısa Okuma"
+
+### Inline SVG figures (charts and schematics)
+
+First used in `short-reads/multitasking.html`. Charts are hand-written inline SVG, no chart library:
+
+```html
+<figure class="fig">
+  <svg viewBox="0 0 340 192" role="img" aria-label="{what the chart shows, with the numbers}">…</svg>
+  <figcaption>{one-line takeaway}<span class="fig-src">{note, e.g. "Şematik çizim."} Kaynak <a href="#ref-4" onclick="savePos(this)">4</a></span></figcaption>
+</figure>
+```
+
+- **Size**: `viewBox` about 340 wide, CSS `width: 100%; max-width: 440px`, no horizontal padding on the figure. Text 13 user units (min 12.6), so it renders at about 12px or more at a 360px screen and never needs horizontal scroll. Prefer vertical stacking (label above bar) over side-by-side labels
+- **Colors via classes, never hex**: CSS in the page's inline `<style>` maps classes to theme variables (`.m-acc` = `var(--accent)` fill for the highlighted series, `.m-ctx` = `var(--surface)` fill + `var(--text-dim)` outline for the comparison series, `.ln` for lines, `.t-dim` / `.t-strong` / `.t-on` for text). Presentation attributes cannot read CSS variables, so use classes or `style=""`. Filled vs outlined is the secondary encoding, so identity never depends on hue alone
+- **Labels**: direct labels on every bar (no legends), Turkish decimal comma (`1,3 sn`, `%66`), body font via `.fig text { font-family: var(--sans) }`. Bars start at zero, data end rounded 4px, baseline square
+- **Honesty**: schematics or illustrative timelines say so in `fig-src`. Captions cite the same reference number as the prose. Only numbers that appear in the article text or its cited sources
+
 ## Adding a New Article
 
 1. Create a new `.html` file at the repo root
@@ -322,9 +348,23 @@ Rules:
 Infra:
 - **CSS**: `.term`, `.term .term-tip`, `.term-left`, `.term-right` live in `styles.css` (global, so every page that links `styles.css` gets it).
 - **JS**: `assets/js/tooltip.js` wires tap-to-toggle on mobile (desktop uses pure CSS `:hover`). Load via `<script src="assets/js/tooltip.js" defer></script>` in `<head>`, same scope as the other article scripts. No-ops when no `.term` spans exist.
-- **Exception**: `guide-intermittent-16-8.html` predates the shared infra and still carries its own inline `.term` CSS + inline tooltip JS. Do NOT add `assets/js/tooltip.js` there (it would double-bind click handlers). New articles should always use the shared `assets/js/tooltip.js` instead of inlining.
+- **Exception**: `short-reads/guide-intermittent-16-8.html` predates the shared infra and still carries its own inline `.term` CSS + inline tooltip JS. Do NOT add `assets/js/tooltip.js` there (it would double-bind click handlers). New articles should always use the shared `assets/js/tooltip.js` instead of inlining.
 
 When adding a new article, gloss its hard terms at first use following this pattern and include `assets/js/tooltip.js`.
+
+### Stat Info Icons (`.stat-info`)
+
+Genuine statistical measures that a general reader can't interpret on their own (correlations `r = 0,08`, effect sizes `d`/`g`, odds like `3,6 kat`) get a small circular accent "i" icon right after the value. Plain units (`ms`, saniye, dakika, `%`, puan) do NOT get an icon: explain them in the prose instead. Keep icons rare (the multitasking article has 3); prefer writing out what happened in the study over stacking statistics. Hover (desktop) / tap (mobile) shows a plain-Turkish explanation of what the statistic is AND what this specific value means. It reuses the `.term` infra:
+
+```html
+<span class="term stat-info"><strong>r = .08</strong><button type="button" class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button><span class="term-tip">r, iki ölçümün birlikte ne kadar değiştiğini gösterir (-1 ile 1 arası). .08 neredeyse sıfır: ...</span></span>
+```
+
+- The value goes **inside** the span (in `<strong>`, numbers are bold), so the icon never wraps away from it and hovering the number also opens the tip. A Turkish suffix may sit inside too: `<strong>%57</strong>'si<button…>`.
+- Keep the wrapped value short (it is `white-space: nowrap`). When several values form one set (e.g. `1022 ms … 943 ms … 888 ms`), put one icon after the last value and explain the whole set in its tip.
+- Tip text: first what the statistic means in general, then what this value means here. No em dashes; any jargon inside the tip must itself be explained.
+- No `.term-left` / `.term-right` needed: on screens wider than 600px `assets/js/tooltip.js` shifts the tip back inside the viewport (`--tip-shift`) and flips it below the line near the top (`.tip-below`); at 600px and below the CSS turns it into a fixed panel at the bottom of the screen.
+- CSS: `.term.stat-info`, `.stat-info-btn` in `styles.css` (no dotted underline, accent circle with serif italic "i", filled when active, `:focus-visible` ring and keyboard-focus reveal). First used in `short-reads/multitasking.html`.
 
 ## End-of-Article Continuation
 
@@ -339,7 +379,7 @@ The continuation is presented as a **TOC-entry pattern**, not a card: chrome-fre
 3. **Closest topical match**: if no same-category sibling exists, link to the topically nearest article. Label still `Sıradaki yazı`.
 4. **Skip entirely**: some articles don't get a continue block when no good match exists (currently `illusion-of-control.html` and `argument.html`). The decision is editorial — quality of the recommendation outranks completeness.
 
-**Guide pages** (`guide-ketogenic.html`, `guide-intermittent-16-8.html`, `guide-intermittent-4-3.html`) are a special case: each cross-links to **both** other guides as stacked TOC entries inside one `<section class="continue">`. Each entry uses label `Bir rehber`. The `.continue-toc + .continue-toc` rule adds a thin divider between adjacent entries.
+**Guide pages** (`short-reads/guide-ketogenic.html`, `short-reads/guide-intermittent-16-8.html`, `short-reads/guide-intermittent-4-3.html`) are a special case: each cross-links to **both** other guides as stacked TOC entries inside one `<section class="continue">`. Each entry uses label `Bir rehber`. The `.continue-toc + .continue-toc` rule adds a thin divider between adjacent entries.
 
 **No "Diğer makaleler" link inside the continue block.** That secondary nav belongs in footer chrome, not paired with the primary next-read action (the two are not peers).
 

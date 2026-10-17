@@ -1509,6 +1509,9 @@ mark.ns-hl.is-pulse {
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   z-index: 100;
   pointer-events: none;
+  /* An open tooltip must not leak into a copied text selection */
+  -webkit-user-select: none;
+  user-select: none;
 }
 .term .term-tip::after {
   content: '';
@@ -1530,4 +1533,99 @@ mark.ns-hl.is-pulse {
 
 @media (max-width: 480px) {
   .term .term-tip { max-width: 220px; font-size: 0.75rem; }
+}
+
+/* ============================================
+   Stat info icons (statistic explainers)
+   <span class="term stat-info"><strong>r = .08</strong><button type="button"
+     class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button>
+     <span class="term-tip">açıklama.</span></span>
+   Reuses .term hover / tap-to-toggle (tooltip.js). Wide screens: tooltip is
+   clamped into the viewport by tooltip.js (--tip-shift, .tip-below).
+   Narrow screens: tooltip becomes a fixed panel at the bottom of the screen.
+   ============================================ */
+.term.stat-info {
+  border-bottom: none;
+  cursor: help;
+}
+.stat-info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -1px;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+  padding: 0;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: help;
+  transition: background 0.15s ease, color 0.15s ease;
+  /* Keep the "i" glyph out of copied text */
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* Larger invisible tap target */
+.stat-info-btn::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
+.stat-info-btn:hover,
+.term.stat-info.active .stat-info-btn {
+  background: var(--accent);
+  color: var(--bg);
+}
+.stat-info-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.term.stat-info:has(.stat-info-btn:focus-visible) .term-tip { display: block; }
+.term.stat-info .term-tip {
+  text-align: left;
+  font-style: normal;
+  transform: translateX(calc(-50% + var(--tip-shift, 0px)));
+}
+.term.stat-info .term-tip::after {
+  transform: translateX(calc(-50% - var(--tip-shift, 0px)));
+}
+.term.stat-info.tip-below .term-tip {
+  bottom: auto;
+  top: calc(100% + 8px);
+}
+.term.stat-info.tip-below .term-tip::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--border);
+}
+/* Touch: a lingering :hover must not keep a closed tooltip open */
+@media (hover: none) {
+  .term.stat-info:not(.active):hover .term-tip { display: none; }
+}
+@media (max-width: 600px) {
+  .term.stat-info .term-tip {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    top: auto;
+    width: auto;
+    max-width: none;
+    transform: none;
+    font-size: 0.85rem;
+    color: var(--text);
+    z-index: 300;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  }
+  .term.stat-info .term-tip::after { display: none; }
 }

@@ -49,7 +49,7 @@ Skip whichever checks do not apply to the page type. Listing pages
 11. **Scripts** — article pages load `theme.js` plus deferred `share.js`,
     `analytics.js`, `toc.js`, `tooltip.js`, `progress.js`, `resume.js`,
     `references.js`, `ref.js`, `highlight.js`. Note that
-    `guide-intermittent-16-8.html` intentionally omits `tooltip.js`; it has its
+    `short-reads/guide-intermittent-16-8.html` intentionally omits `tooltip.js`; it has its
     own inline tooltip JS and loading the shared script would double-bind.
 12. **GoatCounter** — the tracker snippet must be present on every page,
     immediately before `</head>`.
