@@ -9,11 +9,11 @@
       while (sib) {
         if (seen.has(sib)) break;
         seen.add(sib);
-        if (/^H[234]$/.test(sib.tagName) && /Kaynak/i.test(sib.textContent)) {
+        if (/^H[234]$/.test(sib.tagName) && /Kaynak|Referencias/i.test(sib.textContent)) {
           return sib;
         }
         var inner = sib.querySelector('h2, h3, h4');
-        if (inner && /Kaynak/i.test(inner.textContent)) return inner;
+        if (inner && /Kaynak|Referencias/i.test(inner.textContent)) return inner;
         sib = sib.previousElementSibling;
       }
       node = node.parentElement;
@@ -46,7 +46,8 @@
     // Normalize the label across all articles. Source articles may have
     // used "Kaynaklar" or "Kaynakça" interchangeably; we always render
     // "Kaynakça" (the academic-standard Turkish term for bibliography).
-    var label = 'Kaynakça';
+    // Spanish pages (heading "Referencias") keep their own label.
+    var label = /Referencias/i.test(heading.textContent) ? 'Referencias' : 'Kaynakça';
 
     var details = document.createElement('details');
     details.className = 'references-collapse';

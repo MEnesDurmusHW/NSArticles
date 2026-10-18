@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dos tareas a la vez: ¿qué nos hace realmente el multitasking?</title>
+<meta name="description" content="¿Hace la mente de verdad dos tareas a la vez o salta de una a otra? Su precio, medido en el laboratorio, en el aula, en la oficina y al volante: segundos perdidos, información que no se retiene, más estrés y más riesgo de accidente.">
+<meta name="word-count" content="2984">
+<meta name="reading-time" content="13">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Dos tareas a la vez: ¿qué nos hace realmente el multitasking?">
+<meta property="og:description" content="¿Hace la mente de verdad dos tareas a la vez o salta de una a otra? Su precio, medido en el laboratorio, en el aula, en la oficina y al volante: segundos perdidos, información que no se retiene, más estrés y más riesgo de accidente.">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/short-reads/multitasking-es.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="es" href="https://menesdurmushw.github.io/NSArticles/short-reads/multitasking-es.html">
+<link rel="alternate" hreflang="tr" href="https://menesdurmushw.github.io/NSArticles/short-reads/multitasking.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/qrcode.js" defer></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/tooltip.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/resume.js" defer></script>
+<script src="../assets/js/references.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 120px 24px 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px;
+    color: #4A443C;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-align: center;
+  }
+  [data-theme="dark"] .hero-sub { color: #c2bfb8; }
+
+  /* LANGUAGE SWITCH */
+  .lang-switch {
+    margin-top: 22px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .lang-switch a {
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--divider);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .lang-switch a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  p {
+    margin-bottom: 18px;
+    color: var(--text);
+    text-align: justify;
+  }
+  p strong { font-weight: 600; }
+
+  /* MYTHS */
+  .myth {
+    margin: 0 0 24px;
+    padding-left: 18px;
+    border-left: 2px solid var(--divider);
+  }
+  .myth p { margin-bottom: 8px; }
+  .myth p:last-child { margin-bottom: 0; }
+  .myth-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .myth-fact .myth-label { color: var(--accent); }
+
+  /* TAKEAWAYS */
+  ul.takeaways {
+    margin: 0 0 22px;
+    padding-left: 22px;
+  }
+  ul.takeaways li {
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  ul.takeaways li::marker { color: var(--accent); }
+
+  /* FIGURES (inline SVG charts) */
+  .fig {
+    margin: 34px 0 38px;
+  }
+  .fig svg {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+  }
+  .fig text {
+    font-family: var(--sans);
+    font-size: 13px;
+    fill: var(--text);
+  }
+  .fig .t-dim { fill: var(--text-dim); }
+  .fig .t-strong { font-weight: 600; }
+  .fig .t-on { fill: var(--bg); font-weight: 600; }
+  .fig .m-acc { fill: var(--accent); }
+  .fig .m-ctx { fill: var(--surface); stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .ln { fill: none; stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .ln-dash { stroke-dasharray: 4 4; }
+  .fig figcaption {
+    max-width: 520px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .fig .fig-src {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .fig .fig-src a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fig .fig-src a:hover { text-decoration: underline; }
+
+  /* INLINE REFERENCES */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* REFERENCES */
+  .ref-section {
+    padding: 40px 0;
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+
+  /* FAB BACK */
+  #fab-back {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* FEEDBACK */
+  .feedback {
+    padding: 0 0 60px;
+    text-align: center;
+  }
+  .feedback p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  a.home-logo { display: block; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 96px 20px 44px; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .container { padding: 0 18px; }
+    h2 { font-size: 24px; }
+    section { padding: 40px 0; }
+    .fig figcaption { font-size: 14px; }
+  }
+</style>
+  <script src="../assets/js/highlight.js" defer></script>
+  <script src="../assets/js/ref.js" defer></script>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<a class="home-toggle" href="../index.html" aria-label="Volver a la página principal"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+<button class="share-toggle" onclick="openShare()" aria-label="Compartir esta página" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
+<button class="toc-toggle" onclick="toggleToc()" aria-label="Índice" aria-expanded="false" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="14" y2="17"/>
+  </svg>
+</button>
+
+<div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+<nav class="toc-rail" id="toc-rail" aria-label="Índice">
+  <div class="toc-list">
+    <a href="#h01" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">01</span>
+      <span class="toc-title">Dos tareas a la vez</span>
+    </a>
+    <a href="#h02" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">02</span>
+      <span class="toc-title">El precio del cambio</span>
+    </a>
+    <a href="#h03" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">03</span>
+      <span class="toc-title">Los que más lo hacen</span>
+    </a>
+    <a href="#h04" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">04</span>
+      <span class="toc-title">Al volante</span>
+    </a>
+    <a href="#h05" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">05</span>
+      <span class="toc-title">En clase y al leer</span>
+    </a>
+    <a href="#h06" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">06</span>
+      <span class="toc-title">La jornada fragmentada</span>
+    </a>
+    <a href="#h07" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">07</span>
+      <span class="toc-title">Creencias populares</span>
+    </a>
+    <a href="#conclusion" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">·</span>
+      <span class="toc-title">Conclusión</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Lectura breve</div>
+  <h1>Dos tareas a la vez: ¿qué nos hace realmente el <em>multitasking</em>?</h1>
+  <p class="hero-sub">¿Hace la mente de verdad dos tareas a la vez o salta de una a otra? Su precio, medido en el laboratorio, en el aula, en la oficina y al volante: segundos perdidos, información que no se retiene, más estrés y más riesgo de accidente.</p>
+  <div class="lang-switch"><a href="multitasking.html" hreflang="tr">Leer en turco</a></div>
+</header>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <section class="intro" aria-label="Introducción">
+    <p>En la pantalla hay un informe a medio hacer. En una esquina salta el aviso de un correo nuevo y el teléfono vibra sobre la mesa. Del informe al correo, del correo al teléfono y de vuelta al informe. Al llegar la tarde, el día parece haber sido muy ajetreado, pero el informe sigue sin terminar.</p>
+    <p>Esto tiene nombre: <em>multitasking</em> o multitarea, es decir, hacer varias cosas a la vez. Mandar mensajes durante una clase, hablar por teléfono al volante o contestar correos en plena reunión son ejemplos de ello. La pregunta de fondo es esta: ¿puede la mente hacer realmente dos cosas al mismo tiempo o solo va y viene muy rápido entre ellas? Y, si es así, ¿qué precio tiene ese ir y venir?</p>
+    <p>Este texto busca la respuesta en mediciones hechas en el laboratorio, en el aula, en la oficina y al volante, y al final repasa tres creencias muy extendidas sobre el tema.</p>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section id="s01">
+    <div class="section-number">Sección 01</div>
+    <h2 id="h01">Cuando dos tareas llegan a la vez<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>En los experimentos que ponen esto a prueba, una persona se sienta frente a una pantalla. Si oye un sonido, debe pulsar una tecla; si ve aparecer una letra, otra distinta. El intervalo entre el sonido y la letra se acorta poco a poco, hasta que ambos llegan casi a la vez. Oír el sonido y ver la letra al mismo tiempo no es un problema. Pero la mente solo puede decidir «¿qué tecla pulso?» para una tarea cada vez. La segunda tarea espera su turno hasta que se resuelve la decisión de la primera, y por eso la segunda tecla se pulsa con retraso.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+    <p>Esto se debe a que cada respuesta consta de tres pasos: percibir la señal, decidir qué hacer y pulsar la tecla. La percepción y la respuesta de las dos tareas pueden avanzar en paralelo. La decisión, en cambio, es como una carretera de un solo carril: solo deja pasar una tarea cada vez. A ese tramo estrecho se le llama «cuello de botella».</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 156" role="img" aria-label="Esquema: las dos tareas se perciben a la vez. Mientras dura el paso de decisión de la primera, la segunda espera su turno; cuando esa decisión termina, llegan la decisión y la respuesta de la segunda.">
+        <text x="0" y="14" class="t-dim">Tarea 1: al oír un sonido, pulsar una tecla</text>
+        <rect x="0" y="22" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="39" y="41" text-anchor="middle">Percepción</text>
+        <rect x="82" y="22" width="88" height="30" rx="4" class="m-acc"/>
+        <text x="126" y="41" text-anchor="middle" class="t-on">Decisión</text>
+        <rect x="174" y="22" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="213" y="41" text-anchor="middle">Respuesta</text>
+
+        <text x="0" y="78" class="t-dim">Tarea 2: al ver una letra, pulsar otra tecla</text>
+        <rect x="0" y="86" width="78" height="30" rx="4" class="m-ctx"/>
+        <text x="39" y="105" text-anchor="middle">Percepción</text>
+        <line x1="84" y1="108" x2="168" y2="108" class="ln ln-dash"/>
+        <text x="126" y="100" text-anchor="middle" class="t-dim" style="font-size:12.6px">en espera</text>
+        <rect x="174" y="86" width="88" height="30" rx="4" class="m-acc"/>
+        <text x="218" y="105" text-anchor="middle" class="t-on">Decisión</text>
+        <rect x="266" y="86" width="74" height="30" rx="4" class="m-ctx"/>
+        <text x="303" y="105" text-anchor="middle">Respuesta</text>
+
+        <line x1="0" y1="134" x2="332" y2="134" class="ln"/>
+        <path d="M332 130L340 134L332 138Z" style="fill:var(--text-dim)"/>
+        <text x="340" y="152" text-anchor="end" class="t-dim" style="font-size:12.6px">tiempo</text>
+      </svg>
+      <figcaption>La percepción y la respuesta pueden avanzar a la vez en las dos tareas. La decisión, en cambio, tiene un solo carril: allí la segunda tarea espera su turno.<span class="fig-src">Esquema ilustrativo. Fuente: <a href="#ref-1" onclick="savePos(this)">1</a></span></figcaption>
+    </figure>
+
+    <p>Aun así, este límite no es absoluto. Con mucha práctica, algunas personas llegan a hacer a la vez dos tareas sencillas de este tipo de forma casi perfecta.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> Los límites de la mente son reales, pero el entrenamiento puede ampliarlos hasta cierto punto.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Las tareas automatizadas, las que se hacen sin pensar, también suelen combinarse bien con otra: se puede hablar mientras se camina. Cuando la mente no puede hacer dos tareas juntas, solo le queda un camino: ir y venir entre ellas.</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s02">
+    <div class="section-number">Sección 02</div>
+    <h2 id="h02">El precio de pasar de una tarea a otra<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>La forma más sencilla de medir el precio del cambio es pedir a la gente que haga la misma tarea con dos reglas distintas. En un experimento de 2001, los participantes clasificaron un mazo de cartas. Unas veces tenían que separarlas por color (las rojas a un lado, las azules al otro) y otras por la figura que llevaban (los triángulos a un lado, los círculos al otro). En algunas rondas la regla no cambiaba de principio a fin; en otras cambiaba a menudo. En las rondas con cambios de regla, colocar cada carta les llevó en promedio <strong>975 milisegundos</strong> más: casi <strong>1 segundo</strong>.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a></p>
+    <p>Ese tiempo extra tiene una explicación: en el momento del cambio, la mente debe hacer dos cosas. Primero cambia de objetivo: «Ya no miro el color, sino la forma». Luego pone en marcha la nueva regla: «Triángulo a la izquierda, círculo a la derecha». Una pista previa sobre cuál es la siguiente tarea acorta el primer paso; una regla más compleja alarga el segundo. Otro experimento del mismo estudio, con cálculos aritméticos, lo mostró con claridad: con cálculos fáciles y con pista, la pérdida fue de solo <strong>63 milisegundos</strong>; con cálculos difíciles, como multiplicaciones y divisiones, y además sin pista, subió a <strong>1,3 segundos</strong>.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 192" role="img" aria-label="Gráfico de barras horizontales con el tiempo extra que supone pasar de una tarea a otra: 63 milisegundos con cálculos fáciles cuando se sabe qué tarea sigue, 975 milisegundos al alternar entre la regla de color y la de forma al clasificar cartas, y unos 1,3 segundos con cálculos difíciles cuando no se sabe qué tarea sigue.">
+        <text x="0" y="14" class="t-dim">Cálculo fácil y se sabe qué tarea sigue</text>
+        <path d="M0 22H9Q13 22 13 26V38Q13 42 9 42H0Z" class="m-acc"/>
+        <text x="21" y="37" class="t-strong">63 ms</text>
+
+        <text x="0" y="72" class="t-dim">Clasificar cartas: alternar color y forma</text>
+        <path d="M0 80H191Q195 80 195 84V96Q195 100 191 100H0Z" class="m-acc"/>
+        <text x="203" y="95" class="t-strong">975 ms</text>
+
+        <text x="0" y="130" class="t-dim">Cálculo difícil y no se sabe qué tarea sigue</text>
+        <path d="M0 138H249Q253 138 253 142V154Q253 158 249 158H0Z" class="m-acc"/>
+        <text x="261" y="153" class="t-strong">1,3 s</text>
+
+        <line x1="0" y1="168" x2="300" y2="168" style="stroke:var(--divider);stroke-width:1"/>
+        <line x1="0.5" y1="168" x2="0.5" y2="173" class="ln" style="stroke-width:1"/>
+        <line x1="100" y1="168" x2="100" y2="173" class="ln" style="stroke-width:1"/>
+        <line x1="200" y1="168" x2="200" y2="173" class="ln" style="stroke-width:1"/>
+        <text x="0" y="188" class="t-dim" style="font-size:12.6px">0</text>
+        <text x="100" y="188" text-anchor="middle" class="t-dim" style="font-size:12.6px">0,5 s</text>
+        <text x="200" y="188" text-anchor="middle" class="t-dim" style="font-size:12.6px">1 s</text>
+      </svg>
+      <figcaption>El precio del cambio va de 63 milisegundos a 1,3 segundos, según lo difícil que sea la tarea y si se sabe o no de antemano cuál viene después.<span class="fig-src">Cada barra muestra el tiempo extra en las rondas con cambio de regla. Fuente: <a href="#ref-4" onclick="savePos(this)">4</a></span></figcaption>
+    </figure>
+
+    <p>Además, el precio no se paga solo en tiempo: cuando cambia la regla, también hay más cartas que acaban en el montón equivocado. Saber qué tarea viene y prepararse para ella ayuda, pero no hace desaparecer el precio: en cada cambio se sigue perdiendo algo.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Son pérdidas pequeñas, medidas en tareas sencillas; por sí solas no demuestran que a lo largo del día se pierdan horas.</p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s03">
+    <div class="section-number">Sección 03</div>
+    <h2 id="h03">¿Los que más lo hacen son los que mejor lo hacen?<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>En un estudio, unos estudiantes universitarios realizaron una prueba que les obligaba a hacer dos cosas a la vez: comprobar si unas cuentas sencillas que aparecían en pantalla estaban bien y, al mismo tiempo, recordar en orden unas letras que se mostraban entre cuenta y cuenta. También se les preguntó hasta qué punto se consideraban buenos en esto. Alrededor de <strong>7 de cada 10</strong> se situaron por encima de la media, aunque no todos pueden estarlo. Además, la habilidad medida en la prueba y la nota que cada uno se puso apenas coincidieron (<span class="term stat-info"><strong>r = 0,08</strong><button type="button" class="stat-info-btn" aria-label="¿Qué significa este dato?">i</button><span class="term-tip">La r indica hasta qué punto dos mediciones varían juntas: 0 significa que no hay ninguna relación, y 1, que coinciden por completo. Un 0,08 está muy cerca de cero y no se distingue del azar.</span></span>).<a href="#ref-6" class="ref" onclick="savePos(this)">6</a></p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 86" role="img" aria-label="Fila de diez figuras de personas, siete de ellas resaltadas: alrededor de siete de cada diez estudiantes se consideraron por encima de la media en multitasking.">
+        <text x="119" y="14" text-anchor="middle" class="t-strong">se creyeron por encima de la media</text>
+        <path d="M3 30V23H235V30" class="ln"/>
+        <g class="m-acc">
+          <circle cx="17" cy="46" r="7"/><path d="M5 82V72Q5 60 17 60Q29 60 29 72V82Z"/>
+          <circle cx="51" cy="46" r="7"/><path d="M39 82V72Q39 60 51 60Q63 60 63 72V82Z"/>
+          <circle cx="85" cy="46" r="7"/><path d="M73 82V72Q73 60 85 60Q97 60 97 72V82Z"/>
+          <circle cx="119" cy="46" r="7"/><path d="M107 82V72Q107 60 119 60Q131 60 131 72V82Z"/>
+          <circle cx="153" cy="46" r="7"/><path d="M141 82V72Q141 60 153 60Q165 60 165 72V82Z"/>
+          <circle cx="187" cy="46" r="7"/><path d="M175 82V72Q175 60 187 60Q199 60 199 72V82Z"/>
+          <circle cx="221" cy="46" r="7"/><path d="M209 82V72Q209 60 221 60Q233 60 233 72V82Z"/>
+        </g>
+        <g class="m-ctx">
+          <circle cx="255" cy="46" r="7"/><path d="M243 82V72Q243 60 255 60Q267 60 267 72V82Z"/>
+          <circle cx="289" cy="46" r="7"/><path d="M277 82V72Q277 60 289 60Q301 60 301 72V82Z"/>
+          <circle cx="323" cy="46" r="7"/><path d="M311 82V72Q311 60 323 60Q335 60 335 72V82Z"/>
+        </g>
+      </svg>
+      <figcaption>Alrededor de 7 de cada 10 estudiantes se consideraron por encima de la media en <em>multitasking</em>.<span class="fig-src">Fuente: <a href="#ref-6" onclick="savePos(this)">6</a></span></figcaption>
+    </figure>
+
+    <p>Y hay algo más sorprendente: quienes hacían <em>multitasking</em> con más frecuencia no sacaron mejores resultados en la prueba, sino peores. Quienes se creían buenos en esto hacían más a menudo varias cosas a la vez, como mandar mensajes mientras veían una serie, y también hablaban más por teléfono al volante. Esas mismas personas eran más impulsivas y puntuaban más alto en <span class="term">búsqueda de sensaciones<span class="term-tip">Gusto por vivir experiencias nuevas, intensas y a menudo arriesgadas.</span></span>. Así que la gente no parece saltar de una tarea a otra porque se le dé bien, sino porque le cuesta resistirse a las distracciones.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> Pero se trata de una <span class="term">asociación<span class="term-tip">Dos cosas aparecen juntas a menudo, pero eso no demuestra que una provoque la otra.</span></span>, no de una relación de causa y efecto; además, los datos proceden de una sola universidad.</p>
+
+    <p>¿Entonces nadie es capaz de hacer de verdad dos cosas a la vez? En un experimento de 2010, <strong>200</strong> personas condujeron en un <span class="term">simulador<span class="term-tip">Aparato con volante, pedales y pantallas que imita la experiencia de conducir sin salir a la calle.</span></span> mientras resolvían una difícil prueba de memoria y aritmética. En la mayoría empeoraron claramente tanto la conducción como la puntuación en la prueba. Pero <strong>5</strong> personas no mostraron ningún descenso; los investigadores las llamaron <span class="term"><em>supertaskers</em><span class="term-tip">Palabra inglesa inventada por los investigadores: personas que hacen dos tareas difíciles a la vez sin rendir peor en ninguna.</span></span>.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Eso sí, son cinco personas en un único experimento: no basta para afirmar que «el 2&#160;% de las personas puede hacer <em>multitasking</em>», solo para decir que «en el laboratorio se vieron excepciones raras». Y como <strong>7 de cada 10</strong> se consideran buenos en esto, la probabilidad de ser una de esas excepciones es baja.</p>
+
+    <p>En la vida cotidiana, la forma más común de <em>multitasking</em> es atender a varias pantallas o contenidos a la vez: mandar mensajes con el teléfono mientras se ve una serie o dejar un video de fondo mientras se estudia. En un estudio de 2020, primero se preguntó a <strong>80</strong> adultos jóvenes con qué frecuencia lo hacían. Después se les mostró una serie de cosas que debían recordar, y mientras tanto se registraron sus <span class="term">ondas cerebrales<span class="term-tip">Señales eléctricas del cerebro que se captan con sensores colocados sobre la cabeza.</span></span> y el <span class="term">tamaño de sus pupilas<span class="term-tip">La pupila se agranda o se reduce según lo atenta y despierta que esté la persona. Por eso sirve para seguir la atención momento a momento.</span></span>. Estas dos mediciones muestran en qué momentos se desconecta la atención. Quienes más lo hacían tenían más <span class="term">lapsos de atención<span class="term-tip">Momentos breves en los que la mente se desconecta sin que la persona lo note.</span></span>, y lo que vieron durante esos lapsos lo olvidaron más después.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
+
+    <p>Los <span class="term">escáneres cerebrales<span class="term-tip">Imágenes del interior del cerebro tomadas con aparatos como el de resonancia magnética.</span></span> dibujan un panorama parecido. En quienes lo hacen a menudo, una <span class="term">región del cerebro<span class="term-tip">Se llama corteza cingulada anterior. Está en la parte delantera del cerebro, entre sus dos mitades.</span></span> que ayuda a dirigir la atención tiene una materia gris (el tejido donde se concentran las neuronas) menos densa.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Pero en estos dos últimos hallazgos no está claro qué es causa y qué es efecto: ¿el <em>multitasking</em> debilita la atención o las personas que ya se distraen con facilidad son las que más tienden a hacerlo?</p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s04">
+    <div class="section-number">Sección 04</div>
+    <h2 id="h04">El teléfono al volante<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Las consecuencias más graves del <em>multitasking</em> se ven al volante. En un experimento, las mismas personas condujeron dos veces en un simulador: una vez hablando por teléfono y otra con un nivel de alcohol en sangre justo en el <span class="term">límite legal<span class="term-tip">En Estados Unidos, 0,8 gramos de alcohol por litro de sangre; a partir de ahí no se permite conducir.</span></span> de Estados Unidos. Al hablar por teléfono frenaron más tarde y tuvieron más accidentes; con alcohol, en cambio, condujeron de forma más agresiva.<a href="#ref-10" class="ref" onclick="savePos(this)">10</a> El grado de deterioro es parecido, pero no la forma: el teléfono no es peor que el alcohol, pero perjudica la conducción de otra manera.</p>
+
+    <p>Soltar el teléfono tampoco resuelve el problema. El conductor que habla con manos libres, sea con auriculares o por el altavoz del vehículo, también reacciona tarde, detecta peor los peligros y tiene más accidentes. Este resultado procede de un análisis que reunió <strong>93</strong> experimentos. Según ese mismo análisis, marcar un número también empeora seriamente la conducción.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Lo que divide la atención no es la mano que sostiene el teléfono, sino la conversación en sí.</p>
+
+    <p>Fuera del laboratorio, el panorama es el mismo. Los investigadores instalaron cámaras en los vehículos de miles de conductores y grabaron sus trayectos durante mucho tiempo. En los momentos en que tenían el teléfono en la mano, el riesgo de accidente era unas <span class="term stat-info"><strong>3,6 veces</strong><button type="button" class="stat-info-btn" aria-label="¿Qué significa este dato?">i</button><span class="term-tip">Es una <em>odds ratio</em> (razón de probabilidades): con el teléfono en la mano, la probabilidad de accidente era unas 3,6 veces la de los momentos en que no se usaba. Un valor de 1 significaría que no hay ninguna diferencia.</span></span> mayor.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a> Esos momentos ocupaban solo una pequeña parte del tiempo al volante: unos <strong>6</strong> de cada 100 minutos.</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s05">
+    <div class="section-number">Sección 05</div>
+    <h2 id="h05">En clase y al leer<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>En un experimento hecho en el aula, un grupo de estudiantes universitarios escuchó la misma clase y, al terminar, hizo una prueba. A algunos se les pidió que, durante la clase, hicieran en la computadora pequeñas tareas ajenas a la materia. Estos estudiantes acertaron alrededor del <strong>55&#160;%</strong> de las preguntas; quienes solo escucharon la clase acertaron el <strong>66&#160;%</strong>: unos <strong>11 puntos</strong> de diferencia sobre 100.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+
+    <p>El efecto alcanza también a quien está al lado. En un segundo experimento, todos los estudiantes tomaron notas solo en papel. Algunos tenían a la vista a alguien que usaba la computadora para otras cosas; en realidad, esas personas actuaban siguiendo instrucciones de los investigadores. Los estudiantes que veían esa pantalla sacaron un <strong>56&#160;%</strong> en la prueba, y los que no la veían, un <strong>73&#160;%</strong>: una diferencia de unos <strong>17 puntos</strong>.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a> Ambos resultados proceden de grupos pequeños y de una clase preparada para el experimento, así que conviene leerlos con cautela.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 216" role="img" aria-label="Gráfico de barras con el porcentaje de respuestas correctas en la prueba al final de la clase. Primer experimento: quienes solo escucharon la clase, 66 %; quienes hicieron otras tareas en la computadora, 55 %. Segundo experimento: sin la pantalla de otra persona a la vista, 73 %; con ella a la vista, 56 %.">
+        <text x="0" y="14" class="t-strong">Si el propio estudiante hace otras cosas</text>
+        <text x="0" y="36" class="t-dim">solo escuchó la clase</text>
+        <path d="M0 42H161Q165 42 165 46V56Q165 60 161 60H0Z" class="m-ctx"/>
+        <text x="173" y="56" class="t-strong">66&#160;%</text>
+        <text x="0" y="78" class="t-dim">hizo otras tareas en la computadora</text>
+        <path d="M0 84H134Q138 84 138 88V98Q138 102 134 102H0Z" class="m-acc"/>
+        <text x="146" y="98" class="t-strong">55&#160;%</text>
+
+        <text x="0" y="126" class="t-strong">Si ve la pantalla de quien tiene al lado</text>
+        <text x="0" y="148" class="t-dim">sin pantalla a la vista</text>
+        <path d="M0 154H179Q183 154 183 158V168Q183 172 179 172H0Z" class="m-ctx"/>
+        <text x="191" y="168" class="t-strong">73&#160;%</text>
+        <text x="0" y="190" class="t-dim">con pantalla a la vista</text>
+        <path d="M0 196H136Q140 196 140 200V210Q140 214 136 214H0Z" class="m-acc"/>
+        <text x="148" y="210" class="t-strong">56&#160;%</text>
+      </svg>
+      <figcaption>Porcentaje de respuestas correctas en la prueba al final de la clase. Hacer otras tareas en la computadora bajó la nota de quien las hacía y también la de quien veía su pantalla.<span class="fig-src">Dos experimentos distintos, grupos pequeños. Fuente: <a href="#ref-13" onclick="savePos(this)">13</a></span></figcaption>
+    </figure>
+
+    <p>Los datos sobre el teléfono son más sólidos. Usar el teléfono mientras se aprende algo, por ejemplo escribir mensajes durante una clase, reduce claramente lo que se recuerda justo después (<span class="term stat-info"><strong>g = −0,65</strong><button type="button" class="stat-info-btn" aria-label="¿Qué significa este dato?">i</button><span class="term-tip">La g mide el tamaño de la diferencia entre dos grupos. Un 0,65 es una diferencia entre moderada y grande: una persona típica que usaba el teléfono recordó menos que unas tres cuartas partes de quienes no lo usaban.</span></span>).<a href="#ref-14" class="ref" onclick="savePos(this)">14</a> Así lo muestra un análisis que reunió <strong>27</strong> experimentos. En todos ellos se decidió por sorteo quién usaría el teléfono. El sorteo descarta que los dos grupos fueran distintos desde el principio; por eso la diferencia puede atribuirse al teléfono.</p>
+
+    <p>Hacer otra cosa mientras se lee tiene un precio, en comprensión o en tiempo. Si el tiempo es limitado, el texto se entiende peor; si cada uno lee a su ritmo, tarda más en terminar.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a></p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="s06">
+    <div class="section-number">Sección 06</div>
+    <h2 id="h06">En el trabajo: la jornada fragmentada<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>El ir y venir de la escena inicial también se ha medido en oficinas reales. En una empresa, los investigadores se sentaron junto a 24 empleados y, durante más de <strong>700 horas</strong> en total, anotaron la hora exacta de cada salto de una tarea a otra. Por término medio, los empleados dedicaban unos <strong>11 minutos</strong> a un proyecto antes de pasar a otro. En medio se colaba una llamada, una pregunta o algún otro asunto que les venía a la cabeza. Casi siempre retomaban ese mismo día el trabajo que habían dejado a medias, pero unos <strong>25 minutos</strong> después, en promedio, y tras pasar por otras tareas.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a></p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 162" role="img" aria-label="Línea de tiempo esquemática con tres proyectos: la persona dedica unos 11 minutos a cada proyecto y pasa al siguiente. Vuelve al proyecto A, que había dejado a medias, unos 25 minutos después, tras ocuparse de los proyectos B y C.">
+        <text x="170" y="32" text-anchor="middle" class="t-strong" style="font-size:12.6px">regreso tras 25 min</text>
+        <text x="0" y="55">Proyecto A</text>
+        <text x="0" y="89">Proyecto B</text>
+        <text x="0" y="123">Proyecto C</text>
+
+        <rect x="77" y="40" width="42" height="22" rx="3" class="m-acc"/>
+        <text x="98" y="55" text-anchor="middle" class="t-on" style="font-size:11.5px">11 min</text>
+        <line x1="122" y1="51" x2="215" y2="51" class="ln ln-dash"/>
+        <path d="M213 47L219 51L213 55" class="ln"/>
+        <rect x="221" y="40" width="42" height="22" rx="3" class="m-acc"/>
+
+        <rect x="121" y="74" width="46" height="22" rx="3" class="m-ctx"/>
+        <rect x="265" y="74" width="42" height="22" rx="3" class="m-ctx"/>
+        <rect x="169" y="108" width="50" height="22" rx="3" class="m-ctx"/>
+        <rect x="309" y="108" width="30" height="22" rx="3" class="m-ctx"/>
+
+        <line x1="76" y1="140" x2="340" y2="140" style="stroke:var(--divider);stroke-width:1"/>
+        <line x1="76.5" y1="140" x2="76.5" y2="145" class="ln" style="stroke-width:1"/>
+        <line x1="196" y1="140" x2="196" y2="145" class="ln" style="stroke-width:1"/>
+        <line x1="316" y1="140" x2="316" y2="145" class="ln" style="stroke-width:1"/>
+        <text x="76" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">0</text>
+        <text x="196" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">30 min</text>
+        <text x="316" y="158" text-anchor="middle" class="t-dim" style="font-size:12.6px">60 min</text>
+      </svg>
+      <figcaption>Una hora de ejemplo: unos 11 minutos por proyecto, y la vuelta a la tarea pendiente llega unos 25 minutos después.<span class="fig-src">Ejemplo esquemático basado en promedios; no muestra mediciones individuales. Fuente: <a href="#ref-16" onclick="savePos(this)">16</a></span></figcaption>
+    </figure>
+
+    <p>Cuando alguien deja la tarea por iniciativa propia, sin que nada ni nadie lo interrumpa, tarda más en volver a ella que cuando la interrupción viene de fuera. Aun así, los promedios pueden engañar: a veces la vuelta llega en pocos minutos y otras, horas después.</p>
+
+    <p>Las interrupciones no siempre ralentizan el trabajo, pero sí aumentan el estrés. En un experimento, los participantes tenían que contestar una serie de correos. A unos se les interrumpía con otras tareas; los demás trabajaron sin interrupciones. Los interrumpidos aceleraron para recuperar el tiempo perdido y terminaron un poco antes, en <strong>20,5</strong> minutos en lugar de unos <strong>23</strong>, sin que bajara la calidad de lo que escribieron.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a> Pero dijeron sentir más estrés, más presión de tiempo y más frustración: alrededor de <strong>9</strong> frente a <strong>7</strong> en una escala de 20 puntos.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 216" role="img" aria-label="Dos gráficos de barras. Tiempo para terminar la tarea: sin interrupciones, 22,8 minutos; con interrupciones, 20,5 minutos. Estrés declarado, sobre 20 puntos: sin interrupciones, 6,9; con interrupciones, alrededor de 9.">
+        <text x="0" y="14" class="t-strong">Tiempo para terminar la tarea (minutos)</text>
+        <text x="0" y="36" class="t-dim">sin interrupciones</text>
+        <path d="M0 42H178Q182 42 182 46V56Q182 60 178 60H0Z" class="m-ctx"/>
+        <text x="190" y="56" class="t-strong">22,8</text>
+        <text x="0" y="78" class="t-dim">con interrupciones</text>
+        <path d="M0 84H160Q164 84 164 88V98Q164 102 160 102H0Z" class="m-acc"/>
+        <text x="172" y="98" class="t-strong">20,5</text>
+
+        <text x="0" y="126" class="t-strong">Estrés declarado (sobre 20 puntos)</text>
+        <text x="0" y="148" class="t-dim">sin interrupciones</text>
+        <path d="M0 154H79Q83 154 83 158V168Q83 172 79 172H0Z" class="m-ctx"/>
+        <text x="91" y="168" class="t-strong">6,9</text>
+        <text x="0" y="190" class="t-dim">con interrupciones</text>
+        <path d="M0 196H104Q108 196 108 200V210Q108 214 104 214H0Z" class="m-acc"/>
+        <text x="116" y="210" class="t-strong">9</text>
+      </svg>
+      <figcaption>El grupo interrumpido terminó un poco antes, pero dijo sentir más estrés: trabajó más rápido y más tenso.<span class="fig-src">Valores aproximados. Fuente: <a href="#ref-17" onclick="savePos(this)">17</a></span></figcaption>
+    </figure>
+
+    <p>Además, la tarea que se deja a medias sigue ocupando espacio en la mente. En un experimento, los participantes pasaron a evaluar una solicitud de empleo sin haber terminado un acertijo de palabras. Parte de su mente seguía en el acertijo, y en la nueva tarea rindieron peor. Es lo que se llama «residuo de atención»: una parte de la atención se queda enganchada en la tarea anterior y no llega a la nueva. Terminar la tarea anterior antes de cambiar reduce ese residuo.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a> De momento, este hallazgo se apoya en una sola fuente.</p>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="s07">
+    <div class="section-number">Sección 07</div>
+    <h2 id="h07">Creencias populares<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Algunas ideas que circulan sobre el <em>multitasking</em> y la atención no encajan con lo que se ha medido.</p>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Creencia popular</span>La capacidad de atención humana se ha reducido a <strong>8 segundos</strong>: ya es más corta que la de un pez dorado.</p>
+      <p class="myth-fact"><span class="myth-label">En realidad</span>La cifra se popularizó a partir de un informe de <em>marketing</em> de Microsoft Canadá, que a su vez la había sacado de un sitio web de origen dudoso. Detrás de ella no hay ninguna medición.</p>
+    </div>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Creencia popular</span>Las mujeres hacen <em>multitasking</em> mejor que los hombres.</p>
+      <p class="myth-fact"><span class="myth-label">En realidad</span>Los datos son contradictorios. En algunas mediciones, las mujeres se ralentizan un poco menos que los hombres al alternar entre dos tareas,<a href="#ref-19" class="ref" onclick="savePos(this)">19</a> y en otras no aparece ninguna diferencia.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
+    </div>
+
+    <div class="myth">
+      <p class="myth-claim"><span class="myth-label">Creencia popular</span>Tener el teléfono sobre la mesa reduce el rendimiento, aunque ni siquiera se mire.</p>
+      <p class="myth-fact"><span class="myth-label">En realidad</span>Los tres grandes análisis que reúnen los estudios sobre el tema no coinciden: uno encuentra un efecto negativo; otro, solo un efecto pequeño en la capacidad de retener información en la mente, y el tercero, ninguno. La cuestión, por tanto, sigue abierta.</p>
+    </div>
+  </section>
+
+  <!-- CONCLUSION -->
+  <section id="s08">
+    <div class="section-number">Conclusión</div>
+    <h2 id="conclusion">Conclusión: la mente trabaja por turnos<button class="heading-share" type="button" aria-label="Compartir esta sección" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Todas estas mediciones apuntan en la misma dirección. La mente no hace realmente dos cosas a la vez: en el paso de decisión las pone en cola y va y viene entre ellas. Cada cambio tiene un pequeño precio: un retraso que va de unos milisegundos a un segundo, algunos errores más y una parte de la mente que se queda en la tarea a medias. Y casi nadie percibe ese precio en sí mismo.</p>
+
+    <p>De los datos se desprenden algunas conclusiones prácticas:</p>
+    <ul class="takeaways">
+      <li>Terminar la tarea en curso antes de cambiar reduce el residuo de atención que pasa a la nueva.</li>
+      <li>Saber de antemano qué tarea viene después acorta el cambio: no elimina el precio, pero lo reduce.</li>
+      <li>Hablar por teléfono al volante empeora la conducción, incluso con manos libres. La llamada puede esperar a que termine el trayecto.</li>
+      <li>Usar el teléfono o hacer otras tareas en la computadora mientras se aprende algo reduce lo que se retiene. Y lo que se hace en la computadora afecta también a quien está al lado y ve esa pantalla.</li>
+      <li>Un trabajo con interrupciones puede terminarse antes, pero se vive con más estrés.</li>
+    </ul>
+
+    <p>En el fondo, los datos dicen algo sencillo: la mente toma una sola decisión cada vez, y cada ida y vuelta entre dos tareas tiene un precio.</p>
+  </section>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <h3>Referencias</h3>
+    <ol class="references">
+      <li id="ref-1">Pashler, H. (1994). Dual-task interference in simple tasks: Data and theory. <em>Psychological Bulletin</em>, 116(2), 220-244. <a href="https://doi.org/10.1037/0033-2909.116.2.220" target="_blank" rel="noopener">doi:10.1037/0033-2909.116.2.220</a></li>
+      <li id="ref-2">Schumacher, E. H. et al. (2001). Virtually perfect time sharing in dual-task performance: Uncorking the central cognitive bottleneck. <em>Psychological Science</em>, 12(2), 101-108. <a href="https://doi.org/10.1111/1467-9280.00318" target="_blank" rel="noopener">doi:10.1111/1467-9280.00318</a></li>
+      <li id="ref-3">Koch, I., Poljac, E., Müller, H. &amp; Kiesel, A. (2018). Cognitive structure, flexibility, and plasticity in human multitasking: An integrative review of dual-task and task-switching research. <em>Psychological Bulletin</em>, 144(6), 557-583. <a href="https://doi.org/10.1037/bul0000144" target="_blank" rel="noopener">doi:10.1037/bul0000144</a></li>
+      <li id="ref-4">Rubinstein, J. S., Meyer, D. E. &amp; Evans, J. E. (2001). Executive control of cognitive processes in task switching. <em>Journal of Experimental Psychology: Human Perception and Performance</em>, 27(4), 763-797. <a href="https://doi.org/10.1037/0096-1523.27.4.763" target="_blank" rel="noopener">doi:10.1037/0096-1523.27.4.763</a></li>
+      <li id="ref-5">Monsell, S. (2003). Task switching. <em>Trends in Cognitive Sciences</em>, 7(3), 134-140. <a href="https://doi.org/10.1016/S1364-6613(03)00028-7" target="_blank" rel="noopener">doi:10.1016/S1364-6613(03)00028-7</a></li>
+      <li id="ref-6">Sanbonmatsu, D. M., Strayer, D. L., Medeiros-Ward, N. &amp; Watson, J. M. (2013). Who multi-tasks and why? Multi-tasking ability, perceived multi-tasking ability, impulsivity, and sensation seeking. <em>PLOS ONE</em>, 8(1), e54402. <a href="https://doi.org/10.1371/journal.pone.0054402" target="_blank" rel="noopener">doi:10.1371/journal.pone.0054402</a></li>
+      <li id="ref-7">Watson, J. M. &amp; Strayer, D. L. (2010). Supertaskers: Profiles in extraordinary multitasking ability. <em>Psychonomic Bulletin &amp; Review</em>, 17(4), 479-485. <a href="https://doi.org/10.3758/PBR.17.4.479" target="_blank" rel="noopener">doi:10.3758/PBR.17.4.479</a></li>
+      <li id="ref-8">Madore, K. P. et al. (2020). Memory failure predicted by attention lapsing and media multitasking. <em>Nature</em>, 587, 87-91. <a href="https://doi.org/10.1038/s41586-020-2870-z" target="_blank" rel="noopener">doi:10.1038/s41586-020-2870-z</a></li>
+      <li id="ref-9">Loh, K. K. &amp; Kanai, R. (2014). Higher media multi-tasking activity is associated with smaller gray-matter density in the anterior cingulate cortex. <em>PLOS ONE</em>, 9(9), e106698. <a href="https://doi.org/10.1371/journal.pone.0106698" target="_blank" rel="noopener">doi:10.1371/journal.pone.0106698</a></li>
+      <li id="ref-10">Strayer, D. L., Drews, F. A. &amp; Crouch, D. J. (2006). A comparison of the cell phone driver and the drunk driver. <em>Human Factors</em>, 48(2), 381-391. <a href="https://doi.org/10.1518/001872006777724471" target="_blank" rel="noopener">doi:10.1518/001872006777724471</a></li>
+      <li id="ref-11">Caird, J. K. et al. (2018). Does talking on a cell phone, with a passenger, or dialing affect driving performance? An updated systematic review and meta-analysis of experimental studies. <em>Human Factors</em>, 60(1), 101-133. <a href="https://doi.org/10.1177/0018720817748145" target="_blank" rel="noopener">doi:10.1177/0018720817748145</a></li>
+      <li id="ref-12">Dingus, T. A. et al. (2016). Driver crash risk factors and prevalence evaluation using naturalistic driving data. <em>Proceedings of the National Academy of Sciences</em>, 113(10), 2636-2641. <a href="https://doi.org/10.1073/pnas.1513271113" target="_blank" rel="noopener">doi:10.1073/pnas.1513271113</a></li>
+      <li id="ref-13">Sana, F., Weston, T. &amp; Cepeda, N. J. (2013). Laptop multitasking hinders classroom learning for both users and nearby peers. <em>Computers &amp; Education</em>, 62, 24-31. <a href="https://doi.org/10.1016/j.compedu.2012.10.003" target="_blank" rel="noopener">doi:10.1016/j.compedu.2012.10.003</a></li>
+      <li id="ref-14">Chen, Q., Yan, Z., Moeyaert, M. &amp; Bangert-Drowns, R. (2025). Mobile multitasking in learning: A meta-analysis of effects of mobile phone distraction on young adults' immediate recall. <em>Computers in Human Behavior</em>, 162, 108432. <a href="https://doi.org/10.1016/j.chb.2024.108432" target="_blank" rel="noopener">doi:10.1016/j.chb.2024.108432</a></li>
+      <li id="ref-15">Clinton-Lisell, V. (2021). Stop multitasking and just read: Meta-analyses of multitasking's effects on reading performance and reading time. <em>Journal of Research in Reading</em>, 44(4), 787-816. <a href="https://doi.org/10.1111/1467-9817.12372" target="_blank" rel="noopener">doi:10.1111/1467-9817.12372</a></li>
+      <li id="ref-16">Mark, G., Gonzalez, V. M. &amp; Harris, J. (2005). No task left behind? Examining the nature of fragmented work. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '05)</em>, 321-330. <a href="https://doi.org/10.1145/1054972.1055017" target="_blank" rel="noopener">doi:10.1145/1054972.1055017</a></li>
+      <li id="ref-17">Mark, G., Gudith, D. &amp; Klocke, U. (2008). The cost of interrupted work: More speed and stress. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '08)</em>, 107-110. <a href="https://doi.org/10.1145/1357054.1357072" target="_blank" rel="noopener">doi:10.1145/1357054.1357072</a></li>
+      <li id="ref-18">Leroy, S. (2009). Why is it so hard to do my work? The challenge of attention residue when switching between work tasks. <em>Organizational Behavior and Human Decision Processes</em>, 109(2), 168-181. <a href="https://doi.org/10.1016/j.obhdp.2009.04.002" target="_blank" rel="noopener">doi:10.1016/j.obhdp.2009.04.002</a></li>
+      <li id="ref-19">Stoet, G., O'Connor, D. B., Conner, M. &amp; Laws, K. R. (2013). Are women better than men at multi-tasking? <em>BMC Psychology</em>, 1, 18. <a href="https://doi.org/10.1186/2050-7283-1-18" target="_blank" rel="noopener">doi:10.1186/2050-7283-1-18</a></li>
+      <li id="ref-20">Hirnstein, M., Larøi, F. &amp; Laloyaux, J. (2019). No sex difference in an everyday multitasking paradigm. <em>Psychological Research</em>, 83(2), 286-296. <a href="https://doi.org/10.1007/s00426-018-1045-0" target="_blank" rel="noopener">doi:10.1007/s00426-018-1045-0</a></li>
+    </ol>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <p>¿Quieres compartir tu opinión sobre este texto?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Enviar comentarios</a>
+  </div>
+
+</div>
+
+<button id="fab-back" onclick="goBack()" title="Volver al texto">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<a href="../index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
+
+<script>
+  let savedPosition = null;
+
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() {
+      document.getElementById('fab-back').style.display = 'flex';
+    }, 300);
+  }
+
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'none';
+        savedPosition = null;
+      }, 600);
+    }
+  }
+</script>
+
+</body>
+</html>
