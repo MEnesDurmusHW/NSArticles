@@ -149,8 +149,24 @@
     .line{grid-template-columns:1fr;gap:2px;margin-bottom:16px}
     .who{text-align:left;padding-top:0}
     .line.me{margin-left:-12px;padding-left:10px}
+    .hide-me .line.me{grid-template-columns:1fr auto}
+    .hide-me .line.me .who{grid-column:1;grid-row:1}
+    .hide-me .line.me .peek{grid-column:2;grid-row:1}
+    .hide-me .line.me .say{grid-column:1 / -1;grid-row:2}
     .skip{grid-template-columns:18px 1fr;gap:10px}
   }
+
+  /* ---- ezber modu: Humphrey repliklerini gizler, satır başına "Göster" düğmesi ---- */
+  .peek{
+    display:none;align-self:center;justify-self:end;
+    font-family:var(--sheet);font-size:.74rem;font-weight:600;line-height:1;
+    background:#fff;color:#000;border:1.5px solid #000;border-radius:999px;
+    width:4.6rem;padding:6px 0;text-align:center;cursor:pointer;white-space:nowrap;
+  }
+  .peek:hover{background:#000;color:#fff}
+  .hide-me .peek{display:inline-block}
+  .hide-me .line.me{grid-template-columns:112px 1fr auto}
+  .hide-me .line.me:not(.shown) .say{visibility:hidden;user-select:none}
 
   /* ---- ekran kromu (baskıda gizli) ---- */
   .bar{
@@ -207,6 +223,8 @@
     }
     .line.me .who{font-size:8.8pt}
     .line.me .say{font-size:1.06em}
+    .peek{display:none!important}
+    .hide-me .line.me{grid-template-columns:98px 1fr}
     .act-end{margin-top:26px;padding-top:14px}
   }
 </style>
@@ -218,6 +236,9 @@
   <a href="Papaz-Kacti.html" aria-label="Tam metne dön">
     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Tam metin
   </a>
+  <button type="button" id="hide-me-toggle" aria-pressed="false" aria-label="Humphrey repliklerini gizle">
+    <svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg><span>Metnimi gizle</span>
+  </button>
   <button type="button" onclick="window.print()" aria-label="Yazdır">
     <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Yazdır
   </button>
@@ -966,6 +987,42 @@
   <a href="../index.html">NS Articles</a>
   <span>by M. Enes Durmuş</span>
 </div>
+
+<script>
+/* Ezber modu: "Metnimi gizle" Humphrey repliklerini saklar, her satırın sağındaki düğme o satırı açar/kapatır. */
+(function(){
+  var toggle = document.getElementById('hide-me-toggle');
+  var lines = document.querySelectorAll('.line.me');
+  if (!toggle || !lines.length) return;
+  var label = toggle.querySelector('span');
+
+  lines.forEach(function(line){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'peek noprint';
+    btn.textContent = 'Göster';
+    btn.setAttribute('aria-label', 'Bu repliği göster');
+    btn.addEventListener('click', function(){
+      var shown = line.classList.toggle('shown');
+      btn.textContent = shown ? 'Gizle' : 'Göster';
+      btn.setAttribute('aria-label', shown ? 'Bu repliği gizle' : 'Bu repliği göster');
+    });
+    line.appendChild(btn);
+  });
+
+  toggle.addEventListener('click', function(){
+    var on = document.body.classList.toggle('hide-me');
+    toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+    label.textContent = on ? 'Metnimi göster' : 'Metnimi gizle';
+    lines.forEach(function(line){
+      line.classList.remove('shown');
+      var b = line.querySelector('.peek');
+      b.textContent = 'Göster';
+      b.setAttribute('aria-label', 'Bu repliği göster');
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
