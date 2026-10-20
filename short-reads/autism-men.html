@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otizm ve Erkekler</title>
+<meta name="description" content="Erkekler bir parça otistik mi? Otizm anketlerinde erkekler ortalamaya göre nasıl puan alıyor? Fark ne kadar büyük ve hangi özelliklerden geliyor?">
+<meta name="word-count" content="1950">
+<meta name="reading-time" content="9">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="NS Articles">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Otizm ve Erkekler">
+<meta property="og:description" content="Erkekler bir parça otistik mi? Otizm anketlerinde erkekler ortalamaya göre nasıl puan alıyor? Fark ne kadar büyük ve hangi özelliklerden geliyor?">
+<meta property="og:url" content="https://menesdurmushw.github.io/NSArticles/short-reads/autism-men.html">
+<meta property="og:image" content="https://menesdurmushw.github.io/NSArticles/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NS Articles">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/qrcode.js" defer></script>
+<script src="../assets/js/share.js" defer></script>
+<script src="../assets/js/tooltip.js" defer></script>
+<script src="../assets/js/analytics.js" defer></script>
+<script src="../assets/js/progress.js" defer></script>
+<script src="../assets/js/resume.js" defer></script>
+<script src="../assets/js/references.js" defer></script>
+<script src="../assets/js/toc.js" defer></script>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 120px 24px 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5.5vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 17px;
+    color: #4A443C;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-align: center;
+  }
+  [data-theme="dark"] .hero-sub { color: #c2bfb8; }
+
+  /* SECTIONS */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  p {
+    margin-bottom: 18px;
+    color: var(--text);
+    text-align: justify;
+  }
+  p strong { font-weight: 600; }
+
+  /* TRAIT LIST (özellik, kanıt, otizmdeki karşılığı) */
+  .trait {
+    margin: 0 0 30px;
+    padding-left: 18px;
+    border-left: 2px solid var(--divider);
+  }
+  .trait-name {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .trait p { margin-bottom: 10px; }
+  .trait p:last-child { margin-bottom: 0; }
+  .trait-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .trait .trait-parallel { text-align: left; }
+  .trait-parallel .trait-label { color: var(--accent); }
+  .trait-reverse { border-left-style: dashed; }
+
+  /* TANI ALANLARI (iki kart + açılır tam liste) */
+  .domains {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 4px 0 16px;
+  }
+  .domain {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px 18px 15px;
+  }
+  .domain-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .crit-badge {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: 6px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    line-height: 1;
+  }
+  .domain ul,
+  .crit-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .domain li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 9px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+    text-align: left;
+  }
+  .domain li:last-child { margin-bottom: 0; }
+  .domain li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  details.full-list {
+    margin: 0 0 22px;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+  }
+  details.full-list > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: 9px;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: background 0.2s ease;
+  }
+  details.full-list > summary::-webkit-details-marker { display: none; }
+  details.full-list > summary::marker { content: ''; }
+  details.full-list > summary::after {
+    content: '';
+    flex: none;
+    width: 7px;
+    height: 7px;
+    margin: -4px 4px 0 0;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease, margin 0.2s ease;
+  }
+  details.full-list[open] > summary::after {
+    transform: rotate(-135deg);
+    margin-top: 4px;
+  }
+  details.full-list > summary:hover { background: var(--accent-glow); }
+  details.full-list > summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  details.full-list[open] > summary { border-radius: 9px 9px 0 0; }
+  .full-list-body {
+    padding: 2px 18px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: left;
+  }
+  .crit-group { margin-top: 16px; }
+  .crit-group-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .crit-rule {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .crit-group li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+  .crit-group li:last-child { margin-bottom: 0; }
+  .crit-group li .crit-badge {
+    min-width: 26px;
+    height: 20px;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+  .crit-group li strong { font-weight: 600; }
+  .full-list-src {
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+  }
+
+  /* FIGURES (inline SVG charts) */
+  .fig {
+    margin: 34px 0 38px;
+  }
+  .fig svg {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+  }
+  .fig text {
+    font-family: var(--sans);
+    font-size: 13px;
+    fill: var(--text);
+  }
+  .fig .t-dim { fill: var(--text-dim); }
+  .fig .t-strong { font-weight: 600; }
+  .fig .t-sm { font-size: 12.6px; }
+  .fig .m-acc { fill: var(--accent); }
+  .fig .m-ctx { fill: var(--surface); stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .m-neu { fill: var(--text-muted); }
+  .fig .ln { fill: none; stroke: var(--text-dim); stroke-width: 1.5; }
+  .fig .track { stroke: var(--divider); stroke-width: 1; }
+  .fig .c-w { fill: var(--accent); fill-opacity: 0.28; stroke: var(--accent); stroke-width: 1.5; }
+  .fig .c-m { fill: none; stroke: var(--text); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  /* Çizgi üstündeki etiketler: sayfa zemini renginde hale, çizgi yazının içinden geçmesin */
+  .fig .halo {
+    paint-order: stroke fill;
+    stroke: var(--bg);
+    stroke-width: 5px;
+    stroke-linejoin: round;
+  }
+  /* Başlık grafiğin üstünde, kaynak satırı altında */
+  .fig figcaption {
+    max-width: 440px;
+    margin: 0 auto 14px;
+    text-align: left;
+  }
+  .fig .fig-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+  }
+  .fig .fig-sub {
+    display: block;
+    margin-top: 3px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--text-dim);
+  }
+  .fig .fig-src {
+    max-width: 440px;
+    margin: 14px auto 0;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--text-dim);
+  }
+  .fig .fig-src a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fig .fig-src a:hover { text-decoration: underline; }
+
+  /* INLINE REFERENCES */
+  a.ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    vertical-align: super;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  a.ref:hover { text-decoration: underline; }
+  li:target {
+    background: var(--accent-glow);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  /* REFERENCES */
+  .ref-section {
+    padding: 40px 0;
+  }
+  .ref-section h3 {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  ol.references {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ol.references li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  ol.references li:last-child { border-bottom: none; }
+  ol.references a {
+    color: var(--accent);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  ol.references a:hover { text-decoration: underline; }
+
+  /* FAB BACK */
+  #fab-back {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: transform 0.2s ease;
+  }
+  #fab-back:hover { transform: scale(1.1); }
+
+  /* FEEDBACK */
+  .feedback {
+    padding: 0 0 60px;
+    text-align: center;
+  }
+  .feedback p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .feedback-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent-glow);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .feedback-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-1px);
+  }
+
+  a.home-logo { display: block; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 96px 20px 44px; }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .container { padding: 0 18px; }
+    h2 { font-size: 24px; }
+    section { padding: 40px 0; }
+    .trait { padding-left: 14px; }
+    .trait-name { font-size: 16px; }
+    .fig .fig-title { font-size: 14.5px; }
+  }
+  @media (max-width: 560px) {
+    .domains { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 360px) {
+    .domain { padding: 14px 14px 13px; }
+    details.full-list > summary { padding: 12px 14px; }
+    .full-list-body { padding: 2px 14px 14px; }
+  }
+</style>
+  <script src="../assets/js/highlight.js" defer></script>
+  <script src="../assets/js/ref.js" defer></script>
+  <script data-goatcounter="https://nsdurmus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="grain"></div>
+<a class="home-toggle" href="../index.html" aria-label="Ana sayfaya dön"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><text x="16" y="22.5" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="17" font-weight="500" letter-spacing="-0.3">NS</text></svg></a>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+</button>
+<button class="share-toggle" onclick="openShare()" aria-label="Bu sayfayı paylaş" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+</button>
+<button class="toc-toggle" onclick="toggleToc()" aria-label="İçindekiler" aria-expanded="false" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="7" x2="20" y2="7"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <line x1="4" y1="17" x2="14" y2="17"/>
+  </svg>
+</button>
+
+<div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
+
+<nav class="toc-rail" id="toc-rail" aria-label="İçindekiler">
+  <div class="toc-list">
+    <a href="#h01" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">01</span>
+      <span class="toc-title">Otizm nedir</span>
+    </a>
+    <a href="#h02" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">02</span>
+      <span class="toc-title">Asperger</span>
+    </a>
+    <a href="#h03" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">03</span>
+      <span class="toc-title">Anket puanları</span>
+    </a>
+    <a href="#h04" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">04</span>
+      <span class="toc-title">Benzerlikler</span>
+    </a>
+    <a href="#h05" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">05</span>
+      <span class="toc-title">Neden ve itirazlar</span>
+    </a>
+    <a href="#h06" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">06</span>
+      <span class="toc-title">Matematikçiler</span>
+    </a>
+    <a href="#h07" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">07</span>
+      <span class="toc-title">Parantez: kadınlar</span>
+    </a>
+    <a href="#sonuc" class="toc-row toc-level-1">
+      <span class="toc-marker"></span>
+      <span class="toc-num">·</span>
+      <span class="toc-title">Sonuç</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Kısa Okuma</div>
+  <h1>Otizm <em>ve</em> Erkekler</h1>
+  <p class="hero-sub">Erkekler bir parça otistik mi? Otizm anketlerinde erkekler ortalamaya göre nasıl puan alıyor? Fark ne kadar büyük ve hangi özelliklerden geliyor?</p>
+</header>
+
+<div class="container">
+
+  <!-- GİRİŞ -->
+  <section class="intro" aria-label="Giriş">
+    <p>Bu yazının iddiası biraz kışkırtıcı: Erkekler bir parça otistik mi? Hatta bir adım daha ileri gidelim: Erkekler yarı otistik mi?</p>
+    <p>Soru şaka gibi duruyor, ama büsbütün temelsiz de değil. Otizm tanısı erkeklere kadınlardan birkaç kat daha sık konuyor; otizm anketlerinde de erkekler ortalamada biraz daha yüksek puan alıyor. Bu yazı iddiayı kanıtlarla sınıyor: Bakalım ne kadarı ayakta kalacak.</p>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section id="s01">
+    <div class="section-number">Bölüm 01</div>
+    <h2 id="h01">Otizm Nedir, Spektrum Ne Demek?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Otizm spektrum bozukluğu, beynin gelişimiyle ilgili, ömür boyu süren bir durum. Tanı iki alana bakılarak konuyor.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+
+    <div class="domains">
+      <div class="domain">
+        <div class="domain-head"><span class="crit-badge">A</span>Sosyal iletişim</div>
+        <ul>
+          <li>Karşıdakinin sıkıldığını fark etmeden yalnızca kendi konusunu anlatmak</li>
+          <li>Alışılmadık göz teması; jestlerin ve yüz ifadesinin konuşmaya uymaması</li>
+          <li>Arkadaş edinmekte ve arkadaşlığı sürdürmekte zorlanmak</li>
+          <li>Söyleneni kelimesi kelimesine almak: "Etekleri zil çalıyor" deyimini duyunca gerçekten bir zil aramak</li>
+        </ul>
+      </div>
+      <div class="domain">
+        <div class="domain-head"><span class="crit-badge">B</span>Tekrarlayan davranışlar ve dar ilgiler</div>
+        <ul>
+          <li>Her gün aynı yoldan gitmekte, aynı yemeği yemekte ısrar etmek</li>
+          <li>Küçük bir plan değişikliğinde büyük huzursuzluk</li>
+          <li>Trenler gibi tek bir konuya yoğun, dar bir ilgi</li>
+          <li>Seslere, ışığa ya da kumaş dokusuna aşırı ya da çok az tepki</li>
+        </ul>
+      </div>
+    </div>
+
+    <details class="full-list">
+      <summary>Tanı kitabındaki tam liste</summary>
+      <div class="full-list-body">
+        <div class="crit-group">
+          <div class="crit-group-head"><span class="crit-badge">A</span>Sosyal iletişim ve etkileşimde süregiden güçlük<span class="crit-rule">Üçü de gerekli</span></div>
+          <ul>
+            <li><span class="crit-badge">A1</span><span><strong>Karşılıklı sosyal ve duygusal alışveriş:</strong> tek taraflı konuşma, ilgi ve duyguları paylaşmamak.</span></li>
+            <li><span class="crit-badge">A2</span><span><strong>Sözsüz iletişim:</strong> alışılmadık göz teması ve beden dili, jest ve yüz ifadesinin konuşmaya uymaması.</span></li>
+            <li><span class="crit-badge">A3</span><span><strong>İlişki kurmak ve sürdürmek:</strong> davranışı ortama göre ayarlamakta zorlanmak, ortak ya da hayalî oyunda güçlük, yaşıtlara az ilgi.</span></li>
+          </ul>
+        </div>
+        <div class="crit-group">
+          <div class="crit-group-head"><span class="crit-badge">B</span>Kısıtlı, tekrarlayan davranışlar ve ilgiler<span class="crit-rule">Dördünden en az ikisi</span></div>
+          <ul>
+            <li><span class="crit-badge">B1</span><span><strong>Tekrarlayan hareket ya da konuşma:</strong> oyuncakları sıraya dizmek, duyduğu sözleri tekrar etmek.</span></li>
+            <li><span class="crit-badge">B2</span><span><strong>Aynılıkta ısrar:</strong> küçük değişikliklerde büyük huzursuzluk, her gün aynı yol ya da aynı yemek, katı düşünce kalıpları.</span></li>
+            <li><span class="crit-badge">B3</span><span><strong>Çok yoğun, dar ilgiler:</strong> konusu ya da yoğunluğu alışılmadık ilgiler.</span></li>
+            <li><span class="crit-badge">B4</span><span><strong>Duyulara aşırı ya da az tepki:</strong> belli seslerden ya da dokulardan rahatsız olmak, acıya ya da sıcağa kayıtsız görünmek, ışıklara ya da dönen nesnelere hayranlık.</span></li>
+          </ul>
+        </div>
+        <div class="crit-group">
+          <div class="crit-group-head">Ayrıca<span class="crit-rule">Hepsi gerekli</span></div>
+          <ul>
+            <li><span class="crit-badge">C</span><span>Belirtiler erken çocuklukta başlar. Ama sosyal talepler artınca ya da öğrenilmiş stratejilerle örtüldüğü için sonradan belirginleşebilir.</span></li>
+            <li><span class="crit-badge">D</span><span>Günlük hayatı belirgin biçimde zorlaştırır.</span></li>
+            <li><span class="crit-badge">E</span><span>Zihinsel yetersizlik gibi başka bir durumla daha iyi açıklanamaz.</span></li>
+          </ul>
+        </div>
+        <div class="full-list-src">Tanı kitabı DSM-5'teki ölçütlerin sadeleştirilmiş hâli.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></div>
+      </div>
+    </details>
+
+    <p>Tanı için belirtilerin küçük yaşta başlaması ve günlük hayatı belirgin biçimde zorlaştırması da gerekiyor.</p>
+
+    <p>"Otizm" kelimesini 1911'de İsviçreli psikiyatr Eugen Bleuler, şizofrenideki içe kapanmayı anlatmak için kullandı. Kelime, Yunanca "kendi" demek olan <em>autos</em>'tan geliyor.<a href="#ref-2" class="ref" onclick="savePos(this)">2</a> Bugün otizm denen tabloyu ilk tarif edenlerden biri Sovyet çocuk psikiyatrı Grunya Sukhareva'ydı: 1925'te <strong>6</strong> erkek, 1927'de <strong>5</strong> kız çocuğu anlattı ve aralarındaki farklara dikkat çekti.<a href="#ref-3" class="ref" onclick="savePos(this)">3</a> Leo Kanner'in 1943 tarihli ünlü makalesindeki <strong>11</strong> çocuğun ise <strong>8</strong>'i erkek, <strong>3</strong>'ü kızdı.<a href="#ref-4" class="ref" onclick="savePos(this)">4</a> Erkeklerin ağır basması daha ilk kayıtlarda görülüyor.</p>
+
+    <p>"Spektrum" ne demek? Otizm, bir ışık düğmesi gibi ya açık ya kapalı olan bir şey değil; 1 ya da 0 değil. Boy uzunluğu buna iyi bir örnek. Belli bir boyun üstüne, diyelim <strong>1,90</strong> metreye, "uzun boylu" deriz. Ama 1,89 ile 1,91 arasında gerçek bir fark yok: Boy kısadan uzuna kesintisiz uzanıyor ve "uzun" dediğimiz yer bu çizginin bir ucu.</p>
+    <p>Otizm özellikleri de böyle dağılıyor. Genel nüfustan seçilen ikizlerle yapılan bir çalışma, bu özelliklerin herkeste az ya da çok bulunduğunu gösterdi: Çoğu insan ortalarda toplanıyor, tanı alanlar dağılımın en ucunda duruyor.<a href="#ref-5" class="ref" onclick="savePos(this)">5</a> Tanı da o uçta bir yere çekilmiş bir çizgi; üstelik orada yalnızca özelliklere değil, kişinin hayatının ne kadar zorlaştığına da bakılıyor. Yazının sorusu da buradan çıkıyor: Bu özellikler herkeste biraz varsa, erkeklerde biraz daha mı fazla?</p>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s02">
+    <div class="section-number">Bölüm 02</div>
+    <h2 id="h02">Asperger Nereye Gitti?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Viyanalı doktor Hans Asperger 1944'te bir grup çocuğu anlattı: Konuşmaları akıcı, zekâları yerindeydi, ama arkadaş edinmekte zorlanıyor, dar konulara yoğun ilgi duyuyorlardı.<a href="#ref-6" class="ref" onclick="savePos(this)">6</a> "Asperger sendromu" adını 1981'de İngiliz psikiyatr Lorna Wing koydu.<a href="#ref-7" class="ref" onclick="savePos(this)">7</a> Bir süre ayrı bir tanı olarak kullanılan bu tablo, 2013'te psikiyatrinin tanı kitabından çıkarılıp otizm spektrum bozukluğuna katıldı.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+
+    <p>Bugün tanıda otizmin türleri yerine seviyeleri var: <strong>Seviye 1</strong>, <strong>2</strong> ve <strong>3</strong>. Seviye, kişinin günlük hayatta ne kadar desteğe ihtiyaç duyduğunu gösteriyor; en az destek gerektiren Seviye 1. Eskiden Asperger denen tablo kabaca Seviye 1'e denk düşüyor, ama bu resmî bir eşleştirme değil.</p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s03">
+    <div class="section-number">Bölüm 03</div>
+    <h2 id="h03">Otizm Anketinde Erkekler Kaç Puan Alıyor?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Otizm özelliklerini geniş gruplarda ölçmenin en yaygın yolu AQ: kişinin kendi doldurduğu <strong>50</strong> soruluk bir anket. Katılımcı, "Çoğu insanın fark etmediği ayrıntıları fark ederim", "Bir hikâye okurken karakterlerin niyetini anlamakta zorlanırım" gibi cümlelere katılıp katılmadığını işaretliyor. Otizm yönündeki her cevap <strong>1</strong> puan; toplam puan <strong>0</strong> ile <strong>50</strong> arasında.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a></p>
+
+    <p>2015'te <strong>73</strong> çalışmayı bir araya getiren bir analiz, otizm tanısı olmayan yaklaşık <strong>7 bin</strong> kişinin puanlarını topladı. Kadınların ortalaması <strong>14,9</strong>, erkeklerinki <strong>17,9</strong> çıktı. Otizmli yetişkinlerin ortalaması ise <strong>35,2</strong>.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Erkekler gerçekten biraz yukarıda, ama yalnızca <strong>3</strong> puan. Otizmli olanlarla olmayanlar arasındaki fark ise <strong>18</strong> puan civarında, yani bunun yaklaşık altı katı.</p>
+    <p>Burada bir soru akla gelebilir: Tanı alanlar bu ortalamaya girmiyor ve tanı erkeklerde daha sık. O zaman erkeklerin ortalaması olduğundan düşük çıkmıyor mu? Çıkıyor, ama çok az. Kabaca hesaplayalım: Erkeklerin <strong>%3</strong>'ünün, kadınların <strong>%1</strong>'inin otizmli olduğunu ve yüksek puanlarıyla ortalamaya geri eklendiğini düşünelim. Erkek ortalaması <strong>18,4</strong>'e, kadınlarınki <strong>15,1</strong>'e çıkar. Fark 3 puandan 3,3 puana büyür, o kadar. Tanı alanlar toplumun küçük bir kısmı olduğu için ortalamayı yarım puan bile oynatamıyor.</p>
+
+    <p>Aynı cetvelde başka gruplar da var. AQ'nun ilk çalışmasında Cambridge Üniversitesi'nin matematik öğrencileri ortalama <strong>21,5</strong> aldı, Birleşik Krallık Matematik Olimpiyatı'nı kazanan <strong>16</strong> genç (<strong>15</strong>'i erkek) ise <strong>24,5</strong>.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Matematikçiler ortalama erkeğin de üstünde, ama otizmli yetişkinlerin hâlâ çok altında. Bunun ne anlama gelip gelmediğine Bölüm 06'da döneceğiz.</p>
+
+    <figure class="fig">
+      <figcaption><span class="fig-title">Kadın-erkek farkı 3 puan, erkeklerle otizmli yetişkinler arası 17 puandan fazla</span><span class="fig-sub">AQ ortalaması (0-50 puan)</span></figcaption>
+      <svg viewBox="0 0 340 226" role="img" aria-label="Nokta grafiği: AQ otizm özellikleri anketinde 0 ile 50 arasındaki ortalama puanlar. Kadınlar 14,9, erkekler 17,9, matematik öğrencileri 21,5, Matematik Olimpiyatı kazananları 24,5, otizmli yetişkinler 35,2.">
+        <text x="0" y="14" class="t-dim">Kadınlar</text>
+        <line x1="0" y1="28" x2="300" y2="28" class="track"/>
+        <circle cx="89.4" cy="28" r="6" class="m-acc"/>
+        <text x="100" y="32.5" class="t-strong halo">14,9</text>
+
+        <text x="0" y="54" class="t-dim">Erkekler</text>
+        <line x1="0" y1="68" x2="300" y2="68" class="track"/>
+        <circle cx="107.4" cy="68" r="6" class="m-acc"/>
+        <text x="118" y="72.5" class="t-strong halo">17,9</text>
+
+        <text x="0" y="94" class="t-dim">Matematik öğrencileri</text>
+        <line x1="0" y1="108" x2="300" y2="108" class="track"/>
+        <circle cx="129" cy="108" r="6" class="m-ctx"/>
+        <text x="140" y="112.5" class="t-strong halo">21,5</text>
+
+        <text x="0" y="134" class="t-dim">Matematik Olimpiyatı kazananları</text>
+        <line x1="0" y1="148" x2="300" y2="148" class="track"/>
+        <circle cx="147" cy="148" r="6" class="m-ctx"/>
+        <text x="158" y="152.5" class="t-strong halo">24,5</text>
+
+        <text x="0" y="174" class="t-dim">Otizmli yetişkinler</text>
+        <line x1="0" y1="188" x2="300" y2="188" class="track"/>
+        <circle cx="211.2" cy="188" r="6" class="m-acc"/>
+        <text x="222" y="192.5" class="t-strong halo">35,2</text>
+
+        <line x1="0" y1="204" x2="300" y2="204" class="ln" style="stroke-width:1"/>
+        <line x1="0.5" y1="204" x2="0.5" y2="209" class="ln" style="stroke-width:1"/>
+        <line x1="60" y1="204" x2="60" y2="209" class="ln" style="stroke-width:1"/>
+        <line x1="120" y1="204" x2="120" y2="209" class="ln" style="stroke-width:1"/>
+        <line x1="180" y1="204" x2="180" y2="209" class="ln" style="stroke-width:1"/>
+        <line x1="240" y1="204" x2="240" y2="209" class="ln" style="stroke-width:1"/>
+        <line x1="299.5" y1="204" x2="299.5" y2="209" class="ln" style="stroke-width:1"/>
+        <text x="0" y="222" class="t-dim t-sm">0</text>
+        <text x="60" y="222" text-anchor="middle" class="t-dim t-sm">10</text>
+        <text x="120" y="222" text-anchor="middle" class="t-dim t-sm">20</text>
+        <text x="180" y="222" text-anchor="middle" class="t-dim t-sm">30</text>
+        <text x="240" y="222" text-anchor="middle" class="t-dim t-sm">40</text>
+        <text x="300" y="222" text-anchor="middle" class="t-dim t-sm">50</text>
+      </svg>
+      <div class="fig-src">Dolu noktalar 73 çalışmalık analizden, içi boş noktalar AQ'nun ilk çalışmasından (olimpiyat grubu yalnızca 16 kişi). Kaynak <a href="#ref-9" onclick="savePos(this)">9</a>, <a href="#ref-8" onclick="savePos(this)">8</a></div>
+    </figure>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s04">
+    <div class="section-number">Bölüm 04</div>
+    <h2 id="h04">Erkeklerde Biraz Daha Sık Görülenler<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Bu <strong>3</strong> puan nereden geliyor? Aşağıdaki liste, erkeklerde ortalamada biraz daha sık görülen özellikleri, kanıtlarını ve otizmdeki karşılıklarını sıralıyor. Hepsi ortalamalar arasındaki farklar; tek tek insanlara bakınca kadınlarla erkekler büyük ölçüde iç içe.</p>
+
+    <div class="trait">
+      <h3 class="trait-name">1. Nesnelere ve kurallara ilgi</h3>
+      <p>Meslek seçiminde kullanılan ilgi anketlerinde "Bir makineyi tamir etmek mi, birine danışmanlık yapmak mı?" gibi sorular var. Yaklaşık <strong>500 bin</strong> kişinin cevaplarını toplayan bir analizde erkekler nesnelerle ve makinelerle, kadınlar insanlarla çalışmayı belirgin biçimde daha çok tercih etti (<span class="term stat-info"><strong>d = 0,93</strong><button type="button" class="stat-info-btn" aria-label="Bu istatistik ne demek?">i</button><span class="term-tip">d, iki grubun ortalamaları arasındaki farkın ne kadar büyük olduğunu gösterir: 0,2 küçük, 0,5 orta, 0,8 ve üstü büyük sayılır. 0,93 büyük bir fark; yine de iki grubun cevapları çoğunlukla örtüşüyor.</span></span>).<a href="#ref-10" class="ref" onclick="savePos(this)">10</a> Bu listedeki en büyük fark bu.</p>
+      <p>Yaklaşık <strong>670 bin</strong> kişilik başka bir çalışmada da erkekler kurallarla işleyen sistemleri (bir motoru, bir tren tarifesini) çözmeye daha meraklı çıktı; kadınlar ise başkalarının duygularını anlama ölçeğinde daha yüksek puan aldı. Otizmli kişilerin profili, kadın olsun erkek olsun, ortalama erkeğinkine daha yakındı.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Bu çalışmadaki puanlar, kişilerin kendileri hakkında söylediklerine dayanıyor.</p>
+      <p class="trait-parallel"><span class="trait-label">Otizmde</span>Dar, yoğun ve çoğu zaman nesnelere ya da kurallara yönelik ilgiler.</p>
+    </div>
+
+    <div class="trait">
+      <h3 class="trait-name">2. Yüzden ve sesten duygu okuma</h3>
+      <p>Bu testlerde katılımcılar bir yüze bakıp ya da bir sesi dinleyip o kişinin kızgın mı, korkmuş mu, mutlu mu olduğunu söylüyor. <strong>215</strong> ayrı katılımcı grubunu bir araya getiren bir analizde kadınlar biraz daha başarılı çıktı. Ama fark küçük: İki grubun puanları yaklaşık <strong>%92</strong> örtüşüyor.<a href="#ref-12" class="ref" onclick="savePos(this)">12</a></p>
+      <p class="trait-parallel"><span class="trait-label">Otizmde</span>Yüz ifadesinden ve ses tonundan duygu çıkarmakta zorlanma.</p>
+    </div>
+
+    <figure class="fig">
+      <figcaption><span class="fig-title">En büyük farkta bile iki grup büyük ölçüde iç içe</span><span class="fig-sub">Şematik dağılım: dolu alan kadınlar, kesik çizgi erkekler</span></figcaption>
+      <svg viewBox="0 0 340 256" role="img" aria-label="Şematik dağılım eğrileri, iki panel. Üstte duygu okuma: kadın ve erkek eğrileri neredeyse üst üste, yüzde 92 örtüşüyor. Altta insanlarla ya da nesnelerle çalışma tercihi: erkeklerin eğrisi nesnelere, kadınlarınki insanlara doğru kaymış, ama iki eğri yine de büyük ölçüde iç içe.">
+        <text x="0" y="14" class="t-strong">Duygu okuma: küçük fark</text>
+        <text x="0" y="32" class="t-dim t-sm">iki grubun puanları %92 örtüşüyor</text>
+        <path d="M10 100.0L14 100.0L18 100.0L22 100.0L26 99.9L30 99.9L34 99.9L38 99.8L42 99.8L46 99.7L50 99.5L54 99.4L58 99.2L62 98.9L66 98.5L70 98.1L74 97.5L78 96.8L82 96.0L86 95.0L90 93.8L94 92.3L98 90.7L102 88.8L106 86.7L110 84.3L114 81.7L118 78.8L122 75.8L126 72.6L130 69.3L134 65.9L138 62.5L142 59.2L146 56.0L150 53.1L154 50.5L158 48.2L162 46.4L166 45.1L170 44.3L174 44.0L178 44.3L182 45.2L186 46.5L190 48.4L194 50.7L198 53.4L202 56.3L206 59.5L210 62.8L214 66.2L218 69.6L222 72.9L226 76.1L230 79.1L234 82.0L238 84.6L242 86.9L246 89.0L250 90.9L254 92.5L258 93.9L262 95.1L266 96.1L270 96.9L274 97.6L278 98.1L282 98.6L286 98.9L290 99.2L294 99.4L298 99.5L302 99.7L306 99.8L310 99.8L314 99.9L318 99.9L322 99.9L326 100.0L330 100.0Z" class="c-w"/>
+        <path d="M10 100.0L14 100.0L18 99.9L22 99.9L26 99.9L30 99.8L34 99.8L38 99.7L42 99.5L46 99.4L50 99.2L54 98.9L58 98.6L62 98.1L66 97.6L70 96.9L74 96.1L78 95.1L82 93.9L86 92.5L90 90.9L94 89.0L98 86.9L102 84.6L106 82.0L110 79.1L114 76.1L118 72.9L122 69.6L126 66.2L130 62.8L134 59.5L138 56.3L142 53.4L146 50.7L150 48.4L154 46.5L158 45.2L162 44.3L166 44.0L170 44.3L174 45.1L178 46.4L182 48.2L186 50.5L190 53.1L194 56.0L198 59.2L202 62.5L206 65.9L210 69.3L214 72.6L218 75.8L222 78.8L226 81.7L230 84.3L234 86.7L238 88.8L242 90.7L246 92.3L250 93.8L254 95.0L258 96.0L262 96.8L266 97.5L270 98.1L274 98.5L278 98.9L282 99.2L286 99.4L290 99.5L294 99.7L298 99.8L302 99.8L306 99.9L310 99.9L314 99.9L318 100.0L322 100.0L326 100.0L330 100.0" class="c-m"/>
+        <text x="96" y="74" text-anchor="end" class="t-strong halo">erkekler</text>
+        <text x="244" y="74" class="t-strong halo">kadınlar</text>
+        <line x1="10" y1="100" x2="330" y2="100" class="ln" style="stroke-width:1"/>
+        <text x="330" y="116" text-anchor="end" class="t-dim t-sm">duygu okuma puanı →</text>
+
+        <text x="0" y="150" class="t-strong">Nesneler mi, insanlar mı: en büyük fark</text>
+        <text x="0" y="168" class="t-dim t-sm">yine de iki grup büyük ölçüde iç içe</text>
+        <path d="M10 235.9L14 235.8L18 235.8L22 235.7L26 235.6L30 235.4L34 235.2L38 235.0L42 234.7L46 234.3L50 233.7L54 233.1L58 232.3L62 231.4L66 230.3L70 228.9L74 227.4L78 225.6L82 223.6L86 221.3L90 218.8L94 216.0L98 213.0L102 209.9L106 206.6L110 203.2L114 199.8L118 196.5L122 193.3L126 190.2L130 187.5L134 185.1L138 183.1L142 181.5L146 180.5L150 180.0L154 180.1L158 180.8L162 181.9L166 183.6L170 185.7L174 188.3L178 191.1L182 194.2L186 197.5L190 200.8L194 204.2L198 207.6L202 210.8L206 213.9L210 216.9L214 219.5L218 222.0L222 224.2L226 226.2L230 227.9L234 229.4L238 230.6L242 231.7L246 232.6L250 233.3L254 233.9L258 234.4L262 234.8L266 235.1L270 235.3L274 235.5L278 235.6L282 235.7L286 235.8L290 235.9L294 235.9L298 235.9L302 236.0L306 236.0L310 236.0L314 236.0L318 236.0L322 236.0L326 236.0L330 236.0L330 236L10 236Z" class="c-w"/>
+        <path d="M10 236.0L14 236.0L18 236.0L22 236.0L26 236.0L30 236.0L34 236.0L38 236.0L42 235.9L46 235.9L50 235.9L54 235.8L58 235.7L62 235.6L66 235.5L70 235.3L74 235.1L78 234.8L82 234.4L86 233.9L90 233.3L94 232.6L98 231.7L102 230.6L106 229.4L110 227.9L114 226.2L118 224.2L122 222.0L126 219.5L130 216.9L134 213.9L138 210.8L142 207.6L146 204.2L150 200.8L154 197.5L158 194.2L162 191.1L166 188.3L170 185.7L174 183.6L178 181.9L182 180.8L186 180.1L190 180.0L194 180.5L198 181.5L202 183.1L206 185.1L210 187.5L214 190.2L218 193.3L222 196.5L226 199.8L230 203.2L234 206.6L238 209.9L242 213.0L246 216.0L250 218.8L254 221.3L258 223.6L262 225.6L266 227.4L270 228.9L274 230.3L278 231.4L282 232.3L286 233.1L290 233.7L294 234.3L298 234.7L302 235.0L306 235.2L310 235.4L314 235.6L318 235.7L322 235.8L326 235.8L330 235.9" class="c-m"/>
+        <text x="88" y="212" text-anchor="end" class="t-strong halo">kadınlar</text>
+        <text x="252" y="212" class="t-strong halo">erkekler</text>
+        <line x1="10" y1="236" x2="330" y2="236" class="ln" style="stroke-width:1"/>
+        <text x="10" y="252" class="t-dim t-sm">← insanlarla çalışmak</text>
+        <text x="330" y="252" text-anchor="end" class="t-dim t-sm">nesnelerle çalışmak →</text>
+      </svg>
+      <div class="fig-src">Eğriler, analizlerde bulunan fark büyüklüğüne göre ölçeklendi. Kaynak <a href="#ref-10" onclick="savePos(this)">10</a>, <a href="#ref-12" onclick="savePos(this)">12</a></div>
+    </figure>
+
+    <div class="trait">
+      <h3 class="trait-name">3. Gözlerden duygu ve düşünce okuma</h3>
+      <p>Bu testte katılımcı, yalnızca gözlerin göründüğü fotoğraflara bakıp kişinin ne hissettiğini seçeneklerden tahmin ediyor: Kıskanç mı, düşünceli mi? Test <strong>57</strong> ülkede yaklaşık <strong>305 bin</strong> kişiye uygulandı; ortalamada kadınlar daha yüksek puan aldı. <strong>36</strong> ülkede kadınların üstünlüğü istatistik olarak açıktı. Kalan <strong>21</strong> ülkede fark, kesin bir şey söylemeye yetmeyecek kadar küçüktü; bunlardan yalnızca Kolombiya'da erkekler hafifçe öndeydi. Erkeklerin açıkça önde olduğu tek bir ülke bile çıkmadı. Yine de genel fark küçük.<a href="#ref-13" class="ref" onclick="savePos(this)">13</a></p>
+      <p class="trait-parallel"><span class="trait-label">Otizmde</span>Başkasının ne düşündüğünü ve hissettiğini sezmekte güçlük.</p>
+    </div>
+
+    <figure class="fig">
+      <figcaption><span class="fig-title">Gözlerden duygu okuma: 57 ülkenin 36'sında kadınlar açıkça önde, 21'inde fark belirsiz</span><span class="fig-sub">Her nokta bir ülke</span></figcaption>
+      <svg viewBox="0 0 340 118" role="img" aria-label="57 noktalı ızgara, her nokta bir ülke. 36 vurgu renkli nokta: kadınların gözlerden duygu okuma testinde açıkça önde olduğu ülkeler. 21 gri nokta: farkın belirsiz olduğu ülkeler. Erkeklerin açıkça önde olduğu ülke yok.">
+        <text x="0" y="14" class="t-strong">36 ülke</text>
+        <text x="0" y="31" class="t-dim t-sm">kadınlar açıkça önde</text>
+        <text x="222" y="14" class="t-strong">21 ülke</text>
+        <text x="222" y="31" class="t-dim t-sm">fark belirsiz</text>
+        <g class="m-acc">
+          <circle cx="6" cy="48" r="5.5"/><circle cx="22" cy="48" r="5.5"/><circle cx="38" cy="48" r="5.5"/><circle cx="54" cy="48" r="5.5"/><circle cx="70" cy="48" r="5.5"/><circle cx="86" cy="48" r="5.5"/><circle cx="102" cy="48" r="5.5"/><circle cx="118" cy="48" r="5.5"/><circle cx="134" cy="48" r="5.5"/><circle cx="150" cy="48" r="5.5"/><circle cx="166" cy="48" r="5.5"/><circle cx="182" cy="48" r="5.5"/>
+          <circle cx="6" cy="64" r="5.5"/><circle cx="22" cy="64" r="5.5"/><circle cx="38" cy="64" r="5.5"/><circle cx="54" cy="64" r="5.5"/><circle cx="70" cy="64" r="5.5"/><circle cx="86" cy="64" r="5.5"/><circle cx="102" cy="64" r="5.5"/><circle cx="118" cy="64" r="5.5"/><circle cx="134" cy="64" r="5.5"/><circle cx="150" cy="64" r="5.5"/><circle cx="166" cy="64" r="5.5"/><circle cx="182" cy="64" r="5.5"/>
+          <circle cx="6" cy="80" r="5.5"/><circle cx="22" cy="80" r="5.5"/><circle cx="38" cy="80" r="5.5"/><circle cx="54" cy="80" r="5.5"/><circle cx="70" cy="80" r="5.5"/><circle cx="86" cy="80" r="5.5"/><circle cx="102" cy="80" r="5.5"/><circle cx="118" cy="80" r="5.5"/><circle cx="134" cy="80" r="5.5"/><circle cx="150" cy="80" r="5.5"/><circle cx="166" cy="80" r="5.5"/><circle cx="182" cy="80" r="5.5"/>
+        </g>
+        <g class="m-neu">
+          <circle cx="228" cy="48" r="5.5"/><circle cx="244" cy="48" r="5.5"/><circle cx="260" cy="48" r="5.5"/><circle cx="276" cy="48" r="5.5"/><circle cx="292" cy="48" r="5.5"/><circle cx="308" cy="48" r="5.5"/><circle cx="324" cy="48" r="5.5"/>
+          <circle cx="228" cy="64" r="5.5"/><circle cx="244" cy="64" r="5.5"/><circle cx="260" cy="64" r="5.5"/><circle cx="276" cy="64" r="5.5"/><circle cx="292" cy="64" r="5.5"/><circle cx="308" cy="64" r="5.5"/><circle cx="324" cy="64" r="5.5"/>
+          <circle cx="228" cy="80" r="5.5"/><circle cx="244" cy="80" r="5.5"/><circle cx="260" cy="80" r="5.5"/><circle cx="276" cy="80" r="5.5"/><circle cx="292" cy="80" r="5.5"/><circle cx="308" cy="80" r="5.5"/><circle cx="324" cy="80" r="5.5"/>
+        </g>
+        <text x="0" y="112" class="t-strong">Erkeklerin açıkça önde olduğu ülke: 0</text>
+      </svg>
+      <div class="fig-src">Kaynak <a href="#ref-13" onclick="savePos(this)">13</a></div>
+    </figure>
+
+    <div class="trait">
+      <h3 class="trait-name">4. Çocuklukta çok yoğun ilgiler</h3>
+      <p>Bir çalışmada <strong>177</strong> ebeveyne, küçük çocuklarının tek bir konuya, örneğin taşıtlara ya da dinozorlara, aşırı tutkulu bir ilgisi olup olmadığı soruldu. Çocukların yaklaşık <strong>üçte birinde</strong> böyle bir ilgi vardı ve erkek çocuklarda çok daha sıktı.<a href="#ref-14" class="ref" onclick="savePos(this)">14</a> Bu, ebeveynlerin anlattıklarına dayanan küçük bir çalışma.</p>
+      <p class="trait-parallel"><span class="trait-label">Otizmde</span>Tek bir konuya, sıradan bir merakı aşan yoğunlukta ilgi.</p>
+    </div>
+
+    <div class="trait trait-reverse">
+      <h3 class="trait-name">5. Ters yönde: duyulara hassasiyet</h3>
+      <p>Otizm özelliklerinin hepsi erkeklerde daha sık değil. Yüksek seslerden, parlak ışıktan ya da etiketi batan bir tişörtten rahatsız olmak otizmde yaygın. Yukarıdaki <strong>670 bin</strong> kişilik çalışmada bu tür hassasiyet kadınlarda biraz daha yüksek çıktı.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a></p>
+      <p class="trait-parallel"><span class="trait-label">Otizmde</span>Seslere, ışığa ve dokuya aşırı tepki.</p>
+    </div>
+
+    <p>Aynı rutinde ısrar etmek ya da söyleneni kelimesi kelimesine, literal almak gibi özelliklerde ise, tanısı olmayan insanlarda kadınla erkek arasında fark olduğuna dair sağlam bir kanıt yok.</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s05">
+    <div class="section-number">Bölüm 05</div>
+    <h2 id="h05">Neden Böyle? Testosteron ve İtirazlar<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Bir açıklama, bu farkların bir kısmını anne karnına bağlıyor: Erkek bebeklerin daha çok maruz kaldığı testosteron hormonu, beyni nesnelere ve sistemlere daha çok ilgi duyacak biçimde şekillendiriyor olabilir. Bunu sınamak için hamilelikte <span class="term">amniyon sıvısı<span class="term-tip">Anne karnında bebeği çevreleyen sıvı. Hamilelikte bazı testler için iğneyle küçük bir örnek alınabiliyor; bu örnekte bebeğin hormon düzeyi de ölçülebiliyor.</span></span> örneği alınan annelerin çocukları yıllarca izlendi. Bir çalışmada, anne karnında testosteron düzeyi yüksek olan çocuklar sonraki yıllarda otizm özellikleri anketinde daha yüksek puan aldı.<a href="#ref-15" class="ref" onclick="savePos(this)">15</a> Başka bir çalışma ise böyle bir ilişki bulamadı; doğuştan gelen bir hormon bozukluğu yüzünden anne karnında fazladan erkeklik hormonuna maruz kalan kızlarda da otizm özellikleri artmamıştı.<a href="#ref-16" class="ref" onclick="savePos(this)">16</a> Fikir ilginç, ama kanıtlar çelişkili.</p>
+
+    <p>Bu bakışın eleştirmenleri de var. İlk itiraz isimlendirmeyle ilgili: Otizm özelliklerine "erkeksi" denirse, otizm de daha çok erkeklerde aranır ve aynı özellikleri taşıyan kızlar gözden kaçabilir.<a href="#ref-17" class="ref" onclick="savePos(this)">17</a></p>
+    <p>İkinci itiraz farkların büyüklüğüyle ilgili. Kadınlarla erkekleri karşılaştıran <strong>46</strong> ayrı analiz bir araya getirildiğinde, bulunan farkların <strong>%78</strong>'i ya küçük ya da sıfıra yakın çıktı.<a href="#ref-18" class="ref" onclick="savePos(this)">18</a> Yani tek bir özelliğe bakınca kadınlar ve erkekler çoğu zaman birbirine çok benziyor.</p>
+    <p>Ama işin bir de öbür yüzü var. Bir yüzün kadına mı erkeğe mi ait olduğunu yalnızca kaş kalınlığına bakarak söylemek zordur; yüzün tamamına bakınca ise çoğu zaman kolayca anlarız. Kişilikte de benzer bir şey bulundu: Pek çok kişilik özelliği tek tek değil, hep birlikte incelendiğinde kadınların ve erkeklerin profilleri yalnızca yaklaşık <strong>%10</strong> örtüştü.<a href="#ref-19" class="ref" onclick="savePos(this)">19</a> Otizm anketi de buna benzer çalışıyor: <strong>50</strong> sorunun her birindeki küçük farklar toplanınca ortaya <strong>3</strong> puanlık bir fark çıkıyor.</p>
+
+    <p>Belki de en ilginç bulgu şu: Otizmli kişilerin kendi aralarında kadın-erkek farkı kayboluyor. <strong>73</strong> çalışmalık analizde otizmli kadınların AQ ortalaması, otizmli erkeklerinkinden bile biraz yüksekti.<a href="#ref-9" class="ref" onclick="savePos(this)">9</a> Bunun olası bir açıklaması şu: Kadınlar ancak belirtileri daha belirgin olduğunda otizm tanısı alıyor. Bir çalışma da bu açıklamayla uyumlu: Otizm özellikleri aynı düzeyde olan çocuklar karşılaştırıldığında kızlar erkeklere göre daha az tanı alıyordu, tanı alan kızlarda ise çoğu zaman başka sorunlar da vardı.<a href="#ref-20" class="ref" onclick="savePos(this)">20</a></p>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="s06">
+    <div class="section-number">Bölüm 06</div>
+    <h2 id="h06">Matematikçiler ve Cambridge Öğrencileri<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>AQ'nun ilk çalışmasında Cambridge öğrencilerinin puanları bölümlere göre de karşılaştırıldı. Matematik öğrencileri <strong>21,5</strong>, bilgisayar bilimleri öğrencileri <strong>21,1</strong> aldı; tıp öğrencileri <strong>15,4</strong>, biyoloji öğrencileri <strong>14,9</strong>.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> İnsanlarla ve canlılarla uğraşan bölümler aşağıda, sayılarla ve makinelerle uğraşanlar yukarıda.</p>
+
+    <p>Aynı çalışmada ankette <strong>32</strong> ve üstü puan alan öğrenciler görüşmeye çağrıldı. (Otizmli yetişkinlerin <strong>%80</strong>'i bu sınırın üstünde kalıyor, tanısı olmayanların ise yalnızca <strong>%2</strong>'si.) Gelen <strong>11</strong> öğrenciden <strong>7</strong>'si otizm tanı ölçütlerini karşılıyordu, ama hiçbirine tanı konmadı. Nedeni basit: Tanı ancak bu özellikler kişinin hayatını zorlaştırıyorsa konuyor ve bu öğrencilerin hiçbiri o sırada hayatından şikâyetçi değildi. İşin ilginç yanı, aynı öğrenciler okul yıllarında yalnız kalmış, zorbalığa uğramıştı. Üniversitede ise insanlardan uzak durmaları ve matematik gibi dar ilgileri garip karşılanmıyor, hatta takdir görüyordu.<a href="#ref-8" class="ref" onclick="savePos(this)">8</a> Yani aynı özellikler bir ortamda dert, başka bir ortamda avantaj olabiliyor.</p>
+
+    <p><strong>670 bin</strong> kişilik çalışmada da bilim, teknoloji, mühendislik ve matematik alanlarında çalışanlar AQ'da ortalamada daha yüksek puan aldı. Ama otizmli kişilerin bu alanlarda çalışma ihtimali, otizmli olmayanlardan yüksek değildi.<a href="#ref-11" class="ref" onclick="savePos(this)">11</a> Kısacası bu alanlara yönelenlerde bazı otizm özellikleri biraz daha sık görülüyor, ama bu alanlar otizmli insanlarla dolu değil.</p>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="s07">
+    <div class="section-number">Bölüm 07</div>
+    <h2 id="h07">Bir Parantez: Kadınlarda Otizm<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Otizmin erkeklerde kadınlara göre <strong>4</strong> kat daha sık görüldüğü söylenir. <strong>54</strong> çalışmayı bir araya getiren bir analizde, bir bölgedeki herkesi tek tek tarayan çalışmalarda bu oran yaklaşık <strong>3'e 1</strong> çıktı. Bu da otizmli kızların bir kısmının hiç tanı almadığını düşündürüyor.<a href="#ref-21" class="ref" onclick="savePos(this)">21</a> Psikiyatrinin tanı kitabı da buna dikkat çekiyor: Belirtiler sonradan öğrenilen davranışlarla örtülebiliyor, sosyal güçlükleri daha az göze batan kızlar da fark edilmeyebiliyor.<a href="#ref-1" class="ref" onclick="savePos(this)">1</a></p>
+
+    <p>Bu örtme çabasına maskeleme deniyor. <strong>92</strong> otizmli yetişkinle yapılan görüşmelerde katılımcılar ne yaptıklarını anlattı: göz temasını önceden prova etmek, sohbette söyleyecekleri cümleleri ezberlemek, çevrelerindekilerin jestlerini taklit etmek. Bunun bedeli derin bir yorgunluktu.<a href="#ref-22" class="ref" onclick="savePos(this)">22</a> Katılımcıların <strong>30</strong>'u erkekti; maskeleme yalnızca kadınlara özgü değil. Bir tür beceri olduğu için bazıları maskelemeyi daha kolay öğreniyor olabilir: <strong>136</strong> otizmli gençle yapılan bir çalışmada, başkalarının ne düşündüğünü tahmin etmekte zorlandıkları hâlde sosyal ortamda sorunsuz görünenlerin zekâ puanları ve <span class="term">yürütücü işlevleri<span class="term-tip">Plan yapmak, dikkati yönetmek, bir dürtüyü frenlemek ve bir işten ötekine geçmek gibi zihnin "yönetici" becerileri.</span></span> daha yüksekti, ama kaygıları da daha fazlaydı.<a href="#ref-23" class="ref" onclick="savePos(this)">23</a> Yine de bu kesin bir kural değil: <strong>60</strong> otizmli yetişkinle yapılan başka bir çalışmada maskeleme zekâyla ilişkili çıkmadı. Aynı çalışmada kadınlar ortalamada daha çok maskeleme yapıyordu, ama iki cinsiyette de kişiden kişiye büyük farklar vardı.<a href="#ref-24" class="ref" onclick="savePos(this)">24</a></p>
+
+    <p>Gözden kaçan kızlara bazen önce başka bir tanı konuyor: Otizmli kadınlar zaman zaman yeme bozukluğu<a href="#ref-25" class="ref" onclick="savePos(this)">25</a> ya da <span class="term">sınırda kişilik bozukluğu<span class="term-tip">Duyguların çok hızlı ve yoğun değiştiği, ilişkilerin sık sık inişli çıkışlı geçtiği bir kişilik bozukluğu.</span></span> tanısı alıyor.<a href="#ref-26" class="ref" onclick="savePos(this)">26</a> Bu durumlar otizmle birlikte de görülebiliyor; yani böyle bir tanı her zaman yanlış değil.</p>
+  </section>
+
+  <!-- SONUÇ -->
+  <section id="s08">
+    <div class="section-number">Sonuç</div>
+    <h2 id="sonuc">Sonuç: Yarı Otistik mi, Üç Puan mı?<button class="heading-share" type="button" aria-label="Bu bölümü paylaş" onclick="openShareSection(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button></h2>
+
+    <p>Başa dönelim: Erkekler yarı otistik mi? Hayır. Ama iddia büsbütün boş da çıkmadı. Erkeklerde ortalamada biraz daha sık görülen bazı özellikler (nesnelere ve kurallara ilgi, duygu okumada hafifçe geride kalmak, çocuklukta çok yoğun ilgiler) otizm anketlerinin ölçtüğü şeylere benziyor. Bu yüzden ortalama erkek, <strong>50</strong> puanlık cetvelde ortalama kadından <strong>3</strong> puan ileride. Otizmli yetişkinlerin ortalamasına ise hâlâ <strong>17</strong> puan uzakta.</p>
+
+    <p>Üstelik bunlar ortalamalar: Gruplar büyük ölçüde iç içe ve duyulara hassasiyet gibi bazı özelliklerde fark ters yönde. Bir özelliği taşımak da tanı almak demek değil; Cambridge'deki öğrenciler bunun iyi bir örneği.</p>
+
+    <p>Daha dürüst bir başlık şöyle olurdu: "Erkekler otizm cetvelinde birkaç puan ileride." Kulağa o kadar çarpıcı gelmiyor, ama en azından doğru.</p>
+  </section>
+
+  <!-- SIRADAKİ OKUMA -->
+  <section class="continue" aria-label="Sıradaki okuma">
+    <a class="continue-toc" href="multitasking.html">
+      <span class="continue-toc-label">Sıradaki yazı</span>
+      <span class="continue-toc-leader" aria-hidden="true"></span>
+      <span class="continue-toc-end">
+        <h3 class="continue-toc-title">Aynı Anda İki İş: Multitasking Gerçekte Ne Yapıyor?</h3>
+        <p class="continue-toc-meta">Beyin · 9 dk</p>
+      </span>
+      <span class="continue-toc-arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
+
+  <!-- REFERENCES -->
+  <div class="ref-section">
+    <h3>Kaynakça</h3>
+    <ol class="references">
+      <li id="ref-1">American Psychiatric Association (2013). <em>Diagnostic and Statistical Manual of Mental Disorders</em> (5. baskı, DSM-5). Arlington, VA: American Psychiatric Publishing. <a href="https://doi.org/10.1176/appi.books.9780890425596" target="_blank" rel="noopener">doi:10.1176/appi.books.9780890425596</a></li>
+      <li id="ref-2">Bleuler, E. (1911). <em>Dementia praecox oder Gruppe der Schizophrenien</em>. Leipzig: Deuticke.</li>
+      <li id="ref-3">Sher, D. A. &amp; Gibson, J. L. (2023). Pioneering, prodigious and perspicacious: Grunya Efimovna Sukhareva's life and contribution to conceptualising autism and schizophrenia. <em>European Child &amp; Adolescent Psychiatry</em>, 32(3), 475-490. <a href="https://doi.org/10.1007/s00787-021-01875-7" target="_blank" rel="noopener">doi:10.1007/s00787-021-01875-7</a></li>
+      <li id="ref-4">Kanner, L. (1943). Autistic disturbances of affective contact. <em>Nervous Child</em>, 2, 217-250.</li>
+      <li id="ref-5">Constantino, J. N. &amp; Todd, R. D. (2003). Autistic traits in the general population: A twin study. <em>Archives of General Psychiatry</em>, 60(5), 524-530. <a href="https://doi.org/10.1001/archpsyc.60.5.524" target="_blank" rel="noopener">doi:10.1001/archpsyc.60.5.524</a></li>
+      <li id="ref-6">Asperger, H. (1944). Die "Autistischen Psychopathen" im Kindesalter. <em>Archiv für Psychiatrie und Nervenkrankheiten</em>, 117(1), 76-136. <a href="https://doi.org/10.1007/BF01837709" target="_blank" rel="noopener">doi:10.1007/BF01837709</a></li>
+      <li id="ref-7">Wing, L. (1981). Asperger's syndrome: A clinical account. <em>Psychological Medicine</em>, 11(1), 115-129. <a href="https://doi.org/10.1017/S0033291700053332" target="_blank" rel="noopener">doi:10.1017/S0033291700053332</a></li>
+      <li id="ref-8">Baron-Cohen, S., Wheelwright, S., Skinner, R., Martin, J. &amp; Clubley, E. (2001). The Autism-Spectrum Quotient (AQ): Evidence from Asperger syndrome/high-functioning autism, males and females, scientists and mathematicians. <em>Journal of Autism and Developmental Disorders</em>, 31(1), 5-17. <a href="https://doi.org/10.1023/A:1005653411471" target="_blank" rel="noopener">doi:10.1023/A:1005653411471</a></li>
+      <li id="ref-9">Ruzich, E. ve ark. (2015). Measuring autistic traits in the general population: A systematic review of the Autism-Spectrum Quotient (AQ) in a nonclinical population sample of 6,900 typical adult males and females. <em>Molecular Autism</em>, 6, 2. <a href="https://doi.org/10.1186/2040-2392-6-2" target="_blank" rel="noopener">doi:10.1186/2040-2392-6-2</a></li>
+      <li id="ref-10">Su, R., Rounds, J. &amp; Armstrong, P. I. (2009). Men and things, women and people: A meta-analysis of sex differences in interests. <em>Psychological Bulletin</em>, 135(6), 859-884. <a href="https://doi.org/10.1037/a0017364" target="_blank" rel="noopener">doi:10.1037/a0017364</a></li>
+      <li id="ref-11">Greenberg, D. M., Warrier, V., Allison, C. &amp; Baron-Cohen, S. (2018). Testing the Empathizing-Systemizing theory of sex differences and the Extreme Male Brain theory of autism in half a million people. <em>Proceedings of the National Academy of Sciences</em>, 115(48), 12152-12157. <a href="https://doi.org/10.1073/pnas.1811032115" target="_blank" rel="noopener">doi:10.1073/pnas.1811032115</a></li>
+      <li id="ref-12">Thompson, A. E. &amp; Voyer, D. (2014). Sex differences in the ability to recognise non-verbal displays of emotion: A meta-analysis. <em>Cognition and Emotion</em>, 28(7), 1164-1195. <a href="https://doi.org/10.1080/02699931.2013.875889" target="_blank" rel="noopener">doi:10.1080/02699931.2013.875889</a></li>
+      <li id="ref-13">Greenberg, D. M. ve ark. (2023). Sex and age differences in "theory of mind" across 57 countries using the English version of the "Reading the Mind in the Eyes" Test. <em>Proceedings of the National Academy of Sciences</em>, 120(1), e2022385119. <a href="https://doi.org/10.1073/pnas.2022385119" target="_blank" rel="noopener">doi:10.1073/pnas.2022385119</a></li>
+      <li id="ref-14">DeLoache, J. S., Simcock, G. &amp; Macari, S. (2007). Planes, trains, automobiles, and tea sets: Extremely intense interests in very young children. <em>Developmental Psychology</em>, 43(6), 1579-1586. <a href="https://doi.org/10.1037/0012-1649.43.6.1579" target="_blank" rel="noopener">doi:10.1037/0012-1649.43.6.1579</a></li>
+      <li id="ref-15">Auyeung, B., Baron-Cohen, S., Ashwin, E., Knickmeyer, R., Taylor, K. &amp; Hackett, G. (2009). Fetal testosterone and autistic traits. <em>British Journal of Psychology</em>, 100(1), 1-22. <a href="https://doi.org/10.1348/000712608X311731" target="_blank" rel="noopener">doi:10.1348/000712608X311731</a></li>
+      <li id="ref-16">Kung, K. T. F. ve ark. (2016). No relationship between prenatal androgen exposure and autistic traits: Convergent evidence from studies of children with congenital adrenal hyperplasia and of amniotic testosterone concentrations in typically developing children. <em>Journal of Child Psychology and Psychiatry</em>, 57(12), 1455-1462. <a href="https://doi.org/10.1111/jcpp.12602" target="_blank" rel="noopener">doi:10.1111/jcpp.12602</a></li>
+      <li id="ref-17">Krahn, T. M. &amp; Fenton, A. (2012). The extreme male brain theory of autism and the potential adverse effects for boys and girls with autism. <em>Journal of Bioethical Inquiry</em>, 9(1), 93-103. <a href="https://doi.org/10.1007/s11673-011-9350-y" target="_blank" rel="noopener">doi:10.1007/s11673-011-9350-y</a></li>
+      <li id="ref-18">Hyde, J. S. (2005). The gender similarities hypothesis. <em>American Psychologist</em>, 60(6), 581-592. <a href="https://doi.org/10.1037/0003-066X.60.6.581" target="_blank" rel="noopener">doi:10.1037/0003-066X.60.6.581</a></li>
+      <li id="ref-19">Del Giudice, M., Booth, T. &amp; Irwing, P. (2012). The distance between Mars and Venus: Measuring global sex differences in personality. <em>PLOS ONE</em>, 7(1), e29265. <a href="https://doi.org/10.1371/journal.pone.0029265" target="_blank" rel="noopener">doi:10.1371/journal.pone.0029265</a></li>
+      <li id="ref-20">Dworzynski, K., Ronald, A., Bolton, P. &amp; Happé, F. (2012). How different are girls and boys above and below the diagnostic threshold for autism spectrum disorders? <em>Journal of the American Academy of Child &amp; Adolescent Psychiatry</em>, 51(8), 788-797. <a href="https://doi.org/10.1016/j.jaac.2012.05.018" target="_blank" rel="noopener">doi:10.1016/j.jaac.2012.05.018</a></li>
+      <li id="ref-21">Loomes, R., Hull, L. &amp; Mandy, W. P. L. (2017). What is the male-to-female ratio in autism spectrum disorder? A systematic review and meta-analysis. <em>Journal of the American Academy of Child &amp; Adolescent Psychiatry</em>, 56(6), 466-474. <a href="https://doi.org/10.1016/j.jaac.2017.03.013" target="_blank" rel="noopener">doi:10.1016/j.jaac.2017.03.013</a></li>
+      <li id="ref-22">Hull, L., Petrides, K. V., Allison, C., Smith, P., Baron-Cohen, S., Lai, M.-C. &amp; Mandy, W. (2017). "Putting on my best normal": Social camouflaging in adults with autism spectrum conditions. <em>Journal of Autism and Developmental Disorders</em>, 47(8), 2519-2534. <a href="https://doi.org/10.1007/s10803-017-3166-5" target="_blank" rel="noopener">doi:10.1007/s10803-017-3166-5</a></li>
+      <li id="ref-23">Livingston, L. A., Colvert, E., Social Relationships Study Team, Bolton, P. &amp; Happé, F. (2019). Good social skills despite poor theory of mind: Exploring compensation in autism spectrum disorder. <em>Journal of Child Psychology and Psychiatry</em>, 60(1), 102-110. <a href="https://doi.org/10.1111/jcpp.12886" target="_blank" rel="noopener">doi:10.1111/jcpp.12886</a></li>
+      <li id="ref-24">Lai, M.-C. ve ark. (2017). Quantifying and exploring camouflaging in men and women with autism. <em>Autism</em>, 21(6), 690-702. <a href="https://doi.org/10.1177/1362361316671012" target="_blank" rel="noopener">doi:10.1177/1362361316671012</a></li>
+      <li id="ref-25">Huke, V., Turk, J., Saeidi, S., Kent, A. &amp; Morgan, J. F. (2013). Autism spectrum disorders in eating disorder populations: A systematic review. <em>European Eating Disorders Review</em>, 21(5), 345-351. <a href="https://doi.org/10.1002/erv.2244" target="_blank" rel="noopener">doi:10.1002/erv.2244</a></li>
+      <li id="ref-26">Dudas, R. B., Lovejoy, C., Cassidy, S., Allison, C., Smith, P. &amp; Baron-Cohen, S. (2017). The overlap between autistic spectrum conditions and borderline personality disorder. <em>PLOS ONE</em>, 12(9), e0184447. <a href="https://doi.org/10.1371/journal.pone.0184447" target="_blank" rel="noopener">doi:10.1371/journal.pone.0184447</a></li>
+    </ol>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <p>Bu yazı hakkında düşüncelerini paylaşmak ister misin?</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvzPaICh8nxcum8cWzAwEjyeKroTqvninOk6x9lEuYy2JJig/viewform" target="_blank" rel="noopener" class="feedback-btn">Geri Bildirim Gönder</a>
+  </div>
+
+</div>
+
+<button id="fab-back" onclick="goBack()" title="Metne dön">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<a href="../index.html" class="home-logo"><span class="logo-text">NS Articles</span><span class="logo-author">by M. Enes Durmuş</span></a>
+
+<script>
+  let savedPosition = null;
+
+  function savePos(el) {
+    savedPosition = window.scrollY;
+    setTimeout(function() {
+      document.getElementById('fab-back').style.display = 'flex';
+    }, 300);
+  }
+
+  function goBack() {
+    if (savedPosition !== null) {
+      window.scrollTo({ top: savedPosition, behavior: 'smooth' });
+      setTimeout(function() {
+        document.getElementById('fab-back').style.display = 'none';
+        savedPosition = null;
+      }, 600);
+    }
+  }
+</script>
+
+</body>
+</html>
